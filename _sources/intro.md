@@ -1,5 +1,5 @@
 # Apprentissage automatique
 
-Cours et notebooks Jupyter en Python sur quelques méthodes d'apprentissage automatique.
+Cours et notebooks Jupyter en Python sur quelques méthodes d'apprentissage profond.
 
-Les exemples sont codés à l'aide de [Scikit-learn](https://scikit-learn.org/stable/)
+Les exemples sont codés à l'aide de [pytorch](https://pytorch.org/)
