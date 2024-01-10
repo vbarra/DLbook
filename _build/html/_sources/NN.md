@@ -2,7 +2,7 @@
 
 ## Réseaux de neurones et apprentissage automatique
 
-Les réseaux de neurones artificiels sont des techniques numériques
+Les réseaux de neurones artificiels sont des techniques
 issues du domaine du connexionisme. Le courant connexionniste insiste
 sur le grand nombre de connexions (sous forme de réseau) réalisées entre
 les différents automates que sont les neurones. Le connexionisme permet
@@ -16,25 +16,17 @@ les différents automates que sont les neurones. Le connexionisme permet
     traitement électrique.
 
 La démarche des réseaux de neurones s'oppose en certains points à celle
-de l'intelligence artificielle classique. En I.A., on utilise des règles
+de l'intelligence artificielle basée règles,
 qui sont manipulées selon les techniques de la logique formelle afin de
-fournir une représentation explicite du raisonnement. L'I.A. implique
-une approche \" descendante \" : elle part de l'analyse de la manière
+fournir une représentation explicite du raisonnement. Cette méthodologie implique
+une approche \"descendante\" : elle part de l'analyse de la manière
 dont l'être humain procède pour résoudre des problèmes ou pour les
 apprendre, et tente de restituer cette démarche en la décomposant en
-unités élémentaires. Les réseaux de neurones, eux, procèdent selon une
-approche \" ascendante \" qui tente de produire des phénomènes complexes
-comme l'apprentissage ou la reconnaissance de formes à partir
+unités élémentaires. 
+Les réseaux de neurones, eux, procèdent selon une
+approche \"ascendante\" qui tente de produire des phénomènes complexes
+à partir
 d'opérations très élémentaires.\
-D'autre part, l'intelligence artificielle classique suit une approche
-cognitiviste et utilise l'outil informatique comme \"manipulateur de
-symboles\" sans se soucier de la vraisemblance biologique. L'approche
-connexionniste utilise les réseaux de neurones artificiels, plus
-vraisemblables au niveau biologique, mais un apprentissage automatique
-réalisé avec un tel outil ne renseigne pas vraiment sur les
-connaissances apprises puisque le résultat d'un tel apprentissage se
-manifestera par la modification de poids dans une matrice de connexions
-entre les différentes cellules du réseau.
 
 ### Du neurone biologique au neurone formel
 
@@ -44,11 +36,9 @@ rôle très important dans le développement des réseaux de neurones
 artificiels. Les travaux effectués pour essayer de comprendre le
 comportement du cerveau humain ont mené à représenter celui-ci par un
 ensemble de composants structurels appelés neurones, massivement
-interconnectés entre eux. Le cerveau humain en contiendrait plusieurs
-centaines de milliards, et chacun de ceux-ci serait, en moyenne,
+interconnectés entre eux. Le cerveau humain en contient en moyenne une dizaine de milliards, chacun d'entre eux étant connecté, encore une fois en moyenne,
 connecté à dix mille autres.\
-Le neurone biologique est composé de quatre parties distinctes (fig
-[1.1](#biologie){reference-type="ref" reference="biologie"}) :
+Le neurone biologique est composé de quatre parties distinctes ({numref}`neurone`) :
 
 -   le corps cellulaire, qui contient le noyau de la cellule nerveuse;
     c'est en cet endroit que prend naissance l'influx nerveux, qui
@@ -67,12 +57,12 @@ Le neurone biologique est composé de quatre parties distinctes (fig
     poids synaptique, à un autre neurone; elle est essentielle dans le
     fonctionnement du système nerveux.
 
-::: center
-<figure id="biologie">
-<img src="images/biologie.jpg" />
-<figcaption>le neurone biologique</figcaption>
-</figure>
-:::
+```{figure} ./images/neurone.png
+:name: neurone
+Neurone biologique
+```
+
+
 
 La transmission de l'information d'un neurone à l'autre s'effectue au
 moyen de l'influx nerveux, qui est constitué d'une impulsion électrique,
