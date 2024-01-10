@@ -165,10 +165,13 @@ restreintes (RBM) et les autoencodeurs.
 Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
 Les $D$ variables sur lesquelles opère le neurone sont habituellement
 désignées sous le terme d'entrées du neurone (notées
-$x_i,1\leq i\leq D$), et la valeur de la fonction sous celui de sortie
+$x_i,i\in[\![1,D]\!]), et la valeur de la fonction sous celui de sortie
 $y$.\
 Le neurone formel calcule la sortie selon la formule :
-$$y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)$$ où :
+
+$$y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)$$
+
+où :
 
 -   $w_1\cdots w_D$ sont les poids synaptiques qui pondèrent les entrées
     du neurone

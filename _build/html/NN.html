@@ -710,17 +710,17 @@ interconnectés entre eux. Le cerveau humain en contient en moyenne une dizaine 
 connecté à dix mille autres.<br />
 Le neurone biologique est composé de quatre parties distinctes (<a class="reference internal" href="#neurone"><span class="std std-numref">Fig. 1</span></a>) :</p>
 <ul class="simple">
-<li><p>le corps cellulaire, qui contient le noyau de la cellule nerveuse;
+<li><p>le <em>corps cellulaire</em>, qui contient le noyau de la cellule nerveuse;
 c’est en cet endroit que prend naissance l’influx nerveux, qui
 représente l’état d’activité du neurone;</p></li>
-<li><p>les dendrites, ramifications tubulaires courtes formant une espèce
+<li><p>les <em>dendrites</em>, ramifications tubulaires courtes formant une espèce
 d’arborescence autour du corps cellulaire; ce sont les entrées
 principales du neurone, qui captent l’information venant d’autres
 neurones;</p></li>
-<li><p>l’axone, longue fibre nerveuse qui se ramifie à son extrémité; c’est
+<li><p>l”<em>axone</em>, longue fibre nerveuse qui se ramifie à son extrémité; c’est
 la sortie du neurone et le support de l’information vers les autres
 neurones;</p></li>
-<li><p>la synapse, qui communique l’information, en la pondérant par un
+<li><p>la <em>synapse</em>, qui communique l’information, en la pondérant par un
 poids synaptique, à un autre neurone; elle est essentielle dans le
 fonctionnement du système nerveux.</p></li>
 </ul>
@@ -750,11 +750,8 @@ extrêmement parallèle, de manière à pouvoir accomplir des tâches très
 interconnexions, ce système possède une propriété de tolérance aux
 fautes. Ainsi, la défectuosité d’un neurone n’entraînera aucune perte
 réelle d’information, mais seulement une faible dégradation en qualité
-de toute l’information contenue dans le système. C’est pourquoi, nous
-pouvons reconnaître le visage d’une personne même si celle-ci a vieilli,
-par exemple, alors que c’est là une tâche beaucoup plus complexe à faire
-réaliser à un ordinateur classique.<br />
-C’est la tentative de donner à l’ordinateur les qualités de perception
+de toute l’information contenue dans le système.</p>
+<p>C’est la tentative de donner à l’ordinateur les qualités de perception
 du cerveau humain qui a conduit à une modélisation électrique de
 celui-ci. C’est cette modélisation que tentent de réaliser les réseaux
 de neurones artificiels, dont l’élaboration repose sur base de la
@@ -775,13 +772,13 @@ leurs travaux sur les neurones biologiques.</p>
 </div>
 <div class="section" id="classification-des-reseaux-de-neurones">
 <h3>Classification des réseaux de neurones<a class="headerlink" href="#classification-des-reseaux-de-neurones" title="Lien permanent vers ce titre">#</a></h3>
-<p>Un réseau de neurones formels est constitué d’un grand nombre de
+<p>Un réseau de neurones est constitué d’un grand nombre de
 cellules de base interconnectées. De nombreuses variantes sont définies
 selon le choix de la cellule élémentaire, de l’architecture et de la
 dynamique du réseau.</p>
 <p>Une cellule élémentaire peut manipuler des valeurs binaires ou réelles.
 Les valeurs binaires sont représentées par 0 et 1 ou -1 et 1.
-Différentes fonctions peuvent être utilisées pour le calcul de la
+Différentes fonctions d’ctivation peuvent être utilisées pour le calcul de la
 sortie. Le calcul de la sortie peut être déterministe ou probabiliste.</p>
 <p>L’architecture du réseau peut être sans rétroaction, c’est à dire que la
 sortie d’une cellule ne peut influencer son entrée. Elle peut être avec
@@ -799,20 +796,17 @@ modèle de Hopfield et la notion de mémoire associative.</p>
 l’aide de la fonction sigmoïde, une architecture sans rétroaction en
 couches successives avec une couche d’entrée et une couche de sortie,
 une dynamique asynchrone séquentielle, on obtient le modèle du
-Perceptron multi-couches (PMC) qui sera étudié dans les paragraphes
-suivants.</p>
+Perceptron multi-couches (PMC).</p>
 </div>
 <div class="section" id="applications">
 <h3>Applications<a class="headerlink" href="#applications" title="Lien permanent vers ce titre">#</a></h3>
-<p>Les principales applications des réseaux de neurones sont l’optimisation
-et l’apprentissage. En apprentissage, les réseaux de neurones sont
-essentiellement utilisés pour :</p>
+<p>En apprentissage, les réseaux de neurones sont essentiellement utilisés pour :</p>
 <ul class="simple">
 <li><p>l’apprentissage supervisé ;</p></li>
 <li><p>l’apprentissage non supervisé ;</p></li>
 <li><p>l’apprentissage par renforcement.</p></li>
 </ul>
-<p>Dans la suite, nous nous intéressons au cas de l’apprentissage
+<p>Dans la suite, nous nous intéressons essentiellement au cas de l’apprentissage
 supervisé. Le cas des réseaux de neurones en apprentissage non supervisé
 concerne principalement les cartes de Kohonen, les machines de Boltzmann
 restreintes (RBM) et les autoencodeurs.</p>
@@ -822,31 +816,33 @@ restreintes (RBM) et les autoencodeurs.</p>
 <h2>Perceptron<a class="headerlink" href="#perceptron" title="Lien permanent vers ce titre">#</a></h2>
 <div class="section" id="definitions">
 <h3>Définitions<a class="headerlink" href="#definitions" title="Lien permanent vers ce titre">#</a></h3>
-<div class="highlight-definition notranslate"><div class="highlight"><pre><span></span>Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
-Les $D$ variables sur lesquelles opère le neurone sont habituellement
-désignées sous le terme d&#39;entrées du neurone (notées
-$x_i,1\leq i\leq D$), et la valeur de la fonction sous celui de sortie
-$y$.\
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 1 </span> (Neurone)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
+Les <span class="math notranslate nohighlight">\(D\)</span> variables sur lesquelles opère le neurone sont habituellement
+désignées sous le terme d’entrées du neurone (notées
+<span class="math notranslate nohighlight">\(x_i,1\leq i\leq D\)</span>), et la valeur de la fonction sous celui de sortie
+<span class="math notranslate nohighlight">\(y\)</span>.<br />
 Le neurone formel calcule la sortie selon la formule :
-$$y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)$$ où :
-
--   $w_1\cdots w_D$ sont les poids synaptiques qui pondèrent les entrées
-    du neurone
-
--   $w_0$ est un biais
-
--   $\displaystyle\sum_{i=1}^Dw_ix_i$ est le potentiel du neurone
-
--   $f$ est la fonction d&#39;activation associée au neurone.
-</pre></div>
-</div>
-<div class="highlight-definition notranslate"><div class="highlight"><pre><span></span>Un réseau de neurones est un ensemble de neurones interconnectés. Les
+$<span class="math notranslate nohighlight">\(y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)\)</span>$ où :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_1\cdots w_D\)</span> sont les poids synaptiques qui pondèrent les entrées
+du neurone</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_0\)</span> est un biais</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\sum_{i=1}^Dw_ix_i\)</span> est le potentiel du neurone</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> est la fonction d’activation associée au neurone.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+````{prf:definition} Réseau de neurones
+Un réseau de neurones est un ensemble de neurones interconnectés. Les
 réseaux de neurones peuvent être visualisés par l&#39;intermédiaire d&#39;un
 graphe orienté. Chaque neurone est un noeud, les neurones étant
 connectés par des arêtes.
 </pre></div>
 </div>
-<p>Par simplicité, nous distinguerons neurone d’entrée et neurone de
+</div>
+</div><p>Par simplicité, nous distinguerons neurone d’entrée et neurone de
 sortie. Un neurone d’entrée calcule <span class="math notranslate nohighlight">\(y = x\)</span> où <span class="math notranslate nohighlight">\(x\)</span> est une entrée unique
 du neurone. Les neurones de sortie prennent un nombre quelconque
 d’entrées. Interconnectés, l’ensemble de ces neurones calcule <span class="math notranslate nohighlight">\(y(x)\)</span>
