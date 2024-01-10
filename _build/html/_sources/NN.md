@@ -307,7 +307,7 @@ de valeur 1 pour le perceptron.
 L'apprentissage par correction d'erreur du perceptron est donné dans l'({numref}`correction`) 
 
 ```{prf:algorithm} Algorithme d'apprentissage du perceptron par correction d'erreur
-:name: correction
+:label: correction
 1. Initialisation aléatoire des $w_i$
 2. Tant que (test)
     1. Prendre un exemple $(\mathbf{x_n},t_n)$ dans ${\cal E}_a$
