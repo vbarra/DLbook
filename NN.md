@@ -1,3 +1,15 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # Introduction aux réseaux de neurones
 
 ## Réseaux de neurones et apprentissage automatique
@@ -388,15 +400,25 @@ la procédure d'apprentissage par correction d'erreur converge vers un
 perceptron linéaire à seuil qui sépare linéairement ${\cal E}_a$.\
 L'inconvénient majeur de cet apprentissage est que si l'échantillon
 présenté n'est pas linéairement séparable, l'algorithme ne convergera
-pas et l'on aura aucun moyen de le savoir. On pourrait penser qu'il
-suffit d'observer l'évolution des poids synaptiques pour en déduire si
+pas et l'on aura aucun moyen de le savoir. 
+
+```{code-cell} ipython3
+from IPython.display import Video
+Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
+```
+
+
+
+
+On pourrait penser qu'il suffit d'observer l'évolution des poids synaptiques pour en déduire si
 l'on doit arrêter ou non l'algorithme. En effet, si les poids et le
 seuil prennent deux fois les mêmes valeurs sans que le perceptron ait
 appris et alors que tous les exemples ont été présentés, cela signifie
 que l'échantillon n'est pas séparable. Et l'on peut penser que l'on peut
 borner les poids et le seuil en fonction de la taille de la rétine.
+
 C'est vrai mais les résultats de complexité suivants montrent que cette
-idée n'est pas applicable en pratique.\
+idée n'est pas applicable en pratique.
 
 1.  Toute fonction booléenne linéairement séparable sur $D$ variables
     peut être réalisée par un perceptron dont les poids synaptiques
