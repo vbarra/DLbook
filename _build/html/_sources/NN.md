@@ -26,7 +26,7 @@ unités élémentaires.
 Les réseaux de neurones, eux, procèdent selon une
 approche \"ascendante\" qui tente de produire des phénomènes complexes
 à partir
-d'opérations très élémentaires.\
+d'opérations très élémentaires.
 
 ### Du neurone biologique au neurone formel
 
