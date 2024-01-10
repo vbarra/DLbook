@@ -352,8 +352,7 @@ Certains éléments importants ont été laissés volontairement imprécis.
 Nous reviendrons sur toutes ces questions par la suite. 
 
 
-````{prf:example}
-apprentissage du OU binaire.
+````{prf:example} Apprentissage du OU binaire
 Les descriptions appartiennent à {0,1}$^2$, les entrées du perceptron
 appartiennent à {0,1}$^3$, la première composante correspond à l'entrée
 $x_0$ et vaut toujours 1, les deux composantes suivantes correspondent
