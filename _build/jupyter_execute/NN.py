@@ -457,8 +457,9 @@ Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
 # coefficients synaptiques. La sortie $y_n$ est définie par $y_n=\mathbf w^\top\mathbf x_n$. 
 # L'erreur du perceptron sur un échantillon d'apprentissage ${\cal E}_a$
 # d'exemples $(\mathbf x_n,t_n)$ est définie en utilisant par l'erreur quadratique
-# :
+# 
 # $$E(\mathbf w)=\frac{1}{2}\displaystyle\sum_{(\mathbf x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2$$
+# 
 # 
 # L'erreur mesure donc l'écart entre les sorties attendue et calculée sur
 # l'échantillon complet. On remarque que $E(\mathbf w) = 0$ si et seulement si le
@@ -496,33 +497,36 @@ Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
 # La fonction erreur quadratique ne possède qu'un minimum (la surface est
 # une paraboloïde). La convergence est assurée, même si l'échantillon
 # d'entrée n'est pas linéairement séparable, vers un minimum de la
-# fonction erreur pour un $\epsilon$ bien choisi, suffisamment petit. Si
-# $\epsilon$ est trop grand, on risque d'osciller autour du minimum. Pour
+# fonction erreur pour un $\epsilon$ bien choisi, suffisamment petit. $\varepsilon$ est appelé le taux d'apprentissage (ou *learning rate*).
+# 
+# Si $\varepsilon$ est trop grand, on risque d'osciller autour du minimum. Pour
 # cette raison, une modification classique est de diminuer graduellement
-# la valeur de $\epsilon$ en fonction du nombre d'itérations. Le principal
+# la valeur de $\varepsilon$ en fonction du nombre d'itérations. Le principal
 # défaut est que la convergence peut être très lente et que chaque étape
 # nécessite le calcul sur tout l'ensemble d'apprentissage.\
 # Au lieu de calculer les variations des poids en sommant sur tous les
 # exemples de ${\cal E}_a$, l'idée est alors de modifier les poids à
 # chaque présentation d'exemple. La règle de modification des poids
-# devient : $$\Delta w_i=\epsilon (t_n-y_n)x_n^i$$
+# devient : $$\Delta w_i=\varepsilon (t_n-y_n)x_n^i$$
 # 
 # Cette règle est appelée règle delta, ou règle Adaline, ou encore règle
-# de Widrow-Hoff, et l'algorithme
-# [\[A:adaline\]](#A:adaline){reference-type="ref" reference="A:adaline"}
+# de Widrow-Hoff, et l'{prf:ref}`adaline`
 # décrit cette règle :
 # 
-# ::: algorithm
-# Initialisation aléatoire des $w_i$\
-# Prendre un exemple $(x_n,t_n)  \in {\cal E}_a$\
-# Calculer $y_n$\
-# $w_i \leftarrow w_i +\epsilon(t_n-y_n)x_n^i$
-# :::
+# ```{prf:algorithm} Algorithme d'apprentissage du perceptron par descente de gradient
+# :label: adaline
+# 1. Initialisation aléatoire des $w_i$
+# 2. Tant que (test)
+#     1. Prendre un exemple $(\mathbf x_n,t_n)\in {\cal E}_a$
+#     2. Calculer $y_n$
+#     3. Pour tout $i$ $w_i \leftarrow  w_i+\varepsilon (t_y-y_n)x_n^i$
+# ```
 # 
 # En général, on parcourt l'échantillon dans un ordre prédéfini. Le
 # critère d'arrêt généralement choisi fait intervenir un seuil de
 # modifications des poids pour un passage complet de l'échantillon.\
-# Au coefficient $\epsilon$ près dans la règle de modification des poids,
+# 
+# Au coefficient $\varepsilon$ près dans la règle de modification des poids,
 # on retrouve l'algorithme d'apprentissage par correction d'erreur. Pour
 # l'algorithme de Widrow-Hoff, il y a correction chaque fois que la sortie
 # totale (qui est un réel) est différente de la valeur attendue. Ce n'est
@@ -534,12 +538,13 @@ Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
 # Widrow-Hoff par rapport à l'algorithme par correction d'erreur est que,
 # même si l'échantillon d'entrée n'est pas linéairement séparable,
 # l'algorithme va converger vers une solution optimale (sous réserve du
-# bon choix du paramètre $\epsilon$). L'algorithme est, par conséquent,
-# plus robuste au bruit.\
+# bon choix du paramètre $\varepsilon$). L'algorithme est, par conséquent,
+# plus robuste au bruit.
+# 
 # L'algorithme de Widrow-Hoff s'écarte de l'algorithme du gradient sur un
 # point important : on modifie les poids après présentation de chaque
 # exemple en fonction de l'erreur locale et non de l'erreur globale. On
-# utilise donc une méthode de type **gradient stochastique**. Rien ne
+# utilise donc une méthode de type *gradient stochastique*. Rien ne
 # prouve alors que la diminution de l'erreur en un point ne va pas être
 # compensée par une augmentation de l'erreur pour les autres points. La
 # justification empirique de cette manière de procéder est commune à
@@ -547,13 +552,13 @@ Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
 # adaptatives est justement l'ensemble des problèmes pour lesquels des
 # ajustements locaux vont finir par converger vers une solution globale.
 # 
-# L'algorithme de Widrow-Hoff est très souvent utilisé en pratique et
+# L'algorithme de Widrow-Hoff est souvent utilisé en pratique et
 # donne de bons résultats. Iil sera utilisé dans les autres réseaux de
 # neurones rencontrés dans ce cours, avec sa variante où la modification
 # des poids se fait après présentation d'un sous ensemble de données
 # d'apprentissage (apprentissage par batchs). La convergence est, en
 # général, plus rapide que par la méthode du gradient. Il est fréquent
-# pour cet algorithme de faire diminuer la valeur de $\epsilon$ en
+# pour cet algorithme de faire diminuer la valeur de $\varepsilon$ en
 # fonction du nombre d'itérations comme pour l'algorithme du gradient.
 # 
 # ### Pour en finir avec le perceptron
@@ -577,10 +582,10 @@ Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
 # posent naturellement ne peuvent pas être résolus par des méthodes aussi
 # simples : il n'y a que très peu d'espoir que les exemples naturels se
 # répartissent sagement de part et d'autre d'un hyperplan. Deux manières
-# de résoudre cette difficulté peuvent être envisagées : soit mettre au
-# point des séparateurs non-linéaires, soit (ce qui revient à peu près au
-# même) complexifier l'espace de représentation de manière à linéariser le
-# problème initial.\
+# de résoudre cette difficulté peuvent être envisagées : 
+# - soit mettre au point des séparateurs non-linéaires, 
+# - soit (ce qui revient à peu près aumême) complexifier l'espace de représentation de manière à linéariser le problème initial.
+# 
 # Les réseaux multicouches abordent ce type de problème.
 # 
 # ## Perceptrons multicouches {#subsec:multilayer-perceptron}
