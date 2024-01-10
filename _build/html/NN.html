@@ -404,8 +404,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#perceptrons-multicouches-subsec-multilayer-perceptron">
-   Perceptrons multicouches {#subsec:multilayer-perceptron}
+  <a class="reference internal nav-link" href="#perceptrons-multicouches">
+   Perceptrons multicouches
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -592,8 +592,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#perceptrons-multicouches-subsec-multilayer-perceptron">
-   Perceptrons multicouches {#subsec:multilayer-perceptron}
+  <a class="reference internal nav-link" href="#perceptrons-multicouches">
+   Perceptrons multicouches
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -1404,46 +1404,8 @@ de résoudre cette difficulté peuvent être envisagées :</p>
 <p>Les réseaux multicouches abordent ce type de problème.</p>
 </div>
 </div>
-<div class="section" id="perceptrons-multicouches-subsec-multilayer-perceptron">
-<h2>Perceptrons multicouches {#subsec:multilayer-perceptron}<a class="headerlink" href="#perceptrons-multicouches-subsec-multilayer-perceptron" title="Lien permanent vers ce titre">#</a></h2>
-<div class="highlight-definition notranslate"><div class="highlight"><pre><span></span>Un perceptron à $(L+1)$ couches (figure
-[1.3](#fig:multilayer-perceptron){reference-type=&quot;ref&quot;
-reference=&quot;fig:multilayer-perceptron&quot;}) est un réseau constitué d&#39;une
-rétine à $D$ neurones (auxquels on rajoute l&#39;entrée $x_0$), $C$ neurones
-de sortie, et des neurones dits **cachés**, organisés dans $L$ couches
-cachées intermédiaires. De fait, un tel réseau comporte $(L+2)$ couches
-mais on compte rarement la rétine, puisque cette dernière n&#39;effectue pas
-de calculs. Le $i^{\text{e}}$ neurone dans la couche cachée $l$ calcule
-la sortie $$\begin{aligned}
-    y_i^{(l)} &amp;= f\left(z_i^{(l)}\right) \quad\text{ avec }\quad z_i^{(l)} = \sum _{k = 1} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)} + w_{i,0}^{(l)}
-\end{aligned}$$ où $w_{i,k}^{(l)}$ est le poids de la connexion entre le
-$k^{\text{e}}$ neurone de la couche $(l-1)$ et le $i^{\text{e}}$ neurone
-de la couche $l$, et $w_{i,0}^{(l)}$ est le biais. De plus, $m^{(l)}$
-est le nombre de neurones de la couche $l$, de sorte que $D = m^{(0)}$
-et $C = m^{(L+1)}$. Enfin, $f$ est la fonction d&#39;activation du neurone
-(supposée identique pour tous les neurones).\
-</pre></div>
-</div>
-<p>En introduisant dans chaque couche un neurone supplémentaire
-<span class="math notranslate nohighlight">\(y_0^{(l)} = 1\)</span> pour gérer le biais, on a : $<span class="math notranslate nohighlight">\(\begin{aligned}
-    \label{eq:multilayer-perceptron}
-    z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad z^{(l)} = w^{(l)} y^{(l-1)}
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( avec \)</span>z^{(l)}<span class="math notranslate nohighlight">\(, \)</span>w^{(l)}<span class="math notranslate nohighlight">\( et \)</span>y^{(l-1)}<span class="math notranslate nohighlight">\( les
-représentations vectorielle et matricielle des entrées \)</span>z_i^{(l)}<span class="math notranslate nohighlight">\(, des
-poids \)</span>w_{i,k}^{(l)}<span class="math notranslate nohighlight">\( et des sorties \)</span>y_k^{(l-1)}$.</p>
-<figure id="fig:multilayer-perceptron">
-<figcaption>Perceptron multicouches à <span
-class="math inline">(<em>L</em>+1)</span> couches, <span
-class="math inline"><em>D</em></span> entrées et <span
-class="math inline"><em>C</em></span> sorties.</figcaption>
-</figure>
-<p>Un tel réseau représente une fonction $<span class="math notranslate nohighlight">\(\begin{aligned}
-    y(\cdot,w) &amp;:&amp; \mathbb{R}^D \rightarrow \mathbb{R}^C\\
-    x &amp;\mapsto&amp; y(x,w)
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>y(x,w)<span class="math notranslate nohighlight">\( est tel que \)</span>y_i(x,w) = y_i^{(L+1)}<span class="math notranslate nohighlight">\( et \)</span>w$
-est le vecteur de tous les poids du réseau.</p>
-<p>On parlera de <strong>réseau profond (Deep network)</strong> lorsque le nombre de
-couches cachées est supérieur à 3.</p>
+<div class="section" id="perceptrons-multicouches">
+<h2>Perceptrons multicouches<a class="headerlink" href="#perceptrons-multicouches" title="Lien permanent vers ce titre">#</a></h2>
 <div class="section" id="fonctions-d-activation-subsec-activation-functions">
 <h3>Fonctions d’activation {#subsec:activation-functions}<a class="headerlink" href="#fonctions-d-activation-subsec-activation-functions" title="Lien permanent vers ce titre">#</a></h3>
 <p>Trois grandes classes de fonction d’activation <span class="math notranslate nohighlight">\(f\)</span> sont généralement
@@ -1978,7 +1940,126 @@ L’initialisation de Xavier propose un tirage uniforme dans
 </div>
 </div>
 </div>
+<div class="proof definition admonition" id="definition-7">
+<p class="admonition-title"><span class="caption-number">Definition 4 </span> (Perceptron multicouches)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un perceptron à <span class="math notranslate nohighlight">\((L+1)\)</span> couches (figure
+<a class="reference external" href="#fig:multilayer-perceptron">1.3</a>{reference-type= »ref »
+reference= »fig:multilayer-perceptron »}) est un réseau constitué d’une
+rétine à <span class="math notranslate nohighlight">\(D\)</span> neurones (auxquels on rajoute l’entrée <span class="math notranslate nohighlight">\(x_0\)</span>), <span class="math notranslate nohighlight">\(C\)</span> neurones
+de sortie, et des neurones dits <strong>cachés</strong>, organisés dans <span class="math notranslate nohighlight">\(L\)</span> couches
+cachées intermédiaires. De fait, un tel réseau comporte <span class="math notranslate nohighlight">\((L+2)\)</span> couches
+mais on compte rarement la rétine, puisque cette dernière n’effectue pas
+de calculs. Le <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> neurone dans la couche cachée <span class="math notranslate nohighlight">\(l\)</span> calcule
+la sortie $<span class="math notranslate nohighlight">\(\begin{aligned}
+    y_i^{(l)} &amp;= f\left(z_i^{(l)}\right) \quad\text{ avec }\quad z_i^{(l)} = \sum _{k = 1} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)} + w_{i,0}^{(l)}
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>w_{i,k}^{(l)}<span class="math notranslate nohighlight">\( est le poids de la connexion entre le
+\)</span>k^{\text{e}}<span class="math notranslate nohighlight">\( neurone de la couche \)</span>(l-1)<span class="math notranslate nohighlight">\( et le \)</span>i^{\text{e}}<span class="math notranslate nohighlight">\( neurone
+de la couche \)</span>l<span class="math notranslate nohighlight">\(, et \)</span>w_{i,0}^{(l)}<span class="math notranslate nohighlight">\( est le biais. De plus, \)</span>m^{(l)}<span class="math notranslate nohighlight">\(
+est le nombre de neurones de la couche \)</span>l<span class="math notranslate nohighlight">\(, de sorte que \)</span>D = m^{(0)}<span class="math notranslate nohighlight">\(
+et \)</span>C = m^{(L+1)}<span class="math notranslate nohighlight">\(. Enfin, \)</span>f$ est la fonction d’activation du neurone
+(supposée identique pour tous les neurones).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+En introduisant dans chaque couche un neurone supplémentaire
+$y_0^{(l)} = 1$ pour gérer le biais, on a : $$\begin{aligned}
+    \label{eq:multilayer-perceptron}
+    z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad z^{(l)} = w^{(l)} y^{(l-1)}
+\end{aligned}$$ avec $z^{(l)}$, $w^{(l)}$ et $y^{(l-1)}$ les
+représentations vectorielle et matricielle des entrées $z_i^{(l)}$, des
+poids $w_{i,k}^{(l)}$ et des sorties $y_k^{(l-1)}$.
+
+
+```{tikz}
+	\begin{tikzpicture}[shorten &gt;=1pt]
+		\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
+		\tikzstyle{hidden}=[draw,shape=circle,minimum size=1.15cm]
+
+		\node[unit](x0) at (0,3.5){$x_0$};
+		\node[unit](x1) at (0,2){$x_1$};
+		\node at (0,1){\vdots};
+		\node[unit](xd) at (0,0){$x_D$};
+
+		\node[hidden](h10) at (3,4){$y_0^{(1)}$};
+		\node[hidden](h11) at (3,2.5){$y_1^{(1)}$};
+		\node at (3,1.5){\vdots};
+		\node[hidden](h1m) at (3,-0.5){$y_{m^{(1)}}^{(1)}$};
+
+		\node(h22) at (5,0){};
+		\node(h21) at (5,2){};
+		\node(h20) at (5,4){};
+		
+		\node(d3) at (6,0){$\ldots$};
+		\node(d2) at (6,2){$\ldots$};
+		\node(d1) at (6,4){$\ldots$};
+
+		\node(hL12) at (7,0){};
+		\node(hL11) at (7,2){};
+		\node(hL10) at (7,4){};
+		
+		\node[hidden](hL0) at (9,4){$y_0^{(L)}$};
+		\node[hidden](hL1) at (9,2.5){$y_1^{(L)}$};
+		\node at (9,1.5){\vdots};
+		\node[hidden](hLm) at (9,-0.5){$y_{m^{(L)}}^{(L)}$};
+
+		\node[unit](y1) at (12,3.5){$y_1^{(L+1)}$};
+		\node[unit](y2) at (12,2){$y_2^{(L+1)}$};
+		\node at (12,1){\vdots};	
+		\node[unit](yc) at (12,0){$y_C^{(L+1)}$};
+
+		\draw[-&gt;] (x0) -- (h11);
+		\draw[-&gt;] (x0) -- (h1m);
+
+		\draw[-&gt;] (x1) -- (h11);
+		\draw[-&gt;] (x1) -- (h1m);
+
+		\draw[-&gt;] (xd) -- (h11);
+		\draw[-&gt;] (xd) -- (h1m);
+
+		\draw[-&gt;] (hL0) -- (y1);
+		\draw[-&gt;] (hL0) -- (yc);
+		\draw[-&gt;] (hL0) -- (y2);
+
+		\draw[-&gt;] (hL1) -- (y1);
+		\draw[-&gt;] (hL1) -- (yc);
+		\draw[-&gt;] (hL1) -- (y2);
+
+		\draw[-&gt;] (hLm) -- (y1);
+		\draw[-&gt;] (hLm) -- (y2);
+		\draw[-&gt;] (hLm) -- (yc);
+
+		\draw[-&gt;,path fading=east] (h10) -- (h21);
+		\draw[-&gt;,path fading=east] (h10) -- (h22);
+		
+		\draw[-&gt;,path fading=east] (h11) -- (h21);
+		\draw[-&gt;,path fading=east] (h11) -- (h22);
+		
+		\draw[-&gt;,path fading=east] (h1m) -- (h21);
+		\draw[-&gt;,path fading=east] (h1m) -- (h22);
+		
+		\draw[-&gt;,path fading=west] (hL10) -- (hL1);
+		\draw[-&gt;,path fading=west] (hL11) -- (hL1);
+		\draw[-&gt;,path fading=west] (hL12) -- (hL1);
+		
+		\draw[-&gt;,path fading=west] (hL10) -- (hLm);
+		\draw[-&gt;,path fading=west] (hL11) -- (hLm);
+		\draw[-&gt;,path fading=west] (hL12) -- (hLm);
+		
+		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (-0.5,4) -- (0.75,4) node [black,midway,yshift=+0.6cm]{Rétine};
+		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (2.5,4.5) -- (3.75,4.5) node [black,midway,yshift=+0.6cm]{$1^{\text{e}}$ couche cachée};
+		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (8.5,4.5) -- (9.75,4.5) node [black,midway,yshift=+0.6cm]{$L^{\text{e}}$ couche cachée};
+		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (11.5,4) -- (12.75,4) node [black,midway,yshift=+0.6cm]{couche de sortie};
+	\end{tikzpicture}
+</pre></div>
 </div>
+<p>Un tel réseau représente une fonction $<span class="math notranslate nohighlight">\(\begin{aligned}
+    y(\cdot,w) &amp;:&amp; \mathbb{R}^D \rightarrow \mathbb{R}^C\\
+    x &amp;\mapsto&amp; y(x,w)
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>y(x,w)<span class="math notranslate nohighlight">\( est tel que \)</span>y_i(x,w) = y_i^{(L+1)}<span class="math notranslate nohighlight">\( et \)</span>w$
+est le vecteur de tous les poids du réseau.</p>
+<p>On parlera de <strong>réseau profond (Deep network)</strong> lorsque le nombre de
+couches cachées est supérieur à 3.</p>
+</div>
+</div></div>
 <div class="section" id="partie-pratique">
 <h2>Partie pratique<a class="headerlink" href="#partie-pratique" title="Lien permanent vers ce titre">#</a></h2>
 <div class="section" id="id1">
