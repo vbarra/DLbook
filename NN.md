@@ -222,7 +222,7 @@ Les entrées $x_1,\cdots x_D$ peuvent être à valeurs dans {0,1} (ou
 {-1,1}) ou réelles, les poids peuvent être entiers ou réels. 
 
 Pour simplifier les notations et certaines preuves, on remplace souvent
-le seuil par un poids supplémentaire $w_0$ associé à une entrée $x_0=1$.  ({numref}`perceptron`). L'équivalence entre le modèle avec
+le seuil par un poids supplémentaire $w_0$ associé à une entrée $x_0=1$. L'équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient $w_0$ est l'opposé du seuil $\theta$.
 
@@ -244,31 +244,33 @@ coefficient $w_0$ est l'opposé du seuil $\theta$.
 		
 		\node at (10.5,2.25){$w_0$};
 	\end{tikzpicture}
-Représentation d'un perceptron sous la forme d'un graphe orienté
 ```
 
 On note $\mathbf w$ (respectivement $\mathbf x$) $\in\mathbb R^{D+1}$ le vecteur des poids
-(resp. des entrées), augmentée de $w_0$ (resp. $x_0$=1). Comme suggéré
+(resp. des entrées), augmenté de $w_0$ (resp. $x_0$=1). Comme suggéré
 par la définition, on peut décomposer le calcul de la sortie $y$ en un
-premier calcul de la quantité $w^Tx=\displaystyle\sum_{i=0}^Dw_ix_i$
+premier calcul de la quantité $\mathbf w^T\mathbf x=\displaystyle\sum_{i=0}^Dw_ix_i$
 appelée **potentiel post-synaptique** ou **entrée totale**, suivi d'une
 application d'une **fonction d'activation** sur cette entrée totale.
 Dans le cas du perceptron linéaire à seuil, la fonction d'activation est
 la fonction de Heaviside définie par $f(x)=1_{\{x>0\}}$ lorsque la
 sortie est en {0,1}, et $g(x) = 2f(x) - 1$ lorsque la sortie est en
-{-1,1}.\
+{-1,1}.
 
 ### Utilisation : discrimination linéaire
 
 Soit ${\cal E}_a$ un ensemble d'exemples dans $\mathbb R^D\times${0,1} . On
-note $${\cal E}_a^0=\{x\in \mathbb R^D/(x,0)\in {\cal E}_a\}$$ et
-$${\cal E}_a^1=\{x\in \mathbb R^D/(x,1)\in {\cal E}_a\}$$ On dit que
+note 
+$${\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}$$ 
+et
+$${\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}$$ 
+On dit que
 ${\cal E}_a$ est **linéairement séparable** s'il existe un hyperplan $H$
 de $\mathbb R^D$ tel que les ensembles ${\cal E}_a^0$ et ${\cal E}_a^1$
 soient situés de part et d'autre de cet hyperplan.\
 On montre qu'un perceptron linéaire à seuil à $D$ entrées divise
 l'espace des entrées $\mathbb R^D$ en deux sous-espaces délimités par un
-hyperplan $w^Tx=0$. Réciproquement, tout ensemble linéairement séparable
+hyperplan $\mathbf w^T\mathbf x=-\theta$. Réciproquement, tout ensemble linéairement séparable
 peut être discriminé par un perceptron.\
 Un perceptron est donc un discriminant linéaire. On montre facilement
 qu'un échantillon de $\mathbb R^D$ est séparable par un hyperplan si et
@@ -276,7 +278,7 @@ seulement si l'échantillon de $\mathbb R^{D+1}$ obtenu en rajoutant une
 entrée toujours égale à 1 est séparable par un hyperplan passant par
 l'origine.\
 Toute fonction de $\mathbb R^D$ dans {0,1} n'est bien sur pas calculable par
-un tel perceptron.\
+un tel perceptron.
 
 ### Algorithme d'apprentissage par correction d'erreur
 
@@ -292,24 +294,26 @@ manière suivante. On initialise les poids du perceptron à des valeurs
 quelconques. A chaque fois que l'on présente un nouvel exemple, on
 ajuste les poids selon que le perceptron l'a correctement classé ou non.
 L'algorithme s'arrête lorsque tous les exemples ont été présentés sans
-modification d'aucun poids.\
-Dans la suite, on note $x_n$ une entrée. La i$^\textrm{ème}$ composante
-de $x_n$ est notée $x_n^i$. Pour simplifier l'explication de
-l'algorithme, cette composante sera supposée binaire. Un échantillon
-${\cal E}_a$ est un ensemble de couples $(x_n,t_n)$ où $t_n$ est la
-classe binaire de $x_n$. Si une entrée $x_n$ est présentée en entrée
-d'un perceptron, nous noterons $y_n$ la sortie binaire calculée par le
-perceptron. Rappelons qu'il existe une $(D+1)^\textrm{ème}$ entrée $x_0$
-de valeur 1 pour le perceptron.\
-L'algorithme d'apprentissage par correction d'erreur du perceptron
-linéaire à seuil suit alors le schéma suivant :
+modification d'aucun poids ou qu'un nombre maximum d'itération a été atteint.
 
-::: algorithm
-Initialisation aléatoire des $w_i$\
-Prendre un exemple $(x_n,t_n)$ dans ${\cal E}_a$\
-Calculer la sortie $y_n$ du perceptron pour l'entrée $x_n$\
-$w_i \leftarrow w_i+(t_n-y_n)x_n^i$\
-:::
+Dans la suite, on note $\mathbf{x_n}$ une entrée. La ième composante
+de  $\mathbf{x_n}$ est notée $x_n^i$. Pour simplifier l'explication de
+l'algorithme, cette composante sera supposée binaire. Un échantillon
+${\cal E}_a$ est un ensemble de couples $(\mathbf{x_n},t_n)$ où $t_n$ est la
+classe binaire de $\mathbf{x_n}$. Si une entrée $\mathbf{x_n}$ est présentée en entrée
+d'un perceptron, on note $y_n$ la sortie binaire calculée par le
+perceptron. Rappelons qu'il existe une $(D+1)^\textrm{ème}$ entrée $x_0$
+de valeur 1 pour le perceptron.
+L'apprentissage par correction d'erreur du perceptron est donné dans l'({numref}`correction`) 
+
+```{prf:algorithm} Algorithme d'apprentissage du perceptron par correction d'erreur
+:name: correction
+1. Initialisation aléatoire des $w_i$
+2. Tant que (test)
+    1. Prendre un exemple $(\mathbf{x_n},t_n)$ dans ${\cal E}_a$
+    2. Calculer la sortie $y_n$ du perceptron pour l'entrée $\mathbf{x_n}$
+    3. $(\forall i)\; w_i \leftarrow w_i+(t_n-y_n)x_n^i$
+```
 
 La procédure d'apprentissage du perceptron est une procédure de
 correction d'erreur puisque les poids ne sont pas modifiés lorsque la

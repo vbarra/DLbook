@@ -226,7 +226,6 @@ le seuil par un poids supplémentaire $w_0$ associé à une entrée $x_0=1$.  ({
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient $w_0$ est l'opposé du seuil $\theta$.
 
-```{figure}
 ```{tikz} 
 	\begin{tikzpicture}[shorten >=1pt,->]
 		\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
@@ -245,9 +244,7 @@ coefficient $w_0$ est l'opposé du seuil $\theta$.
 		
 		\node at (10.5,2.25){$w_0$};
 	\end{tikzpicture}
-```
-:name: perceptron
-Neurone Représentation d'un perceptron sous la forme d'un graphe orienté
+Représentation d'un perceptron sous la forme d'un graphe orienté
 ```
 
 On note $\mathbf w$ (respectivement $\mathbf x$) $\in\mathbb R^{D+1}$ le vecteur des poids
