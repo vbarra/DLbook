@@ -877,32 +877,35 @@ le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sorti
 </div><p>Les entrées <span class="math notranslate nohighlight">\(x_1,\cdots x_D\)</span> peuvent être à valeurs dans {0,1} (ou
 {-1,1}) ou réelles, les poids peuvent être entiers ou réels.</p>
 <p>Pour simplifier les notations et certaines preuves, on remplace souvent
-le seuil par un poids supplémentaire <span class="math notranslate nohighlight">\(w_0\)</span> associé à une entrée <span class="math notranslate nohighlight">\(x_0=1\)</span>.  (<code class="xref std std-numref docutils literal notranslate"><span class="pre">perceptron</span></code>). L’équivalence entre le modèle avec
+le seuil par un poids supplémentaire <span class="math notranslate nohighlight">\(w_0\)</span> associé à une entrée <span class="math notranslate nohighlight">\(x_0=1\)</span>. L’équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient <span class="math notranslate nohighlight">\(w_0\)</span> est l’opposé du seuil <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<div class="figure" style="text-align: center"><p><img  src="_images/tikz-9895c8e1147e4092d9d420afa501bf0221c11f5c.png" alt="Figure made with TikZ" /></p>
+<div class="figure" style="text-align: center"><p><img  src="_images/tikz-dd600909db7d6122a1eb2f5ab122b5a8739fa91e.png" alt="Figure made with TikZ" /></p>
 </div><p>On note <span class="math notranslate nohighlight">\(\mathbf w\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf x\)</span>) <span class="math notranslate nohighlight">\(\in\mathbb R^{D+1}\)</span> le vecteur des poids
-(resp. des entrées), augmentée de <span class="math notranslate nohighlight">\(w_0\)</span> (resp. <span class="math notranslate nohighlight">\(x_0\)</span>=1). Comme suggéré
+(resp. des entrées), augmenté de <span class="math notranslate nohighlight">\(w_0\)</span> (resp. <span class="math notranslate nohighlight">\(x_0\)</span>=1). Comme suggéré
 par la définition, on peut décomposer le calcul de la sortie <span class="math notranslate nohighlight">\(y\)</span> en un
-premier calcul de la quantité <span class="math notranslate nohighlight">\(w^Tx=\displaystyle\sum_{i=0}^Dw_ix_i\)</span>
+premier calcul de la quantité <span class="math notranslate nohighlight">\(\mathbf w^T\mathbf x=\displaystyle\sum_{i=0}^Dw_ix_i\)</span>
 appelée <strong>potentiel post-synaptique</strong> ou <strong>entrée totale</strong>, suivi d’une
 application d’une <strong>fonction d’activation</strong> sur cette entrée totale.
 Dans le cas du perceptron linéaire à seuil, la fonction d’activation est
 la fonction de Heaviside définie par <span class="math notranslate nohighlight">\(f(x)=1_{\{x&gt;0\}}\)</span> lorsque la
 sortie est en {0,1}, et <span class="math notranslate nohighlight">\(g(x) = 2f(x) - 1\)</span> lorsque la sortie est en
-{-1,1}.\</p>
+{-1,1}.</p>
 </div>
 <div class="section" id="utilisation-discrimination-lineaire">
 <h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien permanent vers ce titre">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span>{0,1} . On
-note $<span class="math notranslate nohighlight">\({\cal E}_a^0=\{x\in \mathbb R^D/(x,0)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( et
-\)</span><span class="math notranslate nohighlight">\({\cal E}_a^1=\{x\in \mathbb R^D/(x,1)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( On dit que
+note
+$<span class="math notranslate nohighlight">\({\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( 
+et
+\)</span><span class="math notranslate nohighlight">\({\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( 
+On dit que
 \)</span>{\cal E}_a<span class="math notranslate nohighlight">\( est **linéairement séparable** s'il existe un hyperplan \)</span>H<span class="math notranslate nohighlight">\(
 de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( tel que les ensembles \)</span>{\cal E}_a^0<span class="math notranslate nohighlight">\( et \)</span>{\cal E}_a^1<span class="math notranslate nohighlight">\(
 soient situés de part et d'autre de cet hyperplan.\
 On montre qu'un perceptron linéaire à seuil à \)</span>D<span class="math notranslate nohighlight">\( entrées divise
 l'espace des entrées \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( en deux sous-espaces délimités par un
-hyperplan \)</span>w^Tx=0<span class="math notranslate nohighlight">\(. Réciproquement, tout ensemble linéairement séparable
+hyperplan \)</span>\mathbf w^T\mathbf x=-\theta<span class="math notranslate nohighlight">\(. Réciproquement, tout ensemble linéairement séparable
 peut être discriminé par un perceptron.\
 Un perceptron est donc un discriminant linéaire. On montre facilement
 qu'un échantillon de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( est séparable par un hyperplan si et
@@ -910,7 +913,7 @@ seulement si l'échantillon de \)</span>\mathbb R^{D+1}<span class="math notrans
 entrée toujours égale à 1 est séparable par un hyperplan passant par
 l'origine.\
 Toute fonction de \)</span>\mathbb R^D$ dans {0,1} n’est bien sur pas calculable par
-un tel perceptron.\</p>
+un tel perceptron.</p>
 </div>
 <div class="section" id="algorithme-d-apprentissage-par-correction-d-erreur">
 <h3>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Lien permanent vers ce titre">#</a></h3>
@@ -926,23 +929,16 @@ manière suivante. On initialise les poids du perceptron à des valeurs
 quelconques. A chaque fois que l’on présente un nouvel exemple, on
 ajuste les poids selon que le perceptron l’a correctement classé ou non.
 L’algorithme s’arrête lorsque tous les exemples ont été présentés sans
-modification d’aucun poids.<br />
-Dans la suite, on note <span class="math notranslate nohighlight">\(x_n\)</span> une entrée. La i<span class="math notranslate nohighlight">\(^\textrm{ème}\)</span> composante
-de <span class="math notranslate nohighlight">\(x_n\)</span> est notée <span class="math notranslate nohighlight">\(x_n^i\)</span>. Pour simplifier l’explication de
+modification d’aucun poids ou qu’un nombre maximum d’itération a été atteint.</p>
+<p>Dans la suite, on note <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span> une entrée. La ième composante
+de  <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span> est notée <span class="math notranslate nohighlight">\(x_n^i\)</span>. Pour simplifier l’explication de
 l’algorithme, cette composante sera supposée binaire. Un échantillon
-<span class="math notranslate nohighlight">\({\cal E}_a\)</span> est un ensemble de couples <span class="math notranslate nohighlight">\((x_n,t_n)\)</span> où <span class="math notranslate nohighlight">\(t_n\)</span> est la
-classe binaire de <span class="math notranslate nohighlight">\(x_n\)</span>. Si une entrée <span class="math notranslate nohighlight">\(x_n\)</span> est présentée en entrée
-d’un perceptron, nous noterons <span class="math notranslate nohighlight">\(y_n\)</span> la sortie binaire calculée par le
+<span class="math notranslate nohighlight">\({\cal E}_a\)</span> est un ensemble de couples <span class="math notranslate nohighlight">\((\mathbf{x_n},t_n)\)</span> où <span class="math notranslate nohighlight">\(t_n\)</span> est la
+classe binaire de <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span>. Si une entrée <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span> est présentée en entrée
+d’un perceptron, on note <span class="math notranslate nohighlight">\(y_n\)</span> la sortie binaire calculée par le
 perceptron. Rappelons qu’il existe une <span class="math notranslate nohighlight">\((D+1)^\textrm{ème}\)</span> entrée <span class="math notranslate nohighlight">\(x_0\)</span>
-de valeur 1 pour le perceptron.<br />
-L’algorithme d’apprentissage par correction d’erreur du perceptron
-linéaire à seuil suit alors le schéma suivant :</p>
-<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>Initialisation aléatoire des $w_i$\
-Prendre un exemple $(x_n,t_n)$ dans ${\cal E}_a$\
-Calculer la sortie $y_n$ du perceptron pour l&#39;entrée $x_n$\
-$w_i \leftarrow w_i+(t_n-y_n)x_n^i$\
-</pre></div>
-</div>
+de valeur 1 pour le perceptron.
+L’apprentissage par correction d’erreur du perceptron est donné dans l”(<code class="xref std std-numref docutils literal notranslate"><span class="pre">correction</span></code>)</p>
 <p>La procédure d’apprentissage du perceptron est une procédure de
 correction d’erreur puisque les poids ne sont pas modifiés lorsque la
 sortie attendue <span class="math notranslate nohighlight">\(t_n\)</span> est égale à la sortie calculée <span class="math notranslate nohighlight">\(y_n\)</span> par le
