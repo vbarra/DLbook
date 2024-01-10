@@ -261,9 +261,12 @@ sortie est en {0,1}, et $g(x) = 2f(x) - 1$ lorsque la sortie est en
 
 Soit ${\cal E}_a$ un ensemble d'exemples dans $\mathbb R^D\times${0,1} . On
 note 
+
 $${\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}$$ 
 et
+
 $${\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}$$ 
+
 On dit que
 ${\cal E}_a$ est **linéairement séparable** s'il existe un hyperplan $H$
 de $\mathbb R^D$ tel que les ensembles ${\cal E}_a^0$ et ${\cal E}_a^1$
@@ -304,7 +307,7 @@ classe binaire de $\mathbf{x_n}$. Si une entrée $\mathbf{x_n}$ est présentée 
 d'un perceptron, on note $y_n$ la sortie binaire calculée par le
 perceptron. Rappelons qu'il existe une $(D+1)^\textrm{ème}$ entrée $x_0$
 de valeur 1 pour le perceptron.
-L'apprentissage par correction d'erreur du perceptron est donné dans l'({numref}`correction`) 
+L'apprentissage par correction d'erreur du perceptron est donné dans algorithme {prf:ref}`correction`
 
 ```{prf:algorithm} Algorithme d'apprentissage du perceptron par correction d'erreur
 :label: correction

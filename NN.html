@@ -895,24 +895,26 @@ sortie est en {0,1}, et <span class="math notranslate nohighlight">\(g(x) = 2f(x
 <div class="section" id="utilisation-discrimination-lineaire">
 <h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien permanent vers ce titre">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span>{0,1} . On
-note
-$<span class="math notranslate nohighlight">\({\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( 
-et
-\)</span><span class="math notranslate nohighlight">\({\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( 
-On dit que
-\)</span>{\cal E}_a<span class="math notranslate nohighlight">\( est **linéairement séparable** s'il existe un hyperplan \)</span>H<span class="math notranslate nohighlight">\(
-de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( tel que les ensembles \)</span>{\cal E}_a^0<span class="math notranslate nohighlight">\( et \)</span>{\cal E}_a^1<span class="math notranslate nohighlight">\(
-soient situés de part et d'autre de cet hyperplan.\
-On montre qu'un perceptron linéaire à seuil à \)</span>D<span class="math notranslate nohighlight">\( entrées divise
-l'espace des entrées \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( en deux sous-espaces délimités par un
-hyperplan \)</span>\mathbf w^T\mathbf x=-\theta<span class="math notranslate nohighlight">\(. Réciproquement, tout ensemble linéairement séparable
-peut être discriminé par un perceptron.\
+note</p>
+<div class="math notranslate nohighlight">
+\[{\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}\]</div>
+<p>et</p>
+<div class="math notranslate nohighlight">
+\[{\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}\]</div>
+<p>On dit que
+<span class="math notranslate nohighlight">\({\cal E}_a\)</span> est <strong>linéairement séparable</strong> s’il existe un hyperplan <span class="math notranslate nohighlight">\(H\)</span>
+de <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> tel que les ensembles <span class="math notranslate nohighlight">\({\cal E}_a^0\)</span> et <span class="math notranslate nohighlight">\({\cal E}_a^1\)</span>
+soient situés de part et d’autre de cet hyperplan.<br />
+On montre qu’un perceptron linéaire à seuil à <span class="math notranslate nohighlight">\(D\)</span> entrées divise
+l’espace des entrées <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> en deux sous-espaces délimités par un
+hyperplan <span class="math notranslate nohighlight">\(\mathbf w^T\mathbf x=-\theta\)</span>. Réciproquement, tout ensemble linéairement séparable
+peut être discriminé par un perceptron.<br />
 Un perceptron est donc un discriminant linéaire. On montre facilement
-qu'un échantillon de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( est séparable par un hyperplan si et
-seulement si l'échantillon de \)</span>\mathbb R^{D+1}<span class="math notranslate nohighlight">\( obtenu en rajoutant une
+qu’un échantillon de <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> est séparable par un hyperplan si et
+seulement si l’échantillon de <span class="math notranslate nohighlight">\(\mathbb R^{D+1}\)</span> obtenu en rajoutant une
 entrée toujours égale à 1 est séparable par un hyperplan passant par
-l'origine.\
-Toute fonction de \)</span>\mathbb R^D$ dans {0,1} n’est bien sur pas calculable par
+l’origine.<br />
+Toute fonction de <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> dans {0,1} n’est bien sur pas calculable par
 un tel perceptron.</p>
 </div>
 <div class="section" id="algorithme-d-apprentissage-par-correction-d-erreur">
@@ -938,7 +940,7 @@ classe binaire de <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</s
 d’un perceptron, on note <span class="math notranslate nohighlight">\(y_n\)</span> la sortie binaire calculée par le
 perceptron. Rappelons qu’il existe une <span class="math notranslate nohighlight">\((D+1)^\textrm{ème}\)</span> entrée <span class="math notranslate nohighlight">\(x_0\)</span>
 de valeur 1 pour le perceptron.
-L’apprentissage par correction d’erreur du perceptron est donné dans l”(<code class="xref std std-numref docutils literal notranslate"><span class="pre">correction</span></code>)</p>
+L’apprentissage par correction d’erreur du perceptron est donné dans algorithme <a class="reference internal" href="#correction">Algorithm 1</a></p>
 <div class="proof algorithm admonition" id="correction">
 <p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Algorithme d’apprentissage du perceptron par correction d’erreur)</p>
 <div class="algorithm-content section" id="proof-content">
