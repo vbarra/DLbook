@@ -165,7 +165,7 @@ restreintes (RBM) et les autoencodeurs.
 Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
 Les $D$ variables sur lesquelles opère le neurone sont habituellement
 désignées sous le terme d'entrées du neurone (notées
-$x_i,i\in[\![1,D]\!]), et la valeur de la fonction sous celui de sortie
+$x_i,i\in[\![1,D]\!])$, et la valeur de la fonction sous celui de sortie
 $y$.\
 Le neurone formel calcule la sortie selon la formule :
 
@@ -181,14 +181,14 @@ où :
 -   $\displaystyle\sum_{i=1}^Dw_ix_i$ est le potentiel du neurone
 
 -   $f$ est la fonction d'activation associée au neurone.
-```
+```````
 
 ````{prf:definition} Réseau de neurones
 Un réseau de neurones est un ensemble de neurones interconnectés. Les
 réseaux de neurones peuvent être visualisés par l'intermédiaire d'un
 graphe orienté. Chaque neurone est un noeud, les neurones étant
 connectés par des arêtes.
-``````
+````
 
 Par simplicité, nous distinguerons neurone d'entrée et neurone de
 sortie. Un neurone d'entrée calcule $y = x$ où $x$ est une entrée unique

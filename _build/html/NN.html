@@ -822,8 +822,8 @@ restreintes (RBM) et les autoencodeurs.</p>
 <p>Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
 Les <span class="math notranslate nohighlight">\(D\)</span> variables sur lesquelles opère le neurone sont habituellement
 désignées sous le terme d’entrées du neurone (notées
-<span class="math notranslate nohighlight">\(x_i,i\in[\![1,D]\!]), et la valeur de la fonction sous celui de sortie
-\)</span>y$.<br />
+<span class="math notranslate nohighlight">\(x_i,i\in[\![1,D]\!])\)</span>, et la valeur de la fonction sous celui de sortie
+<span class="math notranslate nohighlight">\(y\)</span>.<br />
 Le neurone formel calcule la sortie selon la formule :</p>
 <div class="math notranslate nohighlight">
 \[y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)\]</div>
@@ -835,14 +835,14 @@ du neurone</p></li>
 <li><p><span class="math notranslate nohighlight">\(\displaystyle\sum_{i=1}^Dw_ix_i\)</span> est le potentiel du neurone</p></li>
 <li><p><span class="math notranslate nohighlight">\(f\)</span> est la fonction d’activation associée au neurone.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-````{prf:definition} Réseau de neurones
-Un réseau de neurones est un ensemble de neurones interconnectés. Les
-réseaux de neurones peuvent être visualisés par l&#39;intermédiaire d&#39;un
-graphe orienté. Chaque neurone est un noeud, les neurones étant
-connectés par des arêtes.
-</pre></div>
 </div>
+</div><div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Réseau de neurones)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un réseau de neurones est un ensemble de neurones interconnectés. Les
+réseaux de neurones peuvent être visualisés par l’intermédiaire d’un
+graphe orienté. Chaque neurone est un noeud, les neurones étant
+connectés par des arêtes.</p>
 </div>
 </div><p>Par simplicité, nous distinguerons neurone d’entrée et neurone de
 sortie. Un neurone d’entrée calcule <span class="math notranslate nohighlight">\(y = x\)</span> où <span class="math notranslate nohighlight">\(x\)</span> est une entrée unique

@@ -206,19 +206,21 @@ sous-jacente de ce modèle est le fonctionnement de la rétine, l'étude de
 la perception visuelle. Nous commençons par aborder le cas du perceptron
 linéaire à seuil.
 
-::: definition
+````{prf:definition} Perceptron linéire à seuil
 Un perceptron linéaire à seuil prend en entrée $D$ valeurs
 $x_1\cdots x_D$ (la rétine) et calcule une sortie $y$. Suivant la
 définition précédente, un perceptron est défini par la donnée de $D+1$
 constantes : les **poids synaptiques** $w_1,\cdots,w_D$ et un seuil (ou
-le biais) $\theta$. La sortie $y$ est calculée par $$y= 
+le biais) $\theta$. La sortie $y$ est calculée par 
+
+$$y= 
 \left \{
 \begin{array}{lr}
    1 & \textrm{si}\quad w^Tx=\displaystyle\sum_{i=1}^Dw_ix_i>\theta\\
    0 & \textrm{sinon}\\
 \end{array}
 \right.$$
-:::
+````
 
 Les entrées $x_1,\cdots x_D$ peuvent être à valeurs dans {0,1} (ou
 {-1,1}) ou réelles, les poids peuvent être entiers ou réels. Il existe
