@@ -262,10 +262,7 @@ sortie est en {0,1}, et $g(x) = 2f(x) - 1$ lorsque la sortie est en
 Soit ${\cal E}_a$ un ensemble d'exemples dans $\mathbb R^D\times${0,1} . On
 note 
 
-$${\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}$$ 
-et
-
-$${\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}$$ 
+$${\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}\textrm{ et } {\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}$$ 
 
 On dit que
 ${\cal E}_a$ est **linéairement séparable** s'il existe un hyperplan $H$
