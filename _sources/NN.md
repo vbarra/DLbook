@@ -363,7 +363,7 @@ suppose que les exemples sont présentés dans l'ordre lexicographique.
 Le tableau suivant présente la trace de l'algorithme à partir de cette initialisation.
 Aucune entrée ne modifie le perceptron à partir de l'itération 10.
 
-| étape | $w^{t-1}_0$ | $w^{t-1}_1$ | $w^{t-1}_2$ | Entrée | $\displaystyle\sum_{i=0}^2w^{t-1}_ix_i$ | $y$ | $t$ | $w^{t}_0$ | $w^{t}_1$ | $w^{t}_2$ |
+| étape | $w_0$ | $w}_1$ | $w_2$ | Entrée | $\mathbf w^\top \mathbf x$ | $y$ | $t$ | $w^_0$ | $w_1$ | $w_2$ |
 |-------|-------------|-------------|-------------|--------|-----------------------------|-----|-----|-----------|-----------|-----------|
 | Init  |             |             |             |        |                             |     |     | 0         | 1         | -1        |
 | 1     | 0           | 1           | -1          | 100    | 0                           | 0   | 0   | 0         | 1         | -1        |
