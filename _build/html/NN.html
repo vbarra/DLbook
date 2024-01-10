@@ -858,20 +858,24 @@ avec algorithme d’apprentissage (Rosenblatt en 1958). L’idée
 sous-jacente de ce modèle est le fonctionnement de la rétine, l’étude de
 la perception visuelle. Nous commençons par aborder le cas du perceptron
 linéaire à seuil.</p>
-<div class="highlight-definition notranslate"><div class="highlight"><pre><span></span>Un perceptron linéaire à seuil prend en entrée $D$ valeurs
-$x_1\cdots x_D$ (la rétine) et calcule une sortie $y$. Suivant la
-définition précédente, un perceptron est défini par la donnée de $D+1$
-constantes : les **poids synaptiques** $w_1,\cdots,w_D$ et un seuil (ou
-le biais) $\theta$. La sortie $y$ est calculée par $$y= 
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 3 </span> (Perceptron linéire à seuil)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un perceptron linéaire à seuil prend en entrée <span class="math notranslate nohighlight">\(D\)</span> valeurs
+<span class="math notranslate nohighlight">\(x_1\cdots x_D\)</span> (la rétine) et calcule une sortie <span class="math notranslate nohighlight">\(y\)</span>. Suivant la
+définition précédente, un perceptron est défini par la donnée de <span class="math notranslate nohighlight">\(D+1\)</span>
+constantes : les <strong>poids synaptiques</strong> <span class="math notranslate nohighlight">\(w_1,\cdots,w_D\)</span> et un seuil (ou
+le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sortie <span class="math notranslate nohighlight">\(y\)</span> est calculée par</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y= 
 \left \{
 \begin{array}{lr}
    1 &amp; \textrm{si}\quad w^Tx=\displaystyle\sum_{i=1}^Dw_ix_i&gt;\theta\\
    0 &amp; \textrm{sinon}\\
 \end{array}
-\right.$$
-</pre></div>
+\right.\end{split}\]</div>
 </div>
-<p>Les entrées <span class="math notranslate nohighlight">\(x_1,\cdots x_D\)</span> peuvent être à valeurs dans {0,1} (ou
+</div><p>Les entrées <span class="math notranslate nohighlight">\(x_1,\cdots x_D\)</span> peuvent être à valeurs dans {0,1} (ou
 {-1,1}) ou réelles, les poids peuvent être entiers ou réels. Il existe
 également des modèles pour lesquels le calcul de la sortie est
 probabiliste.<br />
