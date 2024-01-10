@@ -227,7 +227,7 @@ le seuil par un poids supplémentaire $w_0$ associé à une entrée $x_0=1$.  (f
 reference="fig:processing-unit"}). L'équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient $w_0$ est l'opposé du seuil $\theta$.
-
+```{tikz} 
 	\begin{tikzpicture}[shorten >=1pt,->]
 		\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
 
@@ -245,7 +245,7 @@ coefficient $w_0$ est l'opposé du seuil $\theta$.
 		
 		\node at (10.5,2.25){$w_0$};
 	\end{tikzpicture}
-
+```
 
 On note $\mathbf w$ (respectivement $\mathbf x$) $\in\mathbb R^{D+1}$ le vecteur des poids
 (resp. des entrées), augmentée de $w_0$ (resp. $x_0$=1). Comme suggéré

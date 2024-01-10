@@ -877,20 +877,31 @@ le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sorti
 </div><p>Les entrées <span class="math notranslate nohighlight">\(x_1,\cdots x_D\)</span> peuvent être à valeurs dans {0,1} (ou
 {-1,1}) ou réelles, les poids peuvent être entiers ou réels.</p>
 <p>Pour simplifier les notations et certaines preuves, on remplace souvent
-le seuil par une entrée supplémentaire <span class="math notranslate nohighlight">\(x_0=1\)</span>. À cette entrée est
-associée un coefficient synaptique <span class="math notranslate nohighlight">\(w_0\)</span> (figure
+le seuil par un poids supplémentaire <span class="math notranslate nohighlight">\(w_0\)</span> associé à une entrée <span class="math notranslate nohighlight">\(x_0=1\)</span>.  (figure
 <a class="reference external" href="#fig:processing-unit">1.2</a>{reference-type= »ref »
 reference= »fig:processing-unit »}). L’équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient <span class="math notranslate nohighlight">\(w_0\)</span> est l’opposé du seuil <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>&lt;figure id=&quot;fig:processing-unit&quot;&gt;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\begin{tikzpicture}[shorten &gt;=1pt,-&gt;]
+	\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
 
-&lt;figcaption&gt;Représentation d’un neurone par un graphe
-orienté.&lt;/figcaption&gt;
-&lt;/figure&gt;
+	\node[unit](p) at (12,1){$y$};
+	\node(dots) at (9,1){\vdots};
+
+	\node[unit](x0) at (9,3){$1$};
+	\node[unit](x1) at (9,1.75){$x_1$};
+	\node[unit](xD) at (9,0) {$x_D$};
+	
+	\draw[-latex new,arrow head=0.15cm] (x0) -- (p);
+	\draw[-latex new,arrow head=0.15cm] (xD) -- (p);
+	\draw[-latex new,arrow head=0.15cm] (x1) -- (p);
+	\draw[-latex new,arrow head=0.15cm] (p) -- (13.5,1);
+	
+	\node at (10.5,2.25){$w_0$};
+\end{tikzpicture}
 </pre></div>
 </div>
-<p>On note <span class="math notranslate nohighlight">\(w\)</span> (respectivement <span class="math notranslate nohighlight">\(x\)</span>) <span class="math notranslate nohighlight">\(\in\nbR^{D+1}\)</span> le vecteur des poids
+<p>On note <span class="math notranslate nohighlight">\(\mathbf w\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf x\)</span>) <span class="math notranslate nohighlight">\(\in\mathbb R^{D+1}\)</span> le vecteur des poids
 (resp. des entrées), augmentée de <span class="math notranslate nohighlight">\(w_0\)</span> (resp. <span class="math notranslate nohighlight">\(x_0\)</span>=1). Comme suggéré
 par la définition, on peut décomposer le calcul de la sortie <span class="math notranslate nohighlight">\(y\)</span> en un
 premier calcul de la quantité <span class="math notranslate nohighlight">\(w^Tx=\displaystyle\sum_{i=0}^Dw_ix_i\)</span>
@@ -903,28 +914,28 @@ sortie est en {0,1}, et <span class="math notranslate nohighlight">\(g(x) = 2f(x
 </div>
 <div class="section" id="utilisation-discrimination-lineaire">
 <h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien permanent vers ce titre">#</a></h3>
-<p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\nbR^D\times\)</span>{0,1} . On
-note $<span class="math notranslate nohighlight">\({\cal E}_a^0=\{x\in \nbR^D/(x,0)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( et
-\)</span><span class="math notranslate nohighlight">\({\cal E}_a^1=\{x\in \nbR^D/(x,1)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( On dit que
+<p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span>{0,1} . On
+note $<span class="math notranslate nohighlight">\({\cal E}_a^0=\{x\in \mathbb R^D/(x,0)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( et
+\)</span><span class="math notranslate nohighlight">\({\cal E}_a^1=\{x\in \mathbb R^D/(x,1)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( On dit que
 \)</span>{\cal E}_a<span class="math notranslate nohighlight">\( est **linéairement séparable** s'il existe un hyperplan \)</span>H<span class="math notranslate nohighlight">\(
-de \)</span>\nbR^D<span class="math notranslate nohighlight">\( tel que les ensembles \)</span>{\cal E}_a^0<span class="math notranslate nohighlight">\( et \)</span>{\cal E}_a^1<span class="math notranslate nohighlight">\(
+de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( tel que les ensembles \)</span>{\cal E}_a^0<span class="math notranslate nohighlight">\( et \)</span>{\cal E}_a^1<span class="math notranslate nohighlight">\(
 soient situés de part et d'autre de cet hyperplan.\
 On montre qu'un perceptron linéaire à seuil à \)</span>D<span class="math notranslate nohighlight">\( entrées divise
-l'espace des entrées \)</span>\nbR^D<span class="math notranslate nohighlight">\( en deux sous-espaces délimités par un
+l'espace des entrées \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( en deux sous-espaces délimités par un
 hyperplan \)</span>w^Tx=0<span class="math notranslate nohighlight">\(. Réciproquement, tout ensemble linéairement séparable
 peut être discriminé par un perceptron.\
 Un perceptron est donc un discriminant linéaire. On montre facilement
-qu'un échantillon de \)</span>\nbR^D<span class="math notranslate nohighlight">\( est séparable par un hyperplan si et
-seulement si l'échantillon de \)</span>\nbR^{D+1}<span class="math notranslate nohighlight">\( obtenu en rajoutant une
+qu'un échantillon de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( est séparable par un hyperplan si et
+seulement si l'échantillon de \)</span>\mathbb R^{D+1}<span class="math notranslate nohighlight">\( obtenu en rajoutant une
 entrée toujours égale à 1 est séparable par un hyperplan passant par
 l'origine.\
-Toute fonction de \)</span>\nbR^D$ dans {0,1} n’est bien sur pas calculable par
+Toute fonction de \)</span>\mathbb R^D$ dans {0,1} n’est bien sur pas calculable par
 un tel perceptron.\</p>
 </div>
 <div class="section" id="algorithme-d-apprentissage-par-correction-d-erreur">
 <h3>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Lien permanent vers ce titre">#</a></h3>
 <p>Étant donné un échantillon d’apprentissage <span class="math notranslate nohighlight">\({\cal E}_a\)</span> de
-<span class="math notranslate nohighlight">\(\nbR^D\times\)</span> {0,1} (respectivement <span class="math notranslate nohighlight">\(\{0,1\}^n\times\)</span> {0,1}),
+<span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span> {0,1} (respectivement <span class="math notranslate nohighlight">\(\{0,1\}^n\times\)</span> {0,1}),
 c’est-à-dire un ensemble d’exemples dont les descriptions sont <span class="math notranslate nohighlight">\(D\)</span>
 attributs réels (respectivement binaires) et la classe est binaire, il
 s’agit de trouver un algorithme qui infère à partir de <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un

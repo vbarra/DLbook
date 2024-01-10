@@ -222,22 +222,32 @@ Les entrées $x_1,\cdots x_D$ peuvent être à valeurs dans {0,1} (ou
 {-1,1}) ou réelles, les poids peuvent être entiers ou réels. 
 
 Pour simplifier les notations et certaines preuves, on remplace souvent
-le seuil par une entrée supplémentaire $x_0=1$. À cette entrée est
-associée un coefficient synaptique $w_0$ (figure
+le seuil par un poids supplémentaire $w_0$ associé à une entrée $x_0=1$.  (figure
 [1.2](#fig:processing-unit){reference-type="ref"
 reference="fig:processing-unit"}). L'équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient $w_0$ est l'opposé du seuil $\theta$.
 
-::: center
-<figure id="fig:processing-unit">
+	\begin{tikzpicture}[shorten >=1pt,->]
+		\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
 
-<figcaption>Représentation d’un neurone par un graphe
-orienté.</figcaption>
-</figure>
-:::
+		\node[unit](p) at (12,1){$y$};
+		\node(dots) at (9,1){\vdots};
 
-On note $w$ (respectivement $x$) $\in\nbR^{D+1}$ le vecteur des poids
+		\node[unit](x0) at (9,3){$1$};
+		\node[unit](x1) at (9,1.75){$x_1$};
+		\node[unit](xD) at (9,0) {$x_D$};
+		
+		\draw[-latex new,arrow head=0.15cm] (x0) -- (p);
+		\draw[-latex new,arrow head=0.15cm] (xD) -- (p);
+		\draw[-latex new,arrow head=0.15cm] (x1) -- (p);
+		\draw[-latex new,arrow head=0.15cm] (p) -- (13.5,1);
+		
+		\node at (10.5,2.25){$w_0$};
+	\end{tikzpicture}
+
+
+On note $\mathbf w$ (respectivement $\mathbf x$) $\in\mathbb R^{D+1}$ le vecteur des poids
 (resp. des entrées), augmentée de $w_0$ (resp. $x_0$=1). Comme suggéré
 par la définition, on peut décomposer le calcul de la sortie $y$ en un
 premier calcul de la quantité $w^Tx=\displaystyle\sum_{i=0}^Dw_ix_i$
@@ -250,28 +260,28 @@ sortie est en {0,1}, et $g(x) = 2f(x) - 1$ lorsque la sortie est en
 
 ### Utilisation : discrimination linéaire
 
-Soit ${\cal E}_a$ un ensemble d'exemples dans $\nbR^D\times${0,1} . On
-note $${\cal E}_a^0=\{x\in \nbR^D/(x,0)\in {\cal E}_a\}$$ et
-$${\cal E}_a^1=\{x\in \nbR^D/(x,1)\in {\cal E}_a\}$$ On dit que
+Soit ${\cal E}_a$ un ensemble d'exemples dans $\mathbb R^D\times${0,1} . On
+note $${\cal E}_a^0=\{x\in \mathbb R^D/(x,0)\in {\cal E}_a\}$$ et
+$${\cal E}_a^1=\{x\in \mathbb R^D/(x,1)\in {\cal E}_a\}$$ On dit que
 ${\cal E}_a$ est **linéairement séparable** s'il existe un hyperplan $H$
-de $\nbR^D$ tel que les ensembles ${\cal E}_a^0$ et ${\cal E}_a^1$
+de $\mathbb R^D$ tel que les ensembles ${\cal E}_a^0$ et ${\cal E}_a^1$
 soient situés de part et d'autre de cet hyperplan.\
 On montre qu'un perceptron linéaire à seuil à $D$ entrées divise
-l'espace des entrées $\nbR^D$ en deux sous-espaces délimités par un
+l'espace des entrées $\mathbb R^D$ en deux sous-espaces délimités par un
 hyperplan $w^Tx=0$. Réciproquement, tout ensemble linéairement séparable
 peut être discriminé par un perceptron.\
 Un perceptron est donc un discriminant linéaire. On montre facilement
-qu'un échantillon de $\nbR^D$ est séparable par un hyperplan si et
-seulement si l'échantillon de $\nbR^{D+1}$ obtenu en rajoutant une
+qu'un échantillon de $\mathbb R^D$ est séparable par un hyperplan si et
+seulement si l'échantillon de $\mathbb R^{D+1}$ obtenu en rajoutant une
 entrée toujours égale à 1 est séparable par un hyperplan passant par
 l'origine.\
-Toute fonction de $\nbR^D$ dans {0,1} n'est bien sur pas calculable par
+Toute fonction de $\mathbb R^D$ dans {0,1} n'est bien sur pas calculable par
 un tel perceptron.\
 
 ### Algorithme d'apprentissage par correction d'erreur
 
 Étant donné un échantillon d'apprentissage ${\cal E}_a$ de
-$\nbR^D\times$ {0,1} (respectivement $\{0,1\}^n\times$ {0,1}),
+$\mathbb R^D\times$ {0,1} (respectivement $\{0,1\}^n\times$ {0,1}),
 c'est-à-dire un ensemble d'exemples dont les descriptions sont $D$
 attributs réels (respectivement binaires) et la classe est binaire, il
 s'agit de trouver un algorithme qui infère à partir de ${\cal E}_a$ un
