@@ -937,7 +937,7 @@ classe binaire de <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</s
 d’un perceptron, on note <span class="math notranslate nohighlight">\(y_n\)</span> la sortie binaire calculée par le
 perceptron. Rappelons qu’il existe une <span class="math notranslate nohighlight">\((D+1)^\textrm{ème}\)</span> entrée <span class="math notranslate nohighlight">\(x_0\)</span>
 de valeur 1 pour le perceptron.
-L’apprentissage par correction d’erreur du perceptron est donné dans algorithme <a class="reference internal" href="#correction">Algorithm 1</a></p>
+L’apprentissage par correction d’erreur du perceptron est donné dans l”<a class="reference internal" href="#correction">Algorithm 1</a></p>
 <div class="proof algorithm admonition" id="correction">
 <p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Algorithme d’apprentissage du perceptron par correction d’erreur)</p>
 <div class="algorithm-content section" id="proof-content">
@@ -955,14 +955,14 @@ L’apprentissage par correction d’erreur du perceptron est donné dans algori
 </div><p>La procédure d’apprentissage du perceptron est une procédure de
 correction d’erreur puisque les poids ne sont pas modifiés lorsque la
 sortie attendue <span class="math notranslate nohighlight">\(t_n\)</span> est égale à la sortie calculée <span class="math notranslate nohighlight">\(y_n\)</span> par le
-perceptron courant.<br />
-Étudions les modifications sur les poids lorsque <span class="math notranslate nohighlight">\(t_n\)</span> diffère de <span class="math notranslate nohighlight">\(y_n\)</span>,
-lorsque <span class="math notranslate nohighlight">\(x\in \{0,1\}^n\)</span> :</p>
+perceptron courant.</p>
+<p>Étudions les modifications sur les poids lorsque <span class="math notranslate nohighlight">\(t_n\)</span> diffère de <span class="math notranslate nohighlight">\(y_n\)</span>,
+lorsque <span class="math notranslate nohighlight">\(\mathbf{x_n} \in \{0,1\}^D\)</span> :</p>
 <ul class="simple">
 <li><p>si <span class="math notranslate nohighlight">\(y_n\)</span>=0 et <span class="math notranslate nohighlight">\(t_n\)</span>=1, cela signifie que le perceptron n’a pas assez
 pris en compte les neurones actifs de l’entrée (c’est-à-dire les
-neurones ayant une entrée à 1) ; dans ce cas,
-<span class="math notranslate nohighlight">\(w_i \leftarrow w_i+x_n^i\)</span>; l’algorithme ajoute la valeur de la
+neurones ayant une entrée à 1). Dans ce cas,
+<span class="math notranslate nohighlight">\(w_i \leftarrow w_i+x_n^i\)</span> : l’algorithme ajoute la valeur de la
 rétine aux poids synaptiques (renforcement).</p></li>
 <li><p>si <span class="math notranslate nohighlight">\(y_n\)</span>=1 et <span class="math notranslate nohighlight">\(t_n\)</span>=0, alors <span class="math notranslate nohighlight">\(w_i \leftarrow w_i-x_n^i\)</span> ;
 l’algorithme retranche la valeur de la rétine aux poids synaptiques
@@ -983,19 +983,172 @@ défini : après un certain nombre d’étapes ? Lorsque tous les
 exemples ont été présentés ? Lorsque les poids ne sont plus modifiés
 pendant un certain nombre d’étapes ?</p></li>
 </ul>
-<p>Nous reviendrons sur toutes ces questions par la suite. Exemple :
-apprentissage du OU binaire<br />
+<p>Nous reviendrons sur toutes ces questions par la suite.</p>
+<div class="proof example admonition" id="example-4">
+<p class="admonition-title"><span class="caption-number">Example 1 </span></p>
+<div class="example-content section" id="proof-content">
+<p>apprentissage du OU binaire.
 Les descriptions appartiennent à {0,1}<span class="math notranslate nohighlight">\(^2\)</span>, les entrées du perceptron
 appartiennent à {0,1}<span class="math notranslate nohighlight">\(^3\)</span>, la première composante correspond à l’entrée
 <span class="math notranslate nohighlight">\(x_0\)</span> et vaut toujours 1, les deux composantes suivantes correspondent
 aux variables <span class="math notranslate nohighlight">\(x_1\)</span> et <span class="math notranslate nohighlight">\(x_2\)</span> . On suppose qu’à l’initialisation, les
 poids suivants ont été choisis : <span class="math notranslate nohighlight">\(w_0\)</span>=0 ; <span class="math notranslate nohighlight">\(w_1\)</span> = 1 et <span class="math notranslate nohighlight">\(w_2\)</span> = -1. On
 suppose que les exemples sont présentés dans l’ordre lexicographique.\</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>étape</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w^{t-1}_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w^{t-1}_1\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w^{t-1}_2\)</span></p></th>
+<th class="head"><p>Entrée</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\dsum_{i=0}^2w^{t-1}_ix_i\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(y\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(t\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w^{t}_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w^{t}_1\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w^{t}_2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Init</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+<td><p>100</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+<td><p>101</p></td>
+<td><p>-1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>110</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>111</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>100</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>101</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>110</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>111</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>100</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>101</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
 <p>Le tableau <a class="reference external" href="#tabou">1.1</a>{reference-type= »ref » reference= »tabou »}
 présente la trace de l’algorithme à partir de cette initialisation.
-Aucune entrée ne modifie le perceptron à partir de l’itération 10.<br />
-<br />
-On peut montrer que si l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est linéairement
+Aucune entrée ne modifie le perceptron à partir de l’itération 10.\</p>
+</div>
+</div><p>On peut montrer que si l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est linéairement
 séparable et si les exemples sont présentés de manière équitable
 (c’est-à-dire que la procédure de choix des exemples n’en exclut aucun),
 la procédure d’apprentissage par correction d’erreur converge vers un
