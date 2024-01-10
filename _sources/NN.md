@@ -607,15 +607,19 @@ de sortie, et des neurones dits **cachés**, organisés dans $L$ couches
 cachées intermédiaires. De fait, un tel réseau comporte $(L+2)$ couches
 mais on compte rarement la rétine, puisque cette dernière n'effectue pas
 de calculs. Le $i^{\text{e}}$ neurone dans la couche cachée $l$ calcule
-la sortie $$\begin{aligned}
+la sortie 
+
+$$\begin{aligned}
     y_i^{(l)} &= f\left(z_i^{(l)}\right) \quad\text{ avec }\quad z_i^{(l)} = \sum _{k = 1} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)} + w_{i,0}^{(l)}
-\end{aligned}$$ où $w_{i,k}^{(l)}$ est le poids de la connexion entre le
+\end{aligned}$$ 
+
+où $w_{i,k}^{(l)}$ est le poids de la connexion entre le
 $k^{\text{e}}$ neurone de la couche $(l-1)$ et le $i^{\text{e}}$ neurone
 de la couche $l$, et $w_{i,0}^{(l)}$ est le biais. De plus, $m^{(l)}$
 est le nombre de neurones de la couche $l$, de sorte que $D = m^{(0)}$
 et $C = m^{(L+1)}$. Enfin, $f$ est la fonction d'activation du neurone
 (supposée identique pour tous les neurones).
-```````
+````
 
 En introduisant dans chaque couche un neurone supplémentaire
 $y_0^{(l)} = 1$ pour gérer le biais, on a : $$\begin{aligned}
