@@ -304,7 +304,7 @@ classe binaire de $\mathbf{x_n}$. Si une entrée $\mathbf{x_n}$ est présentée 
 d'un perceptron, on note $y_n$ la sortie binaire calculée par le
 perceptron. Rappelons qu'il existe une $(D+1)^\textrm{ème}$ entrée $x_0$
 de valeur 1 pour le perceptron.
-L'apprentissage par correction d'erreur du perceptron est donné dans algorithme {prf:ref}`correction`
+L'apprentissage par correction d'erreur du perceptron est donné dans l'{prf:ref}`correction`
 
 ```{prf:algorithm} Algorithme d'apprentissage du perceptron par correction d'erreur
 :label: correction
@@ -318,14 +318,15 @@ L'apprentissage par correction d'erreur du perceptron est donné dans algorithme
 La procédure d'apprentissage du perceptron est une procédure de
 correction d'erreur puisque les poids ne sont pas modifiés lorsque la
 sortie attendue $t_n$ est égale à la sortie calculée $y_n$ par le
-perceptron courant.\
+perceptron courant.
+
 Étudions les modifications sur les poids lorsque $t_n$ diffère de $y_n$,
-lorsque $x\in \{0,1\}^n$ :
+lorsque $\mathbf{x_n} \in \{0,1\}^D$ :
 
 -   si $y_n$=0 et $t_n$=1, cela signifie que le perceptron n'a pas assez
     pris en compte les neurones actifs de l'entrée (c'est-à-dire les
-    neurones ayant une entrée à 1) ; dans ce cas,
-    $w_i \leftarrow w_i+x_n^i$; l'algorithme ajoute la valeur de la
+    neurones ayant une entrée à 1). Dans ce cas,
+    $w_i \leftarrow w_i+x_n^i$ : l'algorithme ajoute la valeur de la
     rétine aux poids synaptiques (renforcement).
 
 -   si $y_n$=1 et $t_n$=0, alors $w_i \leftarrow w_i-x_n^i$ ;
@@ -348,8 +349,11 @@ Certains éléments importants ont été laissés volontairement imprécis.
     exemples ont été présentés ? Lorsque les poids ne sont plus modifiés
     pendant un certain nombre d'étapes ?
 
-Nous reviendrons sur toutes ces questions par la suite. Exemple :
-apprentissage du OU binaire\
+Nous reviendrons sur toutes ces questions par la suite. 
+
+
+````{prf:example}
+apprentissage du OU binaire.
 Les descriptions appartiennent à {0,1}$^2$, les entrées du perceptron
 appartiennent à {0,1}$^3$, la première composante correspond à l'entrée
 $x_0$ et vaut toujours 1, les deux composantes suivantes correspondent
@@ -357,28 +361,27 @@ aux variables $x_1$ et $x_2$ . On suppose qu'à l'initialisation, les
 poids suivants ont été choisis : $w_0$=0 ; $w_1$ = 1 et $w_2$ = -1. On
 suppose que les exemples sont présentés dans l'ordre lexicographique.\
 
-::: {#tabou}
-   étape   $w^{t-1}_0$   $w^{t-1}_1$   $w^{t-1}_2$   Entrée   $\dsum_{i=0}^2w^{t-1}_ix_i$   $y$   $t$   $w^{t}_0$   $w^{t}_1$   $w^{t}_2$
-  ------- ------------- ------------- ------------- -------- ----------------------------- ----- ----- ----------- ----------- -----------
-   Init                                                                                                     0           1          -1
-     1          0             1            -1         100                  0                 0     0        0           1          -1
-     2          0             1            -1         101                 -1                 0     1        1           1           0
-     3          1             1             0         110                  2                 1     1        1           1           0
-     4          1             1             0         111                  2                 1     1        1           1           0
-     5          1             1             0         100                  1                 1     0        0           1           0
-     6          0             1             0         101                  0                 0     1        1           1           1
-     7          1             1             1         110                  2                 1     1        1           1           1
-     8          1             1             1         111                  3                 1     1        1           1           1
-     9          1             1             1         100                  1                 1     0        0           1           1
-    10          0             1             1         101                  1                 1     1        0           1           1
+| étape | $w^{t-1}_0$ | $w^{t-1}_1$ | $w^{t-1}_2$ | Entrée | $\dsum_{i=0}^2w^{t-1}_ix_i$ | $y$ | $t$ | $w^{t}_0$ | $w^{t}_1$ | $w^{t}_2$ |
+|-------|-------------|-------------|-------------|--------|-----------------------------|-----|-----|-----------|-----------|-----------|
+| Init  |             |             |             |        |                             |     |     | 0         | 1         | -1        |
+| 1     | 0           | 1           | -1          | 100    | 0                           | 0   | 0   | 0         | 1         | -1        |
+| 2     | 0           | 1           | -1          | 101    | -1                          | 0   | 1   | 1         | 1         | 0         |
+| 3     | 1           | 1           | 0           | 110    | 2                           | 1   | 1   | 1         | 1         | 0         |
+| 4     | 1           | 1           | 0           | 111    | 2                           | 1   | 1   | 1         | 1         | 0         |
+| 5     | 1           | 1           | 0           | 100    | 1                           | 1   | 0   | 0         | 1         | 0         |
+| 6     | 0           | 1           | 0           | 101    | 0                           | 0   | 1   | 1         | 1         | 1         |
+| 7     | 1           | 1           | 1           | 110    | 2                           | 1   | 1   | 1         | 1         | 1         |
+| 8     | 1           | 1           | 1           | 111    | 3                           | 1   | 1   | 1         | 1         | 1         |
+| 9     | 1           | 1           | 1           | 100    | 1                           | 1   | 0   | 0         | 1         | 1         |
+| 10    | 0           | 1           | 1           | 101    | 1                           | 1   | 1   | 0         | 1         | 1         |
 
-  : Apprentissage du OU binaire
-:::
 
 Le tableau [1.1](#tabou){reference-type="ref" reference="tabou"}
 présente la trace de l'algorithme à partir de cette initialisation.
 Aucune entrée ne modifie le perceptron à partir de l'itération 10.\
-\
+````
+
+
 On peut montrer que si l'échantillon ${\cal E}_a$ est linéairement
 séparable et si les exemples sont présentés de manière équitable
 (c'est-à-dire que la procédure de choix des exemples n'en exclut aucun),
