@@ -359,9 +359,12 @@ appartiennent à {0,1}$^3$, la première composante correspond à l'entrée
 $x_0$ et vaut toujours 1, les deux composantes suivantes correspondent
 aux variables $x_1$ et $x_2$ . On suppose qu'à l'initialisation, les
 poids suivants ont été choisis : $w_0$=0 ; $w_1$ = 1 et $w_2$ = -1. On
-suppose que les exemples sont présentés dans l'ordre lexicographique.\
+suppose que les exemples sont présentés dans l'ordre lexicographique.
 
-| étape | $w^{t-1}_0$ | $w^{t-1}_1$ | $w^{t-1}_2$ | Entrée | $\dsum_{i=0}^2w^{t-1}_ix_i$ | $y$ | $t$ | $w^{t}_0$ | $w^{t}_1$ | $w^{t}_2$ |
+Le tableau suivant présente la trace de l'algorithme à partir de cette initialisation.
+Aucune entrée ne modifie le perceptron à partir de l'itération 10.
+
+| étape | $w^{t-1}_0$ | $w^{t-1}_1$ | $w^{t-1}_2$ | Entrée | $\displaystyle\sum_{i=0}^2w^{t-1}_ix_i$ | $y$ | $t$ | $w^{t}_0$ | $w^{t}_1$ | $w^{t}_2$ |
 |-------|-------------|-------------|-------------|--------|-----------------------------|-----|-----|-----------|-----------|-----------|
 | Init  |             |             |             |        |                             |     |     | 0         | 1         | -1        |
 | 1     | 0           | 1           | -1          | 100    | 0                           | 0   | 0   | 0         | 1         | -1        |
@@ -376,9 +379,6 @@ suppose que les exemples sont présentés dans l'ordre lexicographique.\
 | 10    | 0           | 1           | 1           | 101    | 1                           | 1   | 1   | 0         | 1         | 1         |
 
 
-Le tableau [1.1](#tabou){reference-type="ref" reference="tabou"}
-présente la trace de l'algorithme à partir de cette initialisation.
-Aucune entrée ne modifie le perceptron à partir de l'itération 10.\
 ````
 
 

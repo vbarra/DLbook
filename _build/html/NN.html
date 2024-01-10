@@ -993,7 +993,9 @@ appartiennent à {0,1}<span class="math notranslate nohighlight">\(^3\)</span>, 
 <span class="math notranslate nohighlight">\(x_0\)</span> et vaut toujours 1, les deux composantes suivantes correspondent
 aux variables <span class="math notranslate nohighlight">\(x_1\)</span> et <span class="math notranslate nohighlight">\(x_2\)</span> . On suppose qu’à l’initialisation, les
 poids suivants ont été choisis : <span class="math notranslate nohighlight">\(w_0\)</span>=0 ; <span class="math notranslate nohighlight">\(w_1\)</span> = 1 et <span class="math notranslate nohighlight">\(w_2\)</span> = -1. On
-suppose que les exemples sont présentés dans l’ordre lexicographique.\</p>
+suppose que les exemples sont présentés dans l’ordre lexicographique.</p>
+<p>Le tableau suivant présente la trace de l’algorithme à partir de cette initialisation.
+Aucune entrée ne modifie le perceptron à partir de l’itération 10.</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>étape</p></th>
@@ -1001,7 +1003,7 @@ suppose que les exemples sont présentés dans l’ordre lexicographique.\</p>
 <th class="head"><p><span class="math notranslate nohighlight">\(w^{t-1}_1\)</span></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(w^{t-1}_2\)</span></p></th>
 <th class="head"><p>Entrée</p></th>
-<th class="head"><p><span class="math notranslate nohighlight">\(\dsum_{i=0}^2w^{t-1}_ix_i\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\displaystyle\sum_{i=0}^2w^{t-1}_ix_i\)</span></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(y\)</span></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(t\)</span></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(w^{t}_0\)</span></p></th>
@@ -1144,9 +1146,6 @@ suppose que les exemples sont présentés dans l’ordre lexicographique.\</p>
 </tr>
 </tbody>
 </table>
-<p>Le tableau <a class="reference external" href="#tabou">1.1</a>{reference-type= »ref » reference= »tabou »}
-présente la trace de l’algorithme à partir de cette initialisation.
-Aucune entrée ne modifie le perceptron à partir de l’itération 10.\</p>
 </div>
 </div><p>On peut montrer que si l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est linéairement
 séparable et si les exemples sont présentés de manière équitable
