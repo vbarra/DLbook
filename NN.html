@@ -335,6 +335,141 @@ title="Print to PDF"
      Définitions
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">
+     Utilisation : discrimination linéaire
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">
+     Algorithme d’apprentissage par correction d’erreur
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient-subsec-descentegradient">
+     Algorithme d’apprentissage par descente de gradient {#subsec:descentegradient}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">
+     Pour en finir avec le perceptron
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptrons-multicouches-subsec-multilayer-perceptron">
+   Perceptrons multicouches {#subsec:multilayer-perceptron}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fonctions-d-activation-subsec-activation-functions">
+     Fonctions d’activation {#subsec:activation-functions}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training">
+     Entraînement des réseaux multicouches {#subsec:supervised-training}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strategies-d-entrainement">
+     Stratégies d’entraînement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimisation-des-parametres-subsubsec-parameter-optimization">
+     Optimisation des paramètres {#subsubsec:parameter-optimization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">
+     Initialisation des poids {#sububsec:weight-initialization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation">
+     Rétropropagation de l’erreur {#subsubsec:error-backproagation}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#criteres-d-arret">
+     Critères d’arrêt
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propriete-fondamentale">
+     Propriété fondamentale
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularisation">
+     Régularisation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exemple">
+     Exemple
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reseau">
+       Réseau
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phase-d-apprentissage">
+       Phase d’apprentissage
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-de-sortie">
+         Couche de sortie
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-cachee">
+         Couche cachée
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#initialisation-des-poids-initialisation-des-poids">
+         Initialisation des poids {#initialisation-des-poids}
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partie-pratique">
+   Partie pratique
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Perceptron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perceptron-multicouches">
+     Perceptron multicouches
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#une-couche-cachee">
+       Une couche cachée
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#deux-couches-cachees">
+       Deux couches cachées
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
 </ul>
@@ -387,6 +522,141 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#definitions">
      Définitions
     </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">
+     Utilisation : discrimination linéaire
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">
+     Algorithme d’apprentissage par correction d’erreur
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient-subsec-descentegradient">
+     Algorithme d’apprentissage par descente de gradient {#subsec:descentegradient}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">
+     Pour en finir avec le perceptron
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptrons-multicouches-subsec-multilayer-perceptron">
+   Perceptrons multicouches {#subsec:multilayer-perceptron}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fonctions-d-activation-subsec-activation-functions">
+     Fonctions d’activation {#subsec:activation-functions}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training">
+     Entraînement des réseaux multicouches {#subsec:supervised-training}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strategies-d-entrainement">
+     Stratégies d’entraînement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimisation-des-parametres-subsubsec-parameter-optimization">
+     Optimisation des paramètres {#subsubsec:parameter-optimization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">
+     Initialisation des poids {#sububsec:weight-initialization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation">
+     Rétropropagation de l’erreur {#subsubsec:error-backproagation}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#criteres-d-arret">
+     Critères d’arrêt
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propriete-fondamentale">
+     Propriété fondamentale
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularisation">
+     Régularisation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exemple">
+     Exemple
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reseau">
+       Réseau
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phase-d-apprentissage">
+       Phase d’apprentissage
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-de-sortie">
+         Couche de sortie
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-cachee">
+         Couche cachée
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#initialisation-des-poids-initialisation-des-poids">
+         Initialisation des poids {#initialisation-des-poids}
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partie-pratique">
+   Partie pratique
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Perceptron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perceptron-multicouches">
+     Perceptron multicouches
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#une-couche-cachee">
+       Une couche cachée
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#deux-couches-cachees">
+       Deux couches cachées
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -610,316 +880,281 @@ le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sorti
 le seuil par un poids supplémentaire <span class="math notranslate nohighlight">\(w_0\)</span> associé à une entrée <span class="math notranslate nohighlight">\(x_0=1\)</span>.  (<code class="xref std std-numref docutils literal notranslate"><span class="pre">perceptron</span></code>). L’équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient <span class="math notranslate nohighlight">\(w_0\)</span> est l’opposé du seuil <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<p>:name: perceptron
-Neurone Représentation d’un perceptron sous la forme d’un graphe orienté</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-On note $\mathbf w$ (respectivement $\mathbf x$) $\in\mathbb R^{D+1}$ le vecteur des poids
-(resp. des entrées), augmentée de $w_0$ (resp. $x_0$=1). Comme suggéré
-par la définition, on peut décomposer le calcul de la sortie $y$ en un
-premier calcul de la quantité $w^Tx=\displaystyle\sum_{i=0}^Dw_ix_i$
-appelée **potentiel post-synaptique** ou **entrée totale**, suivi d&#39;une
-application d&#39;une **fonction d&#39;activation** sur cette entrée totale.
-Dans le cas du perceptron linéaire à seuil, la fonction d&#39;activation est
-la fonction de Heaviside définie par $f(x)=1_{\{x&gt;0\}}$ lorsque la
-sortie est en {0,1}, et $g(x) = 2f(x) - 1$ lorsque la sortie est en
-{-1,1}.\
-
-### Utilisation : discrimination linéaire
-
-Soit ${\cal E}_a$ un ensemble d&#39;exemples dans $\mathbb R^D\times${0,1} . On
-note $${\cal E}_a^0=\{x\in \mathbb R^D/(x,0)\in {\cal E}_a\}$$ et
-$${\cal E}_a^1=\{x\in \mathbb R^D/(x,1)\in {\cal E}_a\}$$ On dit que
-${\cal E}_a$ est **linéairement séparable** s&#39;il existe un hyperplan $H$
-de $\mathbb R^D$ tel que les ensembles ${\cal E}_a^0$ et ${\cal E}_a^1$
-soient situés de part et d&#39;autre de cet hyperplan.\
-On montre qu&#39;un perceptron linéaire à seuil à $D$ entrées divise
-l&#39;espace des entrées $\mathbb R^D$ en deux sous-espaces délimités par un
-hyperplan $w^Tx=0$. Réciproquement, tout ensemble linéairement séparable
+<div class="figure" style="text-align: center"><p><img  src="_images/tikz-9895c8e1147e4092d9d420afa501bf0221c11f5c.png" alt="Figure made with TikZ" /></p>
+</div><p>On note <span class="math notranslate nohighlight">\(\mathbf w\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf x\)</span>) <span class="math notranslate nohighlight">\(\in\mathbb R^{D+1}\)</span> le vecteur des poids
+(resp. des entrées), augmentée de <span class="math notranslate nohighlight">\(w_0\)</span> (resp. <span class="math notranslate nohighlight">\(x_0\)</span>=1). Comme suggéré
+par la définition, on peut décomposer le calcul de la sortie <span class="math notranslate nohighlight">\(y\)</span> en un
+premier calcul de la quantité <span class="math notranslate nohighlight">\(w^Tx=\displaystyle\sum_{i=0}^Dw_ix_i\)</span>
+appelée <strong>potentiel post-synaptique</strong> ou <strong>entrée totale</strong>, suivi d’une
+application d’une <strong>fonction d’activation</strong> sur cette entrée totale.
+Dans le cas du perceptron linéaire à seuil, la fonction d’activation est
+la fonction de Heaviside définie par <span class="math notranslate nohighlight">\(f(x)=1_{\{x&gt;0\}}\)</span> lorsque la
+sortie est en {0,1}, et <span class="math notranslate nohighlight">\(g(x) = 2f(x) - 1\)</span> lorsque la sortie est en
+{-1,1}.\</p>
+</div>
+<div class="section" id="utilisation-discrimination-lineaire">
+<h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien permanent vers ce titre">#</a></h3>
+<p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span>{0,1} . On
+note $<span class="math notranslate nohighlight">\({\cal E}_a^0=\{x\in \mathbb R^D/(x,0)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( et
+\)</span><span class="math notranslate nohighlight">\({\cal E}_a^1=\{x\in \mathbb R^D/(x,1)\in {\cal E}_a\}\)</span><span class="math notranslate nohighlight">\( On dit que
+\)</span>{\cal E}_a<span class="math notranslate nohighlight">\( est **linéairement séparable** s'il existe un hyperplan \)</span>H<span class="math notranslate nohighlight">\(
+de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( tel que les ensembles \)</span>{\cal E}_a^0<span class="math notranslate nohighlight">\( et \)</span>{\cal E}_a^1<span class="math notranslate nohighlight">\(
+soient situés de part et d'autre de cet hyperplan.\
+On montre qu'un perceptron linéaire à seuil à \)</span>D<span class="math notranslate nohighlight">\( entrées divise
+l'espace des entrées \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( en deux sous-espaces délimités par un
+hyperplan \)</span>w^Tx=0<span class="math notranslate nohighlight">\(. Réciproquement, tout ensemble linéairement séparable
 peut être discriminé par un perceptron.\
 Un perceptron est donc un discriminant linéaire. On montre facilement
-qu&#39;un échantillon de $\mathbb R^D$ est séparable par un hyperplan si et
-seulement si l&#39;échantillon de $\mathbb R^{D+1}$ obtenu en rajoutant une
+qu'un échantillon de \)</span>\mathbb R^D<span class="math notranslate nohighlight">\( est séparable par un hyperplan si et
+seulement si l'échantillon de \)</span>\mathbb R^{D+1}<span class="math notranslate nohighlight">\( obtenu en rajoutant une
 entrée toujours égale à 1 est séparable par un hyperplan passant par
-l&#39;origine.\
-Toute fonction de $\mathbb R^D$ dans {0,1} n&#39;est bien sur pas calculable par
-un tel perceptron.\
-
-### Algorithme d&#39;apprentissage par correction d&#39;erreur
-
-Étant donné un échantillon d&#39;apprentissage ${\cal E}_a$ de
-$\mathbb R^D\times$ {0,1} (respectivement $\{0,1\}^n\times$ {0,1}),
-c&#39;est-à-dire un ensemble d&#39;exemples dont les descriptions sont $D$
+l'origine.\
+Toute fonction de \)</span>\mathbb R^D$ dans {0,1} n’est bien sur pas calculable par
+un tel perceptron.\</p>
+</div>
+<div class="section" id="algorithme-d-apprentissage-par-correction-d-erreur">
+<h3>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Lien permanent vers ce titre">#</a></h3>
+<p>Étant donné un échantillon d’apprentissage <span class="math notranslate nohighlight">\({\cal E}_a\)</span> de
+<span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span> {0,1} (respectivement <span class="math notranslate nohighlight">\(\{0,1\}^n\times\)</span> {0,1}),
+c’est-à-dire un ensemble d’exemples dont les descriptions sont <span class="math notranslate nohighlight">\(D\)</span>
 attributs réels (respectivement binaires) et la classe est binaire, il
-s&#39;agit de trouver un algorithme qui infère à partir de ${\cal E}_a$ un
-perceptron qui classifie correctement les éléments de ${\cal E}_a$ au vu
-de leurs descriptions si c&#39;est possible, ou au mieux sinon.\
-L&#39;algorithme d&#39;apprentissage peut être décrit succinctement de la
+s’agit de trouver un algorithme qui infère à partir de <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un
+perceptron qui classifie correctement les éléments de <span class="math notranslate nohighlight">\({\cal E}_a\)</span> au vu
+de leurs descriptions si c’est possible, ou au mieux sinon.<br />
+L’algorithme d’apprentissage peut être décrit succinctement de la
 manière suivante. On initialise les poids du perceptron à des valeurs
-quelconques. A chaque fois que l&#39;on présente un nouvel exemple, on
-ajuste les poids selon que le perceptron l&#39;a correctement classé ou non.
-L&#39;algorithme s&#39;arrête lorsque tous les exemples ont été présentés sans
-modification d&#39;aucun poids.\
-Dans la suite, on note $x_n$ une entrée. La i$^\textrm{ème}$ composante
-de $x_n$ est notée $x_n^i$. Pour simplifier l&#39;explication de
-l&#39;algorithme, cette composante sera supposée binaire. Un échantillon
-${\cal E}_a$ est un ensemble de couples $(x_n,t_n)$ où $t_n$ est la
-classe binaire de $x_n$. Si une entrée $x_n$ est présentée en entrée
-d&#39;un perceptron, nous noterons $y_n$ la sortie binaire calculée par le
-perceptron. Rappelons qu&#39;il existe une $(D+1)^\textrm{ème}$ entrée $x_0$
-de valeur 1 pour le perceptron.\
-L&#39;algorithme d&#39;apprentissage par correction d&#39;erreur du perceptron
-linéaire à seuil suit alors le schéma suivant :
-
-::: algorithm
-Initialisation aléatoire des $w_i$\
+quelconques. A chaque fois que l’on présente un nouvel exemple, on
+ajuste les poids selon que le perceptron l’a correctement classé ou non.
+L’algorithme s’arrête lorsque tous les exemples ont été présentés sans
+modification d’aucun poids.<br />
+Dans la suite, on note <span class="math notranslate nohighlight">\(x_n\)</span> une entrée. La i<span class="math notranslate nohighlight">\(^\textrm{ème}\)</span> composante
+de <span class="math notranslate nohighlight">\(x_n\)</span> est notée <span class="math notranslate nohighlight">\(x_n^i\)</span>. Pour simplifier l’explication de
+l’algorithme, cette composante sera supposée binaire. Un échantillon
+<span class="math notranslate nohighlight">\({\cal E}_a\)</span> est un ensemble de couples <span class="math notranslate nohighlight">\((x_n,t_n)\)</span> où <span class="math notranslate nohighlight">\(t_n\)</span> est la
+classe binaire de <span class="math notranslate nohighlight">\(x_n\)</span>. Si une entrée <span class="math notranslate nohighlight">\(x_n\)</span> est présentée en entrée
+d’un perceptron, nous noterons <span class="math notranslate nohighlight">\(y_n\)</span> la sortie binaire calculée par le
+perceptron. Rappelons qu’il existe une <span class="math notranslate nohighlight">\((D+1)^\textrm{ème}\)</span> entrée <span class="math notranslate nohighlight">\(x_0\)</span>
+de valeur 1 pour le perceptron.<br />
+L’algorithme d’apprentissage par correction d’erreur du perceptron
+linéaire à seuil suit alors le schéma suivant :</p>
+<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>Initialisation aléatoire des $w_i$\
 Prendre un exemple $(x_n,t_n)$ dans ${\cal E}_a$\
 Calculer la sortie $y_n$ du perceptron pour l&#39;entrée $x_n$\
 $w_i \leftarrow w_i+(t_n-y_n)x_n^i$\
-:::
-
-La procédure d&#39;apprentissage du perceptron est une procédure de
-correction d&#39;erreur puisque les poids ne sont pas modifiés lorsque la
-sortie attendue $t_n$ est égale à la sortie calculée $y_n$ par le
-perceptron courant.\
-Étudions les modifications sur les poids lorsque $t_n$ diffère de $y_n$,
-lorsque $x\in \{0,1\}^n$ :
-
--   si $y_n$=0 et $t_n$=1, cela signifie que le perceptron n&#39;a pas assez
-    pris en compte les neurones actifs de l&#39;entrée (c&#39;est-à-dire les
-    neurones ayant une entrée à 1) ; dans ce cas,
-    $w_i \leftarrow w_i+x_n^i$; l&#39;algorithme ajoute la valeur de la
-    rétine aux poids synaptiques (renforcement).
-
--   si $y_n$=1 et $t_n$=0, alors $w_i \leftarrow w_i-x_n^i$ ;
-    l&#39;algorithme retranche la valeur de la rétine aux poids synaptiques
-    (inhibition).
-
-Remarquons que, en phase de calcul, les constantes du perceptron sont
+</pre></div>
+</div>
+<p>La procédure d’apprentissage du perceptron est une procédure de
+correction d’erreur puisque les poids ne sont pas modifiés lorsque la
+sortie attendue <span class="math notranslate nohighlight">\(t_n\)</span> est égale à la sortie calculée <span class="math notranslate nohighlight">\(y_n\)</span> par le
+perceptron courant.<br />
+Étudions les modifications sur les poids lorsque <span class="math notranslate nohighlight">\(t_n\)</span> diffère de <span class="math notranslate nohighlight">\(y_n\)</span>,
+lorsque <span class="math notranslate nohighlight">\(x\in \{0,1\}^n\)</span> :</p>
+<ul class="simple">
+<li><p>si <span class="math notranslate nohighlight">\(y_n\)</span>=0 et <span class="math notranslate nohighlight">\(t_n\)</span>=1, cela signifie que le perceptron n’a pas assez
+pris en compte les neurones actifs de l’entrée (c’est-à-dire les
+neurones ayant une entrée à 1) ; dans ce cas,
+<span class="math notranslate nohighlight">\(w_i \leftarrow w_i+x_n^i\)</span>; l’algorithme ajoute la valeur de la
+rétine aux poids synaptiques (renforcement).</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(y_n\)</span>=1 et <span class="math notranslate nohighlight">\(t_n\)</span>=0, alors <span class="math notranslate nohighlight">\(w_i \leftarrow w_i-x_n^i\)</span> ;
+l’algorithme retranche la valeur de la rétine aux poids synaptiques
+(inhibition).</p></li>
+</ul>
+<p>Remarquons que, en phase de calcul, les constantes du perceptron sont
 les poids synaptiques alors que les variables sont les entrées. Tandis
-que, en phase d&#39;apprentissage, ce sont les coefficients synaptiques qui
-sont variables alors que les entrées de l&#39;échantillon ${\cal E}_a$
-apparaissent comme des constantes.\
-Certains éléments importants ont été laissés volontairement imprécis.
-
--   en premier lieu, il faut préciser comment est fait le choix d&#39;un
-    élément de ${\cal E}_a$ : aléatoirement ? En suivant un ordre
-    prédéfini ? Doivent-ils être tous présentés ?
-
--   le critère d&#39;arrêt de la boucle principale de l&#39;algorithme n&#39;est pas
-    défini : après un certain nombre d&#39;étapes ? Lorsque tous les
-    exemples ont été présentés ? Lorsque les poids ne sont plus modifiés
-    pendant un certain nombre d&#39;étapes ?
-
-Nous reviendrons sur toutes ces questions par la suite. Exemple :
-apprentissage du OU binaire\
-Les descriptions appartiennent à {0,1}$^2$, les entrées du perceptron
-appartiennent à {0,1}$^3$, la première composante correspond à l&#39;entrée
-$x_0$ et vaut toujours 1, les deux composantes suivantes correspondent
-aux variables $x_1$ et $x_2$ . On suppose qu&#39;à l&#39;initialisation, les
-poids suivants ont été choisis : $w_0$=0 ; $w_1$ = 1 et $w_2$ = -1. On
-suppose que les exemples sont présentés dans l&#39;ordre lexicographique.\
-
-::: {#tabou}
-   étape   $w^{t-1}_0$   $w^{t-1}_1$   $w^{t-1}_2$   Entrée   $\dsum_{i=0}^2w^{t-1}_ix_i$   $y$   $t$   $w^{t}_0$   $w^{t}_1$   $w^{t}_2$
-  ------- ------------- ------------- ------------- -------- ----------------------------- ----- ----- ----------- ----------- -----------
-   Init                                                                                                     0           1          -1
-     1          0             1            -1         100                  0                 0     0        0           1          -1
-     2          0             1            -1         101                 -1                 0     1        1           1           0
-     3          1             1             0         110                  2                 1     1        1           1           0
-     4          1             1             0         111                  2                 1     1        1           1           0
-     5          1             1             0         100                  1                 1     0        0           1           0
-     6          0             1             0         101                  0                 0     1        1           1           1
-     7          1             1             1         110                  2                 1     1        1           1           1
-     8          1             1             1         111                  3                 1     1        1           1           1
-     9          1             1             1         100                  1                 1     0        0           1           1
-    10          0             1             1         101                  1                 1     1        0           1           1
-
-  : Apprentissage du OU binaire
-:::
-
-Le tableau [1.1](#tabou){reference-type=&quot;ref&quot; reference=&quot;tabou&quot;}
-présente la trace de l&#39;algorithme à partir de cette initialisation.
-Aucune entrée ne modifie le perceptron à partir de l&#39;itération 10.\
-\
-On peut montrer que si l&#39;échantillon ${\cal E}_a$ est linéairement
+que, en phase d’apprentissage, ce sont les coefficients synaptiques qui
+sont variables alors que les entrées de l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span>
+apparaissent comme des constantes.<br />
+Certains éléments importants ont été laissés volontairement imprécis.</p>
+<ul class="simple">
+<li><p>en premier lieu, il faut préciser comment est fait le choix d’un
+élément de <span class="math notranslate nohighlight">\({\cal E}_a\)</span> : aléatoirement ? En suivant un ordre
+prédéfini ? Doivent-ils être tous présentés ?</p></li>
+<li><p>le critère d’arrêt de la boucle principale de l’algorithme n’est pas
+défini : après un certain nombre d’étapes ? Lorsque tous les
+exemples ont été présentés ? Lorsque les poids ne sont plus modifiés
+pendant un certain nombre d’étapes ?</p></li>
+</ul>
+<p>Nous reviendrons sur toutes ces questions par la suite. Exemple :
+apprentissage du OU binaire<br />
+Les descriptions appartiennent à {0,1}<span class="math notranslate nohighlight">\(^2\)</span>, les entrées du perceptron
+appartiennent à {0,1}<span class="math notranslate nohighlight">\(^3\)</span>, la première composante correspond à l’entrée
+<span class="math notranslate nohighlight">\(x_0\)</span> et vaut toujours 1, les deux composantes suivantes correspondent
+aux variables <span class="math notranslate nohighlight">\(x_1\)</span> et <span class="math notranslate nohighlight">\(x_2\)</span> . On suppose qu’à l’initialisation, les
+poids suivants ont été choisis : <span class="math notranslate nohighlight">\(w_0\)</span>=0 ; <span class="math notranslate nohighlight">\(w_1\)</span> = 1 et <span class="math notranslate nohighlight">\(w_2\)</span> = -1. On
+suppose que les exemples sont présentés dans l’ordre lexicographique.\</p>
+<p>Le tableau <a class="reference external" href="#tabou">1.1</a>{reference-type= »ref » reference= »tabou »}
+présente la trace de l’algorithme à partir de cette initialisation.
+Aucune entrée ne modifie le perceptron à partir de l’itération 10.<br />
+<br />
+On peut montrer que si l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est linéairement
 séparable et si les exemples sont présentés de manière équitable
-(c&#39;est-à-dire que la procédure de choix des exemples n&#39;en exclut aucun),
-la procédure d&#39;apprentissage par correction d&#39;erreur converge vers un
-perceptron linéaire à seuil qui sépare linéairement ${\cal E}_a$.\
-L&#39;inconvénient majeur de cet apprentissage est que si l&#39;échantillon
-présenté n&#39;est pas linéairement séparable, l&#39;algorithme ne convergera
-pas et l&#39;on aura aucun moyen de le savoir. On pourrait penser qu&#39;il
-suffit d&#39;observer l&#39;évolution des poids synaptiques pour en déduire si
-l&#39;on doit arrêter ou non l&#39;algorithme. En effet, si les poids et le
+(c’est-à-dire que la procédure de choix des exemples n’en exclut aucun),
+la procédure d’apprentissage par correction d’erreur converge vers un
+perceptron linéaire à seuil qui sépare linéairement <span class="math notranslate nohighlight">\({\cal E}_a\)</span>.<br />
+L’inconvénient majeur de cet apprentissage est que si l’échantillon
+présenté n’est pas linéairement séparable, l’algorithme ne convergera
+pas et l’on aura aucun moyen de le savoir. On pourrait penser qu’il
+suffit d’observer l’évolution des poids synaptiques pour en déduire si
+l’on doit arrêter ou non l’algorithme. En effet, si les poids et le
 seuil prennent deux fois les mêmes valeurs sans que le perceptron ait
 appris et alors que tous les exemples ont été présentés, cela signifie
-que l&#39;échantillon n&#39;est pas séparable. Et l&#39;on peut penser que l&#39;on peut
+que l’échantillon n’est pas séparable. Et l’on peut penser que l’on peut
 borner les poids et le seuil en fonction de la taille de la rétine.
-C&#39;est vrai mais les résultats de complexité suivants montrent que cette
-idée n&#39;est pas applicable en pratique.\
-
-1.  Toute fonction booléenne linéairement séparable sur $D$ variables
-    peut être réalisée par un perceptron dont les poids synaptiques
-    entiers $w_i$ sont tels que
-    $\left\lceil w_i\right\rceil \leq (D+1)^{\frac{D+1}{2}}$
-
-2.  Il existe des fonction booléennes linéairement séparables sur $D$
-    variables qui requièrent des poids entiers supérieurs à
-    $2^{\frac{D+1}{2}}$
-
-Ces résultats sont assez décevants. Le premier montre que l&#39;on peut
+C’est vrai mais les résultats de complexité suivants montrent que cette
+idée n’est pas applicable en pratique.\</p>
+<ol class="simple">
+<li><p>Toute fonction booléenne linéairement séparable sur <span class="math notranslate nohighlight">\(D\)</span> variables
+peut être réalisée par un perceptron dont les poids synaptiques
+entiers <span class="math notranslate nohighlight">\(w_i\)</span> sont tels que
+<span class="math notranslate nohighlight">\(\left\lceil w_i\right\rceil \leq (D+1)^{\frac{D+1}{2}}\)</span></p></li>
+<li><p>Il existe des fonction booléennes linéairement séparables sur <span class="math notranslate nohighlight">\(D\)</span>
+variables qui requièrent des poids entiers supérieurs à
+<span class="math notranslate nohighlight">\(2^{\frac{D+1}{2}}\)</span></p></li>
+</ol>
+<p>Ces résultats sont assez décevants. Le premier montre que l’on peut
 borner les poids synaptiques en fonction de la taille de la rétine, mais
 par un nombre tellement grand que toute application pratique de ce
 résultat semble exclue. Le second résultat montre en particulier que
-l&#39;algorithme d&#39;apprentissage peut nécessiter un nombre exponentiel
-d&#39;étapes (en fonction de la taille de la rétine) avant de s&#39;arrêter. En
-effet, les poids ne varient qu&#39;au plus d&#39;une unité à chaque étape. Même
-lorsque l&#39;algorithme d&#39;apprentissage du perceptron converge, rien ne
-garantit que la solution sera robuste, c&#39;est-à-dire qu&#39;elle ne sera pas
-remise en cause par la présentation d&#39;un seul nouvel exemple. Pire
-encore, cet algorithme n&#39;a aucune tolérance au bruit : si du bruit,
-c&#39;est-à-dire une information mal classée, vient perturber les données
-d&#39;entrée, le perceptron ne convergera jamais. En effet, des données
-linéairement séparables peuvent ne plus l&#39;être à cause du bruit. En
-particulier, les problèmes non-déterministes, c&#39;est-à-dire pour lesquels
+l’algorithme d’apprentissage peut nécessiter un nombre exponentiel
+d’étapes (en fonction de la taille de la rétine) avant de s’arrêter. En
+effet, les poids ne varient qu’au plus d’une unité à chaque étape. Même
+lorsque l’algorithme d’apprentissage du perceptron converge, rien ne
+garantit que la solution sera robuste, c’est-à-dire qu’elle ne sera pas
+remise en cause par la présentation d’un seul nouvel exemple. Pire
+encore, cet algorithme n’a aucune tolérance au bruit : si du bruit,
+c’est-à-dire une information mal classée, vient perturber les données
+d’entrée, le perceptron ne convergera jamais. En effet, des données
+linéairement séparables peuvent ne plus l’être à cause du bruit. En
+particulier, les problèmes non-déterministes, c’est-à-dire pour lesquels
 une même description peut représenter des éléments de classes
-différentes, ne peuvent pas être traités à l&#39;aide d&#39;un perceptron.
-
-### Algorithme d&#39;apprentissage par descente de gradient {#subsec:descentegradient}
-
-Plutôt que d&#39;obtenir un perceptron qui classifie correctement tous les
-exemples, il s&#39;agit maintenant de calculer une erreur et d&#39;essayer de
-minimiser cette erreur. Pour introduire cette notion d&#39;erreur, on
-utilise des poids réels.\
-Un perceptron linéaire prend en entrée un vecteur $x_n$ et calcule une
-sortie $y_n$. Un perceptron est défini par la donnée d&#39;un vecteur $w$ de
-coefficients synaptiques. La sortie $y_n$ est définie par $y_n=w^Tx_n$\
-L&#39;erreur du perceptron sur un échantillon d&#39;apprentissage ${\cal E}_a$
-d&#39;exemples $(x_n,t_n)$ est définie en utilisant par l&#39;erreur quadratique
+différentes, ne peuvent pas être traités à l’aide d’un perceptron.</p>
+</div>
+<div class="section" id="algorithme-d-apprentissage-par-descente-de-gradient-subsec-descentegradient">
+<h3>Algorithme d’apprentissage par descente de gradient {#subsec:descentegradient}<a class="headerlink" href="#algorithme-d-apprentissage-par-descente-de-gradient-subsec-descentegradient" title="Lien permanent vers ce titre">#</a></h3>
+<p>Plutôt que d’obtenir un perceptron qui classifie correctement tous les
+exemples, il s’agit maintenant de calculer une erreur et d’essayer de
+minimiser cette erreur. Pour introduire cette notion d’erreur, on
+utilise des poids réels.<br />
+Un perceptron linéaire prend en entrée un vecteur <span class="math notranslate nohighlight">\(x_n\)</span> et calcule une
+sortie <span class="math notranslate nohighlight">\(y_n\)</span>. Un perceptron est défini par la donnée d’un vecteur <span class="math notranslate nohighlight">\(w\)</span> de
+coefficients synaptiques. La sortie <span class="math notranslate nohighlight">\(y_n\)</span> est définie par <span class="math notranslate nohighlight">\(y_n=w^Tx_n\)</span><br />
+L’erreur du perceptron sur un échantillon d’apprentissage <span class="math notranslate nohighlight">\({\cal E}_a\)</span>
+d’exemples <span class="math notranslate nohighlight">\((x_n,t_n)\)</span> est définie en utilisant par l’erreur quadratique
 :
-$$E(w)=\frac{1}{2}\displaystyle\sum_{(x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2$$
-L&#39;erreur mesure donc l&#39;écart entre les sorties attendue et calculée sur
-l&#39;échantillon complet. On remarque que $E(w) = 0$ si et seulement si le
-perceptron classifie correctement l&#39;échantillon complet. On suppose
-${\cal E}_a$ fixé, le problème est donc de déterminer, par descente de
-gradient, un vecteur $\tilde{w}$ qui minimise $E(w)$. On a alors :
-$$\begin{aligned}
+$<span class="math notranslate nohighlight">\(E(w)=\frac{1}{2}\displaystyle\sum_{(x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2\)</span><span class="math notranslate nohighlight">\(
+L'erreur mesure donc l'écart entre les sorties attendue et calculée sur
+l'échantillon complet. On remarque que \)</span>E(w) = 0<span class="math notranslate nohighlight">\( si et seulement si le
+perceptron classifie correctement l'échantillon complet. On suppose
+\)</span>{\cal E}_a<span class="math notranslate nohighlight">\( fixé, le problème est donc de déterminer, par descente de
+gradient, un vecteur \)</span>\tilde{w}<span class="math notranslate nohighlight">\( qui minimise \)</span>E(w)<span class="math notranslate nohighlight">\(. On a alors :
+\)</span><span class="math notranslate nohighlight">\(\begin{aligned}
 \frac{\partial E(w)}{\partial w_i}&amp;=\frac{\partial}{\partial w_i}\left (\frac{1}{2}\displaystyle\sum_{(x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2 \right )\\
                                                                                 &amp;=\frac{1}{2}\displaystyle\sum_{{\cal E}_a}\frac{\partial}{\partial w_i}(t_n-y_n)^2\\
                                                                                 &amp;=\displaystyle\sum_{{\cal E}_a}(t_n-y_n)\frac{\partial}{\partial w_i}(t_n-w^Tx_n)\\
                                                                                 &amp;=\displaystyle\sum_{{\cal E}_a}(t_n-y_n)(-x_n^i)\\
-\end{aligned}$$ L&#39;application de la méthode du gradient invite donc à
-modifier le poids $w_i$ après une présentation complète de ${\cal E}_a$
-d&#39;une quantité $\Delta w_i$ définie par :
-$$\Delta w_i=-\epsilon \frac{\partial E(w)}{\partial w_i}$$
-
-L&#39;algorithme d&#39;apprentissage par descente de gradient du perceptron
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( L'application de la méthode du gradient invite donc à
+modifier le poids \)</span>w_i<span class="math notranslate nohighlight">\( après une présentation complète de \)</span>{\cal E}_a<span class="math notranslate nohighlight">\(
+d'une quantité \)</span>\Delta w_i<span class="math notranslate nohighlight">\( définie par :
+\)</span><span class="math notranslate nohighlight">\(\Delta w_i=-\epsilon \frac{\partial E(w)}{\partial w_i}\)</span>$</p>
+<p>L’algorithme d’apprentissage par descente de gradient du perceptron
 linéaire peut maintenant être défini (algorithme
-[\[A:descGrad\]](#A:descGrad){reference-type=&quot;ref&quot;
-reference=&quot;A:descGrad&quot;}).
-
-::: algorithm
-Initialisation aléatoire des $w_i$\
+<a class="reference external" href="#A:descGrad">[A:descGrad]</a>{reference-type= »ref »
+reference= »A:descGrad »}).</p>
+<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>Initialisation aléatoire des $w_i$\
 $\Delta w_i \leftarrow 0$\
 Calculer $y_n$\
 $\Delta w_i \leftarrow \Delta w_i +\epsilon(t_n-y_n)x_n^i$
 $w_i \leftarrow w_i+ \Delta w_i$\
-:::
-
-La fonction erreur quadratique ne possède qu&#39;un minimum (la surface est
-une paraboloïde). La convergence est assurée, même si l&#39;échantillon
-d&#39;entrée n&#39;est pas linéairement séparable, vers un minimum de la
-fonction erreur pour un $\epsilon$ bien choisi, suffisamment petit. Si
-$\epsilon$ est trop grand, on risque d&#39;osciller autour du minimum. Pour
+</pre></div>
+</div>
+<p>La fonction erreur quadratique ne possède qu’un minimum (la surface est
+une paraboloïde). La convergence est assurée, même si l’échantillon
+d’entrée n’est pas linéairement séparable, vers un minimum de la
+fonction erreur pour un <span class="math notranslate nohighlight">\(\epsilon\)</span> bien choisi, suffisamment petit. Si
+<span class="math notranslate nohighlight">\(\epsilon\)</span> est trop grand, on risque d’osciller autour du minimum. Pour
 cette raison, une modification classique est de diminuer graduellement
-la valeur de $\epsilon$ en fonction du nombre d&#39;itérations. Le principal
+la valeur de <span class="math notranslate nohighlight">\(\epsilon\)</span> en fonction du nombre d’itérations. Le principal
 défaut est que la convergence peut être très lente et que chaque étape
-nécessite le calcul sur tout l&#39;ensemble d&#39;apprentissage.\
+nécessite le calcul sur tout l’ensemble d’apprentissage.<br />
 Au lieu de calculer les variations des poids en sommant sur tous les
-exemples de ${\cal E}_a$, l&#39;idée est alors de modifier les poids à
-chaque présentation d&#39;exemple. La règle de modification des poids
-devient : $$\Delta w_i=\epsilon (t_n-y_n)x_n^i$$
-
-Cette règle est appelée règle delta, ou règle Adaline, ou encore règle
-de Widrow-Hoff, et l&#39;algorithme
-[\[A:adaline\]](#A:adaline){reference-type=&quot;ref&quot; reference=&quot;A:adaline&quot;}
-décrit cette règle :
-
-::: algorithm
-Initialisation aléatoire des $w_i$\
+exemples de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>, l’idée est alors de modifier les poids à
+chaque présentation d’exemple. La règle de modification des poids
+devient : $<span class="math notranslate nohighlight">\(\Delta w_i=\epsilon (t_n-y_n)x_n^i\)</span>$</p>
+<p>Cette règle est appelée règle delta, ou règle Adaline, ou encore règle
+de Widrow-Hoff, et l’algorithme
+<a class="reference external" href="#A:adaline">[A:adaline]</a>{reference-type= »ref » reference= »A:adaline »}
+décrit cette règle :</p>
+<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>Initialisation aléatoire des $w_i$\
 Prendre un exemple $(x_n,t_n)  \in {\cal E}_a$\
 Calculer $y_n$\
 $w_i \leftarrow w_i +\epsilon(t_n-y_n)x_n^i$
-:::
-
-En général, on parcourt l&#39;échantillon dans un ordre prédéfini. Le
-critère d&#39;arrêt généralement choisi fait intervenir un seuil de
-modifications des poids pour un passage complet de l&#39;échantillon.\
-Au coefficient $\epsilon$ près dans la règle de modification des poids,
-on retrouve l&#39;algorithme d&#39;apprentissage par correction d&#39;erreur. Pour
-l&#39;algorithme de Widrow-Hoff, il y a correction chaque fois que la sortie
-totale (qui est un réel) est différente de la valeur attendue. Ce n&#39;est
-donc pas une méthode d&#39;apprentissage par correction d&#39;erreur puisqu&#39;il y
+</pre></div>
+</div>
+<p>En général, on parcourt l’échantillon dans un ordre prédéfini. Le
+critère d’arrêt généralement choisi fait intervenir un seuil de
+modifications des poids pour un passage complet de l’échantillon.<br />
+Au coefficient <span class="math notranslate nohighlight">\(\epsilon\)</span> près dans la règle de modification des poids,
+on retrouve l’algorithme d’apprentissage par correction d’erreur. Pour
+l’algorithme de Widrow-Hoff, il y a correction chaque fois que la sortie
+totale (qui est un réel) est différente de la valeur attendue. Ce n’est
+donc pas une méthode d’apprentissage par correction d’erreur puisqu’il y
 a modification du perceptron dans (presque) tous les cas. Rappelons
-également que l&#39;algorithme par correction d&#39;erreur produit en sortie un
-perceptron linéaire à seuil alors que l&#39;algorithme par descente de
-gradient produit un perceptron linéaire. L&#39;avantage de l&#39;algorithme de
-Widrow-Hoff par rapport à l&#39;algorithme par correction d&#39;erreur est que,
-même si l&#39;échantillon d&#39;entrée n&#39;est pas linéairement séparable,
-l&#39;algorithme va converger vers une solution optimale (sous réserve du
-bon choix du paramètre $\epsilon$). L&#39;algorithme est, par conséquent,
-plus robuste au bruit.\
-L&#39;algorithme de Widrow-Hoff s&#39;écarte de l&#39;algorithme du gradient sur un
+également que l’algorithme par correction d’erreur produit en sortie un
+perceptron linéaire à seuil alors que l’algorithme par descente de
+gradient produit un perceptron linéaire. L’avantage de l’algorithme de
+Widrow-Hoff par rapport à l’algorithme par correction d’erreur est que,
+même si l’échantillon d’entrée n’est pas linéairement séparable,
+l’algorithme va converger vers une solution optimale (sous réserve du
+bon choix du paramètre <span class="math notranslate nohighlight">\(\epsilon\)</span>). L’algorithme est, par conséquent,
+plus robuste au bruit.<br />
+L’algorithme de Widrow-Hoff s’écarte de l’algorithme du gradient sur un
 point important : on modifie les poids après présentation de chaque
-exemple en fonction de l&#39;erreur locale et non de l&#39;erreur globale. On
-utilise donc une méthode de type **gradient stochastique**. Rien ne
-prouve alors que la diminution de l&#39;erreur en un point ne va pas être
-compensée par une augmentation de l&#39;erreur pour les autres points. La
+exemple en fonction de l’erreur locale et non de l’erreur globale. On
+utilise donc une méthode de type <strong>gradient stochastique</strong>. Rien ne
+prouve alors que la diminution de l’erreur en un point ne va pas être
+compensée par une augmentation de l’erreur pour les autres points. La
 justification empirique de cette manière de procéder est commune à
-toutes les méthodes adaptatives : le champ d&#39;application des méthodes
-adaptatives est justement l&#39;ensemble des problèmes pour lesquels des
-ajustements locaux vont finir par converger vers une solution globale.
-
-L&#39;algorithme de Widrow-Hoff est très souvent utilisé en pratique et
+toutes les méthodes adaptatives : le champ d’application des méthodes
+adaptatives est justement l’ensemble des problèmes pour lesquels des
+ajustements locaux vont finir par converger vers une solution globale.</p>
+<p>L’algorithme de Widrow-Hoff est très souvent utilisé en pratique et
 donne de bons résultats. Iil sera utilisé dans les autres réseaux de
 neurones rencontrés dans ce cours, avec sa variante où la modification
-des poids se fait après présentation d&#39;un sous ensemble de données
-d&#39;apprentissage (apprentissage par batchs). La convergence est, en
+des poids se fait après présentation d’un sous ensemble de données
+d’apprentissage (apprentissage par batchs). La convergence est, en
 général, plus rapide que par la méthode du gradient. Il est fréquent
-pour cet algorithme de faire diminuer la valeur de $\epsilon$ en
-fonction du nombre d&#39;itérations comme pour l&#39;algorithme du gradient.
-
-### Pour en finir avec le perceptron
-
-L&#39;apprentissage par correction ou par la méthode du gradient ne sont
-rien d&#39;autre que des techniques de séparation linéaire qu&#39;il faudrait
+pour cet algorithme de faire diminuer la valeur de <span class="math notranslate nohighlight">\(\epsilon\)</span> en
+fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
+</div>
+<div class="section" id="pour-en-finir-avec-le-perceptron">
+<h3>Pour en finir avec le perceptron<a class="headerlink" href="#pour-en-finir-avec-le-perceptron" title="Lien permanent vers ce titre">#</a></h3>
+<p>L’apprentissage par correction ou par la méthode du gradient ne sont
+rien d’autre que des techniques de séparation linéaire qu’il faudrait
 comparer aux techniques utilisées habituellement en statistiques
-(discriminant linéaire, machines à vecteurs de support,\...). Ces
-méthodes sont non paramétriques, c&#39;est-à-dire qu&#39;elles n&#39;exigent aucune
-autre hypothèse sur les données que la séparabilité.
-
-On peut montrer que presque tous les échantillons de moins de $2D$
-exemples sont linéairement séparables lorsque $D$ est le nombre de
-variables. Une classification correcte d&#39;un petit échantillon n&#39;a donc
-aucune valeur prédictive. Par contre, lorsque l&#39;on travaille sur
-suffisamment de données et que le problème s&#39;y prête, on constate
+(discriminant linéaire, machines à vecteurs de support,…). Ces
+méthodes sont non paramétriques, c’est-à-dire qu’elles n’exigent aucune
+autre hypothèse sur les données que la séparabilité.</p>
+<p>On peut montrer que presque tous les échantillons de moins de <span class="math notranslate nohighlight">\(2D\)</span>
+exemples sont linéairement séparables lorsque <span class="math notranslate nohighlight">\(D\)</span> est le nombre de
+variables. Une classification correcte d’un petit échantillon n’a donc
+aucune valeur prédictive. Par contre, lorsque l’on travaille sur
+suffisamment de données et que le problème s’y prête, on constate
 empiriquement que le perceptron appris par un des algorithmes précédents
-a un bon pouvoir prédictif.
-
-Il est bien évident que la plupart des problèmes d&#39;apprentissage qui se
+a un bon pouvoir prédictif.</p>
+<p>Il est bien évident que la plupart des problèmes d’apprentissage qui se
 posent naturellement ne peuvent pas être résolus par des méthodes aussi
-simples : il n&#39;y a que très peu d&#39;espoir que les exemples naturels se
-répartissent sagement de part et d&#39;autre d&#39;un hyperplan. Deux manières
+simples : il n’y a que très peu d’espoir que les exemples naturels se
+répartissent sagement de part et d’autre d’un hyperplan. Deux manières
 de résoudre cette difficulté peuvent être envisagées : soit mettre au
 point des séparateurs non-linéaires, soit (ce qui revient à peu près au
-même) complexifier l&#39;espace de représentation de manière à linéariser le
-problème initial.\
-Les réseaux multicouches abordent ce type de problème.
-
-## Perceptrons multicouches {#subsec:multilayer-perceptron}
-
-::: definition
-Un perceptron à $(L+1)$ couches (figure
+même) complexifier l’espace de représentation de manière à linéariser le
+problème initial.<br />
+Les réseaux multicouches abordent ce type de problème.</p>
+</div>
+</div>
+<div class="section" id="perceptrons-multicouches-subsec-multilayer-perceptron">
+<h2>Perceptrons multicouches {#subsec:multilayer-perceptron}<a class="headerlink" href="#perceptrons-multicouches-subsec-multilayer-perceptron" title="Lien permanent vers ce titre">#</a></h2>
+<div class="highlight-definition notranslate"><div class="highlight"><pre><span></span>Un perceptron à $(L+1)$ couches (figure
 [1.3](#fig:multilayer-perceptron){reference-type=&quot;ref&quot;
 reference=&quot;fig:multilayer-perceptron&quot;}) est un réseau constitué d&#39;une
 rétine à $D$ neurones (auxquels on rajoute l&#39;entrée $x_0$), $C$ neurones
@@ -935,227 +1170,208 @@ de la couche $l$, et $w_{i,0}^{(l)}$ est le biais. De plus, $m^{(l)}$
 est le nombre de neurones de la couche $l$, de sorte que $D = m^{(0)}$
 et $C = m^{(L+1)}$. Enfin, $f$ est la fonction d&#39;activation du neurone
 (supposée identique pour tous les neurones).\
-:::
-
-En introduisant dans chaque couche un neurone supplémentaire
-$y_0^{(l)} = 1$ pour gérer le biais, on a : $$\begin{aligned}
+</pre></div>
+</div>
+<p>En introduisant dans chaque couche un neurone supplémentaire
+<span class="math notranslate nohighlight">\(y_0^{(l)} = 1\)</span> pour gérer le biais, on a : $<span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:multilayer-perceptron}
     z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad z^{(l)} = w^{(l)} y^{(l-1)}
-\end{aligned}$$ avec $z^{(l)}$, $w^{(l)}$ et $y^{(l-1)}$ les
-représentations vectorielle et matricielle des entrées $z_i^{(l)}$, des
-poids $w_{i,k}^{(l)}$ et des sorties $y_k^{(l-1)}$.
-
-&lt;figure id=&quot;fig:multilayer-perceptron&quot;&gt;
-
-&lt;figcaption&gt;Perceptron multicouches à &lt;span
-class=&quot;math inline&quot;&gt;(&lt;em&gt;L&lt;/em&gt;+1)&lt;/span&gt; couches, &lt;span
-class=&quot;math inline&quot;&gt;&lt;em&gt;D&lt;/em&gt;&lt;/span&gt; entrées et &lt;span
-class=&quot;math inline&quot;&gt;&lt;em&gt;C&lt;/em&gt;&lt;/span&gt; sorties.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-Un tel réseau représente une fonction $$\begin{aligned}
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( avec \)</span>z^{(l)}<span class="math notranslate nohighlight">\(, \)</span>w^{(l)}<span class="math notranslate nohighlight">\( et \)</span>y^{(l-1)}<span class="math notranslate nohighlight">\( les
+représentations vectorielle et matricielle des entrées \)</span>z_i^{(l)}<span class="math notranslate nohighlight">\(, des
+poids \)</span>w_{i,k}^{(l)}<span class="math notranslate nohighlight">\( et des sorties \)</span>y_k^{(l-1)}$.</p>
+<figure id="fig:multilayer-perceptron">
+<figcaption>Perceptron multicouches à <span
+class="math inline">(<em>L</em>+1)</span> couches, <span
+class="math inline"><em>D</em></span> entrées et <span
+class="math inline"><em>C</em></span> sorties.</figcaption>
+</figure>
+<p>Un tel réseau représente une fonction $<span class="math notranslate nohighlight">\(\begin{aligned}
     y(\cdot,w) &amp;:&amp; \mathbb{R}^D \rightarrow \mathbb{R}^C\\
     x &amp;\mapsto&amp; y(x,w)
-\end{aligned}$$ où $y(x,w)$ est tel que $y_i(x,w) = y_i^{(L+1)}$ et $w$
-est le vecteur de tous les poids du réseau.
-
-On parlera de **réseau profond (Deep network)** lorsque le nombre de
-couches cachées est supérieur à 3.
-
-### Fonctions d&#39;activation {#subsec:activation-functions}
-
-Trois grandes classes de fonction d&#39;activation $f$ sont généralement
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>y(x,w)<span class="math notranslate nohighlight">\( est tel que \)</span>y_i(x,w) = y_i^{(L+1)}<span class="math notranslate nohighlight">\( et \)</span>w$
+est le vecteur de tous les poids du réseau.</p>
+<p>On parlera de <strong>réseau profond (Deep network)</strong> lorsque le nombre de
+couches cachées est supérieur à 3.</p>
+<div class="section" id="fonctions-d-activation-subsec-activation-functions">
+<h3>Fonctions d’activation {#subsec:activation-functions}<a class="headerlink" href="#fonctions-d-activation-subsec-activation-functions" title="Lien permanent vers ce titre">#</a></h3>
+<p>Trois grandes classes de fonction d’activation <span class="math notranslate nohighlight">\(f\)</span> sont généralement
 utilisées : les fonctions de seuils (comme dans le perceptron linéaire à
 seuil), les fonctions linéaires par morceau et les fonctions de type
 sigmoïde. Dans les deux premiers cas, de nombreux problèmes se
 présentent, notamment en raison de la non différentiabilité de ces
-fonctions (qui est nécessaire dans les algorithmes d&#39;apprentissage du
+fonctions (qui est nécessaire dans les algorithmes d’apprentissage du
 type descente de gradient), ou encore en raison de la faiblesse de leur
-pouvoir d&#39;expression. Ainsi, il est préférable d&#39;utiliser des fonctions
+pouvoir d’expression. Ainsi, il est préférable d’utiliser des fonctions
 de type sigmoïde, et par exemple la sigmoïde logistique est donnée par :
-$$\begin{aligned}
+$<span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:logistic-sigmoid}
     \sigma(z) = \frac{1}{1 + \exp(-z)}.
-\end{aligned}$$
-
-La tangente hyperbolique $\tanh(z)$, également utilisée pour ses bonnes
-propriétés de dérivabilité ($(\tanh)&#39;=1-\tanh^2$), peut être vue comme
-une transformation linéaire de la sigmoïde dans l&#39;intervalle $[-1,1]$.
-
-Ces réseaux peuvent être utilisés en régression (sortie à valeurs dans
-$\mathbb{R}^C$) ou en classification. Dans ce dernier cas, la fonction
-d&#39;activation softmax est utilisée à la sortie du réseau pour interpréter
-les sorties comme des valeurs de probabilité a posteriori. S&#39;il s&#39;agit
-de classer un exemple $x$ à la classe $c$, la probabilité conditionnelle
-$p(c|x)$ peut être calculée en utilisant la règle de Bayes
-:$$\begin{aligned}
+\end{aligned}\)</span>$</p>
+<p>La tangente hyperbolique <span class="math notranslate nohighlight">\(\tanh(z)\)</span>, également utilisée pour ses bonnes
+propriétés de dérivabilité (<span class="math notranslate nohighlight">\((\tanh)'=1-\tanh^2\)</span>), peut être vue comme
+une transformation linéaire de la sigmoïde dans l’intervalle <span class="math notranslate nohighlight">\([-1,1]\)</span>.</p>
+<p>Ces réseaux peuvent être utilisés en régression (sortie à valeurs dans
+<span class="math notranslate nohighlight">\(\mathbb{R}^C\)</span>) ou en classification. Dans ce dernier cas, la fonction
+d’activation softmax est utilisée à la sortie du réseau pour interpréter
+les sorties comme des valeurs de probabilité a posteriori. S’il s’agit
+de classer un exemple <span class="math notranslate nohighlight">\(x\)</span> à la classe <span class="math notranslate nohighlight">\(c\)</span>, la probabilité conditionnelle
+<span class="math notranslate nohighlight">\(p(c|x)\)</span> peut être calculée en utilisant la règle de Bayes
+:$<span class="math notranslate nohighlight">\(\begin{aligned}
 p(c|x) = \frac{p(x|c)p(c)}{p(x)}
-\end{aligned}$$ $p(c|x)$ est alors interprétée comme une probabilité a
-posteriori. Disposant de ces probabilités pour tout $c=1,\ldots,C$, la
-règle de décision de Bayes donne :$$\begin{aligned}
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( \)</span>p(c|x)<span class="math notranslate nohighlight">\( est alors interprétée comme une probabilité a
+posteriori. Disposant de ces probabilités pour tout \)</span>c=1,\ldots,C<span class="math notranslate nohighlight">\(, la
+règle de décision de Bayes donne :\)</span><span class="math notranslate nohighlight">\(\begin{aligned}
 c: \mathbb{R}^D \rightarrow \{1,\ldots,C\}, x \mapsto  argmax_{c}\left(p(c|x)\right).
-\end{aligned}$$ L&#39;utilisation de la fonction d&#39;activation softmax en
-sortie permet d&#39;interpréter les sorties du réseau comme de telles
-probabilités :la sortie du $i^{\text{e}}$ neurone de la couche de sortie
-est
-
-$$\begin{aligned}
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( L'utilisation de la fonction d'activation softmax en
+sortie permet d'interpréter les sorties du réseau comme de telles
+probabilités :la sortie du \)</span>i^{\text{e}}$ neurone de la couche de sortie
+est</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
     \sigma(z^{(L+1)},i) = \frac{\exp(z_i^{(L+1)})}{\displaystyle\sum_{k = 1} ^C \exp(z_k^{(L+1)})}.
-\end{aligned}$$
-
-En apprentissage profond, il a été reporté que la sigmoïde et la
+\end{aligned}\]</div>
+<p>En apprentissage profond, il a été reporté que la sigmoïde et la
 tangente hyperbolique avaient des performances moindres que la fonction
-d&#39;activation softsign : $$\begin{aligned}
+d’activation softsign : $<span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:softsign}
     s(z) = \frac{1}{1+ |z|}.
-\end{aligned}$$ En effet, les valeurs de $z$ arrivant près des paliers
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( En effet, les valeurs de \)</span>z<span class="math notranslate nohighlight">\( arrivant près des paliers
 de saturation de ces fonctions donnent des gradients faibles, qui ont
-tendance à s&#39;annuler lors de la phase d&#39;apprentissage détaillée plus
+tendance à s'annuler lors de la phase d'apprentissage détaillée plus
 loin (rétropropagation du gradient). Une autre fonction, non saturante
-elle, peut être utilisée : $$\begin{aligned}
+elle, peut être utilisée : \)</span><span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:relu}
     r(z) = \max (0,z).
-\end{aligned}$$ Les neurones cachés utilisant la fonction décrite dans
-l&#39;équation [\[eq:relu\]](#eq:relu){reference-type=&quot;eqref&quot;
-reference=&quot;eq:relu&quot;} sont appelés neurones linéaires rectifiés
-(**Rectified Linear Units, ReLUs**), et sont en pratique très utilisés.\
-Quelques fonctions d&#39;activation sont présentées dans la figure
-[1.4](#fig:sigmoid-tanh){reference-type=&quot;ref&quot;
-reference=&quot;fig:sigmoid-tanh&quot;}.
-
-&lt;figure id=&quot;fig:sigmoid-tanh&quot;&gt;
-
-&lt;figcaption&gt;Quelques fonctions d’activation classiques.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-### Entraînement des réseaux multicouches {#subsec:supervised-training}
-
-Pour pouvoir utiliser les réseaux multicouches en apprentissage, deux
-ingrédients sont indispensables :
-
--   une méthode indiquant comment choisir une architecture de réseau
-    pour résoudre un problème donné. C&#39;est-à-dire, pouvoir répondre aux
-    questions suivantes : combien de couches cachées ? combien de
-    neurones par couche cachée ?
-
--   une fois l&#39;architecture choisie, un algorithme d&#39;apprentissage qui
-    calcule, à partir d&#39;un l&#39;échantillon d&#39;apprentissage
-    ${\cal E}_a = \left \{(x_n, t_n), 1 \leq n \leq N \right \}$ , les
-    valeurs des poids synaptiques pour construire un réseau adapté au
-    problème (c&#39;est à dire approchant une fonction $g$ désirée mais
-    inconnue, telle qu&#39;en particulier $t_n \approx g(x_n)$) .
-
-Sur le premier point, quelques algorithmes d&#39;apprentissage
-auto-constructifs ont été proposés. Leur rôle est double :
-
--   apprentissage de l&#39;échantillon avec un réseau courant,
-
--   modification du réseau courant, en ajoutant de nouvelles cellules ou
-    une nouvelle couche, en cas d&#39;échec de l&#39;apprentissage.
-
-Il semble assez facile de concevoir des algorithmes auto-constructifs
-qui classent correctement l&#39;échantillon, mais beaucoup plus difficile
-d&#39;en obtenir qui aient un bon pouvoir de généralisation.\
+\end{aligned}\)</span>$ Les neurones cachés utilisant la fonction décrite dans
+l’équation <a class="reference external" href="#eq:relu">[eq:relu]</a>{reference-type= »eqref »
+reference= »eq:relu »} sont appelés neurones linéaires rectifiés
+(<strong>Rectified Linear Units, ReLUs</strong>), et sont en pratique très utilisés.<br />
+Quelques fonctions d’activation sont présentées dans la figure
+<a class="reference external" href="#fig:sigmoid-tanh">1.4</a>{reference-type= »ref »
+reference= »fig:sigmoid-tanh »}.</p>
+<figure id="fig:sigmoid-tanh">
+<figcaption>Quelques fonctions d’activation classiques.</figcaption>
+</figure>
+</div>
+<div class="section" id="entrainement-des-reseaux-multicouches-subsec-supervised-training">
+<h3>Entraînement des réseaux multicouches {#subsec:supervised-training}<a class="headerlink" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training" title="Lien permanent vers ce titre">#</a></h3>
+<p>Pour pouvoir utiliser les réseaux multicouches en apprentissage, deux
+ingrédients sont indispensables :</p>
+<ul class="simple">
+<li><p>une méthode indiquant comment choisir une architecture de réseau
+pour résoudre un problème donné. C’est-à-dire, pouvoir répondre aux
+questions suivantes : combien de couches cachées ? combien de
+neurones par couche cachée ?</p></li>
+<li><p>une fois l’architecture choisie, un algorithme d’apprentissage qui
+calcule, à partir d’un l’échantillon d’apprentissage
+<span class="math notranslate nohighlight">\({\cal E}_a = \left \{(x_n, t_n), 1 \leq n \leq N \right \}\)</span> , les
+valeurs des poids synaptiques pour construire un réseau adapté au
+problème (c’est à dire approchant une fonction <span class="math notranslate nohighlight">\(g\)</span> désirée mais
+inconnue, telle qu’en particulier <span class="math notranslate nohighlight">\(t_n \approx g(x_n)\)</span>) .</p></li>
+</ul>
+<p>Sur le premier point, quelques algorithmes d’apprentissage
+auto-constructifs ont été proposés. Leur rôle est double :</p>
+<ul class="simple">
+<li><p>apprentissage de l’échantillon avec un réseau courant,</p></li>
+<li><p>modification du réseau courant, en ajoutant de nouvelles cellules ou
+une nouvelle couche, en cas d’échec de l’apprentissage.</p></li>
+</ul>
+<p>Il semble assez facile de concevoir des algorithmes auto-constructifs
+qui classent correctement l’échantillon, mais beaucoup plus difficile
+d’en obtenir qui aient un bon pouvoir de généralisation.<br />
 Il a fallu attendre le milieu des années 1980 pour que le deuxième
-problème trouve une solution : l&#39;algorithme de **rétropropagation du
-gradient**, découvert simultanément par des équipes française et
-américaine.
-
-L&#39;entraînement, comme dans le cas de l&#39;algorithme
-[\[A:descGrad\]](#A:descGrad){reference-type=&quot;ref&quot;
-reference=&quot;A:descGrad&quot;}, consiste à trouver les poids qui minimisent une
-fonction d&#39;erreur, mesurant l&#39;écart entre la sortie du réseau $y(x_n)$
-et $t_n$, pour tous les exemples de ${\cal E}_a$. Les fonctions
+problème trouve une solution : l’algorithme de <strong>rétropropagation du
+gradient</strong>, découvert simultanément par des équipes française et
+américaine.</p>
+<p>L’entraînement, comme dans le cas de l’algorithme
+<a class="reference external" href="#A:descGrad">[A:descGrad]</a>{reference-type= »ref »
+reference= »A:descGrad »}, consiste à trouver les poids qui minimisent une
+fonction d’erreur, mesurant l’écart entre la sortie du réseau <span class="math notranslate nohighlight">\(y(x_n)\)</span>
+et <span class="math notranslate nohighlight">\(t_n\)</span>, pour tous les exemples de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Les fonctions
 couramment choisies sont les sommes des fonctions de perte sur chaque
-exemple, et incluent l&#39;erreur quadratique $$\begin{aligned}
+exemple, et incluent l’erreur quadratique $<span class="math notranslate nohighlight">\(\begin{aligned}
     E(w) = \dsum_{n = 1}^N E_n(w) = \dsum_{n = 1}^N \sum_{i = 1}^C (y_i(x_n,w) - t^i_{n})^2
-\end{aligned}$$ ou l&#39;erreur d&#39;entropie croisée $$\begin{aligned}
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( ou l'erreur d'entropie croisée \)</span><span class="math notranslate nohighlight">\(\begin{aligned}
     E(w) = \dsum_{n = 1}^N E_n(w) = \dsum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(x_n,w)),
-\end{aligned}$$ où $t^i_{n}$ est la $i^{\text{e}}$ composante de $t_n$.
-
-### Stratégies d&#39;entraînement
-
-Parmi les stratégies d&#39;entraînement qui peuvent être retenues, trois
-sont classiquement utilisées
-
--   entraînement sur ${\cal E}_a$, les poids étant mis à jour après
-    présentation, en fonction de l&#39;erreur totale
-    $E(w) = \dsum_{n=1}^N E_n(w)$.
-
--   entraînement stochastique : un exemple est présenté et les poids
-    sont mis à jour sur l&#39;erreur $E_n(w)$ calculée sur cet exemple
-    (règle Adaline)
-
--   entraînement par batch sur un sous-ensemble
-    $M \subseteq \{1,\ldots,N\}$ de ${\cal E}_a$, les poids étant mis à
-    jour en fonction de l&#39;erreur cumulée
-    $E_M(w) = \dsum_{n \in M} E_n(w)$.
-
-### Optimisation des paramètres {#subsubsec:parameter-optimization}
-
-Considérons le cas de l&#39;entraînement stochastique. La condition
-nécessaire d&#39;optimalité d&#39;ordre 1 donne $$\begin{aligned}
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>t^i_{n}<span class="math notranslate nohighlight">\( est la \)</span>i^{\text{e}}<span class="math notranslate nohighlight">\( composante de \)</span>t_n$.</p>
+</div>
+<div class="section" id="strategies-d-entrainement">
+<h3>Stratégies d’entraînement<a class="headerlink" href="#strategies-d-entrainement" title="Lien permanent vers ce titre">#</a></h3>
+<p>Parmi les stratégies d’entraînement qui peuvent être retenues, trois
+sont classiquement utilisées</p>
+<ul class="simple">
+<li><p>entraînement sur <span class="math notranslate nohighlight">\({\cal E}_a\)</span>, les poids étant mis à jour après
+présentation, en fonction de l’erreur totale
+<span class="math notranslate nohighlight">\(E(w) = \dsum_{n=1}^N E_n(w)\)</span>.</p></li>
+<li><p>entraînement stochastique : un exemple est présenté et les poids
+sont mis à jour sur l’erreur <span class="math notranslate nohighlight">\(E_n(w)\)</span> calculée sur cet exemple
+(règle Adaline)</p></li>
+<li><p>entraînement par batch sur un sous-ensemble
+<span class="math notranslate nohighlight">\(M \subseteq \{1,\ldots,N\}\)</span> de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>, les poids étant mis à
+jour en fonction de l’erreur cumulée
+<span class="math notranslate nohighlight">\(E_M(w) = \dsum_{n \in M} E_n(w)\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="optimisation-des-parametres-subsubsec-parameter-optimization">
+<h3>Optimisation des paramètres {#subsubsec:parameter-optimization}<a class="headerlink" href="#optimisation-des-parametres-subsubsec-parameter-optimization" title="Lien permanent vers ce titre">#</a></h3>
+<p>Considérons le cas de l’entraînement stochastique. La condition
+nécessaire d’optimalité d’ordre 1 donne $<span class="math notranslate nohighlight">\(\begin{aligned}
     \frac{\partial E_n}{\partial w} = \nabla E_n(w) = 0
-\end{aligned}$$
-
-Une méthode itérative est utilisée pour trouver une solution approchée.
-Si $w[t]$ est le vecteur de poids à la $t^{\text{e}}$ itération, une
-mise à jour des poids $\Delta w[t]$ est calculée et propagée à
-l&#39;itération suivante : $w[t+1] = w[t] + \Delta w[t]$. Comme dans le cas
+\end{aligned}\)</span>$</p>
+<p>Une méthode itérative est utilisée pour trouver une solution approchée.
+Si <span class="math notranslate nohighlight">\(w[t]\)</span> est le vecteur de poids à la <span class="math notranslate nohighlight">\(t^{\text{e}}\)</span> itération, une
+mise à jour des poids <span class="math notranslate nohighlight">\(\Delta w[t]\)</span> est calculée et propagée à
+l’itération suivante : <span class="math notranslate nohighlight">\(w[t+1] = w[t] + \Delta w[t]\)</span>. Comme dans le cas
 du perceptron, on peut utiliser une méthode de type descente de gradient
 (ordre 1), ou une méthode type Newton (ordre 2, qui nécessite alors le
-calcul ou l&#39;estimation du Hessien $H_n$ de $E_n$ à chaque itération).
-
--   pour la méthode de descente du gradient, comme dans, la section
-    [1.2.4](#subsec:descentegradient){reference-type=&quot;ref&quot;
-    reference=&quot;subsec:descentegradient&quot;}, la mise à jour est effectuée
-    par $$\begin{aligned}
-                \Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])
-            
-    \end{aligned}$$ où $\gamma$ est le taux d&#39;apprentissage.
-
--   pour les méthodes d&#39;ordre 2, type Newton, la mise à jour s&#39;effectue
-    selon le schéma $$\begin{aligned}
-            \Delta w[t] = - \gamma \left(\frac{\partial^2 E_n}{\partial w[t]^2}\right)^{-1} \frac{\partial E_n}{\partial w[t]} = - \gamma \left(H_n(w[t])\right)^{-1} \nabla E_n(w[t])
-        
-    \end{aligned}$$ où $\gamma$ est le taux d&#39;apprentissage. L&#39;ordre 2
-    assure une convergence plus rapide, mais requiert le calcul et
-    l&#39;inversion du Hessien $H_n(w[t])$ de $E_n$, ce qui est coûteux.
-
-### Initialisation des poids {#sububsec:weight-initialization}
-
-Une méthode itérative d&#39;optimisation étant utilisée, l&#39;initialisation
+calcul ou l’estimation du Hessien <span class="math notranslate nohighlight">\(H_n\)</span> de <span class="math notranslate nohighlight">\(E_n\)</span> à chaque itération).</p>
+<ul>
+<li><p>pour la méthode de descente du gradient, comme dans, la section
+<a class="reference external" href="#subsec:descentegradient">1.2.4</a>{reference-type= »ref »
+reference= »subsec:descentegradient »}, la mise à jour est effectuée
+par $$\begin{aligned}
+\Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])</p>
+<p>\end{aligned}$<span class="math notranslate nohighlight">\( où \)</span>\gamma$ est le taux d’apprentissage.</p>
+</li>
+<li><p>pour les méthodes d’ordre 2, type Newton, la mise à jour s’effectue
+selon le schéma $$\begin{aligned}
+\Delta w[t] = - \gamma \left(\frac{\partial^2 E_n}{\partial w[t]^2}\right)^{-1} \frac{\partial E_n}{\partial w[t]} = - \gamma \left(H_n(w[t])\right)^{-1} \nabla E_n(w[t])</p>
+<p>\end{aligned}$<span class="math notranslate nohighlight">\( où \)</span>\gamma<span class="math notranslate nohighlight">\( est le taux d'apprentissage. L'ordre 2
+assure une convergence plus rapide, mais requiert le calcul et
+l'inversion du Hessien \)</span>H_n(w[t])<span class="math notranslate nohighlight">\( de \)</span>E_n$, ce qui est coûteux.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="initialisation-des-poids-sububsec-weight-initialization">
+<h3>Initialisation des poids {#sububsec:weight-initialization}<a class="headerlink" href="#initialisation-des-poids-sububsec-weight-initialization" title="Lien permanent vers ce titre">#</a></h3>
+<p>Une méthode itérative d’optimisation étant utilisée, l’initialisation
 des poids requiert une attention toute particulière. En faisant
-l&#39;hypothèse que les entrées de chaque cellule de la rétine sont
+l’hypothèse que les entrées de chaque cellule de la rétine sont
 distribuées selon une loi gaussienne, il est courant de choisir les
-poids aléatoirement dans $$\begin{aligned}
+poids aléatoirement dans $<span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:weight-initialization}
     - \frac{1}{\sqrt{m^{(l-1)}}} &lt; w_{i,j}^{(l)} &lt; \frac{1}{\sqrt{m^{(l-1)}}}.
-\end{aligned}$$
-
-En utilisant des fonctions d&#39;activation sigmoïde, il a été prouvé que
-l&#39;apprentissage était alors optimal, en le sens que l&#39;apprentissage est
+\end{aligned}\)</span>$</p>
+<p>En utilisant des fonctions d’activation sigmoïde, il a été prouvé que
+l’apprentissage était alors optimal, en le sens que l’apprentissage est
 rapide et que les poids atteignent une valeur stable quasiment tous en
-même temps.
-
-Un autre schéma d&#39;initialisation est possible (initialisation
+même temps.</p>
+<p>Un autre schéma d’initialisation est possible (initialisation
 normalisée, ou initialisation de Xavier) en choisissant
-$$\begin{aligned}
+$<span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:normalized-initialization}
     - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} &lt; w_{i,j}^{(l)} &lt; \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
-\end{aligned}$$
-
-### Rétropropagation de l&#39;erreur {#subsubsec:error-backproagation}
-
-L&#39;algorithme
-[\[alg:error-backpropagation\]](#alg:error-backpropagation){reference-type=&quot;ref&quot;
-reference=&quot;alg:error-backpropagation&quot;}, dit algorithme de
+\end{aligned}\)</span>$</p>
+</div>
+<div class="section" id="retropropagation-de-l-erreur-subsubsec-error-backproagation">
+<h3>Rétropropagation de l’erreur {#subsubsec:error-backproagation}<a class="headerlink" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation" title="Lien permanent vers ce titre">#</a></h3>
+<p>L’algorithme
+<a class="reference external" href="#alg:error-backpropagation">[alg:error-backpropagation]</a>{reference-type= »ref »
+reference= »alg:error-backpropagation »}, dit algorithme de
 rétropropagation du gradient, est utilisé pour évaluer le gradient
-$\nabla E_n (w[t])$ de l&#39;erreur $E_n$ à chaque itération, ceci pour tous
-les poids
-
-::: algorithm
-1.  Propager un exemple $x_n$ dans le réseau.
+<span class="math notranslate nohighlight">\(\nabla E_n (w[t])\)</span> de l’erreur <span class="math notranslate nohighlight">\(E_n\)</span> à chaque itération, ceci pour tous
+les poids</p>
+<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>1.  Propager un exemple $x_n$ dans le réseau.
 
 2.  Calculer les erreurs $\delta_i^{(L+1)}$ des neurones de sortie :
     $$\begin{aligned}
@@ -1176,205 +1392,190 @@ les poids
     \end{aligned}$$
 
 []{#alg:error-backpropagation label=&quot;alg:error-backpropagation&quot;}
-:::
-
-Dans le cas d&#39;un apprentissage stochastique, cet algorithme est appliqué
-jusqu&#39;à convergence, pour estimer les poids du réseau de neurones.
-
-### Critères d&#39;arrêt
-
-Plusieurs critères d&#39;arrêt peuvent être utilisés avec l&#39;algorithme de
+</pre></div>
+</div>
+<p>Dans le cas d’un apprentissage stochastique, cet algorithme est appliqué
+jusqu’à convergence, pour estimer les poids du réseau de neurones.</p>
+</div>
+<div class="section" id="criteres-d-arret">
+<h3>Critères d’arrêt<a class="headerlink" href="#criteres-d-arret" title="Lien permanent vers ce titre">#</a></h3>
+<p>Plusieurs critères d’arrêt peuvent être utilisés avec l’algorithme de
 rétropropagation du gradient. Le plus commun consiste à fixer un nombre
-maximum de périodes d&#39;entraînement (sur ${\cal E}_a$), ce qui fixe
-effectivement une limite supérieure sur la durée de l&#39;apprentissage. Ce
-critère est important car la rétropropagation n&#39;offre aucune garantie
-quant à la convergence de l&#39;algorithme. Il peut arriver, par exemple,
-que le processus d&#39;optimisation reste pris dans un minimum local. Sans
-un tel critère, l&#39;algorithme pourrait ne jamais se terminer. Un deuxième
-critère commun consiste à fixer une borne inférieure sur l&#39;erreur
-quadratique moyenne. Dépendant de l&#39;application, il est parfois possible
-de fixer *a priori* un objectif à atteindre. Lorsque l&#39;indice de
+maximum de périodes d’entraînement (sur <span class="math notranslate nohighlight">\({\cal E}_a\)</span>), ce qui fixe
+effectivement une limite supérieure sur la durée de l’apprentissage. Ce
+critère est important car la rétropropagation n’offre aucune garantie
+quant à la convergence de l’algorithme. Il peut arriver, par exemple,
+que le processus d’optimisation reste pris dans un minimum local. Sans
+un tel critère, l’algorithme pourrait ne jamais se terminer. Un deuxième
+critère commun consiste à fixer une borne inférieure sur l’erreur
+quadratique moyenne. Dépendant de l’application, il est parfois possible
+de fixer <em>a priori</em> un objectif à atteindre. Lorsque l’indice de
 performance choisi diminue en dessous de cet objectif, on considère
 simplement que le réseau a suffisamment bien appris ses données et on
-arrête l&#39;apprentissage.\
+arrête l’apprentissage.<br />
 Les deux critères précédents sont utiles mais ils comportent aussi des
 limitations. Le critère relatif au nombre maximum de périodes
-d&#39;entraînement n&#39;est aucunement lié à la performance du réseau. Le
-critère relatif à l&#39;erreur minimale obtenue mesure quant à lui un indice
+d’entraînement n’est aucunement lié à la performance du réseau. Le
+critère relatif à l’erreur minimale obtenue mesure quant à lui un indice
 de performance mais ce dernier peut engendrer un phénomène dit de
-sur-apprentissage qui n&#39;est pas désirable dans la pratique, surtout si
-l&#39;on ne possède pas une grande quantité de données d&#39;apprentissage, ou
-si ces dernières ne sont pas de bonne qualité.\
-Un processus d&#39;apprentissage comme celui de la rétropropagation, vise à
-réduire autant que possible l&#39;erreur que commet le réseau. Mais cette
-erreur est mesurée sur un ensemble de données d&#39;apprentissage
-${\cal E}_a$. Si les données sont bonnes, c&#39;est-à-dire quelles
-représentent bien le processus physique sous-jacent que l&#39;on tente
-d&#39;apprendre ou de modéliser, et que l&#39;algorithme a convergé sur un
-optimum global, alors il devrait bien se comporter sur d&#39;autres données
+sur-apprentissage qui n’est pas désirable dans la pratique, surtout si
+l’on ne possède pas une grande quantité de données d’apprentissage, ou
+si ces dernières ne sont pas de bonne qualité.<br />
+Un processus d’apprentissage comme celui de la rétropropagation, vise à
+réduire autant que possible l’erreur que commet le réseau. Mais cette
+erreur est mesurée sur un ensemble de données d’apprentissage
+<span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Si les données sont bonnes, c’est-à-dire quelles
+représentent bien le processus physique sous-jacent que l’on tente
+d’apprendre ou de modéliser, et que l’algorithme a convergé sur un
+optimum global, alors il devrait bien se comporter sur d’autres données
 issues du même processus physique. Cependant, si les données
-d&#39;apprentissage sont partiellement corrompues par du bruit ou par des
-erreurs de mesure, alors il n&#39;est pas évident que la performance
-optimale du réseau soit atteinte en minimisant l&#39;erreur, lorsqu&#39;on la
+d’apprentissage sont partiellement corrompues par du bruit ou par des
+erreurs de mesure, alors il n’est pas évident que la performance
+optimale du réseau soit atteinte en minimisant l’erreur, lorsqu’on la
 testera sur un jeu de données différent de celui qui a servi à
-l&#39;entraînement. On parle alors de la capacité de généralisation du
-réseau, c&#39;est-à-dire sa capacité à bien se comporter avec des données
-qu&#39;il n&#39;a jamais vu auparavant.
-
-Une solution à ce problème consiste à faire appel à un autre critère
-d&#39;arrêt basé sur une technique de validation croisée. Cette technique
+l’entraînement. On parle alors de la capacité de généralisation du
+réseau, c’est-à-dire sa capacité à bien se comporter avec des données
+qu’il n’a jamais vu auparavant.</p>
+<p>Une solution à ce problème consiste à faire appel à un autre critère
+d’arrêt basé sur une technique de validation croisée. Cette technique
 consiste à utiliser deux ensembles indépendants de données. En pratique,
-il s&#39;agit de partitionner ${\cal E}_a$ pour entraîner le réseau en un
-ensemble d&#39;apprentissage (ajustement des poids) un ensemble de
-validation (calcul d&#39;un indice de performance). Le critère d&#39;arrêt
-consiste alors à stopper l&#39;apprentissage lorsque l&#39;indice de performance
-calculé sur les données de validation cesse de s&#39;améliorer pendant
-plusieurs périodes d&#39;entraînement. Lors de deux périodes successives
-d&#39;entraînement, des exemples peuvent être échangés entre ensembles
-d&#39;apprentissage et de validation.
-
-### Propriété fondamentale
-
-Terminons par une dernière remarque sur la puissance de représentation
+il s’agit de partitionner <span class="math notranslate nohighlight">\({\cal E}_a\)</span> pour entraîner le réseau en un
+ensemble d’apprentissage (ajustement des poids) un ensemble de
+validation (calcul d’un indice de performance). Le critère d’arrêt
+consiste alors à stopper l’apprentissage lorsque l’indice de performance
+calculé sur les données de validation cesse de s’améliorer pendant
+plusieurs périodes d’entraînement. Lors de deux périodes successives
+d’entraînement, des exemples peuvent être échangés entre ensembles
+d’apprentissage et de validation.</p>
+</div>
+<div class="section" id="propriete-fondamentale">
+<h3>Propriété fondamentale<a class="headerlink" href="#propriete-fondamentale" title="Lien permanent vers ce titre">#</a></h3>
+<p>Terminons par une dernière remarque sur la puissance de représentation
 des réseaux multicouches. La plupart des fonctions numériques peuvent
 être approximées avec une précision arbitraire par des réseaux à une
 seule couche cachée. Mais cette couche cachée peut être démesurément
 grande et le théorème de Hornik, qui affirme cette propriété
-d&#39;approximateurs universels des réseaux multicouches, est
-essentiellement un résultat théorique sur l&#39;expressivité des réseaux.
-
-Plus formellement, la propriété fondamentale des réseaux de neurones est
-l&#39;approximation parcimonieuse, qui traduit deux propriétés distinctes :
-d&#39;une part les réseaux de neurones sont des approximateurs universels,
-et d&#39;autre part, une approximation à l&#39;aide d&#39;un réseau de neurones
+d’approximateurs universels des réseaux multicouches, est
+essentiellement un résultat théorique sur l’expressivité des réseaux.</p>
+<p>Plus formellement, la propriété fondamentale des réseaux de neurones est
+l’approximation parcimonieuse, qui traduit deux propriétés distinctes :
+d’une part les réseaux de neurones sont des approximateurs universels,
+et d’autre part, une approximation à l’aide d’un réseau de neurones
 nécessite, en général, moins de paramètres ajustables que les
-approximateurs usuels.
-
--   Approximateurs universels : Cybenko a énoncé en 1989 la propriété
-    suivante : toute fonction bornée, suffisamment régulière, peut être
-    approchée uniformément, avec une précision arbitraire, dans un
-    domaine fini de l&#39;espace de ses variables, par un réseau de neurones
-    comportant une couche de neurones cachés en nombre fini, possédant
-    tous la même fonction d&#39;activation, et un neurone de sortie
-    linéaire.\
-
--   Parcimonie : Hornik a montré en 1994 que si la sortie d&#39;un réseau de
-    neurones est une fonction non linéaire des paramètres ajustables,
-    elle est plus parcimonieuse que si elle était une fonction linéaire
-    de ces paramètres. De plus, pour les réseaux dont la fonction
-    d&#39;activation des neurones est une sigmoïde, l&#39;erreur commise dans
-    l&#39;approximation varie comme l&#39;inverse du nombre de neurones cachés,
-    et elle est indépendante du nombre de variables de la fonction à
-    approcher. Ainsi, pour une précision donnée (*i.e.* étant donné un
-    nombre de neurones cachés) le nombre de paramètres du réseau est
-    proportionnel au nombre de variables de la fonction à approcher.\
-
-Dans la plupart des cas d&#39;utilisation des réseaux de neurones, il va
-s&#39;agir d&#39;établir un modèle d&#39;une fonction inconnue à partir de mesures
-bruitées de l&#39;ensemble d&#39;apprentissage, permettant de reproduire les
+approximateurs usuels.</p>
+<ul class="simple">
+<li><p>Approximateurs universels : Cybenko a énoncé en 1989 la propriété
+suivante : toute fonction bornée, suffisamment régulière, peut être
+approchée uniformément, avec une précision arbitraire, dans un
+domaine fini de l’espace de ses variables, par un réseau de neurones
+comportant une couche de neurones cachés en nombre fini, possédant
+tous la même fonction d’activation, et un neurone de sortie
+linéaire.\</p></li>
+<li><p>Parcimonie : Hornik a montré en 1994 que si la sortie d’un réseau de
+neurones est une fonction non linéaire des paramètres ajustables,
+elle est plus parcimonieuse que si elle était une fonction linéaire
+de ces paramètres. De plus, pour les réseaux dont la fonction
+d’activation des neurones est une sigmoïde, l’erreur commise dans
+l’approximation varie comme l’inverse du nombre de neurones cachés,
+et elle est indépendante du nombre de variables de la fonction à
+approcher. Ainsi, pour une précision donnée (<em>i.e.</em> étant donné un
+nombre de neurones cachés) le nombre de paramètres du réseau est
+proportionnel au nombre de variables de la fonction à approcher.\</p></li>
+</ul>
+<p>Dans la plupart des cas d’utilisation des réseaux de neurones, il va
+s’agir d’établir un modèle d’une fonction inconnue à partir de mesures
+bruitées de l’ensemble d’apprentissage, permettant de reproduire les
 sorties à partir des entrées, et de proposer une généralisation à des
-données test. On cherche alors la **fonction de régression** du
-processus considéré, *i.e.* la fonction obtenue en calculant la moyenne
-d&#39;une infinité de mesures effectuées en chaque point du domaine de
+données test. On cherche alors la <strong>fonction de régression</strong> du
+processus considéré, <em>i.e.</em> la fonction obtenue en calculant la moyenne
+d’une infinité de mesures effectuées en chaque point du domaine de
 validité du modèle. Le nombre de points de ce domaine étant lui-même
 infini, la connaissance de la fonction de régression nécessiterait donc
-une infinité de mesures en un nombre infini de points.\
+une infinité de mesures en un nombre infini de points.<br />
 Les réseaux de neurones, en raison de leur propriété fondamentale, sont
 de bons candidats pour réaliser une approximation de la fonction de
-régression à partir d&#39;un nombre fini de mesures. Ils entrent donc dans
-le cadre des méthodes statistiques d&#39;apprentissage, et élargissent ce
+régression à partir d’un nombre fini de mesures. Ils entrent donc dans
+le cadre des méthodes statistiques d’apprentissage, et élargissent ce
 domaine déjà bien exploré pour des fonctions de régression linéaire au
-cas non linéaire.\
-
-### Régularisation
-
-La notion d&#39;approximateur universel peut induire également un problème
-de surapprentissage (overfitting) de ${\cal E}_a$. Les techniques de
-régularisation permettent d&#39;éviter ce problème, et permettent aux
-réseaux de neurones (et à d&#39;autres algorithmes d&#39;ailleurs, comme les
-autoencodeurs ou les SVM par exemple) d&#39;avoir une bonne capacité de
-généralisation.\
-Il existe plusieurs techniques permettant d&#39;introduire de la
-régularisation dans les réseaux. Parmi elles, on note :
-
--   ${\cal E}_a$ est enrichi pour introduire certaines invariances que
-    le réseau est supposé apprendre.
-
--   à chaque exemple présenté, chaque neurone caché est supprimé du
-    calcul de la sortie avec probabilité $\frac{1}{2}$. Cette technique
-    peut être vue comme la construction d&#39;un modèle moyen
-    d&#39;apprentissage de plusieurs réseaux distincts.
-
--   lorsque ${\cal E}_a$ est séparé en un ensemble d&#39;apprentissage
-    ${\cal E}^1_a$ et un ensemble de validation ${\cal E}^2_a$, il est
-    courant de voir que l&#39;erreur baisse sur ${\cal E}^1_a$ au fil des
-    itérations, alors que l&#39;erreur sur ${\cal E}^2_a$ tend à augmenter
-    lorsque le réseau commence à sur-apprendre sur ${\cal E}^1_a$.
-    L&#39;entraînement est alors stoppé dès que l&#39;erreur sur ${\cal E}^2_a$
-    atteint un minimum. Cette technique est appelée early stopping
-    (arrêt précoce).
-
--   le partage de poids : plusieurs neurones d&#39;une même couche partagent
-    des mêmes valeurs de poids. La complexité du réseau est réduite et
-    des informations *a priori* peuvent être introduites par ce biais
-    dans l&#39;architecture du réseau. L&#39;algorithme de rétropropagation du
-    gradient s&#39;en trouve modifié et l&#39;équation
-    [\[eq:backprop-derivative\]](#eq:backprop-derivative){reference-type=&quot;eqref&quot;
-    reference=&quot;eq:backprop-derivative&quot;} devient $$\begin{aligned}
-        \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \sum _{k = 1} ^{m^{(l)}} \delta_k^{(l)} y_i^{(l-1)}
-    \end{aligned}$$ en supposant que tous les neurones de la couche $l$
-    sont tels que $w_{j,i}^{(l)} = w_{k,i}^{(l)}$ pour
-    $1 \leq j,k \leq m^{(l)}$
-
--   un terme de régularisation est ajouté à la fonctionnelle à minimiser
-    pour contrôler la complexité et le forme de la solution et, par
-    exemple $$\begin{aligned}
-        \hat{E}_n (w) = E_n (w) + \eta P(w)
-    \end{aligned}$$ où $P(w)$ influence la forme de la solution et
-    $\eta$ contrôle l&#39;influence du terme de régularisation. $P(w)$ peut
-    prendre la forme d&#39;une fonction de la norme $L_p$ de $w$. Deux
-    exemples classiques sont :
-
-    -   la régularisation $L_2$ : $$\begin{aligned}
-            P(w) = \|w\|_2^2 = w^Tw.
-        \end{aligned}$$ où le principe est de pénaliser les poids de
-        fortes valeurs, qui tendent à amplifier le problème de
-        surapprentissage.
-
-    -   la régularisation $L_1$ : $$\begin{aligned}
-            P(w) = \|w\|_1 = \dsum_{k = 1} ^W |w_k|.
-        \end{aligned}$$ où $W$ est la dimension de $w$, qui tend à
-        rendre épars le vecteur de poids (beaucoup de valeurs de poids
-        deviennent nulles).
-
-### Exemple
-
-On va considérer le réseau décrit sur la figure
-[1.5](#F:XOR_BackPropagation){reference-type=&quot;ref&quot;
-reference=&quot;F:XOR_BackPropagation&quot;} pour apprendre la fonction du OU
-exclusif (aussi appelé XOR). L&#39;opérateur XOR est défini par sa table de
-vérité donnée par le tableau [1.2](#T:XOR){reference-type=&quot;ref&quot;
-reference=&quot;T:XOR&quot;}.\
-
-::: {#T:XOR}
-   $x_1 \backslash x_2$   0   1
-  ---------------------- --- ---
-            0             0   1
-            1             1   0
-
-  : Table de vérité du XOR
-:::
-
-#### Réseau
-
-Sur le réseau de la figure
-[1.5](#F:XOR_BackPropagation){reference-type=&quot;ref&quot;
-reference=&quot;F:XOR_BackPropagation&quot;} les différentes relations sont
-données par l&#39;équation [\[E:XOR\]](#E:XOR){reference-type=&quot;ref&quot;
-reference=&quot;E:XOR&quot;} où les paramètres en rouge correspondent aux poids à
-calculer durant la phase d&#39;apprentissage.
-
-$$\left\{
+cas non linéaire.\</p>
+</div>
+<div class="section" id="regularisation">
+<h3>Régularisation<a class="headerlink" href="#regularisation" title="Lien permanent vers ce titre">#</a></h3>
+<p>La notion d’approximateur universel peut induire également un problème
+de surapprentissage (overfitting) de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Les techniques de
+régularisation permettent d’éviter ce problème, et permettent aux
+réseaux de neurones (et à d’autres algorithmes d’ailleurs, comme les
+autoencodeurs ou les SVM par exemple) d’avoir une bonne capacité de
+généralisation.<br />
+Il existe plusieurs techniques permettant d’introduire de la
+régularisation dans les réseaux. Parmi elles, on note :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({\cal E}_a\)</span> est enrichi pour introduire certaines invariances que
+le réseau est supposé apprendre.</p></li>
+<li><p>à chaque exemple présenté, chaque neurone caché est supprimé du
+calcul de la sortie avec probabilité <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>. Cette technique
+peut être vue comme la construction d’un modèle moyen
+d’apprentissage de plusieurs réseaux distincts.</p></li>
+<li><p>lorsque <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est séparé en un ensemble d’apprentissage
+<span class="math notranslate nohighlight">\({\cal E}^1_a\)</span> et un ensemble de validation <span class="math notranslate nohighlight">\({\cal E}^2_a\)</span>, il est
+courant de voir que l’erreur baisse sur <span class="math notranslate nohighlight">\({\cal E}^1_a\)</span> au fil des
+itérations, alors que l’erreur sur <span class="math notranslate nohighlight">\({\cal E}^2_a\)</span> tend à augmenter
+lorsque le réseau commence à sur-apprendre sur <span class="math notranslate nohighlight">\({\cal E}^1_a\)</span>.
+L’entraînement est alors stoppé dès que l’erreur sur <span class="math notranslate nohighlight">\({\cal E}^2_a\)</span>
+atteint un minimum. Cette technique est appelée early stopping
+(arrêt précoce).</p></li>
+<li><p>le partage de poids : plusieurs neurones d’une même couche partagent
+des mêmes valeurs de poids. La complexité du réseau est réduite et
+des informations <em>a priori</em> peuvent être introduites par ce biais
+dans l’architecture du réseau. L’algorithme de rétropropagation du
+gradient s’en trouve modifié et l’équation
+<a class="reference external" href="#eq:backprop-derivative">[eq:backprop-derivative]</a>{reference-type= »eqref »
+reference= »eq:backprop-derivative »} devient $<span class="math notranslate nohighlight">\(\begin{aligned}
+    \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \sum _{k = 1} ^{m^{(l)}} \delta_k^{(l)} y_i^{(l-1)}
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( en supposant que tous les neurones de la couche \)</span>l<span class="math notranslate nohighlight">\(
+sont tels que \)</span>w_{j,i}^{(l)} = w_{k,i}^{(l)}<span class="math notranslate nohighlight">\( pour
+\)</span>1 \leq j,k \leq m^{(l)}$</p></li>
+<li><p>un terme de régularisation est ajouté à la fonctionnelle à minimiser
+pour contrôler la complexité et le forme de la solution et, par
+exemple $<span class="math notranslate nohighlight">\(\begin{aligned}
+    \hat{E}_n (w) = E_n (w) + \eta P(w)
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>P(w)<span class="math notranslate nohighlight">\( influence la forme de la solution et
+\)</span>\eta<span class="math notranslate nohighlight">\( contrôle l'influence du terme de régularisation. \)</span>P(w)<span class="math notranslate nohighlight">\( peut
+prendre la forme d'une fonction de la norme \)</span>L_p<span class="math notranslate nohighlight">\( de \)</span>w$. Deux
+exemples classiques sont :</p>
+<ul>
+<li><p>la régularisation <span class="math notranslate nohighlight">\(L_2\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
+    P(w) = \|w\|_2^2 = w^Tw.
+\end{aligned}\)</span>$ où le principe est de pénaliser les poids de
+fortes valeurs, qui tendent à amplifier le problème de
+surapprentissage.</p></li>
+<li><p>la régularisation <span class="math notranslate nohighlight">\(L_1\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
+    P(w) = \|w\|_1 = \dsum_{k = 1} ^W |w_k|.
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>W<span class="math notranslate nohighlight">\( est la dimension de \)</span>w$, qui tend à
+rendre épars le vecteur de poids (beaucoup de valeurs de poids
+deviennent nulles).</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="exemple">
+<h3>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">#</a></h3>
+<p>On va considérer le réseau décrit sur la figure
+<a class="reference external" href="#F:XOR_BackPropagation">1.5</a>{reference-type= »ref »
+reference= »F:XOR_BackPropagation »} pour apprendre la fonction du OU
+exclusif (aussi appelé XOR). L’opérateur XOR est défini par sa table de
+vérité donnée par le tableau <a class="reference external" href="#T:XOR">1.2</a>{reference-type= »ref »
+reference= »T:XOR »}.\</p>
+<div class="section" id="reseau">
+<h4>Réseau<a class="headerlink" href="#reseau" title="Lien permanent vers ce titre">#</a></h4>
+<p>Sur le réseau de la figure
+<a class="reference external" href="#F:XOR_BackPropagation">1.5</a>{reference-type= »ref »
+reference= »F:XOR_BackPropagation »} les différentes relations sont
+données par l’équation <a class="reference external" href="#E:XOR">[E:XOR]</a>{reference-type= »ref »
+reference= »E:XOR »} où les paramètres en rouge correspondent aux poids à
+calculer durant la phase d’apprentissage.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{
         \begin{array}{r c l}
             z_1 &amp;=&amp; {\color{red}w_1}~x_1+{\color{red}w_2}~x_2+{\color{red}b_1}\\
             z_2 &amp;=&amp; {\color{red}w_3}~x_1+{\color{red}w_4}~x_2+{\color{red}b_2}\\
@@ -1384,100 +1585,91 @@ $$\left\{
             h_i\left(z_i\right) &amp;=&amp; \frac{1}{1+e^{-z_i}} \ \ \ \ (sigmoide)
         \end{array}
     \right.
-    \label{E:XOR}$$
-
-&lt;figure id=&quot;F:XOR_BackPropagation&quot;&gt;
-
-&lt;figcaption&gt;Exemple d’un réseau pour apprendre la relation
-XOR.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-#### Phase d&#39;apprentissage
-
-Durant la phase d&#39;apprentissage, on minimise un risque empirique par une
+    \label{E:XOR}\end{split}\]</div>
+<figure id="F:XOR_BackPropagation">
+<figcaption>Exemple d’un réseau pour apprendre la relation
+XOR.</figcaption>
+</figure>
+</div>
+<div class="section" id="phase-d-apprentissage">
+<h4>Phase d’apprentissage<a class="headerlink" href="#phase-d-apprentissage" title="Lien permanent vers ce titre">#</a></h4>
+<p>Durant la phase d’apprentissage, on minimise un risque empirique par une
 fonction de coût. Dans cet exemple, nous allons choisir la minimisation
-de l&#39;écart quadratique avec la base d&#39;apprentissage labelisée
-${\cal E}_a =\left( \textbf{x}, \textbf{y}_{lab} \right)$ ou une partie
-de cette base d&#39;apprentissage $\mathcal{E}_a^\prime$ :
-$$E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.$$
-On peut utiliser qu&#39;une partie de la base, voire que le $k^{ieme}$
+de l’écart quadratique avec la base d’apprentissage labelisée
+<span class="math notranslate nohighlight">\({\cal E}_a =\left( \textbf{x}, \textbf{y}_{lab} \right)\)</span> ou une partie
+de cette base d’apprentissage <span class="math notranslate nohighlight">\(\mathcal{E}_a^\prime\)</span> :
+$<span class="math notranslate nohighlight">\(E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.\)</span><span class="math notranslate nohighlight">\(
+On peut utiliser qu'une partie de la base, voire que le \)</span>k^{ieme}<span class="math notranslate nohighlight">\(
 échantillon de la base (cf. gradient stochastique) :
-$$E\left(x_k\right)=E_{k}=\displaystyle\frac{1}{2}\left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 .
-    \label{E:Ek}$$
-
-L&#39;objectif de la phase d&#39;apprentissage est de mettre à jour les poids du
-réseau par une approche de descente du gradient. Si l&#39;on considère un
-poids quelconque du réseau que l&#39;on note $\theta$, sa mise à jour durant
-l&#39;itération $n+1$ se fait pas l&#39;équation suivante:
-$$\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta$$
-où $$\Delta \theta = -\nabla_\theta E.$$ On peut choisir $E=E_{tot}$ ou
-$E=E_k$ et pour cet exemple nous choisirons le deuxième cas.
-
-##### Couche de sortie
-
-Pour la couche de sortie, prenons par exemple le paramètre $w_7$, sa
+\)</span><span class="math notranslate nohighlight">\(E\left(x_k\right)=E_{k}=\displaystyle\frac{1}{2}\left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 .
+    \label{E:Ek}\)</span>$</p>
+<p>L’objectif de la phase d’apprentissage est de mettre à jour les poids du
+réseau par une approche de descente du gradient. Si l’on considère un
+poids quelconque du réseau que l’on note <span class="math notranslate nohighlight">\(\theta\)</span>, sa mise à jour durant
+l’itération <span class="math notranslate nohighlight">\(n+1\)</span> se fait pas l’équation suivante:
+$<span class="math notranslate nohighlight">\(\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta\)</span><span class="math notranslate nohighlight">\(
+où \)</span><span class="math notranslate nohighlight">\(\Delta \theta = -\nabla_\theta E.\)</span><span class="math notranslate nohighlight">\( On peut choisir \)</span>E=E_{tot}<span class="math notranslate nohighlight">\( ou
+\)</span>E=E_k$ et pour cet exemple nous choisirons le deuxième cas.</p>
+<div class="section" id="couche-de-sortie">
+<h5>Couche de sortie<a class="headerlink" href="#couche-de-sortie" title="Lien permanent vers ce titre">#</a></h5>
+<p>Pour la couche de sortie, prenons par exemple le paramètre <span class="math notranslate nohighlight">\(w_7\)</span>, sa
 mise à jour est donnée par la relation suivante :
-$$w_7^{\left(n+1\right)} = w_7^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_7}.$$
-
-Le problème consiste à calculer $\frac{\partial E_k}{\partial w_7}$,
+$<span class="math notranslate nohighlight">\(w_7^{\left(n+1\right)} = w_7^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_7}.\)</span>$</p>
+<p>Le problème consiste à calculer <span class="math notranslate nohighlight">\(\frac{\partial E_k}{\partial w_7}\)</span>,
 pour cela nous allons utiliser le théorème de dérivation des fonctions
-composées, d&#39;où:
-$$\frac{\partial E_k}{\partial w_7} = \frac{\partial E_k}{\partial h_4} \times  \frac{\partial h_4}{\partial z_4} \times  \frac{\partial z_4}{\partial w_7}$$
+composées, d’où:
+$<span class="math notranslate nohighlight">\(\frac{\partial E_k}{\partial w_7} = \frac{\partial E_k}{\partial h_4} \times  \frac{\partial h_4}{\partial z_4} \times  \frac{\partial z_4}{\partial w_7}\)</span><span class="math notranslate nohighlight">\(
 Cette relation est représentée graphiquement sur la figure
 [1.6](#F:CoucheSortie){reference-type=&quot;ref&quot;
 reference=&quot;F:CoucheSortie&quot;}.\
-A l&#39;aide de l&#39;équation [\[E:XOR\]](#E:XOR){reference-type=&quot;ref&quot;
-reference=&quot;E:XOR&quot;} et de l&#39;équation
+A l'aide de l'équation [\[E:XOR\]](#E:XOR){reference-type=&quot;ref&quot;
+reference=&quot;E:XOR&quot;} et de l'équation
 [\[E:Ek\]](#E:Ek){reference-type=&quot;ref&quot; reference=&quot;E:Ek&quot;}, on obtient:
-$$\left\{
+\)</span><span class="math notranslate nohighlight">\(\left\{
         \begin{array}{r c l}
             \displaystyle\frac{\partial E_k}{\partial h_4} &amp;=&amp; \frac{\partial }{\partial h_4}\left( \frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 \right) = -\left(y[k]_{lab} - h_4\left(z_4\right)  \right)\\
             \displaystyle\frac{\partial h_4}{\partial z_4}  &amp;=&amp; \frac{\partial }{\partial z_4}\left( \frac{1}{1+e^{-z_4}}\right) = \frac{e^{-z_4}}{\left(1+e^{-z_4}\right)^2} = h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) \\
             \displaystyle\frac{\partial z_4}{\partial w_7} &amp;=&amp; h_1\left(z_1\right)
         \end{array}
     \right.
-    \label{E:CompOutLayer}$$ d&#39;où
-
-::: tcolorbox
-w_7\^(n+1) = w_7\^(n) + (y\[k\]\_lab - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
+    \label{E:CompOutLayer}\)</span>$ d’où</p>
+<div class="highlight-tcolorbox notranslate"><div class="highlight"><pre><span></span>w_7\^(n+1) = w_7\^(n) + (y\[k\]\_lab - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
 h_1(z_1).
-:::
-
-On peut réaliser la même démarche pour les poids $w_8$, $w_9$ et $b_4$,
-pour obtenir les relations suivantes :
-
-$$\left\{
+</pre></div>
+</div>
+<p>On peut réaliser la même démarche pour les poids <span class="math notranslate nohighlight">\(w_8\)</span>, <span class="math notranslate nohighlight">\(w_9\)</span> et <span class="math notranslate nohighlight">\(b_4\)</span>,
+pour obtenir les relations suivantes :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{
         \begin{array}{r c l}
             w_8^{\left(n+1\right)} &amp;=&amp; w_8^{\left(n\right)} + \eta \times \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right) \\
             w_9^{\left(n+1\right)} &amp;=&amp; w_9^{\left(n\right)} + \eta \times \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_3\left(z_3\right) \\
             b_4^{\left(n+1\right)} &amp;=&amp; b_4^{\left(n\right)} + \eta \times \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) 
         \end{array}
     \right.
-    \label{E:OutLayer}$$
-
-&lt;figure id=&quot;F:CoucheSortie&quot;&gt;
-
-&lt;figcaption&gt;Rétropropagation du gradient sur la couche de
-sortie.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-##### Couche cachée
-
-Pour la couche cachée du réseau, c&#39;est exactement le même raisonnement.
-Prenons par exemple, le paramètre $w_1$ pour le calcul :
-$$w_1^{\left(n+1\right)} = w_1^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_1}.$$
+    \label{E:OutLayer}\end{split}\]</div>
+<figure id="F:CoucheSortie">
+<figcaption>Rétropropagation du gradient sur la couche de
+sortie.</figcaption>
+</figure>
+</div>
+<div class="section" id="couche-cachee">
+<h5>Couche cachée<a class="headerlink" href="#couche-cachee" title="Lien permanent vers ce titre">#</a></h5>
+<p>Pour la couche cachée du réseau, c’est exactement le même raisonnement.
+Prenons par exemple, le paramètre <span class="math notranslate nohighlight">\(w_1\)</span> pour le calcul :
+$<span class="math notranslate nohighlight">\(w_1^{\left(n+1\right)} = w_1^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_1}.\)</span><span class="math notranslate nohighlight">\(
 Le problème maintenant consiste à calculer
-$\frac{\partial E_k}{\partial w_1}$, pour cela nous allons utiliser le
-théorème de dérivation des fonctions composées, d&#39;où:
-$$\frac{\partial E_k}{\partial w_1} = \frac{\partial E_k}{\partial z_4} \times  \frac{\partial z_4}{\partial h_1}  \times  \frac{\partial h_1}{\partial z_1} \times  \frac{\partial z_1}{\partial w_1}$$
+\)</span>\frac{\partial E_k}{\partial w_1}<span class="math notranslate nohighlight">\(, pour cela nous allons utiliser le
+théorème de dérivation des fonctions composées, d'où:
+\)</span><span class="math notranslate nohighlight">\(\frac{\partial E_k}{\partial w_1} = \frac{\partial E_k}{\partial z_4} \times  \frac{\partial z_4}{\partial h_1}  \times  \frac{\partial h_1}{\partial z_1} \times  \frac{\partial z_1}{\partial w_1}\)</span><span class="math notranslate nohighlight">\(
 Cette relation est représentée graphiquement sur la figure
 [1.7](#F:CoucheCachee){reference-type=&quot;ref&quot;
 reference=&quot;F:CoucheCachee&quot;}.\
-A l&#39;aide de l&#39;équation [\[E:XOR\]](#E:XOR){reference-type=&quot;ref&quot;
-reference=&quot;E:XOR&quot;}, de l&#39;équation [\[E:Ek\]](#E:Ek){reference-type=&quot;ref&quot;
-reference=&quot;E:Ek&quot;} et de l&#39;équation
+A l'aide de l'équation [\[E:XOR\]](#E:XOR){reference-type=&quot;ref&quot;
+reference=&quot;E:XOR&quot;}, de l'équation [\[E:Ek\]](#E:Ek){reference-type=&quot;ref&quot;
+reference=&quot;E:Ek&quot;} et de l'équation
 [\[E:CompOutLayer\]](#E:CompOutLayer){reference-type=&quot;ref&quot;
-reference=&quot;E:CompOutLayer&quot;} on obtient: $$\left\{
+reference=&quot;E:CompOutLayer&quot;} on obtient: \)</span><span class="math notranslate nohighlight">\(\left\{
         \begin{array}{r c l}
             \displaystyle\frac{\partial E_k}{\partial z_4} &amp;=&amp; -\left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right)\\
             \displaystyle\frac{\partial z_4}{\partial h_1}  &amp;=&amp; w_7 \\
@@ -1485,32 +1677,27 @@ reference=&quot;E:CompOutLayer&quot;} on obtient: $$\left\{
             \displaystyle\frac{\partial z_1}{\partial w_1} &amp;=&amp; x_1
         \end{array}
     \right.
-    \label{E:CompOut}$$ d&#39;où
-
-::: tcolorbox
-w_1\^(n+1) = w_1\^(n) + (y\[k\]\_lab - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
+    \label{E:CompOut}\)</span>$ d’où</p>
+<div class="highlight-tcolorbox notranslate"><div class="highlight"><pre><span></span>w_1\^(n+1) = w_1\^(n) + (y\[k\]\_lab - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
 h_1(z_1)( 1 - h_1(z_1)) w_7 x_1
-:::
-
-On peut réaliser la même démarche pour les poids $w_2$ et $b_1$, pour
-obtenir les relations suivantes :
-
-$$\left\{
+</pre></div>
+</div>
+<p>On peut réaliser la même démarche pour les poids <span class="math notranslate nohighlight">\(w_2\)</span> et <span class="math notranslate nohighlight">\(b_1\)</span>, pour
+obtenir les relations suivantes :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{
         \begin{array}{r c l}
             w_2^{\left(n+1\right)} &amp;=&amp; w_2^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_1\left(z_1\right)\left( 1 - h_1\left(z_1\right)\right) w_7 x_2\\
             b_1^{\left(n+1\right)} &amp;=&amp; b_1^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_1\left(z_1\right)\left( 1 - h_1\left(z_1\right)\right) w_7
         \end{array}
     \right.
-    \label{E:CompHiddenLayer}$$
-
-&lt;figure id=&quot;F:CoucheCachee&quot;&gt;
-
-&lt;figcaption&gt;Rétropropagation du gradient sur la couche
-cachée.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-Il suffit de réaliser des calculs identiques pour les autres neurones et
-on obtient les relations suivantes : $$\left\{
+    \label{E:CompHiddenLayer}\end{split}\]</div>
+<figure id="F:CoucheCachee">
+<figcaption>Rétropropagation du gradient sur la couche
+cachée.</figcaption>
+</figure>
+<p>Il suffit de réaliser des calculs identiques pour les autres neurones et
+on obtient les relations suivantes : $<span class="math notranslate nohighlight">\(\left\{
             \begin{array}{r c l}
                 w_3^{\left(n+1\right)} &amp;=&amp; w_3^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 x_1\\                
                 w_4^{\left(n+1\right)} &amp;=&amp; w_4^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 x_2\\
@@ -1519,122 +1706,109 @@ on obtient les relations suivantes : $$\left\{
                 b_2^{\left(n+1\right)} &amp;=&amp; b_2^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 \\
                 b_3^{\left(n+1\right)} &amp;=&amp; b_3^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_3\left(z_3\right)\left( 1 - h_3\left(z_3\right)\right) w_9               
             \end{array}
-        \right.$$
-
-##### Initialisation des poids {#initialisation-des-poids}
-
--   les biais sont initialisés à zéro
-    $( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4$ ;
-
--   pour les poids $w_i$, ils sont initialisées de façon aléatoire
-    dépendant de la taille de la couche d&#39;avant $m^{(l-1)}$ et d&#39;après
-    $m^{(l)}$.\
-    L&#39;initialisation de Xavier propose un tirage uniforme dans
-    $\left[-\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} ;\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} \right]$.
-
-Pour notre exemple, on obtient l&#39;initialisation suivante : $$\left\{
+        \right.\)</span>$</p>
+</div>
+<div class="section" id="initialisation-des-poids-initialisation-des-poids">
+<h5>Initialisation des poids {#initialisation-des-poids}<a class="headerlink" href="#initialisation-des-poids-initialisation-des-poids" title="Lien permanent vers ce titre">#</a></h5>
+<ul class="simple">
+<li><p>les biais sont initialisés à zéro
+<span class="math notranslate nohighlight">\(( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4\)</span> ;</p></li>
+<li><p>pour les poids <span class="math notranslate nohighlight">\(w_i\)</span>, ils sont initialisées de façon aléatoire
+dépendant de la taille de la couche d’avant <span class="math notranslate nohighlight">\(m^{(l-1)}\)</span> et d’après
+<span class="math notranslate nohighlight">\(m^{(l)}\)</span>.<br />
+L’initialisation de Xavier propose un tirage uniforme dans
+<span class="math notranslate nohighlight">\(\left[-\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} ;\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} \right]\)</span>.</p></li>
+</ul>
+<p>Pour notre exemple, on obtient l’initialisation suivante : $<span class="math notranslate nohighlight">\(\left\{
         \begin{array}{r c l}
             w_1 \ ...\ w_6 &amp;=&amp; UD \ dans \ \left[-\sqrt{\frac{6}{2+3}} ;\sqrt{\frac{6}{2+3}} \right] = \left[-1,09;1,09 \right]\\
             w_7 \ ... \ w_9 &amp;=&amp; UD \ dans \ \left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right] = \left[-1,23;1,23 \right]
         \end{array}
-    \right.$$
-
-## Partie pratique
-
-### Perceptron
-
-Le notebook perceptron fournit le squelette d&#39;un programme de calcul des
-résultats d&#39;un perceptron linéaire sur trois types de données (figure
-[1.8](#F:simdata){reference-type=&quot;ref&quot; reference=&quot;F:simdata&quot;}) :
-
-1.  un jeu de données linéairement séparable (figure
-    [\[F:ld\]](#F:ld){reference-type=&quot;ref&quot; reference=&quot;F:ld&quot;})
-
-2.  un jeu de données non linéairement séparable moon (figure
-    [\[F:md\]](#F:md){reference-type=&quot;ref&quot; reference=&quot;F:md&quot;})
-
-3.  un jeu de données non linéairement séparable composé de deux cercles
-    concentriques (figure [\[F:cd\]](#F:cd){reference-type=&quot;ref&quot;
-    reference=&quot;F:cd&quot;})
-
-&lt;figure id=&quot;F:simdata&quot;&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;figcaption&gt;Données d’entraînement du perceptron&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-Vous devez compléter ce notebook pour :
-
--   définir la structure du réseau : $y=softmax(w^Tx+b)$
-
--   spécifier la fonction de coût et l&#39;algorithme d&#39;optimisation à
-    utiliser.
-
-Le résultat sur les trois jeux de données sont présentés en figure
-[1.9](#F:resperceptron){reference-type=&quot;ref&quot;
-reference=&quot;F:resperceptron&quot;}.
-
-&lt;figure id=&quot;F:resperceptron&quot;&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;p&gt;.&lt;/p&gt;
-&lt;figcaption&gt;Frontières de décision du perceptron sur les trois jeux de
-données simulées&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-### Perceptron multicouches
-
-#### Une couche cachée
-
-A partir de ce code, il vous est demandé de réaliser un perceptron
+    \right.\)</span>$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="partie-pratique">
+<h2>Partie pratique<a class="headerlink" href="#partie-pratique" title="Lien permanent vers ce titre">#</a></h2>
+<div class="section" id="id1">
+<h3>Perceptron<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">#</a></h3>
+<p>Le notebook perceptron fournit le squelette d’un programme de calcul des
+résultats d’un perceptron linéaire sur trois types de données (figure
+<a class="reference external" href="#F:simdata">1.8</a>{reference-type= »ref » reference= »F:simdata »}) :</p>
+<ol class="simple">
+<li><p>un jeu de données linéairement séparable (figure
+<a class="reference external" href="#F:ld">[F:ld]</a>{reference-type= »ref » reference= »F:ld »})</p></li>
+<li><p>un jeu de données non linéairement séparable moon (figure
+<a class="reference external" href="#F:md">[F:md]</a>{reference-type= »ref » reference= »F:md »})</p></li>
+<li><p>un jeu de données non linéairement séparable composé de deux cercles
+concentriques (figure <a class="reference external" href="#F:cd">[F:cd]</a>{reference-type= »ref »
+reference= »F:cd »})</p></li>
+</ol>
+<figure id="F:simdata">
+<figure>
+</figure>
+<figure>
+</figure>
+<figure>
+</figure>
+<figcaption>Données d’entraînement du perceptron</figcaption>
+</figure>
+<p>Vous devez compléter ce notebook pour :</p>
+<ul class="simple">
+<li><p>définir la structure du réseau : <span class="math notranslate nohighlight">\(y=softmax(w^Tx+b)\)</span></p></li>
+<li><p>spécifier la fonction de coût et l’algorithme d’optimisation à
+utiliser.</p></li>
+</ul>
+<p>Le résultat sur les trois jeux de données sont présentés en figure
+<a class="reference external" href="#F:resperceptron">1.9</a>{reference-type= »ref »
+reference= »F:resperceptron »}.</p>
+<figure id="F:resperceptron">
+<figure>
+</figure>
+<figure>
+</figure>
+<figure>
+</figure>
+<p>.</p>
+<figcaption>Frontières de décision du perceptron sur les trois jeux de
+données simulées</figcaption>
+</figure>
+</div>
+<div class="section" id="perceptron-multicouches">
+<h3>Perceptron multicouches<a class="headerlink" href="#perceptron-multicouches" title="Lien permanent vers ce titre">#</a></h3>
+<div class="section" id="une-couche-cachee">
+<h4>Une couche cachée<a class="headerlink" href="#une-couche-cachee" title="Lien permanent vers ce titre">#</a></h4>
+<p>A partir de ce code, il vous est demandé de réaliser un perceptron
 multicouches, à une couche cachée, permettant de séparer avec une
-précision de presque 100% les données des jeux `moon` et `twocircles`
-(figure [1.10](#F:resPMC){reference-type=&quot;ref&quot; reference=&quot;F:resPMC&quot;}).
-Un notebook vous est proposé, à compléter. Vous devez implémenter :
-
--   le réseau à une couche cachée. Le calcul des activations de la
-    couche cachée, à `num_hidden` neurones se fait à l&#39;aide de la
-    fonction tangente hyperbolique. Le calcul de la sortie du réseau
-    sera effectué à l&#39;aide de la fonction softmax
-
--   la compilation de ce réseau, en spécifiant une fonction de perte
-    idoine et un optimiseur adapté
-
-&lt;figure id=&quot;F:resPMC&quot;&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;figure&gt;
-
-&lt;/figure&gt;
-&lt;p&gt;.&lt;/p&gt;
-&lt;figcaption&gt;Frontières de décision du PMC sur les trois jeux de données
-simulées&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-#### Deux couches cachées
-
-Il vous est enfin demandé de compléter le notebook qui vous est fourni,
-et dont l&#39;objectif est de construire un perceptron multicouches à deux
-couches cachées pour la classification des images MNIST.
-</pre></div>
+précision de presque 100% les données des jeux <code class="docutils literal notranslate"><span class="pre">moon</span></code> et <code class="docutils literal notranslate"><span class="pre">twocircles</span></code>
+(figure <a class="reference external" href="#F:resPMC">1.10</a>{reference-type= »ref » reference= »F:resPMC »}).
+Un notebook vous est proposé, à compléter. Vous devez implémenter :</p>
+<ul class="simple">
+<li><p>le réseau à une couche cachée. Le calcul des activations de la
+couche cachée, à <code class="docutils literal notranslate"><span class="pre">num_hidden</span></code> neurones se fait à l’aide de la
+fonction tangente hyperbolique. Le calcul de la sortie du réseau
+sera effectué à l’aide de la fonction softmax</p></li>
+<li><p>la compilation de ce réseau, en spécifiant une fonction de perte
+idoine et un optimiseur adapté</p></li>
+</ul>
+<figure id="F:resPMC">
+<figure>
+</figure>
+<figure>
+</figure>
+<figure>
+</figure>
+<p>.</p>
+<figcaption>Frontières de décision du PMC sur les trois jeux de données
+simulées</figcaption>
+</figure>
+</div>
+<div class="section" id="deux-couches-cachees">
+<h4>Deux couches cachées<a class="headerlink" href="#deux-couches-cachees" title="Lien permanent vers ce titre">#</a></h4>
+<p>Il vous est enfin demandé de compléter le notebook qui vous est fourni,
+et dont l’objectif est de construire un perceptron multicouches à deux
+couches cachées pour la classification des images MNIST.</p>
 </div>
 </div>
 </div>
