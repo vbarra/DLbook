@@ -435,7 +435,7 @@ idée n'est pas applicable en pratique.
     variables qui requièrent des poids entiers supérieurs à
     $2^{\frac{D+1}{2}}$
 
-Ces résultats sont assez décevants. Le premier montre que l'on peut
+Le premier résultat montre que l'on peut
 borner les poids synaptiques en fonction de la taille de la rétine, mais
 par un nombre tellement grand que toute application pratique de ce
 résultat semble exclue. Le second résultat montre en particulier que
@@ -453,46 +453,53 @@ particulier, les problèmes non-déterministes, c'est-à-dire pour lesquels
 une même description peut représenter des éléments de classes
 différentes, ne peuvent pas être traités à l'aide d'un perceptron.
 
-### Algorithme d'apprentissage par descente de gradient {#subsec:descentegradient}
+### Algorithme d'apprentissage par descente de gradient
 
 Plutôt que d'obtenir un perceptron qui classifie correctement tous les
 exemples, il s'agit maintenant de calculer une erreur et d'essayer de
 minimiser cette erreur. Pour introduire cette notion d'erreur, on
-utilise des poids réels.\
-Un perceptron linéaire prend en entrée un vecteur $x_n$ et calcule une
-sortie $y_n$. Un perceptron est défini par la donnée d'un vecteur $w$ de
-coefficients synaptiques. La sortie $y_n$ est définie par $y_n=w^Tx_n$\
+utilise des poids réels et donc des sorties réelles.
+
+Un perceptron linéaire prend en entrée un vecteur $\mathbf x_n$ et calcule une
+sortie $y_n$. Un perceptron est défini par la donnée d'un vecteur $\mathbf w$ de
+coefficients synaptiques. La sortie $y_n$ est définie par $y_n=\mathbf w^\top\mathbf x_n$. 
 L'erreur du perceptron sur un échantillon d'apprentissage ${\cal E}_a$
-d'exemples $(x_n,t_n)$ est définie en utilisant par l'erreur quadratique
+d'exemples $(\mathbf x_n,t_n)$ est définie en utilisant par l'erreur quadratique
 :
-$$E(w)=\frac{1}{2}\displaystyle\sum_{(x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2$$
+$$E(\mathbf w)=\frac{1}{2}\displaystyle\sum_{(\mathbf x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2$$
+
 L'erreur mesure donc l'écart entre les sorties attendue et calculée sur
-l'échantillon complet. On remarque que $E(w) = 0$ si et seulement si le
+l'échantillon complet. On remarque que $E(\mathbf w) = 0$ si et seulement si le
 perceptron classifie correctement l'échantillon complet. On suppose
 ${\cal E}_a$ fixé, le problème est donc de déterminer, par descente de
-gradient, un vecteur $\tilde{w}$ qui minimise $E(w)$. On a alors :
+gradient, un vecteur $\tilde{\mathbf w}$ qui minimise $E(\mathbf w)$. On a alors :
+
 $$\begin{aligned}
-\frac{\partial E(w)}{\partial w_i}&=\frac{\partial}{\partial w_i}\left (\frac{1}{2}\displaystyle\sum_{(x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2 \right )\\
+\frac{\partial E(\mathbf w)}{\partial w_i}&=\frac{\partial}{\partial w_i}\left (\frac{1}{2}\displaystyle\sum_{(\mathbf x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2 \right )\\
                                                                                 &=\frac{1}{2}\displaystyle\sum_{{\cal E}_a}\frac{\partial}{\partial w_i}(t_n-y_n)^2\\
-                                                                                &=\displaystyle\sum_{{\cal E}_a}(t_n-y_n)\frac{\partial}{\partial w_i}(t_n-w^Tx_n)\\
+                                                                                &=\displaystyle\sum_{{\cal E}_a}(t_n-y_n)\frac{\partial}{\partial w_i}(t_n-\mathbf w^\top \mathbf x_n)\\
                                                                                 &=\displaystyle\sum_{{\cal E}_a}(t_n-y_n)(-x_n^i)\\
-\end{aligned}$$ L'application de la méthode du gradient invite donc à
+\end{aligned}$$
+
+L'application de la méthode du gradient invite donc à
 modifier le poids $w_i$ après une présentation complète de ${\cal E}_a$
 d'une quantité $\Delta w_i$ définie par :
-$$\Delta w_i=-\epsilon \frac{\partial E(w)}{\partial w_i}$$
+$$\Delta w_i=-\epsilon \frac{\partial E(\mathbf w)}{\partial w_i}$$
 
 L'algorithme d'apprentissage par descente de gradient du perceptron
-linéaire peut maintenant être défini (algorithme
-[\[A:descGrad\]](#A:descGrad){reference-type="ref"
-reference="A:descGrad"}).
+linéaire peut maintenant être défini l'{prf:ref}`descente`.
 
-::: algorithm
-Initialisation aléatoire des $w_i$\
-$\Delta w_i \leftarrow 0$\
-Calculer $y_n$\
-$\Delta w_i \leftarrow \Delta w_i +\epsilon(t_n-y_n)x_n^i$
-$w_i \leftarrow w_i+ \Delta w_i$\
-:::
+
+```{prf:algorithm} Algorithme d'apprentissage du perceptron par descente de gradient
+:label: descente
+1. Initialisation aléatoire des $w_i$
+2. Tant que (test)
+    1. Pour tout $i$ $\Delta w_i \leftarrow 0$
+    2. Pour tout $(\mathbf x_n,t_n)\in {\cal E}_a$
+        1. Calculer $y_n$
+        2. Pour tout $i$ $\Delta w_i \leftarrow \Delta w_i+\varepsilon (t_y-y_n)x_n^i$
+    3. Pour tout $i$ $w_i \leftarrow w_i + \Delta w_i$$
+```
 
 La fonction erreur quadratique ne possède qu'un minimum (la surface est
 une paraboloïde). La convergence est assurée, même si l'échantillon
@@ -774,9 +781,7 @@ du perceptron, on peut utiliser une méthode de type descente de gradient
 (ordre 1), ou une méthode type Newton (ordre 2, qui nécessite alors le
 calcul ou l'estimation du Hessien $H_n$ de $E_n$ à chaque itération).
 
--   pour la méthode de descente du gradient, comme dans, la section
-    [1.2.4](#subsec:descentegradient){reference-type="ref"
-    reference="subsec:descentegradient"}, la mise à jour est effectuée
+-   pour la méthode de descente du gradient, la mise à jour est effectuée
     par $$\begin{aligned}
                 \Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])
             
