@@ -826,13 +826,12 @@ désignées sous le terme d’entrées du neurone (notées
 <span class="math notranslate nohighlight">\(y\)</span>.<br />
 Le neurone formel calcule la sortie selon la formule :</p>
 <div class="math notranslate nohighlight">
-\[y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)\]</div>
+\[y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i) = f(w_0+\mathbf w^\top \mathbf x)\]</div>
 <p>où :</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(w_1\cdots w_D\)</span> sont les poids synaptiques qui pondèrent les entrées
-du neurone</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf w = (w_1\cdots w_D)^\top\)</span> est le vecteur des poids synaptiques qui pondèrent les entrées du neurone,</p></li>
 <li><p><span class="math notranslate nohighlight">\(w_0\)</span> est un biais</p></li>
-<li><p><span class="math notranslate nohighlight">\(\displaystyle\sum_{i=1}^Dw_ix_i\)</span> est le potentiel du neurone</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf w^\top \mathbf x\)</span> est le potentiel du neurone</p></li>
 <li><p><span class="math notranslate nohighlight">\(f\)</span> est la fonction d’activation associée au neurone.</p></li>
 </ul>
 </div>

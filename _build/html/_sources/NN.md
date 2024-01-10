@@ -169,17 +169,13 @@ $x_i,i\in[\![1,D]\!])$, et la valeur de la fonction sous celui de sortie
 $y$.\
 Le neurone formel calcule la sortie selon la formule :
 
-$$y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)$$
+$$y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i) = f(w_0+\mathbf w^\top \mathbf x)$$
 
 où :
 
--   $w_1\cdots w_D$ sont les poids synaptiques qui pondèrent les entrées
-    du neurone
-
+-   $\mathbf w = (w_1\cdots w_D)^\top$ est le vecteur des poids synaptiques qui pondèrent les entrées du neurone, 
 -   $w_0$ est un biais
-
--   $\displaystyle\sum_{i=1}^Dw_ix_i$ est le potentiel du neurone
-
+-   $\mathbf w^\top \mathbf x$ est le potentiel du neurone
 -   $f$ est la fonction d'activation associée au neurone.
 ```````
 
