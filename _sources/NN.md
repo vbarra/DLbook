@@ -186,17 +186,17 @@ graphe orienté. Chaque neurone est un noeud, les neurones étant
 connectés par des arêtes.
 ````
 
-Par simplicité, nous distinguerons neurone d'entrée et neurone de
+On distingue habituellement neurone d'entrée et neurone de
 sortie. Un neurone d'entrée calcule $y = x$ où $x$ est une entrée unique
 du neurone. Les neurones de sortie prennent un nombre quelconque
-d'entrées. Interconnectés, l'ensemble de ces neurones calcule $y(x)$
+d'entrées. Interconnectés, l'ensemble de ces neurones calcule $\mathbf y(x)$
 dont la dimension est donnée par le nombre de neurones d'entrée et de
 sortie (l'entrée du réseau est acceptée par les neurones d'entrée, qui
 forment la rétine), et la sortie du réseau est formée par les neurones
 de sortie.
 
-Le cas le plus simple est celui d'un réseau comportant un seul neurone.
-C'est le perceptron. Le perceptron est un modèle de réseau de neurones
+Le cas le plus simple est celui d'un réseau comportant un seul neurone de sortie.
+C'est le *perceptron*. Le perceptron est un modèle de réseau de neurones
 avec algorithme d'apprentissage (Rosenblatt en 1958). L'idée
 sous-jacente de ce modèle est le fonctionnement de la rétine, l'étude de
 la perception visuelle. Nous commençons par aborder le cas du perceptron
@@ -219,9 +219,8 @@ $$y=
 ````
 
 Les entrées $x_1,\cdots x_D$ peuvent être à valeurs dans {0,1} (ou
-{-1,1}) ou réelles, les poids peuvent être entiers ou réels. Il existe
-également des modèles pour lesquels le calcul de la sortie est
-probabiliste.\
+{-1,1}) ou réelles, les poids peuvent être entiers ou réels. 
+
 Pour simplifier les notations et certaines preuves, on remplace souvent
 le seuil par une entrée supplémentaire $x_0=1$. À cette entrée est
 associée un coefficient synaptique $w_0$ (figure

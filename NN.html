@@ -843,16 +843,16 @@ réseaux de neurones peuvent être visualisés par l’intermédiaire d’un
 graphe orienté. Chaque neurone est un noeud, les neurones étant
 connectés par des arêtes.</p>
 </div>
-</div><p>Par simplicité, nous distinguerons neurone d’entrée et neurone de
+</div><p>On distingue habituellement neurone d’entrée et neurone de
 sortie. Un neurone d’entrée calcule <span class="math notranslate nohighlight">\(y = x\)</span> où <span class="math notranslate nohighlight">\(x\)</span> est une entrée unique
 du neurone. Les neurones de sortie prennent un nombre quelconque
-d’entrées. Interconnectés, l’ensemble de ces neurones calcule <span class="math notranslate nohighlight">\(y(x)\)</span>
+d’entrées. Interconnectés, l’ensemble de ces neurones calcule <span class="math notranslate nohighlight">\(\mathbf y(x)\)</span>
 dont la dimension est donnée par le nombre de neurones d’entrée et de
 sortie (l’entrée du réseau est acceptée par les neurones d’entrée, qui
 forment la rétine), et la sortie du réseau est formée par les neurones
 de sortie.</p>
-<p>Le cas le plus simple est celui d’un réseau comportant un seul neurone.
-C’est le perceptron. Le perceptron est un modèle de réseau de neurones
+<p>Le cas le plus simple est celui d’un réseau comportant un seul neurone de sortie.
+C’est le <em>perceptron</em>. Le perceptron est un modèle de réseau de neurones
 avec algorithme d’apprentissage (Rosenblatt en 1958). L’idée
 sous-jacente de ce modèle est le fonctionnement de la rétine, l’étude de
 la perception visuelle. Nous commençons par aborder le cas du perceptron
@@ -875,10 +875,8 @@ le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sorti
 \right.\end{split}\]</div>
 </div>
 </div><p>Les entrées <span class="math notranslate nohighlight">\(x_1,\cdots x_D\)</span> peuvent être à valeurs dans {0,1} (ou
-{-1,1}) ou réelles, les poids peuvent être entiers ou réels. Il existe
-également des modèles pour lesquels le calcul de la sortie est
-probabiliste.<br />
-Pour simplifier les notations et certaines preuves, on remplace souvent
+{-1,1}) ou réelles, les poids peuvent être entiers ou réels.</p>
+<p>Pour simplifier les notations et certaines preuves, on remplace souvent
 le seuil par une entrée supplémentaire <span class="math notranslate nohighlight">\(x_0=1\)</span>. À cette entrée est
 associée un coefficient synaptique <span class="math notranslate nohighlight">\(w_0\)</span> (figure
 <a class="reference external" href="#fig:processing-unit">1.2</a>{reference-type= »ref »
