@@ -40,20 +40,20 @@ interconnectés entre eux. Le cerveau humain en contient en moyenne une dizaine 
 connecté à dix mille autres.\
 Le neurone biologique est composé de quatre parties distinctes ({numref}`neurone`) :
 
--   le corps cellulaire, qui contient le noyau de la cellule nerveuse;
+-   le *corps cellulaire*, qui contient le noyau de la cellule nerveuse;
     c'est en cet endroit que prend naissance l'influx nerveux, qui
     représente l'état d'activité du neurone;
 
--   les dendrites, ramifications tubulaires courtes formant une espèce
+-   les *dendrites*, ramifications tubulaires courtes formant une espèce
     d'arborescence autour du corps cellulaire; ce sont les entrées
     principales du neurone, qui captent l'information venant d'autres
     neurones;
 
--   l'axone, longue fibre nerveuse qui se ramifie à son extrémité; c'est
+-   l'*axone*, longue fibre nerveuse qui se ramifie à son extrémité; c'est
     la sortie du neurone et le support de l'information vers les autres
     neurones;
 
--   la synapse, qui communique l'information, en la pondérant par un
+-   la *synapse*, qui communique l'information, en la pondérant par un
     poids synaptique, à un autre neurone; elle est essentielle dans le
     fonctionnement du système nerveux.
 
@@ -86,10 +86,8 @@ extrêmement parallèle, de manière à pouvoir accomplir des tâches très
 interconnexions, ce système possède une propriété de tolérance aux
 fautes. Ainsi, la défectuosité d'un neurone n'entraînera aucune perte
 réelle d'information, mais seulement une faible dégradation en qualité
-de toute l'information contenue dans le système. C'est pourquoi, nous
-pouvons reconnaître le visage d'une personne même si celle-ci a vieilli,
-par exemple, alors que c'est là une tâche beaucoup plus complexe à faire
-réaliser à un ordinateur classique.\
+de toute l'information contenue dans le système. 
+
 C'est la tentative de donner à l'ordinateur les qualités de perception
 du cerveau humain qui a conduit à une modélisation électrique de
 celui-ci. C'est cette modélisation que tentent de réaliser les réseaux
@@ -113,14 +111,14 @@ leurs travaux sur les neurones biologiques.
 
 ### Classification des réseaux de neurones
 
-Un réseau de neurones formels est constitué d'un grand nombre de
+Un réseau de neurones est constitué d'un grand nombre de
 cellules de base interconnectées. De nombreuses variantes sont définies
 selon le choix de la cellule élémentaire, de l'architecture et de la
 dynamique du réseau.
 
 Une cellule élémentaire peut manipuler des valeurs binaires ou réelles.
 Les valeurs binaires sont représentées par 0 et 1 ou -1 et 1.
-Différentes fonctions peuvent être utilisées pour le calcul de la
+Différentes fonctions d'ctivation peuvent être utilisées pour le calcul de la
 sortie. Le calcul de la sortie peut être déterministe ou probabiliste.
 
 L'architecture du réseau peut être sans rétroaction, c'est à dire que la
@@ -142,14 +140,11 @@ Si on considère des neurones déterministes à sortie réelle calculée à
 l'aide de la fonction sigmoïde, une architecture sans rétroaction en
 couches successives avec une couche d'entrée et une couche de sortie,
 une dynamique asynchrone séquentielle, on obtient le modèle du
-Perceptron multi-couches (PMC) qui sera étudié dans les paragraphes
-suivants.
+Perceptron multi-couches (PMC).
 
 ### Applications
 
-Les principales applications des réseaux de neurones sont l'optimisation
-et l'apprentissage. En apprentissage, les réseaux de neurones sont
-essentiellement utilisés pour :
+En apprentissage, les réseaux de neurones sont essentiellement utilisés pour :
 
 -   l'apprentissage supervisé ;
 
@@ -157,7 +152,7 @@ essentiellement utilisés pour :
 
 -   l'apprentissage par renforcement.
 
-Dans la suite, nous nous intéressons au cas de l'apprentissage
+Dans la suite, nous nous intéressons essentiellement au cas de l'apprentissage
 supervisé. Le cas des réseaux de neurones en apprentissage non supervisé
 concerne principalement les cartes de Kohonen, les machines de Boltzmann
 restreintes (RBM) et les autoencodeurs.
@@ -166,7 +161,7 @@ restreintes (RBM) et les autoencodeurs.
 
 ### Définitions
 
-::: definition
+````{prf:definition} Neurone
 Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
 Les $D$ variables sur lesquelles opère le neurone sont habituellement
 désignées sous le terme d'entrées du neurone (notées
@@ -183,14 +178,14 @@ $$y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i)$$ où :
 -   $\displaystyle\sum_{i=1}^Dw_ix_i$ est le potentiel du neurone
 
 -   $f$ est la fonction d'activation associée au neurone.
-:::
+```
 
-::: definition
+````{prf:definition} Réseau de neurones
 Un réseau de neurones est un ensemble de neurones interconnectés. Les
 réseaux de neurones peuvent être visualisés par l'intermédiaire d'un
 graphe orienté. Chaque neurone est un noeud, les neurones étant
 connectés par des arêtes.
-:::
+``````
 
 Par simplicité, nous distinguerons neurone d'entrée et neurone de
 sortie. Un neurone d'entrée calcule $y = x$ où $x$ est une entrée unique
