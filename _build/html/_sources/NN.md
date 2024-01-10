@@ -226,7 +226,7 @@ le seuil par un poids supplémentaire $w_0$ associé à une entrée $x_0=1$.  ({
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient $w_0$ est l'opposé du seuil $\theta$.
 
-```{figure} ./images/perceptron.png
+```{figure}
 ```{tikz} 
 	\begin{tikzpicture}[shorten >=1pt,->]
 		\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
