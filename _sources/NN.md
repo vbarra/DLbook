@@ -615,7 +615,7 @@ de la couche $l$, et $w_{i,0}^{(l)}$ est le biais. De plus, $m^{(l)}$
 est le nombre de neurones de la couche $l$, de sorte que $D = m^{(0)}$
 et $C = m^{(L+1)}$. Enfin, $f$ est la fonction d'activation du neurone
 (supposée identique pour tous les neurones).
-```
+```````
 
 En introduisant dans chaque couche un neurone supplémentaire
 $y_0^{(l)} = 1$ pour gérer le biais, on a : $$\begin{aligned}
