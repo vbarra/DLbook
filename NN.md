@@ -227,6 +227,7 @@ le seuil par un poids supplémentaire $w_0$ associé à une entrée $x_0=1$.  (f
 reference="fig:processing-unit"}). L'équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient $w_0$ est l'opposé du seuil $\theta$.
+
 ```{tikz} 
 	\begin{tikzpicture}[shorten >=1pt,->]
 		\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
@@ -238,10 +239,10 @@ coefficient $w_0$ est l'opposé du seuil $\theta$.
 		\node[unit](x1) at (9,1.75){$x_1$};
 		\node[unit](xD) at (9,0) {$x_D$};
 		
-		\draw[-latex new,arrow head=0.15cm] (x0) -- (p);
-		\draw[-latex new,arrow head=0.15cm] (xD) -- (p);
-		\draw[-latex new,arrow head=0.15cm] (x1) -- (p);
-		\draw[-latex new,arrow head=0.15cm] (p) -- (13.5,1);
+		\draw[-latex ,arrow head=0.15cm] (x0) -- (p);
+		\draw[-latex ,arrow head=0.15cm] (xD) -- (p);
+		\draw[-latex ,arrow head=0.15cm] (x1) -- (p);
+		\draw[-latex ,arrow head=0.15cm] (p) -- (13.5,1);
 		
 		\node at (10.5,2.25){$w_0$};
 	\end{tikzpicture}
