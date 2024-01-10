@@ -239,10 +239,10 @@ coefficient $w_0$ est l'opposé du seuil $\theta$.
 		\node[unit](x1) at (9,1.75){$x_1$};
 		\node[unit](xD) at (9,0) {$x_D$};
 		
-		\draw[-latex ,arrow head=0.15cm] (x0) -- (p);
-		\draw[-latex ,arrow head=0.15cm] (xD) -- (p);
-		\draw[-latex ,arrow head=0.15cm] (x1) -- (p);
-		\draw[-latex ,arrow head=0.15cm] (p) -- (13.5,1);
+		\draw[->] (x0) -- (p);
+		\draw[->] (xD) -- (p);
+		\draw[->] (x1) -- (p);
+		\draw[->] (p) -- (13.5,1);
 		
 		\node at (10.5,2.25){$w_0$};
 	\end{tikzpicture}
