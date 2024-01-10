@@ -622,94 +622,20 @@ et $C = m^{(L+1)}$. Enfin, $f$ est la fonction d'activation du neurone
 ````
 
 En introduisant dans chaque couche un neurone supplémentaire
-$y_0^{(l)} = 1$ pour gérer le biais, on a : $$\begin{aligned}
-    \label{eq:multilayer-perceptron}
+$y_0^{(l)} = 1$ pour gérer le biais, on a : 
+
+$$\begin{aligned}
     z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad z^{(l)} = w^{(l)} y^{(l-1)}
-\end{aligned}$$ avec $z^{(l)}$, $w^{(l)}$ et $y^{(l-1)}$ les
+\end{aligned}$$ 
+
+avec $z^{(l)}$, $w^{(l)}$ et $y^{(l-1)}$ les
 représentations vectorielle et matricielle des entrées $z_i^{(l)}$, des
 poids $w_{i,k}^{(l)}$ et des sorties $y_k^{(l-1)}$.
 
 
-```{tikz}
-	\begin{tikzpicture}[shorten >=1pt]
-		\tikzstyle{unit}=[draw,shape=circle,minimum size=1.15cm]
-		\tikzstyle{hidden}=[draw,shape=circle,minimum size=1.15cm]
-
-		\node[unit](x0) at (0,3.5){$x_0$};
-		\node[unit](x1) at (0,2){$x_1$};
-		\node at (0,1){\vdots};
-		\node[unit](xd) at (0,0){$x_D$};
-
-		\node[hidden](h10) at (3,4){$y_0^{(1)}$};
-		\node[hidden](h11) at (3,2.5){$y_1^{(1)}$};
-		\node at (3,1.5){\vdots};
-		\node[hidden](h1m) at (3,-0.5){$y_{m^{(1)}}^{(1)}$};
-
-		\node(h22) at (5,0){};
-		\node(h21) at (5,2){};
-		\node(h20) at (5,4){};
-		
-		\node(d3) at (6,0){$\ldots$};
-		\node(d2) at (6,2){$\ldots$};
-		\node(d1) at (6,4){$\ldots$};
-
-		\node(hL12) at (7,0){};
-		\node(hL11) at (7,2){};
-		\node(hL10) at (7,4){};
-		
-		\node[hidden](hL0) at (9,4){$y_0^{(L)}$};
-		\node[hidden](hL1) at (9,2.5){$y_1^{(L)}$};
-		\node at (9,1.5){\vdots};
-		\node[hidden](hLm) at (9,-0.5){$y_{m^{(L)}}^{(L)}$};
-
-		\node[unit](y1) at (12,3.5){$y_1^{(L+1)}$};
-		\node[unit](y2) at (12,2){$y_2^{(L+1)}$};
-		\node at (12,1){\vdots};	
-		\node[unit](yc) at (12,0){$y_C^{(L+1)}$};
-
-		\draw[->] (x0) -- (h11);
-		\draw[->] (x0) -- (h1m);
-
-		\draw[->] (x1) -- (h11);
-		\draw[->] (x1) -- (h1m);
-
-		\draw[->] (xd) -- (h11);
-		\draw[->] (xd) -- (h1m);
-
-		\draw[->] (hL0) -- (y1);
-		\draw[->] (hL0) -- (yc);
-		\draw[->] (hL0) -- (y2);
-
-		\draw[->] (hL1) -- (y1);
-		\draw[->] (hL1) -- (yc);
-		\draw[->] (hL1) -- (y2);
-
-		\draw[->] (hLm) -- (y1);
-		\draw[->] (hLm) -- (y2);
-		\draw[->] (hLm) -- (yc);
-
-		\draw[->,path fading=east] (h10) -- (h21);
-		\draw[->,path fading=east] (h10) -- (h22);
-		
-		\draw[->,path fading=east] (h11) -- (h21);
-		\draw[->,path fading=east] (h11) -- (h22);
-		
-		\draw[->,path fading=east] (h1m) -- (h21);
-		\draw[->,path fading=east] (h1m) -- (h22);
-		
-		\draw[->,path fading=west] (hL10) -- (hL1);
-		\draw[->,path fading=west] (hL11) -- (hL1);
-		\draw[->,path fading=west] (hL12) -- (hL1);
-		
-		\draw[->,path fading=west] (hL10) -- (hLm);
-		\draw[->,path fading=west] (hL11) -- (hLm);
-		\draw[->,path fading=west] (hL12) -- (hLm);
-		
-		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (-0.5,4) -- (0.75,4) node [black,midway,yshift=+0.6cm]{Rétine};
-		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (2.5,4.5) -- (3.75,4.5) node [black,midway,yshift=+0.6cm]{$1^{\text{e}}$ couche cachée};
-		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (8.5,4.5) -- (9.75,4.5) node [black,midway,yshift=+0.6cm]{$L^{\text{e}}$ couche cachée};
-		\draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (11.5,4) -- (12.75,4) node [black,midway,yshift=+0.6cm]{couche de sortie};
-	\end{tikzpicture}
+```{figure} ./images/mlp.png
+:name: mlp
+Perceptron multicouches à $(L + 1)$ couches, $D$ entrées et $C$ sorties.
 ```
 
 
