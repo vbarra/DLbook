@@ -939,7 +939,21 @@ d’un perceptron, on note <span class="math notranslate nohighlight">\(y_n\)</s
 perceptron. Rappelons qu’il existe une <span class="math notranslate nohighlight">\((D+1)^\textrm{ème}\)</span> entrée <span class="math notranslate nohighlight">\(x_0\)</span>
 de valeur 1 pour le perceptron.
 L’apprentissage par correction d’erreur du perceptron est donné dans l”(<code class="xref std std-numref docutils literal notranslate"><span class="pre">correction</span></code>)</p>
-<p>La procédure d’apprentissage du perceptron est une procédure de
+<div class="proof algorithm admonition" id="correction">
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Algorithme d’apprentissage du perceptron par correction d’erreur)</p>
+<div class="algorithm-content section" id="proof-content">
+<ol class="simple">
+<li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
+<li><p>Tant que (test)</p>
+<ol class="simple">
+<li><p>Prendre un exemple <span class="math notranslate nohighlight">\((\mathbf{x_n},t_n)\)</span> dans <span class="math notranslate nohighlight">\({\cal E}_a\)</span></p></li>
+<li><p>Calculer la sortie <span class="math notranslate nohighlight">\(y_n\)</span> du perceptron pour l’entrée <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\forall i)\; w_i \leftarrow w_i+(t_n-y_n)x_n^i\)</span></p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div><p>La procédure d’apprentissage du perceptron est une procédure de
 correction d’erreur puisque les poids ne sont pas modifiés lorsque la
 sortie attendue <span class="math notranslate nohighlight">\(t_n\)</span> est égale à la sortie calculée <span class="math notranslate nohighlight">\(y_n\)</span> par le
 perceptron courant.<br />
