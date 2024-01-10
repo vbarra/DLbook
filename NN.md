@@ -397,7 +397,13 @@ On peut montrer que si l'échantillon ${\cal E}_a$ est linéairement
 séparable et si les exemples sont présentés de manière équitable
 (c'est-à-dire que la procédure de choix des exemples n'en exclut aucun),
 la procédure d'apprentissage par correction d'erreur converge vers un
-perceptron linéaire à seuil qui sépare linéairement ${\cal E}_a$.\
+perceptron linéaire à seuil qui sépare linéairement ${\cal E}_a$.
+
+```{code-cell} ipython3
+from IPython.display import Video
+Video("videos/correction_erreur_linsep.mp4",embed =True,width=500)
+```
+
 L'inconvénient majeur de cet apprentissage est que si l'échantillon
 présenté n'est pas linéairement séparable, l'algorithme ne convergera
 pas et l'on aura aucun moyen de le savoir. 
