@@ -246,6 +246,8 @@ coefficient $w_0$ est l'opposé du seuil $\theta$.
 		\node at (10.5,2.25){$w_0$};
 	\end{tikzpicture}
 ```
+:name: perceptron
+Neurone Représentation d'un perceptron sous la forme d'un graphe orienté
 ```
 
 On note $\mathbf w$ (respectivement $\mathbf x$) $\in\mathbb R^{D+1}$ le vecteur des poids
