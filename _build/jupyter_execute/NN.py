@@ -591,9 +591,7 @@ Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
 # ## Perceptrons multicouches 
 # 
 # ````{prf:definition} Perceptron multicouches
-# Un perceptron à $(L+1)$ couches (figure
-# [1.3](#fig:multilayer-perceptron){reference-type="ref"
-# reference="fig:multilayer-perceptron"}) est un réseau constitué d'une
+# Un perceptron à $(L+1)$ couches ({numref}`mlp`) est un réseau constitué d'une
 # rétine à $D$ neurones (auxquels on rajoute l'entrée $x_0$), $C$ neurones
 # de sortie, et des neurones dits **cachés**, organisés dans $L$ couches
 # cachées intermédiaires. De fait, un tel réseau comporte $(L+2)$ couches
