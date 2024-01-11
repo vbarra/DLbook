@@ -599,7 +599,7 @@ def extract_data(filename):
     return features_np,labels_onehot    
 
 
-# On écrit une fonction permettant de visualiser le récultat de la classification par le perceptron.
+# On écrit une fonction permettant de visualiser le résultat de la classification par le perceptron.
 
 # In[4]:
 
@@ -648,19 +648,13 @@ class Perceptron(nn.Module):
         return output
 
 
-# On écrit ensuite la fonction d'entraînement. 
-# 
-# La fonction de perte est l'[entropie croisée binaire](https://en.wikipedia.org/wiki/Cross_entropy)
-# 
-# L'optimiseur est [Adam ](https://arxiv.org/abs/1412.6980).
+# On écrit ensuite la fonction d'entraînement. La fonction de perte est l'[entropie croisée binaire](https://en.wikipedia.org/wiki/Cross_entropy) et l'optimiseur est [Adam ](https://arxiv.org/abs/1412.6980).
 
 # In[6]:
 
 
-# Loss function  
 loss = nn.BCELoss()
 
-# Training function
 def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
     
     losses = np.zeros(n_epochs)
@@ -670,14 +664,14 @@ def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
         yPred = classifier(X)
         loss = criterion(yPred,y)
         losses[iter] = loss.item()
-        #Gradient and backpropagation
+        #Gradient et rétropropagation
         loss.backward()
-        #Update the weights
+        #Mise à jour des poids
         optimizer.step()
         y2 = yPred>0.5
         correct = (y2 == y).sum().item()/2
         if (iter %1000 ==0):
-            print('Epoch {}\t loss: {}, correct {}'.format(iter,loss,100 * correct / (X.shape[0])))
+            print('Epoch {}\t perte: {}, précision {}'.format(iter,loss,100 * correct / (X.shape[0])))
     acc = 100 * correct / (X.shape[0])
     return losses,acc
 

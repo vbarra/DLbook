@@ -1427,7 +1427,7 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 </div>
 </div>
 </div>
-<p>On écrit une fonction permettant de visualiser le récultat de la classification par le perceptron.</p>
+<p>On écrit une fonction permettant de visualiser le résultat de la classification par le perceptron.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plotResults</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
@@ -1476,15 +1476,11 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 </div>
 </div>
 </div>
-<p>On écrit ensuite la fonction d’entraînement.</p>
-<p>La fonction de perte est l”<a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">entropie croisée binaire</a></p>
-<p>L’optimiseur est <a class="reference external" href="https://arxiv.org/abs/1412.6980">Adam </a>.</p>
+<p>On écrit ensuite la fonction d’entraînement. La fonction de perte est l”<a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">entropie croisée binaire</a> et l’optimiseur est <a class="reference external" href="https://arxiv.org/abs/1412.6980">Adam </a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loss function  </span>
-<span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>
 
-<span class="c1"># Training function</span>
 <span class="k">def</span> <span class="nf">train_session</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">classifier</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span><span class="n">optimizer</span><span class="p">,</span><span class="n">n_epochs</span><span class="o">=</span><span class="n">num_epochs</span><span class="p">):</span>
     
     <span class="n">losses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">)</span>
@@ -1494,14 +1490,14 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
         <span class="n">yPred</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
         <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">yPred</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
         <span class="n">losses</span><span class="p">[</span><span class="nb">iter</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="c1">#Gradient and backpropagation</span>
+        <span class="c1">#Gradient et rétropropagation</span>
         <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        <span class="c1">#Update the weights</span>
+        <span class="c1">#Mise à jour des poids</span>
         <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
         <span class="n">y2</span> <span class="o">=</span> <span class="n">yPred</span><span class="o">&gt;</span><span class="mf">0.5</span>
         <span class="n">correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">y2</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span>
         <span class="k">if</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">%</span><span class="k">1000</span> ==0):
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">{}</span><span class="se">\t</span><span class="s1"> loss: </span><span class="si">{}</span><span class="s1">, correct </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="mi">100</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">{}</span><span class="se">\t</span><span class="s1"> perte: </span><span class="si">{}</span><span class="s1">, précision </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="mi">100</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
     <span class="n">acc</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">losses</span><span class="p">,</span><span class="n">acc</span>
 </pre></div>
@@ -1526,64 +1522,64 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0	 loss: 0.9721289277076721, correct 50.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0	 perte: 0.6887891888618469, précision 50.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1000	 loss: 0.5318459868431091, correct 95.6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1000	 perte: 0.3785892426967621, précision 96.9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2000	 loss: 0.3617071509361267, correct 99.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2000	 perte: 0.2310616672039032, précision 99.4
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3000	 loss: 0.24629510939121246, correct 99.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3000	 perte: 0.15307040512561798, précision 99.7
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4000	 loss: 0.1720017045736313, correct 99.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4000	 perte: 0.10691165179014206, précision 100.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5000	 loss: 0.12322376668453217, correct 99.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5000	 perte: 0.07733277976512909, précision 100.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6000	 loss: 0.09020712226629257, correct 99.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6000	 perte: 0.05735726282000542, précision 100.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7000	 loss: 0.06725089997053146, correct 99.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7000	 perte: 0.04338707774877548, précision 100.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8000	 loss: 0.05094658583402634, correct 99.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8000	 perte: 0.03337708115577698, précision 100.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9000	 loss: 0.03916874900460243, correct 99.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9000	 perte: 0.0260750874876976, précision 100.0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0	 loss: 2.320486068725586, correct 42.6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0	 perte: 1.445142388343811, précision 55.4
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1000	 loss: 0.6890954375267029, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1000	 perte: 0.6890953779220581, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2000	 loss: 0.6890953183174133, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2000	 perte: 0.6890952587127686, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3000	 loss: 0.6890953183174133, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3000	 perte: 0.6890953183174133, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4000	 loss: 0.6890953183174133, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4000	 perte: 0.6890952587127686, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5000	 loss: 0.6890953183174133, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5000	 perte: 0.6890952587127686, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6000	 loss: 0.6890952587127686, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6000	 perte: 0.6890952587127686, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7000	 loss: 0.6890952587127686, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7000	 perte: 0.6890952587127686, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8000	 loss: 0.6890952587127686, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8000	 perte: 0.6890952587127686, précision 36.2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9000	 loss: 0.6890952587127686, correct 36.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9000	 perte: 0.6890953183174133, précision 36.2
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
