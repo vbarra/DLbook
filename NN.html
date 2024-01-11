@@ -1451,7 +1451,7 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 
     <span class="n">ay</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pltloss</span><span class="p">)</span>
     <span class="n">ay</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;perte sur &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
-    <span class="n">ay</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+    <span class="n">ay</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -1525,23 +1525,7 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">pltloss</span><span class="p">,</span><span class="n">acc</span> <span class="o">=</span> <span class="n">train_session</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">train_data</span><span class="p">),</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">train_labels</span><span class="p">),</span><span class="n">model</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="n">optimizer</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">titre</span><span class="o">=</span> <span class="s2">&quot;Précision =</span><span class="si">{0:5.3f}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">plotResults</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">titre</span><span class="p">,</span> <span class="n">pltloss</span><span class="p">,</span> <span class="n">name_test</span><span class="p">)</span>
-
-<span class="nn">Cell In[4], line 22,</span> in <span class="ni">plotResults</span><span class="nt">(ax, ay, X, Y, model, title, pltloss, name)</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">ay</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pltloss</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">ay</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;perte sur &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">22</span> <span class="n">ay</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
-<span class="ne">AttributeError</span>: &#39;Axes&#39; object has no attribute &#39;xlabel&#39;
-</pre></div>
-</div>
-<img alt="_images/NN_13_1.png" src="_images/NN_13_1.png" />
+<img alt="_images/NN_13_0.png" src="_images/NN_13_0.png" />
 </div>
 </div>
 </div>
