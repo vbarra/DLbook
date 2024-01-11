@@ -577,7 +577,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','.data/moon_data_train.csv']
+fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','./data/moon_data_train.csv']
 fichiers_test = ['./data/linear_data_eval.csv','./data/twocircles_data_eval.csv','./data/moon_data_eval.csv']
 
 # Fonction de lecture des jeux de données
@@ -604,7 +604,7 @@ def extract_data(filename):
 # In[4]:
 
 
-def plotResults(ax,X,Y,model,title):
+def plotResults(ax,ay,X,Y,model,title,pltloss,name):
     mins = np.amin(X,0); 
     mins = mins - 0.1*np.abs(mins);
     maxs = np.amax(X,0); 
@@ -622,6 +622,11 @@ def plotResults(ax,X,Y,model,title):
     ax.contourf(xs, ys, Z, cmap=plt.cm.magma,alpha=.5)
     ax.scatter(np.array(X[:, 0]),np.array(X[:, 1]),c= np.array(labelY),s=20,cmap=colors.ListedColormap(['red', 'green']))
     ax.set_title(title)
+
+    ay.plot(pltloss)
+    ay.set_title("perte sur " + name)
+    ay.xlabel("epoch")
+
     plt.tight_layout()
 
 
@@ -656,24 +661,22 @@ class Perceptron(nn.Module):
 loss = nn.BCELoss()
 
 def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
-    
+    loss_values = []    
     losses = np.zeros(n_epochs)
     correct = 0
     for iter in range(n_epochs):
-        optimizer.zero_grad() #reinitialize gradient at each epoch
+        optimizer.zero_grad() 
         yPred = classifier(X)
         loss = criterion(yPred,y)
-        losses[iter] = loss.item()
+        loss_values.append(loss.detach().numpy())
         #Gradient et rétropropagation
         loss.backward()
         #Mise à jour des poids
         optimizer.step()
         y2 = yPred>0.5
         correct = (y2 == y).sum().item()/2
-        if (iter %1000 ==0):
-            print('Epoch {}\t perte: {}, précision {}'.format(iter,loss,100 * correct / (X.shape[0])))
     acc = 100 * correct / (X.shape[0])
-    return losses,acc
+    return loss_values,acc
 
 
 # On applique enfin le perceptron sur les jeux de données et on visualise les résultats.
@@ -681,17 +684,17 @@ def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
 # In[7]:
 
 
-fig,axs = plt.subplots(1, 3,figsize=(15,8))
+fig,axs = plt.subplots(2, 3,figsize=(15,8))
 for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
     train_data,train_labels = extract_data(name_train)
     test_data, test_labels = extract_data(name_test)
 
     model = Perceptron(train_data.shape[1])
     optimizer = optim.Adam(model.parameters())
-    losses,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
+    pltloss,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
     
     titre= "Précision ={0:5.3f} ".format(acc)
-    plotResults(axs[i],test_data, test_labels, model, titre)
+    plotResults(axs[0][i],axs[1][i],test_data, test_labels, model, titre, pltloss, name_test)
 
 
 # ### Pour en finir avec le perceptron
