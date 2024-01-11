@@ -603,7 +603,7 @@ num_labels = 2
 num_features = 2
 
 # Name of the files (training and test datasets) 
-fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','.data//moon_data_train.csv']
+fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','.data/moon_data_train.csv']
 fichiers_test = ['./data/linear_data_eval.csv','./data/twocircles_data_eval.csv','./data/moon_data_eval.csv']
 ```
 
