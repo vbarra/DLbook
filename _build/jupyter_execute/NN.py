@@ -625,7 +625,7 @@ def plotResults(ax,ay,X,Y,model,title,pltloss,name):
 
     ay.plot(pltloss)
     ay.set_title("perte sur " + name)
-    ay.xlabel("epoch")
+    ay.set_xlabel("epoch")
 
     plt.tight_layout()
 
