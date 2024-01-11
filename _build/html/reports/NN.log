@@ -26,25 +26,25 @@ for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
     optimizer = optim.Adam(model.parameters())
     losses,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
     
-    titre= "Accuracy ={0:5.3f} ".format(acc)
+    titre= "Précision ={0:5.3f} ".format(acc)
     plotResults(axs[i],test_data, test_labels, model, titre)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [0;32mIn[8], line 3[0m
+Cell [0;32mIn[7], line 3[0m
 [1;32m      1[0m fig,axs [38;5;241m=[39m plt[38;5;241m.[39msubplots([38;5;241m1[39m, [38;5;241m3[39m,figsize[38;5;241m=[39m([38;5;241m15[39m,[38;5;241m8[39m))
 [1;32m      2[0m [38;5;28;01mfor[39;00m i,name_train,name_test [38;5;129;01min[39;00m [38;5;28mzip[39m ([[38;5;241m0[39m,[38;5;241m1[39m,[38;5;241m2[39m],fichiers_train,fichiers_test):
 [0;32m----> 3[0m     train_data,train_labels [38;5;241m=[39m [43mextract_data[49m[43m([49m[43mname_train[49m[43m)[49m
 [1;32m      4[0m     test_data, test_labels [38;5;241m=[39m extract_data(name_test)
 [1;32m      6[0m     model [38;5;241m=[39m Perceptron(train_data[38;5;241m.[39mshape[[38;5;241m1[39m])
 
-Cell [0;32mIn[4], line 7[0m, in [0;36mextract_data[0;34m(filename)[0m
-[1;32m      4[0m labels [38;5;241m=[39m []
-[1;32m      5[0m features [38;5;241m=[39m []
-[0;32m----> 7[0m [38;5;28;01mfor[39;00m line [38;5;129;01min[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mfilename[49m[43m)[49m:
-[1;32m      8[0m     row [38;5;241m=[39m line[38;5;241m.[39msplit([38;5;124m"[39m[38;5;124m,[39m[38;5;124m"[39m)
-[1;32m      9[0m     [38;5;66;03m# labels are integers[39;00m
+Cell [0;32mIn[3], line 17[0m, in [0;36mextract_data[0;34m(filename)[0m
+[1;32m     14[0m labels [38;5;241m=[39m []
+[1;32m     15[0m features [38;5;241m=[39m []
+[0;32m---> 17[0m [38;5;28;01mfor[39;00m line [38;5;129;01min[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mfilename[49m[43m)[49m:
+[1;32m     18[0m     row [38;5;241m=[39m line[38;5;241m.[39msplit([38;5;124m"[39m[38;5;124m,[39m[38;5;124m"[39m)
+[1;32m     19[0m     labels[38;5;241m.[39mappend([38;5;28mint[39m(row[[38;5;241m0[39m]))
 
 File [0;32m~/Library/Python/3.9/lib/python/site-packages/IPython/core/interactiveshell.py:310[0m, in [0;36m_modified_open[0;34m(file, *args, **kwargs)[0m
 [1;32m    303[0m [38;5;28;01mif[39;00m file [38;5;129;01min[39;00m {[38;5;241m0[39m, [38;5;241m1[39m, [38;5;241m2[39m}:
