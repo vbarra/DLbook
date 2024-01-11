@@ -571,6 +571,10 @@ fonction du nombre d'itérations comme pour l'algorithme du gradient.
 
 ### Implémentation
 
+On illustre le pouvoir de séparation linéaire d'un perceptron sur trois jeux de données : 
+- un jeu de données linéairement séparable
+- deux jeux de données non linéairement séparables classiques ("twocircles" et "moons")
+
 ```{code-cell} ipython3
 import numpy as np
 from matplotlib import pyplot as plt
@@ -579,38 +583,10 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-''' 
--------------------------------------------------------------------------
-Network parameters
--------------------------------------------------------------------------
-'''    
-# Size of the batch for the training step
-batch_size = 100  
-
-# Iterations number
-num_epochs = 10000
-
-
-''' 
--------------------------------------------------------------------------
-Algorithm parameters
--------------------------------------------------------------------------
-'''   
-# Number of labels
-num_labels = 2 
-
-# Number of features
-num_features = 2
-
-# Name of the files (training and test datasets) 
 fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','.data/moon_data_train.csv']
 fichiers_test = ['./data/linear_data_eval.csv','./data/twocircles_data_eval.csv','./data/moon_data_eval.csv']
-```
 
-
-
-```{code-cell} ipython3
-# Extract data from the lines : label, desc1 ... descn in a compatible format
+# Fonction de lecture des jeux de données
 def extract_data(filename):
 
     labels = []
@@ -618,12 +594,9 @@ def extract_data(filename):
 
     for line in open(filename):
         row = line.split(",")
-        # labels are integers
         labels.append(int(row[0]))
-        # features are reals
         features.append([float(x) for x in row[1:]])
 
-    # Conversion into numpy matrix
     features_np = np.matrix(features).astype(np.float32)
 
     labels_np = np.array(labels).astype(dtype=np.uint8)
@@ -632,29 +605,24 @@ def extract_data(filename):
     return features_np,labels_onehot    
 ```
 
-
+On écrit une fonction permettant de visualiser le récultat de la classification par le perceptron.
 
 ```{code-cell} ipython3
 def plotResults(ax,X,Y,model,title):
-    # Compute the region for the display (min and max of the features)
     mins = np.amin(X,0); 
     mins = mins - 0.1*np.abs(mins);
     maxs = np.amax(X,0); 
     maxs = maxs + 0.1*maxs;
 
-    # Mesh generation on the rectangle used for display
     xs,ys = np.meshgrid(np.linspace(mins[0,0],maxs[0,0],300),np.linspace(mins[0,1], maxs[0,1], 300));
 
-    # Compute the prediction from the model on the grid
     toto = torch.FloatTensor(np.c_[xs.flatten(), ys.flatten()])
     Z = np.argmax(model(toto).detach().numpy(), axis=-1)
     Z=Z.reshape(xs.shape[0],xs.shape[1])
     
-    # Conversion into a flattened vector
     labelY = np.matrix(Y[:, 0]+2*Y[:, 1])
     labelY = labelY.reshape(np.array(X[:, 0]).shape)
 
-    # Display the graph on the axes 'ax' into the figure 
     ax.contourf(xs, ys, Z, cmap=plt.cm.magma,alpha=.5)
     ax.scatter(np.array(X[:, 0]),np.array(X[:, 1]),c= np.array(labelY),s=20,cmap=colors.ListedColormap(['red', 'green']))
     ax.set_title(title)
@@ -662,8 +630,17 @@ def plotResults(ax,X,Y,model,title):
 ```
 
 
+On construit ensuite le perceptron (extension de la classe ` nn.Module`)
 
 ```{code-cell} ipython3
+
+
+# Paramètres de l'apprentissage
+batch_size = 100  
+num_epochs = 10000
+num_labels = 2 
+num_features = 2
+
 class Perceptron(nn.Module):
     def __init__(self,p):
         super(Perceptron, self).__init__()
@@ -676,7 +653,11 @@ class Perceptron(nn.Module):
         return output
 ```
 
+On écrit ensuite la fonction d'entraînement. 
 
+La fonction de perte est l'[entropie croisée binaire](https://en.wikipedia.org/wiki/Cross_entropy)
+
+L'optimiseur est [Adam ](https://arxiv.org/abs/1412.6980).
 
 ```{code-cell} ipython3
 # Loss function  
@@ -704,7 +685,7 @@ def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
     return losses,acc
 ```
 
-
+On applique enfin le perceptron sur les jeux de données et on visualise les résultats.
 
 ```{code-cell} ipython3
 fig,axs = plt.subplots(1, 3,figsize=(15,8))
@@ -716,7 +697,7 @@ for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
     optimizer = optim.Adam(model.parameters())
     losses,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
     
-    titre= "Accuracy ={0:5.3f} ".format(acc)
+    titre= "Précision ={0:5.3f} ".format(acc)
     plotResults(axs[i],test_data, test_labels, model, titre)
 ```
 
