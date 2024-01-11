@@ -1,0 +1,60 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/local/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/local/Cellar/python@3.9/3.9.18_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/usr/local/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+fig,axs = plt.subplots(1, 3,figsize=(15,8))
+for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
+    train_data,train_labels = extract_data(name_train)
+    test_data, test_labels = extract_data(name_test)
+
+    model = Perceptron(train_data.shape[1])
+    optimizer = optim.Adam(model.parameters())
+    losses,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
+    
+    titre= "Accuracy ={0:5.3f} ".format(acc)
+    plotResults(axs[i],test_data, test_labels, model, titre)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [0;32mIn[8], line 3[0m
+[1;32m      1[0m fig,axs [38;5;241m=[39m plt[38;5;241m.[39msubplots([38;5;241m1[39m, [38;5;241m3[39m,figsize[38;5;241m=[39m([38;5;241m15[39m,[38;5;241m8[39m))
+[1;32m      2[0m [38;5;28;01mfor[39;00m i,name_train,name_test [38;5;129;01min[39;00m [38;5;28mzip[39m ([[38;5;241m0[39m,[38;5;241m1[39m,[38;5;241m2[39m],fichiers_train,fichiers_test):
+[0;32m----> 3[0m     train_data,train_labels [38;5;241m=[39m [43mextract_data[49m[43m([49m[43mname_train[49m[43m)[49m
+[1;32m      4[0m     test_data, test_labels [38;5;241m=[39m extract_data(name_test)
+[1;32m      6[0m     model [38;5;241m=[39m Perceptron(train_data[38;5;241m.[39mshape[[38;5;241m1[39m])
+
+Cell [0;32mIn[4], line 7[0m, in [0;36mextract_data[0;34m(filename)[0m
+[1;32m      4[0m labels [38;5;241m=[39m []
+[1;32m      5[0m features [38;5;241m=[39m []
+[0;32m----> 7[0m [38;5;28;01mfor[39;00m line [38;5;129;01min[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mfilename[49m[43m)[49m:
+[1;32m      8[0m     row [38;5;241m=[39m line[38;5;241m.[39msplit([38;5;124m"[39m[38;5;124m,[39m[38;5;124m"[39m)
+[1;32m      9[0m     [38;5;66;03m# labels are integers[39;00m
+
+File [0;32m~/Library/Python/3.9/lib/python/site-packages/IPython/core/interactiveshell.py:310[0m, in [0;36m_modified_open[0;34m(file, *args, **kwargs)[0m
+[1;32m    303[0m [38;5;28;01mif[39;00m file [38;5;129;01min[39;00m {[38;5;241m0[39m, [38;5;241m1[39m, [38;5;241m2[39m}:
+[1;32m    304[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m    305[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mIPython won[39m[38;5;124m'[39m[38;5;124mt let you open fd=[39m[38;5;132;01m{[39;00mfile[38;5;132;01m}[39;00m[38;5;124m by default [39m[38;5;124m"[39m
+[1;32m    306[0m         [38;5;124m"[39m[38;5;124mas it is likely to crash IPython. If you know what you are doing, [39m[38;5;124m"[39m
+[1;32m    307[0m         [38;5;124m"[39m[38;5;124myou can use builtins[39m[38;5;124m'[39m[38;5;124m open.[39m[38;5;124m"[39m
+[1;32m    308[0m     )
+[0;32m--> 310[0m [38;5;28;01mreturn[39;00m [43mio_open[49m[43m([49m[43mfile[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '.data//moon_data_train.csv'
+FileNotFoundError: [Errno 2] No such file or directory: '.data//moon_data_train.csv'
+

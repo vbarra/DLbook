@@ -569,6 +569,158 @@ général, plus rapide que par la méthode du gradient. Il est fréquent
 pour cet algorithme de faire diminuer la valeur de $\varepsilon$ en
 fonction du nombre d'itérations comme pour l'algorithme du gradient.
 
+### Implémentation
+
+```{code-cell} ipython3
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib import colors
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+''' 
+-------------------------------------------------------------------------
+Network parameters
+-------------------------------------------------------------------------
+'''    
+# Size of the batch for the training step
+batch_size = 100  
+
+# Iterations number
+num_epochs = 10000
+
+
+''' 
+-------------------------------------------------------------------------
+Algorithm parameters
+-------------------------------------------------------------------------
+'''   
+# Number of labels
+num_labels = 2 
+
+# Number of features
+num_features = 2
+
+# Name of the files (training and test datasets) 
+fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','.data//moon_data_train.csv']
+fichiers_test = ['./data/linear_data_eval.csv','./data/twocircles_data_eval.csv','./data/moon_data_eval.csv']
+```
+
+
+
+```{code-cell} ipython3
+# Extract data from the lines : label, desc1 ... descn in a compatible format
+def extract_data(filename):
+
+    labels = []
+    features = []
+
+    for line in open(filename):
+        row = line.split(",")
+        # labels are integers
+        labels.append(int(row[0]))
+        # features are reals
+        features.append([float(x) for x in row[1:]])
+
+    # Conversion into numpy matrix
+    features_np = np.matrix(features).astype(np.float32)
+
+    labels_np = np.array(labels).astype(dtype=np.uint8)
+    labels_onehot = (np.arange(num_labels) == labels_np[:, None]).astype(np.float32)
+
+    return features_np,labels_onehot    
+```
+
+
+
+```{code-cell} ipython3
+def plotResults(ax,X,Y,model,title):
+    # Compute the region for the display (min and max of the features)
+    mins = np.amin(X,0); 
+    mins = mins - 0.1*np.abs(mins);
+    maxs = np.amax(X,0); 
+    maxs = maxs + 0.1*maxs;
+
+    # Mesh generation on the rectangle used for display
+    xs,ys = np.meshgrid(np.linspace(mins[0,0],maxs[0,0],300),np.linspace(mins[0,1], maxs[0,1], 300));
+
+    # Compute the prediction from the model on the grid
+    toto = torch.FloatTensor(np.c_[xs.flatten(), ys.flatten()])
+    Z = np.argmax(model(toto).detach().numpy(), axis=-1)
+    Z=Z.reshape(xs.shape[0],xs.shape[1])
+    
+    # Conversion into a flattened vector
+    labelY = np.matrix(Y[:, 0]+2*Y[:, 1])
+    labelY = labelY.reshape(np.array(X[:, 0]).shape)
+
+    # Display the graph on the axes 'ax' into the figure 
+    ax.contourf(xs, ys, Z, cmap=plt.cm.magma,alpha=.5)
+    ax.scatter(np.array(X[:, 0]),np.array(X[:, 1]),c= np.array(labelY),s=20,cmap=colors.ListedColormap(['red', 'green']))
+    ax.set_title(title)
+    plt.tight_layout()
+```
+
+
+
+```{code-cell} ipython3
+class Perceptron(nn.Module):
+    def __init__(self,p):
+        super(Perceptron, self).__init__()
+        # input layer
+        self.fc = nn.Linear(num_features,num_labels)
+        self.output = nn.Softmax(1) 
+    def forward(self, x):
+        lin = self.fc(x)
+        output = self.output(lin) 
+        return output
+```
+
+
+
+```{code-cell} ipython3
+# Loss function  
+loss = nn.BCELoss()
+
+# Training function
+def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
+    
+    losses = np.zeros(n_epochs)
+    correct = 0
+    for iter in range(n_epochs):
+        optimizer.zero_grad() #reinitialize gradient at each epoch
+        yPred = classifier(X)
+        loss = criterion(yPred,y)
+        losses[iter] = loss.item()
+        #Gradient and backpropagation
+        loss.backward()
+        #Update the weights
+        optimizer.step()
+        y2 = yPred>0.5
+        correct = (y2 == y).sum().item()/2
+        if (iter %1000 ==0):
+            print('Epoch {}\t loss: {}, correct {}'.format(iter,loss,100 * correct / (X.shape[0])))
+    acc = 100 * correct / (X.shape[0])
+    return losses,acc
+```
+
+
+
+```{code-cell} ipython3
+fig,axs = plt.subplots(1, 3,figsize=(15,8))
+for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
+    train_data,train_labels = extract_data(name_train)
+    test_data, test_labels = extract_data(name_test)
+
+    model = Perceptron(train_data.shape[1])
+    optimizer = optim.Adam(model.parameters())
+    losses,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
+    
+    titre= "Accuracy ={0:5.3f} ".format(acc)
+    plotResults(axs[i],test_data, test_labels, model, titre)
+```
+
+
 ### Pour en finir avec le perceptron
 
 L'apprentissage par correction ou par la méthode du gradient ne sont
