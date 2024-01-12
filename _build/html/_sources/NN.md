@@ -651,7 +651,7 @@ class Perceptron(nn.Module):
         super(Perceptron, self).__init__()
         # Couche d'entrée
         self.fc = nn.Linear(num_features,num_labels)
-        self.output = nn.Linear(1) 
+        self.output = nn.Softmax(1) 
     def forward(self, x):
         lin = self.fc(x)
         output = self.output(lin) 
