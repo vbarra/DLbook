@@ -371,9 +371,7 @@ Les deux critères précédents sont utiles mais ils comportent aussi des
 limitations. Le critère relatif au nombre maximum de périodes
 d'entraînement n'est aucunement lié à la performance du réseau. Le
 critère relatif à l'erreur minimale obtenue mesure quant à lui un indice
-de performance mais ce dernier peut engendrer un phénomène dit de
-sur-apprentissage qui n'est pas désirable dans la pratique, surtout si
-l'on ne possède pas une grande quantité de données d'apprentissage, ou
+de performance mais ce dernier peut engendrer du sur-apprentissage qui n'est pas désirable dans la pratique, surtout si l'on ne possède pas une grande quantité de données d'apprentissage, ou
 si ces dernières ne sont pas de bonne qualité.\
 Un processus d'apprentissage comme celui de la rétropropagation, vise à
 réduire autant que possible l'erreur que commet le réseau. Mais cette
@@ -382,12 +380,12 @@ ${\cal E}_a$. Si les données sont bonnes, c'est-à-dire quelles
 représentent bien le processus physique sous-jacent que l'on tente
 d'apprendre ou de modéliser, et que l'algorithme a convergé sur un
 optimum global, alors il devrait bien se comporter sur d'autres données
-issues du même processus physique. Cependant, si les données
+issues du même processus physique . Cependant, si les données
 d'apprentissage sont partiellement corrompues par du bruit ou par des
 erreurs de mesure, alors il n'est pas évident que la performance
 optimale du réseau soit atteinte en minimisant l'erreur, lorsqu'on la
 testera sur un jeu de données différent de celui qui a servi à
-l'entraînement. On parle alors de la capacité de généralisation du
+l'entraînement. On parle alors de la **capacité de généralisation** du
 réseau, c'est-à-dire sa capacité à bien se comporter avec des données
 qu'il n'a jamais vu auparavant.
 
@@ -414,8 +412,8 @@ d'approximateurs universels des réseaux multicouches, est
 essentiellement un résultat théorique sur l'expressivité des réseaux.
 
 Plus formellement, la propriété fondamentale des réseaux de neurones est
-l'approximation parcimonieuse, qui traduit deux propriétés distinctes :
-d'une part les réseaux de neurones sont des approximateurs universels,
+l'**approximation parcimonieuse**, qui traduit deux propriétés distinctes :
+d'une part les réseaux de neurones sont des **approximateurs universels**,
 et d'autre part, une approximation à l'aide d'un réseau de neurones
 nécessite, en général, moins de paramètres ajustables que les
 approximateurs usuels.
@@ -448,13 +446,30 @@ processus considéré, *i.e.* la fonction obtenue en calculant la moyenne
 d'une infinité de mesures effectuées en chaque point du domaine de
 validité du modèle. Le nombre de points de ce domaine étant lui-même
 infini, la connaissance de la fonction de régression nécessiterait donc
-une infinité de mesures en un nombre infini de points.\
+une infinité de mesures en un nombre infini de points.
+
 Les réseaux de neurones, en raison de leur propriété fondamentale, sont
 de bons candidats pour réaliser une approximation de la fonction de
 régression à partir d'un nombre fini de mesures. Ils entrent donc dans
 le cadre des méthodes statistiques d'apprentissage, et élargissent ce
 domaine déjà bien exploré pour des fonctions de régression linéaire au
 cas non linéaire.
+
+
+Pour illustration simple, on considère la ({numref}`approx`). L'objectif est d'apprendre $f(x)=x^2$. En rouge sont représentés 50 points d'apprentissage, en bleu la fonction prédite sur l'intervalle [-1,1] par un réseau de neurones ({numref}`approx2`) à une couche cachée, dont les 3 neurones sont équipés de la conction d'activation $tanh$. Les fonctions apprises par ces neurones sont en pointillés, et la combinaison linéaire de ces fonctions donne la courbe bleue prédite.
+
+```{figure} ./images/f1.png
+:name: approx
+Exemple de réseau pour apprendre le XOR
+```
+
+```{figure} ./images/exmlp.png
+:name: approx2
+Exemple de réseau pour apprendre le XOR
+```
+
+
+
 
 ## Régularisation
 
@@ -587,7 +602,9 @@ poids quelconque du réseau que l'on note $\theta$, sa mise à jour durant
 l'itération $n+1$ se fait pas l'équation suivante:
 
 $$\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta$$
-où $$\Delta \theta = -\nabla_\theta E.$$ 
+
+où $\Delta \theta = -\nabla_\theta E$. 
+
 
 On peut choisir $E=E_{tot}$ ou
 $E=E_k$ et pour cet exemple nous choisirons le deuxième cas.
@@ -665,10 +682,10 @@ $$\left\{
     \right.
     $$ 
     
-    d'où
+ d'où
 
 $$
-w_1^{(n+1)} = w_1^{(n)} + (y[k]{_lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))h_1(z_1)( 1 - h_1(z_1)) w_7 x_1
+w_1^{(n+1)} = w_1^{(n)} + (y[k]_{ lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))h_1(z_1)( 1 - h_1(z_1)) w_7 x_1
 $$
 
 On peut réaliser la même démarche pour les poids $w_2$ et $b_1$, pour
@@ -703,12 +720,12 @@ on obtient les relations suivantes :
 
 #### Initialisation des poids 
 
--   les biais sont initialisés à zéro
+-   les biais sont initialisés à zéro : 
     $( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4$ ;
 
 -   pour les poids $w_i$, ils sont initialisées de façon aléatoire
     dépendant de la taille de la couche d'avant $m^{(l-1)}$ et d'après
-    $m^{(l)}$.\
+    $m^{(l)}$.
     L'initialisation de Xavier propose un tirage uniforme dans
     $\left[-\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} ;\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} \right]$.
 

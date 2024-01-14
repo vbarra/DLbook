@@ -711,9 +711,7 @@ Les deux critères précédents sont utiles mais ils comportent aussi des
 limitations. Le critère relatif au nombre maximum de périodes
 d’entraînement n’est aucunement lié à la performance du réseau. Le
 critère relatif à l’erreur minimale obtenue mesure quant à lui un indice
-de performance mais ce dernier peut engendrer un phénomène dit de
-sur-apprentissage qui n’est pas désirable dans la pratique, surtout si
-l’on ne possède pas une grande quantité de données d’apprentissage, ou
+de performance mais ce dernier peut engendrer du sur-apprentissage qui n’est pas désirable dans la pratique, surtout si l’on ne possède pas une grande quantité de données d’apprentissage, ou
 si ces dernières ne sont pas de bonne qualité.<br />
 Un processus d’apprentissage comme celui de la rétropropagation, vise à
 réduire autant que possible l’erreur que commet le réseau. Mais cette
@@ -722,12 +720,12 @@ erreur est mesurée sur un ensemble de données d’apprentissage
 représentent bien le processus physique sous-jacent que l’on tente
 d’apprendre ou de modéliser, et que l’algorithme a convergé sur un
 optimum global, alors il devrait bien se comporter sur d’autres données
-issues du même processus physique. Cependant, si les données
+issues du même processus physique . Cependant, si les données
 d’apprentissage sont partiellement corrompues par du bruit ou par des
 erreurs de mesure, alors il n’est pas évident que la performance
 optimale du réseau soit atteinte en minimisant l’erreur, lorsqu’on la
 testera sur un jeu de données différent de celui qui a servi à
-l’entraînement. On parle alors de la capacité de généralisation du
+l’entraînement. On parle alors de la <strong>capacité de généralisation</strong> du
 réseau, c’est-à-dire sa capacité à bien se comporter avec des données
 qu’il n’a jamais vu auparavant.</p>
 <p>Une solution à ce problème consiste à faire appel à un autre critère
@@ -752,8 +750,8 @@ grande et le théorème de Hornik, qui affirme cette propriété
 d’approximateurs universels des réseaux multicouches, est
 essentiellement un résultat théorique sur l’expressivité des réseaux.</p>
 <p>Plus formellement, la propriété fondamentale des réseaux de neurones est
-l’approximation parcimonieuse, qui traduit deux propriétés distinctes :
-d’une part les réseaux de neurones sont des approximateurs universels,
+l”<strong>approximation parcimonieuse</strong>, qui traduit deux propriétés distinctes :
+d’une part les réseaux de neurones sont des <strong>approximateurs universels</strong>,
 et d’autre part, une approximation à l’aide d’un réseau de neurones
 nécessite, en général, moins de paramètres ajustables que les
 approximateurs usuels.</p>
@@ -785,13 +783,22 @@ processus considéré, <em>i.e.</em> la fonction obtenue en calculant la moyenne
 d’une infinité de mesures effectuées en chaque point du domaine de
 validité du modèle. Le nombre de points de ce domaine étant lui-même
 infini, la connaissance de la fonction de régression nécessiterait donc
-une infinité de mesures en un nombre infini de points.<br />
-Les réseaux de neurones, en raison de leur propriété fondamentale, sont
+une infinité de mesures en un nombre infini de points.</p>
+<p>Les réseaux de neurones, en raison de leur propriété fondamentale, sont
 de bons candidats pour réaliser une approximation de la fonction de
 régression à partir d’un nombre fini de mesures. Ils entrent donc dans
 le cadre des méthodes statistiques d’apprentissage, et élargissent ce
 domaine déjà bien exploré pour des fonctions de régression linéaire au
 cas non linéaire.</p>
+<p>Pour illustration simple, on considère la (<a class="reference internal" href="#approx"><span class="std std-numref">Fig. 5</span></a>). L’objectif est d’apprendre <span class="math notranslate nohighlight">\(f(x)=x^2\)</span>. En rouge sont représentés 50 points d’apprentissage, en bleu la fonction prédite sur l’intervalle [-1,1] par un réseau de neurones (<a class="reference internal" href="#approx2"><span class="std std-numref">Fig. 6</span></a>) à une couche cachée, dont les 3 neurones sont équipés de la conction d’activation <span class="math notranslate nohighlight">\(tanh\)</span>. Les fonctions apprises par ces neurones sont en pointillés, et la combinaison linéaire de ces fonctions donne la courbe bleue prédite.</p>
+<div class="figure align-default" id="approx">
+<img alt="_images/f1.png" src="_images/f1.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#approx" title="Lien permanent vers cette image">#</a></p>
+</div>
+<div class="figure align-default" id="approx2">
+<img alt="_images/exmlp.png" src="_images/exmlp.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#approx2" title="Lien permanent vers cette image">#</a></p>
+</div>
 </div>
 <div class="section" id="regularisation">
 <h2>Régularisation<a class="headerlink" href="#regularisation" title="Lien permanent vers ce titre">#</a></h2>
@@ -861,7 +868,7 @@ exemples classiques sont :</p>
 </div>
 <div class="section" id="exemple">
 <h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">#</a></h2>
-<p>On va considérer le réseau décrit sur la (<a class="reference internal" href="#xor"><span class="std std-numref">Fig. 5</span></a>) pour apprendre la fonction du OU
+<p>On va considérer le réseau décrit sur la (<a class="reference internal" href="#xor"><span class="std std-numref">Fig. 7</span></a>) pour apprendre la fonction du OU
 exclusif (aussi appelé XOR). L’opérateur XOR est défini par sa table de
 vérité donnée par le tableau  suivant</p>
 <table class="colwidths-auto table">
@@ -885,7 +892,7 @@ vérité donnée par le tableau  suivant</p>
 <div class="section" id="reseau">
 <h3>Réseau<a class="headerlink" href="#reseau" title="Lien permanent vers ce titre">#</a></h3>
 <p>Sur le réseau de la figure
-(<a class="reference internal" href="#xor"><span class="std std-numref">Fig. 5</span></a>) les différentes relations sont
+(<a class="reference internal" href="#xor"><span class="std std-numref">Fig. 7</span></a>) les différentes relations sont
 données par l’équation suivante où les paramètres en rouge correspondent aux poids à
 calculer durant la phase d’apprentissage.</p>
 <div class="math notranslate nohighlight">
@@ -902,7 +909,7 @@ calculer durant la phase d’apprentissage.</p>
     \label{E:XOR}\end{split}\]</div>
 <div class="figure align-default" id="xor">
 <img alt="_images/xor.png" src="_images/xor.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#xor" title="Lien permanent vers cette image">#</a></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#xor" title="Lien permanent vers cette image">#</a></p>
 </div>
 </div>
 <div class="section" id="phase-d-apprentissage">
@@ -925,7 +932,7 @@ poids quelconque du réseau que l’on note <span class="math notranslate nohigh
 l’itération <span class="math notranslate nohighlight">\(n+1\)</span> se fait pas l’équation suivante:</p>
 <div class="math notranslate nohighlight">
 \[\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta\]</div>
-<p>où $<span class="math notranslate nohighlight">\(\Delta \theta = -\nabla_\theta E.\)</span>$</p>
+<p>où <span class="math notranslate nohighlight">\(\Delta \theta = -\nabla_\theta E\)</span>.</p>
 <p>On peut choisir <span class="math notranslate nohighlight">\(E=E_{tot}\)</span> ou
 <span class="math notranslate nohighlight">\(E=E_k\)</span> et pour cet exemple nous choisirons le deuxième cas.</p>
 <div class="section" id="couche-de-sortie">
@@ -939,7 +946,7 @@ pour cela nous allons utiliser le théorème de dérivation des fonctions
 composées, d’où:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial E_k}{\partial w_7} = \frac{\partial E_k}{\partial h_4} \times  \frac{\partial h_4}{\partial z_4} \times  \frac{\partial z_4}{\partial w_7}\]</div>
-<p>Cette relation est représentée graphiquement sur la (<a class="reference internal" href="#xor2"><span class="std std-numref">Fig. 6</span></a>).
+<p>Cette relation est représentée graphiquement sur la (<a class="reference internal" href="#xor2"><span class="std std-numref">Fig. 8</span></a>).
 Utilisant l’expression de A <span class="math notranslate nohighlight">\(E_k\)</span> on a alors :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left\{
@@ -967,7 +974,7 @@ pour obtenir les relations suivantes :</p>
     \end{split}\]</div>
 <div class="figure align-default" id="xor2">
 <img alt="_images/xor2.png" src="_images/xor2.png" />
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Rétropropagation du gradient sur la couche de sortie.</span><a class="headerlink" href="#xor2" title="Lien permanent vers cette image">#</a></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Rétropropagation du gradient sur la couche de sortie.</span><a class="headerlink" href="#xor2" title="Lien permanent vers cette image">#</a></p>
 </div>
 </div>
 <div class="section" id="couche-cachee">
@@ -981,7 +988,7 @@ Prenons par exemple, le paramètre <span class="math notranslate nohighlight">\(
 théorème de dérivation des fonctions composées, d’où:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial E_k}{\partial w_1} = \frac{\partial E_k}{\partial z_4} \times  \frac{\partial z_4}{\partial h_1}  \times  \frac{\partial h_1}{\partial z_1} \times  \frac{\partial z_1}{\partial w_1}\]</div>
-<p>Cette relation est représentée graphiquement sur la (<a class="reference internal" href="#xor3"><span class="std std-numref">Fig. 7</span></a>).
+<p>Cette relation est représentée graphiquement sur la (<a class="reference internal" href="#xor3"><span class="std std-numref">Fig. 9</span></a>).
 Utilisant les équations précédentes, on obtient alors</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left\{
@@ -993,12 +1000,10 @@ Utilisant les équations précédentes, on obtient alors</p>
         \end{array}
     \right.
     \end{split}\]</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>d&#39;où
-</pre></div>
-</div>
+<p>d’où</p>
 <div class="math notranslate nohighlight">
 \[
-w_1^{(n+1)} = w_1^{(n)} + (y[k]{_lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))h_1(z_1)( 1 - h_1(z_1)) w_7 x_1
+w_1^{(n+1)} = w_1^{(n)} + (y[k]_{ lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))h_1(z_1)( 1 - h_1(z_1)) w_7 x_1
 \]</div>
 <p>On peut réaliser la même démarche pour les poids <span class="math notranslate nohighlight">\(w_2\)</span> et <span class="math notranslate nohighlight">\(b_1\)</span>, pour
 obtenir les relations suivantes :</p>
@@ -1012,7 +1017,7 @@ obtenir les relations suivantes :</p>
     \end{split}\]</div>
 <div class="figure align-default" id="xor3">
 <img alt="_images/xor3.png" src="_images/xor3.png" />
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Rétropropagation du gradient sur la couche cachée.</span><a class="headerlink" href="#xor3" title="Lien permanent vers cette image">#</a></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Rétropropagation du gradient sur la couche cachée.</span><a class="headerlink" href="#xor3" title="Lien permanent vers cette image">#</a></p>
 </div>
 <p>Il suffit de réaliser des calculs identiques pour les autres neurones et
 on obtient les relations suivantes :</p>
@@ -1031,11 +1036,11 @@ on obtient les relations suivantes :</p>
 <div class="section" id="id1">
 <h4>Initialisation des poids<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">#</a></h4>
 <ul class="simple">
-<li><p>les biais sont initialisés à zéro
+<li><p>les biais sont initialisés à zéro :
 <span class="math notranslate nohighlight">\(( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4\)</span> ;</p></li>
 <li><p>pour les poids <span class="math notranslate nohighlight">\(w_i\)</span>, ils sont initialisées de façon aléatoire
 dépendant de la taille de la couche d’avant <span class="math notranslate nohighlight">\(m^{(l-1)}\)</span> et d’après
-<span class="math notranslate nohighlight">\(m^{(l)}\)</span>.<br />
+<span class="math notranslate nohighlight">\(m^{(l)}\)</span>.
 L’initialisation de Xavier propose un tirage uniforme dans
 <span class="math notranslate nohighlight">\(\left[-\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} ;\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} \right]\)</span>.</p></li>
 </ul>
