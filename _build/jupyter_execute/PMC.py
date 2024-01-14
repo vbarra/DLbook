@@ -244,12 +244,21 @@
 #     
 #     où $\gamma$ est le taux d'apprentissage. L'ordre 2 assure une convergence plus rapide, mais requiert le calcul et l'inversion du Hessien $\mathbf H_n(\mathbf w[t])$ de $E_n$, ce qui est coûteux.
 # 
-# ## Initialisation des poids {#sububsec:weight-initialization}
+# ## Initialisation des poids 
 # 
 # Une méthode itérative d'optimisation étant utilisée, l'initialisation
-# des poids requiert une attention toute particulière. En faisant
-# l'hypothèse que les entrées de chaque cellule de la rétine sont
-# distribuées selon une loi gaussienne, il est courant de choisir les
+# des poids requiert une attention toute particulière. 
+# 
+# Une première idée est d'initialiser les poids selon une loi normale : $\forall i\; w_{ij} \rightsquigarrow 10^{-m}\mathcal{N}(0,1)\ m>0 $. Cependant, cela amène naturellement rapidement à une évolution des poids vers des valeurs nulles ({numref}`vanishing`) (phénomène de disparition du gradient).
+# 
+# 
+# ```{figure} ./images/vanishing.png
+# :name: vanishing
+# Quelques fonctions d'activation
+# ```
+# 
+# En faisant l'hypothèse que les entrées de chaque cellule de la rétine sont
+# distribuées selon une loi gaussienne, il est alors courant de choisir les
 # poids aléatoirement dans 
 # 
 # $$\begin{aligned}
