@@ -693,7 +693,7 @@
 #             \end{array}
 #         \right.$$
 # 
-# #### Initialisation des poids {#initialisation-des-poids}
+# #### Initialisation des poids 
 # 
 # -   les biais sont initialisés à zéro
 #     $( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4$ ;
@@ -708,7 +708,7 @@
 # 
 # $$\left\{
 #         \begin{array}{r c l}
-#             w_1 \ ...\ w_6 &=& UD \ dans \ \left[-\sqrt{\frac{6}{2+3}} ;\sqrt{\frac{6}{2+3}} \right] = \left[-1,09;1,09 \right]\\
-#             w_7 \ ... \ w_9 &=& UD \ dans \ \left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right] = \left[-1,23;1,23 \right]
+#             w_1 \ ...\ w_6 &=& U\left ( \left[-\sqrt{\frac{6}{2+3}} ;\sqrt{\frac{6}{2+3}} \right]\right ) = U(\left[-1,09;1,09 \right])\\
+#             w_7 \ ... \ w_9 &=& U\left \left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right]\right ) = U(\left[-1,23;1,23 \right])
 #         \end{array}
 #     \right.$$
