@@ -593,17 +593,18 @@ calcul ou l’estimation du Hessien <span class="math notranslate nohighlight">\
 par</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-                \Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])
+                \Delta \mathbf w[t] = - \gamma \frac{\partial E_n}{\partial \mathbf w[t]} = - \gamma \nabla E_n (\mathbf w[t])
             
     \end{aligned}\]</div>
 <p>où <span class="math notranslate nohighlight">\(\gamma\)</span> est le taux d’apprentissage.</p>
 </li>
 <li><p>pour les méthodes d’ordre 2, type Newton, la mise à jour s’effectue
-selon le schéma $$\begin{aligned}
-\Delta w[t] = - \gamma \left(\frac{\partial^2 E_n}{\partial w[t]^2}\right)^{-1} \frac{\partial E_n}{\partial w[t]} = - \gamma \left(H_n(w[t])\right)^{-1} \nabla E_n(w[t])</p>
-<p>\end{aligned}$<span class="math notranslate nohighlight">\( où \)</span>\gamma<span class="math notranslate nohighlight">\( est le taux d'apprentissage. L'ordre 2
-assure une convergence plus rapide, mais requiert le calcul et
-l'inversion du Hessien \)</span>H_n(w[t])<span class="math notranslate nohighlight">\( de \)</span>E_n$, ce qui est coûteux.</p>
+selon le schéma</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+            \Delta \mathbf w[t] = - \gamma \left(\frac{\partial^2 E_n}{\partial \mathbf w[t]^2}\right)^{-1} \frac{\partial E_n}{\partial \mathbf w[t]} = - \gamma \left(\mathbf H_n\mathbf (\mathbf w[t])\right)^{-1} \nabla E_n(\mathbf w[t])  
+    \end{aligned}\]</div>
+<p>où <span class="math notranslate nohighlight">\(\gamma\)</span> est le taux d’apprentissage. L’ordre 2 assure une convergence plus rapide, mais requiert le calcul et l’inversion du Hessien <span class="math notranslate nohighlight">\(\mathbf H_n(\mathbf w[t])\)</span> de <span class="math notranslate nohighlight">\(E_n\)</span>, ce qui est coûteux.</p>
 </li>
 </ul>
 </div>
