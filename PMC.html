@@ -230,8 +230,8 @@ title="Fullscreen mode"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">
-   Initialisation des poids {#sububsec:weight-initialization}
+  <a class="reference internal nav-link" href="#initialisation-des-poids">
+   Initialisation des poids
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -328,8 +328,8 @@ title="Fullscreen mode"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">
-   Initialisation des poids {#sububsec:weight-initialization}
+  <a class="reference internal nav-link" href="#initialisation-des-poids">
+   Initialisation des poids
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -608,12 +608,17 @@ selon le schéma</p>
 </li>
 </ul>
 </div>
-<div class="section" id="initialisation-des-poids-sububsec-weight-initialization">
-<h2>Initialisation des poids {#sububsec:weight-initialization}<a class="headerlink" href="#initialisation-des-poids-sububsec-weight-initialization" title="Lien permanent vers ce titre">#</a></h2>
+<div class="section" id="initialisation-des-poids">
+<h2>Initialisation des poids<a class="headerlink" href="#initialisation-des-poids" title="Lien permanent vers ce titre">#</a></h2>
 <p>Une méthode itérative d’optimisation étant utilisée, l’initialisation
-des poids requiert une attention toute particulière. En faisant
-l’hypothèse que les entrées de chaque cellule de la rétine sont
-distribuées selon une loi gaussienne, il est courant de choisir les
+des poids requiert une attention toute particulière.</p>
+<p>Une première idée est d’initialiser les poids selon une loi normale : <span class="math notranslate nohighlight">\(\forall i\; w_{ij} \rightsquigarrow 10^{-m}\mathcal{N}(0,1)\ m&gt;0 \)</span>. Cependant, cela amène naturellement rapidement à une évolution des poids vers des valeurs nulles (<a class="reference internal" href="#vanishing"><span class="std std-numref">Fig. 4</span></a>) (phénomène de disparition du gradient).</p>
+<div class="figure align-default" id="vanishing">
+<img alt="_images/vanishing.png" src="_images/vanishing.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Quelques fonctions d’activation</span><a class="headerlink" href="#vanishing" title="Lien permanent vers cette image">#</a></p>
+</div>
+<p>En faisant l’hypothèse que les entrées de chaque cellule de la rétine sont
+distribuées selon une loi gaussienne, il est alors courant de choisir les
 poids aléatoirement dans</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
