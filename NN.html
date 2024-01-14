@@ -1,62 +1,49 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="fr" data-content_root="" >
-
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction aux réseaux de neurones &#8212; Apprentissage profond</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/translations.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -66,267 +53,544 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'NN';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Perceptrons multicouches" href="PMC.html" />
     <link rel="prev" title="Apprentissage profond" href="intro.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="fr"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="fr">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
+    
+    <div class="container-fluid" id="banner"></div>
 
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    
 
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search..."
-         aria-label="Search..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-
-<a class="navbar-brand logo" href="intro.html">
-  
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Apprentissage profond</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction aux réseaux de neurones</a></li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction aux réseaux de neurones
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="PMC.html">
+   Perceptrons multicouches
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
 
 
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Mode plein écran"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
-
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
   
-</div>
-</div>
-              
-              
+>
+  
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction aux réseaux de neurones</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contenu </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reseaux-de-neurones-et-apprentissage-automatique">Réseaux de neurones et apprentissage automatique</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#du-neurone-biologique-au-neurone-formel">Du neurone biologique au neurone formel</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-des-reseaux-de-neurones">Classification des réseaux de neurones</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron">Perceptron</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Définitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">Utilisation : discrimination linéaire</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">Algorithme d’apprentissage par correction d’erreur</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient">Algorithme d’apprentissage par descente de gradient</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">Pour en finir avec le perceptron</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptrons-multicouches">Perceptrons multicouches</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-d-activation-subsec-activation-functions">Fonctions d’activation {#subsec:activation-functions}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training">Entraînement des réseaux multicouches {#subsec:supervised-training}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategies-d-entrainement">Stratégies d’entraînement</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimisation-des-parametres-subsubsec-parameter-optimization">Optimisation des paramètres {#subsubsec:parameter-optimization}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">Initialisation des poids {#sububsec:weight-initialization}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation">Rétropropagation de l’erreur {#subsubsec:error-backproagation}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criteres-d-arret">Critères d’arrêt</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propriete-fondamentale">Propriété fondamentale</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularisation">Régularisation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple">Exemple</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reseau">Réseau</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-d-apprentissage">Phase d’apprentissage</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#couche-de-sortie">Couche de sortie</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#couche-cachee">Couche cachée</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#initialisation-des-poids-initialisation-des-poids">Initialisation des poids {#initialisation-des-poids}</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Perceptron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-multicouches">Perceptron multicouches</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#une-couche-cachee">Une couche cachée</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deux-couches-cachees">Deux couches cachées</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-              
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reseaux-de-neurones-et-apprentissage-automatique">
+   Réseaux de neurones et apprentissage automatique
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#du-neurone-biologique-au-neurone-formel">
+     Du neurone biologique au neurone formel
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classification-des-reseaux-de-neurones">
+     Classification des réseaux de neurones
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications">
+     Applications
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptron">
+   Perceptron
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definitions">
+     Définitions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">
+     Utilisation : discrimination linéaire
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">
+     Algorithme d’apprentissage par correction d’erreur
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient">
+     Algorithme d’apprentissage par descente de gradient
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation">
+     Implémentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">
+     Pour en finir avec le perceptron
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptrons-multicouches">
+   Perceptrons multicouches
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fonctions-d-activation-subsec-activation-functions">
+     Fonctions d’activation {#subsec:activation-functions}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training">
+     Entraînement des réseaux multicouches {#subsec:supervised-training}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strategies-d-entrainement">
+     Stratégies d’entraînement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimisation-des-parametres-subsubsec-parameter-optimization">
+     Optimisation des paramètres {#subsubsec:parameter-optimization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">
+     Initialisation des poids {#sububsec:weight-initialization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation">
+     Rétropropagation de l’erreur {#subsubsec:error-backproagation}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#criteres-d-arret">
+     Critères d’arrêt
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propriete-fondamentale">
+     Propriété fondamentale
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularisation">
+     Régularisation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exemple">
+     Exemple
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reseau">
+       Réseau
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phase-d-apprentissage">
+       Phase d’apprentissage
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-de-sortie">
+         Couche de sortie
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-cachee">
+         Couche cachée
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#initialisation-des-poids-initialisation-des-poids">
+         Initialisation des poids {#initialisation-des-poids}
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partie-pratique">
+   Partie pratique
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Perceptron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perceptron-multicouches">
+     Perceptron multicouches
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#une-couche-cachee">
+       Une couche cachée
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#deux-couches-cachees">
+       Deux couches cachées
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction aux réseaux de neurones</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reseaux-de-neurones-et-apprentissage-automatique">
+   Réseaux de neurones et apprentissage automatique
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#du-neurone-biologique-au-neurone-formel">
+     Du neurone biologique au neurone formel
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classification-des-reseaux-de-neurones">
+     Classification des réseaux de neurones
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications">
+     Applications
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptron">
+   Perceptron
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definitions">
+     Définitions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">
+     Utilisation : discrimination linéaire
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">
+     Algorithme d’apprentissage par correction d’erreur
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient">
+     Algorithme d’apprentissage par descente de gradient
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation">
+     Implémentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">
+     Pour en finir avec le perceptron
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptrons-multicouches">
+   Perceptrons multicouches
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fonctions-d-activation-subsec-activation-functions">
+     Fonctions d’activation {#subsec:activation-functions}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training">
+     Entraînement des réseaux multicouches {#subsec:supervised-training}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strategies-d-entrainement">
+     Stratégies d’entraînement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimisation-des-parametres-subsubsec-parameter-optimization">
+     Optimisation des paramètres {#subsubsec:parameter-optimization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">
+     Initialisation des poids {#sububsec:weight-initialization}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation">
+     Rétropropagation de l’erreur {#subsubsec:error-backproagation}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#criteres-d-arret">
+     Critères d’arrêt
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propriete-fondamentale">
+     Propriété fondamentale
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularisation">
+     Régularisation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exemple">
+     Exemple
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reseau">
+       Réseau
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phase-d-apprentissage">
+       Phase d’apprentissage
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-de-sortie">
+         Couche de sortie
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#couche-cachee">
+         Couche cachée
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#initialisation-des-poids-initialisation-des-poids">
+         Initialisation des poids {#initialisation-des-poids}
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partie-pratique">
+   Partie pratique
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Perceptron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perceptron-multicouches">
+     Perceptron multicouches
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#une-couche-cachee">
+       Une couche cachée
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#deux-couches-cachees">
+       Deux couches cachées
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-aux-reseaux-de-neurones">
-<h1>Introduction aux réseaux de neurones<a class="headerlink" href="#introduction-aux-reseaux-de-neurones" title="Lien permanent vers cette rubrique">#</a></h1>
-<section id="reseaux-de-neurones-et-apprentissage-automatique">
-<h2>Réseaux de neurones et apprentissage automatique<a class="headerlink" href="#reseaux-de-neurones-et-apprentissage-automatique" title="Lien permanent vers cette rubrique">#</a></h2>
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-aux-reseaux-de-neurones">
+<h1>Introduction aux réseaux de neurones<a class="headerlink" href="#introduction-aux-reseaux-de-neurones" title="Lien permanent vers ce titre">#</a></h1>
+<div class="section" id="reseaux-de-neurones-et-apprentissage-automatique">
+<h2>Réseaux de neurones et apprentissage automatique<a class="headerlink" href="#reseaux-de-neurones-et-apprentissage-automatique" title="Lien permanent vers ce titre">#</a></h2>
 <p>Les réseaux de neurones artificiels sont des techniques
 issues du domaine du connexionisme. Le courant connexionniste insiste
 sur le grand nombre de connexions (sous forme de réseau) réalisées entre
@@ -351,8 +615,8 @@ Les réseaux de neurones, eux, procèdent selon une
 approche « ascendante » qui tente de produire des phénomènes complexes
 à partir
 d’opérations très élémentaires.</p>
-<section id="du-neurone-biologique-au-neurone-formel">
-<h3>Du neurone biologique au neurone formel<a class="headerlink" href="#du-neurone-biologique-au-neurone-formel" title="Lien permanent vers cette rubrique">#</a></h3>
+<div class="section" id="du-neurone-biologique-au-neurone-formel">
+<h3>Du neurone biologique au neurone formel<a class="headerlink" href="#du-neurone-biologique-au-neurone-formel" title="Lien permanent vers ce titre">#</a></h3>
 <p>La reconnaissance du fait que le cerveau fonctionne de manière
 entièrement différente de celle d’un ordinateur conventionnel a joué un
 rôle très important dans le développement des réseaux de neurones
@@ -377,12 +641,10 @@ neurones;</p></li>
 poids synaptique, à un autre neurone; elle est essentielle dans le
 fonctionnement du système nerveux.</p></li>
 </ul>
-<figure class="align-default" id="neurone">
+<div class="figure align-default" id="neurone">
 <img alt="_images/neurone.png" src="_images/neurone.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Neurone biologique</span><a class="headerlink" href="#neurone" title="Lien permanent vers cette image">#</a></p>
-</figcaption>
-</figure>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Neurone biologique</span><a class="headerlink" href="#neurone" title="Lien permanent vers cette image">#</a></p>
+</div>
 <p>La transmission de l’information d’un neurone à l’autre s’effectue au
 moyen de l’influx nerveux, qui est constitué d’une impulsion électrique,
 d’une durée d’environ 2 ms et d’une amplitude de 100 mV. Une cellule
@@ -415,7 +677,7 @@ définition suivante, proposée par Haykin :\</p>
 parallèle, qui a une propension naturelle à mémoriser des connaissances
 de façon expérimentale et de les rendre disponibles pour utilisation. Il
 ressemble au cerveau en deux points :</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>la connaissance est acquise au travers d’un processus
 d’apprentissage;</p></li>
 <li><p>les poids des connections entre les neurones sont utilisés pour
@@ -424,9 +686,9 @@ mémoriser la connaissance</p></li>
 <p>La première étude systématique du neurone artificiel est due au
 neuropsychiatre McCulloch et au logicien Pitts qui s’inspirèrent de
 leurs travaux sur les neurones biologiques.</p>
-</section>
-<section id="classification-des-reseaux-de-neurones">
-<h3>Classification des réseaux de neurones<a class="headerlink" href="#classification-des-reseaux-de-neurones" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="classification-des-reseaux-de-neurones">
+<h3>Classification des réseaux de neurones<a class="headerlink" href="#classification-des-reseaux-de-neurones" title="Lien permanent vers ce titre">#</a></h3>
 <p>Un réseau de neurones est constitué d’un grand nombre de
 cellules de base interconnectées. De nombreuses variantes sont définies
 selon le choix de la cellule élémentaire, de l’architecture et de la
@@ -452,9 +714,9 @@ l’aide de la fonction sigmoïde, une architecture sans rétroaction en
 couches successives avec une couche d’entrée et une couche de sortie,
 une dynamique asynchrone séquentielle, on obtient le modèle du
 Perceptron multi-couches (PMC).</p>
-</section>
-<section id="applications">
-<h3>Applications<a class="headerlink" href="#applications" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="applications">
+<h3>Applications<a class="headerlink" href="#applications" title="Lien permanent vers ce titre">#</a></h3>
 <p>En apprentissage, les réseaux de neurones sont essentiellement utilisés pour :</p>
 <ul class="simple">
 <li><p>l’apprentissage supervisé ;</p></li>
@@ -465,15 +727,15 @@ Perceptron multi-couches (PMC).</p>
 supervisé. Le cas des réseaux de neurones en apprentissage non supervisé
 concerne principalement les cartes de Kohonen, les machines de Boltzmann
 restreintes (RBM) et les autoencodeurs.</p>
-</section>
-</section>
-<section id="perceptron">
-<h2>Perceptron<a class="headerlink" href="#perceptron" title="Lien permanent vers cette rubrique">#</a></h2>
-<section id="definitions">
-<h3>Définitions<a class="headerlink" href="#definitions" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+</div>
+<div class="section" id="perceptron">
+<h2>Perceptron<a class="headerlink" href="#perceptron" title="Lien permanent vers ce titre">#</a></h2>
+<div class="section" id="definitions">
+<h3>Définitions<a class="headerlink" href="#definitions" title="Lien permanent vers ce titre">#</a></h3>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 1 </span> (Neurone)</p>
-<section class="definition-content" id="proof-content">
+<div class="definition-content section" id="proof-content">
 <p>Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
 Les <span class="math notranslate nohighlight">\(D\)</span> variables sur lesquelles opère le neurone sont habituellement
 désignées sous le terme d’entrées du neurone (notées
@@ -489,15 +751,15 @@ Le neurone formel calcule la sortie selon la formule :</p>
 <li><p><span class="math notranslate nohighlight">\(\mathbf w^\top \mathbf x\)</span> est le potentiel du neurone</p></li>
 <li><p><span class="math notranslate nohighlight">\(f\)</span> est la fonction d’activation associée au neurone.</p></li>
 </ul>
-</section>
+</div>
 </div><div class="proof definition admonition" id="definition-1">
 <p class="admonition-title"><span class="caption-number">Definition 2 </span> (Réseau de neurones)</p>
-<section class="definition-content" id="proof-content">
+<div class="definition-content section" id="proof-content">
 <p>Un réseau de neurones est un ensemble de neurones interconnectés. Les
 réseaux de neurones peuvent être visualisés par l’intermédiaire d’un
 graphe orienté. Chaque neurone est un noeud, les neurones étant
 connectés par des arêtes.</p>
-</section>
+</div>
 </div><p>On distingue habituellement neurone d’entrée et neurone de
 sortie. Un neurone d’entrée calcule <span class="math notranslate nohighlight">\(y = x\)</span> où <span class="math notranslate nohighlight">\(x\)</span> est une entrée unique
 du neurone. Les neurones de sortie prennent un nombre quelconque
@@ -514,7 +776,7 @@ la perception visuelle. Nous commençons par aborder le cas du perceptron
 linéaire à seuil.</p>
 <div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 3 </span> (Perceptron linéire à seuil)</p>
-<section class="definition-content" id="proof-content">
+<div class="definition-content section" id="proof-content">
 <p>Un perceptron linéaire à seuil prend en entrée <span class="math notranslate nohighlight">\(D\)</span> valeurs
 <span class="math notranslate nohighlight">\(x_1\cdots x_D\)</span> (la rétine) et calcule une sortie <span class="math notranslate nohighlight">\(y\)</span>. Suivant la
 définition précédente, un perceptron est défini par la donnée de <span class="math notranslate nohighlight">\(D+1\)</span>
@@ -528,7 +790,7 @@ le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sorti
    0 &amp; \textrm{sinon}\\
 \end{array}
 \right.\end{split}\]</div>
-</section>
+</div>
 </div><p>Les entrées <span class="math notranslate nohighlight">\(x_1,\cdots x_D\)</span> peuvent être à valeurs dans {0,1} (ou
 {-1,1}) ou réelles, les poids peuvent être entiers ou réels.</p>
 <p>Pour simplifier les notations et certaines preuves, on remplace souvent
@@ -546,9 +808,9 @@ Dans le cas du perceptron linéaire à seuil, la fonction d’activation est
 la fonction de Heaviside définie par <span class="math notranslate nohighlight">\(f(x)=1_{\{x&gt;0\}}\)</span> lorsque la
 sortie est en {0,1}, et <span class="math notranslate nohighlight">\(g(x) = 2f(x) - 1\)</span> lorsque la sortie est en
 {-1,1}.</p>
-</section>
-<section id="utilisation-discrimination-lineaire">
-<h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="utilisation-discrimination-lineaire">
+<h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien permanent vers ce titre">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span>{0,1} . On
 note</p>
 <div class="math notranslate nohighlight">
@@ -568,9 +830,9 @@ entrée toujours égale à 1 est séparable par un hyperplan passant par
 l’origine.<br />
 Toute fonction de <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> dans {0,1} n’est bien sur pas calculable par
 un tel perceptron.</p>
-</section>
-<section id="algorithme-d-apprentissage-par-correction-d-erreur">
-<h3>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="algorithme-d-apprentissage-par-correction-d-erreur">
+<h3>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Lien permanent vers ce titre">#</a></h3>
 <p>Étant donné un échantillon d’apprentissage <span class="math notranslate nohighlight">\({\cal E}_a\)</span> de
 <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span> {0,1} (respectivement <span class="math notranslate nohighlight">\(\{0,1\}^n\times\)</span> {0,1}),
 c’est-à-dire un ensemble d’exemples dont les descriptions sont <span class="math notranslate nohighlight">\(D\)</span>
@@ -595,18 +857,18 @@ de valeur 1 pour le perceptron.
 L’apprentissage par correction d’erreur du perceptron est donné dans l”<a class="reference internal" href="#correction">Algorithm 1</a></p>
 <div class="proof algorithm admonition" id="correction">
 <p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Algorithme d’apprentissage du perceptron par correction d’erreur)</p>
-<section class="algorithm-content" id="proof-content">
-<ol class="arabic simple">
+<div class="algorithm-content section" id="proof-content">
+<ol class="simple">
 <li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
 <li><p>Tant que (test)</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Prendre un exemple <span class="math notranslate nohighlight">\((\mathbf{x_n},t_n)\)</span> dans <span class="math notranslate nohighlight">\({\cal E}_a\)</span></p></li>
 <li><p>Calculer la sortie <span class="math notranslate nohighlight">\(y_n\)</span> du perceptron pour l’entrée <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\((\forall i)\; w_i \leftarrow w_i+(t_n-y_n)x_n^i\)</span></p></li>
 </ol>
 </li>
 </ol>
-</section>
+</div>
 </div><p>La procédure d’apprentissage du perceptron est une procédure de
 correction d’erreur puisque les poids ne sont pas modifiés lorsque la
 sortie attendue <span class="math notranslate nohighlight">\(t_n\)</span> est égale à la sortie calculée <span class="math notranslate nohighlight">\(y_n\)</span> par le
@@ -641,7 +903,7 @@ pendant un certain nombre d’étapes ?</p></li>
 <p>Nous reviendrons sur toutes ces questions par la suite.</p>
 <div class="proof example admonition" id="example-4">
 <p class="admonition-title"><span class="caption-number">Example 1 </span> (Apprentissage du OU binaire)</p>
-<section class="example-content" id="proof-content">
+<div class="example-content section" id="proof-content">
 <p>Les descriptions appartiennent à {0,1}<span class="math notranslate nohighlight">\(^2\)</span>, les entrées du perceptron
 appartiennent à {0,1}<span class="math notranslate nohighlight">\(^3\)</span>, la première composante correspond à l’entrée
 <span class="math notranslate nohighlight">\(x_0\)</span> et vaut toujours 1, les deux composantes suivantes correspondent
@@ -650,7 +912,7 @@ poids suivants ont été choisis : <span class="math notranslate nohighlight">\(
 suppose que les exemples sont présentés dans l’ordre lexicographique.</p>
 <p>Le tableau suivant présente la trace de l’algorithme à partir de cette initialisation.
 Aucune entrée ne modifie le perceptron à partir de l’itération 10.</p>
-<table class="table">
+<table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>étape</p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(w_0\)</span></p></th>
@@ -800,7 +1062,7 @@ Aucune entrée ne modifie le perceptron à partir de l’itération 10.</p>
 </tr>
 </tbody>
 </table>
-</section>
+</div>
 </div><p>On peut montrer que si l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est linéairement
 séparable et si les exemples sont présentés de manière équitable
 (c’est-à-dire que la procédure de choix des exemples n’en exclut aucun),
@@ -843,7 +1105,7 @@ que l’échantillon n’est pas séparable. Et l’on peut penser que l’on pe
 borner les poids et le seuil en fonction de la taille de la rétine.</p>
 <p>C’est vrai mais les résultats de complexité suivants montrent que cette
 idée n’est pas applicable en pratique.</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Toute fonction booléenne linéairement séparable sur <span class="math notranslate nohighlight">\(D\)</span> variables
 peut être réalisée par un perceptron dont les poids synaptiques
 entiers <span class="math notranslate nohighlight">\(w_i\)</span> sont tels que
@@ -869,9 +1131,9 @@ linéairement séparables peuvent ne plus l’être à cause du bruit. En
 particulier, les problèmes non-déterministes, c’est-à-dire pour lesquels
 une même description peut représenter des éléments de classes
 différentes, ne peuvent pas être traités à l’aide d’un perceptron.</p>
-</section>
-<section id="algorithme-d-apprentissage-par-descente-de-gradient">
-<h3>Algorithme d’apprentissage par descente de gradient<a class="headerlink" href="#algorithme-d-apprentissage-par-descente-de-gradient" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="algorithme-d-apprentissage-par-descente-de-gradient">
+<h3>Algorithme d’apprentissage par descente de gradient<a class="headerlink" href="#algorithme-d-apprentissage-par-descente-de-gradient" title="Lien permanent vers ce titre">#</a></h3>
 <p>Plutôt que d’obtenir un perceptron qui classifie correctement tous les
 exemples, il s’agit maintenant de calculer une erreur et d’essayer de
 minimiser cette erreur. Pour introduire cette notion d’erreur, on
@@ -903,14 +1165,14 @@ $<span class="math notranslate nohighlight">\(\Delta w_i=-\epsilon \frac{\partia
 linéaire peut maintenant être défini l”<a class="reference internal" href="#descente">Algorithm 2</a>.</p>
 <div class="proof algorithm admonition" id="descente">
 <p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
-<section class="algorithm-content" id="proof-content">
-<ol class="arabic simple">
+<div class="algorithm-content section" id="proof-content">
+<ol class="simple">
 <li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
 <li><p>Tant que (test)</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Pour tout <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(\Delta w_i \leftarrow 0\)</span></p></li>
 <li><p>Pour tout <span class="math notranslate nohighlight">\((\mathbf x_n,t_n)\in {\cal E}_a\)</span></p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Calculer <span class="math notranslate nohighlight">\(y_n\)</span></p></li>
 <li><p>Pour tout <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(\Delta w_i \leftarrow \Delta w_i+\varepsilon (t_y-y_n)x_n^i\)</span></p></li>
 </ol>
@@ -919,7 +1181,7 @@ linéaire peut maintenant être défini l”<a class="reference internal" href="
 </ol>
 </li>
 </ol>
-</section>
+</div>
 </div><p>La fonction erreur quadratique ne possède qu’un minimum (la surface est
 une paraboloïde). La convergence est assurée, même si l’échantillon
 d’entrée n’est pas linéairement séparable, vers un minimum de la
@@ -938,18 +1200,18 @@ de Widrow-Hoff, et l”<a class="reference internal" href="#adaline">Algorithm 3
 décrit cette règle :</p>
 <div class="proof algorithm admonition" id="adaline">
 <p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
-<section class="algorithm-content" id="proof-content">
-<ol class="arabic simple">
+<div class="algorithm-content section" id="proof-content">
+<ol class="simple">
 <li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
 <li><p>Tant que (test)</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Prendre un exemple <span class="math notranslate nohighlight">\((\mathbf x_n,t_n)\in {\cal E}_a\)</span></p></li>
 <li><p>Calculer <span class="math notranslate nohighlight">\(y_n\)</span></p></li>
 <li><p>Pour tout <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(w_i \leftarrow  w_i+\varepsilon (t_y-y_n)x_n^i\)</span></p></li>
 </ol>
 </li>
 </ol>
-</section>
+</div>
 </div><p>En général, on parcourt l’échantillon dans un ordre prédéfini. Le
 critère d’arrêt généralement choisi fait intervenir un seuil de
 modifications des poids pour un passage complet de l’échantillon.\</p>
@@ -985,9 +1247,9 @@ d’apprentissage (apprentissage par batchs). La convergence est, en
 général, plus rapide que par la méthode du gradient. Il est fréquent
 pour cet algorithme de faire diminuer la valeur de <span class="math notranslate nohighlight">\(\varepsilon\)</span> en
 fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
-</section>
-<section id="implementation">
-<h3>Implémentation<a class="headerlink" href="#implementation" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="implementation">
+<h3>Implémentation<a class="headerlink" href="#implementation" title="Lien permanent vers ce titre">#</a></h3>
 <p>On illustre le pouvoir de séparation linéaire d’un perceptron sur trois jeux de données :</p>
 <ul class="simple">
 <li><p>un jeu de données linéairement séparable</p></li>
@@ -1124,12 +1386,12 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/14a6204ca741c08de5d516589c36d1cb6c8e60e9ba4a3181067ef3036812fcb1.png" src="_images/14a6204ca741c08de5d516589c36d1cb6c8e60e9ba4a3181067ef3036812fcb1.png" />
+<img alt="_images/NN_13_0.png" src="_images/NN_13_0.png" />
 </div>
 </div>
-</section>
-<section id="pour-en-finir-avec-le-perceptron">
-<h3>Pour en finir avec le perceptron<a class="headerlink" href="#pour-en-finir-avec-le-perceptron" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="pour-en-finir-avec-le-perceptron">
+<h3>Pour en finir avec le perceptron<a class="headerlink" href="#pour-en-finir-avec-le-perceptron" title="Lien permanent vers ce titre">#</a></h3>
 <p>L’apprentissage par correction ou par la méthode du gradient ne sont
 rien d’autre que des techniques de séparation linéaire qu’il faudrait
 comparer aux techniques utilisées habituellement en statistiques
@@ -1153,14 +1415,14 @@ de résoudre cette difficulté peuvent être envisagées :</p>
 <li><p>soit (ce qui revient à peu près aumême) complexifier l’espace de représentation de manière à linéariser le problème initial.</p></li>
 </ul>
 <p>Les réseaux multicouches abordent ce type de problème.</p>
-</section>
-</section>
-<section id="perceptrons-multicouches">
-<h2>Perceptrons multicouches<a class="headerlink" href="#perceptrons-multicouches" title="Lien permanent vers cette rubrique">#</a></h2>
+</div>
+</div>
+<div class="section" id="perceptrons-multicouches">
+<h2>Perceptrons multicouches<a class="headerlink" href="#perceptrons-multicouches" title="Lien permanent vers ce titre">#</a></h2>
 <div class="proof definition admonition" id="definition-7">
 <p class="admonition-title"><span class="caption-number">Definition 4 </span> (Perceptron multicouches)</p>
-<section class="definition-content" id="proof-content">
-<p>Un perceptron à <span class="math notranslate nohighlight">\((L+1)\)</span> couches (<a class="reference internal" href="#mlp"><span class="std std-numref">Fig. 2</span></a>) est un réseau constitué d’une
+<div class="definition-content section" id="proof-content">
+<p>Un perceptron à <span class="math notranslate nohighlight">\((L+1)\)</span> couches (<a class="reference internal" href="PMC.html#mlp"><span class="std std-numref">Fig. 3</span></a>) est un réseau constitué d’une
 rétine à <span class="math notranslate nohighlight">\(D\)</span> neurones (auxquels on rajoute l’entrée <span class="math notranslate nohighlight">\(x_0\)</span>), <span class="math notranslate nohighlight">\(C\)</span> neurones
 de sortie, et des neurones dits <strong>cachés</strong>, organisés dans <span class="math notranslate nohighlight">\(L\)</span> couches
 cachées intermédiaires. De fait, un tel réseau comporte <span class="math notranslate nohighlight">\((L+2)\)</span> couches
@@ -1177,7 +1439,7 @@ de la couche <span class="math notranslate nohighlight">\(l\)</span>, et <span c
 est le nombre de neurones de la couche <span class="math notranslate nohighlight">\(l\)</span>, de sorte que <span class="math notranslate nohighlight">\(D = m^{(0)}\)</span>
 et <span class="math notranslate nohighlight">\(C = m^{(L+1)}\)</span>. Enfin, <span class="math notranslate nohighlight">\(f\)</span> est la fonction d’activation du neurone
 (supposée identique pour tous les neurones).</p>
-</section>
+</div>
 </div><p>En introduisant dans chaque couche un neurone supplémentaire
 <span class="math notranslate nohighlight">\(y_0^{(l)} = 1\)</span> pour gérer le biais, on a :</p>
 <div class="math notranslate nohighlight">
@@ -1187,12 +1449,10 @@ et <span class="math notranslate nohighlight">\(C = m^{(L+1)}\)</span>. Enfin, <
 <p>avec <span class="math notranslate nohighlight">\(z^{(l)}\)</span>, <span class="math notranslate nohighlight">\(w^{(l)}\)</span> et <span class="math notranslate nohighlight">\(y^{(l-1)}\)</span> les
 représentations vectorielle et matricielle des entrées <span class="math notranslate nohighlight">\(z_i^{(l)}\)</span>, des
 poids <span class="math notranslate nohighlight">\(w_{i,k}^{(l)}\)</span> et des sorties <span class="math notranslate nohighlight">\(y_k^{(l-1)}\)</span>.</p>
-<figure class="align-default" id="mlp">
+<div class="figure align-default" id="mlp">
 <img alt="_images/mlp.png" src="_images/mlp.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Perceptron multicouches à <span class="math notranslate nohighlight">\((L + 1)\)</span> couches, <span class="math notranslate nohighlight">\(D\)</span> entrées et <span class="math notranslate nohighlight">\(C\)</span> sorties.</span><a class="headerlink" href="#mlp" title="Lien permanent vers cette image">#</a></p>
-</figcaption>
-</figure>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Perceptron multicouches à <span class="math notranslate nohighlight">\((L + 1)\)</span> couches, <span class="math notranslate nohighlight">\(D\)</span> entrées et <span class="math notranslate nohighlight">\(C\)</span> sorties.</span><a class="headerlink" href="#mlp" title="Lien permanent vers cette image">#</a></p>
+</div>
 <p>Un tel réseau représente une fonction $<span class="math notranslate nohighlight">\(\begin{aligned}
     y(\cdot,w) &amp;:&amp; \mathbb{R}^D \rightarrow \mathbb{R}^C\\
     x &amp;\mapsto&amp; y(x,w)
@@ -1200,8 +1460,8 @@ poids <span class="math notranslate nohighlight">\(w_{i,k}^{(l)}\)</span> et des
 est le vecteur de tous les poids du réseau.</p>
 <p>On parlera de <strong>réseau profond (Deep network)</strong> lorsque le nombre de
 couches cachées est supérieur à 3.</p>
-<section id="fonctions-d-activation-subsec-activation-functions">
-<h3>Fonctions d’activation {#subsec:activation-functions}<a class="headerlink" href="#fonctions-d-activation-subsec-activation-functions" title="Lien permanent vers cette rubrique">#</a></h3>
+<div class="section" id="fonctions-d-activation-subsec-activation-functions">
+<h3>Fonctions d’activation {#subsec:activation-functions}<a class="headerlink" href="#fonctions-d-activation-subsec-activation-functions" title="Lien permanent vers ce titre">#</a></h3>
 <p>Trois grandes classes de fonction d’activation <span class="math notranslate nohighlight">\(f\)</span> sont généralement
 utilisées : les fonctions de seuils (comme dans le perceptron linéaire à
 seuil), les fonctions linéaires par morceau et les fonctions de type
@@ -1251,18 +1511,18 @@ elle, peut être utilisée : \)</span><span class="math notranslate nohighlight"
     \label{eq:relu}
     r(z) = \max (0,z).
 \end{aligned}\)</span>$ Les neurones cachés utilisant la fonction décrite dans
-l’équation <span class="xref myst">[eq:relu]</span>{reference-type= »eqref »
+l’équation <a class="reference external" href="#eq:relu">[eq:relu]</a>{reference-type= »eqref »
 reference= »eq:relu »} sont appelés neurones linéaires rectifiés
 (<strong>Rectified Linear Units, ReLUs</strong>), et sont en pratique très utilisés.<br />
 Quelques fonctions d’activation sont présentées dans la figure
-<span class="xref myst">1.4</span>{reference-type= »ref »
+<a class="reference external" href="#fig:sigmoid-tanh">1.4</a>{reference-type= »ref »
 reference= »fig:sigmoid-tanh »}.</p>
 <figure id="fig:sigmoid-tanh">
 <figcaption>Quelques fonctions d’activation classiques.</figcaption>
 </figure>
-</section>
-<section id="entrainement-des-reseaux-multicouches-subsec-supervised-training">
-<h3>Entraînement des réseaux multicouches {#subsec:supervised-training}<a class="headerlink" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="entrainement-des-reseaux-multicouches-subsec-supervised-training">
+<h3>Entraînement des réseaux multicouches {#subsec:supervised-training}<a class="headerlink" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training" title="Lien permanent vers ce titre">#</a></h3>
 <p>Pour pouvoir utiliser les réseaux multicouches en apprentissage, deux
 ingrédients sont indispensables :</p>
 <ul class="simple">
@@ -1292,7 +1552,7 @@ problème trouve une solution : l’algorithme de <strong>rétropropagation du
 gradient</strong>, découvert simultanément par des équipes française et
 américaine.</p>
 <p>L’entraînement, comme dans le cas de l’algorithme
-<span class="xref myst">[A:descGrad]</span>{reference-type= »ref »
+<a class="reference external" href="#A:descGrad">[A:descGrad]</a>{reference-type= »ref »
 reference= »A:descGrad »}, consiste à trouver les poids qui minimisent une
 fonction d’erreur, mesurant l’écart entre la sortie du réseau <span class="math notranslate nohighlight">\(y(x_n)\)</span>
 et <span class="math notranslate nohighlight">\(t_n\)</span>, pour tous les exemples de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Les fonctions
@@ -1302,9 +1562,9 @@ exemple, et incluent l’erreur quadratique $<span class="math notranslate nohig
 \end{aligned}\)</span><span class="math notranslate nohighlight">\( ou l'erreur d'entropie croisée \)</span><span class="math notranslate nohighlight">\(\begin{aligned}
     E(w) = \dsum_{n = 1}^N E_n(w) = \dsum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(x_n,w)),
 \end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>t^i_{n}<span class="math notranslate nohighlight">\( est la \)</span>i^{\text{e}}<span class="math notranslate nohighlight">\( composante de \)</span>t_n$.</p>
-</section>
-<section id="strategies-d-entrainement">
-<h3>Stratégies d’entraînement<a class="headerlink" href="#strategies-d-entrainement" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="strategies-d-entrainement">
+<h3>Stratégies d’entraînement<a class="headerlink" href="#strategies-d-entrainement" title="Lien permanent vers ce titre">#</a></h3>
 <p>Parmi les stratégies d’entraînement qui peuvent être retenues, trois
 sont classiquement utilisées</p>
 <ul class="simple">
@@ -1319,9 +1579,9 @@ sont mis à jour sur l’erreur <span class="math notranslate nohighlight">\(E_
 jour en fonction de l’erreur cumulée
 <span class="math notranslate nohighlight">\(E_M(w) = \dsum_{n \in M} E_n(w)\)</span>.</p></li>
 </ul>
-</section>
-<section id="optimisation-des-parametres-subsubsec-parameter-optimization">
-<h3>Optimisation des paramètres {#subsubsec:parameter-optimization}<a class="headerlink" href="#optimisation-des-parametres-subsubsec-parameter-optimization" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="optimisation-des-parametres-subsubsec-parameter-optimization">
+<h3>Optimisation des paramètres {#subsubsec:parameter-optimization}<a class="headerlink" href="#optimisation-des-parametres-subsubsec-parameter-optimization" title="Lien permanent vers ce titre">#</a></h3>
 <p>Considérons le cas de l’entraînement stochastique. La condition
 nécessaire d’optimalité d’ordre 1 donne $<span class="math notranslate nohighlight">\(\begin{aligned}
     \frac{\partial E_n}{\partial w} = \nabla E_n(w) = 0
@@ -1347,9 +1607,9 @@ assure une convergence plus rapide, mais requiert le calcul et
 l'inversion du Hessien \)</span>H_n(w[t])<span class="math notranslate nohighlight">\( de \)</span>E_n$, ce qui est coûteux.</p>
 </li>
 </ul>
-</section>
-<section id="initialisation-des-poids-sububsec-weight-initialization">
-<h3>Initialisation des poids {#sububsec:weight-initialization}<a class="headerlink" href="#initialisation-des-poids-sububsec-weight-initialization" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="initialisation-des-poids-sububsec-weight-initialization">
+<h3>Initialisation des poids {#sububsec:weight-initialization}<a class="headerlink" href="#initialisation-des-poids-sububsec-weight-initialization" title="Lien permanent vers ce titre">#</a></h3>
 <p>Une méthode itérative d’optimisation étant utilisée, l’initialisation
 des poids requiert une attention toute particulière. En faisant
 l’hypothèse que les entrées de chaque cellule de la rétine sont
@@ -1368,11 +1628,11 @@ $<span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:normalized-initialization}
     - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} &lt; w_{i,j}^{(l)} &lt; \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
 \end{aligned}\)</span>$</p>
-</section>
-<section id="retropropagation-de-l-erreur-subsubsec-error-backproagation">
-<h3>Rétropropagation de l’erreur {#subsubsec:error-backproagation}<a class="headerlink" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="retropropagation-de-l-erreur-subsubsec-error-backproagation">
+<h3>Rétropropagation de l’erreur {#subsubsec:error-backproagation}<a class="headerlink" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation" title="Lien permanent vers ce titre">#</a></h3>
 <p>L’algorithme
-<span class="xref myst">[alg:error-backpropagation]</span>{reference-type= »ref »
+<a class="reference external" href="#alg:error-backpropagation">[alg:error-backpropagation]</a>{reference-type= »ref »
 reference= »alg:error-backpropagation »}, dit algorithme de
 rétropropagation du gradient, est utilisé pour évaluer le gradient
 <span class="math notranslate nohighlight">\(\nabla E_n (w[t])\)</span> de l’erreur <span class="math notranslate nohighlight">\(E_n\)</span> à chaque itération, ceci pour tous
@@ -1402,9 +1662,9 @@ les poids</p>
 </div>
 <p>Dans le cas d’un apprentissage stochastique, cet algorithme est appliqué
 jusqu’à convergence, pour estimer les poids du réseau de neurones.</p>
-</section>
-<section id="criteres-d-arret">
-<h3>Critères d’arrêt<a class="headerlink" href="#criteres-d-arret" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="criteres-d-arret">
+<h3>Critères d’arrêt<a class="headerlink" href="#criteres-d-arret" title="Lien permanent vers ce titre">#</a></h3>
 <p>Plusieurs critères d’arrêt peuvent être utilisés avec l’algorithme de
 rétropropagation du gradient. Le plus commun consiste à fixer un nombre
 maximum de périodes d’entraînement (sur <span class="math notranslate nohighlight">\({\cal E}_a\)</span>), ce qui fixe
@@ -1453,9 +1713,9 @@ calculé sur les données de validation cesse de s’améliorer pendant
 plusieurs périodes d’entraînement. Lors de deux périodes successives
 d’entraînement, des exemples peuvent être échangés entre ensembles
 d’apprentissage et de validation.</p>
-</section>
-<section id="propriete-fondamentale">
-<h3>Propriété fondamentale<a class="headerlink" href="#propriete-fondamentale" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="propriete-fondamentale">
+<h3>Propriété fondamentale<a class="headerlink" href="#propriete-fondamentale" title="Lien permanent vers ce titre">#</a></h3>
 <p>Terminons par une dernière remarque sur la puissance de représentation
 des réseaux multicouches. La plupart des fonctions numériques peuvent
 être approximées avec une précision arbitraire par des réseaux à une
@@ -1504,9 +1764,9 @@ régression à partir d’un nombre fini de mesures. Ils entrent donc dans
 le cadre des méthodes statistiques d’apprentissage, et élargissent ce
 domaine déjà bien exploré pour des fonctions de régression linéaire au
 cas non linéaire.\</p>
-</section>
-<section id="regularisation">
-<h3>Régularisation<a class="headerlink" href="#regularisation" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="regularisation">
+<h3>Régularisation<a class="headerlink" href="#regularisation" title="Lien permanent vers ce titre">#</a></h3>
 <p>La notion d’approximateur universel peut induire également un problème
 de surapprentissage (overfitting) de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Les techniques de
 régularisation permettent d’éviter ce problème, et permettent aux
@@ -1535,7 +1795,7 @@ des mêmes valeurs de poids. La complexité du réseau est réduite et
 des informations <em>a priori</em> peuvent être introduites par ce biais
 dans l’architecture du réseau. L’algorithme de rétropropagation du
 gradient s’en trouve modifié et l’équation
-<span class="xref myst">[eq:backprop-derivative]</span>{reference-type= »eqref »
+<a class="reference external" href="#eq:backprop-derivative">[eq:backprop-derivative]</a>{reference-type= »eqref »
 reference= »eq:backprop-derivative »} devient $<span class="math notranslate nohighlight">\(\begin{aligned}
     \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \sum _{k = 1} ^{m^{(l)}} \delta_k^{(l)} y_i^{(l-1)}
 \end{aligned}\)</span><span class="math notranslate nohighlight">\( en supposant que tous les neurones de la couche \)</span>l<span class="math notranslate nohighlight">\(
@@ -1563,21 +1823,21 @@ deviennent nulles).</p></li>
 </ul>
 </li>
 </ul>
-</section>
-<section id="exemple">
-<h3>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+<div class="section" id="exemple">
+<h3>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">#</a></h3>
 <p>On va considérer le réseau décrit sur la figure
-<span class="xref myst">1.5</span>{reference-type= »ref »
+<a class="reference external" href="#F:XOR_BackPropagation">1.5</a>{reference-type= »ref »
 reference= »F:XOR_BackPropagation »} pour apprendre la fonction du OU
 exclusif (aussi appelé XOR). L’opérateur XOR est défini par sa table de
-vérité donnée par le tableau <span class="xref myst">1.2</span>{reference-type= »ref »
+vérité donnée par le tableau <a class="reference external" href="#T:XOR">1.2</a>{reference-type= »ref »
 reference= »T:XOR »}.\</p>
-<section id="reseau">
-<h4>Réseau<a class="headerlink" href="#reseau" title="Lien permanent vers cette rubrique">#</a></h4>
+<div class="section" id="reseau">
+<h4>Réseau<a class="headerlink" href="#reseau" title="Lien permanent vers ce titre">#</a></h4>
 <p>Sur le réseau de la figure
-<span class="xref myst">1.5</span>{reference-type= »ref »
+<a class="reference external" href="#F:XOR_BackPropagation">1.5</a>{reference-type= »ref »
 reference= »F:XOR_BackPropagation »} les différentes relations sont
-données par l’équation <span class="xref myst">[E:XOR]</span>{reference-type= »ref »
+données par l’équation <a class="reference external" href="#E:XOR">[E:XOR]</a>{reference-type= »ref »
 reference= »E:XOR »} où les paramètres en rouge correspondent aux poids à
 calculer durant la phase d’apprentissage.</p>
 <div class="math notranslate nohighlight">
@@ -1596,9 +1856,9 @@ calculer durant la phase d’apprentissage.</p>
 <figcaption>Exemple d’un réseau pour apprendre la relation
 XOR.</figcaption>
 </figure>
-</section>
-<section id="phase-d-apprentissage">
-<h4>Phase d’apprentissage<a class="headerlink" href="#phase-d-apprentissage" title="Lien permanent vers cette rubrique">#</a></h4>
+</div>
+<div class="section" id="phase-d-apprentissage">
+<h4>Phase d’apprentissage<a class="headerlink" href="#phase-d-apprentissage" title="Lien permanent vers ce titre">#</a></h4>
 <p>Durant la phase d’apprentissage, on minimise un risque empirique par une
 fonction de coût. Dans cet exemple, nous allons choisir la minimisation
 de l’écart quadratique avec la base d’apprentissage labelisée
@@ -1616,8 +1876,8 @@ l’itération <span class="math notranslate nohighlight">\(n+1\)</span> se fait
 $<span class="math notranslate nohighlight">\(\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta\)</span><span class="math notranslate nohighlight">\(
 où \)</span><span class="math notranslate nohighlight">\(\Delta \theta = -\nabla_\theta E.\)</span><span class="math notranslate nohighlight">\( On peut choisir \)</span>E=E_{tot}<span class="math notranslate nohighlight">\( ou
 \)</span>E=E_k$ et pour cet exemple nous choisirons le deuxième cas.</p>
-<section id="couche-de-sortie">
-<h5>Couche de sortie<a class="headerlink" href="#couche-de-sortie" title="Lien permanent vers cette rubrique">#</a></h5>
+<div class="section" id="couche-de-sortie">
+<h5>Couche de sortie<a class="headerlink" href="#couche-de-sortie" title="Lien permanent vers ce titre">#</a></h5>
 <p>Pour la couche de sortie, prenons par exemple le paramètre <span class="math notranslate nohighlight">\(w_7\)</span>, sa
 mise à jour est donnée par la relation suivante :
 $<span class="math notranslate nohighlight">\(w_7^{\left(n+1\right)} = w_7^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_7}.\)</span>$</p>
@@ -1658,9 +1918,9 @@ pour obtenir les relations suivantes :</p>
 <figcaption>Rétropropagation du gradient sur la couche de
 sortie.</figcaption>
 </figure>
-</section>
-<section id="couche-cachee">
-<h5>Couche cachée<a class="headerlink" href="#couche-cachee" title="Lien permanent vers cette rubrique">#</a></h5>
+</div>
+<div class="section" id="couche-cachee">
+<h5>Couche cachée<a class="headerlink" href="#couche-cachee" title="Lien permanent vers ce titre">#</a></h5>
 <p>Pour la couche cachée du réseau, c’est exactement le même raisonnement.
 Prenons par exemple, le paramètre <span class="math notranslate nohighlight">\(w_1\)</span> pour le calcul :
 $<span class="math notranslate nohighlight">\(w_1^{\left(n+1\right)} = w_1^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_1}.\)</span><span class="math notranslate nohighlight">\(
@@ -1713,9 +1973,9 @@ on obtient les relations suivantes : $<span class="math notranslate nohighlight"
                 b_3^{\left(n+1\right)} &amp;=&amp; b_3^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_3\left(z_3\right)\left( 1 - h_3\left(z_3\right)\right) w_9               
             \end{array}
         \right.\)</span>$</p>
-</section>
-<section id="initialisation-des-poids-initialisation-des-poids">
-<h5>Initialisation des poids {#initialisation-des-poids}<a class="headerlink" href="#initialisation-des-poids-initialisation-des-poids" title="Lien permanent vers cette rubrique">#</a></h5>
+</div>
+<div class="section" id="initialisation-des-poids-initialisation-des-poids">
+<h5>Initialisation des poids {#initialisation-des-poids}<a class="headerlink" href="#initialisation-des-poids-initialisation-des-poids" title="Lien permanent vers ce titre">#</a></h5>
 <ul class="simple">
 <li><p>les biais sont initialisés à zéro
 <span class="math notranslate nohighlight">\(( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4\)</span> ;</p></li>
@@ -1731,24 +1991,24 @@ L’initialisation de Xavier propose un tirage uniforme dans
             w_7 \ ... \ w_9 &amp;=&amp; UD \ dans \ \left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right] = \left[-1,23;1,23 \right]
         \end{array}
     \right.\)</span>$</p>
-</section>
-</section>
-</section>
-</section>
-<section id="partie-pratique">
-<h2>Partie pratique<a class="headerlink" href="#partie-pratique" title="Lien permanent vers cette rubrique">#</a></h2>
-<section id="id1">
-<h3>Perceptron<a class="headerlink" href="#id1" title="Lien permanent vers cette rubrique">#</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="partie-pratique">
+<h2>Partie pratique<a class="headerlink" href="#partie-pratique" title="Lien permanent vers ce titre">#</a></h2>
+<div class="section" id="id1">
+<h3>Perceptron<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">#</a></h3>
 <p>Le notebook perceptron fournit le squelette d’un programme de calcul des
 résultats d’un perceptron linéaire sur trois types de données (figure
-<span class="xref myst">1.8</span>{reference-type= »ref » reference= »F:simdata »}) :</p>
-<ol class="arabic simple">
+<a class="reference external" href="#F:simdata">1.8</a>{reference-type= »ref » reference= »F:simdata »}) :</p>
+<ol class="simple">
 <li><p>un jeu de données linéairement séparable (figure
-<span class="xref myst">[F:ld]</span>{reference-type= »ref » reference= »F:ld »})</p></li>
+<a class="reference external" href="#F:ld">[F:ld]</a>{reference-type= »ref » reference= »F:ld »})</p></li>
 <li><p>un jeu de données non linéairement séparable moon (figure
-<span class="xref myst">[F:md]</span>{reference-type= »ref » reference= »F:md »})</p></li>
+<a class="reference external" href="#F:md">[F:md]</a>{reference-type= »ref » reference= »F:md »})</p></li>
 <li><p>un jeu de données non linéairement séparable composé de deux cercles
-concentriques (figure <span class="xref myst">[F:cd]</span>{reference-type= »ref »
+concentriques (figure <a class="reference external" href="#F:cd">[F:cd]</a>{reference-type= »ref »
 reference= »F:cd »})</p></li>
 </ol>
 <figure id="F:simdata">
@@ -1767,7 +2027,7 @@ reference= »F:cd »})</p></li>
 utiliser.</p></li>
 </ul>
 <p>Le résultat sur les trois jeux de données sont présentés en figure
-<span class="xref myst">1.9</span>{reference-type= »ref »
+<a class="reference external" href="#F:resperceptron">1.9</a>{reference-type= »ref »
 reference= »F:resperceptron »}.</p>
 <figure id="F:resperceptron">
 <figure>
@@ -1780,15 +2040,15 @@ reference= »F:resperceptron »}.</p>
 <figcaption>Frontières de décision du perceptron sur les trois jeux de
 données simulées</figcaption>
 </figure>
-</section>
-<section id="perceptron-multicouches">
-<h3>Perceptron multicouches<a class="headerlink" href="#perceptron-multicouches" title="Lien permanent vers cette rubrique">#</a></h3>
-<section id="une-couche-cachee">
-<h4>Une couche cachée<a class="headerlink" href="#une-couche-cachee" title="Lien permanent vers cette rubrique">#</a></h4>
+</div>
+<div class="section" id="perceptron-multicouches">
+<h3>Perceptron multicouches<a class="headerlink" href="#perceptron-multicouches" title="Lien permanent vers ce titre">#</a></h3>
+<div class="section" id="une-couche-cachee">
+<h4>Une couche cachée<a class="headerlink" href="#une-couche-cachee" title="Lien permanent vers ce titre">#</a></h4>
 <p>A partir de ce code, il vous est demandé de réaliser un perceptron
 multicouches, à une couche cachée, permettant de séparer avec une
 précision de presque 100% les données des jeux <code class="docutils literal notranslate"><span class="pre">moon</span></code> et <code class="docutils literal notranslate"><span class="pre">twocircles</span></code>
-(figure <span class="xref myst">1.10</span>{reference-type= »ref » reference= »F:resPMC »}).
+(figure <a class="reference external" href="#F:resPMC">1.10</a>{reference-type= »ref » reference= »F:resPMC »}).
 Un notebook vous est proposé, à compléter. Vous devez implémenter :</p>
 <ul class="simple">
 <li><p>le réseau à une couche cachée. Le calcul des activations de la
@@ -1809,16 +2069,16 @@ idoine et un optimiseur adapté</p></li>
 <figcaption>Frontières de décision du PMC sur les trois jeux de données
 simulées</figcaption>
 </figure>
-</section>
-<section id="deux-couches-cachees">
-<h4>Deux couches cachées<a class="headerlink" href="#deux-couches-cachees" title="Lien permanent vers cette rubrique">#</a></h4>
+</div>
+<div class="section" id="deux-couches-cachees">
+<h4>Deux couches cachées<a class="headerlink" href="#deux-couches-cachees" title="Lien permanent vers ce titre">#</a></h4>
 <p>Il vous est enfin demandé de compléter le notebook qui vous est fourni,
 et dont l’objectif est de construire un perceptron multicouches à deux
 couches cachées pour la classification des images MNIST.</p>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1832,7 +2092,7 @@ couches cachées pour la classification des images MNIST.</p>
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1840,138 +2100,50 @@ couches cachées pour la classification des images MNIST.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="intro.html"
-       title="page précédente">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">précédent</p>
-        <p class="prev-next-title">Apprentissage profond</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="précédent page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">précédent</p>
+            <p class="prev-next-title">Apprentissage profond</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="PMC.html" title="suivant page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Perceptrons multicouches</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contenu
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reseaux-de-neurones-et-apprentissage-automatique">Réseaux de neurones et apprentissage automatique</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#du-neurone-biologique-au-neurone-formel">Du neurone biologique au neurone formel</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-des-reseaux-de-neurones">Classification des réseaux de neurones</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron">Perceptron</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Définitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">Utilisation : discrimination linéaire</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">Algorithme d’apprentissage par correction d’erreur</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient">Algorithme d’apprentissage par descente de gradient</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">Pour en finir avec le perceptron</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptrons-multicouches">Perceptrons multicouches</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-d-activation-subsec-activation-functions">Fonctions d’activation {#subsec:activation-functions}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement-des-reseaux-multicouches-subsec-supervised-training">Entraînement des réseaux multicouches {#subsec:supervised-training}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategies-d-entrainement">Stratégies d’entraînement</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimisation-des-parametres-subsubsec-parameter-optimization">Optimisation des paramètres {#subsubsec:parameter-optimization}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialisation-des-poids-sububsec-weight-initialization">Initialisation des poids {#sububsec:weight-initialization}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retropropagation-de-l-erreur-subsubsec-error-backproagation">Rétropropagation de l’erreur {#subsubsec:error-backproagation}</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criteres-d-arret">Critères d’arrêt</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propriete-fondamentale">Propriété fondamentale</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularisation">Régularisation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple">Exemple</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reseau">Réseau</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-d-apprentissage">Phase d’apprentissage</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#couche-de-sortie">Couche de sortie</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#couche-cachee">Couche cachée</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#initialisation-des-poids-initialisation-des-poids">Initialisation des poids {#initialisation-des-poids}</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Perceptron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-multicouches">Perceptron multicouches</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#une-couche-cachee">Une couche cachée</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deux-couches-cachees">Deux couches cachées</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-Par Vincent BARRA
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
-    
-      © Copyright 2022.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Vincent BARRA<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>
