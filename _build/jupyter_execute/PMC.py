@@ -313,36 +313,30 @@
 # 
 # ## Rétropropagation de l'erreur 
 # 
-# L'algorithme
-# [\[alg:error-backpropagation\]](#alg:error-backpropagation){reference-type="ref"
-# reference="alg:error-backpropagation"}, dit algorithme de
+# l'{prf:ref}`backprop`, dit algorithme de
 # rétropropagation du gradient, est utilisé pour évaluer le gradient
 # $\nabla E_n (w[t])$ de l'erreur $E_n$ à chaque itération, ceci pour tous
 # les poids
 # 
-# ::: algorithm
+# ```{prf:algorithm} Algorithme de rétropropagation du gradient
+# :label: backprop
 # 1.  Propager un exemple $x_n$ dans le réseau.
-# 
 # 2.  Calculer les erreurs $\delta_i^{(L+1)}$ des neurones de sortie :
 #     $$\begin{aligned}
 #                 (\forall i\in\{1\cdots C\})\quad\delta_i^{(L+1)} = \frac{\partial E_n}{\partial y_i^{(L+1)}} f'(z_i^{(L+1)}).
 #             
 #     \end{aligned}$$
-# 
 # 3.  Déterminer $\delta _i ^{(l)}$ pour toutes les couches cachées :
+# 
 #     $$\begin{aligned}
 #                 (\forall l\in\{1\cdots L\})(\forall i\in\{1\cdots m^l\})\quad\delta _i ^{(l)} = f' (z_i^{(l)}) \sum _{k = 1} ^{m^{(l+1)}} w_{i,k}^{(l+1)} \delta _k ^{(l+1)}.
 #             
 #     \end{aligned}$$
-# 
-# 4.  Calculer les composantes du gradient : $$\begin{aligned}
-#                 \label{eq:backprop-derivative}
-#                 \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \delta _j ^{(l)} y_i^{(l-1)}.
-#             
+# 4.  Calculer les composantes du gradient : 
+# $$\begin{aligned}
+#                 \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \delta _j ^{(l)} y_i^{(l-1)}.           
 #     \end{aligned}$$
-# 
-# []{#alg:error-backpropagation label="alg:error-backpropagation"}
-# :::
+# ```
 # 
 # Dans le cas d'un apprentissage stochastique, cet algorithme est appliqué
 # jusqu'à convergence, pour estimer les poids du réseau de neurones.
@@ -484,11 +478,13 @@
 #     des mêmes valeurs de poids. La complexité du réseau est réduite et
 #     des informations *a priori* peuvent être introduites par ce biais
 #     dans l'architecture du réseau. L'algorithme de rétropropagation du
-#     gradient s'en trouve modifié et l'équation
-#     [\[eq:backprop-derivative\]](#eq:backprop-derivative){reference-type="eqref"
-#     reference="eq:backprop-derivative"} devient $$\begin{aligned}
+#     gradient s'en trouve modifié et l'étape 4 devient 
+#     
+#     $$\begin{aligned}
 #         \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \sum _{k = 1} ^{m^{(l)}} \delta_k^{(l)} y_i^{(l-1)}
-#     \end{aligned}$$ en supposant que tous les neurones de la couche $l$
+#     \end{aligned}$$ 
+#     
+#     en supposant que tous les neurones de la couche $l$
 #     sont tels que $w_{j,i}^{(l)} = w_{k,i}^{(l)}$ pour
 #     $1 \leq j,k \leq m^{(l)}$
 # 
