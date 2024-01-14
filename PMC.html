@@ -666,11 +666,13 @@ les poids</p>
 <p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Algorithme de rétropropagation du gradient)</p>
 <div class="algorithm-content section" id="proof-content">
 <ol>
-<li><p>Propager un exemple <span class="math notranslate nohighlight">\(x_n\)</span> dans le réseau.</p></li>
-<li><p>Calculer les erreurs <span class="math notranslate nohighlight">\(\delta_i^{(L+1)}\)</span> des neurones de sortie :
-$$\begin{aligned}
-(\forall i\in{1\cdots C})\quad\delta_i^{(L+1)} = \frac{\partial E_n}{\partial y_i^{(L+1)}} f”(z_i^{(L+1)}).</p>
-<p>\end{aligned}$$</p>
+<li><p>Propager un exemple <span class="math notranslate nohighlight">\(\mathbf x_n\)</span> dans le réseau.</p></li>
+<li><p>Calculer les erreurs <span class="math notranslate nohighlight">\(\delta_i^{(L+1)}\)</span> des neurones de sortie :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+                (\forall i\in\{1\cdots C\})\quad\delta_i^{(L+1)} = \frac{\partial E_n}{\partial y_i^{(L+1)}} f'(z_i^{(L+1)}).
+            
+    \end{aligned}\]</div>
 </li>
 <li><p>Déterminer <span class="math notranslate nohighlight">\(\delta _i ^{(l)}\)</span> pour toutes les couches cachées :</p>
 <div class="math notranslate nohighlight">
@@ -679,11 +681,12 @@ $$\begin{aligned}
             
     \end{aligned}\]</div>
 </li>
-<li><p>Calculer les composantes du gradient :
-$<span class="math notranslate nohighlight">\(\begin{aligned}
-            \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \delta _j ^{(l)} y_i^{(l-1)}.           
-\end{aligned}\)</span>$</p></li>
+<li><p>Calculer les composantes du gradient :</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+                \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \delta _j ^{(l)} y_i^{(l-1)}.           
+    \end{aligned}\]</div>
 </div>
 </div><p>Dans le cas d’un apprentissage stochastique, cet algorithme est appliqué
 jusqu’à convergence, pour estimer les poids du réseau de neurones.</p>

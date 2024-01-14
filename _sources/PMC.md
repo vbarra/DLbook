@@ -328,8 +328,9 @@ les poids
 
 ```{prf:algorithm} Algorithme de rétropropagation du gradient
 :label: backprop
-1.  Propager un exemple $x_n$ dans le réseau.
+1.  Propager un exemple $\mathbf x_n$ dans le réseau.
 2.  Calculer les erreurs $\delta_i^{(L+1)}$ des neurones de sortie :
+
     $$\begin{aligned}
                 (\forall i\in\{1\cdots C\})\quad\delta_i^{(L+1)} = \frac{\partial E_n}{\partial y_i^{(L+1)}} f'(z_i^{(L+1)}).
             
@@ -341,6 +342,7 @@ les poids
             
     \end{aligned}$$
 4.  Calculer les composantes du gradient : 
+
 $$\begin{aligned}
                 \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \delta _j ^{(l)} y_i^{(l-1)}.           
     \end{aligned}$$
