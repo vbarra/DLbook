@@ -522,10 +522,10 @@ questions suivantes : combien de couches cachées ? combien de
 neurones par couche cachée ?</p></li>
 <li><p>une fois l’architecture choisie, un algorithme d’apprentissage qui
 calcule, à partir d’un l’échantillon d’apprentissage
-<span class="math notranslate nohighlight">\({\cal E}_a = \left \{({\mathbf x_n}, t_n), 1 \leq n \leq N \right \}\)</span> , les
+<span class="math notranslate nohighlight">\({\cal E}_a = \left \{({\mathbf x_n}, \mathbf t_n),n\in[\![1,N]\!] \right \}\)</span> , les
 valeurs des poids synaptiques pour construire un réseau adapté au
 problème (c’est à dire approchant une fonction <span class="math notranslate nohighlight">\(g\)</span> désirée mais
-inconnue, telle qu’en particulier <span class="math notranslate nohighlight">\(t_n \approx g(x_n)\)</span>) .</p></li>
+inconnue, telle qu’en particulier <span class="math notranslate nohighlight">\(\mathbf t_n \approx {\mathbf g(x_n)}\)</span>) .</p></li>
 </ul>
 <p>Sur le premier point, quelques algorithmes d’apprentissage
 auto-constructifs ont été proposés. Leur rôle est double :</p>
@@ -539,12 +539,11 @@ qui classent correctement l’échantillon, mais beaucoup plus difficile
 d’en obtenir qui aient un bon pouvoir de généralisation.<br />
 Il a fallu attendre le milieu des années 1980 pour que le deuxième
 problème trouve une solution : l’algorithme de <strong>rétropropagation du
-gradient</strong>, découvert simultanément par des équipes française et
-américaine.</p>
+gradient</strong>.</p>
 <p>L’entraînement, comme dans le cas de l’algorithme
 de descentre de gradient, consiste à trouver les poids qui minimisent une
 fonction d’erreur, mesurant l’écart entre la sortie du réseau <span class="math notranslate nohighlight">\(y({\mathbf x_n})\)</span>
-et <span class="math notranslate nohighlight">\(t_n\)</span>, pour tous les exemples de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Les fonctions
+et <span class="math notranslate nohighlight">\(\mathbf t_n\)</span>, pour tous les exemples de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Les fonctions
 couramment choisies sont les sommes des fonctions de perte sur chaque
 exemple, et incluent l’erreur quadratique</p>
 <div class="math notranslate nohighlight">
@@ -556,7 +555,7 @@ exemple, et incluent l’erreur quadratique</p>
 \[\begin{aligned}
     E(\mathbf w) = \displaystyle\sum_{n = 1}^N E_n(\mathbf w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(\mathbf x_n,\mathbf w)),
 \end{aligned}\]</div>
-<p>où <span class="math notranslate nohighlight">\(t^i_{n}\)</span> est la <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> composante de <span class="math notranslate nohighlight">\(t_n\)</span>.</p>
+<p>où <span class="math notranslate nohighlight">\(t^i_{n}\)</span> est la <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> composante de <span class="math notranslate nohighlight">\(\mathbf t_n\)</span>.</p>
 </div>
 <div class="section" id="strategies-d-entrainement">
 <h2>Stratégies d’entraînement<a class="headerlink" href="#strategies-d-entrainement" title="Lien permanent vers ce titre">#</a></h2>
@@ -565,14 +564,14 @@ sont classiquement utilisées</p>
 <ul class="simple">
 <li><p>entraînement sur <span class="math notranslate nohighlight">\({\cal E}_a\)</span>, les poids étant mis à jour après
 présentation, en fonction de l’erreur totale
-<span class="math notranslate nohighlight">\(E(w) = \displaystyle\sum_{n=1}^N E_n(w)\)</span>.</p></li>
+<span class="math notranslate nohighlight">\(E(\mathbf w) = \displaystyle\sum_{n=1}^N E_n(\mathbf w)\)</span>.</p></li>
 <li><p>entraînement stochastique : un exemple est présenté et les poids
-sont mis à jour sur l’erreur <span class="math notranslate nohighlight">\(E_n(w)\)</span> calculée sur cet exemple
+sont mis à jour sur l’erreur <span class="math notranslate nohighlight">\(E_n(\mathbf w)\)</span> calculée sur cet exemple
 (règle Adaline)</p></li>
 <li><p>entraînement par batch sur un sous-ensemble
 <span class="math notranslate nohighlight">\(M \subseteq \{1,\ldots,N\}\)</span> de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>, les poids étant mis à
 jour en fonction de l’erreur cumulée
-<span class="math notranslate nohighlight">\(E_M(w) = \displaystyle\sum_{n \in M} E_n(w)\)</span>.</p></li>
+<span class="math notranslate nohighlight">\(E_M(\mathbf w) = \displaystyle\sum_{n \in M} E_n(\mathbf w)\)</span>.</p></li>
 </ul>
 </div>
 <div class="section" id="optimisation-des-parametres">
