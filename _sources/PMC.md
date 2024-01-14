@@ -39,7 +39,7 @@ $$\begin{aligned}
     \bf {z_i^{(l)}} = \displaystyle\sum _{k = 0} ^{m^{(l-1)}} \bf{w_{i,k}^{(l)}} \bf {y_k^{(l-1)}}\quad \text{ où }\quad \bf{z^{(l)}} = \bf{w^{(l)} y^{(l-1)}}
 \end{aligned}$$ 
 
-avec $z^{(l)}$, $w^{(l)}$ et $y^{(l-1)}$ les
+avec ${\bf z^{(l)}}$, $\bf{w^{(l)}}$ et $\bf{y^{(l-1)}}$ les
 représentations vectorielle et matricielle des entrées $z_i^{(l)}$, des
 poids $w_{i,k}^{(l)}$ et des sorties $y_k^{(l-1)}$.
 
