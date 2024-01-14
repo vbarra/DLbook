@@ -57,6 +57,7 @@ Perceptron multicouches à $(L + 1)$ couches, $D$ entrées et $C$ sorties.
 
 
 Un tel réseau représente une fonction 
+
 $$\begin{aligned}
     y(\cdot,w) &:& \mathbb{R}^D \rightarrow \mathbb{R}^C\\
     x &\mapsto& y(x,w)

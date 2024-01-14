@@ -432,12 +432,13 @@ poids <span class="math notranslate nohighlight">\(w_{i,k}^{(l)}\)</span> et des
 <img alt="_images/mlp.png" src="_images/mlp.png" />
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Perceptron multicouches à <span class="math notranslate nohighlight">\((L + 1)\)</span> couches, <span class="math notranslate nohighlight">\(D\)</span> entrées et <span class="math notranslate nohighlight">\(C\)</span> sorties.</span><a class="headerlink" href="#mlp" title="Lien permanent vers cette image">#</a></p>
 </div>
-<p>Un tel réseau représente une fonction
-$<span class="math notranslate nohighlight">\(\begin{aligned}
+<p>Un tel réseau représente une fonction</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
     y(\cdot,w) &amp;:&amp; \mathbb{R}^D \rightarrow \mathbb{R}^C\\
     x &amp;\mapsto&amp; y(x,w)
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( 
-où \)</span>y(x,w)<span class="math notranslate nohighlight">\( est tel que \)</span>y_i(x,w) = y_i^{(L+1)}<span class="math notranslate nohighlight">\( et \)</span>w$
+\end{aligned}\end{split}\]</div>
+<p>où <span class="math notranslate nohighlight">\(y(x,w)\)</span> est tel que <span class="math notranslate nohighlight">\(y_i(x,w) = y_i^{(L+1)}\)</span> et <span class="math notranslate nohighlight">\(w\)</span>
 est le vecteur de tous les poids du réseau.</p>
 <p>On parlera de <strong>réseau profond (Deep network)</strong> lorsque le nombre de
 couches cachées est « suffisamment important » (supérieur à 3 par exemple).</p>
