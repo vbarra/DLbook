@@ -517,8 +517,7 @@ régularisation dans les réseaux. Parmi elles, on note :
             P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top w.
         \end{aligned}$$ 
         
-où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème d  surapprentissage.
-
+où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
     -   la régularisation $L_1$ : 
     
     $$\begin{aligned}
