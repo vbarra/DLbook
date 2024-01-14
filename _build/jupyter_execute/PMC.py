@@ -85,9 +85,12 @@
 # les sorties comme des valeurs de probabilité a posteriori. S'il s'agit
 # de classer un exemple $x$ à la classe $c$, la probabilité conditionnelle
 # $p(c|x)$ peut être calculée en utilisant la règle de Bayes
-# :$$\begin{aligned}
+# :
+# $$\begin{aligned}
 # p(c|x) = \frac{p(x|c)p(c)}{p(x)}
-# \end{aligned}$$ $p(c|x)$ est alors interprétée comme une probabilité a
+# \end{aligned}$$ 
+# 
+# $p(c|x)$ est alors interprétée comme une probabilité a
 # posteriori. Disposant de ces probabilités pour tout $c=1,\ldots,C$, la
 # règle de décision de Bayes donne :$$\begin{aligned}
 # c: \mathbb{R}^D \rightarrow \{1,\ldots,C\}, x \mapsto  argmax_{c}\left(p(c|x)\right).
@@ -106,6 +109,7 @@
 # $$\begin{aligned}
 #     s(z) = \frac{1}{1+ |z|}.
 # \end{aligned}$$ 
+# 
 # En effet, les valeurs de $z$ arrivant près des paliers
 # de saturation de ces fonctions donnent des gradients faibles, qui ont
 # tendance à s'annuler lors de la phase d'apprentissage détaillée plus
