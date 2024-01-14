@@ -237,19 +237,20 @@ calcul ou l'estimation du Hessien $H_n$ de $E_n$ à chaque itération).
     par 
 
     $$\begin{aligned}
-                \Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])
+                \Delta \mathbf w[t] = - \gamma \frac{\partial E_n}{\partial \mathbf w[t]} = - \gamma \nabla E_n (\mathbf w[t])
             
     \end{aligned}$$ 
     
     où $\gamma$ est le taux d'apprentissage.
 
 -   pour les méthodes d'ordre 2, type Newton, la mise à jour s'effectue
-    selon le schéma $$\begin{aligned}
-            \Delta w[t] = - \gamma \left(\frac{\partial^2 E_n}{\partial w[t]^2}\right)^{-1} \frac{\partial E_n}{\partial w[t]} = - \gamma \left(H_n(w[t])\right)^{-1} \nabla E_n(w[t])
-        
-    \end{aligned}$$ où $\gamma$ est le taux d'apprentissage. L'ordre 2
-    assure une convergence plus rapide, mais requiert le calcul et
-    l'inversion du Hessien $H_n(w[t])$ de $E_n$, ce qui est coûteux.
+    selon le schéma 
+    
+    $$\begin{aligned}
+            \Delta \mathbf w[t] = - \gamma \left(\frac{\partial^2 E_n}{\partial \mathbf w[t]^2}\right)^{-1} \frac{\partial E_n}{\partial \mathbf w[t]} = - \gamma \left(\mathbf H_n\mathbf (\mathbf w[t])\right)^{-1} \nabla E_n(\mathbf w[t])  
+    \end{aligned}$$ 
+    
+    où $\gamma$ est le taux d'apprentissage. L'ordre 2 assure une convergence plus rapide, mais requiert le calcul et l'inversion du Hessien $\mathbf H_n(\mathbf w[t])$ de $E_n$, ce qui est coûteux.
 
 ## Initialisation des poids {#sububsec:weight-initialization}
 

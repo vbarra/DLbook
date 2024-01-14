@@ -212,23 +212,28 @@
 # ## Optimisation des paramètres 
 # 
 # Considérons le cas de l'entraînement stochastique. La condition
-# nécessaire d'optimalité d'ordre 1 donne $$\begin{aligned}
-#     \frac{\partial E_n}{\partial w} = \nabla E_n(w) = 0
+# nécessaire d'optimalité d'ordre 1 donne 
+# 
+# $$\begin{aligned}
+#     \frac{\partial E_n}{\partial \mathbf w} = \nabla E_n(\mathbf w) = 0
 # \end{aligned}$$
 # 
 # Une méthode itérative est utilisée pour trouver une solution approchée.
-# Si $w[t]$ est le vecteur de poids à la $t^{\text{e}}$ itération, une
-# mise à jour des poids $\Delta w[t]$ est calculée et propagée à
-# l'itération suivante : $w[t+1] = w[t] + \Delta w[t]$. Comme dans le cas
-# du perceptron, on peut utiliser une méthode de type descente de gradient
+# Si $\mathbf w[t]$ est le vecteur de poids à la $t^{\text{e}}$ itération, une
+# mise à jour des poids $\Delta \mathbf w[t]$ est calculée et propagée à
+# l'itération suivante : $\mathbf w[t+1] = \mathbf w[t] + \Delta \mathbf w[t]$. Comme dans le cas du perceptron, on peut utiliser une méthode de type descente de gradient
 # (ordre 1), ou une méthode type Newton (ordre 2, qui nécessite alors le
 # calcul ou l'estimation du Hessien $H_n$ de $E_n$ à chaque itération).
 # 
 # -   pour la méthode de descente du gradient, la mise à jour est effectuée
-#     par $$\begin{aligned}
+#     par 
+# 
+#     $$\begin{aligned}
 #                 \Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])
 #             
-#     \end{aligned}$$ où $\gamma$ est le taux d'apprentissage.
+#     \end{aligned}$$ 
+#     
+#     où $\gamma$ est le taux d'apprentissage.
 # 
 # -   pour les méthodes d'ordre 2, type Newton, la mise à jour s'effectue
 #     selon le schéma $$\begin{aligned}
