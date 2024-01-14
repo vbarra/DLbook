@@ -152,10 +152,10 @@
 # 
 # -   une fois l'architecture choisie, un algorithme d'apprentissage qui
 #     calcule, à partir d'un l'échantillon d'apprentissage
-#     ${\cal E}_a = \left \{({\mathbf x_n}, t_n), 1 \leq n \leq N \right \}$ , les
+#     ${\cal E}_a = \left \{({\mathbf x_n}, \mathbf t_n),n\in[\![1,N]\!] \right \}$ , les
 #     valeurs des poids synaptiques pour construire un réseau adapté au
 #     problème (c'est à dire approchant une fonction $g$ désirée mais
-#     inconnue, telle qu'en particulier $t_n \approx g(x_n)$) .
+#     inconnue, telle qu'en particulier $\mathbf t_n \approx {\mathbf g(x_n)}$) .
 # 
 # Sur le premier point, quelques algorithmes d'apprentissage
 # auto-constructifs ont été proposés. Leur rôle est double :
@@ -170,13 +170,12 @@
 # d'en obtenir qui aient un bon pouvoir de généralisation.\
 # Il a fallu attendre le milieu des années 1980 pour que le deuxième
 # problème trouve une solution : l'algorithme de **rétropropagation du
-# gradient**, découvert simultanément par des équipes française et
-# américaine.
+# gradient**.
 # 
 # L'entraînement, comme dans le cas de l'algorithme
 # de descentre de gradient, consiste à trouver les poids qui minimisent une
 # fonction d'erreur, mesurant l'écart entre la sortie du réseau $y({\mathbf x_n})$
-# et $t_n$, pour tous les exemples de ${\cal E}_a$. Les fonctions
+# et $\mathbf t_n$, pour tous les exemples de ${\cal E}_a$. Les fonctions
 # couramment choisies sont les sommes des fonctions de perte sur chaque
 # exemple, et incluent l'erreur quadratique 
 # 
@@ -190,7 +189,7 @@
 #     E(\mathbf w) = \displaystyle\sum_{n = 1}^N E_n(\mathbf w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(\mathbf x_n,\mathbf w)),
 # \end{aligned}$$ 
 # 
-# où $t^i_{n}$ est la $i^{\text{e}}$ composante de $t_n$.
+# où $t^i_{n}$ est la $i^{\text{e}}$ composante de $\mathbf t_n$.
 # 
 # ## Stratégies d'entraînement
 # 
@@ -199,16 +198,16 @@
 # 
 # -   entraînement sur ${\cal E}_a$, les poids étant mis à jour après
 #     présentation, en fonction de l'erreur totale
-#     $E(w) = \displaystyle\sum_{n=1}^N E_n(w)$.
+#     $E(\mathbf w) = \displaystyle\sum_{n=1}^N E_n(\mathbf w)$.
 # 
 # -   entraînement stochastique : un exemple est présenté et les poids
-#     sont mis à jour sur l'erreur $E_n(w)$ calculée sur cet exemple
+#     sont mis à jour sur l'erreur $E_n(\mathbf w)$ calculée sur cet exemple
 #     (règle Adaline)
 # 
 # -   entraînement par batch sur un sous-ensemble
 #     $M \subseteq \{1,\ldots,N\}$ de ${\cal E}_a$, les poids étant mis à
 #     jour en fonction de l'erreur cumulée
-#     $E_M(w) = \displaystyle\sum_{n \in M} E_n(w)$.
+#     $E_M(\mathbf w) = \displaystyle\sum_{n \in M} E_n(\mathbf w)$.
 # 
 # ## Optimisation des paramètres 
 # 
