@@ -56,14 +56,16 @@ Perceptron multicouches à $(L + 1)$ couches, $D$ entrées et $C$ sorties.
 
 
 
-Un tel réseau représente une fonction $$\begin{aligned}
+Un tel réseau représente une fonction 
+$$\begin{aligned}
     y(\cdot,w) &:& \mathbb{R}^D \rightarrow \mathbb{R}^C\\
     x &\mapsto& y(x,w)
-\end{aligned}$$ où $y(x,w)$ est tel que $y_i(x,w) = y_i^{(L+1)}$ et $w$
+\end{aligned}$$ 
+où $y(x,w)$ est tel que $y_i(x,w) = y_i^{(L+1)}$ et $w$
 est le vecteur de tous les poids du réseau.
 
 On parlera de **réseau profond (Deep network)** lorsque le nombre de
-couches cachées est supérieur à 3.
+couches cachées est "suffisamment important" (supérieur à 3 par exemple).
 
 ## Fonctions d'activation 
 
@@ -76,6 +78,7 @@ fonctions (qui est nécessaire dans les algorithmes d'apprentissage du
 type descente de gradient), ou encore en raison de la faiblesse de leur
 pouvoir d'expression. Ainsi, il est préférable d'utiliser des fonctions
 de type sigmoïde, et par exemple la sigmoïde logistique est donnée par :
+
 $$\begin{aligned}
     \sigma(z) = \frac{1}{1 + \exp(-z)}.
 \end{aligned}$$
@@ -124,14 +127,12 @@ Les neurones cachés utilisant la fonction décrite dans
 l'équation précédente sont appelés neurones linéaires rectifiés
 (**Rectified Linear Units, ReLUs**), et sont en pratique très utilisés.
 
-Quelques fonctions d'activation sont présentées dans la figure
-[1.4](#fig:sigmoid-tanh){reference-type="ref"
-reference="fig:sigmoid-tanh"}.
+Quelques fonctions d'activation sont présentées dans la ({numref}`tabact`).
 
-<figure id="fig:sigmoid-tanh">
-
-<figcaption>Quelques fonctions d’activation classiques.</figcaption>
-</figure>
+```{figure} ./images/tabactivation.pdf
+:name: tabact
+Quelques fonctions d'activation
+```
 
 ## Entraînement des réseaux multicouches 
 

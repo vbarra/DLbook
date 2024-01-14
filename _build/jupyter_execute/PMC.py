@@ -57,7 +57,7 @@
 # On parlera de **réseau profond (Deep network)** lorsque le nombre de
 # couches cachées est supérieur à 3.
 # 
-# ## Fonctions d'activation {#subsec:activation-functions}
+# ## Fonctions d'activation 
 # 
 # Trois grandes classes de fonction d'activation $f$ sont généralement
 # utilisées : les fonctions de seuils (comme dans le perceptron linéaire à
@@ -69,7 +69,6 @@
 # pouvoir d'expression. Ainsi, il est préférable d'utiliser des fonctions
 # de type sigmoïde, et par exemple la sigmoïde logistique est donnée par :
 # $$\begin{aligned}
-#     \label{eq:logistic-sigmoid}
 #     \sigma(z) = \frac{1}{1 + \exp(-z)}.
 # \end{aligned}$$
 # 
@@ -100,20 +99,23 @@
 # 
 # En apprentissage profond, il a été reporté que la sigmoïde et la
 # tangente hyperbolique avaient des performances moindres que la fonction
-# d'activation softsign : $$\begin{aligned}
-#     \label{eq:softsign}
+# d'activation softsign : 
+# $$\begin{aligned}
 #     s(z) = \frac{1}{1+ |z|}.
-# \end{aligned}$$ En effet, les valeurs de $z$ arrivant près des paliers
+# \end{aligned}$$ 
+# En effet, les valeurs de $z$ arrivant près des paliers
 # de saturation de ces fonctions donnent des gradients faibles, qui ont
 # tendance à s'annuler lors de la phase d'apprentissage détaillée plus
 # loin (rétropropagation du gradient). Une autre fonction, non saturante
-# elle, peut être utilisée : $$\begin{aligned}
-#     \label{eq:relu}
+# elle, peut être utilisée : 
+# $$\begin{aligned}
 #     r(z) = \max (0,z).
-# \end{aligned}$$ Les neurones cachés utilisant la fonction décrite dans
-# l'équation [\[eq:relu\]](#eq:relu){reference-type="eqref"
-# reference="eq:relu"} sont appelés neurones linéaires rectifiés
-# (**Rectified Linear Units, ReLUs**), et sont en pratique très utilisés.\
+# \end{aligned}$$ 
+# 
+# Les neurones cachés utilisant la fonction décrite dans
+# l'équation précédente sont appelés neurones linéaires rectifiés
+# (**Rectified Linear Units, ReLUs**), et sont en pratique très utilisés.
+# 
 # Quelques fonctions d'activation sont présentées dans la figure
 # [1.4](#fig:sigmoid-tanh){reference-type="ref"
 # reference="fig:sigmoid-tanh"}.
@@ -123,7 +125,7 @@
 # <figcaption>Quelques fonctions d’activation classiques.</figcaption>
 # </figure>
 # 
-# ## Entraînement des réseaux multicouches {#subsec:supervised-training}
+# ## Entraînement des réseaux multicouches 
 # 
 # Pour pouvoir utiliser les réseaux multicouches en apprentissage, deux
 # ingrédients sont indispensables :
@@ -163,9 +165,9 @@
 # et $t_n$, pour tous les exemples de ${\cal E}_a$. Les fonctions
 # couramment choisies sont les sommes des fonctions de perte sur chaque
 # exemple, et incluent l'erreur quadratique $$\begin{aligned}
-#     E(w) = \dsum_{n = 1}^N E_n(w) = \dsum_{n = 1}^N \sum_{i = 1}^C (y_i(x_n,w) - t^i_{n})^2
+#     E(w) = \displaystyle\sum_{n = 1}^N E_n(w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C (y_i(x_n,w) - t^i_{n})^2
 # \end{aligned}$$ ou l'erreur d'entropie croisée $$\begin{aligned}
-#     E(w) = \dsum_{n = 1}^N E_n(w) = \dsum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(x_n,w)),
+#     E(w) = \displaystyle\sum_{n = 1}^N E_n(w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(x_n,w)),
 # \end{aligned}$$ où $t^i_{n}$ est la $i^{\text{e}}$ composante de $t_n$.
 # 
 # ## Stratégies d'entraînement
@@ -175,7 +177,7 @@
 # 
 # -   entraînement sur ${\cal E}_a$, les poids étant mis à jour après
 #     présentation, en fonction de l'erreur totale
-#     $E(w) = \dsum_{n=1}^N E_n(w)$.
+#     $E(w) = \displaystyle\sum_{n=1}^N E_n(w)$.
 # 
 # -   entraînement stochastique : un exemple est présenté et les poids
 #     sont mis à jour sur l'erreur $E_n(w)$ calculée sur cet exemple
@@ -184,9 +186,9 @@
 # -   entraînement par batch sur un sous-ensemble
 #     $M \subseteq \{1,\ldots,N\}$ de ${\cal E}_a$, les poids étant mis à
 #     jour en fonction de l'erreur cumulée
-#     $E_M(w) = \dsum_{n \in M} E_n(w)$.
+#     $E_M(w) = \displaystyle\sum_{n \in M} E_n(w)$.
 # 
-# ## Optimisation des paramètres {#subsubsec:parameter-optimization}
+# ## Optimisation des paramètres 
 # 
 # Considérons le cas de l'entraînement stochastique. La condition
 # nécessaire d'optimalité d'ordre 1 donne $$\begin{aligned}
@@ -221,8 +223,9 @@
 # des poids requiert une attention toute particulière. En faisant
 # l'hypothèse que les entrées de chaque cellule de la rétine sont
 # distribuées selon une loi gaussienne, il est courant de choisir les
-# poids aléatoirement dans $$\begin{aligned}
-#     \label{eq:weight-initialization}
+# poids aléatoirement dans 
+# 
+# $$\begin{aligned}
 #     - \frac{1}{\sqrt{m^{(l-1)}}} < w_{i,j}^{(l)} < \frac{1}{\sqrt{m^{(l-1)}}}.
 # \end{aligned}$$
 # 
@@ -233,12 +236,12 @@
 # 
 # Un autre schéma d'initialisation est possible (initialisation
 # normalisée, ou initialisation de Xavier) en choisissant
+# 
 # $$\begin{aligned}
-#     \label{eq:normalized-initialization}
 #     - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} < w_{i,j}^{(l)} < \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
 # \end{aligned}$$
 # 
-# ## Rétropropagation de l'erreur {#subsubsec:error-backproagation}
+# ## Rétropropagation de l'erreur 
 # 
 # L'algorithme
 # [\[alg:error-backpropagation\]](#alg:error-backpropagation){reference-type="ref"
@@ -435,7 +438,7 @@
 #         surapprentissage.
 # 
 #     -   la régularisation $L_1$ : $$\begin{aligned}
-#             P(w) = \|w\|_1 = \dsum_{k = 1} ^W |w_k|.
+#             P(w) = \|w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
 #         \end{aligned}$$ où $W$ est la dimension de $w$, qui tend à
 #         rendre épars le vecteur de poids (beaucoup de valeurs de poids
 #         deviennent nulles).
@@ -495,8 +498,9 @@
 # $$E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.$$
 # On peut utiliser qu'une partie de la base, voire que le $k^{ieme}$
 # échantillon de la base (cf. gradient stochastique) :
+# 
 # $$E\left(x_k\right)=E_{k}=\displaystyle\frac{1}{2}\left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 .
-#     \label{E:Ek}$$
+#     $$
 # 
 # L'objectif de la phase d'apprentissage est de mettre à jour les poids du
 # réseau par une approche de descente du gradient. Si l'on considère un
@@ -515,13 +519,13 @@
 # Le problème consiste à calculer $\frac{\partial E_k}{\partial w_7}$,
 # pour cela nous allons utiliser le théorème de dérivation des fonctions
 # composées, d'où:
+# 
 # $$\frac{\partial E_k}{\partial w_7} = \frac{\partial E_k}{\partial h_4} \times  \frac{\partial h_4}{\partial z_4} \times  \frac{\partial z_4}{\partial w_7}$$
+# 
 # Cette relation est représentée graphiquement sur la figure
 # [1.6](#F:CoucheSortie){reference-type="ref"
 # reference="F:CoucheSortie"}.\
-# A l'aide de l'équation [\[E:XOR\]](#E:XOR){reference-type="ref"
-# reference="E:XOR"} et de l'équation
-# [\[E:Ek\]](#E:Ek){reference-type="ref" reference="E:Ek"}, on obtient:
+# Utilisant l'expression de A $E_k$ on a alors :
 # $$\left\{
 #         \begin{array}{r c l}
 #             \displaystyle\frac{\partial E_k}{\partial h_4} &=& \frac{\partial }{\partial h_4}\left( \frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 \right) = -\left(y[k]_{lab} - h_4\left(z_4\right)  \right)\\
@@ -529,12 +533,12 @@
 #             \displaystyle\frac{\partial z_4}{\partial w_7} &=& h_1\left(z_1\right)
 #         \end{array}
 #     \right.
-#     \label{E:CompOutLayer}$$ d'où
+#     $$ 
+#     
+#     d'où
 # 
-# ::: tcolorbox
-# w_7\^(n+1) = w_7\^(n) + (y\[k\]\_lab - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
-# h_1(z_1).
-# :::
+# $$w_7^{(n+1)} = w_7^{(n) }+ (y[k]_{lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
+# h_1(z_1)$$
 # 
 # On peut réaliser la même démarche pour les poids $w_8$, $w_9$ et $b_4$,
 # pour obtenir les relations suivantes :
@@ -546,7 +550,7 @@
 #             b_4^{\left(n+1\right)} &=& b_4^{\left(n\right)} + \eta \times \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) 
 #         \end{array}
 #     \right.
-#     \label{E:OutLayer}$$
+#     $$
 # 
 # <figure id="F:CoucheSortie">
 # 
@@ -570,7 +574,9 @@
 # reference="E:XOR"}, de l'équation [\[E:Ek\]](#E:Ek){reference-type="ref"
 # reference="E:Ek"} et de l'équation
 # [\[E:CompOutLayer\]](#E:CompOutLayer){reference-type="ref"
-# reference="E:CompOutLayer"} on obtient: $$\left\{
+# reference="E:CompOutLayer"} on obtient: 
+# 
+# $$\left\{
 #         \begin{array}{r c l}
 #             \displaystyle\frac{\partial E_k}{\partial z_4} &=& -\left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right)\\
 #             \displaystyle\frac{\partial z_4}{\partial h_1}  &=& w_7 \\
@@ -578,12 +584,13 @@
 #             \displaystyle\frac{\partial z_1}{\partial w_1} &=& x_1
 #         \end{array}
 #     \right.
-#     \label{E:CompOut}$$ d'où
+#     $$ 
+#     
+#     d'où
 # 
-# ::: tcolorbox
-# w_1\^(n+1) = w_1\^(n) + (y\[k\]\_lab - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
-# h_1(z_1)( 1 - h_1(z_1)) w_7 x_1
-# :::
+# $$
+# w_1^{(n+1)} = w_1^{(n)} + (y[k]{_lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))h_1(z_1)( 1 - h_1(z_1)) w_7 x_1
+# $$
 # 
 # On peut réaliser la même démarche pour les poids $w_2$ et $b_1$, pour
 # obtenir les relations suivantes :
@@ -594,7 +601,7 @@
 #             b_1^{\left(n+1\right)} &=& b_1^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_1\left(z_1\right)\left( 1 - h_1\left(z_1\right)\right) w_7
 #         \end{array}
 #     \right.
-#     \label{E:CompHiddenLayer}$$
+#     $$
 # 
 # <figure id="F:CoucheCachee">
 # 
