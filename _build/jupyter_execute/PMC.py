@@ -506,7 +506,7 @@
 #     -   la régularisation $L_2$ : 
 #     
 #     $$\begin{aligned}
-#             P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top w.
+#             P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w.
 #         \end{aligned}$$ 
 #         
 # où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
@@ -532,7 +532,7 @@
 # ### Réseau
 # 
 # Sur le réseau de la figure
-# ({numref}`tabact`) les différentes relations sont
+# ({numref}`xor`) les différentes relations sont
 # données par l'équation suivante où les paramètres en rouge correspondent aux poids à
 # calculer durant la phase d'apprentissage.
 # 
@@ -564,9 +564,11 @@
 # de l'écart quadratique avec la base d'apprentissage labelisée
 # ${\cal E}_a =\left( \textbf{x}, \textbf{y}_{lab} \right)$ ou une partie
 # de cette base d'apprentissage $\mathcal{E}_a^\prime$ :
+# 
 # $$E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.$$
+# 
 # On peut utiliser qu'une partie de la base, voire que le $k^{ieme}$
-# échantillon de la base (cf. gradient stochastique) :
+# échantillon de la base (gradient stochastique) :
 # 
 # $$E\left(x_k\right)=E_{k}=\displaystyle\frac{1}{2}\left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 .
 #     $$
@@ -575,14 +577,18 @@
 # réseau par une approche de descente du gradient. Si l'on considère un
 # poids quelconque du réseau que l'on note $\theta$, sa mise à jour durant
 # l'itération $n+1$ se fait pas l'équation suivante:
+# 
 # $$\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta$$
-# où $$\Delta \theta = -\nabla_\theta E.$$ On peut choisir $E=E_{tot}$ ou
+# où $$\Delta \theta = -\nabla_\theta E.$$ 
+# 
+# On peut choisir $E=E_{tot}$ ou
 # $E=E_k$ et pour cet exemple nous choisirons le deuxième cas.
 # 
 # #### Couche de sortie
 # 
 # Pour la couche de sortie, prenons par exemple le paramètre $w_7$, sa
 # mise à jour est donnée par la relation suivante :
+# 
 # $$w_7^{\left(n+1\right)} = w_7^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_7}.$$
 # 
 # Le problème consiste à calculer $\frac{\partial E_k}{\partial w_7}$,
@@ -591,10 +597,9 @@
 # 
 # $$\frac{\partial E_k}{\partial w_7} = \frac{\partial E_k}{\partial h_4} \times  \frac{\partial h_4}{\partial z_4} \times  \frac{\partial z_4}{\partial w_7}$$
 # 
-# Cette relation est représentée graphiquement sur la figure
-# [1.6](#F:CoucheSortie){reference-type="ref"
-# reference="F:CoucheSortie"}.\
+# Cette relation est représentée graphiquement sur la ({numref}`xor2`). 
 # Utilisant l'expression de A $E_k$ on a alors :
+# 
 # $$\left\{
 #         \begin{array}{r c l}
 #             \displaystyle\frac{\partial E_k}{\partial h_4} &=& \frac{\partial }{\partial h_4}\left( \frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 \right) = -\left(y[k]_{lab} - h_4\left(z_4\right)  \right)\\
@@ -621,11 +626,10 @@
 #     \right.
 #     $$
 # 
-# <figure id="F:CoucheSortie">
-# 
-# <figcaption>Rétropropagation du gradient sur la couche de
-# sortie.</figcaption>
-# </figure>
+# ```{figure} ./images/xor2.png
+# :name: xor2
+# Rétropropagation du gradient sur la couche de sortie.
+# ```
 # 
 # #### Couche cachée
 # 

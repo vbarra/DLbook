@@ -847,7 +847,7 @@ exemples classiques sont :</p>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-            P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top w.
+            P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w.
         \end{aligned}\]</div>
 </li>
 </ul>
@@ -885,7 +885,7 @@ vérité donnée par le tableau  suivant</p>
 <div class="section" id="reseau">
 <h3>Réseau<a class="headerlink" href="#reseau" title="Lien permanent vers ce titre">#</a></h3>
 <p>Sur le réseau de la figure
-(<a class="reference internal" href="#tabact"><span class="std std-numref">Fig. 3</span></a>) les différentes relations sont
+(<a class="reference internal" href="#xor"><span class="std std-numref">Fig. 5</span></a>) les différentes relations sont
 données par l’équation suivante où les paramètres en rouge correspondent aux poids à
 calculer durant la phase d’apprentissage.</p>
 <div class="math notranslate nohighlight">
@@ -911,42 +911,45 @@ calculer durant la phase d’apprentissage.</p>
 fonction de coût. Dans cet exemple, nous allons choisir la minimisation
 de l’écart quadratique avec la base d’apprentissage labelisée
 <span class="math notranslate nohighlight">\({\cal E}_a =\left( \textbf{x}, \textbf{y}_{lab} \right)\)</span> ou une partie
-de cette base d’apprentissage <span class="math notranslate nohighlight">\(\mathcal{E}_a^\prime\)</span> :
-$<span class="math notranslate nohighlight">\(E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.\)</span><span class="math notranslate nohighlight">\(
-On peut utiliser qu'une partie de la base, voire que le \)</span>k^{ieme}$
-échantillon de la base (cf. gradient stochastique) :</p>
+de cette base d’apprentissage <span class="math notranslate nohighlight">\(\mathcal{E}_a^\prime\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.\]</div>
+<p>On peut utiliser qu’une partie de la base, voire que le <span class="math notranslate nohighlight">\(k^{ieme}\)</span>
+échantillon de la base (gradient stochastique) :</p>
 <div class="math notranslate nohighlight">
 \[E\left(x_k\right)=E_{k}=\displaystyle\frac{1}{2}\left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 .
     \]</div>
 <p>L’objectif de la phase d’apprentissage est de mettre à jour les poids du
 réseau par une approche de descente du gradient. Si l’on considère un
 poids quelconque du réseau que l’on note <span class="math notranslate nohighlight">\(\theta\)</span>, sa mise à jour durant
-l’itération <span class="math notranslate nohighlight">\(n+1\)</span> se fait pas l’équation suivante:
-$<span class="math notranslate nohighlight">\(\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta\)</span><span class="math notranslate nohighlight">\(
-où \)</span><span class="math notranslate nohighlight">\(\Delta \theta = -\nabla_\theta E.\)</span><span class="math notranslate nohighlight">\( On peut choisir \)</span>E=E_{tot}<span class="math notranslate nohighlight">\( ou
-\)</span>E=E_k$ et pour cet exemple nous choisirons le deuxième cas.</p>
+l’itération <span class="math notranslate nohighlight">\(n+1\)</span> se fait pas l’équation suivante:</p>
+<div class="math notranslate nohighlight">
+\[\theta^{\left(n+1\right)} = \theta^{\left(n\right)} + \gamma_n\times \Delta \theta\]</div>
+<p>où $<span class="math notranslate nohighlight">\(\Delta \theta = -\nabla_\theta E.\)</span>$</p>
+<p>On peut choisir <span class="math notranslate nohighlight">\(E=E_{tot}\)</span> ou
+<span class="math notranslate nohighlight">\(E=E_k\)</span> et pour cet exemple nous choisirons le deuxième cas.</p>
 <div class="section" id="couche-de-sortie">
 <h4>Couche de sortie<a class="headerlink" href="#couche-de-sortie" title="Lien permanent vers ce titre">#</a></h4>
 <p>Pour la couche de sortie, prenons par exemple le paramètre <span class="math notranslate nohighlight">\(w_7\)</span>, sa
-mise à jour est donnée par la relation suivante :
-$<span class="math notranslate nohighlight">\(w_7^{\left(n+1\right)} = w_7^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_7}.\)</span>$</p>
+mise à jour est donnée par la relation suivante :</p>
+<div class="math notranslate nohighlight">
+\[w_7^{\left(n+1\right)} = w_7^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_7}.\]</div>
 <p>Le problème consiste à calculer <span class="math notranslate nohighlight">\(\frac{\partial E_k}{\partial w_7}\)</span>,
 pour cela nous allons utiliser le théorème de dérivation des fonctions
 composées, d’où:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial E_k}{\partial w_7} = \frac{\partial E_k}{\partial h_4} \times  \frac{\partial h_4}{\partial z_4} \times  \frac{\partial z_4}{\partial w_7}\]</div>
-<p>Cette relation est représentée graphiquement sur la figure
-<a class="reference external" href="#F:CoucheSortie">1.6</a>{reference-type= »ref »
-reference= »F:CoucheSortie »}.<br />
-Utilisant l’expression de A <span class="math notranslate nohighlight">\(E_k\)</span> on a alors :
-$<span class="math notranslate nohighlight">\(\left\{
+<p>Cette relation est représentée graphiquement sur la (<a class="reference internal" href="#xor2"><span class="std std-numref">Fig. 6</span></a>).
+Utilisant l’expression de A <span class="math notranslate nohighlight">\(E_k\)</span> on a alors :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{
         \begin{array}{r c l}
             \displaystyle\frac{\partial E_k}{\partial h_4} &amp;=&amp; \frac{\partial }{\partial h_4}\left( \frac{1}{2}\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2 \right) = -\left(y[k]_{lab} - h_4\left(z_4\right)  \right)\\
             \displaystyle\frac{\partial h_4}{\partial z_4}  &amp;=&amp; \frac{\partial }{\partial z_4}\left( \frac{1}{1+e^{-z_4}}\right) = \frac{e^{-z_4}}{\left(1+e^{-z_4}\right)^2} = h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) \\
             \displaystyle\frac{\partial z_4}{\partial w_7} &amp;=&amp; h_1\left(z_1\right)
         \end{array}
     \right.
-    \)</span>$</p>
+    \end{split}\]</div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>d&#39;où
 </pre></div>
 </div>
@@ -964,10 +967,10 @@ pour obtenir les relations suivantes :</p>
         \end{array}
     \right.
     \end{split}\]</div>
-<figure id="F:CoucheSortie">
-<figcaption>Rétropropagation du gradient sur la couche de
-sortie.</figcaption>
-</figure>
+<div class="figure align-default" id="xor2">
+<img alt="_images/xor2.png" src="_images/xor2.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Rétropropagation du gradient sur la couche de sortie.</span><a class="headerlink" href="#xor2" title="Lien permanent vers cette image">#</a></p>
+</div>
 </div>
 <div class="section" id="couche-cachee">
 <h4>Couche cachée<a class="headerlink" href="#couche-cachee" title="Lien permanent vers ce titre">#</a></h4>

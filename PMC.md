@@ -616,8 +616,8 @@ $$\left\{
         \end{array}
     \right.
     $$ 
-    
-    d'où
+
+d'où
 
 $$w_7^{(n+1)} = w_7^{(n) }+ (y[k]_{lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
 h_1(z_1)$$
@@ -643,19 +643,17 @@ Rétropropagation du gradient sur la couche de sortie.
 
 Pour la couche cachée du réseau, c'est exactement le même raisonnement.
 Prenons par exemple, le paramètre $w_1$ pour le calcul :
+
 $$w_1^{\left(n+1\right)} = w_1^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_1}.$$
+
 Le problème maintenant consiste à calculer
 $\frac{\partial E_k}{\partial w_1}$, pour cela nous allons utiliser le
 théorème de dérivation des fonctions composées, d'où:
+
 $$\frac{\partial E_k}{\partial w_1} = \frac{\partial E_k}{\partial z_4} \times  \frac{\partial z_4}{\partial h_1}  \times  \frac{\partial h_1}{\partial z_1} \times  \frac{\partial z_1}{\partial w_1}$$
-Cette relation est représentée graphiquement sur la figure
-[1.7](#F:CoucheCachee){reference-type="ref"
-reference="F:CoucheCachee"}.\
-A l'aide de l'équation [\[E:XOR\]](#E:XOR){reference-type="ref"
-reference="E:XOR"}, de l'équation [\[E:Ek\]](#E:Ek){reference-type="ref"
-reference="E:Ek"} et de l'équation
-[\[E:CompOutLayer\]](#E:CompOutLayer){reference-type="ref"
-reference="E:CompOutLayer"} on obtient: 
+
+Cette relation est représentée graphiquement sur la ({numref}`xor3`). 
+Utilisant les équations précédentes, on obtient alors  
 
 $$\left\{
         \begin{array}{r c l}
@@ -684,14 +682,15 @@ $$\left\{
     \right.
     $$
 
-<figure id="F:CoucheCachee">
-
-<figcaption>Rétropropagation du gradient sur la couche
-cachée.</figcaption>
-</figure>
+```{figure} ./images/xor3.png
+:name: xor3
+Rétropropagation du gradient sur la couche cachée.
+```
 
 Il suffit de réaliser des calculs identiques pour les autres neurones et
-on obtient les relations suivantes : $$\left\{
+on obtient les relations suivantes :
+
+ $$\left\{
             \begin{array}{r c l}
                 w_3^{\left(n+1\right)} &=& w_3^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 x_1\\                
                 w_4^{\left(n+1\right)} &=& w_4^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 x_2\\
@@ -713,7 +712,9 @@ on obtient les relations suivantes : $$\left\{
     L'initialisation de Xavier propose un tirage uniforme dans
     $\left[-\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} ;\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} \right]$.
 
-Pour notre exemple, on obtient l'initialisation suivante : $$\left\{
+Pour notre exemple, on obtient l'initialisation suivante : 
+
+$$\left\{
         \begin{array}{r c l}
             w_1 \ ...\ w_6 &=& UD \ dans \ \left[-\sqrt{\frac{6}{2+3}} ;\sqrt{\frac{6}{2+3}} \right] = \left[-1,09;1,09 \right]\\
             w_7 \ ... \ w_9 &=& UD \ dans \ \left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right] = \left[-1,23;1,23 \right]
