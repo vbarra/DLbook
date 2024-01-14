@@ -708,7 +708,7 @@
 # 
 # $$\left\{
 #         \begin{array}{r c l}
-#             w_1 \ ...\ w_6 &=& U\left ( \left[-\sqrt{\frac{6}{2+3}} ;\sqrt{\frac{6}{2+3}} \right]\right ) = U(\left[-1,09;1,09 \right])\\
-#             w_7 \ ... \ w_9 &=& U\left \left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right]\right ) = U(\left[-1,23;1,23 \right])
+#             w_1 \ ...\ w_6 &=& U\left ( \left[-\sqrt{\frac{6}{2+3}} ;\sqrt{\frac{6}{2+3}} \right] \right ) = U(\left[-1,09;1,09 \right])\\
+#             w_7 \ ... \ w_9 &=& U\left (\left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right]\right ) = U(\left[-1,23;1,23 \right])
 #         \end{array}
 #     \right.$$
