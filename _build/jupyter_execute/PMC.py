@@ -278,9 +278,9 @@
 #     - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} < w_{i,j}^{(l)} < \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
 # \end{aligned}$$
 # 
-# Donnons quelqes éléments qui amènent à ce schéma. Supposons un perceptron multicouches avec $\mathbf w\in\mathbb{R}^d i.i.d \rightsquigarrow\mathcal{N}(0,1)$ et d'entrées $\mathbf x\in\mathbb{R}^d$, $x_i\ \  i.i.d \rightsquigarrow\mathcal{N}(0,1)$. 
+# Donnons quelques éléments qui amènent à ce schéma. Supposons un perceptron multicouches avec $\mathbf w\in\mathbb{R}^d, w_i i.i.d \rightsquigarrow\mathcal{N}(0,1)$ et d'entrées $\mathbf x\in\mathbb{R}^d$, $x_i\ \  i.i.d \rightsquigarrow\mathcal{N}(0,1)$. 
 # 
-# Le potentiel post-synaptique d'un neurone de la première couche cachée est de la forme :  $\mathbf w^\top \mathbf x$.
+# Le potentiel post-synaptique d'un neurone de la première couche cachée est de la forme $\mathbf w^\top \mathbf x$.
 # 
 # Alors 
 # 
@@ -293,7 +293,7 @@
 # 
 # $$Var(\mathbf w^\top\mathbf x) =  \displaystyle\sum_{i=1}^dVar (w_i) Var(x_i) $$
 # 
-# Or $w_i,\ x_i$ i.i.d  donc $ Var(\mathbf w^\top\mathbf x) =  dVar (w_i) Var(x_i) $
+# Or $w_i,\ x_i i.i.d $  donc $ Var(\mathbf w^\top\mathbf x) =  dVar (w_i) Var(x_i) $
 # 
 # Et plus généralement 
 # 
@@ -303,12 +303,12 @@
 # 
 # Si $dVar(w_i)>1$ le gradient croît à mesure que l'on s'enfonce dans le réseau. A l'inverse, si $d Var(w_i)<1$  le gradient disparaît lorsque $l$ croît. 
 # 
-# Il est donc lgitime pour imiter ces deux phénomènes d'imposer  $d Var(w_i)=1$, et donc $ Var(w_i)=1/d$
+# Il est donc légitime pour imiter ces deux phénomènes d'imposer  $d Var(w_i)=1$, et donc $ Var(w_i)=1/d$
 # et  
 # 
 # $$\mathbf  w_{ij}^l \rightsquigarrow\ \frac{1}{\sqrt{m^{l-1}}}\mathcal{N}(0,1)$$
 # 
-# Si la fonction d'activation du neurone est la fonction ReLU, on peut multiplier par $\frac{\sqrt{2}}{\sqrt{m^{l-1}}}$ pour prendre en compte la partie négative que ne participe pas au calcul de la variance.
+# Si la fonction d'activation du neurone est la fonction ReLU, on peut multiplier par $\frac{\sqrt{2}}{\sqrt{m^{l-1}}}$ pour prendre en compte la partie négative qui ne participe pas au calcul de la variance.
 # 
 # 
 # ## Rétropropagation de l'erreur 
