@@ -465,18 +465,21 @@ une transformation linéaire de la sigmoïde dans l’intervalle <span class="ma
 d’activation softmax est utilisée à la sortie du réseau pour interpréter
 les sorties comme des valeurs de probabilité a posteriori. S’il s’agit
 de classer un exemple <span class="math notranslate nohighlight">\(x\)</span> à la classe <span class="math notranslate nohighlight">\(c\)</span>, la probabilité conditionnelle
-<span class="math notranslate nohighlight">\(p(c|x)\)</span> peut être calculée en utilisant la règle de Bayes
-:
-$<span class="math notranslate nohighlight">\(\begin{aligned}
+<span class="math notranslate nohighlight">\(p(c|x)\)</span> peut être calculée en utilisant la règle de Bayes :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
 p(c|x) = \frac{p(x|c)p(c)}{p(x)}
-\end{aligned}\)</span>$</p>
+\end{aligned}\]</div>
 <p><span class="math notranslate nohighlight">\(p(c|x)\)</span> est alors interprétée comme une probabilité a
 posteriori. Disposant de ces probabilités pour tout <span class="math notranslate nohighlight">\(c=1,\ldots,C\)</span>, la
-règle de décision de Bayes donne :$<span class="math notranslate nohighlight">\(\begin{aligned}
+règle de décision de Bayes donne :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
 c: \mathbb{R}^D \rightarrow \{1,\ldots,C\}, x \mapsto  argmax_{c}\left(p(c|x)\right).
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( L'utilisation de la fonction d'activation softmax en
-sortie permet d'interpréter les sorties du réseau comme de telles
-probabilités :la sortie du \)</span>i^{\text{e}}$ neurone de la couche de sortie
+\end{aligned}\]</div>
+<p>L’utilisation de la fonction d’activation softmax en
+sortie permet d’interpréter les sorties du réseau comme de telles
+probabilités :la sortie du <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> neurone de la couche de sortie
 est</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
@@ -484,10 +487,11 @@ est</p>
 \end{aligned}\]</div>
 <p>En apprentissage profond, il a été reporté que la sigmoïde et la
 tangente hyperbolique avaient des performances moindres que la fonction
-d’activation softsign :
-$<span class="math notranslate nohighlight">\(\begin{aligned}
+d’activation softsign :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
     s(z) = \frac{1}{1+ |z|}.
-\end{aligned}\)</span>$</p>
+\end{aligned}\]</div>
 <p>En effet, les valeurs de <span class="math notranslate nohighlight">\(z\)</span> arrivant près des paliers
 de saturation de ces fonctions donnent des gradients faibles, qui ont
 tendance à s’annuler lors de la phase d’apprentissage détaillée plus
