@@ -129,6 +129,7 @@ de saturation de ces fonctions donnent des gradients faibles, qui ont
 tendance à s'annuler lors de la phase d'apprentissage détaillée plus
 loin (rétropropagation du gradient). Une autre fonction, non saturante
 elle, peut être utilisée : 
+
 $$\begin{aligned}
     r(z) = \max (0,z).
 \end{aligned}$$ 
