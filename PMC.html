@@ -615,11 +615,11 @@ des poids requiert une attention toute particulière.</p>
 <p>Une première idée est d’initialiser les poids selon une loi normale : <span class="math notranslate nohighlight">\(\forall i\; w_{ij} \rightsquigarrow 10^{-m}\mathcal{N}(0,1)\ m&gt;0 \)</span>. Cependant, cela amène naturellement rapidement à une évolution des poids vers des valeurs nulles (<a class="reference internal" href="#vanishing"><span class="std std-numref">Fig. 4</span></a>) (phénomène de disparition du gradient).</p>
 <div class="figure align-default" id="vanishing">
 <img alt="_images/vanishing.png" src="_images/vanishing.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Quelques fonctions d’activation</span><a class="headerlink" href="#vanishing" title="Lien permanent vers cette image">#</a></p>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Evolution de la distribution des poids au cours des epochs d’apprentissage (10 epochs à gauche, 20 au centre et 50 epochs à droite).</span><a class="headerlink" href="#vanishing" title="Lien permanent vers cette image">#</a></p>
 </div>
+<p>Plus le réseau est profond, plus l’apprentissage sera sensible à ce phénomène. On parle de <em>disparition du gradient</em> (venishing gradient).</p>
 <p>En faisant l’hypothèse que les entrées de chaque cellule de la rétine sont
-distribuées selon une loi gaussienne, il est alors courant de choisir les
-poids aléatoirement dans</p>
+distribuées selon une loi gaussienne, il est alors courant d’introduire une dépendance à la profondeur des couches considérées : on choisit les poids aléatoirement dans</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
     - \frac{1}{\sqrt{m^{(l-1)}}} &lt; w_{i,j}^{(l)} &lt; \frac{1}{\sqrt{m^{(l-1)}}}.
@@ -634,6 +634,27 @@ normalisée, ou initialisation de Xavier) en choisissant</p>
 \[\begin{aligned}
     - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} &lt; w_{i,j}^{(l)} &lt; \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
 \end{aligned}\]</div>
+<p>Donnons quelqes éléments qui amènent à ce schéma. Supposons un perceptron multicouches avec <span class="math notranslate nohighlight">\(\mathbf w\in\mathbb{R}^d i.i.d \rightsquigarrow\mathcal{N}(0,1)\)</span> et d’entrées <span class="math notranslate nohighlight">\(\mathbf x\in\mathbb{R}^d\)</span>, <span class="math notranslate nohighlight">\(x_i\ \  i.i.d \rightsquigarrow\mathcal{N}(0,1)\)</span>.</p>
+<p>Le potentiel post-synaptique d’un neurone de la première couche cachée est de la forme :  <span class="math notranslate nohighlight">\(\mathbf w^\top \mathbf x\)</span>.</p>
+<p>Alors</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} Var(\mathbf w^\top\mathbf x) =&amp; \displaystyle\sum_{i=1}^d Var (w_ix_i) \\
+=&amp;  \displaystyle\sum_{i=1}^d \left (\mathbb{E}(w_i)^2Var(x_i) + \mathbb{E}(x_i)^2Var (w_i) + Var (w_i) Var(x_i) \right )
+\end{aligned}\end{split}\]</div>
+<p>Puisque <span class="math notranslate nohighlight">\(\mathbb{E}(w_i)=\mathbb{E}(x_i)=0\)</span></p>
+<div class="math notranslate nohighlight">
+\[Var(\mathbf w^\top\mathbf x) =  \displaystyle\sum_{i=1}^dVar (w_i) Var(x_i) \]</div>
+<p>Or <span class="math notranslate nohighlight">\(w_i,\ x_i\)</span> i.i.d  donc <span class="math notranslate nohighlight">\( Var(\mathbf w^\top\mathbf x) =  dVar (w_i) Var(x_i) \)</span></p>
+<p>Et plus généralement</p>
+<div class="math notranslate nohighlight">
+\[Var(y^l) = \left ( d Var(w_i)\right )^l Var (x_i)\]</div>
+<p>Chaque neurone peut varier d’un facteur <span class="math notranslate nohighlight">\(d\)</span> par rapport à son entrée.</p>
+<p>Si <span class="math notranslate nohighlight">\(dVar(w_i)&gt;1\)</span> le gradient croît à mesure que l’on s’enfonce dans le réseau. A l’inverse, si <span class="math notranslate nohighlight">\(d Var(w_i)&lt;1\)</span>  le gradient disparaît lorsque <span class="math notranslate nohighlight">\(l\)</span> croît.</p>
+<p>Il est donc lgitime pour imiter ces deux phénomènes d’imposer  <span class="math notranslate nohighlight">\(d Var(w_i)=1\)</span>, et donc <span class="math notranslate nohighlight">\( Var(w_i)=1/d\)</span>
+et</p>
+<div class="math notranslate nohighlight">
+\[\mathbf  w_{ij}^l \rightsquigarrow\ \frac{1}{\sqrt{m^{l-1}}}\mathcal{N}(0,1)\]</div>
+<p>Si la fonction d’activation du neurone est la fonction ReLU, on peut multiplier par <span class="math notranslate nohighlight">\(\frac{\sqrt{2}}{\sqrt{m^{l-1}}}\)</span> pour prendre en compte la partie négative que ne participe pas au calcul de la variance.</p>
 </div>
 <div class="section" id="retropropagation-de-l-erreur">
 <h2>Rétropropagation de l’erreur<a class="headerlink" href="#retropropagation-de-l-erreur" title="Lien permanent vers ce titre">#</a></h2>
