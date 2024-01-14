@@ -487,8 +487,8 @@ régularisation dans les réseaux. Parmi elles, on note :
 -   ${\cal E}_a$ est enrichi pour introduire certaines invariances que
     le réseau est supposé apprendre.
 
--   à chaque exemple présenté, chaque neurone caché est supprimé du
-    calcul de la sortie avec probabilité $\frac{1}{2}$. Cette technique
+-   à chaque exemple/batch présenté, chaque neurone caché est supprimé du
+    calcul de la sortie avec probabilité $p$ (dropout). Cette technique
     peut être vue comme la construction d'un modèle moyen
     d'apprentissage de plusieurs réseaux distincts.
 
@@ -525,23 +525,11 @@ régularisation dans les réseaux. Parmi elles, on note :
     
     où $P(\mathbf w)$ influence la forme de la solution et
     $\eta$ contrôle l'influence du terme de régularisation. $P(\mathbf w)$ peut
-    prendre la forme d'une fonction de la norme $L_p$ de $w$. Deux
+    prendre la forme d'une fonction de la norme $L_p$ de $\mathbf w$. Deux
     exemples classiques sont :
 
-    -   la régularisation $L_2$ : 
-    
-    $$\begin{aligned}
-            P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w.
-        \end{aligned}$$ 
-        
-où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
-    -   la régularisation $L_1$ : 
-    
-$$\begin{aligned}
-            P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
-\end{aligned}$$ 
-        
-où $W$ est la dimension de $\mathbf w$, qui tend àrendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).
+    -   la régularisation $L_2$ : $P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w$, où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
+    -   la régularisation $L_1$ : $P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|$ où $W$ est la dimension de $\mathbf w$, qui tend à rendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).
 
 ## Exemple
 
