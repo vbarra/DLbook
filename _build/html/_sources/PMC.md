@@ -262,12 +262,13 @@ Une première idée est d'initialiser les poids selon une loi normale : $\forall
 
 ```{figure} ./images/vanishing.png
 :name: vanishing
-Quelques fonctions d'activation
+Evolution de la distribution des poids au cours des epochs d'apprentissage (10 epochs à gauche, 20 au centre et 50 epochs à droite).
 ```
 
+Plus le réseau est profond, plus l'apprentissage sera sensible à ce phénomène. On parle de *disparition du gradient* (venishing gradient).
+
 En faisant l'hypothèse que les entrées de chaque cellule de la rétine sont
-distribuées selon une loi gaussienne, il est alors courant de choisir les
-poids aléatoirement dans 
+distribuées selon une loi gaussienne, il est alors courant d'introduire une dépendance à la profondeur des couches considérées : on choisit les poids aléatoirement dans 
 
 $$\begin{aligned}
     - \frac{1}{\sqrt{m^{(l-1)}}} < w_{i,j}^{(l)} < \frac{1}{\sqrt{m^{(l-1)}}}.
@@ -284,6 +285,39 @@ normalisée, ou initialisation de Xavier) en choisissant
 $$\begin{aligned}
     - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} < w_{i,j}^{(l)} < \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
 \end{aligned}$$
+
+Donnons quelqes éléments qui amènent à ce schéma. Supposons un perceptron multicouches avec $\mathbf w\in\mathbb{R}^d i.i.d \rightsquigarrow\mathcal{N}(0,1)$ et d'entrées $\mathbf x\in\mathbb{R}^d$, $x_i\ \  i.i.d \rightsquigarrow\mathcal{N}(0,1)$. 
+
+Le potentiel post-synaptique d'un neurone de la première couche cachée est de la forme :  $\mathbf w^\top \mathbf x$.
+
+Alors 
+
+$$\begin{aligned} Var(\mathbf w^\top\mathbf x) =& \displaystyle\sum_{i=1}^d Var (w_ix_i) \\
+=&  \displaystyle\sum_{i=1}^d \left (\mathbb{E}(w_i)^2Var(x_i) + \mathbb{E}(x_i)^2Var (w_i) + Var (w_i) Var(x_i) \right )
+\end{aligned}$$
+
+
+Puisque $\mathbb{E}(w_i)=\mathbb{E}(x_i)=0$
+
+$$Var(\mathbf w^\top\mathbf x) =  \displaystyle\sum_{i=1}^dVar (w_i) Var(x_i) $$
+
+Or $w_i,\ x_i$ i.i.d  donc $ Var(\mathbf w^\top\mathbf x) =  dVar (w_i) Var(x_i) $
+
+Et plus généralement 
+
+$$Var(y^l) = \left ( d Var(w_i)\right )^l Var (x_i)$$ 
+
+Chaque neurone peut varier d'un facteur $d$ par rapport à son entrée.
+
+Si $dVar(w_i)>1$ le gradient croît à mesure que l'on s'enfonce dans le réseau. A l'inverse, si $d Var(w_i)<1$  le gradient disparaît lorsque $l$ croît. 
+
+Il est donc lgitime pour imiter ces deux phénomènes d'imposer  $d Var(w_i)=1$, et donc $ Var(w_i)=1/d$
+et  
+
+$$\mathbf  w_{ij}^l \rightsquigarrow\ \frac{1}{\sqrt{m^{l-1}}}\mathcal{N}(0,1)$$
+
+Si la fonction d'activation du neurone est la fonction ReLU, on peut multiplier par $\frac{\sqrt{2}}{\sqrt{m^{l-1}}}$ pour prendre en compte la partie négative que ne participe pas au calcul de la variance.
+
 
 ## Rétropropagation de l'erreur 
 
