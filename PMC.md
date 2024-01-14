@@ -520,11 +520,11 @@ régularisation dans les réseaux. Parmi elles, on note :
 où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
     -   la régularisation $L_1$ : 
     
-    $$\begin{aligned}
+$$\begin{aligned}
             P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
-        \end{aligned}$$ 
+\end{aligned}$$ 
         
-    où $W$ est la dimension de $\mathbf w$, qui tend àrendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).
+où $W$ est la dimension de $\mathbf w$, qui tend àrendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).
 
 ## Exemple
 
