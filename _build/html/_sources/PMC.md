@@ -36,7 +36,7 @@ En introduisant dans chaque couche un neurone supplémentaire
 $y_0^{(l)} = 1$ pour gérer le biais, on a : 
 
 $$\begin{aligned}
-    z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad z^{(l)} = w^{(l)} y^{(l-1)}
+    \bf {z_i^{(l)}} = \displaystyle\sum _{k = 0} ^{m^{(l-1)}} \bf{w_{i,k}^{(l)}} \bf {y_k^{(l-1)}}\quad \text{ où }\quad \bf{z^{(l)}} = \bf{w^{(l)} y^{(l-1)}}
 \end{aligned}$$ 
 
 avec $z^{(l)}$, $w^{(l)}$ et $y^{(l-1)}$ les
