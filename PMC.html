@@ -950,9 +950,7 @@ Utilisant l’expression de A <span class="math notranslate nohighlight">\(E_k\)
         \end{array}
     \right.
     \end{split}\]</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>d&#39;où
-</pre></div>
-</div>
+<p>d’où</p>
 <div class="math notranslate nohighlight">
 \[w_7^{(n+1)} = w_7^{(n) }+ (y[k]_{lab} - h_4(z_4)) h_4(z_4)( 1 - h_4(z_4))
 h_1(z_1)\]</div>
@@ -975,20 +973,16 @@ pour obtenir les relations suivantes :</p>
 <div class="section" id="couche-cachee">
 <h4>Couche cachée<a class="headerlink" href="#couche-cachee" title="Lien permanent vers ce titre">#</a></h4>
 <p>Pour la couche cachée du réseau, c’est exactement le même raisonnement.
-Prenons par exemple, le paramètre <span class="math notranslate nohighlight">\(w_1\)</span> pour le calcul :
-$<span class="math notranslate nohighlight">\(w_1^{\left(n+1\right)} = w_1^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_1}.\)</span><span class="math notranslate nohighlight">\(
-Le problème maintenant consiste à calculer
-\)</span>\frac{\partial E_k}{\partial w_1}<span class="math notranslate nohighlight">\(, pour cela nous allons utiliser le
-théorème de dérivation des fonctions composées, d'où:
-\)</span><span class="math notranslate nohighlight">\(\frac{\partial E_k}{\partial w_1} = \frac{\partial E_k}{\partial z_4} \times  \frac{\partial z_4}{\partial h_1}  \times  \frac{\partial h_1}{\partial z_1} \times  \frac{\partial z_1}{\partial w_1}\)</span>$
-Cette relation est représentée graphiquement sur la figure
-<a class="reference external" href="#F:CoucheCachee">1.7</a>{reference-type= »ref »
-reference= »F:CoucheCachee »}.<br />
-A l’aide de l’équation <a class="reference external" href="#E:XOR">[E:XOR]</a>{reference-type= »ref »
-reference= »E:XOR »}, de l’équation <a class="reference external" href="#E:Ek">[E:Ek]</a>{reference-type= »ref »
-reference= »E:Ek »} et de l’équation
-<a class="reference external" href="#E:CompOutLayer">[E:CompOutLayer]</a>{reference-type= »ref »
-reference= »E:CompOutLayer »} on obtient:</p>
+Prenons par exemple, le paramètre <span class="math notranslate nohighlight">\(w_1\)</span> pour le calcul :</p>
+<div class="math notranslate nohighlight">
+\[w_1^{\left(n+1\right)} = w_1^{\left(n\right)} - \eta \times \frac{\partial E_k}{\partial w_1}.\]</div>
+<p>Le problème maintenant consiste à calculer
+<span class="math notranslate nohighlight">\(\frac{\partial E_k}{\partial w_1}\)</span>, pour cela nous allons utiliser le
+théorème de dérivation des fonctions composées, d’où:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial E_k}{\partial w_1} = \frac{\partial E_k}{\partial z_4} \times  \frac{\partial z_4}{\partial h_1}  \times  \frac{\partial h_1}{\partial z_1} \times  \frac{\partial z_1}{\partial w_1}\]</div>
+<p>Cette relation est représentée graphiquement sur la (<a class="reference internal" href="#xor3"><span class="std std-numref">Fig. 7</span></a>).
+Utilisant les équations précédentes, on obtient alors</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left\{
         \begin{array}{r c l}
@@ -1016,12 +1010,14 @@ obtenir les relations suivantes :</p>
         \end{array}
     \right.
     \end{split}\]</div>
-<figure id="F:CoucheCachee">
-<figcaption>Rétropropagation du gradient sur la couche
-cachée.</figcaption>
-</figure>
+<div class="figure align-default" id="xor3">
+<img alt="_images/xor3.png" src="_images/xor3.png" />
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Rétropropagation du gradient sur la couche cachée.</span><a class="headerlink" href="#xor3" title="Lien permanent vers cette image">#</a></p>
+</div>
 <p>Il suffit de réaliser des calculs identiques pour les autres neurones et
-on obtient les relations suivantes : $<span class="math notranslate nohighlight">\(\left\{
+on obtient les relations suivantes :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{
             \begin{array}{r c l}
                 w_3^{\left(n+1\right)} &amp;=&amp; w_3^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 x_1\\                
                 w_4^{\left(n+1\right)} &amp;=&amp; w_4^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 x_2\\
@@ -1030,7 +1026,7 @@ on obtient les relations suivantes : $<span class="math notranslate nohighlight"
                 b_2^{\left(n+1\right)} &amp;=&amp; b_2^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_2\left(z_2\right)\left( 1 - h_2\left(z_2\right)\right) w_8 \\
                 b_3^{\left(n+1\right)} &amp;=&amp; b_3^{\left(n\right)} + \eta \left(y[k]_{lab} - h_4\left(z_4\right)\right) h_4\left(z_4\right)\left( 1 - h_4\left(z_4\right)\right) h_3\left(z_3\right)\left( 1 - h_3\left(z_3\right)\right) w_9               
             \end{array}
-        \right.\)</span>$</p>
+        \right.\end{split}\]</div>
 </div>
 <div class="section" id="initialisation-des-poids-initialisation-des-poids">
 <h4>Initialisation des poids {#initialisation-des-poids}<a class="headerlink" href="#initialisation-des-poids-initialisation-des-poids" title="Lien permanent vers ce titre">#</a></h4>
@@ -1043,12 +1039,14 @@ dépendant de la taille de la couche d’avant <span class="math notranslate noh
 L’initialisation de Xavier propose un tirage uniforme dans
 <span class="math notranslate nohighlight">\(\left[-\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} ;\sqrt{\frac{6}{m^{(l-1)}+m^{(l)}}} \right]\)</span>.</p></li>
 </ul>
-<p>Pour notre exemple, on obtient l’initialisation suivante : $<span class="math notranslate nohighlight">\(\left\{
+<p>Pour notre exemple, on obtient l’initialisation suivante :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{
         \begin{array}{r c l}
             w_1 \ ...\ w_6 &amp;=&amp; UD \ dans \ \left[-\sqrt{\frac{6}{2+3}} ;\sqrt{\frac{6}{2+3}} \right] = \left[-1,09;1,09 \right]\\
             w_7 \ ... \ w_9 &amp;=&amp; UD \ dans \ \left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right] = \left[-1,23;1,23 \right]
         \end{array}
-    \right.\)</span>$</p>
+    \right.\end{split}\]</div>
 </div>
 </div>
 </div>
