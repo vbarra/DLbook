@@ -448,17 +448,19 @@
 # cas non linéaire.
 # 
 # 
-# Pour illustration simple, on considère la ({numref}`approx`). L'objectif est d'apprendre $f(x)=x^2$. En rouge sont représentés 50 points d'apprentissage, en bleu la fonction prédite sur l'intervalle [-1,1] par un réseau de neurones ({numref}`approx2`) à une couche cachée, dont les 3 neurones sont équipés de la conction d'activation $tanh$. Les fonctions apprises par ces neurones sont en pointillés, et la combinaison linéaire de ces fonctions donne la courbe bleue prédite.
-# 
-# ```{figure} ./images/f1.png
-# :name: approx
-# Exemple de réseau pour apprendre le XOR
-# ```
+# Pour illustration simple, on considère la ({numref}`approx`). L'objectif est d'apprendre $f(x)=x^2$. En rouge sont représentés 50 points d'apprentissage, en bleu la fonction prédite sur l'intervalle [-1,1] par un réseau de neurones ({numref}`approx2`) à une couche cachée, dont les 3 neurones sont équipés de la fonction d'activation $tanh$. Les fonctions apprises par ces neurones sont en pointillés, et la combinaison linéaire de ces fonctions donne la courbe bleue prédite.
 # 
 # ```{figure} ./images/exmlp.png
 # :name: approx2
-# Exemple de réseau pour apprendre le XOR
+# Un perceptron multicouches à une couche cachée
 # ```
+# 
+# ```{figure} ./images/f1.png
+# :name: approx
+# Approximation de $f(x)=x^2$ par un réseau à une couche cachée.
+# ```
+# 
+# 
 # 
 # 
 # 
