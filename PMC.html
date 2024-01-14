@@ -577,21 +577,26 @@ jour en fonction de l’erreur cumulée
 <div class="section" id="optimisation-des-parametres">
 <h2>Optimisation des paramètres<a class="headerlink" href="#optimisation-des-parametres" title="Lien permanent vers ce titre">#</a></h2>
 <p>Considérons le cas de l’entraînement stochastique. La condition
-nécessaire d’optimalité d’ordre 1 donne $<span class="math notranslate nohighlight">\(\begin{aligned}
-    \frac{\partial E_n}{\partial w} = \nabla E_n(w) = 0
-\end{aligned}\)</span>$</p>
+nécessaire d’optimalité d’ordre 1 donne</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+    \frac{\partial E_n}{\partial \mathbf w} = \nabla E_n(\mathbf w) = 0
+\end{aligned}\]</div>
 <p>Une méthode itérative est utilisée pour trouver une solution approchée.
-Si <span class="math notranslate nohighlight">\(w[t]\)</span> est le vecteur de poids à la <span class="math notranslate nohighlight">\(t^{\text{e}}\)</span> itération, une
-mise à jour des poids <span class="math notranslate nohighlight">\(\Delta w[t]\)</span> est calculée et propagée à
-l’itération suivante : <span class="math notranslate nohighlight">\(w[t+1] = w[t] + \Delta w[t]\)</span>. Comme dans le cas
-du perceptron, on peut utiliser une méthode de type descente de gradient
+Si <span class="math notranslate nohighlight">\(\mathbf w[t]\)</span> est le vecteur de poids à la <span class="math notranslate nohighlight">\(t^{\text{e}}\)</span> itération, une
+mise à jour des poids <span class="math notranslate nohighlight">\(\Delta \mathbf w[t]\)</span> est calculée et propagée à
+l’itération suivante : <span class="math notranslate nohighlight">\(\mathbf w[t+1] = \mathbf w[t] + \Delta \mathbf w[t]\)</span>. Comme dans le cas du perceptron, on peut utiliser une méthode de type descente de gradient
 (ordre 1), ou une méthode type Newton (ordre 2, qui nécessite alors le
 calcul ou l’estimation du Hessien <span class="math notranslate nohighlight">\(H_n\)</span> de <span class="math notranslate nohighlight">\(E_n\)</span> à chaque itération).</p>
 <ul>
 <li><p>pour la méthode de descente du gradient, la mise à jour est effectuée
-par $$\begin{aligned}
-\Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])</p>
-<p>\end{aligned}$<span class="math notranslate nohighlight">\( où \)</span>\gamma$ est le taux d’apprentissage.</p>
+par</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+                \Delta w[t] = - \gamma \frac{\partial E_n}{\partial w[t]} = - \gamma \nabla E_n (w[t])
+            
+    \end{aligned}\]</div>
+<p>où <span class="math notranslate nohighlight">\(\gamma\)</span> est le taux d’apprentissage.</p>
 </li>
 <li><p>pour les méthodes d’ordre 2, type Newton, la mise à jour s’effectue
 selon le schéma $$\begin{aligned}
