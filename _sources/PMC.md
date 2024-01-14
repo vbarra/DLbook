@@ -59,11 +59,12 @@ Perceptron multicouches à $(L + 1)$ couches, $D$ entrées et $C$ sorties.
 Un tel réseau représente une fonction 
 
 $$\begin{aligned}
-    y(\cdot,w) &:& \mathbb{R}^D \rightarrow \mathbb{R}^C\\
-    x &\mapsto& y(x,w)
+    {\mathbf y}(\cdot,{\mathbf w}) &:& \mathbb{R}^D \rightarrow \mathbb{R}^C\\
+    {\mathbf x} &\mapsto& {\mathbf y(x,w)}
 \end{aligned}$$ 
-où $y(x,w)$ est tel que $y_i(x,w) = y_i^{(L+1)}$ et $w$
-est le vecteur de tous les poids du réseau.
+
+où ${\mathbf y(x,w)}$ est tel que ${\mathbf y_i}({\mathbf x},{\mathbf w}) = {\mathbf y_i^{(L+1)}}$ et ${\mathbf w}$
+est la matrice de tous les poids du réseau.
 
 On parlera de **réseau profond (Deep network)** lorsque le nombre de
 couches cachées est "suffisamment important" (supérieur à 3 par exemple).
@@ -145,6 +146,8 @@ Quelques fonctions d'activation sont présentées dans la ({numref}`tabact`).
 Quelques fonctions d'activation
 ```
 
+Les fonctions d'activation sous Pytorch sont résumées [ici](https://pytorch.org/docs/stable/nn.functional.html).
+
 ## Entraînement des réseaux multicouches 
 
 Pour pouvoir utiliser les réseaux multicouches en apprentissage, deux
@@ -157,7 +160,7 @@ ingrédients sont indispensables :
 
 -   une fois l'architecture choisie, un algorithme d'apprentissage qui
     calcule, à partir d'un l'échantillon d'apprentissage
-    ${\cal E}_a = \left \{(x_n, t_n), 1 \leq n \leq N \right \}$ , les
+    ${\cal E}_a = \left \{({\mathbf x_n}, t_n), 1 \leq n \leq N \right \}$ , les
     valeurs des poids synaptiques pour construire un réseau adapté au
     problème (c'est à dire approchant une fonction $g$ désirée mais
     inconnue, telle qu'en particulier $t_n \approx g(x_n)$) .
@@ -179,16 +182,23 @@ gradient**, découvert simultanément par des équipes française et
 américaine.
 
 L'entraînement, comme dans le cas de l'algorithme
-[\[A:descGrad\]](#A:descGrad){reference-type="ref"
-reference="A:descGrad"}, consiste à trouver les poids qui minimisent une
-fonction d'erreur, mesurant l'écart entre la sortie du réseau $y(x_n)$
+de descentre de gradient, consiste à trouver les poids qui minimisent une
+fonction d'erreur, mesurant l'écart entre la sortie du réseau $y({\mathbf x_n})$
 et $t_n$, pour tous les exemples de ${\cal E}_a$. Les fonctions
 couramment choisies sont les sommes des fonctions de perte sur chaque
-exemple, et incluent l'erreur quadratique $$\begin{aligned}
-    E(w) = \displaystyle\sum_{n = 1}^N E_n(w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C (y_i(x_n,w) - t^i_{n})^2
-\end{aligned}$$ ou l'erreur d'entropie croisée $$\begin{aligned}
-    E(w) = \displaystyle\sum_{n = 1}^N E_n(w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(x_n,w)),
-\end{aligned}$$ où $t^i_{n}$ est la $i^{\text{e}}$ composante de $t_n$.
+exemple, et incluent l'erreur quadratique 
+
+$$\begin{aligned}
+    E(\mathbf w) = \displaystyle\sum_{n = 1}^N E_n(\mathbf w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C (y_i(\mathbf x_n,\mathbf w) - t^i_{n})^2
+\end{aligned}$$ 
+
+ou l'erreur d'entropie croisée 
+
+$$\begin{aligned}
+    E(\mathbf w) = \displaystyle\sum_{n = 1}^N E_n(\mathbf w) = \displaystyle\sum_{n = 1}^N \sum_{i = 1}^C t^i_{n} \log(y_i(\mathbf x_n,\mathbf w)),
+\end{aligned}$$ 
+
+où $t^i_{n}$ est la $i^{\text{e}}$ composante de $t_n$.
 
 ## Stratégies d'entraînement
 
