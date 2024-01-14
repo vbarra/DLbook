@@ -658,36 +658,34 @@ et</p>
 </div>
 <div class="section" id="retropropagation-de-l-erreur">
 <h2>Rétropropagation de l’erreur<a class="headerlink" href="#retropropagation-de-l-erreur" title="Lien permanent vers ce titre">#</a></h2>
-<p>L’algorithme
-<a class="reference external" href="#alg:error-backpropagation">[alg:error-backpropagation]</a>{reference-type= »ref »
-reference= »alg:error-backpropagation »}, dit algorithme de
+<p>l”<a class="reference internal" href="#backprop">Algorithm 4</a>, dit algorithme de
 rétropropagation du gradient, est utilisé pour évaluer le gradient
 <span class="math notranslate nohighlight">\(\nabla E_n (w[t])\)</span> de l’erreur <span class="math notranslate nohighlight">\(E_n\)</span> à chaque itération, ceci pour tous
 les poids</p>
-<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>1.  Propager un exemple $x_n$ dans le réseau.
-
-2.  Calculer les erreurs $\delta_i^{(L+1)}$ des neurones de sortie :
-    $$\begin{aligned}
-                (\forall i\in\{1\cdots C\})\quad\delta_i^{(L+1)} = \frac{\partial E_n}{\partial y_i^{(L+1)}} f&#39;(z_i^{(L+1)}).
+<div class="proof algorithm admonition" id="backprop">
+<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Algorithme de rétropropagation du gradient)</p>
+<div class="algorithm-content section" id="proof-content">
+<ol>
+<li><p>Propager un exemple <span class="math notranslate nohighlight">\(x_n\)</span> dans le réseau.</p></li>
+<li><p>Calculer les erreurs <span class="math notranslate nohighlight">\(\delta_i^{(L+1)}\)</span> des neurones de sortie :
+$$\begin{aligned}
+(\forall i\in{1\cdots C})\quad\delta_i^{(L+1)} = \frac{\partial E_n}{\partial y_i^{(L+1)}} f”(z_i^{(L+1)}).</p>
+<p>\end{aligned}$$</p>
+</li>
+<li><p>Déterminer <span class="math notranslate nohighlight">\(\delta _i ^{(l)}\)</span> pour toutes les couches cachées :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+                (\forall l\in\{1\cdots L\})(\forall i\in\{1\cdots m^l\})\quad\delta _i ^{(l)} = f' (z_i^{(l)}) \sum _{k = 1} ^{m^{(l+1)}} w_{i,k}^{(l+1)} \delta _k ^{(l+1)}.
             
-    \end{aligned}$$
-
-3.  Déterminer $\delta _i ^{(l)}$ pour toutes les couches cachées :
-    $$\begin{aligned}
-                (\forall l\in\{1\cdots L\})(\forall i\in\{1\cdots m^l\})\quad\delta _i ^{(l)} = f&#39; (z_i^{(l)}) \sum _{k = 1} ^{m^{(l+1)}} w_{i,k}^{(l+1)} \delta _k ^{(l+1)}.
-            
-    \end{aligned}$$
-
-4.  Calculer les composantes du gradient : $$\begin{aligned}
-                \label{eq:backprop-derivative}
-                \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \delta _j ^{(l)} y_i^{(l-1)}.
-            
-    \end{aligned}$$
-
-[]{#alg:error-backpropagation label=&quot;alg:error-backpropagation&quot;}
-</pre></div>
+    \end{aligned}\]</div>
+</li>
+<li><p>Calculer les composantes du gradient :
+$<span class="math notranslate nohighlight">\(\begin{aligned}
+            \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \delta _j ^{(l)} y_i^{(l-1)}.           
+\end{aligned}\)</span>$</p></li>
+</ol>
 </div>
-<p>Dans le cas d’un apprentissage stochastique, cet algorithme est appliqué
+</div><p>Dans le cas d’un apprentissage stochastique, cet algorithme est appliqué
 jusqu’à convergence, pour estimer les poids du réseau de neurones.</p>
 </div>
 <div class="section" id="criteres-d-arret">
@@ -802,7 +800,7 @@ autoencodeurs ou les SVM par exemple) d’avoir une bonne capacité de
 généralisation.<br />
 Il existe plusieurs techniques permettant d’introduire de la
 régularisation dans les réseaux. Parmi elles, on note :</p>
-<ul class="simple">
+<ul>
 <li><p><span class="math notranslate nohighlight">\({\cal E}_a\)</span> est enrichi pour introduire certaines invariances que
 le réseau est supposé apprendre.</p></li>
 <li><p>à chaque exemple présenté, chaque neurone caché est supprimé du
@@ -821,13 +819,15 @@ atteint un minimum. Cette technique est appelée early stopping
 des mêmes valeurs de poids. La complexité du réseau est réduite et
 des informations <em>a priori</em> peuvent être introduites par ce biais
 dans l’architecture du réseau. L’algorithme de rétropropagation du
-gradient s’en trouve modifié et l’équation
-<a class="reference external" href="#eq:backprop-derivative">[eq:backprop-derivative]</a>{reference-type= »eqref »
-reference= »eq:backprop-derivative »} devient $<span class="math notranslate nohighlight">\(\begin{aligned}
-    \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \sum _{k = 1} ^{m^{(l)}} \delta_k^{(l)} y_i^{(l-1)}
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( en supposant que tous les neurones de la couche \)</span>l<span class="math notranslate nohighlight">\(
-sont tels que \)</span>w_{j,i}^{(l)} = w_{k,i}^{(l)}<span class="math notranslate nohighlight">\( pour
-\)</span>1 \leq j,k \leq m^{(l)}$</p></li>
+gradient s’en trouve modifié et l’étape 4 devient</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+        \frac{\partial E_n}{\partial w_{j,i}^{(l)}} = \sum _{k = 1} ^{m^{(l)}} \delta_k^{(l)} y_i^{(l-1)}
+    \end{aligned}\]</div>
+<p>en supposant que tous les neurones de la couche <span class="math notranslate nohighlight">\(l\)</span>
+sont tels que <span class="math notranslate nohighlight">\(w_{j,i}^{(l)} = w_{k,i}^{(l)}\)</span> pour
+<span class="math notranslate nohighlight">\(1 \leq j,k \leq m^{(l)}\)</span></p>
+</li>
 <li><p>un terme de régularisation est ajouté à la fonctionnelle à minimiser
 pour contrôler la complexité et le forme de la solution et, par
 exemple $<span class="math notranslate nohighlight">\(\begin{aligned}
@@ -836,7 +836,7 @@ exemple $<span class="math notranslate nohighlight">\(\begin{aligned}
 \)</span>\eta<span class="math notranslate nohighlight">\( contrôle l'influence du terme de régularisation. \)</span>P(w)<span class="math notranslate nohighlight">\( peut
 prendre la forme d'une fonction de la norme \)</span>L_p<span class="math notranslate nohighlight">\( de \)</span>w$. Deux
 exemples classiques sont :</p>
-<ul>
+<ul class="simple">
 <li><p>la régularisation <span class="math notranslate nohighlight">\(L_2\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
     P(w) = \|w\|_2^2 = w^Tw.
 \end{aligned}\)</span>$ où le principe est de pénaliser les poids de
