@@ -813,8 +813,8 @@ régularisation dans les réseaux. Parmi elles, on note :</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\({\cal E}_a\)</span> est enrichi pour introduire certaines invariances que
 le réseau est supposé apprendre.</p></li>
-<li><p>à chaque exemple présenté, chaque neurone caché est supprimé du
-calcul de la sortie avec probabilité <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>. Cette technique
+<li><p>à chaque exemple/batch présenté, chaque neurone caché est supprimé du
+calcul de la sortie avec probabilité <span class="math notranslate nohighlight">\(p\)</span> (dropout). Cette technique
 peut être vue comme la construction d’un modèle moyen
 d’apprentissage de plusieurs réseaux distincts.</p></li>
 <li><p>lorsque <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est séparé en un ensemble d’apprentissage
@@ -847,24 +847,14 @@ exemple</p>
     \end{aligned}\]</div>
 <p>où <span class="math notranslate nohighlight">\(P(\mathbf w)\)</span> influence la forme de la solution et
 <span class="math notranslate nohighlight">\(\eta\)</span> contrôle l’influence du terme de régularisation. <span class="math notranslate nohighlight">\(P(\mathbf w)\)</span> peut
-prendre la forme d’une fonction de la norme <span class="math notranslate nohighlight">\(L_p\)</span> de <span class="math notranslate nohighlight">\(w\)</span>. Deux
+prendre la forme d’une fonction de la norme <span class="math notranslate nohighlight">\(L_p\)</span> de <span class="math notranslate nohighlight">\(\mathbf w\)</span>. Deux
 exemples classiques sont :</p>
 <ul class="simple">
-<li><p>la régularisation <span class="math notranslate nohighlight">\(L_2\)</span> :</p></li>
+<li><p>la régularisation <span class="math notranslate nohighlight">\(L_2\)</span> : <span class="math notranslate nohighlight">\(P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w\)</span>, où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.</p></li>
+<li><p>la régularisation <span class="math notranslate nohighlight">\(L_1\)</span> : <span class="math notranslate nohighlight">\(P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|\)</span> où <span class="math notranslate nohighlight">\(W\)</span> est la dimension de <span class="math notranslate nohighlight">\(\mathbf w\)</span>, qui tend à rendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\begin{aligned}
-            P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w.
-        \end{aligned}\]</div>
 </li>
 </ul>
-<p>où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
--   la régularisation <span class="math notranslate nohighlight">\(L_1\)</span> :</p>
-<div class="math notranslate nohighlight">
-\[\begin{aligned}
-            P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
-\end{aligned}\]</div>
-<p>où <span class="math notranslate nohighlight">\(W\)</span> est la dimension de <span class="math notranslate nohighlight">\(\mathbf w\)</span>, qui tend àrendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).</p>
 </div>
 <div class="section" id="exemple">
 <h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">#</a></h2>
