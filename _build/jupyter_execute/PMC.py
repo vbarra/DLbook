@@ -492,22 +492,34 @@
 # 
 # -   un terme de régularisation est ajouté à la fonctionnelle à minimiser
 #     pour contrôler la complexité et le forme de la solution et, par
-#     exemple $$\begin{aligned}
+#     exemple 
+#     
+#     $$\begin{aligned}
 #         \hat{E}_n (w) = E_n (w) + \eta P(w)
-#     \end{aligned}$$ où $P(w)$ influence la forme de la solution et
+#     \end{aligned}$$ 
+#     
+#     où $P(w)$ influence la forme de la solution et
 #     $\eta$ contrôle l'influence du terme de régularisation. $P(w)$ peut
 #     prendre la forme d'une fonction de la norme $L_p$ de $w$. Deux
 #     exemples classiques sont :
 # 
-#     -   la régularisation $L_2$ : $$\begin{aligned}
+#     -   la régularisation $L_2$ : 
+#     
+#     $$\begin{aligned}
 #             P(w) = \|w\|_2^2 = w^Tw.
-#         \end{aligned}$$ où le principe est de pénaliser les poids de
+#         \end{aligned}$$ 
+#         
+#         où le principe est de pénaliser les poids de
 #         fortes valeurs, qui tendent à amplifier le problème de
 #         surapprentissage.
 # 
-#     -   la régularisation $L_1$ : $$\begin{aligned}
+#     -   la régularisation $L_1$ : 
+#     
+#     $$\begin{aligned}
 #             P(w) = \|w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
-#         \end{aligned}$$ où $W$ est la dimension de $w$, qui tend à
+#         \end{aligned}$$ 
+#         
+#         où $W$ est la dimension de $w$, qui tend à
 #         rendre épars le vecteur de poids (beaucoup de valeurs de poids
 #         deviennent nulles).
 # 
@@ -541,7 +553,6 @@
 #     \right.
 #     \label{E:XOR}$$
 # 
-# <figure id="F:XOR_BackPropagation">
 # 
 # ```{figure} ./images/xor.png
 # :name: xor

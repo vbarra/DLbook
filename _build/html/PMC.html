@@ -833,24 +833,39 @@ sont tels que <span class="math notranslate nohighlight">\(w_{j,i}^{(l)} = w_{k,
 </li>
 <li><p>un terme de régularisation est ajouté à la fonctionnelle à minimiser
 pour contrôler la complexité et le forme de la solution et, par
-exemple $<span class="math notranslate nohighlight">\(\begin{aligned}
-    \hat{E}_n (w) = E_n (w) + \eta P(w)
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>P(w)<span class="math notranslate nohighlight">\( influence la forme de la solution et
-\)</span>\eta<span class="math notranslate nohighlight">\( contrôle l'influence du terme de régularisation. \)</span>P(w)<span class="math notranslate nohighlight">\( peut
-prendre la forme d'une fonction de la norme \)</span>L_p<span class="math notranslate nohighlight">\( de \)</span>w$. Deux
+exemple</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+        \hat{E}_n (w) = E_n (w) + \eta P(w)
+    \end{aligned}\]</div>
+<p>où <span class="math notranslate nohighlight">\(P(w)\)</span> influence la forme de la solution et
+<span class="math notranslate nohighlight">\(\eta\)</span> contrôle l’influence du terme de régularisation. <span class="math notranslate nohighlight">\(P(w)\)</span> peut
+prendre la forme d’une fonction de la norme <span class="math notranslate nohighlight">\(L_p\)</span> de <span class="math notranslate nohighlight">\(w\)</span>. Deux
 exemples classiques sont :</p>
 <ul class="simple">
-<li><p>la régularisation <span class="math notranslate nohighlight">\(L_2\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
-    P(w) = \|w\|_2^2 = w^Tw.
-\end{aligned}\)</span>$ où le principe est de pénaliser les poids de
-fortes valeurs, qui tendent à amplifier le problème de
-surapprentissage.</p></li>
-<li><p>la régularisation <span class="math notranslate nohighlight">\(L_1\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
-    P(w) = \|w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>W<span class="math notranslate nohighlight">\( est la dimension de \)</span>w$, qui tend à
-rendre épars le vecteur de poids (beaucoup de valeurs de poids
-deviennent nulles).</p></li>
+<li><p>la régularisation <span class="math notranslate nohighlight">\(L_2\)</span> :</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+            P(w) = \|w\|_2^2 = w^Tw.
+        \end{aligned}\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>où le principe est de pénaliser les poids de
+fortes valeurs, qui tendent à amplifier le problème de
+surapprentissage.
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>la régularisation <span class="math notranslate nohighlight">\(L_1\)</span> :</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+            P(w) = \|w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
+        \end{aligned}\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>où $W$ est la dimension de $w$, qui tend à
+rendre épars le vecteur de poids (beaucoup de valeurs de poids
+deviennent nulles).
+</pre></div>
+</div>
 </li>
 </ul>
 </div>
@@ -895,7 +910,6 @@ calculer durant la phase d’apprentissage.</p>
         \end{array}
     \right.
     \label{E:XOR}\end{split}\]</div>
-<figure id="F:XOR_BackPropagation">
 <div class="figure align-default" id="xor">
 <img alt="_images/xor.png" src="_images/xor.png" />
 <p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#xor" title="Lien permanent vers cette image">#</a></p>

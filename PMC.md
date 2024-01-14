@@ -426,7 +426,7 @@ approximateurs usuels.
     domaine fini de l'espace de ses variables, par un réseau de neurones
     comportant une couche de neurones cachés en nombre fini, possédant
     tous la même fonction d'activation, et un neurone de sortie
-    linéaire.\
+    linéaire.
 
 -   Parcimonie : Hornik a montré en 1994 que si la sortie d'un réseau de
     neurones est une fonction non linéaire des paramètres ajustables,
@@ -437,7 +437,7 @@ approximateurs usuels.
     et elle est indépendante du nombre de variables de la fonction à
     approcher. Ainsi, pour une précision donnée (*i.e.* étant donné un
     nombre de neurones cachés) le nombre de paramètres du réseau est
-    proportionnel au nombre de variables de la fonction à approcher.\
+    proportionnel au nombre de variables de la fonction à approcher.
 
 Dans la plupart des cas d'utilisation des réseaux de neurones, il va
 s'agir d'établir un modèle d'une fonction inconnue à partir de mesures
@@ -454,7 +454,7 @@ de bons candidats pour réaliser une approximation de la fonction de
 régression à partir d'un nombre fini de mesures. Ils entrent donc dans
 le cadre des méthodes statistiques d'apprentissage, et élargissent ce
 domaine déjà bien exploré pour des fonctions de régression linéaire au
-cas non linéaire.\
+cas non linéaire.
 
 ## Régularisation
 
@@ -503,33 +503,29 @@ régularisation dans les réseaux. Parmi elles, on note :
     exemple 
     
     $$\begin{aligned}
-        \hat{E}_n (w) = E_n (w) + \eta P(w)
+        \hat{E}_n (\mathbf w) = E_n (\mathbf w) + \eta P(\mathbf w)
     \end{aligned}$$ 
     
-    où $P(w)$ influence la forme de la solution et
-    $\eta$ contrôle l'influence du terme de régularisation. $P(w)$ peut
+    où $P(\mathbf w)$ influence la forme de la solution et
+    $\eta$ contrôle l'influence du terme de régularisation. $P(\mathbf w)$ peut
     prendre la forme d'une fonction de la norme $L_p$ de $w$. Deux
     exemples classiques sont :
 
     -   la régularisation $L_2$ : 
     
     $$\begin{aligned}
-            P(w) = \|w\|_2^2 = w^Tw.
+            P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top w.
         \end{aligned}$$ 
         
-        où le principe est de pénaliser les poids de
-        fortes valeurs, qui tendent à amplifier le problème de
-        surapprentissage.
+où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème d  surapprentissage.
 
     -   la régularisation $L_1$ : 
     
     $$\begin{aligned}
-            P(w) = \|w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
+            P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|.
         \end{aligned}$$ 
         
-        où $W$ est la dimension de $w$, qui tend à
-        rendre épars le vecteur de poids (beaucoup de valeurs de poids
-        deviennent nulles).
+    où $W$ est la dimension de $\mathbf w$, qui tend àrendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).
 
 ## Exemple
 
