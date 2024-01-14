@@ -432,13 +432,15 @@ poids <span class="math notranslate nohighlight">\(w_{i,k}^{(l)}\)</span> et des
 <img alt="_images/mlp.png" src="_images/mlp.png" />
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Perceptron multicouches à <span class="math notranslate nohighlight">\((L + 1)\)</span> couches, <span class="math notranslate nohighlight">\(D\)</span> entrées et <span class="math notranslate nohighlight">\(C\)</span> sorties.</span><a class="headerlink" href="#mlp" title="Lien permanent vers cette image">#</a></p>
 </div>
-<p>Un tel réseau représente une fonction $<span class="math notranslate nohighlight">\(\begin{aligned}
+<p>Un tel réseau représente une fonction
+$<span class="math notranslate nohighlight">\(\begin{aligned}
     y(\cdot,w) &amp;:&amp; \mathbb{R}^D \rightarrow \mathbb{R}^C\\
     x &amp;\mapsto&amp; y(x,w)
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>y(x,w)<span class="math notranslate nohighlight">\( est tel que \)</span>y_i(x,w) = y_i^{(L+1)}<span class="math notranslate nohighlight">\( et \)</span>w$
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( 
+où \)</span>y(x,w)<span class="math notranslate nohighlight">\( est tel que \)</span>y_i(x,w) = y_i^{(L+1)}<span class="math notranslate nohighlight">\( et \)</span>w$
 est le vecteur de tous les poids du réseau.</p>
 <p>On parlera de <strong>réseau profond (Deep network)</strong> lorsque le nombre de
-couches cachées est supérieur à 3.</p>
+couches cachées est « suffisamment important » (supérieur à 3 par exemple).</p>
 <div class="section" id="fonctions-d-activation">
 <h2>Fonctions d’activation<a class="headerlink" href="#fonctions-d-activation" title="Lien permanent vers ce titre">#</a></h2>
 <p>Trois grandes classes de fonction d’activation <span class="math notranslate nohighlight">\(f\)</span> sont généralement
@@ -449,10 +451,11 @@ présentent, notamment en raison de la non différentiabilité de ces
 fonctions (qui est nécessaire dans les algorithmes d’apprentissage du
 type descente de gradient), ou encore en raison de la faiblesse de leur
 pouvoir d’expression. Ainsi, il est préférable d’utiliser des fonctions
-de type sigmoïde, et par exemple la sigmoïde logistique est donnée par :
-$<span class="math notranslate nohighlight">\(\begin{aligned}
+de type sigmoïde, et par exemple la sigmoïde logistique est donnée par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
     \sigma(z) = \frac{1}{1 + \exp(-z)}.
-\end{aligned}\)</span>$</p>
+\end{aligned}\]</div>
 <p>La tangente hyperbolique <span class="math notranslate nohighlight">\(\tanh(z)\)</span>, également utilisée pour ses bonnes
 propriétés de dérivabilité (<span class="math notranslate nohighlight">\((\tanh)'=1-\tanh^2\)</span>), peut être vue comme
 une transformation linéaire de la sigmoïde dans l’intervalle <span class="math notranslate nohighlight">\([-1,1]\)</span>.</p>
@@ -493,12 +496,11 @@ elle, peut être utilisée :
 <p>Les neurones cachés utilisant la fonction décrite dans
 l’équation précédente sont appelés neurones linéaires rectifiés
 (<strong>Rectified Linear Units, ReLUs</strong>), et sont en pratique très utilisés.</p>
-<p>Quelques fonctions d’activation sont présentées dans la figure
-<a class="reference external" href="#fig:sigmoid-tanh">1.4</a>{reference-type= »ref »
-reference= »fig:sigmoid-tanh »}.</p>
-<figure id="fig:sigmoid-tanh">
-<figcaption>Quelques fonctions d’activation classiques.</figcaption>
-</figure>
+<p>Quelques fonctions d’activation sont présentées dans la (<a class="reference internal" href="#tabact"><span class="std std-numref">Fig. 3</span></a>).</p>
+<div class="figure align-default" id="tabact">
+<img alt="_images/tabactivation.pdf" src="_images/tabactivation.pdf" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Quelques fonctions d’activation</span><a class="headerlink" href="#tabact" title="Lien permanent vers cette image">#</a></p>
+</div>
 </div>
 <div class="section" id="entrainement-des-reseaux-multicouches">
 <h2>Entraînement des réseaux multicouches<a class="headerlink" href="#entrainement-des-reseaux-multicouches" title="Lien permanent vers ce titre">#</a></h2>
