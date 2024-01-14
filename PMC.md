@@ -729,5 +729,8 @@ $$\left\{
     \right.$$
 
 
+## Implémentation
+
+<code> import numpy as np </code>
 
 

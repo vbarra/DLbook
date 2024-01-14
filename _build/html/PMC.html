@@ -895,8 +895,8 @@ calculer durant la phase d’apprentissage.</p>
             y &amp;=&amp; h_4\left(z_4\right) \\
             h_i\left(z_i\right) &amp;=&amp; \frac{1}{1+e^{-z_i}} \ \ \ \ (sigmoide)
         \end{array}
-    \right.
-    \label{E:XOR}\end{split}\]</div>
+    \right .
+    \end{split}\]</div>
 <div class="figure align-default" id="xor">
 <img alt="_images/xor.png" src="_images/xor.png" />
 <p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#xor" title="Lien permanent vers cette image">#</a></p>
@@ -907,7 +907,7 @@ calculer durant la phase d’apprentissage.</p>
 <p>Durant la phase d’apprentissage, on minimise un risque empirique par une
 fonction de coût. Dans cet exemple, nous allons choisir la minimisation
 de l’écart quadratique avec la base d’apprentissage labelisée
-<span class="math notranslate nohighlight">\({\cal E}_a =\left( \textbf{x}, \textbf{y}_{lab} \right)\)</span> ou une partie
+<span class="math notranslate nohighlight">\({\cal E}_a =\left( \textbf{x}, {y}_{lab} \right)\)</span> ou une partie
 de cette base d’apprentissage <span class="math notranslate nohighlight">\(\mathcal{E}_a^\prime\)</span> :</p>
 <div class="math notranslate nohighlight">
 \[E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.\]</div>

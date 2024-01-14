@@ -558,8 +558,8 @@ $$\left\{
             y &=& h_4\left(z_4\right) \\
             h_i\left(z_i\right) &=& \frac{1}{1+e^{-z_i}} \ \ \ \ (sigmoide)
         \end{array}
-    \right.
-    \label{E:XOR}$$
+    \right .
+    $$
 
 
 ```{figure} ./images/xor.png
@@ -575,7 +575,7 @@ Exemple de réseau pour apprendre le XOR
 Durant la phase d'apprentissage, on minimise un risque empirique par une
 fonction de coût. Dans cet exemple, nous allons choisir la minimisation
 de l'écart quadratique avec la base d'apprentissage labelisée
-${\cal E}_a =\left( \textbf{x}, \textbf{y}_{lab} \right)$ ou une partie
+${\cal E}_a =\left( \textbf{x}, {y}_{lab} \right)$ ou une partie
 de cette base d'apprentissage $\mathcal{E}_a^\prime$ :
 
 $$E\left({\cal E}_a\right)=E_{tot}=\displaystyle\frac{1}{2}\sum_k \left(y[k]_{lab} - y \right)^2 = \displaystyle\frac{1}{2}\sum_k\left(y[k]_{lab} - h_4\left(z_4\right)  \right)^2.$$
