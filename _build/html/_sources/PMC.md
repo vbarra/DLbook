@@ -323,7 +323,7 @@ Si la fonction d'activation du neurone est la fonction ReLU, on peut multiplier 
 
 l'{prf:ref}`backprop`, dit algorithme de
 rétropropagation du gradient, est utilisé pour évaluer le gradient
-$\nabla E_n (w[t])$ de l'erreur $E_n$ à chaque itération, ceci pour tous
+$\nabla E_n (\mathbf w[t])$ de l'erreur $E_n$ à chaque itération, ceci pour tous
 les poids
 
 ```{prf:algorithm} Algorithme de rétropropagation du gradient
@@ -521,29 +521,20 @@ régularisation dans les réseaux. Parmi elles, on note :
 
 ## Exemple
 
-On va considérer le réseau décrit sur la figure
-[1.5](#F:XOR_BackPropagation){reference-type="ref"
-reference="F:XOR_BackPropagation"} pour apprendre la fonction du OU
+On va considérer le réseau décrit sur la ({numref}`xor`) pour apprendre la fonction du OU
 exclusif (aussi appelé XOR). L'opérateur XOR est défini par sa table de
-vérité donnée par le tableau [1.2](#T:XOR){reference-type="ref"
-reference="T:XOR"}.\
+vérité donnée par le tableau  suivant 
 
-::: {#T:XOR}
-   $x_1 \backslash x_2$   0   1
-  ---------------------- --- ---
-            0             0   1
-            1             1   0
-
-  : Table de vérité du XOR
-:::
+| $x_1 \backslash x_2$ | 0 | 1 |
+|-----------------------------|---|---|
+| 0                           | 0 | 1 |
+| 1                           | 1 | 0 |
 
 ### Réseau
 
 Sur le réseau de la figure
-[1.5](#F:XOR_BackPropagation){reference-type="ref"
-reference="F:XOR_BackPropagation"} les différentes relations sont
-données par l'équation [\[E:XOR\]](#E:XOR){reference-type="ref"
-reference="E:XOR"} où les paramètres en rouge correspondent aux poids à
+({numref}`tabact`) les différentes relations sont
+données par l'équation suivante où les paramètres en rouge correspondent aux poids à
 calculer durant la phase d'apprentissage.
 
 $$\left\{
@@ -560,9 +551,13 @@ $$\left\{
 
 <figure id="F:XOR_BackPropagation">
 
-<figcaption>Exemple d’un réseau pour apprendre la relation
-XOR.</figcaption>
-</figure>
+```{figure} ./images/xor.png
+:name: xor
+Exemple de réseau pour apprendre le XOR
+```
+
+
+
 
 ### Phase d'apprentissage
 
