@@ -791,11 +791,11 @@ normaliser les données d’entrée
 <div class="proof algorithm admonition" id="norm">
 <p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Normalisation par batch sur la présentation d’un mini batch <span class="math notranslate nohighlight">\(\mathcal{B}\)</span>)</p>
 <div class="algorithm-content section" id="proof-content">
-<p>{\bf Entrées} : valeurs de l’activation <span class="math notranslate nohighlight">\(x\)</span> sur un mini batch <span class="math notranslate nohighlight">\(\mathcal{B} = \{x_1\cdots x_m\}\)</span>,  Param\ètres <span class="math notranslate nohighlight">\(\beta,\gamma\)</span> `a apprendre}
-{\bf Sortie} : Données normalisées <span class="math notranslate nohighlight">\(\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)\)</span></p>
+<p>Entrées : valeurs de l’activation <span class="math notranslate nohighlight">\(x\)</span> sur un mini batch <span class="math notranslate nohighlight">\(\mathcal{B} = \{x_1\cdots x_m\}\)</span>,  Param\ètres <span class="math notranslate nohighlight">\(\beta,\gamma\)</span> `a apprendre</p>
+<p>Sortie : Données normalisées <span class="math notranslate nohighlight">\(\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)\)</span></p>
 <ol class="simple">
-<li><p>{<span class="math notranslate nohighlight">\(\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i\)</span>\</p></li>
-<li><p>$\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2$\</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2\)</span></p></li>
 <li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(m\)</span></p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(y_i = \gamma \frac{x_i-\mu_\mathcal{B}}{\sqrt{\sigma^2_\mathcal{B}+\epsilon}}+\beta\)</span></p></li>
