@@ -460,6 +460,8 @@ Pour illustration simple, on considère le problème d'apprentissage de la fonct
 
 ```{figure} ./images/exmlp.png
 :name: approx2
+:width: 500px
+:align: center
 Un perceptron multicouches à une couche cachée
 ```
 
@@ -643,6 +645,8 @@ $$\left\{
 
 ```{figure} ./images/xor2.png
 :name: xor2
+:width: 500px
+:align: center
 Rétropropagation du gradient sur la couche de sortie.
 ```
 
@@ -691,6 +695,8 @@ $$\left\{
 
 ```{figure} ./images/xor3.png
 :name: xor3
+:width: 500px
+:align: center
 Rétropropagation du gradient sur la couche cachée.
 ```
 

@@ -321,6 +321,8 @@ valeur, affectée à la position centrale dans la carte de sortie.
 
 ```{figure} ./images/pooling.png
 :name: pooling
+:width: 200px
+:align: center
 Couche d’agrégation et de sous-échantillonnage $l$. Chacune des $n^{(l−1)}$ cartes de la couche $l-1$ est traitée individuellement. Chaque neurone des $n^(l) = n^{(l−1)}$ cartes de sortie est la moyenne (ou le maximum) des valeurs contenues dans une fenêtre de taille donnée dans la carte correspondante de la couche $l-1$.
 ```
 
