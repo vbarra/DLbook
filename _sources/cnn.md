@@ -403,7 +403,7 @@ stratégies largement utilisées en apprentissage profond.
 
 ### Régularisation de la fonction de coût
 
-La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches ({ref}`ontent:references:reg`).
+La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches ({ref}`content:references:reg`).
 
 L'équation [\[E:softmaxCout\]](#E:softmaxCout){reference-type="ref"
 reference="E:softmaxCout"} est un exemple de régularisation de la
