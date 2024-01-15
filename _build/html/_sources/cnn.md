@@ -179,8 +179,7 @@ $n_2^{(l)} = n_2^{(l-1)} - 2h_2^{(l)}$.
 Souvent, les filtres utilisés pour calculer $\mathbf{Y_i^{(l)}}$ sont
 les mêmes, i.e. $\mathbf{K_{i,j}^{(l)}} = \mathbf{K _{i,k}^{(l)}}$ pour
 $j \neq k$. De plus, la somme dans l'équation
-[\[eq:convlayer\]](#eq:convlayer){reference-type="eqref"
-reference="eq:convlayer"} peut être conduite sur un sous ensemble des
+de la convolution peut être conduite sur un sous-ensemble des
 cartes d'entrée.
 
 Il est possible de mettre en correspondance la couche de convolution et
