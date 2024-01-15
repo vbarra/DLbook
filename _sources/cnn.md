@@ -888,3 +888,6 @@ données dont la topologie se conforme à une structure de grille
 n-dimensionnelle. Dans le cas de données 1D séquentielles, d'autres
 réseaux performants ont été développés : les réseaux récurrents.
 
+```{bibliography}
+:style: unsrt
+```
