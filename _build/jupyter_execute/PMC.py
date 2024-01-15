@@ -723,7 +723,7 @@
 # 
 # ## Implémentation
 # 
-# Nous reprenons les exemples du perceptron et montrons qu'un PMC à une couche cachée permet de résoudre le problème de séparation non linéaire
+# Nous reprenons les exemples du perceptron et montrons qu'un PMC à une couche cachée permet de résoudre le problème de séparation non linéaire.
 
 # In[1]:
 
