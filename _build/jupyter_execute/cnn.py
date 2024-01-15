@@ -130,11 +130,7 @@
 # 
 # ### Couche de convolution
 # 
-# ```{figure} ./images/cnn1.png
-# :name: cnn1
-# Illustration des calculseffectués dans une opération de convolution discrète. Le pixel (2,2) de
-# l’image ${\mathbf Y_i^{l}}$ est une combinaison linéaire des pixels $(i,j)\in[\![1,3]\!]^2$ de ${\mathbf Y_i^{l-1}}$ les coefficients de la combinaison étant portés par le filtre $\mathbf K$.
-# ```
+# 
 # 
 # 
 # Soit $l\in\mathbb{N}$ une couche de convolution. L'entrée de la couche
@@ -144,15 +140,25 @@
 # $\mathbf{I}$. La sortie de la couche $l$ est formée de $n^{(l)}$ cartes
 # de taille $n_1^{(l)} \times n_2^{(l)}$. La $i^{\text{e}}$ carte de la
 # couche $l$, notée $\mathbf{Y_i^{(l)}}$, se calcule comme :
+# 
 # $$\begin{aligned}
 #     \label{eq:convlayer}
 #     \mathbf{Y_i^{(l)}} = \mathbf{B^{(l)}_{i}} + \displaystyle\sum _{j = 1}^{n^{(l-1)}} \mathbf{K^{(l)}_{i,j}} \ast \mathbf{Y_j^{(l-1)}}
-# \end{aligned}$$ où $\mathbf{B_i^{(l)}}$ est une matrice de biais et
+# \end{aligned}$$ 
+# 
+# où $\mathbf{B_i^{(l)}}$ est une matrice de biais et
 # $\mathbf{K^{(l)}_{i,j}}$ est le filtre de taille
 # $(2h_1^{(l)} + 1) \times (2h_2^{(l)} + 1)$ connectant la $j^{\text{e}}$
 # carte de la couche $(l-1)$ à la $i^{\text{e}}$ carte de la couche $l$
-# (voir la figure [\[F:coucheconv\]](#F:coucheconv){reference-type="ref"
-# reference="F:coucheconv"}).
+# ({numref}`cnn1`).
+# 
+# 
+# ```{figure} ./images/cnn1.png
+# :name: cnn1
+# Illustration des calculs effectués dans une opération de convolution discrète. Le pixel (2,2) de
+# l’image ${\mathbf Y_i^{l}}$ est une combinaison linéaire des pixels $(i,j)\in[\![1,3]\!]^2$ de ${\mathbf Y_i^{l-1}}$ les coefficients de la combinaison étant portés par le filtre $\mathbf K$.
+# ```
+# 
 # 
 # $n_1^{(l)}$ et $n_2^{(l)}$ doivent prendre en compte les effets de bords
 # : lors du calcul de la convolution, seuls les pixels dont la somme est
