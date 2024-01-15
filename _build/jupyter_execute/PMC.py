@@ -777,7 +777,7 @@ def plotResults(ax,ay,X,Y,model,title,pltloss,name):
     labelY = np.matrix(Y[:, 0]+2*Y[:, 1])
     labelY = labelY.reshape(np.array(X[:, 0]).shape)
 
-    ax.contourf(xs, ys, Z, cmap=plt.cm.magma,alpha=.5)
+    ax.contourf(xs, ys, Z, cmap=colors.ListedColormap([[0,0.5,0.66,0], [0.93,0.76,0.27,0]]),alpha=.5)
     ax.scatter(np.array(X[:, 0]),np.array(X[:, 1]),c= np.array(labelY),s=20,cmap=colors.ListedColormap(['red', 'green']))
     ax.set_title(title)
 
