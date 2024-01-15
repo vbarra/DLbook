@@ -11,3 +11,4 @@ parts:
     chapters:
       - file: NN
       - file: PMC
+      - file: cnn
