@@ -816,16 +816,16 @@ Entrées : {un réseau <span class="math notranslate nohighlight">\(N\)</span>, 
 <li><p><span class="math notranslate nohighlight">\(N_n=N\)</span></p></li>
 <li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(K\)</span></p>
 <ol class="simple">
-<li><p>Calculer <span class="math notranslate nohighlight">\(y^i=BN_{\gamma,\beta}(x^i)\)</span> à l’aide de l”(<a class="reference internal" href="#norm">Algorithm 5</a>)</p></li>
+<li><p>Calculer <span class="math notranslate nohighlight">\(y^i=BN_{\gamma,\beta}(x^i)\)</span> à l’aide de l”<a class="reference internal" href="#norm">Algorithm 5</a></p></li>
 <li><p>Modifier chaque couche de <span class="math notranslate nohighlight">\(N_n\)</span> : l’entrée <span class="math notranslate nohighlight">\(y^i\)</span> remplace l’entrée <span class="math notranslate nohighlight">\(x^i\)</span></p></li>
 </ol>
 </li>
-<li><p>Entraîner <span class="math notranslate nohighlight">\(N_n\)</span> pour optimiser les paramètres de <span class="math notranslate nohighlight">\(N\)</span> et <span class="math notranslate nohighlight">\((\gamma^i,\beta^i)_{1\leq i\leq K}\)</span></p></li>
+<li><p>Entraîner <span class="math notranslate nohighlight">\(N_n\)</span> pour optimiser les paramètres de <span class="math notranslate nohighlight">\(N\)</span> et <span class="math notranslate nohighlight">\((\gamma^i,\beta^i)_{i\in[\![1,K]\!]}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(N^f = N_n\)</span></p></li>
 <li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(K\)</span></p>
 <ol class="simple">
 <li><p>Utiliser <span class="math notranslate nohighlight">\(N^f\)</span> sur des batchs <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> de taille <span class="math notranslate nohighlight">\(m\)</span></p></li>
-<li><p>Calculer la moyenne des moyennes <span class="math notranslate nohighlight">\(\bar{x^i}\)</span> et des variances <span class="math notranslate nohighlight">\(Var(x^i)\)</span>\</p></li>
+<li><p>Calculer la moyenne des moyennes <span class="math notranslate nohighlight">\(\bar{x^i}\)</span> et des variances <span class="math notranslate nohighlight">\(Var(x^i)\)</span></p></li>
 <li><p>Remplacer dans <span class="math notranslate nohighlight">\(N^f\)</span> la transformation <span class="math notranslate nohighlight">\(y^i=BN_{\gamma,\beta}(x^i)\)</span> par</p></li>
 </ol>
 </li>
@@ -836,41 +836,44 @@ Entrées : {un réseau <span class="math notranslate nohighlight">\(N\)</span>, 
 </div></div>
 <div class="section" id="couche-d-agregation-et-de-sous-echantillonnage">
 <h3>Couche d’agrégation et de sous-échantillonnage<a class="headerlink" href="#couche-d-agregation-et-de-sous-echantillonnage" title="Lien permanent vers ce titre">#</a></h3>
-<p>[]{#subsubsec:coucheagreg label= »subsubsec:coucheagreg »}</p>
-<div class="highlight-SCfigure notranslate"><div class="highlight"><pre><span></span>![image](images/fig-agregation2.pdf)
-</pre></div>
-</div>
 <p>Le sous-échantillonnage (pooling) des cartes obtenues par les couches
 précédentes a pour objectif d’assurer une robustesse au bruit et aux
 distorsions.</p>
 <p>La sortie d’une couche d’agrégation <span class="math notranslate nohighlight">\(l\)</span>
-(figure <a class="reference external" href="#F:coucheagreg">[F:coucheagreg]</a>{reference-type= »ref »
-reference= »F:coucheagreg »}) est composée de <span class="math notranslate nohighlight">\(n^{(l)} = n^{(l-1)}\)</span> cartes
+(<a class="reference internal" href="#pooling"><span class="std std-numref">Fig. 11</span></a>) est composée de <span class="math notranslate nohighlight">\(n^{(l)} = n^{(l-1)}\)</span> cartes
 de taille réduite. En général, l’agrégation est effectuée en déplaçant
 dans les cartes d’entrée une fenêtre de taille <span class="math notranslate nohighlight">\(2p \times 2p\)</span> toutes les
 <span class="math notranslate nohighlight">\(q\)</span> positions (il y a recouvrement si <span class="math notranslate nohighlight">\(q &lt; p\)</span> et non recouvrement
 sinon), et en calculant, pour chaque position de la fenêtre, une seule
-valeur, affectée à la position centrale dans la carte de sortie. On
-distingue généralement deux types d’agrégation :</p>
-<p>La moyenne</p>
-<p>:   : on utilise un filtre <span class="math notranslate nohighlight">\(\mathbf{K_B}\)</span> de taille
-<span class="math notranslate nohighlight">\((2h_1 + 1)\times (2h_2 + 1)\)</span> défini par :
-$<span class="math notranslate nohighlight">\(\left(\mathbf{K_B}\right)_{r,s} = \frac{1}{(2h_1 + 1)(2h_2 + 1)}\)</span>$</p>
-<p>Le maximum</p>
-<p>:   : la valeur maximum dans la fenêtre est retenue.</p>
+valeur, affectée à la position centrale dans la carte de sortie.</p>
+<div class="figure align-default" id="pooling">
+<img alt="_images/pooling.png" src="_images/pooling.png" />
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Couche d’agrégation et de sous-échantillonnage <span class="math notranslate nohighlight">\(l\)</span>. Chacune des <span class="math notranslate nohighlight">\(n^{(l−1)}\)</span> cartes de la couche <span class="math notranslate nohighlight">\(l-1\)</span> est traitée individuellement. Chaque neurone des <span class="math notranslate nohighlight">\(n^(l) = n^{(l−1)}\)</span> cartes de sortie est la moyenne (ou le maximum) des valeurs contenues dans une fenêtre de taille donnée dans la carte correspondante de la couche <span class="math notranslate nohighlight">\(l-1\)</span>.</span><a class="headerlink" href="#pooling" title="Lien permanent vers cette image">#</a></p>
+</div>
+<p>On distingue généralement deux types d’agrégation :</p>
+<ul>
+<li><p>La moyenne : on utilise un filtre <span class="math notranslate nohighlight">\(\mathbf{K_B}\)</span> de taille
+<span class="math notranslate nohighlight">\((2h_1 + 1)\times (2h_2 + 1)\)</span> défini par</p>
+<div class="math notranslate nohighlight">
+\[\left(\mathbf{K_B}\right)_{r,s} = \frac{1}{(2h_1 + 1)(2h_2 + 1)}\]</div>
+</li>
+<li><p>Le maximum : la valeur maximum dans la fenêtre est retenue.</p></li>
+</ul>
 <p>Le maximum est souvent utilisé pour assurer une convergence rapide
 durant la phase d’entraînement. L’agrégation avec recouvrement, elle,
 semble assurer une réduction du phénomène de surapprentissage</p>
 </div>
 <div class="section" id="couche-completement-connectee">
 <h3>Couche complètement connectée<a class="headerlink" href="#couche-completement-connectee" title="Lien permanent vers ce titre">#</a></h3>
-<p>Si <span class="math notranslate nohighlight">\(l\)</span> et <span class="math notranslate nohighlight">\((l-1)\)</span> sont des couches complètement connectées, l’équation :
-$<span class="math notranslate nohighlight">\(\begin{aligned}
+<p>Si <span class="math notranslate nohighlight">\(l\)</span> et <span class="math notranslate nohighlight">\((l-1)\)</span> sont des couches complètement connectées, l’équation :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
     z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad \mathbf{Z^{(l)}} = \mathbf{W^{(l)}} \mathbf{Y^{(l-1)}}
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( avec \)</span>\mathbf{Z^{(l)}}<span class="math notranslate nohighlight">\(, \)</span>\mathbf{W^{(l)}}<span class="math notranslate nohighlight">\( et
-\)</span>\mathbf{Y^{(l-1)}}<span class="math notranslate nohighlight">\( les représentations vectorielle et matricielle des
-entrées \)</span>z_i^{(l)}<span class="math notranslate nohighlight">\(, des poids \)</span>w_{i,k}^{(l)}<span class="math notranslate nohighlight">\( et des sorties
-\)</span>y_k^{(l-1)}$, permet de relier ces deux couches.</p>
+\end{aligned}\]</div>
+<p>avec <span class="math notranslate nohighlight">\(\mathbf{Z^{(l)}}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W^{(l)}}\)</span> et
+<span class="math notranslate nohighlight">\(\mathbf{Y^{(l-1)}}\)</span> les représentations vectorielle et matricielle des
+entrées <span class="math notranslate nohighlight">\(z_i^{(l)}\)</span>, des poids <span class="math notranslate nohighlight">\(w_{i,k}^{(l)}\)</span> et des sorties
+<span class="math notranslate nohighlight">\(y_k^{(l-1)}\)</span>, permet de relier ces deux couches.</p>
 <p>Dans le cas contraire, la couche <span class="math notranslate nohighlight">\(l\)</span> attend <span class="math notranslate nohighlight">\(n^{(l-1)}\)</span> entrées de
 taille <span class="math notranslate nohighlight">\(n_1^{(l-1)} \times n_2^{(l-1)}\)</span> et le <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> neurone de
 la couche <span class="math notranslate nohighlight">\(l\)</span> calcule : $<span class="math notranslate nohighlight">\(\begin{aligned}
