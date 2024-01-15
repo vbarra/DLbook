@@ -213,7 +213,7 @@
 # $\mathbf{Y_i^{(l)}}$ = $f \left(\mathbf{Y_i^{(l-1)}}\right)$, où $f$ est
 # la fonction d'activation utilisée dans la couche $l$.
 # 
-# La {numref}`tabact` du cours sur les perceptrons multicouches présente quelques fonctions d'activation classiques
+# La {numref}`tabact` du cours sur les perceptrons multicouches présente quelques fonctions d'activation classiques.
 # 
 # En apprentissage profond, il a été reporté que la sigmoïde et la
 # tangente hyperbolique avaient des performances moindres que la fonction
@@ -229,7 +229,7 @@
 # (problème du *gradient évanescent* ou *vanishing gradient*) lors de la
 # phase d'apprentissage par rétropropagation du gradient. Une autre
 # fonction, non saturante elle, est très largement utilisée. Il s'agit de
-# la fonction ReLU (Rectified Linear Unit) [@Nair10] : 
+# la fonction ReLU (Rectified Linear Unit) {cite:p}`Nair10` : 
 # 
 # $$\begin{aligned}
 # \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
