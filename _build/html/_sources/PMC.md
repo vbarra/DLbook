@@ -474,7 +474,7 @@ Approximation de $f(x)=x^2$ par un réseau à une couche cachée.
 
 
 
-
+(content:references:reg)=
 ## Régularisation
 
 La notion d'approximateur universel peut induire également un problème

@@ -378,10 +378,10 @@ multiclasse ($k$ classes). L'ensemble d'apprentissage
 ${\mathcal E}_a = \left \{(\mathbf{x^{(i)}}, y^{(i)}),i \in[\![1,m]\!]\right \}$
 est donc tel que $y^{(i)}\in[\![1,k]\!]$ et le classifieur estime
 la probabilité $P(y^{(i)}=j |\mathbf{x^{(i)}})$ pour chaque classe
-$1\leq j\leq k$. Le classifieur softmax calcule cette probabilité selon
+$j\in [\![1,k]\!]$. Le classifieur softmax calcule cette probabilité selon
 :
 
-$$\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}$$
+$$\forall j\in[\![1,k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}$$
 
 où $\mathbf{W}$ est la matrice des paramètres du modèle (les poids). Ces
 paramètres sont obtenus en minimisant une fonction de coût, qui peut par
@@ -402,6 +402,8 @@ aujourd'hui proposées en ce sens. Nous faisons ici un focus sur trois
 stratégies largement utilisées en apprentissage profond.
 
 ### Régularisation de la fonction de coût
+
+La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches ({ref}`ontent:references:reg`).
 
 L'équation [\[E:softmaxCout\]](#E:softmaxCout){reference-type="ref"
 reference="E:softmaxCout"} est un exemple de régularisation de la
