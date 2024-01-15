@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Réseaux convolutifs {#sec:convolutional-neural-networks}
+# # Réseaux convolutifs
 # 
 # ## Introduction
 # 
@@ -932,16 +932,3 @@
 # données dont la topologie se conforme à une structure de grille
 # n-dimensionnelle. Dans le cas de données 1D séquentielles, d'autres
 # réseaux performants ont été développés : les réseaux récurrents.
-# 
-# ## Partie pratique
-# 
-# A l'aide du notebook fourni, réalisez le réseau convolutif de la figure
-# [1.8](#F:myCNN){reference-type="ref" reference="F:myCNN"}.
-# 
-# <figure id="F:myCNN">
-# <img src="images/model" />
-# <figcaption>Architecture du CNN à construire</figcaption>
-# </figure>
-# 
-# La fonction de perte utilisée est l'entropie croisée et l'algorithme
-# d'optimisation ADAM.\
