@@ -126,24 +126,12 @@
 # 
 # ### Couche de convolution
 # 
-# <figure id="fig-convolution-3D">
-# <div class="center">
+# ```{figure} ./images/cnn1.png
+# :name: cnn1
+# Illustration des calculseffectués dans une opération de convolution discrète. Le pixel (2,2) de
+# l’image ${\mathbf Y_i^{l}}$ est une combinaison linéaire des pixels $(i,j)\in[\![1,3]\!]^2$ de ${\mathbf Y_i^{l-1}}$ les coefficients de la combinaison étant portés par le filtre $\mathbf K$.
+# ```
 # 
-# </div>
-# <figcaption><span id="fig-convolution-3D"
-# label="fig-convolution-3D"></span> <em>Illustration des calculs
-# effectués dans une opération de convolution discrète. Le pixel (2,2) de
-# l’image <span
-# class="math inline"><strong>Y</strong><sub><strong>i</strong></sub><sup><strong>(</strong><strong>l</strong><strong>)</strong></sup></span>
-# est une combinaison linéaire des pixels <span
-# class="math inline">(<em>i</em>,<em>j</em>), <em>i</em>, <em>j</em> ∈ [ [1,3] ]</span>
-# de <span
-# class="math inline"><strong>Y</strong><sub><strong>i</strong></sub><sup><strong>(</strong><strong>l</strong><strong>−</strong><strong>1</strong><strong>)</strong></sup></span>,
-# les coefficients de la combinaison étant portés par le filtre <span
-# class="math inline"><strong>K</strong></span> (équation <a
-# href="#eq:convlayer" data-reference-type="ref"
-# data-reference="eq:convlayer">[eq:convlayer]</a>).</em></figcaption>
-# </figure>
 # 
 # Soit $l\in\mathbb{N}$ une couche de convolution. L'entrée de la couche
 # $l$ est composée de $n^{(l-1)}$ cartes provenant de la couche
