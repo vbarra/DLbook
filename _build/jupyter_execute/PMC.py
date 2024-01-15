@@ -452,6 +452,8 @@
 # 
 # ```{figure} ./images/exmlp.png
 # :name: approx2
+# :width: 500px
+# :align: center
 # Un perceptron multicouches à une couche cachée
 # ```
 # 
@@ -635,6 +637,8 @@
 # 
 # ```{figure} ./images/xor2.png
 # :name: xor2
+# :width: 500px
+# :align: center
 # Rétropropagation du gradient sur la couche de sortie.
 # ```
 # 
@@ -683,6 +687,8 @@
 # 
 # ```{figure} ./images/xor3.png
 # :name: xor3
+# :width: 500px
+# :align: center
 # Rétropropagation du gradient sur la couche cachée.
 # ```
 # 

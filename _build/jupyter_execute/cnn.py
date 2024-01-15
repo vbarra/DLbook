@@ -151,6 +151,8 @@
 # 
 # ```{figure} ./images/cnn1.png
 # :name: cnn1
+# :width: 500px
+# :align: center
 # Illustration des calculs effectués dans une opération de convolution discrète. Le pixel (2,2) de
 # l’image ${\mathbf Y_i^{l}}$ est une combinaison linéaire des pixels $(i,j)\in[\![1,3]\!]^2$ de ${\mathbf Y_i^{l-1}}$ les coefficients de la combinaison étant portés par le filtre $\mathbf K$.
 # ```
@@ -312,7 +314,7 @@
 # 
 # ```{figure} ./images/pooling.png
 # :name: pooling
-# :width: 200px
+# :width: 500px
 # :align: center
 # Couche d’agrégation et de sous-échantillonnage $l$. Chacune des $n^{(l−1)}$ cartes de la couche $l-1$ est traitée individuellement. Chaque neurone des $n^(l) = n^{(l−1)}$ cartes de sortie est la moyenne (ou le maximum) des valeurs contenues dans une fenêtre de taille donnée dans la carte correspondante de la couche $l-1$.
 # ```
