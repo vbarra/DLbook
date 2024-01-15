@@ -322,38 +322,6 @@ title="Fullscreen mode"
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quelques-applications-subsubsec-applis">
-   Quelques applications {#subsubsec:applis}
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#la-classification-d-images">
-     La classification d’images
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-annotation-de-scenes">
-     L’annotation de scènes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#la-reconnaissance-d-actions">
-     La reconnaissance d’actions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-analyse-de-documents">
-     L’analyse de documents
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-augmentation-de-donnees">
-     L’augmentation de données
-    </a>
-   </li>
-  </ul>
- </li>
 </ul>
 
     </nav>
@@ -477,38 +445,6 @@ title="Fullscreen mode"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#methodes-fondees-sur-le-gradient">
      Méthodes fondées sur le gradient
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quelques-applications-subsubsec-applis">
-   Quelques applications {#subsubsec:applis}
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#la-classification-d-images">
-     La classification d’images
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-annotation-de-scenes">
-     L’annotation de scènes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#la-reconnaissance-d-actions">
-     La reconnaissance d’actions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-analyse-de-documents">
-     L’analyse de documents
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-augmentation-de-donnees">
-     L’augmentation de données
     </a>
    </li>
   </ul>
@@ -1032,7 +968,7 @@ et de <em>fine tuning</em>, cas particulier d’adaptation de domaine :</p>
 la dernière couche complètement connectée et traitent le réseau
 restant comme un extracteur de caractéristiques. Un nouveau
 classifieur, la dernière couche, est alors entraîné sur le nouveau
-problème ((<a class="reference internal" href="#transfer"><span class="std std-numref">Fig. 13</span></a>))</p></li>
+problème (<a class="reference internal" href="#transfer"><span class="std std-numref">Fig. 13</span></a>).</p></li>
 </ul>
 <div class="figure align-center" id="transfer">
 <img alt="_images/transferLearning.png" src="_images/transferLearning.png" />
@@ -1100,7 +1036,7 @@ de dimension.</p>
 <div class="figure align-center" id="visufiltres">
 <a class="reference internal image-reference" href="_images/visufiltres.png"><img alt="_images/visufiltres.png" src="_images/visufiltres.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Visualisation des filtres de la première couche d’AlexNet (à
-gauche, 64 filtres 11<span class="math notranslate nohighlight">\(\times\)</span>) et de ResNet-18 (à droite, 64 filtres 7<span class="math notranslate nohighlight">\(\times 7\)</span>.</span><a class="headerlink" href="#visufiltres" title="Lien permanent vers cette image">#</a></p>
+gauche, 64 filtres 11<span class="math notranslate nohighlight">\(\times\)</span>11) et de ResNet-18 (à droite, 64 filtres 7<span class="math notranslate nohighlight">\(\times 7\)</span>).</span><a class="headerlink" href="#visufiltres" title="Lien permanent vers cette image">#</a></p>
 </div>
 </div>
 <div class="section" id="methodes-fondees-sur-les-activations">
@@ -1130,13 +1066,13 @@ comprendre ce à quoi le neurone s’intéresse dans son champ réceptif
 (<a class="reference internal" href="#champr"><span class="std std-numref">Fig. 15</span></a>).</p></li>
 </ul>
 <div class="figure align-center" id="champr">
-<a class="reference internal image-reference" href="_images/champr.png"><img alt="_images/champr.png" src="_images/champr.png" style="width: 500px;" /></a>
+<img alt="_images/champr.png" src="_images/champr.png" />
 <p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Champ récéptif de quelques neurones de la dernière couche
 d’agrégation du réseau AlexNet, superposées aux images ayant le plus
 fortement activé ces neurones. Le champ est encadré en blanc, et la
 valeur d’activation correspondante est reportée en haut. On voit par
 exemple que certains neurones sont très sensibles aux textes, d’autres
-aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="#id46">4</a>]</span> )</span><a class="headerlink" href="#champr" title="Lien permanent vers cette image">#</a></p>
+aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="#id46">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Lien permanent vers cette image">#</a></p>
 </div>
 <ul class="simple">
 <li><p>Cacher (par un rectangle noir par exemple) différentes parties de
@@ -1158,7 +1094,7 @@ droite). La probabilité de la classe s’effondre lorsque le rectangle
 couvre une partie de la face du chien. Cela suggère que cette face est
 grandement responsable de la forte probabilité de classement de l’image
 comme un loulou. A l’inverse, l’occlusion du fond n’altère pas la forte
-valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="#id11">5</a>]</span> )</span><a class="headerlink" href="#occlusion" title="Lien permanent vers cette image">#</a></p>
+valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="#id11">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Lien permanent vers cette image">#</a></p>
 </div>
 </div>
 <div class="section" id="methodes-fondees-sur-le-gradient">
@@ -1184,7 +1120,7 @@ ce neurone répond (<a class="reference internal" href="#gradcam"><span class="s
 <a class="reference internal image-reference" href="_images/gradcam.png"><img alt="_images/gradcam.png" src="_images/gradcam.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Approches par gradient de visualisation du fonctionnement
 d’un réseau convolutif. Comparaison de la méthode de rétropropagation
-guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="#id47">6</a>]</span> )</span><a class="headerlink" href="#gradcam" title="Lien permanent vers cette image">#</a></p>
+guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="#id47">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Lien permanent vers cette image">#</a></p>
 </div>
 <p>Ces gradients peuvent également être utilisés dans la méthode de montée
 de gradient (gradient Ascent), dont l’objectif est de générer une image
@@ -1199,70 +1135,8 @@ cette méthode produit des images parfois très artistiques ((<a class="referenc
 <div class="figure align-center" id="monteeg">
 <img alt="_images/monteeg.png" src="_images/monteeg.png" />
 <p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Visualisation des 4 premières couches de convolution d’un
-réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="#id48">7</a>]</span> )</span><a class="headerlink" href="#monteeg" title="Lien permanent vers cette image">#</a></p>
+réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="#id48">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Lien permanent vers cette image">#</a></p>
 </div>
-</div>
-</div>
-<div class="section" id="quelques-applications-subsubsec-applis">
-<h2>Quelques applications {#subsubsec:applis}<a class="headerlink" href="#quelques-applications-subsubsec-applis" title="Lien permanent vers ce titre">#</a></h2>
-<p>Depuis leur introduction en reconnaissance de caractères manuscrits
-[&#64;LeCun90], les réseaux convolutifs n’ont cessé de trouver des champs
-applicatifs, commerciaux et parfois ludiques. Parmi ces applications,
-nous en citons ici quelques-unes.</p>
-<div class="section" id="la-classification-d-images">
-<h3>La classification d’images<a class="headerlink" href="#la-classification-d-images" title="Lien permanent vers ce titre">#</a></h3>
-<p><br />
-Premier domaine d’application des réseaux convolutifs, la classification
-d’images consiste à affecter une image à une classe, apprise par le
-réseau sur un grand nombre d’exemples. Depuis l’avènement d’ImageNet, et
-la mise en place de la compétition ILSVRC, les résultats obtenus ne
-cessent de s’améliorer et sont depuis quelques années la référence dans
-ce domaine (dépassant même les performances humaines en 2015).</p>
-</div>
-<div class="section" id="l-annotation-de-scenes">
-<h3>L’annotation de scènes<a class="headerlink" href="#l-annotation-de-scenes" title="Lien permanent vers ce titre">#</a></h3>
-<p><br />
-Des réseaux convolutifs ont été utilisés pour annoter des scènes 2D ou
-2D+t, <em>i.e.</em> assigner à chaque pixel un label identifiant l’objet auquel
-il appartient. De nombreux réseaux ont été développés à cet effet
-(R-CNN, Fast R-CNN, Mast R-CNN par exemple)
-(figure <a class="reference external" href="#F:annotation">[F:annotation]</a>{reference-type= »ref »
-reference= »F:annotation »}).</p>
-</div>
-<div class="section" id="la-reconnaissance-d-actions">
-<h3>La reconnaissance d’actions<a class="headerlink" href="#la-reconnaissance-d-actions" title="Lien permanent vers ce titre">#</a></h3>
-<p><br />
-Le développement de champs réceptifs 3D dans les réseaux convolutifs a
-permis d’extraire dans ces réseaux des caractéristiques invariantes à la
-translation. L’intégration de techniques de régularisation adaptée (type
-partage de paramètres) a rendu possible l’optimisation de ces réseaux
-pour la reconnaissance d’actions dans des scènes dynamiques.</p>
-</div>
-<div class="section" id="l-analyse-de-documents">
-<h3>L’analyse de documents<a class="headerlink" href="#l-analyse-de-documents" title="Lien permanent vers ce titre">#</a></h3>
-<p><br />
-L’analyse de documents à des fins de reconnaissance de caractères, de
-classification de documents ou encore d’annotation sémantique a
-largement bénéficié de l’apport des réseaux convolutifs.</p>
-</div>
-<div class="section" id="l-augmentation-de-donnees">
-<h3>L’augmentation de données<a class="headerlink" href="#l-augmentation-de-donnees" title="Lien permanent vers ce titre">#</a></h3>
-<p><br />
-De nombreux réseaux ont été proposés pour ajouter à des données nD des
-informations manquantes (colorisation d’images,
-figure <a class="reference external" href="#F:color">[F:color]</a>{reference-type= »ref »
-reference= »F:color »}, inpainting, restauration d’images,
-superrésolution), ou pour proposer des versions différentes des données
-initiales en fonction d’une contrainte de style extérieure (transfert de
-style, figure <a class="reference external" href="#F:transfer">[F:transfer]</a>{reference-type= »ref »
-reference= »F:transfer »}).</p>
-<figure>
-<figcaption>Quelques applications des réseaux convolutifs.</figcaption>
-</figure>
-<p>Les réseaux convolutifs sont des réseaux spécialisés pour traiter des
-données dont la topologie se conforme à une structure de grille
-n-dimensionnelle. Dans le cas de données 1D séquentielles, d’autres
-réseaux performants ont été développés : les réseaux récurrents.</p>
 <p id="id8"><dl class="citation">
 <dt class="label" id="id45"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
