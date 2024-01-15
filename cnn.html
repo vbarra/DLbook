@@ -748,7 +748,7 @@ d’une couche non linéaire sont <span class="math notranslate nohighlight">\(n
 <span class="math notranslate nohighlight">\(n_2^{(l)} = n_2^{(l-1)}\)</span>, données par
 <span class="math notranslate nohighlight">\(\mathbf{Y_i^{(l)}}\)</span> = <span class="math notranslate nohighlight">\(f \left(\mathbf{Y_i^{(l-1)}}\right)\)</span>, où <span class="math notranslate nohighlight">\(f\)</span> est
 la fonction d’activation utilisée dans la couche <span class="math notranslate nohighlight">\(l\)</span>.</p>
-<p>La <a class="reference internal" href="PMC.html#tabact"><span class="std std-numref">Fig. 3</span></a> du cours sur les perceptrons multicouches présente quelques fonctions d’activation classiques</p>
+<p>La <a class="reference internal" href="PMC.html#tabact"><span class="std std-numref">Fig. 3</span></a> du cours sur les perceptrons multicouches présente quelques fonctions d’activation classiques.</p>
 <p>En apprentissage profond, il a été reporté que la sigmoïde et la
 tangente hyperbolique avaient des performances moindres que la fonction
 d’activation <em>softsign</em> :</p>
@@ -762,7 +762,7 @@ fonctions donnent des gradients faibles, qui ont tendance à s’annuler
 (problème du <em>gradient évanescent</em> ou <em>vanishing gradient</em>) lors de la
 phase d’apprentissage par rétropropagation du gradient. Une autre
 fonction, non saturante elle, est très largement utilisée. Il s’agit de
-la fonction ReLU (Rectified Linear Unit) [&#64;Nair10] :</p>
+la fonction ReLU (Rectified Linear Unit) <span id="id1">[]</span> :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
