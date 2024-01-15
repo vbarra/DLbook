@@ -846,8 +846,8 @@ dans les cartes d’entrée une fenêtre de taille <span class="math notranslate
 <span class="math notranslate nohighlight">\(q\)</span> positions (il y a recouvrement si <span class="math notranslate nohighlight">\(q &lt; p\)</span> et non recouvrement
 sinon), et en calculant, pour chaque position de la fenêtre, une seule
 valeur, affectée à la position centrale dans la carte de sortie.</p>
-<div class="figure align-default" id="pooling">
-<img alt="_images/pooling.png" src="_images/pooling.png" />
+<div class="figure align-center" id="pooling">
+<a class="reference internal image-reference" href="_images/pooling.png"><img alt="_images/pooling.png" src="_images/pooling.png" style="width: 200px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Couche d’agrégation et de sous-échantillonnage <span class="math notranslate nohighlight">\(l\)</span>. Chacune des <span class="math notranslate nohighlight">\(n^{(l−1)}\)</span> cartes de la couche <span class="math notranslate nohighlight">\(l-1\)</span> est traitée individuellement. Chaque neurone des <span class="math notranslate nohighlight">\(n^(l) = n^{(l−1)}\)</span> cartes de sortie est la moyenne (ou le maximum) des valeurs contenues dans une fenêtre de taille donnée dans la carte correspondante de la couche <span class="math notranslate nohighlight">\(l-1\)</span>.</span><a class="headerlink" href="#pooling" title="Lien permanent vers cette image">#</a></p>
 </div>
 <p>On distingue généralement deux types d’agrégation :</p>
