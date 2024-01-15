@@ -762,69 +762,23 @@ fonctions donnent des gradients faibles, qui ont tendance à s’annuler
 (problème du <em>gradient évanescent</em> ou <em>vanishing gradient</em>) lors de la
 phase d’apprentissage par rétropropagation du gradient. Une autre
 fonction, non saturante elle, est très largement utilisée. Il s’agit de
-la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="#id39">1</a>]</span> :</p>
+la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="#id41">1</a>]</span> :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
 \end{aligned}\]</div>
 <p>Les neurones utilisant la fonction ReLU sont appelés neurones linéaires rectifiés. Glorot
-et Bengio [&#64;Glorot11] ont montré que l’utilisation d’une couche ReLU en
+et Bengio <span id="id2">[<a class="reference internal" href="#id9">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
 tant que couche non linéaire permettait un entraînement efficace de
 réseaux profonds sans pré-entraînement non supervisé. Plusieurs
 variantes de cette fonction existent, par exemple pour assurer une
 différentiabilité en 0 ou pour proposer des valeurs non nulles pour des
-valeurs négatives de l’argument. La figure
-<a class="reference external" href="#F:plotactiv">1.2</a>{reference-type= »ref » reference= »F:plotactiv »}.
-illustre quelques unes de ces fonctions d’activation.</p>
-<figure id="F:plotactiv">
-<table>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span
-class="math inline"><em>R</em><em>e</em><em>L</em><em>U</em>(<em>x</em>) = <em>m</em><em>a</em><em>x</em>(0,<em>x</em>)</span></td>
-<td style="text-align: center;"><span
-class="math inline">$LeakyReLU(x,\alpha) = \left \lbrace
-\begin{array}{cc}
-   x &amp; si\ x&gt;0  \\
-   \alpha x &amp; sinon
-\end{array}
-\right .$</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math inline">$elu(x,\alpha)
-=
-\left \lbrace
-\begin{array}{cc}
-   x &amp; si\ x&gt;0  \\
-   \alpha(e^x-1) &amp; sinon
-\end{array}
-\right .$</span></td>
-<td style="text-align: center;"><span
-class="math inline">$SeLU(x,\alpha,\lambda) =
-\left \lbrace
-\begin{array}{cc}
-   \lambda x &amp; si\ x&gt;0  \\
-   \lambda\alpha(e^x-1) &amp; sinon
-\end{array}
-\right .$</span></td>
-</tr>
-</tbody>
-</table>
-<figcaption>Quelques fonctions d’activation</figcaption>
-</figure>
+valeurs négatives de l’argument.</p>
 </div>
 <div class="section" id="couches-de-normalisation">
 <h3>Couches de normalisation<a class="headerlink" href="#couches-de-normalisation" title="Lien permanent vers ce titre">#</a></h3>
 <p>La normalisation prend aujourd’hui une place de plus en plus importante,
-notamment depuis les travaux de Ioffe et Szegedy [&#64;Ioffe15]. Les auteurs
+notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="#id10">3</a>]</span>. Les auteurs
 suggèrent qu’un changement dans la distribution des activations d’un
 réseau profond, résultant de la présentation d’un nouveau mini batch
 d’exemples, ralentit le processus d’apprentissage. Pour pallier ce
@@ -833,12 +787,23 @@ problème, chaque activation du mini batch est centrée et normée
 batch entier, indépendamment pour chaque activation. Des paramètres
 d’offset <span class="math notranslate nohighlight">\(\beta\)</span> et multiplicatif <span class="math notranslate nohighlight">\(\gamma\)</span> sont alors appliqués pour
 normaliser les données d’entrée
-(algorithme <a class="reference external" href="#A:bn1">[A:bn1]</a>{reference-type= »ref »
-reference= »A:bn1 »}).</p>
-<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
+(<a class="reference internal" href="#norm">Algorithm 5</a>).</p>
+<div class="proof algorithm admonition" id="norm">
+<p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Normalisation par batch sur la présentation d’un mini batch <span class="math notranslate nohighlight">\(\mathcal{B}\)</span>)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>{\bf Entrées} : valeurs de l’activation <span class="math notranslate nohighlight">\(x\)</span> sur un mini batch <span class="math notranslate nohighlight">\(\mathcal{B} = \{x_1\cdots x_m\}\)</span>,  Param\ètres <span class="math notranslate nohighlight">\(\beta,\gamma\)</span> `a apprendre}
+{\bf Sortie} : Données normalisées <span class="math notranslate nohighlight">\(\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)\)</span></p>
+<ol class="simple">
+<li><p>{<span class="math notranslate nohighlight">\(\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i\)</span>\</p></li>
+<li><p>$\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2$\</p></li>
+<li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(m\)</span></p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(y_i = \gamma \frac{x_i-\mu_\mathcal{B}}{\sqrt{\sigma^2_\mathcal{B}+\epsilon}}+\beta\)</span></p></li>
+</ol>
+</li>
+</ol>
 </div>
-<p>Lorsque la descente de gradient est achevée, un post apprentissage est
+</div><p>Lorsque la descente de gradient est achevée, un post apprentissage est
 appliqué dans lequel la moyenne et la variance sont calculées sur
 l’ensemble d’entraînement et remplacent <span class="math notranslate nohighlight">\(\mu_\mathcal{B}\)</span> et
 <span class="math notranslate nohighlight">\(\sigma^2_\mathcal{B}\)</span> (algorithme
@@ -1373,9 +1338,15 @@ reference= »F:transfer »}).</p>
 données dont la topologie se conforme à une structure de grille
 n-dimensionnelle. Dans le cas de données 1D séquentielles, d’autres
 réseaux performants ont été développés : les réseaux récurrents.</p>
-<p id="id2"><dl class="citation">
-<dt class="label" id="id39"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<p id="id4"><dl class="citation">
+<dt class="label" id="id41"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </dd>
 </dl>
 </p>

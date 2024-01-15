@@ -236,64 +236,17 @@
 # \end{aligned}$$ 
 # 
 # Les neurones utilisant la fonction ReLU sont appelés neurones linéaires rectifiés. Glorot
-# et Bengio [@Glorot11] ont montré que l'utilisation d'une couche ReLU en
+# et Bengio {cite:p}`Glorot11` ont montré que l'utilisation d'une couche ReLU en
 # tant que couche non linéaire permettait un entraînement efficace de
 # réseaux profonds sans pré-entraînement non supervisé. Plusieurs
 # variantes de cette fonction existent, par exemple pour assurer une
 # différentiabilité en 0 ou pour proposer des valeurs non nulles pour des
-# valeurs négatives de l'argument. La figure
-# [1.2](#F:plotactiv){reference-type="ref" reference="F:plotactiv"}.
-# illustre quelques unes de ces fonctions d'activation.
-# 
-# <figure id="F:plotactiv">
-# <table>
-# <tbody>
-# <tr class="odd">
-# <td style="text-align: center;"></td>
-# <td style="text-align: center;"></td>
-# </tr>
-# <tr class="even">
-# <td style="text-align: center;"><span
-# class="math inline"><em>R</em><em>e</em><em>L</em><em>U</em>(<em>x</em>) = <em>m</em><em>a</em><em>x</em>(0,<em>x</em>)</span></td>
-# <td style="text-align: center;"><span
-# class="math inline">$LeakyReLU(x,\alpha) = \left \lbrace
-# \begin{array}{cc}
-#    x &amp; si\ x&gt;0  \\
-#    \alpha x &amp; sinon
-# \end{array}
-# \right .$</span></td>
-# </tr>
-# <tr class="odd">
-# <td style="text-align: center;"></td>
-# <td style="text-align: center;"></td>
-# </tr>
-# <tr class="even">
-# <td style="text-align: center;"><span class="math inline">$elu(x,\alpha)
-# =
-# \left \lbrace
-# \begin{array}{cc}
-#    x &amp; si\ x&gt;0  \\
-#    \alpha(e^x-1) &amp; sinon
-# \end{array}
-# \right .$</span></td>
-# <td style="text-align: center;"><span
-# class="math inline">$SeLU(x,\alpha,\lambda) =
-# \left \lbrace
-# \begin{array}{cc}
-#    \lambda x &amp; si\ x&gt;0  \\
-#    \lambda\alpha(e^x-1) &amp; sinon
-# \end{array}
-# \right .$</span></td>
-# </tr>
-# </tbody>
-# </table>
-# <figcaption>Quelques fonctions d’activation</figcaption>
-# </figure>
+# valeurs négatives de l'argument. 
 # 
 # ### Couches de normalisation
 # 
 # La normalisation prend aujourd'hui une place de plus en plus importante,
-# notamment depuis les travaux de Ioffe et Szegedy [@Ioffe15]. Les auteurs
+# notamment depuis les travaux de Ioffe et Szegedy {cite:p}`Ioffe15`. Les auteurs
 # suggèrent qu'un changement dans la distribution des activations d'un
 # réseau profond, résultant de la présentation d'un nouveau mini batch
 # d'exemples, ralentit le processus d'apprentissage. Pour pallier ce
@@ -302,11 +255,21 @@
 # batch entier, indépendamment pour chaque activation. Des paramètres
 # d'offset $\beta$ et multiplicatif $\gamma$ sont alors appliqués pour
 # normaliser les données d'entrée
-# (algorithme [\[A:bn1\]](#A:bn1){reference-type="ref"
-# reference="A:bn1"}).
+# ({prf:ref}`norm`).
 # 
-# ::: algorithm
-# :::
+# ```{prf:algorithm} Normalisation par batch sur la présentation d'un mini batch $\mathcal{B}$
+# :label: norm
+# {\bf Entrées} : valeurs de l'activation $x$ sur un mini batch $\mathcal{B} = \{x_1\cdots x_m\}$,  Param\ètres $\beta,\gamma$ \`a apprendre}
+# {\bf Sortie} : Données normalisées $\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)$
+# 
+# 1. {$\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i$\\
+# 2. $\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2$\\
+# 3. Pour $i=1$ à $m$
+#     1. $y_i = \gamma \frac{x_i-\mu_\mathcal{B}}{\sqrt{\sigma^2_\mathcal{B}+\epsilon}}+\beta$
+# ```
+# 
+# 
+# 
 # 
 # Lorsque la descente de gradient est achevée, un post apprentissage est
 # appliqué dans lequel la moyenne et la variance sont calculées sur
