@@ -268,27 +268,42 @@ normaliser les données d'entrée
 
 ```{prf:algorithm} Normalisation par batch sur la présentation d'un mini batch $\mathcal{B}$
 :label: norm
-Entrées : valeurs de l'activation $x$ sur un mini batch $\mathcal{B} = \{x_1\cdots x_m\}$,  Param\ètres $\beta,\gamma$ \`a apprendre
+Entrées : valeurs de l'activation $x$ sur un mini batch $\mathcal{B} = \{x_1\cdots x_m\}$,  Paramètres $\beta,\gamma$ à apprendre
 
-Sortie : Données normalisées $\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)$
+Sortie : Données normalisées $\{y_1\cdots  y_m\}=BatchNorm_{\gamma,\beta}(x_1\cdots x_m)$
 
 1. $\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i$
 2. $\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2$
 3. Pour $i=1$ à $m$
     1. $y_i = \gamma \frac{x_i-\mu_\mathcal{B}}{\sqrt{\sigma^2_\mathcal{B}+\epsilon}}+\beta$
 ```
-
-
-
-
 Lorsque la descente de gradient est achevée, un post apprentissage est
 appliqué dans lequel la moyenne et la variance sont calculées sur
 l'ensemble d'entraînement et remplacent $\mu_\mathcal{B}$ et
-$\sigma^2_\mathcal{B}$ (algorithme
-[\[A:bn2\]](#A:bn2){reference-type="ref" reference="A:bn2"}).
+$\sigma^2_\mathcal{B}$ ({prf:ref}`norm2`).
 
-::: algorithm
-:::
+```{prf:algorithm} Normalisation par batch d'un réseau
+:label: norm2
+{
+Entrées : {un réseau $N$,  un ensemble d'activations $\{x^1\cdots x^K\}$
+
+1. $N_n=N$
+2. Pour $i=1$ à $K$
+    1. Calculer $y^i=BN_{\gamma,\beta}(x^i)$ à l'aide de l'({prf:ref}`norm`)
+    2. Modifier chaque couche de $N_n$ : l'entrée $y^i$ remplace l'entrée $x^i$
+3. Entraîner $N_n$ pour optimiser les paramètres de $N$ et $(\gamma^i,\beta^i)_{1\leq i\leq K}$
+4. $N^f = N_n$
+5. Pour $i=1$ à $K$
+    1. Utiliser $N^f$ sur des batchs $\mathcal{B}$ de taille $m$
+    2. Calculer la moyenne des moyennes $\bar{x^i}$ et des variances $Var(x^i)$\\
+    3. Remplacer dans $N^f$ la transformation $y^i=BN_{\gamma,\beta}(x^i)$ par 
+
+$$y^i=\frac{\gamma^i}{\sqrt{Var(x^i)+\epsilon}}x^i+\left(\beta^i -\frac{\gamma^i \bar{x^i}}{\sqrt{Var(x^i)+\epsilon}}\right)$$ 
+```
+
+
+
+
 
 ### Couche d'agrégation et de sous-échantillonnage
 
