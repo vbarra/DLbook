@@ -175,6 +175,7 @@
 # couche $l$ est formée de $n_1^{(l)} \cdot n_2^{(l)}$ neurones organisés
 # dans un tableau à deux dimensions. Le neurone en position $(r,s)$
 # calcule : 
+# 
 # $$\begin{aligned}
 #     \left(\mathbf{Y_i^{(l)}}\right)_{r,s} &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \displaystyle\sum _{j = 1}^{n^{(l-1)}} \left(\mathbf{K^{(l)}_{i,j} }\ast \mathbf{Y_j^{(l-1)}}\right)_{r,s}\\
 #     &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \displaystyle\sum _{j = 1}^{n^{(l-1)}} \displaystyle\sum _{u = - h_1^{(l)}} ^{h_1^{(l)}} \displaystyle\sum _{v = - h_2^{(l)}} ^{h_2^{(l)}} \left(\mathbf{K^{(l)}_{i,j}}\right)_{u,v} \left(\mathbf{Y_j^{(l-1)}}\right)_{r+u,s+v}
@@ -212,7 +213,7 @@
 # $\mathbf{Y_i^{(l)}}$ = $f \left(\mathbf{Y_i^{(l-1)}}\right)$, où $f$ est
 # la fonction d'activation utilisée dans la couche $l$.
 # 
-# Le  ({numref}`tabact`) présente quelques fonctions d'activation classiques
+# La {numref}`tabact` du cours sur les perceptrons multicouches présente quelques fonctions d'activation classiques
 # 
 # En apprentissage profond, il a été reporté que la sigmoïde et la
 # tangente hyperbolique avaient des performances moindres que la fonction

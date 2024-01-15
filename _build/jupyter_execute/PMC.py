@@ -131,7 +131,7 @@
 # l'équation précédente sont appelés neurones linéaires rectifiés
 # (**Rectified Linear Units, ReLUs**), et sont en pratique très utilisés.
 # 
-# Quelques fonctions d'activation sont présentées dans la ({numref}`tabact`).
+# Quelques fonctions d'activation sont présentées dans la {numref}`tabact`.
 # 
 # ```{figure} ./images/tabactivation.png
 # :name: tabact
