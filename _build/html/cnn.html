@@ -791,8 +791,8 @@ normaliser les données d’entrée
 <div class="proof algorithm admonition" id="norm">
 <p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Normalisation par batch sur la présentation d’un mini batch <span class="math notranslate nohighlight">\(\mathcal{B}\)</span>)</p>
 <div class="algorithm-content section" id="proof-content">
-<p>Entrées : valeurs de l’activation <span class="math notranslate nohighlight">\(x\)</span> sur un mini batch <span class="math notranslate nohighlight">\(\mathcal{B} = \{x_1\cdots x_m\}\)</span>,  Param\ètres <span class="math notranslate nohighlight">\(\beta,\gamma\)</span> `a apprendre</p>
-<p>Sortie : Données normalisées <span class="math notranslate nohighlight">\(\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)\)</span></p>
+<p>Entrées : valeurs de l’activation <span class="math notranslate nohighlight">\(x\)</span> sur un mini batch <span class="math notranslate nohighlight">\(\mathcal{B} = \{x_1\cdots x_m\}\)</span>,  Paramètres <span class="math notranslate nohighlight">\(\beta,\gamma\)</span> à apprendre</p>
+<p>Sortie : Données normalisées <span class="math notranslate nohighlight">\(\{y_1\cdots  y_m\}=BatchNorm_{\gamma,\beta}(x_1\cdots x_m)\)</span></p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2\)</span></p></li>
@@ -806,12 +806,34 @@ normaliser les données d’entrée
 </div><p>Lorsque la descente de gradient est achevée, un post apprentissage est
 appliqué dans lequel la moyenne et la variance sont calculées sur
 l’ensemble d’entraînement et remplacent <span class="math notranslate nohighlight">\(\mu_\mathcal{B}\)</span> et
-<span class="math notranslate nohighlight">\(\sigma^2_\mathcal{B}\)</span> (algorithme
-<a class="reference external" href="#A:bn2">[A:bn2]</a>{reference-type= »ref » reference= »A:bn2 »}).</p>
-<div class="highlight-algorithm notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
+<span class="math notranslate nohighlight">\(\sigma^2_\mathcal{B}\)</span> (<a class="reference internal" href="#norm2">Algorithm 6</a>).</p>
+<div class="proof algorithm admonition" id="norm2">
+<p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (Normalisation par batch d’un réseau)</p>
+<div class="algorithm-content section" id="proof-content">
+<p>{
+Entrées : {un réseau <span class="math notranslate nohighlight">\(N\)</span>,  un ensemble d’activations <span class="math notranslate nohighlight">\(\{x^1\cdots x^K\}\)</span></p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(N_n=N\)</span></p></li>
+<li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(K\)</span></p>
+<ol class="simple">
+<li><p>Calculer <span class="math notranslate nohighlight">\(y^i=BN_{\gamma,\beta}(x^i)\)</span> à l’aide de l”(<a class="reference internal" href="#norm">Algorithm 5</a>)</p></li>
+<li><p>Modifier chaque couche de <span class="math notranslate nohighlight">\(N_n\)</span> : l’entrée <span class="math notranslate nohighlight">\(y^i\)</span> remplace l’entrée <span class="math notranslate nohighlight">\(x^i\)</span></p></li>
+</ol>
+</li>
+<li><p>Entraîner <span class="math notranslate nohighlight">\(N_n\)</span> pour optimiser les paramètres de <span class="math notranslate nohighlight">\(N\)</span> et <span class="math notranslate nohighlight">\((\gamma^i,\beta^i)_{1\leq i\leq K}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(N^f = N_n\)</span></p></li>
+<li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(K\)</span></p>
+<ol class="simple">
+<li><p>Utiliser <span class="math notranslate nohighlight">\(N^f\)</span> sur des batchs <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> de taille <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p>Calculer la moyenne des moyennes <span class="math notranslate nohighlight">\(\bar{x^i}\)</span> et des variances <span class="math notranslate nohighlight">\(Var(x^i)\)</span>\</p></li>
+<li><p>Remplacer dans <span class="math notranslate nohighlight">\(N^f\)</span> la transformation <span class="math notranslate nohighlight">\(y^i=BN_{\gamma,\beta}(x^i)\)</span> par</p></li>
+</ol>
+</li>
+</ol>
+<div class="math notranslate nohighlight">
+\[y^i=\frac{\gamma^i}{\sqrt{Var(x^i)+\epsilon}}x^i+\left(\beta^i -\frac{\gamma^i \bar{x^i}}{\sqrt{Var(x^i)+\epsilon}}\right)\]</div>
 </div>
-</div>
+</div></div>
 <div class="section" id="couche-d-agregation-et-de-sous-echantillonnage">
 <h3>Couche d’agrégation et de sous-échantillonnage<a class="headerlink" href="#couche-d-agregation-et-de-sous-echantillonnage" title="Lien permanent vers ce titre">#</a></h3>
 <p>[]{#subsubsec:coucheagreg label= »subsubsec:coucheagreg »}</p>

@@ -289,13 +289,13 @@ Entrées : {un réseau $N$,  un ensemble d'activations $\{x^1\cdots x^K\}$
 
 1. $N_n=N$
 2. Pour $i=1$ à $K$
-    1. Calculer $y^i=BN_{\gamma,\beta}(x^i)$ à l'aide de l'({prf:ref}`norm`)
+    1. Calculer $y^i=BN_{\gamma,\beta}(x^i)$ à l'aide de l'{prf:ref}`norm`
     2. Modifier chaque couche de $N_n$ : l'entrée $y^i$ remplace l'entrée $x^i$
-3. Entraîner $N_n$ pour optimiser les paramètres de $N$ et $(\gamma^i,\beta^i)_{1\leq i\leq K}$
+3. Entraîner $N_n$ pour optimiser les paramètres de $N$ et $(\gamma^i,\beta^i)_{i\in[\![1,K]\!]}$
 4. $N^f = N_n$
 5. Pour $i=1$ à $K$
     1. Utiliser $N^f$ sur des batchs $\mathcal{B}$ de taille $m$
-    2. Calculer la moyenne des moyennes $\bar{x^i}$ et des variances $Var(x^i)$\\
+    2. Calculer la moyenne des moyennes $\bar{x^i}$ et des variances $Var(x^i)$
     3. Remplacer dans $N^f$ la transformation $y^i=BN_{\gamma,\beta}(x^i)$ par 
 
 $$y^i=\frac{\gamma^i}{\sqrt{Var(x^i)+\epsilon}}x^i+\left(\beta^i -\frac{\gamma^i \bar{x^i}}{\sqrt{Var(x^i)+\epsilon}}\right)$$ 
@@ -307,35 +307,32 @@ $$y^i=\frac{\gamma^i}{\sqrt{Var(x^i)+\epsilon}}x^i+\left(\beta^i -\frac{\gamma^i
 
 ### Couche d'agrégation et de sous-échantillonnage
 
-[]{#subsubsec:coucheagreg label="subsubsec:coucheagreg"}
-
-::: SCfigure
-![image](images/fig-agregation2.pdf)
-:::
-
 Le sous-échantillonnage (pooling) des cartes obtenues par les couches
 précédentes a pour objectif d'assurer une robustesse au bruit et aux
 distorsions.
 
 La sortie d'une couche d'agrégation $l$
-(figure [\[F:coucheagreg\]](#F:coucheagreg){reference-type="ref"
-reference="F:coucheagreg"}) est composée de $n^{(l)} = n^{(l-1)}$ cartes
+({numref}`pooling`) est composée de $n^{(l)} = n^{(l-1)}$ cartes
 de taille réduite. En général, l'agrégation est effectuée en déplaçant
 dans les cartes d'entrée une fenêtre de taille $2p \times 2p$ toutes les
 $q$ positions (il y a recouvrement si $q < p$ et non recouvrement
 sinon), et en calculant, pour chaque position de la fenêtre, une seule
-valeur, affectée à la position centrale dans la carte de sortie. On
-distingue généralement deux types d'agrégation :
+valeur, affectée à la position centrale dans la carte de sortie. 
 
-La moyenne
+```{figure} ./images/pooling.png
+:name: pooling
+Couche d’agrégation et de sous-échantillonnage $l$. Chacune des $n^{(l−1)}$ cartes de la couche $l-1$ est traitée individuellement. Chaque neurone des $n^(l) = n^{(l−1)}$ cartes de sortie est la moyenne (ou le maximum) des valeurs contenues dans une fenêtre de taille donnée dans la carte correspondante de la couche $l-1$.
+```
 
-:   : on utilise un filtre $\mathbf{K_B}$ de taille
-    $(2h_1 + 1)\times (2h_2 + 1)$ défini par :
+
+On distingue généralement deux types d'agrégation :
+
+- La moyenne : on utilise un filtre $\mathbf{K_B}$ de taille
+    $(2h_1 + 1)\times (2h_2 + 1)$ défini par 
+
     $$\left(\mathbf{K_B}\right)_{r,s} = \frac{1}{(2h_1 + 1)(2h_2 + 1)}$$
 
-Le maximum
-
-:   : la valeur maximum dans la fenêtre est retenue.
+- Le maximum : la valeur maximum dans la fenêtre est retenue.
 
 Le maximum est souvent utilisé pour assurer une convergence rapide
 durant la phase d'entraînement. L'agrégation avec recouvrement, elle,
@@ -344,9 +341,12 @@ semble assurer une réduction du phénomène de surapprentissage
 ### Couche complètement connectée
 
 Si $l$ et $(l-1)$ sont des couches complètement connectées, l'équation :
+
 $$\begin{aligned}
     z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad \mathbf{Z^{(l)}} = \mathbf{W^{(l)}} \mathbf{Y^{(l-1)}}
-\end{aligned}$$ avec $\mathbf{Z^{(l)}}$, $\mathbf{W^{(l)}}$ et
+\end{aligned}$$ 
+
+avec $\mathbf{Z^{(l)}}$, $\mathbf{W^{(l)}}$ et
 $\mathbf{Y^{(l-1)}}$ les représentations vectorielle et matricielle des
 entrées $z_i^{(l)}$, des poids $w_{i,k}^{(l)}$ et des sorties
 $y_k^{(l-1)}$, permet de relier ces deux couches.
