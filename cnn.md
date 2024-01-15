@@ -390,7 +390,7 @@ exemple s'écrire :
 $$J(\mathbf{W}) =- \frac{1}{m}\displaystyle\sum_{i=1}^m \displaystyle\sum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\displaystyle\sum_{i=1}^n \displaystyle\sum_{j=1}^k W_{ji}^2
 $$ 
 
-où $\lambda$ est un paramètre de régularisation contrôlant le second terme du coût qui pénalise les grandes valeurs des poids (régularisation $L_2$).
+où $\lambda$ est un paramètre de régularisation contrôlant le second terme du coût qui pénalise les grandes valeurs des poids (régularisation $\ell_2$).
 
 ## Régularisation
 
@@ -398,25 +398,19 @@ Un des enjeux principaux en apprentissage automatique est de construire
 des algorithmes ayant une bonne capacité de généralisation. Les
 stratégies mises en œuvre pour arriver à cette fin rentrent dans la
 catégorie générale de la régularisation et de nombreuses méthodes sont
-aujourd'hui proposées en ce sens. Nous faisons ici un focus sur trois
+aujourd'hui proposées en ce sens. La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches (voir section {ref}`content:references:reg`). Nous faisons ici un focus sur trois
 stratégies largement utilisées en apprentissage profond.
 
 ### Régularisation de la fonction de coût
 
-La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches ({ref}`content:references:reg`).
-
-L'équation [\[E:softmaxCout\]](#E:softmaxCout){reference-type="ref"
-reference="E:softmaxCout"} est un exemple de régularisation de la
+L'équation précédente est un exemple de régularisation de la
 fonction de coût, utilisée lors de la phase d'entraînement. À la
 fonction d'erreur est ajoutée une fonction des poids du réseau, qui peut
 prendre de multiples formes. Les deux principales stratégies sont :
 
 -   La régularisation $\ell_2$ (ou ridge regression), qui force les
     poids à avoir une faible valeur absolue : un terme de régularisation
-    fonction de la norme $\ell_2$ de la matrice des poids est ajouté (à
-    la manière de l'équation
-    [\[E:softmaxCout\]](#E:softmaxCout){reference-type="ref"
-    reference="E:softmaxCout"}). On parle souvent de *weight decay*.
+    fonction de la norme $\ell_2$ de la matrice des poids est ajouté. On parle souvent de *weight decay*.
 
 -   La régularisation $\ell_1$, qui tend à rendre épars le réseau
     profond, *i.e.* à imposer à un maximum de poids de s'annuler. Un
@@ -470,17 +464,22 @@ une stratégie dite de partage des paramètres. Dans le cas des réseaux
 convolutifs utilisés en vision, cette régularisation est assez intuitive
 puisque les entrées (images) possèdent de nombreuses propriétés
 invariantes par transformations affines (une image de voiture reste une
-image de voiture, même si l'image est translatée ou mise à l'échelle,
-cf. figure [\[F:partage\]](#F:partage){reference-type="ref"
-reference="F:partage"}). Le réseau exploite alors ce partage de
+image de voiture, même si l'image est translatée ou mise à l'échelle ({numref}`partage`)).
+Le réseau exploite alors ce partage de
 paramètres, en calculant une même caractéristique (un neurone et son
 poids) à différentes positions dans l'image. De ce fait, le nombre de
 paramètres est drastiquement réduit, ainsi que l'empreinte mémoire du
 réseau appris.
 
-::: SCfigure
-![image](images/fig-partage-param.pdf){width="0.40\\linewidth"}
-:::
+
+```{figure} ./images/partage.png
+:name: partage
+:width: 500px
+:align: center
+Partage de paramètres : les neurones voient des champs réceptifs distincts, mais partagent les mêmes paramètres (poids). Leur capacité de détection d’un triangle restera la même, quelle que soit la position de l'objet dans l’image.
+```
+
+
 
 ## Initialisation
 
