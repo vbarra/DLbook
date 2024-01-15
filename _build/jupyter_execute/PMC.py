@@ -244,6 +244,9 @@
 #     
 #     où $\gamma$ est le taux d'apprentissage. L'ordre 2 assure une convergence plus rapide, mais requiert le calcul et l'inversion du Hessien $\mathbf H_n(\mathbf w[t])$ de $E_n$, ce qui est coûteux.
 # 
+# 
+# (content:references:initW)=
+# 
 # ## Initialisation des poids 
 # 
 # Une méthode itérative d'optimisation étant utilisée, l'initialisation
