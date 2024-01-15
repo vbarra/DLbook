@@ -495,7 +495,7 @@
 # réseau à $k$ couches peut représenter de manière compacte (avec un
 # nombre de neurones cachés qui est polynomial en le nombre des entrées),
 # alors qu'un réseau à $k-1$ couches ne peut pas le faire, à moins d'avoir
-# une combinatoire exponentielle sur le nombre de neurones cachés.\
+# une combinatoire exponentielle sur le nombre de neurones cachés.
 # 
 # ### Le problème de l'entraînement
 # 
@@ -537,7 +537,7 @@
 # Aujourd'hui, de nombreux réseaux, déjà entraînés, sont mis à
 # disposition. En effet, ces entraînements nécessitent de grandes bases
 # d'apprentissage (type ImageNet) et une puissance de calcul assez élevée
-# (GPU obligatoire(s)). Pour le traitement de problèmes précis, des
+# (GPUs obligatoires). Pour le traitement de problèmes précis, des
 # méthodes existent, qui partent de ces réseaux préentraînés et les
 # modifient localement pour, par exemple, apprendre de nouvelles classes
 # d'images non encore vues par le réseau. L'idée sous-jacente est que les
@@ -550,17 +550,22 @@
 # classification), c'est-à-dire en réapprenant les connexions, on
 # spécifiera le nouveau réseau pour la nouvelle tâche de classification.
 # Cette approche rentre dans le cadre des méthodes de *transfer learning*
-# [@Pan10] et de *fine tuning*, cas particulier d'adaptation de domaine :
+# et de *fine tuning*, cas particulier d'adaptation de domaine :
 # 
 # -   Les méthodes de transfert prennent un réseau déjà entraîné, enlèvent
 #     la dernière couche complètement connectée et traitent le réseau
 #     restant comme un extracteur de caractéristiques. Un nouveau
 #     classifieur, la dernière couche, est alors entraîné sur le nouveau
-#     problème.
+#     problème (({numref}`transfer`))
 # 
-# -   Les méthodes de fine tuning ré-entraînent le classifieur du réseau
-#     et remettent à jour les poids du réseau pré-entraîné par
-#     rétropropagation.
+# ```{figure} ./images/transferLearning.png
+# :name: transfer
+# :align: center
+# Illustration de la technique de transfer Learning. Le réseau appris à classer des images de chat est amputé de sa partie classification. Un nouveau classifieur est mis au bout du réseau, dont les poids sont entraînés sur la nouvelle tâche de classification.
+# ```
+# 
+# -   Les méthodes de fine tuning ré-entraînent tout ou partie d'un réseau (suivant les données disponibles) et conservent les poids non ré-entrainés.
+# 
 # 
 # Plusieurs facteurs influent sur le choix de la méthode à utiliser : la
 # taille des données d'apprentissage du nouveau problème et la
@@ -585,29 +590,10 @@
 # 
 # Dans le cas où un réseau ad hoc doit être construit et où une base
 # d'apprentissage suffisante est disponible, l'entraînement par
-# optimisation reste possible. Il existe en particulier des techniques
-# d'apprentissage couche à couche, lorsque les couches successives
-# calculent des fonctions d'activation des couches précédentes (empilement
-# d'autoencodeurs par exemple).
+# optimisation reste possible mais peut nécessiter des ressources de calcul importantes.  De plus, il a été montré que : 
+# - le transfer Learning ou le fine tuning permettaient souvent d'aboutir à de meilleures performances que l'entraînement depuis un réseau initial aléatoire (on se sert des poids du réseau pré entraîné comme initialisation, plutôt qu'une initialisation type Xavier).
+# - le fine tuning améliorait la capacité de généralisation du réseau. 
 # 
-# ### Apprentissage glouton par couche
-# 
-# L'idée est d'entraîner les couches une à une, d'abord dans un réseau à
-# une couche cachée, puis à deux couches cachées\... À chaque étape $k$,
-# la couche $k$ est ajoutée et a pour entrée la couche $k-1$ précédemment
-# entraînée. L'entraînement peut être supervisé, mais le plus souvent il
-# est non supervisé. Les poids issus de cet entraînement servent
-# d'initialisation pour le réseau final.\
-# En comparaison des points précédents, cette approche est bien plus
-# pertinente :
-# 
-# -   Les données non étiquetées sont très faciles à obtenir.
-# 
-# -   L'initialisation des poids sur des données non étiquetées est plus
-#     performante qu'une initialisation aléatoire. Empiriquement, une
-#     méthode type descente de gradient permet d'aboutir à un meilleur
-#     minimum local (les données non étiquetées fournissent en effet des
-#     informations a priori déjà importantes sur les données).
 # 
 # ### Visualisation du mécanisme des réseaux convolutifs
 # 
@@ -620,7 +606,7 @@
 # construction et l'amélioration de ces réseaux.
 # 
 # Les méthodes de visualisation du fonctionnement des réseaux convolutifs
-# peuvent être rangées en trois catégories, décrites dans les paragraphes
+# peuvent être rangées en trois catégories, décrites brièvement dans les paragraphes
 # suivants.
 # 
 # ### Méthodes de visualisation de base
@@ -632,8 +618,7 @@
 # $\mathbf{Y_i^{(l)}}$ deviennent localisées et éparses.
 # 
 # Il est également possible de visualiser les filtres des différentes
-# couches de convolution (figure
-# [1.3](#F:viewfilters){reference-type="ref" reference="F:viewfilters"}).
+# couches de convolution ({numref}`visufiltres`).
 # Les filtres des premières couches agissent comme des détecteurs de bords
 # et coins et, à mesure que l'on s'enfonce dans le réseau, les filtres
 # capturent des concepts haut niveau comme des objets ou encore des
@@ -644,13 +629,14 @@
 # dimension (par exemple 4096 pour AlexNet) via une méthode de réduction
 # de dimension.
 # 
-# <figure id="F:viewfilters">
-# <img src="images/viewfilters" />
-# <figcaption>Visualisation des filtres de la première couche d’AlexNet (à
-# gauche, 64 filtres 11<span class="math inline">×</span>11) et de
-# ResNet-18 (à droite, 64 filtres 7<span
-# class="math inline">×</span>7).</figcaption>
-# </figure>
+# ```{figure} ./images/visufiltres.png
+# :name: visufiltres
+# :width: 500px
+# :align: center
+# Visualisation des filtres de la première couche d’AlexNet (à
+# gauche, 64 filtres 11$\times$) et de ResNet-18 (à droite, 64 filtres 7$\times 7$.
+# ```
+# 
 # 
 # ### Méthodes fondées sur les activations
 # 
@@ -677,19 +663,21 @@
 #     neurone particulier, conserver celle qui a le plus activé ce
 #     neurone. Il est alors possible de visualiser les images pour
 #     comprendre ce à quoi le neurone s'intéresse dans son champ réceptif
-#     (figure [1.4](#F:champreceptif){reference-type="ref"
-#     reference="F:champreceptif"}).
+#     ({numref}`champr`).
 # 
-#     <figure id="F:champreceptif">
-#     <img src="images/champreceptif" />
-#     <figcaption>Champ récéptif de quelques neurones de la dernière couche
+# 
+# ```{figure} ./images/champr.png
+# :name: champr
+# :width: 500px
+# :align: center
+# Champ récéptif de quelques neurones de la dernière couche
 #     d’agrégation du réseau AlexNet, superposées aux images ayant le plus
 #     fortement activé ces neurones. Le champ est encadré en blanc, et la
 #     valeur d’activation correspondante est reportée en haut. On voit par
 #     exemple que certains neurones sont très sensibles aux textes, d’autres
-#     aux réflexions spéculaires, ou encore aux hauts du corps (source : <span
-#     class="citation" data-cites="Girshick14"></span>).</figcaption>
-#     </figure>
+#     aux réflexions spéculaires, ou encore aux hauts du corps (source :{cite:p}`Girshick14` )
+# ```
+# 
 # 
 # -   Cacher (par un rectangle noir par exemple) différentes parties de
 #     l'image d'entrée qui est d'une certaine classe (disons un chien) et
@@ -698,12 +686,13 @@
 #     d'intérêt comme une fonction de la position du rectangle occultant,
 #     il est possible de voir si le réseau s'intéresse effectivement aux
 #     parties de l'image spécifiques de la classe, ou à des autres zones
-#     (le fond par exemple) (figure
-#     [1.5](#F:occlusion){reference-type="ref" reference="F:occlusion"}).
+#     (le fond par exemple) ({numref}`occlusion`).
 # 
-#     <figure id="F:occlusion">
-#     <img src="images/occlusion" />
-#     <figcaption>Occlusion d’une image (à gauche). Le rectangle noir est
+# ```{figure} ./images/occlusion.png
+# :name: occlusion
+# :width: 500px
+# :align: center
+# Occlusion d’une image (à gauche). Le rectangle noir est
 #     déplacé dans l’image et pour chaque position la probabilité de la classe
 #     de l’image (ici un loulou de Poméranie) est enregistrée. Ces
 #     probabilités sont ensuite représentées sous forme d’une carte 2D (à
@@ -711,9 +700,10 @@
 #     couvre une partie de la face du chien. Cela suggère que cette face est
 #     grandement responsable de la forte probabilité de classement de l’image
 #     comme un loulou. A l’inverse, l’occlusion du fond n’altère pas la forte
-#     valeur de probabilité de la classe (source : <span class="citation"
-#     data-cites="ZE13"></span>).</figcaption>
-#     </figure>
+#     valeur de probabilité de la classe  (source :{cite:p}`ZE13` )
+# ```
+# 
+# 
 # 
 # ### Méthodes fondées sur le gradient
 # 
@@ -728,22 +718,26 @@
 # Il est également possible d'utiliser le gradient par rapport à la
 # dernière couche de convolution (approche Grad-CAM), ce qui permet de
 # récupérer des informations de localisation spatiale des régions
-# importantes pour la prédiction (figure
-# [1.6](#F:grad){reference-type="ref" reference="F:grad"}, droite).\
+# importantes pour la prédiction ({numref}`gradcam` droite).
+# 
 # Plus généralement, en choisissant un neurone intermédiaire du réseau
 # (d'une couche de convolution), la méthode de rétropropagation guidée
 # calcule le gradient de sa valeur par rapport aux pixels de l'image
 # d'entrée, ce qui permet de souligner les parties de l'image auxquelles
-# ce neurone répond (figure [1.6](#F:grad){reference-type="ref"
-# reference="F:grad"}, milieu).
+# ce neurone répond ({numref}`gradcam` milieu).
 # 
-# <figure id="F:grad">
-# <img src="images/gradCam" />
-# <figcaption>Approches par gradient de visualisation du fonctionnement
+# 
+# ```{figure} ./images/gradcam.png
+# :name: gradcam
+# :width: 500px
+# :align: center
+# Approches par gradient de visualisation du fonctionnement
 # d’un réseau convolutif. Comparaison de la méthode de rétropropagation
-# guidée et de Grad-CAM.(source : <span class="citation"
-# data-cites="Selvaraju17"></span>).</figcaption>
-# </figure>
+# guidée et de Grad-CAM (source :{cite:p}`Selvaraju17` )
+# ```
+# 
+# 
+# 
 # 
 # Ces gradients peuvent également être utilisés dans la méthode de montée
 # de gradient (gradient Ascent), dont l'objectif est de générer une image
@@ -754,15 +748,17 @@
 # pixels de $\mathbf{I}$ et d'opérer une petite modification de ces
 # pixels. Outre son aspect informatif sur la structure interne du réseau
 # étudié (visualisation des cartes $\mathbf{Y_i^{(l)}}$ intermédiaires),
-# cette méthode produit des images parfois très artistiques (figure
-# [1.7](#F:gradAscent){reference-type="ref" reference="F:gradAscent"}).
+# cette méthode produit des images parfois très artistiques (({numref}`monteeg`).
 # 
-# <figure id="F:gradAscent">
-# <img src="images/gradAscent" />
-# <figcaption>Visualisation des 4 premières couches de convolution d’un
-# réseau convolutif par montée de gradient (source : <span
-# class="citation" data-cites="Yosinski15"></span>).</figcaption>
-# </figure>
+# 
+# ```{figure} ./images/monteeg.png
+# :name: monteeg
+# :align: center
+# Visualisation des 4 premières couches de convolution d’un
+# réseau convolutif par montée de gradient  (source :{cite:p}`Yosinski15` )
+# ```
+# 
+# 
 # 
 # ## Quelques applications {#subsubsec:applis}
 # 
