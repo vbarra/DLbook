@@ -817,8 +817,13 @@ class PMC(nn.Module):
 et on définit la fonction d'entraînement. La fonction de perte est l'[entropie croisée binaire](https://en.wikipedia.org/wiki/Cross_entropy) et l'optimiseur est [Adam ](https://arxiv.org/abs/1412.6980).
 
 ```{code-cell} ipython3
+
+# Paramètres de l'apprentissage
 batch_size = 100  
 num_epochs = 10000
+num_labels = 2 
+num_features = 2
+
 
 def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
     loss_values = []    

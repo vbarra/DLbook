@@ -32,19 +32,13 @@ for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[5], line 3[0m
-[1;32m      1[0m fig,axs [38;5;241m=[39m plt[38;5;241m.[39msubplots([38;5;241m2[39m, [38;5;241m3[39m,figsize[38;5;241m=[39m([38;5;241m15[39m,[38;5;241m8[39m))
-[1;32m      2[0m [38;5;28;01mfor[39;00m i,name_train,name_test [38;5;129;01min[39;00m [38;5;28mzip[39m ([[38;5;241m0[39m,[38;5;241m1[39m,[38;5;241m2[39m],fichiers_train,fichiers_test):
-[0;32m----> 3[0m     train_data,train_labels [38;5;241m=[39m [43mextract_data[49m[43m([49m[43mname_train[49m[43m)[49m
-[1;32m      4[0m     test_data, test_labels [38;5;241m=[39m extract_data(name_test)
-[1;32m      6[0m     model [38;5;241m=[39m PMC(train_data[38;5;241m.[39mshape[[38;5;241m1[39m])
+Cell [0;32mIn[5], line 8[0m
+[1;32m      6[0m model [38;5;241m=[39m PMC(train_data[38;5;241m.[39mshape[[38;5;241m1[39m])
+[1;32m      7[0m optimizer [38;5;241m=[39m optim[38;5;241m.[39mAdam(model[38;5;241m.[39mparameters())
+[0;32m----> 8[0m pltloss,acc [38;5;241m=[39m train_session(torch[38;5;241m.[39mFloatTensor(train_data),torch[38;5;241m.[39mFloatTensor(train_labels),model,[43mloss[49m,optimizer)
+[1;32m     10[0m titre[38;5;241m=[39m [38;5;124m"[39m[38;5;124mPrécision =[39m[38;5;132;01m{0:5.3f}[39;00m[38;5;124m [39m[38;5;124m"[39m[38;5;241m.[39mformat(acc)
+[1;32m     11[0m plotResults(axs[[38;5;241m0[39m][i],axs[[38;5;241m1[39m][i],test_data, test_labels, model, titre, pltloss, name_test)
 
-Cell [0;32mIn[1], line 25[0m, in [0;36mextract_data[0;34m(filename)[0m
-[1;32m     22[0m features_np [38;5;241m=[39m np[38;5;241m.[39mmatrix(features)[38;5;241m.[39mastype(np[38;5;241m.[39mfloat32)
-[1;32m     24[0m labels_np [38;5;241m=[39m np[38;5;241m.[39marray(labels)[38;5;241m.[39mastype(dtype[38;5;241m=[39mnp[38;5;241m.[39muint8)
-[0;32m---> 25[0m labels_onehot [38;5;241m=[39m (np[38;5;241m.[39marange([43mnum_labels[49m) [38;5;241m==[39m labels_np[:, [38;5;28;01mNone[39;00m])[38;5;241m.[39mastype(np[38;5;241m.[39mfloat32)
-[1;32m     27[0m [38;5;28;01mreturn[39;00m features_np,labels_onehot
-
-[0;31mNameError[0m: name 'num_labels' is not defined
-NameError: name 'num_labels' is not defined
+[0;31mNameError[0m: name 'loss' is not defined
+NameError: name 'loss' is not defined
 
