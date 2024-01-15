@@ -904,7 +904,7 @@ exemple s’écrire :</p>
 <div class="math notranslate nohighlight">
 \[J(\mathbf{W}) =- \frac{1}{m}\displaystyle\sum_{i=1}^m \displaystyle\sum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\displaystyle\sum_{i=1}^n \displaystyle\sum_{j=1}^k W_{ji}^2
 \]</div>
-<p>où <span class="math notranslate nohighlight">\(\lambda\)</span> est un paramètre de régularisation contrôlant le second terme du coût qui pénalise les grandes valeurs des poids (régularisation <span class="math notranslate nohighlight">\(L_2\)</span>).</p>
+<p>où <span class="math notranslate nohighlight">\(\lambda\)</span> est un paramètre de régularisation contrôlant le second terme du coût qui pénalise les grandes valeurs des poids (régularisation <span class="math notranslate nohighlight">\(\ell_2\)</span>).</p>
 </div>
 </div>
 <div class="section" id="regularisation">
@@ -913,23 +913,18 @@ exemple s’écrire :</p>
 des algorithmes ayant une bonne capacité de généralisation. Les
 stratégies mises en œuvre pour arriver à cette fin rentrent dans la
 catégorie générale de la régularisation et de nombreuses méthodes sont
-aujourd’hui proposées en ce sens. Nous faisons ici un focus sur trois
+aujourd’hui proposées en ce sens. La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches (voir section <a class="reference internal" href="PMC.html#content-references-reg"><span class="std std-ref">Régularisation</span></a>). Nous faisons ici un focus sur trois
 stratégies largement utilisées en apprentissage profond.</p>
 <div class="section" id="regularisation-de-la-fonction-de-cout">
 <h3>Régularisation de la fonction de coût<a class="headerlink" href="#regularisation-de-la-fonction-de-cout" title="Lien permanent vers ce titre">#</a></h3>
-<p>La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches (<a class="reference internal" href="PMC.html#content-references-reg"><span class="std std-ref">Régularisation</span></a>).</p>
-<p>L’équation <a class="reference external" href="#E:softmaxCout">[E:softmaxCout]</a>{reference-type= »ref »
-reference= »E:softmaxCout »} est un exemple de régularisation de la
+<p>L’équation précédente est un exemple de régularisation de la
 fonction de coût, utilisée lors de la phase d’entraînement. À la
 fonction d’erreur est ajoutée une fonction des poids du réseau, qui peut
 prendre de multiples formes. Les deux principales stratégies sont :</p>
 <ul class="simple">
 <li><p>La régularisation <span class="math notranslate nohighlight">\(\ell_2\)</span> (ou ridge regression), qui force les
 poids à avoir une faible valeur absolue : un terme de régularisation
-fonction de la norme <span class="math notranslate nohighlight">\(\ell_2\)</span> de la matrice des poids est ajouté (à
-la manière de l’équation
-<a class="reference external" href="#E:softmaxCout">[E:softmaxCout]</a>{reference-type= »ref »
-reference= »E:softmaxCout »}). On parle souvent de <em>weight decay</em>.</p></li>
+fonction de la norme <span class="math notranslate nohighlight">\(\ell_2\)</span> de la matrice des poids est ajouté. On parle souvent de <em>weight decay</em>.</p></li>
 <li><p>La régularisation <span class="math notranslate nohighlight">\(\ell_1\)</span>, qui tend à rendre épars le réseau
 profond, <em>i.e.</em> à imposer à un maximum de poids de s’annuler. Un
 terme de régularisation, somme pondérée des valeurs absolues des
@@ -980,15 +975,15 @@ une stratégie dite de partage des paramètres. Dans le cas des réseaux
 convolutifs utilisés en vision, cette régularisation est assez intuitive
 puisque les entrées (images) possèdent de nombreuses propriétés
 invariantes par transformations affines (une image de voiture reste une
-image de voiture, même si l’image est translatée ou mise à l’échelle,
-cf. figure <a class="reference external" href="#F:partage">[F:partage]</a>{reference-type= »ref »
-reference= »F:partage »}). Le réseau exploite alors ce partage de
+image de voiture, même si l’image est translatée ou mise à l’échelle (<a class="reference internal" href="#partage"><span class="std std-numref">Fig. 12</span></a>)).
+Le réseau exploite alors ce partage de
 paramètres, en calculant une même caractéristique (un neurone et son
 poids) à différentes positions dans l’image. De ce fait, le nombre de
 paramètres est drastiquement réduit, ainsi que l’empreinte mémoire du
 réseau appris.</p>
-<div class="highlight-SCfigure notranslate"><div class="highlight"><pre><span></span>![image](images/fig-partage-param.pdf){width=&quot;0.40\\linewidth&quot;}
-</pre></div>
+<div class="figure align-center" id="partage">
+<a class="reference internal image-reference" href="_images/partage.png"><img alt="_images/partage.png" src="_images/partage.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Partage de paramètres : les neurones voient des champs réceptifs distincts, mais partagent les mêmes paramètres (poids). Leur capacité de détection d’un triangle restera la même, quelle que soit la position de l’objet dans l’image.</span><a class="headerlink" href="#partage" title="Lien permanent vers cette image">#</a></p>
 </div>
 </div>
 </div>

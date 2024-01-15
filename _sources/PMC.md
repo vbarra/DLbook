@@ -530,8 +530,8 @@ régularisation dans les réseaux. Parmi elles, on note :
     prendre la forme d'une fonction de la norme $L_p$ de $\mathbf w$. Deux
     exemples classiques sont :
 
-    -   la régularisation $L_2$ : $P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w$, où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
-    -   la régularisation $L_1$ : $P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|$ où $W$ est la dimension de $\mathbf w$, qui tend à rendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).
+    -   la régularisation $\ell_2$ : $P(\mathbf w) = \|\mathbf w\|_2^2 = \mathbf w^\top \mathbf w$, où le principe est de pénaliser les poids de fortes valeurs, qui tendent à amplifier le problème de  surapprentissage.
+    -   la régularisation $\ell_1$ : $P(\mathbf w) = \|\mathbf w\|_1 = \displaystyle\sum_{k = 1} ^W |w_k|$ où $W$ est la dimension de $\mathbf w$, qui tend à rendre épars le vecteur de poids (beaucoup de valeurs de poids deviennent nulles).
 
 ## Exemple
 
