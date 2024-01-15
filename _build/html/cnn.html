@@ -225,8 +225,8 @@ title="Fullscreen mode"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolution-discrete-subsec-convolution">
-     Convolution discrète {#subsec:convolution}
+    <a class="reference internal nav-link" href="#convolution-discrete">
+     Convolution discrète
     </a>
    </li>
   </ul>
@@ -401,8 +401,8 @@ title="Fullscreen mode"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolution-discrete-subsec-convolution">
-     Convolution discrète {#subsec:convolution}
+    <a class="reference internal nav-link" href="#convolution-discrete">
+     Convolution discrète
     </a>
    </li>
   </ul>
@@ -622,30 +622,37 @@ gris, de taille <span class="math notranslate nohighlight">\(n_1 \times n_2\)</s
 \end{aligned}\)</span><span class="math notranslate nohighlight">\( \)</span>\mathbf{I}$ sera indifféremment vue comme une fonction
 ou une matrice.</p>
 </div>
-<div class="section" id="convolution-discrete-subsec-convolution">
-<h3>Convolution discrète {#subsec:convolution}<a class="headerlink" href="#convolution-discrete-subsec-convolution" title="Lien permanent vers ce titre">#</a></h3>
+<div class="section" id="convolution-discrete">
+<h3>Convolution discrète<a class="headerlink" href="#convolution-discrete" title="Lien permanent vers ce titre">#</a></h3>
 <p>Pour reproduire la notion de champ réceptif, et ainsi permettre aux
 neurones de détecter des caractéristiques de petite taille mais porteurs
 d’information, l’idée est de laisser un neurone caché voir et traiter
 seulement une petite portion de l’image qu’il prend en entrée. L’outil
 retenu dans les réseaux convolutifs est la convolution discrète.</p>
-<div class="highlight-definition notranslate"><div class="highlight"><pre><span></span>Soient
-$h_1,h_2\in\mathbb{N}, \mathbf{K} \in \mathbb{R}^{(2h_1+1) \times (2h_2+1)}$.
-La convolution discrète de $\mathbf{I}$ par le filtre $\mathbf{K}$ est
-donnée par : $$\begin{aligned}
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 5 </span> (Convolution discrète)</p>
+<div class="definition-content section" id="proof-content">
+<p>Soient
+<span class="math notranslate nohighlight">\(h_1,h_2\in\mathbb{N}, \mathbf{K} \in \mathbb{R}^{(2h_1+1) \times (2h_2+1)}\)</span>.
+La convolution discrète de <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> par le filtre <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> est
+donnée par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
     \label{eq:convolution}
     \left(\mathbf{K} \ast \mathbf{I}\right)_{r,s} = \dsum _{u = -h_1} ^{h_1} \dsum _{v = -h_2}^{h_2} K_{u,v} I_{r+u,s+v}
-\end{aligned}$$ où $\mathbf{K}$ est donné par : $$\begin{aligned}
+\end{aligned}\]</div>
+<p>où <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> est donné par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
     \mathbf{K} =
     \begin{pmatrix}
         K_{-h_1,-h_2} &amp; \ldots &amp; K_{-h_1,h_2}\\
         \vdots &amp; K_{0,0} &amp; \vdots\\
         K_{h_1,-h_2} &amp; \ldots &amp; K_{h_1,h_2}\\
     \end{pmatrix}.
-\end{aligned}$$
-</pre></div>
+\end{aligned}\end{split}\]</div>
 </div>
-<p>La taille du filtre <span class="math notranslate nohighlight">\((2h_1+1) \times (2h_2+1)\)</span> précise le champ visuel
+</div><p>La taille du filtre <span class="math notranslate nohighlight">\((2h_1+1) \times (2h_2+1)\)</span> précise le champ visuel
 capturé et traité par <span class="math notranslate nohighlight">\(\mathbf{K}\)</span>.<br />
 Lorsque <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> parcourt <span class="math notranslate nohighlight">\(\mathbf{I}\)</span>, le déplacement du filtre est
 réglé par deux paramètres de <em>stride</em> (horizontal et vertical). Un

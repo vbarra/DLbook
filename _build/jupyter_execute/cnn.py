@@ -72,7 +72,7 @@
 # \end{aligned}$$ $\mathbf{I}$ sera indifféremment vue comme une fonction
 # ou une matrice.
 # 
-# ### Convolution discrète {#subsec:convolution}
+# ### Convolution discrète 
 # 
 # Pour reproduire la notion de champ réceptif, et ainsi permettre aux
 # neurones de détecter des caractéristiques de petite taille mais porteurs
@@ -80,14 +80,20 @@
 # seulement une petite portion de l'image qu'il prend en entrée. L'outil
 # retenu dans les réseaux convolutifs est la convolution discrète.
 # 
-# ::: definition
+# ````{prf:definition} Convolution discrète
 # Soient
 # $h_1,h_2\in\mathbb{N}, \mathbf{K} \in \mathbb{R}^{(2h_1+1) \times (2h_2+1)}$.
 # La convolution discrète de $\mathbf{I}$ par le filtre $\mathbf{K}$ est
-# donnée par : $$\begin{aligned}
+# donnée par : 
+# 
+# $$\begin{aligned}
 #     \label{eq:convolution}
 #     \left(\mathbf{K} \ast \mathbf{I}\right)_{r,s} = \dsum _{u = -h_1} ^{h_1} \dsum _{v = -h_2}^{h_2} K_{u,v} I_{r+u,s+v}
-# \end{aligned}$$ où $\mathbf{K}$ est donné par : $$\begin{aligned}
+# \end{aligned}$$ 
+# 
+# où $\mathbf{K}$ est donné par : 
+# 
+# $$\begin{aligned}
 #     \mathbf{K} =
 #     \begin{pmatrix}
 #         K_{-h_1,-h_2} & \ldots & K_{-h_1,h_2}\\
@@ -95,7 +101,7 @@
 #         K_{h_1,-h_2} & \ldots & K_{h_1,h_2}\\
 #     \end{pmatrix}.
 # \end{aligned}$$
-# :::
+# ````
 # 
 # La taille du filtre $(2h_1+1) \times (2h_2+1)$ précise le champ visuel
 # capturé et traité par $\mathbf{K}$.\

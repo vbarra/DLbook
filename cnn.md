@@ -51,9 +51,7 @@ inspirés par ces processus biologiques. Ces réseaux consistent en un
 empilage multicouche de perceptrons, dont le but est de prétraiter de
 petites quantités d'informations. Les réseaux convolutifs ont de larges
 applications dans la reconnaissance d'image et vidéo, les systèmes de
-recommandation et le traitement du langage naturel (voir section
-[1.6](#subsubsec:applis){reference-type="ref"
-reference="subsubsec:applis"} pour quelques exemples)
+recommandation et le traitement du langage naturel.
 
 Un réseau convolutif se compose de deux types de neurones, agencés en
 couches traitant successivement l'information. Dans le cas du traitement
@@ -75,11 +73,14 @@ d'abstraction croissants et extraient des caractéristiques de plus en
 plus haut niveau des données d'entrée.
 
 Dans la suite, le propos sera illustré sur des images 2D en niveaux de
-gris, de taille $n_1 \times n_2$ : $$\begin{aligned}
+gris, de taille $n_1 \times n_2$ : 
+
+$$\begin{aligned}
     \mathbf{I} : [\![1\cdots n_1]\!]\times [\![1\cdots n_2]\!] &\rightarrow&  \mathbb{R}\\
      (i,j) &\mapsto& I_{i,j}
-\end{aligned}$$ $\mathbf{I}$ sera indifféremment vue comme une fonction
-ou une matrice.
+\end{aligned}$$ 
+
+$\mathbf{I}$ sera indifféremment vue comme une fonction ou une matrice.
 
 ### Convolution discrète 
 
@@ -97,7 +98,7 @@ donnée par :
 
 $$\begin{aligned}
     \label{eq:convolution}
-    \left(\mathbf{K} \ast \mathbf{I}\right)_{r,s} = \dsum _{u = -h_1} ^{h_1} \dsum _{v = -h_2}^{h_2} K_{u,v} I_{r+u,s+v}
+    \left(\mathbf{K} \ast \mathbf{I}\right)_{r,s} = \\displastyle\sum _{u = -h_1} ^{h_1} \\displastyle\sum _{v = -h_2}^{h_2} K_{u,v} I_{r+u,s+v}
 \end{aligned}$$ 
 
 où $\mathbf{K}$ est donné par : 
@@ -157,7 +158,7 @@ de taille $n_1^{(l)} \times n_2^{(l)}$. La $i^{\text{e}}$ carte de la
 couche $l$, notée $\mathbf{Y_i^{(l)}}$, se calcule comme :
 $$\begin{aligned}
     \label{eq:convlayer}
-    \mathbf{Y_i^{(l)}} = \mathbf{B^{(l)}_{i}} + \dsum _{j = 1}^{n^{(l-1)}} \mathbf{K^{(l)}_{i,j}} \ast \mathbf{Y_j^{(l-1)}}
+    \mathbf{Y_i^{(l)}} = \mathbf{B^{(l)}_{i}} + \\displastyle\sum _{j = 1}^{n^{(l-1)}} \mathbf{K^{(l)}_{i,j}} \ast \mathbf{Y_j^{(l-1)}}
 \end{aligned}$$ où $\mathbf{B_i^{(l)}}$ est une matrice de biais et
 $\mathbf{K^{(l)}_{i,j}}$ est le filtre de taille
 $(2h_1^{(l)} + 1) \times (2h_2^{(l)} + 1)$ connectant la $j^{\text{e}}$
@@ -188,8 +189,8 @@ reference="eq:convlayer"} : chaque carte $\mathbf{Y_i^{(l)}}$ de la
 couche $l$ est formée de $n_1^{(l)} \cdot n_2^{(l)}$ neurones organisés
 dans un tableau à deux dimensions. Le neurone en position $(r,s)$
 calcule : $$\begin{aligned}
-    \left(\mathbf{Y_i^{(l)}}\right)_{r,s} &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \dsum _{j = 1}^{n^{(l-1)}} \left(\mathbf{K^{(l)}_{i,j} }\ast \mathbf{Y_j^{(l-1)}}\right)_{r,s}\\
-    &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \dsum _{j = 1}^{n^{(l-1)}} \dsum _{u = - h_1^{(l)}} ^{h_1^{(l)}} \dsum _{v = - h_2^{(l)}} ^{h_2^{(l)}} \left(\mathbf{K^{(l)}_{i,j}}\right)_{u,v} \left(\mathbf{Y_j^{(l-1)}}\right)_{r+u,s+v}
+    \left(\mathbf{Y_i^{(l)}}\right)_{r,s} &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \\displastyle\sum _{j = 1}^{n^{(l-1)}} \left(\mathbf{K^{(l)}_{i,j} }\ast \mathbf{Y_j^{(l-1)}}\right)_{r,s}\\
+    &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \\displastyle\sum _{j = 1}^{n^{(l-1)}} \\displastyle\sum _{u = - h_1^{(l)}} ^{h_1^{(l)}} \\displastyle\sum _{v = - h_2^{(l)}} ^{h_2^{(l)}} \left(\mathbf{K^{(l)}_{i,j}}\right)_{u,v} \left(\mathbf{Y_j^{(l-1)}}\right)_{r+u,s+v}
 \end{aligned}$$
 
 Les paramètres du réseau à entraîner (poids) peuvent alors être trouvés
@@ -423,7 +424,7 @@ $y_k^{(l-1)}$, permet de relier ces deux couches.
 Dans le cas contraire, la couche $l$ attend $n^{(l-1)}$ entrées de
 taille $n_1^{(l-1)} \times n_2^{(l-1)}$ et le $i^{\text{e}}$ neurone de
 la couche $l$ calcule : $$\begin{aligned}
-    y_i^{(l)} = f\left(z_i^{(l)}\right)\quad\text{ avec }\quad z_i^{(l)} = \dsum _{j = 1}^{n^{(l-1)}} \dsum _{r = 1} ^{n_1^{(l-1)}} \dsum _{s = 1}^{n_2^{(l-1)}} w_{i,j,r,s}^{(l)} \left(\mathbf{ Y_j^{(l-1)}} \right)_{r,s}
+    y_i^{(l)} = f\left(z_i^{(l)}\right)\quad\text{ avec }\quad z_i^{(l)} = \\displastyle\sum _{j = 1}^{n^{(l-1)}} \\displastyle\sum _{r = 1} ^{n_1^{(l-1)}} \\displastyle\sum _{s = 1}^{n_2^{(l-1)}} w_{i,j,r,s}^{(l)} \left(\mathbf{ Y_j^{(l-1)}} \right)_{r,s}
 \end{aligned}$$ où $w_{i,j,r,s}^{(l)}$ est le poids connectant le
 neurone en position $(r,s)$ de la $j^{\text{e}}$ carte de la couche
 $(l - 1)$ au $i^{\text{e}}$ neurone de la couche $l$.
@@ -441,11 +442,11 @@ est donc tel que $y^{(i)}\in[\![1\cdots k]\!]$ et le classifieur estime
 la probabilité $P(y^{(i)}=j |\mathbf{x^{(i)}})$ pour chaque classe
 $1\leq j\leq k$. Le classifieur softmax calcule cette probabilité selon
 :
-$$\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\dsum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}$$
+$$\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\\displastyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}$$
 où $\mathbf{W}$ est la matrice des paramètres du modèle (les poids). Ces
 paramètres sont obtenus en minimisant une fonction de coût, qui peut par
 exemple s'écrire :
-$$J(\mathbf{W}) =- \frac{1}{m}\dsum_{i=1}^m \dsum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\dsum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\dsum_{i=1}^n \dsum_{j=1}^k W_{ji}^2
+$$J(\mathbf{W}) =- \frac{1}{m}\\displastyle\sum_{i=1}^m \\displastyle\sum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\\displastyle\sum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\\displastyle\sum_{i=1}^n \\displastyle\sum_{j=1}^k W_{ji}^2
 \label{E:softmaxCout}$$ où $\lambda$ est un paramètre de régularisation
 contrôlant le second terme du coût qui pénalise les grandes valeurs des
 poids (régularisation $\ell_2$).
