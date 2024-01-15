@@ -110,9 +110,7 @@
 # réglé par deux paramètres de *stride* (horizontal et vertical). Un
 # stride de 1 horizontal (respectivement vertical) signifie que
 # $\mathbf{K}$ se déplace d'une position horizontale (resp. verticale) à
-# chaque application de
-# [\[eq:convolution\]](#eq:convolution){reference-type="ref"
-# reference="eq:convolution"}. Les valeurs de stride peuvent également
+# chaque application de l'équation précédente. Les valeurs de stride peuvent également
 # être supérieures et ainsi sous-échantillonner $\mathbf{I}$.
 # 
 # Le comportement du filtre sur les bords de $\mathbf{I}$ doit également
@@ -126,10 +124,9 @@
 # 
 # ## Définition des couches
 # 
-# Nous introduisons ici les différents types de couches utilisées dans les
+# Nous introduisons ici les principaux types de couches utilisées dans les
 # réseaux convolutifs. L'assemblage de ces couches permet de construire
-# des architectures complexes pour la classification ou la régression,
-# dont certaines seront précisées dans un prochain cours.
+# des architectures complexes pour la classification ou la régression.
 # 
 # ### Couche de convolution
 # 

@@ -658,9 +658,7 @@ Lorsque <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> parcour
 réglé par deux paramètres de <em>stride</em> (horizontal et vertical). Un
 stride de 1 horizontal (respectivement vertical) signifie que
 <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> se déplace d’une position horizontale (resp. verticale) à
-chaque application de
-<a class="reference external" href="#eq:convolution">[eq:convolution]</a>{reference-type= »ref »
-reference= »eq:convolution »}. Les valeurs de stride peuvent également
+chaque application de l’équation précédente. Les valeurs de stride peuvent également
 être supérieures et ainsi sous-échantillonner <span class="math notranslate nohighlight">\(\mathbf{I}\)</span>.</p>
 <p>Le comportement du filtre sur les bords de <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> doit également
 être précisé, par l’intermédiaire d’un paramètre de <em>padding</em>. Si
@@ -674,10 +672,9 @@ est réalisée sans padding, l’image convoluée est de taille
 </div>
 <div class="section" id="definition-des-couches">
 <h2>Définition des couches<a class="headerlink" href="#definition-des-couches" title="Lien permanent vers ce titre">#</a></h2>
-<p>Nous introduisons ici les différents types de couches utilisées dans les
+<p>Nous introduisons ici les principaux types de couches utilisées dans les
 réseaux convolutifs. L’assemblage de ces couches permet de construire
-des architectures complexes pour la classification ou la régression,
-dont certaines seront précisées dans un prochain cours.</p>
+des architectures complexes pour la classification ou la régression.</p>
 <div class="section" id="couche-de-convolution">
 <h3>Couche de convolution<a class="headerlink" href="#couche-de-convolution" title="Lien permanent vers ce titre">#</a></h3>
 <div class="figure align-default" id="cnn1">
