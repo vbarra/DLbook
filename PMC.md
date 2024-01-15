@@ -731,6 +731,126 @@ $$\left\{
 
 ## Implémentation
 
-<code> import numpy as np </code>
+Nous reprenons les exemples du perceptron et montrons qu'un PMC à une couche cachée permet de résoudre le problème de séparation non linéaire
 
 
+```{code-cell} ipython3
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib import colors
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','./data/moon_data_train.csv']
+fichiers_test = ['./data/linear_data_eval.csv','./data/twocircles_data_eval.csv','./data/moon_data_eval.csv']
+
+# Fonction de lecture des jeux de données
+def extract_data(filename):
+
+    labels = []
+    features = []
+
+    for line in open(filename):
+        row = line.split(",")
+        labels.append(int(row[0]))
+        features.append([float(x) for x in row[1:]])
+
+    features_np = np.matrix(features).astype(np.float32)
+
+    labels_np = np.array(labels).astype(dtype=np.uint8)
+    labels_onehot = (np.arange(num_labels) == labels_np[:, None]).astype(np.float32)
+
+    return features_np,labels_onehot    
+```
+
+On écrit une fonction permettant de visualiser le résultat de la classification par le perceptron.
+
+```{code-cell} ipython3
+def plotResults(ax,ay,X,Y,model,title,pltloss,name):
+    mins = np.amin(X,0); 
+    mins = mins - 0.1*np.abs(mins);
+    maxs = np.amax(X,0); 
+    maxs = maxs + 0.1*maxs;
+
+    xs,ys = np.meshgrid(np.linspace(mins[0,0],maxs[0,0],300),np.linspace(mins[0,1], maxs[0,1], 300));
+
+    toto = torch.FloatTensor(np.c_[xs.flatten(), ys.flatten()])
+    Z = np.argmax(model(toto).detach().numpy(), axis=-1)
+    Z=Z.reshape(xs.shape[0],xs.shape[1])
+    
+    labelY = np.matrix(Y[:, 0]+2*Y[:, 1])
+    labelY = labelY.reshape(np.array(X[:, 0]).shape)
+
+    ax.contourf(xs, ys, Z, cmap=plt.cm.magma,alpha=.5)
+    ax.scatter(np.array(X[:, 0]),np.array(X[:, 1]),c= np.array(labelY),s=20,cmap=colors.ListedColormap(['red', 'green']))
+    ax.set_title(title)
+
+    ay.plot(pltloss)
+    ay.set_title("perte sur " + name)
+    ay.set_xlabel("epoch")
+
+    plt.tight_layout()
+```
+
+On implémente une classe PMC, dérivée de la clase `nn.Module`.
+
+
+```{code-cell} ipython3
+# Nombre de neurones de la couche cachée
+num_hidden = 5
+
+class PMC(nn.Module):
+    def __init__(self,p):
+        super().__init__()
+        self.layers = nn.Sequential(
+          nn.Linear(num_features, num_hidden),
+          nn.Tanh(),
+          nn.Linear(num_hidden, num_labels),
+          nn.Softmax(1),
+        )
+        
+    def forward(self, x): 
+        return self.layers(x)
+```
+
+et on définit la fonction d'entraînement. La fonction de perte est l'[entropie croisée binaire](https://en.wikipedia.org/wiki/Cross_entropy) et l'optimiseur est [Adam ](https://arxiv.org/abs/1412.6980).
+
+```{code-cell} ipython3
+batch_size = 100  
+num_epochs = 10000
+
+def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
+    loss_values = []    
+    losses = np.zeros(n_epochs)
+    correct = 0
+    for iter in range(n_epochs):
+        optimizer.zero_grad() 
+        yPred = classifier(X)
+        loss = criterion(yPred,y)
+        loss_values.append(loss.detach().numpy())
+        #Gradient et rétropropagation
+        loss.backward()
+        #Mise à jour des poids
+        optimizer.step()
+        y2 = yPred>0.5
+        correct = (y2 == y).sum().item()/2
+    acc = 100 * correct / (X.shape[0])
+    return loss_values,acc
+```
+
+On applique enfin le perceptron sur les jeux de données et on visualise les résultats.
+
+```{code-cell} ipython3
+fig,axs = plt.subplots(2, 3,figsize=(15,8))
+for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
+    train_data,train_labels = extract_data(name_train)
+    test_data, test_labels = extract_data(name_test)
+
+    model = PMC(train_data.shape[1])
+    optimizer = optim.Adam(model.parameters())
+    pltloss,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
+    
+    titre= "Précision ={0:5.3f} ".format(acc)
+    plotResults(axs[0][i],axs[1][i],test_data, test_labels, model, titre, pltloss, name_test)
+```

@@ -719,3 +719,8 @@
 #             w_7 \ ... \ w_9 &=& U\left (\left[-\sqrt{\frac{6}{3+1}} ;\sqrt{\frac{6}{3+1}} \right]\right ) = U(\left[-1,23;1,23 \right])
 #         \end{array}
 #     \right.$$
+# 
+# 
+# ## Implémentation
+# 
+# <code> import numpy as np </code>
