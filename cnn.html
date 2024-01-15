@@ -894,10 +894,10 @@ multiclasse (<span class="math notranslate nohighlight">\(k\)</span> classes). L
 <span class="math notranslate nohighlight">\({\mathcal E}_a = \left \{(\mathbf{x^{(i)}}, y^{(i)}),i \in[\![1,m]\!]\right \}\)</span>
 est donc tel que <span class="math notranslate nohighlight">\(y^{(i)}\in[\![1,k]\!]\)</span> et le classifieur estime
 la probabilité <span class="math notranslate nohighlight">\(P(y^{(i)}=j |\mathbf{x^{(i)}})\)</span> pour chaque classe
-<span class="math notranslate nohighlight">\(1\leq j\leq k\)</span>. Le classifieur softmax calcule cette probabilité selon
+<span class="math notranslate nohighlight">\(j\in [\![1,k]\!]\)</span>. Le classifieur softmax calcule cette probabilité selon
 :</p>
 <div class="math notranslate nohighlight">
-\[\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}\]</div>
+\[\forall j\in[\![1,k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}\]</div>
 <p>où <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> est la matrice des paramètres du modèle (les poids). Ces
 paramètres sont obtenus en minimisant une fonction de coût, qui peut par
 exemple s’écrire :</p>
@@ -917,6 +917,7 @@ aujourd’hui proposées en ce sens. Nous faisons ici un focus sur trois
 stratégies largement utilisées en apprentissage profond.</p>
 <div class="section" id="regularisation-de-la-fonction-de-cout">
 <h3>Régularisation de la fonction de coût<a class="headerlink" href="#regularisation-de-la-fonction-de-cout" title="Lien permanent vers ce titre">#</a></h3>
+<p>La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches (<span class="xref std std-ref">ontent:references:reg</span>).</p>
 <p>L’équation <a class="reference external" href="#E:softmaxCout">[E:softmaxCout]</a>{reference-type= »ref »
 reference= »E:softmaxCout »} est un exemple de régularisation de la
 fonction de coût, utilisée lors de la phase d’entraînement. À la
