@@ -141,7 +141,7 @@ l'équation précédente sont appelés neurones linéaires rectifiés
 
 Quelques fonctions d'activation sont présentées dans la ({numref}`tabact`).
 
-```{figure} ./images/tabactivation.pdf
+```{figure} ./images/tabactivation.png
 :name: tabact
 Quelques fonctions d'activation
 ```

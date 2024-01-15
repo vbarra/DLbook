@@ -139,9 +139,6 @@ des architectures complexes pour la classification ou la régression.
 
 ### Couche de convolution
 
-
-
-
 Soit $l\in\mathbb{N}$ une couche de convolution. L'entrée de la couche
 $l$ est composée de $n^{(l-1)}$ cartes provenant de la couche
 précédente, de taille $n_1^{(l-1)} \times n_2^{(l-1)}$. Dans le cas de
@@ -151,7 +148,6 @@ de taille $n_1^{(l)} \times n_2^{(l)}$. La $i^{\text{e}}$ carte de la
 couche $l$, notée $\mathbf{Y_i^{(l)}}$, se calcule comme :
 
 $$\begin{aligned}
-    \label{eq:convlayer}
     \mathbf{Y_i^{(l)}} = \mathbf{B^{(l)}_{i}} + \displaystyle\sum _{j = 1}^{n^{(l-1)}} \mathbf{K^{(l)}_{i,j}} \ast \mathbf{Y_j^{(l-1)}}
 \end{aligned}$$ 
 
@@ -182,15 +178,13 @@ $j \neq k$. De plus, la somme dans l'équation
 de la convolution peut être conduite sur un sous-ensemble des
 cartes d'entrée.
 
-Il est possible de mettre en correspondance la couche de convolution et
-l'opération [\[eq:convlayer\]](#eq:convlayer){reference-type="eqref"
-reference="eq:convlayer"} qu'elle effectue, avec un perceptron
-multicouche. Pour cela, il suffit de réécrire l'équation
-[\[eq:convlayer\]](#eq:convlayer){reference-type="eqref"
-reference="eq:convlayer"} : chaque carte $\mathbf{Y_i^{(l)}}$ de la
+Il est possible de mettre en correspondance la couche de convolution, et
+l'opération qu'elle effectue, avec un perceptron
+multicouche. Pour cela, il suffit de réécrire l'équation : chaque carte $\mathbf{Y_i^{(l)}}$ de la
 couche $l$ est formée de $n_1^{(l)} \cdot n_2^{(l)}$ neurones organisés
 dans un tableau à deux dimensions. Le neurone en position $(r,s)$
-calcule : $$\begin{aligned}
+calcule : 
+$$\begin{aligned}
     \left(\mathbf{Y_i^{(l)}}\right)_{r,s} &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \displaystyle\sum _{j = 1}^{n^{(l-1)}} \left(\mathbf{K^{(l)}_{i,j} }\ast \mathbf{Y_j^{(l-1)}}\right)_{r,s}\\
     &= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \displaystyle\sum _{j = 1}^{n^{(l-1)}} \displaystyle\sum _{u = - h_1^{(l)}} ^{h_1^{(l)}} \displaystyle\sum _{v = - h_2^{(l)}} ^{h_2^{(l)}} \left(\mathbf{K^{(l)}_{i,j}}\right)_{u,v} \left(\mathbf{Y_j^{(l-1)}}\right)_{r+u,s+v}
 \end{aligned}$$
@@ -199,21 +193,18 @@ Les paramètres du réseau à entraîner (poids) peuvent alors être trouvés
 dans les filtres $\mathbf{K^{(l)}_{i,j}}$ et les matrices de biais
 $\mathbf{B_i^{(l)}}$.
 
-Comme nous le verrons dans la section
-[\[subsubsec:coucheagreg\]](#subsubsec:coucheagreg){reference-type="ref"
-reference="subsubsec:coucheagreg"}, un sous-échantillonnage est utilisé
+Comme nous le verrons plus loin, un sous-échantillonnage est utilisé
 pour diminuer l'influence du bruit et des distorsions dans les images.
 Le sous-échantillonnage peut être également réalisé simplement avec des
 paramètres de stride, en sautant un nombre fixe de pixels dans les
 dimensions horizontale (saut $s_1^{(l)}$) et verticale (saut
 $s_2^{(l)}$) avant d'appliquer de nouveau le filtre. La taille des
-images de sortie est alors : $$\begin{aligned}
+images de sortie est alors : 
+
+$$\begin{aligned}
     n_1^{(l)} = \frac{n_1^{(l-1)} - 2h_1^{(l)}}{s_1^{(l)} + 1}\quad \text{ et }\quad n_2^{(l)} = \frac{n_2^{(l-1)} - 2h_2^{(l)}}{s_2^{(l)} + 1}.
 \end{aligned}$$
 
-::: SCfigure
-![image](images/Fig10-2-new)
-:::
 
 Un point clé des réseaux convolutifs est d'exploiter la corrélation
 spatiale des données. L'utilisation des noyaux permet d'alléger le
@@ -221,81 +212,38 @@ modèle, plutôt que d'utiliser des couches complètement connectées.
 
 ### Couche non linéaire
 
-[]{#S:nonlinl label="S:nonlinl"} Pour augmenter le pouvoir d'expression
+Pour augmenter le pouvoir d'expression
 des réseaux profonds, on utilise des couches non linéaires. Les entrées
 d'une couche non linéaire sont $n^{(l-1)}$ cartes et ses sorties
 $n^{(l)} = n^{(l-1)}$ cartes $\mathbf{Y_i^{(l)}}$, de taille
 $n_1^{(l-1)} \times n_2^{(l-1)}$ telles que $n_1^{(l)} = n_1^{(l-1)}$ et
 $n_2^{(l)} = n_2^{(l-1)}$, données par
 $\mathbf{Y_i^{(l)}}$ = $f \left(\mathbf{Y_i^{(l-1)}}\right)$, où $f$ est
-la fonction d'activation utilisée dans la couche $l$. Le tableau
-[\[T:activation\]](#T:activation){reference-type="ref"
-reference="T:activation"} propose quelques fonctions d'activation
-usuelles.
+la fonction d'activation utilisée dans la couche $l$.
 
-::: tabularx
-\|\>Y\| \>Z\| \>Z\| \>Z\| **Nom** & **Graphe** & & **$f'$**\
-
-Rampe & & $$f(x) = x$$ & $f'(x) = 1$\
-
-Heaviside & & $$f(x) =
-\begin{cases}
-\;\; 0 & \text{si $x \; < \; 0$}  \\
-\;\; 1 & \text{si $x \; \geq \; 0$}
-\end{cases}$$ & $$f'(x) =
-\begin{cases}
-\;\; 0 & \text{si $x \; \neq \; 0$}  \\
-\;\; ? & \text{si $x \; = \; 0$}
-\end{cases}$$\
-
-Logistique ou sigmoı̈de & & $$f(x) \; = \; \frac{1}{1 + e^{-x}}$$ &
-$f'(x) \; = \; f(x) \, \bigl(1 \, - \, f(x)\bigr)$\
-
-Tangente hyperbolique& & $$\begin{aligned}
-f(x) \; &= \; \tanh(x) \\
-& = \;  \frac{2}{1 + e^{-2x}} - 1
-\end{aligned}$$ & $$f'(x) \; = \; 1 \, - \, f^2(x)$$\
-
-Arc Tangente& & $$f(x) \; = \; \tan^{-1}(x)$$ &
-$$f'(x) \; = \; \frac{1}{x^2 + 1}$$\
-
-ReLU& & $$f(x) =
-\begin{cases}
-\;\; 0 & \text{si $x \; < \; 0$}  \\
-\;\; x & \text{si $x \; \geq \; 0$}
-\end{cases}$$ & $$f'(x) =
-\begin{cases}
-\;\; 0 & \text{si $x \; \neq \; 0$}  \\
-\;\; 1 & \text{si $x \; = \; 0$}
-\end{cases}$$\
-
-Exponentielle Linéaire& & $$f(x) =
-\begin{cases}
-\;\; \alpha \, (e^x \, - \, 1) & \text{si $x \; < \; 0$}  \\
-\;\; x & \text{si $x \; \geq \; 0$}
-\end{cases}$$ & $$f'(x) =
-\begin{cases}
-\;\; f(x) \, + \, \alpha & \text{si $x \; < \; 0$}  \\
-\;\; 1 & \text{si $x \; \geq \; 0$}
-\end{cases}$$\
-:::
+Le  ({numref}`tabact`) présente quelques fonctions d'activation classiques
 
 En apprentissage profond, il a été reporté que la sigmoïde et la
 tangente hyperbolique avaient des performances moindres que la fonction
-d'activation *softsign* : $$\begin{aligned}
+d'activation *softsign* : 
+
+$$\begin{aligned}
     \mathbf{Y_i^{(l)}}  = \frac{1}{1+ \left|\mathbf{Y_i^{(l-1)}} \right |}.
-\end{aligned}$$ En effet, les valeurs des pixels des cartes
+\end{aligned}$$ 
+
+En effet, les valeurs des pixels des cartes
 $\mathbf{Y_i^{(l-1)}}$ arrivant près des paliers de saturation de ces
 fonctions donnent des gradients faibles, qui ont tendance à s'annuler
 (problème du *gradient évanescent* ou *vanishing gradient*) lors de la
 phase d'apprentissage par rétropropagation du gradient. Une autre
 fonction, non saturante elle, est très largement utilisée. Il s'agit de
-la fonction ReLU (Rectified Linear Unit) [@Nair10] : $$\begin{aligned}
-    \label{eq:relu}
+la fonction ReLU (Rectified Linear Unit) [@Nair10] : 
+
+$$\begin{aligned}
 \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
-\end{aligned}$$ Les neurones utilisant la fonction décrite dans
-l'équation [\[eq:relu\]](#eq:relu){reference-type="eqref"
-reference="eq:relu"} sont appelés neurones linéaires rectifiés. Glorot
+\end{aligned}$$ 
+
+Les neurones utilisant la fonction ReLU sont appelés neurones linéaires rectifiés. Glorot
 et Bengio [@Glorot11] ont montré que l'utilisation d'une couche ReLU en
 tant que couche non linéaire permettait un entraînement efficace de
 réseaux profonds sans pré-entraînement non supervisé. Plusieurs
