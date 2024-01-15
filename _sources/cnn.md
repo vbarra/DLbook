@@ -486,54 +486,13 @@ Partage de paramètres : les neurones voient des champs réceptifs distincts, ma
 Une initialisation convenable des poids est essentielle pour assurer une
 convergence de la phase d'entraînement. Un choix arbitraire des poids (à
 zéro, à de petites ou grandes valeurs aléatoires) peut ralentir, voire
-causer de la redondance dans le réseau (problème de la symétrie).\
-Plusieurs schémas d'initialisation ont été proposés et nous donnons dans
-les deux paragraphes qui suivent d'eux d'entre eux.
+causer de la redondance dans le réseau (problème de la symétrie). Ces aspects ont déjà été abordés dans la section {ref}`content:references:initW`), où l'initialisation de Xavier
 
-### Initialisation prenant en compte les variations des neurones
+$$\begin{aligned}
+    - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} < w_{i,j}^{(l)} < \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
+\end{aligned}$$
 
-Pour illustrer le propos, on suppose que l'entrée du réseau de neurones
-est composée de $n^{(1)}$ entrées
-$\mathbf{x}=(x_1\ldots x_{n^{(1)}})^\top$, les $x_i$ étant i.i.d,
-normalisés selon une loi $\mathcal{N}(0,\sigma_x)$. Pour simplifier la
-démonstration, on suppose que la couche suivante calcule un simple
-potentiel post synaptique : pour un neurone de cette couche, ce
-potentiel est $\mathbf{w}^\top\mathbf{x}$, avec
-$\mathbf{w}\in\mathbb{R}^{n^{(1)}}$ i.i.d $\mathcal{N}(0,\sigma_w)$. La
-variance de ce potentiel est alors
-$$Var(\mathbf{w}^\top\mathbf{x}) = \displaystyle\sum_{i=1}^{n^{(1)}} Var (w_ix_i) =  \displaystyle\sum_{i=1}^{n^{(1)}}  \left (\mathbb{E}(w_i)^2Var(x_i) + \mathbb{E}(x_i)^2Var (w_i) + Var (w_i) Var(x_i) \right )$$
-Les entrées et les poids sont de moyenne nulle, donc
-$$Var(\mathbf{w}^\top\mathbf{x}) =  \displaystyle\sum_{i=1}^{n^{(1)}}\sigma_x\sigma_w$$
-et puisque les $w_ix_i$ sont i.i.d.
-$$Var(\mathbf{w}^\top\mathbf{x}) =  {n^{(1)}}\sigma_x\sigma_w$$ On
-montre plus généralement que sur la $l^e$ couche cachée, la variance de
-$\mathbf{Y^{(l)}}$ est
-$$Var(\mathbf{Y^{(l)}}) = \left ( n^{(l)} Var(w_i)\right )^l Var (x_i)$$
-Chaque neurone peut donc varier dans un rapport de $n^{(l)}$ fois la
-variation de son entrée (qui est elle même $n^{(l-1)}$ fois la variance
-de son entrée\...)
-
-On a alors les cas de figure suivants :
-
--   si $n^{(l)} Var(w_i)>1$ le gradient va tendre vers de grandes
-    valeurs à mesure que l'on s'enfonce dans le réseau (que $l$ croît)
-
--   si $n^{(l)} Var(w_i)<1$ le gradient disparaît à mesure que l'on
-    s'enfonce dans le réseau
-
-Pour éviter ces deux problèmes, la solution est de forcer
-$n^{(l)} Var(w_i)=1$, soit $Var(w_i)=1/n^{(l)}$. On initialise donc les
-poids se la couche $l$ selon une loi
-$$\frac{1}{\sqrt{n^{(l-1)}}}\mathcal{N}(0,1)$$ Cette procédure est la
-méthode d'initialisation de Xavier, ou de Glorot [@Glorot10].
-
-### Initialisation de He
-
-He a montré dans [@He15] que la méthode de Xavier pouvait ne pas
-fonctionner correctement lorsque les traitements non linéaires étaient
-effectués par la fonction ReLU. Les auteurs proposent alors de plutôt
-multiplier par $\frac{\sqrt{2}}{\sqrt{n^{(l-1)}}}$ pour prendre en
-compte la partie négative qui ne participe pas au calcul de la variance.
+a été notamment détaillée. 
 
 ## Apprentissage
 

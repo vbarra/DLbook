@@ -289,18 +289,6 @@ title="Fullscreen mode"
   <a class="reference internal nav-link" href="#initialisation">
    Initialisation
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#initialisation-prenant-en-compte-les-variations-des-neurones">
-     Initialisation prenant en compte les variations des neurones
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#initialisation-de-he">
-     Initialisation de He
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#apprentissage">
@@ -465,18 +453,6 @@ title="Fullscreen mode"
   <a class="reference internal nav-link" href="#initialisation">
    Initialisation
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#initialisation-prenant-en-compte-les-variations-des-neurones">
-     Initialisation prenant en compte les variations des neurones
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#initialisation-de-he">
-     Initialisation de He
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#apprentissage">
@@ -992,52 +968,12 @@ réseau appris.</p>
 <p>Une initialisation convenable des poids est essentielle pour assurer une
 convergence de la phase d’entraînement. Un choix arbitraire des poids (à
 zéro, à de petites ou grandes valeurs aléatoires) peut ralentir, voire
-causer de la redondance dans le réseau (problème de la symétrie).<br />
-Plusieurs schémas d’initialisation ont été proposés et nous donnons dans
-les deux paragraphes qui suivent d’eux d’entre eux.</p>
-<div class="section" id="initialisation-prenant-en-compte-les-variations-des-neurones">
-<h3>Initialisation prenant en compte les variations des neurones<a class="headerlink" href="#initialisation-prenant-en-compte-les-variations-des-neurones" title="Lien permanent vers ce titre">#</a></h3>
-<p>Pour illustrer le propos, on suppose que l’entrée du réseau de neurones
-est composée de <span class="math notranslate nohighlight">\(n^{(1)}\)</span> entrées
-<span class="math notranslate nohighlight">\(\mathbf{x}=(x_1\ldots x_{n^{(1)}})^\top\)</span>, les <span class="math notranslate nohighlight">\(x_i\)</span> étant i.i.d,
-normalisés selon une loi <span class="math notranslate nohighlight">\(\mathcal{N}(0,\sigma_x)\)</span>. Pour simplifier la
-démonstration, on suppose que la couche suivante calcule un simple
-potentiel post synaptique : pour un neurone de cette couche, ce
-potentiel est <span class="math notranslate nohighlight">\(\mathbf{w}^\top\mathbf{x}\)</span>, avec
-<span class="math notranslate nohighlight">\(\mathbf{w}\in\mathbb{R}^{n^{(1)}}\)</span> i.i.d <span class="math notranslate nohighlight">\(\mathcal{N}(0,\sigma_w)\)</span>. La
-variance de ce potentiel est alors
-$<span class="math notranslate nohighlight">\(Var(\mathbf{w}^\top\mathbf{x}) = \displaystyle\sum_{i=1}^{n^{(1)}} Var (w_ix_i) =  \displaystyle\sum_{i=1}^{n^{(1)}}  \left (\mathbb{E}(w_i)^2Var(x_i) + \mathbb{E}(x_i)^2Var (w_i) + Var (w_i) Var(x_i) \right )\)</span><span class="math notranslate nohighlight">\(
-Les entrées et les poids sont de moyenne nulle, donc
-\)</span><span class="math notranslate nohighlight">\(Var(\mathbf{w}^\top\mathbf{x}) =  \displaystyle\sum_{i=1}^{n^{(1)}}\sigma_x\sigma_w\)</span><span class="math notranslate nohighlight">\(
-et puisque les \)</span>w_ix_i<span class="math notranslate nohighlight">\( sont i.i.d.
-\)</span><span class="math notranslate nohighlight">\(Var(\mathbf{w}^\top\mathbf{x}) =  {n^{(1)}}\sigma_x\sigma_w\)</span><span class="math notranslate nohighlight">\( On
-montre plus généralement que sur la \)</span>l^e<span class="math notranslate nohighlight">\( couche cachée, la variance de
-\)</span>\mathbf{Y^{(l)}}<span class="math notranslate nohighlight">\( est
-\)</span><span class="math notranslate nohighlight">\(Var(\mathbf{Y^{(l)}}) = \left ( n^{(l)} Var(w_i)\right )^l Var (x_i)\)</span><span class="math notranslate nohighlight">\(
-Chaque neurone peut donc varier dans un rapport de \)</span>n^{(l)}<span class="math notranslate nohighlight">\( fois la
-variation de son entrée (qui est elle même \)</span>n^{(l-1)}$ fois la variance
-de son entrée…)</p>
-<p>On a alors les cas de figure suivants :</p>
-<ul class="simple">
-<li><p>si <span class="math notranslate nohighlight">\(n^{(l)} Var(w_i)&gt;1\)</span> le gradient va tendre vers de grandes
-valeurs à mesure que l’on s’enfonce dans le réseau (que <span class="math notranslate nohighlight">\(l\)</span> croît)</p></li>
-<li><p>si <span class="math notranslate nohighlight">\(n^{(l)} Var(w_i)&lt;1\)</span> le gradient disparaît à mesure que l’on
-s’enfonce dans le réseau</p></li>
-</ul>
-<p>Pour éviter ces deux problèmes, la solution est de forcer
-<span class="math notranslate nohighlight">\(n^{(l)} Var(w_i)=1\)</span>, soit <span class="math notranslate nohighlight">\(Var(w_i)=1/n^{(l)}\)</span>. On initialise donc les
-poids se la couche <span class="math notranslate nohighlight">\(l\)</span> selon une loi
-$<span class="math notranslate nohighlight">\(\frac{1}{\sqrt{n^{(l-1)}}}\mathcal{N}(0,1)\)</span>$ Cette procédure est la
-méthode d’initialisation de Xavier, ou de Glorot [&#64;Glorot10].</p>
-</div>
-<div class="section" id="initialisation-de-he">
-<h3>Initialisation de He<a class="headerlink" href="#initialisation-de-he" title="Lien permanent vers ce titre">#</a></h3>
-<p>He a montré dans [&#64;He15] que la méthode de Xavier pouvait ne pas
-fonctionner correctement lorsque les traitements non linéaires étaient
-effectués par la fonction ReLU. Les auteurs proposent alors de plutôt
-multiplier par <span class="math notranslate nohighlight">\(\frac{\sqrt{2}}{\sqrt{n^{(l-1)}}}\)</span> pour prendre en
-compte la partie négative qui ne participe pas au calcul de la variance.</p>
-</div>
+causer de la redondance dans le réseau (problème de la symétrie). Ces aspects ont déjà été abordés dans la section <a class="reference internal" href="PMC.html#content-references-initw"><span class="std std-ref">Initialisation des poids</span></a>), où l’initialisation de Xavier</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+    - \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}} &lt; w_{i,j}^{(l)} &lt; \frac{\sqrt{6}}{\sqrt{m^{(l-1)} + m^{(l)}}}.
+\end{aligned}\]</div>
+<p>a été notamment détaillée.</p>
 </div>
 <div class="section" id="apprentissage">
 <h2>Apprentissage<a class="headerlink" href="#apprentissage" title="Lien permanent vers ce titre">#</a></h2>
