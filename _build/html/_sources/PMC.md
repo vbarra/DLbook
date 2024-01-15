@@ -824,6 +824,7 @@ num_epochs = 10000
 num_labels = 2 
 num_features = 2
 
+loss = nn.BCELoss()
 
 def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
     loss_values = []    
