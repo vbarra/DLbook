@@ -259,11 +259,12 @@
 # 
 # ```{prf:algorithm} Normalisation par batch sur la présentation d'un mini batch $\mathcal{B}$
 # :label: norm
-# {\bf Entrées} : valeurs de l'activation $x$ sur un mini batch $\mathcal{B} = \{x_1\cdots x_m\}$,  Param\ètres $\beta,\gamma$ \`a apprendre}
-# {\bf Sortie} : Données normalisées $\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)$
+# Entrées : valeurs de l'activation $x$ sur un mini batch $\mathcal{B} = \{x_1\cdots x_m\}$,  Param\ètres $\beta,\gamma$ \`a apprendre
 # 
-# 1. {$\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i$\\
-# 2. $\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2$\\
+# Sortie : Données normalisées $\{y_1\cdots  y_m\}=BN_{\gamma,\beta}(x_1\cdots x_m)$
+# 
+# 1. $\mu_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m x_i$
+# 2. $\sigma^2_\mathcal{B} = \frac{1}{m}\displaystyle\sum_{i=1}^m \left (x_i-\mu_\mathcal{B}\right )^2$
 # 3. Pour $i=1$ à $m$
 #     1. $y_i = \gamma \frac{x_i-\mu_\mathcal{B}}{\sqrt{\sigma^2_\mathcal{B}+\epsilon}}+\beta$
 # ```
