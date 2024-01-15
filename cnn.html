@@ -673,23 +673,11 @@ des architectures complexes pour la classification ou la régression,
 dont certaines seront précisées dans un prochain cours.</p>
 <div class="section" id="couche-de-convolution">
 <h3>Couche de convolution<a class="headerlink" href="#couche-de-convolution" title="Lien permanent vers ce titre">#</a></h3>
-<figure id="fig-convolution-3D">
-<div class="center">
+<div class="figure align-default" id="cnn1">
+<img alt="_images/cnn1.png" src="_images/cnn1.png" />
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Illustration des calculseffectués dans une opération de convolution discrète. Le pixel (2,2) de
+l’image <span class="math notranslate nohighlight">\({\mathbf Y_i^{l}}\)</span> est une combinaison linéaire des pixels <span class="math notranslate nohighlight">\((i,j)\in[\![1,3]\!]^2\)</span> de <span class="math notranslate nohighlight">\({\mathbf Y_i^{l-1}}\)</span> les coefficients de la combinaison étant portés par le filtre <span class="math notranslate nohighlight">\(\mathbf K\)</span>.</span><a class="headerlink" href="#cnn1" title="Lien permanent vers cette image">#</a></p>
 </div>
-<figcaption><span id="fig-convolution-3D"
-label="fig-convolution-3D"></span> <em>Illustration des calculs
-effectués dans une opération de convolution discrète. Le pixel (2,2) de
-l’image <span
-class="math inline"><strong>Y</strong><sub><strong>i</strong></sub><sup><strong>(</strong><strong>l</strong><strong>)</strong></sup></span>
-est une combinaison linéaire des pixels <span
-class="math inline">(<em>i</em>,<em>j</em>), <em>i</em>, <em>j</em> ∈ [ [1,3] ]</span>
-de <span
-class="math inline"><strong>Y</strong><sub><strong>i</strong></sub><sup><strong>(</strong><strong>l</strong><strong>−</strong><strong>1</strong><strong>)</strong></sup></span>,
-les coefficients de la combinaison étant portés par le filtre <span
-class="math inline"><strong>K</strong></span> (équation <a
-href="#eq:convlayer" data-reference-type="ref"
-data-reference="eq:convlayer">[eq:convlayer]</a>).</em></figcaption>
-</figure>
 <p>Soit <span class="math notranslate nohighlight">\(l\in\mathbb{N}\)</span> une couche de convolution. L’entrée de la couche
 <span class="math notranslate nohighlight">\(l\)</span> est composée de <span class="math notranslate nohighlight">\(n^{(l-1)}\)</span> cartes provenant de la couche
 précédente, de taille <span class="math notranslate nohighlight">\(n_1^{(l-1)} \times n_2^{(l-1)}\)</span>. Dans le cas de
