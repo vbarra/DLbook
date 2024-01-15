@@ -868,7 +868,7 @@ semble assurer une réduction du phénomène de surapprentissage</p>
 <p>Si <span class="math notranslate nohighlight">\(l\)</span> et <span class="math notranslate nohighlight">\((l-1)\)</span> sont des couches complètement connectées, l’équation :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-    z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad \mathbf{Z^{(l)}} = \mathbf{W^{(l)}} \mathbf{Y^{(l-1)}}
+    z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ où }\quad \mathbf{Z^{(l)}} = \mathbf{W^{(l)}} \mathbf{Y^{(l-1)}}
 \end{aligned}\]</div>
 <p>avec <span class="math notranslate nohighlight">\(\mathbf{Z^{(l)}}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W^{(l)}}\)</span> et
 <span class="math notranslate nohighlight">\(\mathbf{Y^{(l-1)}}\)</span> les représentations vectorielle et matricielle des
@@ -876,11 +876,14 @@ entrées <span class="math notranslate nohighlight">\(z_i^{(l)}\)</span>, des po
 <span class="math notranslate nohighlight">\(y_k^{(l-1)}\)</span>, permet de relier ces deux couches.</p>
 <p>Dans le cas contraire, la couche <span class="math notranslate nohighlight">\(l\)</span> attend <span class="math notranslate nohighlight">\(n^{(l-1)}\)</span> entrées de
 taille <span class="math notranslate nohighlight">\(n_1^{(l-1)} \times n_2^{(l-1)}\)</span> et le <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> neurone de
-la couche <span class="math notranslate nohighlight">\(l\)</span> calcule : $<span class="math notranslate nohighlight">\(\begin{aligned}
+la couche <span class="math notranslate nohighlight">\(l\)</span> calcule :</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
     y_i^{(l)} = f\left(z_i^{(l)}\right)\quad\text{ avec }\quad z_i^{(l)} = \displaystyle\sum _{j = 1}^{n^{(l-1)}} \displaystyle\sum _{r = 1} ^{n_1^{(l-1)}} \displaystyle\sum _{s = 1}^{n_2^{(l-1)}} w_{i,j,r,s}^{(l)} \left(\mathbf{ Y_j^{(l-1)}} \right)_{r,s}
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>w_{i,j,r,s}^{(l)}<span class="math notranslate nohighlight">\( est le poids connectant le
-neurone en position \)</span>(r,s)<span class="math notranslate nohighlight">\( de la \)</span>j^{\text{e}}<span class="math notranslate nohighlight">\( carte de la couche
-\)</span>(l - 1)<span class="math notranslate nohighlight">\( au \)</span>i^{\text{e}}<span class="math notranslate nohighlight">\( neurone de la couche \)</span>l$.</p>
+\end{aligned}\]</div>
+<p>où <span class="math notranslate nohighlight">\(w_{i,j,r,s}^{(l)}\)</span> est le poids connectant le
+neurone en position <span class="math notranslate nohighlight">\((r,s)\)</span> de la <span class="math notranslate nohighlight">\(j^{\text{e}}\)</span> carte de la couche
+<span class="math notranslate nohighlight">\((l - 1)\)</span> au <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> neurone de la couche <span class="math notranslate nohighlight">\(l\)</span>.</p>
 <p>En pratique, les réseaux convolutifs sont utilisés pour apprendre une
 hiérarchie dans les données et la (ou les) couche(s) complètement
 connectée(s) est(sont) utilisée(s) en bout de réseau pour des tâches de
@@ -888,19 +891,20 @@ classification ou de régression.</p>
 <p>Une couche de classification classiquement mise en œuvre utilise le
 classifieur <em>softmax</em>, qui généralise la régression logistique au cas
 multiclasse (<span class="math notranslate nohighlight">\(k\)</span> classes). L’ensemble d’apprentissage
-<span class="math notranslate nohighlight">\({\mathcal E}_a = \left \{(\mathbf{x^{(i)}}, y^{(i)}),i \in[\![1\cdots m]\!]\right \}\)</span>
-est donc tel que <span class="math notranslate nohighlight">\(y^{(i)}\in[\![1\cdots k]\!]\)</span> et le classifieur estime
+<span class="math notranslate nohighlight">\({\mathcal E}_a = \left \{(\mathbf{x^{(i)}}, y^{(i)}),i \in[\![1,m]\!]\right \}\)</span>
+est donc tel que <span class="math notranslate nohighlight">\(y^{(i)}\in[\![1,k]\!]\)</span> et le classifieur estime
 la probabilité <span class="math notranslate nohighlight">\(P(y^{(i)}=j |\mathbf{x^{(i)}})\)</span> pour chaque classe
 <span class="math notranslate nohighlight">\(1\leq j\leq k\)</span>. Le classifieur softmax calcule cette probabilité selon
-:
-$<span class="math notranslate nohighlight">\(\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}\)</span><span class="math notranslate nohighlight">\(
-où \)</span>\mathbf{W}<span class="math notranslate nohighlight">\( est la matrice des paramètres du modèle (les poids). Ces
+:</p>
+<div class="math notranslate nohighlight">
+\[\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}\]</div>
+<p>où <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> est la matrice des paramètres du modèle (les poids). Ces
 paramètres sont obtenus en minimisant une fonction de coût, qui peut par
-exemple s'écrire :
-\)</span><span class="math notranslate nohighlight">\(J(\mathbf{W}) =- \frac{1}{m}\displaystyle\sum_{i=1}^m \displaystyle\sum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\displaystyle\sum_{i=1}^n \displaystyle\sum_{j=1}^k W_{ji}^2
-\label{E:softmaxCout}\)</span><span class="math notranslate nohighlight">\( où \)</span>\lambda<span class="math notranslate nohighlight">\( est un paramètre de régularisation
-contrôlant le second terme du coût qui pénalise les grandes valeurs des
-poids (régularisation \)</span>\ell_2$).</p>
+exemple s’écrire :</p>
+<div class="math notranslate nohighlight">
+\[J(\mathbf{W}) =- \frac{1}{m}\displaystyle\sum_{i=1}^m \displaystyle\sum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\displaystyle\sum_{i=1}^n \displaystyle\sum_{j=1}^k W_{ji}^2
+\]</div>
+<p>où <span class="math notranslate nohighlight">\(\lambda\)</span> est un paramètre de régularisation contrôlant le second terme du coût qui pénalise les grandes valeurs des poids (régularisation <span class="math notranslate nohighlight">\(L_2\)</span>).</p>
 </div>
 </div>
 <div class="section" id="regularisation">

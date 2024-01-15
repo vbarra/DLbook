@@ -338,7 +338,7 @@
 # Si $l$ et $(l-1)$ sont des couches complètement connectées, l'équation :
 # 
 # $$\begin{aligned}
-#     z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ ou }\quad \mathbf{Z^{(l)}} = \mathbf{W^{(l)}} \mathbf{Y^{(l-1)}}
+#     z_i^{(l)} = \sum _{k = 0} ^{m^{(l-1)}} w_{i,k}^{(l)} y_k^{(l-1)}\quad \text{ où }\quad \mathbf{Z^{(l)}} = \mathbf{W^{(l)}} \mathbf{Y^{(l-1)}}
 # \end{aligned}$$ 
 # 
 # avec $\mathbf{Z^{(l)}}$, $\mathbf{W^{(l)}}$ et
@@ -348,9 +348,13 @@
 # 
 # Dans le cas contraire, la couche $l$ attend $n^{(l-1)}$ entrées de
 # taille $n_1^{(l-1)} \times n_2^{(l-1)}$ et le $i^{\text{e}}$ neurone de
-# la couche $l$ calcule : $$\begin{aligned}
+# la couche $l$ calcule : 
+# 
+# $$\begin{aligned}
 #     y_i^{(l)} = f\left(z_i^{(l)}\right)\quad\text{ avec }\quad z_i^{(l)} = \displaystyle\sum _{j = 1}^{n^{(l-1)}} \displaystyle\sum _{r = 1} ^{n_1^{(l-1)}} \displaystyle\sum _{s = 1}^{n_2^{(l-1)}} w_{i,j,r,s}^{(l)} \left(\mathbf{ Y_j^{(l-1)}} \right)_{r,s}
-# \end{aligned}$$ où $w_{i,j,r,s}^{(l)}$ est le poids connectant le
+# \end{aligned}$$ 
+# 
+# où $w_{i,j,r,s}^{(l)}$ est le poids connectant le
 # neurone en position $(r,s)$ de la $j^{\text{e}}$ carte de la couche
 # $(l - 1)$ au $i^{\text{e}}$ neurone de la couche $l$.
 # 
@@ -362,19 +366,22 @@
 # Une couche de classification classiquement mise en œuvre utilise le
 # classifieur *softmax*, qui généralise la régression logistique au cas
 # multiclasse ($k$ classes). L'ensemble d'apprentissage
-# ${\mathcal E}_a = \left \{(\mathbf{x^{(i)}}, y^{(i)}),i \in[\![1\cdots m]\!]\right \}$
-# est donc tel que $y^{(i)}\in[\![1\cdots k]\!]$ et le classifieur estime
+# ${\mathcal E}_a = \left \{(\mathbf{x^{(i)}}, y^{(i)}),i \in[\![1,m]\!]\right \}$
+# est donc tel que $y^{(i)}\in[\![1,k]\!]$ et le classifieur estime
 # la probabilité $P(y^{(i)}=j |\mathbf{x^{(i)}})$ pour chaque classe
 # $1\leq j\leq k$. Le classifieur softmax calcule cette probabilité selon
 # :
+# 
 # $$\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}$$
+# 
 # où $\mathbf{W}$ est la matrice des paramètres du modèle (les poids). Ces
 # paramètres sont obtenus en minimisant une fonction de coût, qui peut par
 # exemple s'écrire :
+# 
 # $$J(\mathbf{W}) =- \frac{1}{m}\displaystyle\sum_{i=1}^m \displaystyle\sum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\displaystyle\sum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\displaystyle\sum_{i=1}^n \displaystyle\sum_{j=1}^k W_{ji}^2
-# \label{E:softmaxCout}$$ où $\lambda$ est un paramètre de régularisation
-# contrôlant le second terme du coût qui pénalise les grandes valeurs des
-# poids (régularisation $\ell_2$).
+# $$ 
+# 
+# où $\lambda$ est un paramètre de régularisation contrôlant le second terme du coût qui pénalise les grandes valeurs des poids (régularisation $L_2$).
 # 
 # ## Régularisation
 # 
