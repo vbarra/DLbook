@@ -595,9 +595,7 @@ inspirés par ces processus biologiques. Ces réseaux consistent en un
 empilage multicouche de perceptrons, dont le but est de prétraiter de
 petites quantités d’informations. Les réseaux convolutifs ont de larges
 applications dans la reconnaissance d’image et vidéo, les systèmes de
-recommandation et le traitement du langage naturel (voir section
-<a class="reference external" href="#subsubsec:applis">1.6</a>{reference-type= »ref »
-reference= »subsubsec:applis »} pour quelques exemples)</p>
+recommandation et le traitement du langage naturel.</p>
 <p>Un réseau convolutif se compose de deux types de neurones, agencés en
 couches traitant successivement l’information. Dans le cas du traitement
 de données de type images, on a ainsi :</p>
@@ -616,11 +614,13 @@ couche suivante. Les couches et leurs connexions apprennent des niveaux
 d’abstraction croissants et extraient des caractéristiques de plus en
 plus haut niveau des données d’entrée.</p>
 <p>Dans la suite, le propos sera illustré sur des images 2D en niveaux de
-gris, de taille <span class="math notranslate nohighlight">\(n_1 \times n_2\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
+gris, de taille <span class="math notranslate nohighlight">\(n_1 \times n_2\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
     \mathbf{I} : [\![1\cdots n_1]\!]\times [\![1\cdots n_2]\!] &amp;\rightarrow&amp;  \mathbb{R}\\
      (i,j) &amp;\mapsto&amp; I_{i,j}
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( \)</span>\mathbf{I}$ sera indifféremment vue comme une fonction
-ou une matrice.</p>
+\end{aligned}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{I}\)</span> sera indifféremment vue comme une fonction ou une matrice.</p>
 </div>
 <div class="section" id="convolution-discrete">
 <h3>Convolution discrète<a class="headerlink" href="#convolution-discrete" title="Lien permanent vers ce titre">#</a></h3>
@@ -637,10 +637,10 @@ retenu dans les réseaux convolutifs est la convolution discrète.</p>
 La convolution discrète de <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> par le filtre <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> est
 donnée par :</p>
 <div class="math notranslate nohighlight">
-\[\begin{aligned}
+\[\begin{split}\begin{aligned}
     \label{eq:convolution}
-    \left(\mathbf{K} \ast \mathbf{I}\right)_{r,s} = \dsum _{u = -h_1} ^{h_1} \dsum _{v = -h_2}^{h_2} K_{u,v} I_{r+u,s+v}
-\end{aligned}\]</div>
+    \left(\mathbf{K} \ast \mathbf{I}\right)_{r,s} = \\displastyle\sum _{u = -h_1} ^{h_1} \\displastyle\sum _{v = -h_2}^{h_2} K_{u,v} I_{r+u,s+v}
+\end{aligned}\end{split}\]</div>
 <p>où <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> est donné par :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -694,7 +694,7 @@ de taille <span class="math notranslate nohighlight">\(n_1^{(l)} \times n_2^{(l)
 couche <span class="math notranslate nohighlight">\(l\)</span>, notée <span class="math notranslate nohighlight">\(\mathbf{Y_i^{(l)}}\)</span>, se calcule comme :
 $<span class="math notranslate nohighlight">\(\begin{aligned}
     \label{eq:convlayer}
-    \mathbf{Y_i^{(l)}} = \mathbf{B^{(l)}_{i}} + \dsum _{j = 1}^{n^{(l-1)}} \mathbf{K^{(l)}_{i,j}} \ast \mathbf{Y_j^{(l-1)}}
+    \mathbf{Y_i^{(l)}} = \mathbf{B^{(l)}_{i}} + \\displastyle\sum _{j = 1}^{n^{(l-1)}} \mathbf{K^{(l)}_{i,j}} \ast \mathbf{Y_j^{(l-1)}}
 \end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>\mathbf{B_i^{(l)}}<span class="math notranslate nohighlight">\( est une matrice de biais et
 \)</span>\mathbf{K^{(l)}_{i,j}}<span class="math notranslate nohighlight">\( est le filtre de taille
 \)</span>(2h_1^{(l)} + 1) \times (2h_2^{(l)} + 1)<span class="math notranslate nohighlight">\( connectant la \)</span>j^{\text{e}}<span class="math notranslate nohighlight">\(
@@ -722,8 +722,8 @@ reference= »eq:convlayer »} : chaque carte <span class="math notranslate noh
 couche <span class="math notranslate nohighlight">\(l\)</span> est formée de <span class="math notranslate nohighlight">\(n_1^{(l)} \cdot n_2^{(l)}\)</span> neurones organisés
 dans un tableau à deux dimensions. Le neurone en position <span class="math notranslate nohighlight">\((r,s)\)</span>
 calcule : $<span class="math notranslate nohighlight">\(\begin{aligned}
-    \left(\mathbf{Y_i^{(l)}}\right)_{r,s} &amp;= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \dsum _{j = 1}^{n^{(l-1)}} \left(\mathbf{K^{(l)}_{i,j} }\ast \mathbf{Y_j^{(l-1)}}\right)_{r,s}\\
-    &amp;= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \dsum _{j = 1}^{n^{(l-1)}} \dsum _{u = - h_1^{(l)}} ^{h_1^{(l)}} \dsum _{v = - h_2^{(l)}} ^{h_2^{(l)}} \left(\mathbf{K^{(l)}_{i,j}}\right)_{u,v} \left(\mathbf{Y_j^{(l-1)}}\right)_{r+u,s+v}
+    \left(\mathbf{Y_i^{(l)}}\right)_{r,s} &amp;= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \\displastyle\sum _{j = 1}^{n^{(l-1)}} \left(\mathbf{K^{(l)}_{i,j} }\ast \mathbf{Y_j^{(l-1)}}\right)_{r,s}\\
+    &amp;= \left(\mathbf{B_i^{(l)}}\right)_{r,s} + \\displastyle\sum _{j = 1}^{n^{(l-1)}} \\displastyle\sum _{u = - h_1^{(l)}} ^{h_1^{(l)}} \\displastyle\sum _{v = - h_2^{(l)}} ^{h_2^{(l)}} \left(\mathbf{K^{(l)}_{i,j}}\right)_{u,v} \left(\mathbf{Y_j^{(l-1)}}\right)_{r+u,s+v}
 \end{aligned}\)</span>$</p>
 <p>Les paramètres du réseau à entraîner (poids) peuvent alors être trouvés
 dans les filtres <span class="math notranslate nohighlight">\(\mathbf{K^{(l)}_{i,j}}\)</span> et les matrices de biais
@@ -940,7 +940,7 @@ entrées \)</span>z_i^{(l)}<span class="math notranslate nohighlight">\(, des po
 <p>Dans le cas contraire, la couche <span class="math notranslate nohighlight">\(l\)</span> attend <span class="math notranslate nohighlight">\(n^{(l-1)}\)</span> entrées de
 taille <span class="math notranslate nohighlight">\(n_1^{(l-1)} \times n_2^{(l-1)}\)</span> et le <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> neurone de
 la couche <span class="math notranslate nohighlight">\(l\)</span> calcule : $<span class="math notranslate nohighlight">\(\begin{aligned}
-    y_i^{(l)} = f\left(z_i^{(l)}\right)\quad\text{ avec }\quad z_i^{(l)} = \dsum _{j = 1}^{n^{(l-1)}} \dsum _{r = 1} ^{n_1^{(l-1)}} \dsum _{s = 1}^{n_2^{(l-1)}} w_{i,j,r,s}^{(l)} \left(\mathbf{ Y_j^{(l-1)}} \right)_{r,s}
+    y_i^{(l)} = f\left(z_i^{(l)}\right)\quad\text{ avec }\quad z_i^{(l)} = \\displastyle\sum _{j = 1}^{n^{(l-1)}} \\displastyle\sum _{r = 1} ^{n_1^{(l-1)}} \\displastyle\sum _{s = 1}^{n_2^{(l-1)}} w_{i,j,r,s}^{(l)} \left(\mathbf{ Y_j^{(l-1)}} \right)_{r,s}
 \end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>w_{i,j,r,s}^{(l)}<span class="math notranslate nohighlight">\( est le poids connectant le
 neurone en position \)</span>(r,s)<span class="math notranslate nohighlight">\( de la \)</span>j^{\text{e}}<span class="math notranslate nohighlight">\( carte de la couche
 \)</span>(l - 1)<span class="math notranslate nohighlight">\( au \)</span>i^{\text{e}}<span class="math notranslate nohighlight">\( neurone de la couche \)</span>l$.</p>
@@ -956,11 +956,11 @@ est donc tel que <span class="math notranslate nohighlight">\(y^{(i)}\in[\![1\cd
 la probabilité <span class="math notranslate nohighlight">\(P(y^{(i)}=j |\mathbf{x^{(i)}})\)</span> pour chaque classe
 <span class="math notranslate nohighlight">\(1\leq j\leq k\)</span>. Le classifieur softmax calcule cette probabilité selon
 :
-$<span class="math notranslate nohighlight">\(\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\dsum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}\)</span><span class="math notranslate nohighlight">\(
+$<span class="math notranslate nohighlight">\(\forall j\in[\![1\cdots k]\!]\quad P(y^{(i)}=j | \mathbf{x^{(i)}},\mathbf{W}) = \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\\displastyle\sum_{l=1}^k e^{\mathbf{W_l^\top}\mathbf{x^{(i)}}}}\)</span><span class="math notranslate nohighlight">\(
 où \)</span>\mathbf{W}<span class="math notranslate nohighlight">\( est la matrice des paramètres du modèle (les poids). Ces
 paramètres sont obtenus en minimisant une fonction de coût, qui peut par
 exemple s'écrire :
-\)</span><span class="math notranslate nohighlight">\(J(\mathbf{W}) =- \frac{1}{m}\dsum_{i=1}^m \dsum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\dsum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\dsum_{i=1}^n \dsum_{j=1}^k W_{ji}^2
+\)</span><span class="math notranslate nohighlight">\(J(\mathbf{W}) =- \frac{1}{m}\\displastyle\sum_{i=1}^m \\displastyle\sum_{j=1}^k \mathbb{I}_{y^{(i)}=j}log\left ( \frac{e^{\mathbf{W_j^\top x^{(i)}}}}{\\displastyle\sum_{l=1}^k e^{\mathbf{W_l^\top x^{(i)}}}}\right ) + \frac{\lambda}{2}\\displastyle\sum_{i=1}^n \\displastyle\sum_{j=1}^k W_{ji}^2
 \label{E:softmaxCout}\)</span><span class="math notranslate nohighlight">\( où \)</span>\lambda<span class="math notranslate nohighlight">\( est un paramètre de régularisation
 contrôlant le second terme du coût qui pénalise les grandes valeurs des
 poids (régularisation \)</span>\ell_2$).</p>
