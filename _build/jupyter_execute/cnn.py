@@ -556,7 +556,7 @@
 #     la dernière couche complètement connectée et traitent le réseau
 #     restant comme un extracteur de caractéristiques. Un nouveau
 #     classifieur, la dernière couche, est alors entraîné sur le nouveau
-#     problème (({numref}`transfer`))
+#     problème ({numref}`transfer`).
 # 
 # ```{figure} ./images/transferLearning.png
 # :name: transfer
@@ -634,7 +634,7 @@
 # :width: 500px
 # :align: center
 # Visualisation des filtres de la première couche d’AlexNet (à
-# gauche, 64 filtres 11$\times$) et de ResNet-18 (à droite, 64 filtres 7$\times 7$.
+# gauche, 64 filtres 11$\times$11) et de ResNet-18 (à droite, 64 filtres 7$\times 7$).
 # ```
 # 
 # 
@@ -668,14 +668,13 @@
 # 
 # ```{figure} ./images/champr.png
 # :name: champr
-# :width: 500px
 # :align: center
 # Champ récéptif de quelques neurones de la dernière couche
 #     d’agrégation du réseau AlexNet, superposées aux images ayant le plus
 #     fortement activé ces neurones. Le champ est encadré en blanc, et la
 #     valeur d’activation correspondante est reportée en haut. On voit par
 #     exemple que certains neurones sont très sensibles aux textes, d’autres
-#     aux réflexions spéculaires, ou encore aux hauts du corps (source :{cite:p}`Girshick14` )
+#     aux réflexions spéculaires, ou encore aux hauts du corps (source :{cite:p}`Girshick14`)
 # ```
 # 
 # 
@@ -700,7 +699,7 @@
 #     couvre une partie de la face du chien. Cela suggère que cette face est
 #     grandement responsable de la forte probabilité de classement de l’image
 #     comme un loulou. A l’inverse, l’occlusion du fond n’altère pas la forte
-#     valeur de probabilité de la classe  (source :{cite:p}`ZE13` )
+#     valeur de probabilité de la classe  (source :{cite:p}`ZE13`)
 # ```
 # 
 # 
@@ -733,7 +732,7 @@
 # :align: center
 # Approches par gradient de visualisation du fonctionnement
 # d’un réseau convolutif. Comparaison de la méthode de rétropropagation
-# guidée et de Grad-CAM (source :{cite:p}`Selvaraju17` )
+# guidée et de Grad-CAM (source :{cite:p}`Selvaraju17`)
 # ```
 # 
 # 
@@ -755,75 +754,10 @@
 # :name: monteeg
 # :align: center
 # Visualisation des 4 premières couches de convolution d’un
-# réseau convolutif par montée de gradient  (source :{cite:p}`Yosinski15` )
+# réseau convolutif par montée de gradient  (source :{cite:p}`Yosinski15`)
 # ```
 # 
 # 
-# 
-# ## Quelques applications {#subsubsec:applis}
-# 
-# Depuis leur introduction en reconnaissance de caractères manuscrits
-# [@LeCun90], les réseaux convolutifs n'ont cessé de trouver des champs
-# applicatifs, commerciaux et parfois ludiques. Parmi ces applications,
-# nous en citons ici quelques-unes.
-# 
-# ##### La classification d'images
-# 
-#   \
-# Premier domaine d'application des réseaux convolutifs, la classification
-# d'images consiste à affecter une image à une classe, apprise par le
-# réseau sur un grand nombre d'exemples. Depuis l'avènement d'ImageNet, et
-# la mise en place de la compétition ILSVRC, les résultats obtenus ne
-# cessent de s'améliorer et sont depuis quelques années la référence dans
-# ce domaine (dépassant même les performances humaines en 2015).
-# 
-# ##### L'annotation de scènes
-# 
-#   \
-# Des réseaux convolutifs ont été utilisés pour annoter des scènes 2D ou
-# 2D+t, *i.e.* assigner à chaque pixel un label identifiant l'objet auquel
-# il appartient. De nombreux réseaux ont été développés à cet effet
-# (R-CNN, Fast R-CNN, Mast R-CNN par exemple)
-# (figure [\[F:annotation\]](#F:annotation){reference-type="ref"
-# reference="F:annotation"}).
-# 
-# ##### La reconnaissance d'actions
-# 
-#   \
-# Le développement de champs réceptifs 3D dans les réseaux convolutifs a
-# permis d'extraire dans ces réseaux des caractéristiques invariantes à la
-# translation. L'intégration de techniques de régularisation adaptée (type
-# partage de paramètres) a rendu possible l'optimisation de ces réseaux
-# pour la reconnaissance d'actions dans des scènes dynamiques.
-# 
-# ##### L'analyse de documents
-# 
-#   \
-# L'analyse de documents à des fins de reconnaissance de caractères, de
-# classification de documents ou encore d'annotation sémantique a
-# largement bénéficié de l'apport des réseaux convolutifs.
-# 
-# #####  L'augmentation de données
-# 
-#   \
-# De nombreux réseaux ont été proposés pour ajouter à des données nD des
-# informations manquantes (colorisation d'images,
-# figure [\[F:color\]](#F:color){reference-type="ref"
-# reference="F:color"}, inpainting, restauration d'images,
-# superrésolution), ou pour proposer des versions différentes des données
-# initiales en fonction d'une contrainte de style extérieure (transfert de
-# style, figure [\[F:transfer\]](#F:transfer){reference-type="ref"
-# reference="F:transfer"}).
-# 
-# <figure>
-# 
-# <figcaption>Quelques applications des réseaux convolutifs.</figcaption>
-# </figure>
-# 
-# Les réseaux convolutifs sont des réseaux spécialisés pour traiter des
-# données dont la topologie se conforme à une structure de grille
-# n-dimensionnelle. Dans le cas de données 1D séquentielles, d'autres
-# réseaux performants ont été développés : les réseaux récurrents.
 # 
 # ```{bibliography}
 # :style: unsrt
