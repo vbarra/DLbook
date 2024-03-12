@@ -84,8 +84,8 @@ visualisé (ligne du milieu) sous la forme d'images
 6$\times$6. Le décodeur produit des images
 reconstruites (ligne du bas) à partir de ce
 code```
-::: center
-![.](images/AEMNIST){#F:AEMNIST width="\\textwidth"}
+
+
 
 ### Le cas $|\mathcal{H}|\geq|\mathcal{X}|$
 
