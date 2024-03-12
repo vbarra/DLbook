@@ -21,12 +21,12 @@ composé de deux parties : un *encodeur* `E` qui transforme $\mathbf{x}$
 en un code déterministe
 $\mathbf{h} = f(\mathbf{x} ; \mathbf{w_E})\in \mathcal{H}$ ou une
 distribution
-$\textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})$,
+$\textbf{{{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})$,
 qui représente l'entrée ; et un *décodeur* `D` qui produit une
 reconstruction déterministe
 $\mathbf{\hat{x}} = g(\mathbf{h} ; \mathbf{w_D})$ de $\mathbf{x}$ ou une
 distribution
-$\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
+$\textbf{{{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
 Les vecteurs $\mathbf{w_E}$ et $\mathbf{w_D}$ sont les paramètres de `E`
 et `D`. Le plus souvent, l'encodeur et le décodeur sont des réseaux de
 neurones (perceptrons multicouches plus ou moins profonds, réseaux
