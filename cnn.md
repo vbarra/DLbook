@@ -16,8 +16,7 @@ kernelspec:
 
 ### Inspiration biologique
 
-Un réseau de neurones convolutif (CNN, *Convolutional Neural Network* ou
-ConvNet) est un type de réseau de neurones artificiels acyclique à
+Un réseau de neurones convolutif (CNN, *Convolutional Neural Network*) est un type de réseau de neurones artificiels acyclique à
 propagation avant, dans lequel le motif de connexion entre les neurones
 est inspiré par le cortex visuel des animaux. Les neurones de cette
 région du cerveau sont arrangés de sorte à ce qu'ils correspondent à des
@@ -66,8 +65,8 @@ de données de type images, on a ainsi :
 
 Un traitement correctif non linéaire est appliqué entre chaque couche
 pour améliorer la pertinence du résultat. L'ensemble des sorties d'une
-couche de traitement permet de reconstituer une image intermédiaire,
-dite carte de caractéristiques (feature map), qui sert de base à la
+couche de traitement permet de reconstituer des images intermédiaires,
+dite cartes de caractéristiques (feature maps), qui servent de base à la
 couche suivante. Les couches et leurs connexions apprennent des niveaux
 d'abstraction croissants et extraient des caractéristiques de plus en
 plus haut niveau des données d'entrée.
@@ -76,7 +75,7 @@ Dans la suite, le propos sera illustré sur des images 2D en niveaux de
 gris, de taille $n_1 \times n_2$ : 
 
 $$\begin{aligned}
-    \mathbf{I} : [\![1\cdots n_1]\!]\times [\![1\cdots n_2]\!] &\rightarrow&  \mathbb{R}\\
+    \mathbf{I} : [\![1,n_1]\!]\times [\![1, n_2]\!] &\rightarrow&  \mathbb{R}\\
      (i,j) &\mapsto& I_{i,j}
 \end{aligned}$$ 
 
@@ -662,7 +661,7 @@ cartes $\mathbf{Y_i^{(l)}}$, parmi lesquelles :
     permis le calcul des activations de la couche $l$. Le processus est
     alors itéré jusqu'à atteindre la couche d'entrée $l = 1$, les
     activations de la couche $l$ étant alors rétroprojetées dans le plan
-    image [@ZE13]. La présence de couches d'agrégation et de
+    image. La présence de couches d'agrégation et de
     rectification rend ce processus non inversible (par exemple, une
     couche d'agrégation maximum nécessite de connaître à quelles
     positions de l'image $\mathbf{Y_i^{(l)}}$ sont situés les maxima
@@ -756,7 +755,7 @@ rétropropager pour obtenir le gradient d'un neurone par rapport aux
 pixels de $\mathbf{I}$ et d'opérer une petite modification de ces
 pixels. Outre son aspect informatif sur la structure interne du réseau
 étudié (visualisation des cartes $\mathbf{Y_i^{(l)}}$ intermédiaires),
-cette méthode produit des images parfois très artistiques (({numref}`monteeg`).
+cette méthode produit des images parfois très artistiques ({numref}`monteeg`).
 
 
 ```{figure} ./images/monteeg.png
@@ -766,7 +765,165 @@ Visualisation des 4 premières couches de convolution d’un
 réseau convolutif par montée de gradient  (source :{cite:p}`Yosinski15`)
 ```
 
+## Implémentation
 
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torchvision import datasets, transforms
+from torchsummary import summary
+import torch.nn.functional as F
+from torch.optim.lr_scheduler import StepLR
+```
+
+On travaille sur les données MNIST
+
+
+```python
+# taille des batchs
+train_batch_size=128
+test_batch_size = 128
+
+# Learning rate
+lr = 0.001
+
+# Nombre d'epochs 
+num_epochs = 10
+
+# Régularisation Dropout
+dropout = 0.25
+
+transform=transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,))
+        ])
+dataset1 = datasets.MNIST('../data', train=True, download=True,
+                       transform=transform)
+dataset2 = datasets.MNIST('../data', train=False,
+                       transform=transform)
+train_kwargs = {'batch_size': train_batch_size}
+test_kwargs = {'batch_size': test_batch_size}
+train_loader = torch.utils.data.DataLoader(dataset1,**train_kwargs)
+test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
+```
+
+et on implémente un réseau convolutif ayant l'architecture suivante : 
+
+CONV1 - RELU - MAX POOLING - CONV2 - RELU - MAX POOLING - FCL - DROPOUT - Prediction
+
+avec :
+- des noyaux de convolution de taille 5$\times$5
+- un max pooling sur une région 2$\times$2
+
+
+
+```python
+class CNN(nn.Module):
+  def __init__(self):
+        super(CNN, self).__init__()
+        self.conv1 = nn.Conv2d(1, 32, 5, 1)
+        self.conv2 = nn.Conv2d(32, 64, 5, 1)
+        self.dropout = nn.Dropout(dropout)
+        self.fc1 = nn.Linear(1024, 1024)
+        self.fc2 = nn.Linear(1024, 10)
+
+  def forward(self,x):
+        x = self.conv1(x)
+        x = F.relu(x)
+        x = F.max_pool2d(x, 2)
+        x = self.conv2(x)
+        x = F.relu(x)
+        x = F.max_pool2d(x, 2)
+        x = torch.flatten(x, 1)
+        x = self.fc1(x)
+        x = F.relu(x)
+        x = self.dropout(x)
+        x = self.fc2(x)
+        output = F.softmax(x, dim=1)
+        return output
+```
+
+On créé ensuite les fonction pour entraîner et tester le réseau
+
+```python
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+def train(model, device, train_loader, optimizer, epoch):
+    model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        data, target = data.to(device), target.to(device)
+        optimizer.zero_grad()
+        output = model(data)
+        loss = F.nll_loss(output, target)
+        loss.backward()
+        optimizer.step()
+        if batch_idx % 100 == 0:
+            print('Epoch: {} [{}/{} ({:.0f}%)]\tPerte : {:.6f}'.format(
+                epoch, batch_idx * len(data), len(train_loader.dataset),
+                100. * batch_idx / len(train_loader), loss.item()))
+    return loss
+
+
+def test(model, device, test_loader):
+    model.eval()
+    test_loss = 0
+    correct = 0
+    with torch.no_grad():
+        for data, target in test_loader:
+            data, target = data.to(device), target.to(device)
+            output = model(data)
+            test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
+            pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
+            correct += pred.eq(target.view_as(pred)).sum().item()
+
+    test_loss /= len(test_loader.dataset)
+    test_acc = 100. * correct / len(test_loader.dataset)
+
+    print('\nPerte moyenne en test : {:.4f}, Précision : {}/{} ({:.0f}%)\n'.format(
+        test_loss, correct, len(test_loader.dataset),test_acc
+        ))
+    return test_loss,test_acc
+```
+
+et on instantie le modèle
+
+```python
+model = CNN().to(device)
+summary(model, (1,28,28))
+```
+
+puis on l'entraîne
+
+```python
+optimizer = optim.Adam(model.parameters(), lr=lr)
+
+scheduler = StepLR(optimizer, step_size=1)
+trainLoss = []
+testLoss = []
+testAcc = []
+for epoch in range(1, num_epochs + 1):
+    trainLoss.append(train(model, device, train_loader, optimizer, epoch).detach().numpy())
+    t,a = test(model, device, test_loader)
+    testLoss.append(t)
+    testAcc.append(a)
+    scheduler.step()
+    
+plt.plot(trainLoss, '-b',label='train')
+plt.plot(testLoss, 'r',label='test')
+plt.legend(loc='best')
+plt.figure()
+plt.plot(testAcc)
+```
+
+
+```{figure} ./images/perteprecisionCNN.png
+:name: perte
+:align: center
+Fonction de perte et précision en test.
+```
 
 ```{bibliography}
 :style: unsrt

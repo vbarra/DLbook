@@ -653,7 +653,7 @@
 #     permis le calcul des activations de la couche $l$. Le processus est
 #     alors itéré jusqu'à atteindre la couche d'entrée $l = 1$, les
 #     activations de la couche $l$ étant alors rétroprojetées dans le plan
-#     image [@ZE13]. La présence de couches d'agrégation et de
+#     image. La présence de couches d'agrégation et de
 #     rectification rend ce processus non inversible (par exemple, une
 #     couche d'agrégation maximum nécessite de connaître à quelles
 #     positions de l'image $\mathbf{Y_i^{(l)}}$ sont situés les maxima
