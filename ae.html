@@ -321,7 +321,7 @@ distribution
 Les vecteurs <span class="math notranslate nohighlight">\(\mathbf{w_E}\)</span> et <span class="math notranslate nohighlight">\(\mathbf{w_D}\)</span> sont les paramètres de <code class="docutils literal notranslate"><span class="pre">E</span></code>
 et <code class="docutils literal notranslate"><span class="pre">D</span></code>. Le plus souvent, l’encodeur et le décodeur sont des réseaux de
 neurones (perceptrons multicouches plus ou moins profonds, réseaux
-convolutifs) et les paramètres sont donc les poids de ces réseaux. À ce
+convolutifs ou récurrents,…) et les paramètres sont donc les poids de ces réseaux. À ce
 titre, l’entraînement peut être réalisé avec les mêmes algorithmes que
 ceux utilisés dans les réseaux de neurones classiques.<br />
 Entraîner un autoencodeur à reconstruire
@@ -357,9 +357,19 @@ d’information utile sur les données.</p>
 <p>L’espace <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> peut être utilisé pour de la visualisation en
 dimension réduite des données, pour des tâches de classification, ou
 plus simplement pour un espace de représentation plus compact des
-données de <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> (figure <a class="reference internal" href="#F:AEMNIST"><span class="xref myst">1.2</span></a>{reference-type= »ref »
-reference= »F:AEMNIST »}).</p>
-<p><img alt="Utilisation d'un autoencodeur pour la compression et la génération dechiffres manuscrits. Les images MNIST (28{=html}28,ligne du haut) sont encodées par un simple perceptron multicouche àactivation sigmoïde et une seule couche cachée de taille 36. Le code estvisualisé (ligne du milieu) sous la forme d'images6{=html}6. Le décodeur produit des imagesreconstruites (ligne du bas) à partir de cecode." src="images/AEMNIST" />{#F:AEMNIST width= »\textwidth »}</p>
+données de <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> (<a class="reference internal" href="#ae2"><span class="std std-numref">Fig. 21</span></a>).</p>
+<figure class="align-default" id="ae2">
+<img alt="_images/ae2.png" src="_images/ae2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Utilisation d’un autoencodeur pour la compression et la génération de
+chiffres manuscrits. Les images MNIST (28<span class="math notranslate nohighlight">\(\times\)</span>28,
+ligne du haut) sont encodées par un simple perceptron multicouche à
+activation sigmoïde et une seule couche cachée de taille 36. Le code est
+visualisé (ligne du milieu) sous la forme d’images
+6<span class="math notranslate nohighlight">\(\times\)</span>6. Le décodeur produit des images
+reconstruites (ligne du bas) à partir de ce
+code```</span><a class="headerlink" href="#ae2" title="Link to this image">#</a></p>
+<div class="legend">
 <h3 class="rubric" id="le-cas-mathcal-h-geq-mathcal-x">Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|\geq|\mathcal{X}|\)</span></h3>
 <p>Si la taille de l’espace de représentation <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> est supérieure
 à celle de l’espace d’entrée, on comprend assez facilement qu’il est
@@ -467,6 +477,9 @@ reference= »A:DAE »} (figure <a class="reference internal" href="#F:AEMNISTB
 reference= »F:AEMNISTBruit »}).</p>
 <div class="algorithm docutils">
 </div>
+</div>
+</figcaption>
+</figure>
 </div>
 <p>L’apprentissage peut être vu comme une descente de gradient stochastique
 de
