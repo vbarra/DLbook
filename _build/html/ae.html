@@ -345,14 +345,15 @@ décodeur, une fois appris, permet de créer une donnée dans <span class="math 
 à partir d’un point de <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> : il agit donc comme un modèle
 génératif.<br />
 L’apprentissage (la recherche des valeurs de <span class="math notranslate nohighlight">\(\mathbf{w_E}\)</span> et
-<span class="math notranslate nohighlight">\(\mathbf{w_D}\)</span>) s’effectue par minimisation d’une fonction de perte
-$<span class="math notranslate nohighlight">\(\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ]\)</span><span class="math notranslate nohighlight">\(
-Si \)</span>g<span class="math notranslate nohighlight">\( est linéaire et \)</span>\ell<span class="math notranslate nohighlight">\( est la fonction de perte quadratique,
-alors l'autoencodeur agit comme l'analyse en composantes principales.
-Dans le cas plus général, l'autoencodeur apprend une représentation plus
-complexe des données. Il faut cependant prendre garde à ce que \)</span>f<span class="math notranslate nohighlight">\( et
-\)</span>g<span class="math notranslate nohighlight">\( ne soient pas trop complexes, auquel cas l'autoencodeur ne saura
-faire que copier exactement l'entrée, sans extraire dans \)</span>\mathcal{H}$
+<span class="math notranslate nohighlight">\(\mathbf{w_D}\)</span>) s’effectue par minimisation d’une fonction de perte</p>
+<div class="math notranslate nohighlight">
+\[\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ]\]</div>
+<p>Si <span class="math notranslate nohighlight">\(g\)</span> est linéaire et <span class="math notranslate nohighlight">\(\ell\)</span> est la fonction de perte quadratique,
+alors l’autoencodeur agit comme l’analyse en composantes principales.
+Dans le cas plus général, l’autoencodeur apprend une représentation plus
+complexe des données. Il faut cependant prendre garde à ce que <span class="math notranslate nohighlight">\(f\)</span> et
+<span class="math notranslate nohighlight">\(g\)</span> ne soient pas trop complexes, auquel cas l’autoencodeur ne saura
+faire que copier exactement l’entrée, sans extraire dans <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>
 d’information utile sur les données.</p>
 <p>L’espace <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> peut être utilisé pour de la visualisation en
 dimension réduite des données, pour des tâches de classification, ou
@@ -368,8 +369,9 @@ activation sigmoïde et une seule couche cachée de taille 36. Le code est
 visualisé (ligne du milieu) sous la forme d’images
 6<span class="math notranslate nohighlight">\(\times\)</span>6. Le décodeur produit des images
 reconstruites (ligne du bas) à partir de ce
-code```</span><a class="headerlink" href="#ae2" title="Link to this image">#</a></p>
-<div class="legend">
+code</span><a class="headerlink" href="#ae2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <h3 class="rubric" id="le-cas-mathcal-h-geq-mathcal-x">Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|\geq|\mathcal{X}|\)</span></h3>
 <p>Si la taille de l’espace de représentation <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> est supérieure
 à celle de l’espace d’entrée, on comprend assez facilement qu’il est
@@ -477,9 +479,6 @@ reference= »A:DAE »} (figure <a class="reference internal" href="#F:AEMNISTB
 reference= »F:AEMNISTBruit »}).</p>
 <div class="algorithm docutils">
 </div>
-</div>
-</figcaption>
-</figure>
 </div>
 <p>L’apprentissage peut être vu comme une descente de gradient stochastique
 de
