@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Auto-encodeurs &#8212; Apprentissage profond</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ae';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Réseaux convolutifs" href="cnn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Auto-encodeurs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeurs-variationnels">Autoencodeurs variationnels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-d-autoencodeurs-simples">Construction d’autoencodeurs simples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeur-de-debruitage">Autoencodeur de débruitage</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="auto-encodeurs">
+<h1>Auto-encodeurs<a class="headerlink" href="#auto-encodeurs" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Un autoencodeur est algorithme entraîné de manière non supervisée à
+reproduire son entrée <span class="math notranslate nohighlight">\(\mathbf{x}\in \mathcal{X}\)</span>. Il peut être vu
+(<code class="xref std std-numref docutils literal notranslate"><span class="pre">ae1</span></code>) comme
+composé de deux parties : un <em>encodeur</em> <code class="docutils literal notranslate"><span class="pre">E</span></code> qui transforme <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>
+en un code déterministe
+<span class="math notranslate nohighlight">\(\mathbf{h} = f(\mathbf{x} ; \mathbf{w_E})\in \mathcal{H}\)</span> ou une
+distribution
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>,
+qui représente l’entrée ; et un <em>décodeur</em> <code class="docutils literal notranslate"><span class="pre">D</span></code> qui produit une
+reconstruction déterministe
+<span class="math notranslate nohighlight">\(\mathbf{\hat{x}} = g(\mathbf{h} ; \mathbf{w_D})\)</span> de <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> ou une
+distribution
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.
+Les vecteurs <span class="math notranslate nohighlight">\(\mathbf{w_E}\)</span> et <span class="math notranslate nohighlight">\(\mathbf{w_D}\)</span> sont les paramètres de <code class="docutils literal notranslate"><span class="pre">E</span></code>
+et <code class="docutils literal notranslate"><span class="pre">D</span></code>. Le plus souvent, l’encodeur et le décodeur sont des réseaux de
+neurones (perceptrons multicouches plus ou moins profonds, réseaux
+convolutifs) et les paramètres sont donc les poids de ces réseaux. À ce
+titre, l’entraînement peut être réalisé avec les mêmes algorithmes que
+ceux utilisés dans les réseaux de neurones classiques.<br />
+Entraîner un autoencodeur à reconstruire
+<span class="math notranslate nohighlight">\(g\circ f(\mathbf{x})=\mathbf{x}\)</span> pour tout <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> n’est pas utile
+(on apprend l’identité). On contraint donc le réseau à ne pas reproduire
+parfaitement l’entrée, et à ne s’intéresser qu’à certains aspects de la
+reconstruction, ce qui lui permet d’apprendre des propriétés utilies des
+données.</p>
+<figure class="align-default" id="ae1">
+<img alt="_images/ae1.png" src="_images/ae1.png" />
+<figcaption>
+<p><span class="caption-text">Architecture générale d’un autoencodeur</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="center docutils">
+<h2 class="rubric" id="influence-de-la-taille-de-l-espace-de-codage">Influence de la taille de l’espace de codage</h2>
+<h3 class="rubric" id="le-cas-mathcal-h-mathcal-x">Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|&lt;|\mathcal{X}|\)</span></h3>
+<p>Lorsque la dimension du code <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> est inférieure à celle de
+<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, l’encodeur <code class="docutils literal notranslate"><span class="pre">E</span></code> apprend à réduire la dimension. Le
+décodeur, une fois appris, permet de créer une donnée dans <span class="math notranslate nohighlight">\(\mathcal{X}\)</span>
+à partir d’un point de <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> : il agit donc comme un modèle
+génératif.<br />
+L’apprentissage (la recherche des valeurs de <span class="math notranslate nohighlight">\(\mathbf{w_E}\)</span> et
+<span class="math notranslate nohighlight">\(\mathbf{w_D}\)</span>) s’effectue par minimisation d’une fonction de perte
+$<span class="math notranslate nohighlight">\(\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ]\)</span><span class="math notranslate nohighlight">\(
+Si \)</span>g<span class="math notranslate nohighlight">\( est linéaire et \)</span>\ell<span class="math notranslate nohighlight">\( est la fonction de perte quadratique,
+alors l'autoencodeur agit comme l'analyse en composantes principales.
+Dans le cas plus général, l'autoencodeur apprend une représentation plus
+complexe des données. Il faut cependant prendre garde à ce que \)</span>f<span class="math notranslate nohighlight">\( et
+\)</span>g<span class="math notranslate nohighlight">\( ne soient pas trop complexes, auquel cas l'autoencodeur ne saura
+faire que copier exactement l'entrée, sans extraire dans \)</span>\mathcal{H}$
+d’information utile sur les données.</p>
+<p>L’espace <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> peut être utilisé pour de la visualisation en
+dimension réduite des données, pour des tâches de classification, ou
+plus simplement pour un espace de représentation plus compact des
+données de <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> (figure <a class="reference internal" href="#F:AEMNIST"><span class="xref myst">1.2</span></a>{reference-type= »ref »
+reference= »F:AEMNIST »}).</p>
+<p><img alt="Utilisation d'un autoencodeur pour la compression et la génération dechiffres manuscrits. Les images MNIST (28{=html}28,ligne du haut) sont encodées par un simple perceptron multicouche àactivation sigmoïde et une seule couche cachée de taille 36. Le code estvisualisé (ligne du milieu) sous la forme d'images6{=html}6. Le décodeur produit des imagesreconstruites (ligne du bas) à partir de cecode." src="images/AEMNIST" />{#F:AEMNIST width= »\textwidth »}</p>
+<h3 class="rubric" id="le-cas-mathcal-h-geq-mathcal-x">Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|\geq|\mathcal{X}|\)</span></h3>
+<p>Si la taille de l’espace de représentation <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> est supérieure
+à celle de l’espace d’entrée, on comprend assez facilement qu’il est
+très aisé pour l’autoencodeur d’apprendre l’identité, sans extraire
+d’information utile des données initiales (il suffit de propager
+<span class="math notranslate nohighlight">\(\mathcal{X}\)</span> dans <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>). Il est donc nécessaire de contraindre
+le modèle.</p>
+<h2 class="rubric" id="autoencodeurs-regularises">Autoencodeurs régularisés</h2>
+<p>Régulariser un autoencodeur permet d’entraîner efficacement
+l’algorithme, en choisissant de plus la dimension de <span class="math notranslate nohighlight">\(\mathcal H\)</span> et la
+complexité de <span class="math notranslate nohighlight">\(f\)</span> et <span class="math notranslate nohighlight">\(g\)</span> en fonction de la complexité de la distribution
+à modéliser. Plutôt que de limiter la capacité du modèle (en imposant
+par exemple que <code class="docutils literal notranslate"><span class="pre">E</span></code> et <code class="docutils literal notranslate"><span class="pre">D</span></code> soient des réseaux multicouches à faible
+profondeur et/ou que <span class="math notranslate nohighlight">\(\mathcal H\)</span> soit de faible dimension), la
+régularisation construit une fonction de perte qui encourage
+l’autoencodeur à avoir des propriétés supplémentaires, en plus de celle
+de reproduire son entrée.<br />
+Un autoencodeur régularisé minimise la fonction
+$<span class="math notranslate nohighlight">\(\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ] + \beta \Omega(\mathbf{h})\)</span><span class="math notranslate nohighlight">\(
+où \)</span>\Omega(\mathbf{h})<span class="math notranslate nohighlight">\( est un terme de pénalisation permettant de
+contraindre les paramètres du modèle et \)</span>\beta\in\mathbb{R}$ contrôle le
+poids du terme de pénalité dans l’optimisation.\</p>
+<h3 class="rubric" id="autoencodeurs-parcimonieux">Autoencodeurs parcimonieux</h3>
+<p>Les autoencodeurs parcimonieux (ou épars) sont typiquement utilisés pour
+apprendre des caractéristiques pertinentes des données d’entrée, qui
+sont ensuite utilisées comme entrées d’algorithmes de classification ou
+de régression.<br />
+Supposons que <code class="docutils literal notranslate"><span class="pre">E</span></code> et <code class="docutils literal notranslate"><span class="pre">D</span></code> soient des perceptrons multicouches. Il est
+alors par exemple possible d’imposer aux neurones d’être « inactifs » la
+plupart du temps, en définissant l’inactivité comme une valeur de sortie
+du neurone proche de zéro (pour une sigmoïde, ou -1 pour une tangente
+hyperbolique). Pour cela, on dispose de <span class="math notranslate nohighlight">\(m\)</span> exemples
+<span class="math notranslate nohighlight">\(\mathcal{S} =  \{\mathbf{x_1}\cdots \mathbf{x_m}\}\)</span>. On note
+<span class="math notranslate nohighlight">\(y^{(l)}_j(\mathbf{x})\)</span> l’activation du neurone caché <span class="math notranslate nohighlight">\(j\)</span> de la couche
+<span class="math notranslate nohighlight">\(l\)</span> lorsque l’entrée <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> est présentée au réseau. On note
+également
+$<span class="math notranslate nohighlight">\(\hat\rho_j = \frac{1}{m} \sum_{i=1}^m \left[ y^{(l)}_j(\mathbf{x_i}) \right]\)</span><span class="math notranslate nohighlight">\(
+l'activation moyenne du neurone caché \)</span>j<span class="math notranslate nohighlight">\( sur présentation de
+\)</span>\mathcal{S}<span class="math notranslate nohighlight">\(. L'objectif est alors d'imposer \)</span>\hat\rho_j = \rho<span class="math notranslate nohighlight">\(, où
+\)</span>\rho<span class="math notranslate nohighlight">\( est une valeur proche de zéro (ainsi l'activation moyenne de
+chaque neurone caché doit être faible), par l'intermédiaire d'une
+définition adaptée de \)</span>\Omega<span class="math notranslate nohighlight">\(. De nombreux choix sont possibles. Par
+exemple pour un réseau à une couche cachée :
+\)</span><span class="math notranslate nohighlight">\(\Omega(\mathbf{h}) = \displaystyle\sum_{j=1}^{n^{(2)}} \rho \log \frac{\rho}{\hat\rho_j} + (1-\rho) \log \frac{1-\rho}{1-\hat\rho_j} = \displaystyle\sum_{j=1}^{n^{(2)}} {KL}(\rho || \hat\rho_j),\)</span><span class="math notranslate nohighlight">\(
+où \)</span>{KL}(\rho || \hat\rho_j)<span class="math notranslate nohighlight">\( est la divergence de Kullback-Leibler (KL)
+entre une variable aléatoire de loi de Bernoulli de moyenne \)</span>\rho<span class="math notranslate nohighlight">\( et
+une variable aléatoire de loi de Bernoulli de moyenne \)</span>\hat\rho_j<span class="math notranslate nohighlight">\(.\
+On peut alors montrer que \)</span>{KL}(\rho || \hat\rho_j) = 0<span class="math notranslate nohighlight">\( si
+\)</span>\hat\rho_j = \rho<span class="math notranslate nohighlight">\(, et \)</span>{KL}<span class="math notranslate nohighlight">\( croît de façon monotone lorsque
+\)</span>\hat\rho_j<span class="math notranslate nohighlight">\( s'éloigne de \)</span>\rho<span class="math notranslate nohighlight">\(.\
+Le calcul des dérivées partielles et la descente de gradient changent
+peu pour l'algorithme d'optimisation. Il faut cependant connaître au
+préalable les \)</span>\textstyle \hat\rho_j<span class="math notranslate nohighlight">\( et donc faire dans un premier
+temps une propagation avant sur tous les exemples de \)</span>\mathcal{S}<span class="math notranslate nohighlight">\(
+permettant de calculer les activations moyennes.\
+Dans le cas où la base d'apprentissage est suffisamment petite, elle
+tient entièrement en mémoire et les activations peuvent être stockées
+pour calculer \)</span>\textstyle \hat\rho_j<span class="math notranslate nohighlight">\(. Les activations stockées peuvent
+alors être utilisées dans l'étape de rétropropagation sur l'ensemble des
+exemples.\
+Dans le cas contraire, le calcul de \)</span>\textstyle \hat\rho_j<span class="math notranslate nohighlight">\( peut être
+fait en accumulant les activations calculées exemple par exemple, mais
+sans sauvegarder les valeurs de ces activations. Une seconde propagation
+sur chaque exemple sera alors nécessaire pour permettre la
+rétropropagation. Les autoencodeurs parcimonieux peuvent également être
+vus d'un point de vue probabiliste comme des algorithmes maximisant la
+vraisemblance maximale d'un modèle génératif à variables latentes
+\)</span>\mathbf{h}<span class="math notranslate nohighlight">\(. Supposons disposer d'une distribution jointe explicite
+\)</span><span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h}) = \textbf{\textsf{\textup{p}}}_{modele}( \mathbf{h})\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x}|\mathbf{h})\)</span><span class="math notranslate nohighlight">\(
+La log vraisemblance peut alors s'écrire
+\)</span><span class="math notranslate nohighlight">\(log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x})) = log \left (\displaystyle\sum_{\mathbf{h}}  \textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h})\right )\)</span><span class="math notranslate nohighlight">\(
+L'autoencodeur approche cette somme juste pour une une valeur de
+\)</span>\mathbf{h}<span class="math notranslate nohighlight">\( fortement probable. Pour cette valeur, on maximise alors
+\)</span><span class="math notranslate nohighlight">\(log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h})) = log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{h})) + log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x}|\mathbf{h}))\)</span><span class="math notranslate nohighlight">\(
+et \)</span>log(\textbf{\textsf{\textup{p}}}<em>{modele}(\mathbf{h}))<span class="math notranslate nohighlight">\( peut être
+utilisée pour introduire de la parcimonie.\
+Par exemple si
+\)</span>\textbf{\textsf{\textup{p}}}</em>{modele}(h_i) = \frac{\lambda}{2} e^{-\beta|h_i| }<span class="math notranslate nohighlight">\(
+(Laplace prior), alors
+\)</span><span class="math notranslate nohighlight">\(-log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{h})) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\left (\lambda |h_i| -log\frac{\lambda}{2} \right) = \Omega(\mathbf{h})  + c\)</span><span class="math notranslate nohighlight">\(
+et l'on retrouve une régularisation \)</span>\ell_1$ (méthode Lasso).</p>
+<h3 class="rubric" id="autoencodeurs-contractifs">Autoencodeurs contractifs</h3>
+<p>Une autre stratégie de régularisation consiste à faire dépendre <span class="math notranslate nohighlight">\(\Omega\)</span>
+du gradient du code en fonction des entrées :
+$<span class="math notranslate nohighlight">\(\Omega(\mathbf{x},\mathbf{h}) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\|\nabla_{\mathbf{x}} h_i\|^2 =\left  \|\frac{\partial f(\mathbf{x},\mathbf{w_E})}{\partial \mathbf{x}}\right \|_F^2\)</span><span class="math notranslate nohighlight">\(
+où \)</span>|.|_F<span class="math notranslate nohighlight">\( est la norme de Frobenius. Le modèle apprend alors une
+fonction qui change peu lorsque \)</span>\mathbf{x}<span class="math notranslate nohighlight">\( varie peu. Puisque la
+pénalité n'est appliquée que sur les exemples de \)</span>\mathcal{S}<span class="math notranslate nohighlight">\(, les
+informations capturées dans le code concernent la distribution des
+données d'entraînement, et plus précisément la variété sur laquelle
+vivent les données de \)</span>\mathcal{S}$. En ce sens, ces autoencodeurs sont
+à rapprocher des méthodes de <em>Manifold Learning</em>.</p>
+<h3 class="rubric" id="autoencodeurs-de-debruitage">Autoencodeurs de débruitage</h3>
+<p>Plutôt que d’ajouter un terme à la fonction de perte, on peut
+directement changer cette dernière pour apprendre des caractéristiques
+utiles des données.<br />
+Un autoencodeur de débruitage considère la fonction de perte
+$<span class="math notranslate nohighlight">\(\ell(\mathbf{x} , g\left [f(\mathbf{\tilde{x}} ; \mathbf{w_E}); \mathbf{w_D})\right ]\)</span><span class="math notranslate nohighlight">\(
+où \)</span>\mathbf{\tilde{x}}<span class="math notranslate nohighlight">\( est une version de \)</span>\mathbf<span class="math notranslate nohighlight">\( bruitée par
+une distribution conditionnelle \)</span>C(\mathbf{\tilde{x}},\mathbf{x})<span class="math notranslate nohighlight">\(.
+L'autoencodeur apprend alors une distribution de reconstruction
+\)</span>\textbf{\textsf{\textup{p}}}_R(\mathbf{x}\mid \mathbf{\tilde{x}})$
+selon l’algorithme <a class="reference internal" href="#A:DAE"><span class="xref myst">[A:DAE]</span></a>{reference-type= »ref »
+reference= »A:DAE »} (figure <a class="reference internal" href="#F:AEMNISTBruit"><span class="xref myst">1.3</span></a>{reference-type= »ref »
+reference= »F:AEMNISTBruit »}).</p>
+<div class="algorithm docutils">
+</div>
+</div>
+<p>L’apprentissage peut être vu comme une descente de gradient stochastique
+de
+$<span class="math notranslate nohighlight">\(-\mathbb{E}_{\mathbf{x}\sim \textbf{\textsf{\textup{p}}}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log \textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )\)</span>$</p>
+<p><img alt="Autoencodeur de débruitage sur les données MNIST. Les images (ligne du haut) sont corrompues par un bruit gaussiencentré de variance unité (deuxième ligne). Un autoencodeur de débruitageest ensuite entraîné. Le code  de taille 32 est visualisé(troisième ligne) sous la forme d'images 8{=html}4. Ledécodeur produit les images débruitées de la dernièreligne." src="images/denoising_AE" />{#F:AEMNISTBruit width= ».8\textwidth »}</p>
+</section>
+<section id="autoencodeurs-variationnels">
+<h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Link to this heading">#</a></h2>
+<p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec la
+section suivante sur les réseaux antagonistes générateurs.<br />
+Les autoencodeurs variationnels (VAE) [&#64;Kingma13] sont des modèles
+génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
+que nous les avons abordés dans les paragraphes précédents, ils
+empruntent juste une architecture similaire (figure
+<a class="reference internal" href="#F:VAE"><span class="xref myst">1.4</span></a>{reference-type= »ref » reference= »F:VAE »}), d’où leur nom.\</p>
+<div class="center docutils">
+<figure id="F:VAE">
+<p><span> myTrapezium/.pic = <span> (0,0) – (0,)̱ – (,)̧ – (,-)̧ – (0,-)̱ –
+cycle ; (-center) at (/2,0); (-out) at (,0); </span> </span></p>
+<p>= [thick, decoration=<span>markings,mark=at position 1 with </span>,
+double distance=1.4pt, shorten &gt;= 5.5pt, preaction =
+<span>decorate</span>, postaction = <span>draw,line width=1.4pt,
+white,shorten &gt;= 4.5pt</span>]</p>
+<figcaption>Architecture générale d’un autoencodeur
+variationnel</figcaption>
+</figure>
+</div>
+<p>Au lieu d’apprendre <span class="math notranslate nohighlight">\(f(.,\mathbf{w_E})\)</span> et <span class="math notranslate nohighlight">\(g(.,\mathbf{w_D})\)</span>, un
+autoencodeur variationnel apprend des distributions de probabilité
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>
+et
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.<br />
+Apprendre des distributions plutôt que des fonctions déterministes
+présente plusieurs avantages, et notamment :</p>
+<ul class="simple">
+<li><p>les données d’entrée peuvent être bruitées, et un modèle de
+distribution <span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span> peut être
+plus utile</p></li>
+<li><p>il est possible d’utiliser
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>
+pour échantillonner <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> puis <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, et donc de
+générer des données ayant des statistiques similaires aux éléments
+de <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> (figure <a class="reference internal" href="#F:VAE2"><span class="xref myst">[F:VAE2]</span></a>{reference-type= »ref »
+reference= »F:VAE2 »}).</p></li>
+</ul>
+<p>Abordons ces autoencodeurs sous l’angle des modèles génératifs.
+Supposons que nous voulions générer des points suivant la distribution
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span>. Plutôt que d’inférer
+directement sur cette distribution, nous pouvons utiliser des <em>variables
+latentes</em> (le code des autoencodeurs). Les modèles à variables latentes
+font l’hypothèse que les données <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> sont issues d’une variable
+non observée <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. S’il peut être difficile de modéliser
+directement <span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span>, il peut être plus
+facile de choisir<em>a priori</em> une distribution
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{h}\)</span> et chercher à modéliser
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{\mathbf{x}|\mathbf{h}}\)</span>.<br />
+Pour générer <span class="math notranslate nohighlight">\(\mathbf{x}\sim \textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span>,
+un autoencodeur variationnel tire donc tout d’abord
+<span class="math notranslate nohighlight">\(\mathbf{h}\sim \textbf{\textsf{\textup{p}}}_\mathbf{h}\)</span>. <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>
+est ensuite passé à un réseau de neurones et <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> est finalement
+tiré selon
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.
+L’entraînement est réalisé en maximisant la borne inférieure
+variationnelle :
+$<span class="math notranslate nohighlight">\(\mathcal{L}(q) = \mathbb{E}_{\mathbf{h}\sim q(\mathbf{h}|\mathbf{x})} log \left (\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\right ) -KL\left (q(\mathbf{h}|\mathbf{x}) ||\textbf{\textsf{\textup{p}}}_\mathbf{h}\right )\)</span><span class="math notranslate nohighlight">\(
+où \)</span>KL<span class="math notranslate nohighlight">\( est la divergence de Kullback Leibler déjà rencontrée dans les
+autoencodeurs parcimonieux. Le premier terme de \)</span>\mathcal{L}(q)<span class="math notranslate nohighlight">\( est la
+log vraisemblance de la reconstruction trouvée dans les autoencodeurs
+classiques, tandis que le second terme tend à rapprocher la distribution
+*a posteriori* \)</span>q(\mathbf{h}|\mathbf{x})<span class="math notranslate nohighlight">\( et le modèle *a priori*
+\)</span>\textbf{\textsf{\textup{p}}}_\mathbf{h}<span class="math notranslate nohighlight">\(. Dans les techniques
+classiques d'inférence, \)</span>q<span class="math notranslate nohighlight">\( est approché par optimisation. Dans les
+autoencodeurs variationnels, on entraîne un encodeur paramétrique (un
+réseau de neurones paramétré par \)</span>\mathbf{w_E}<span class="math notranslate nohighlight">\() qui produit les
+paramètres de \)</span>q<span class="math notranslate nohighlight">\(. Tant que \)</span>\mathbf{h}<span class="math notranslate nohighlight">\( est continue, il est donc
+possible de rétropropager à travers les tirages de \)</span>\mathbf{h}<span class="math notranslate nohighlight">\(
+effectués selon
+\)</span>q(\mathbf{h}|\mathbf{x})  = q(\mathbf{h}| f(\mathbf{x} ; \mathbf{w_E}))<span class="math notranslate nohighlight">\(
+pour obtenir le gradient par rapport à \)</span>\mathbf{w_E}<span class="math notranslate nohighlight">\(. L'apprentissage
+consiste alors simplement à maximiser \)</span>\mathcal{L}<span class="math notranslate nohighlight">\( par rapport à
+\)</span>(\mathbf{w_E},\mathbf{w_D})$.</p>
+<p>Il est courant de choisir comme prior
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{h}\)</span> une loi normale centrée
+réduite <span class="math notranslate nohighlight">\(\mathcal{N}(\mathbf{0},\mathbf{I})\)</span>. Cette simplicité apparente
+ne réduit pas le pouvoir d’expression du modèle si l’effort est fait sur
+l’optimisation de la distribution
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.
+L’encodeur <code class="docutils literal notranslate"><span class="pre">E</span></code> est alors un réseau de neurones générant des paramètres
+de distribution de <span class="math notranslate nohighlight">\(q\)</span> dans <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, soit un vecteur de moyenne
+<span class="math notranslate nohighlight">\(\mu\)</span> et une matrice de covariance <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>.<br />
+Notons enfin que la rétropropagation du gradient nécessite une astuce de
+calcul dans <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, dite astuce de reparamétrisation : la
+génération de
+<span class="math notranslate nohighlight">\(\mathbf{h}\sim \textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>
+se fait effectivement en tirant une variable aléatoire
+<span class="math notranslate nohighlight">\(\epsilon\sim\mathcal{N}(\mathbf{0},\mathbf{I})\)</span>, puis en calculant
+<span class="math notranslate nohighlight">\(\mathbf{h}\)</span>=<span class="math notranslate nohighlight">\(\mu\)</span> + <span class="math notranslate nohighlight">\(\Sigma^{1/2} \epsilon\)</span>. L’échantillonnage se fait
+alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</span>, qui n’a pas besoin d’être rétropropagé.</p>
+<div class="SCfigure docutils">
+<p><img alt="image" src="images/vae" /></p>
+</div>
+</section>
+<section id="partie-pratique">
+<h2>Partie pratique<a class="headerlink" href="#partie-pratique" title="Link to this heading">#</a></h2>
+<section id="construction-d-autoencodeurs-simples">
+<h3>Construction d’autoencodeurs simples<a class="headerlink" href="#construction-d-autoencodeurs-simples" title="Link to this heading">#</a></h3>
+<p>Les squelettes notebook vous étant donnés, il est demandé de construire
+deux auto-encodeurs :</p>
+<ol class="arabic simple">
+<li><p>un premier avec un encodeur et un décodeur définis par des
+perceptrons multicouches (figure <a class="reference internal" href="#F:AE"><span class="xref myst">1.5</span></a>{reference-type= »ref »
+reference= »F:AE »}-(a))</p></li>
+<li><p>un second dont l’encodeur et le décodeur sont composés de réseaux
+convolutifs (figure <a class="reference internal" href="#F:AE"><span class="xref myst">1.5</span></a>{reference-type= »ref »
+reference= »F:AE »}-(b))</p></li>
+</ol>
+<p>Vous ferez varier les paramètres de vos autoencodeurs (nombre de
+neurones sur les couches cachées, learning rate, nombre d’itérations,
+taille des batchs…), et observerez :</p>
+<ul class="simple">
+<li><p>l’espace latent de l’autoencodeur ;</p></li>
+<li><p>les images reconstruites pour les deux autoencodeurs produits, et
+vous jugerez de la qualité de la reconstruction.</p></li>
+</ul>
+<figure id="F:AE">
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="images/AEdense"
+alt="image" /></td>
+<td style="text-align: center;"><img src="images/AECNN"
+alt="image" /></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">(a)Autoencodeur à base de PMC</td>
+<td style="text-align: center;">(b) Autoencodeur à base de CNN</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Autoencodeurs </figcaption>
+</figure>
+</section>
+<section id="autoencodeur-de-debruitage">
+<h3>Autoencodeur de débruitage<a class="headerlink" href="#autoencodeur-de-debruitage" title="Link to this heading">#</a></h3>
+<p>Réalisez un autoencodeur permettant de réaliser du débruitage d’image.
+En vous appuyant sur la partie précédente, apprenez le modèle en
+présentant des données corrompues (changer les valeurs aléatoirement
+pour <span class="math notranslate nohighlight">\(p\)</span>% des pixels de l’image d’entrainement).</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cnn.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Réseaux convolutifs</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeurs-variationnels">Autoencodeurs variationnels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-d-autoencodeurs-simples">Construction d’autoencodeurs simples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeur-de-debruitage">Autoencodeur de débruitage</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Vincent BARRA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
