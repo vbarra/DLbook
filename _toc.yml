@@ -12,5 +12,5 @@ parts:
       - file: NN
       - file: PMC
       - file: cnn
-      - file: AE
+      - file: ae
       - file: rnn
