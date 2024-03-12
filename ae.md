@@ -59,7 +59,9 @@ décodeur, une fois appris, permet de créer une donnée dans $\mathcal{X}$
 génératif.\
 L'apprentissage (la recherche des valeurs de $\mathbf{w_E}$ et
 $\mathbf{w_D}$) s'effectue par minimisation d'une fonction de perte
+
 $$\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ]$$
+
 Si $g$ est linéaire et $\ell$ est la fonction de perte quadratique,
 alors l'autoencodeur agit comme l'analyse en composantes principales.
 Dans le cas plus général, l'autoencodeur apprend une représentation plus
@@ -83,7 +85,8 @@ activation sigmoïde et une seule couche cachée de taille 36. Le code est
 visualisé (ligne du milieu) sous la forme d'images
 6$\times$6. Le décodeur produit des images
 reconstruites (ligne du bas) à partir de ce
-code```
+code
+```
 
 
 

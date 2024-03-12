@@ -30,7 +30,7 @@ $\textbf p_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
 Les vecteurs $\mathbf{w_E}$ et $\mathbf{w_D}$ sont les paramètres de `E`
 et `D`. Le plus souvent, l'encodeur et le décodeur sont des réseaux de
 neurones (perceptrons multicouches plus ou moins profonds, réseaux
-convolutifs) et les paramètres sont donc les poids de ces réseaux. À ce
+convolutifs ou récurrents,...) et les paramètres sont donc les poids de ces réseaux. À ce
 titre, l'entraînement peut être réalisé avec les mêmes algorithmes que
 ceux utilisés dans les réseaux de neurones classiques.\
 Entraîner un autoencodeur à reconstruire
@@ -71,17 +71,21 @@ d'information utile sur les données.
 L'espace $\mathcal{H}$ peut être utilisé pour de la visualisation en
 dimension réduite des données, pour des tâches de classification, ou
 plus simplement pour un espace de représentation plus compact des
-données de $\mathcal{X}$ (figure [1.2](#F:AEMNIST){reference-type="ref"
-reference="F:AEMNIST"}).
+données de $\mathcal{X}$ ({numref}`ae2`).
 
-![Utilisation d'un autoencodeur pour la compression et la génération de
-chiffres manuscrits. Les images MNIST (28$\times$`<!-- -->`{=html}28,
+
+```{figure} ./images/ae2.png
+:name: ae2
+Utilisation d'un autoencodeur pour la compression et la génération de
+chiffres manuscrits. Les images MNIST (28$\times$28,
 ligne du haut) sont encodées par un simple perceptron multicouche à
 activation sigmoïde et une seule couche cachée de taille 36. Le code est
 visualisé (ligne du milieu) sous la forme d'images
-6$\times$`<!-- -->`{=html}6. Le décodeur produit des images
+6$\times$6. Le décodeur produit des images
 reconstruites (ligne du bas) à partir de ce
-code.](images/AEMNIST){#F:AEMNIST width="\\textwidth"}
+code```
+
+
 
 ### Le cas $|\mathcal{H}|\geq|\mathcal{X}|$
 
