@@ -178,10 +178,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Auto-encodeurs</a></li>
 </ul>
 
     </div>
@@ -306,7 +307,7 @@ document.write(`
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Un autoencodeur est algorithme entraîné de manière non supervisée à
 reproduire son entrée <span class="math notranslate nohighlight">\(\mathbf{x}\in \mathcal{X}\)</span>. Il peut être vu
-(<code class="xref std std-numref docutils literal notranslate"><span class="pre">ae1</span></code>) comme
+(<a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 20</span></a>) comme
 composé de deux parties : un <em>encodeur</em> <code class="docutils literal notranslate"><span class="pre">E</span></code> qui transforme <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>
 en un code déterministe
 <span class="math notranslate nohighlight">\(\mathbf{h} = f(\mathbf{x} ; \mathbf{w_E})\in \mathcal{H}\)</span> ou une
@@ -332,7 +333,7 @@ données.</p>
 <figure class="align-default" id="ae1">
 <img alt="_images/ae1.png" src="_images/ae1.png" />
 <figcaption>
-<p><span class="caption-text">Architecture générale d’un autoencodeur</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Architecture générale d’un autoencodeur</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="center docutils">
