@@ -233,7 +233,7 @@ selon l'{prf:ref}`AEB` ({numref}`ae3`).
 1. Tant que (non stop)
     1. Tirer un exemple $\mathbf x$ de $\mathcal{S}$
     2. Tirer $\mathbf {\tilde{x}}$ selon $C(\mathbf{\tilde{x}},\mathbf{x})$
-    3. Estimer $\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}}) = \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf{h},\mathbf{w_D})=g(\mathbf{h},\mathbf{w_D})$ où $\mathbf{h} = f((\mathbf{\tilde{x}},\mathbf{w_E})$
+    3. Estimer $\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}}) = \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf{h},\mathbf{w_D})=g(\mathbf{h},\mathbf{w_D})$ où $\mathbf{h} = f(\mathbf{\tilde{x}},\mathbf{w_E})$
 ```
 
 L'apprentissage peut être vu comme une descente de gradient stochastique
@@ -260,7 +260,7 @@ ligne.
 
 Le dernier modèle d'autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.
 
-Les autoencodeurs variationnels (VAE) sont des modèles
+Les autoencodeurs variationnels (VAE) {cite:p}`Kingma13` sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
 empruntent juste une architecture similaire ({numref}`ae4`), d'où leur nom.
@@ -355,3 +355,8 @@ alors seulement pour $\epsilon$, qui n'a pas besoin d'être rétropropagé.
 Visualisation de l’espace latent $\mathcal H = \mathbb{R}^2$ appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur $\mathbf h_i$ discrétisée sur $\mathcal H$ est affichée une image $\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w_D})$. Les chiffres de la même classe sont groupés dans cet espace, et les axes de $\mathcal H$ ont une interprétation (l'axe horizontal semble souligner le caractère "penché" des chiffres).
 ```
 
+## Implémentation
+
+```{bibliography}
+:style: unsrt
+```
