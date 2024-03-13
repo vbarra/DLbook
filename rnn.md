@@ -31,7 +31,7 @@ aux instants suivants, à l'aide des arcs récurrents.
 
 Deux équations permettent de calculer les quantités nécessaires à
 l'instant $t$ dans la phase de propagation avant d'un réseau récurrent
-simple (comme celui de la {numref}`ae1` gauche) : 
+simple (comme celui de la {numref}`rnn1` gauche) : 
 
 $$\begin{aligned}
 h_t&=&\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t-1}} + b_h\right)\\
@@ -42,14 +42,14 @@ où $\mathbf{W_{hx}}$ est la matrice des poids reliant
 l'entrée à la couche cachée et $\mathbf{W_{hh}}$ celle des poids des
 arcs récurrents. Les biais sont notés $b_h$ et $b_y$.\
 La dynamique du réseau peut être décrite en dépliant ce réseau dans le
-temps ({numref}`ae1` droite). Le réseau devient donc un réseau profond, avec une couche par instant $t$ et un partage de poids au cours du temps. Ce dernier peut
+temps ({numref}`rnn1` droite). Le réseau devient donc un réseau profond, avec une couche par instant $t$ et un partage de poids au cours du temps. Ce dernier peut
 donc être entraîné de manière classique par l'algorithme de
 rétropropagation du gradient, indicé par le temps (*Backpropagation
 through time*, BPTT algorithm).
 
 
 ```{figure} ./images/rnn1.png
-:name: ae1
+:name: rnn1
 Réseau récurrent et sa version dépliée dans le
 temps.
 ```
@@ -58,21 +58,26 @@ temps.
 
 Avec ces réseaux, il est possible de traiter des séquences de longueur
 quelconque, la taille du modèle étant indépendante de cette longueur.
-Plusieurs architectures peuvent être déclinées sur ce principe et le
-tableau [1.1](#T:rnn){reference-type="ref" reference="T:rnn"} donne un
-panorama de certaines d'entre elles, avec des exemples d'applications.
+Plusieurs architectures peuvent être déclinées sur ce principe
 
-::: {#T:rnn}
-  **Architecture**           **Réseau**                                              **Applications**
-  -------------------------- ------------------------------------------------------- ---------------------------------------------------------------
-  Un vers plusieurs          ![image](images/onetomany.pdf){width="\\linewidth"}     Génération de musique, légendage d'images
-  Plusieurs vers un          ![image](images/manytoone.pdf){width="\\linewidth"}     Classification de sentiments
-  Plusieurs vers plusieurs   ![image](images/manytomany1.pdf){width="\\linewidth"}   Reconnaissance d'entité dans des textes, annotation de vidéos
-  Plusieurs vers plusieurs   ![image](images/manytomany2.pdf){width="\\linewidth"}   Traduction
+```{figure} ./images/onetomany.pdf
+:name: onetomany
+Architectures "un vers plusieurs" , utilisées par exemple en génération de musique ou légendage d'images.
+```
 
-  : Différentes architectures de réseaux récurrents et leurs
-  applications
-:::
+```{figure} ./images/manytoone.pdf
+:name: onetomany
+Architectures "un vers plusieurs" , utilisées par exemple en classification de sentiments
+```
+```{figure} ./images/manytomany1.pdf
+:name: onetomany
+Architectures "plusieurs vers plusieurs", pour la reconnaissance d'entité dans des textes ou annotation de vidéos.
+```
+```{figure} ./images/manytomany2.pdf
+:name: onetomany
+Architectures "plusieurs vers plusieurs", pour la traduction automatique.
+```
+
 
 ## Entraînement des réseaux récurrents
 

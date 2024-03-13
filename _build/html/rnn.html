@@ -180,11 +180,12 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Réseaux récurrents</a></li>
 </ul>
 
     </div>
@@ -325,7 +326,7 @@ La donnée <span class="math notranslate nohighlight">\(\mathbf{x_{t-1}}\)</span
 aux instants suivants, à l’aide des arcs récurrents.</p>
 <p>Deux équations permettent de calculer les quantités nécessaires à
 l’instant <span class="math notranslate nohighlight">\(t\)</span> dans la phase de propagation avant d’un réseau récurrent
-simple (comme celui de la <code class="xref std std-numref docutils literal notranslate"><span class="pre">ae1</span></code> gauche) :</p>
+simple (comme celui de la <a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 28</span></a> gauche) :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 h_t&amp;=&amp;\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t-1}} + b_h\right)\\
@@ -335,14 +336,14 @@ h_t&amp;=&amp;\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t
 l’entrée à la couche cachée et <span class="math notranslate nohighlight">\(\mathbf{W_{hh}}\)</span> celle des poids des
 arcs récurrents. Les biais sont notés <span class="math notranslate nohighlight">\(b_h\)</span> et <span class="math notranslate nohighlight">\(b_y\)</span>.<br />
 La dynamique du réseau peut être décrite en dépliant ce réseau dans le
-temps (<code class="xref std std-numref docutils literal notranslate"><span class="pre">ae1</span></code> droite). Le réseau devient donc un réseau profond, avec une couche par instant <span class="math notranslate nohighlight">\(t\)</span> et un partage de poids au cours du temps. Ce dernier peut
+temps (<a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 28</span></a> droite). Le réseau devient donc un réseau profond, avec une couche par instant <span class="math notranslate nohighlight">\(t\)</span> et un partage de poids au cours du temps. Ce dernier peut
 donc être entraîné de manière classique par l’algorithme de
 rétropropagation du gradient, indicé par le temps (<em>Backpropagation
 through time</em>, BPTT algorithm).</p>
 <figure class="align-default" id="ae1">
 <img alt="_images/rnn1.png" src="_images/rnn1.png" />
 <figcaption>
-<p><span class="caption-text">Réseau récurrent et sa version dépliée dans le
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Réseau récurrent et sa version dépliée dans le
 temps.</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
