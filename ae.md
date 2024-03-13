@@ -449,7 +449,7 @@ for i in range(num_epochs):
         optimizer.step()
         
     if i%10==0:    
-        print('====> Epoch: {} perte moyenne: {:.9f}'.format(i, train_loss ))
+        print('Epoch: {} perte moyenne: {:.9f}'.format(i, train_loss))
 ```
 
 Pour finalement visualiser les résultats de la reconstruction ({numref}`ae6`)
