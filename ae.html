@@ -72,6 +72,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ae';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Réseaux récurrents" href="rnn.html" />
     <link rel="prev" title="Réseaux convolutifs" href="cnn.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="fr"/>
@@ -316,7 +317,7 @@ document.write(`
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Un autoencodeur est algorithme entraîné de manière non supervisée à
 reproduire son entrée <span class="math notranslate nohighlight">\(\mathbf{x}\in \mathcal{X}\)</span>. Il peut être vu
-(<a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 21</span></a>) comme
+(<code class="xref std std-numref docutils literal notranslate"><span class="pre">ae1</span></code>) comme
 composé de deux parties : un <em>encodeur</em> <code class="docutils literal notranslate"><span class="pre">E</span></code> qui transforme <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>
 en un code déterministe
 <span class="math notranslate nohighlight">\(\mathbf{h} = f(\mathbf{x} ; \mathbf{w_E})\in \mathcal{H}\)</span> ou une
@@ -541,7 +542,7 @@ ligne.</span><a class="headerlink" href="#ae3" title="Link to this image">#</a><
 <section id="autoencodeurs-variationnels">
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Link to this heading">#</a></h2>
 <p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.</p>
-<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="cnn.html#id25" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
+<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="rnn.html#id18" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
 empruntent juste une architecture similaire (<a class="reference internal" href="#ae4"><span class="std std-numref">Fig. 24</span></a>), d’où leur nom.</p>
@@ -723,7 +724,7 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <p><span class="caption-number">Fig. 26 </span><span class="caption-text">Reconstruction aux itérations 0,10,20,30 et 40 d’un sous-ensemble de l’ensemble d’apprentissage.</span><a class="headerlink" href="#ae5b" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Pour finalement visualiser les résultats de la reconstruction sur un ensemble de test(<a class="reference internal" href="#ae6"><span class="std std-numref">Fig. 27</span></a>).</p>
+<p>Pour finalement visualiser les résultats de la reconstruction sur un ensemble de test (<a class="reference internal" href="#ae6"><span class="std std-numref">Fig. 27</span></a>).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
     <span class="n">npimg</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
@@ -753,7 +754,7 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <figure class="align-center" id="ae6">
 <img alt="_images/ae6.png" src="_images/ae6.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Images originales (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Images originales de test (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>L’Autoencodeur peut ensuite être utilisé par exemple en reconnaissance de chiffres. Une manière simple consiste à choisir au hasard 10 échantillons d’apprentissage de chaque classe et à leur attribuer une étiquette. Ensuite, étant donné les données de test, il est possible de prédire à quelles classes elles appartiennent en trouvant les échantillons d’apprentissage étiquetés les plus similaires dans l’espace latent <span class="math notranslate nohighlight">\(\mathcal H\)</span>.</p>
@@ -815,6 +816,10 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">8</a><span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
 </div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
+<p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
+</div>
 </div>
 </div>
 </section>
@@ -858,6 +863,15 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
         <p class="prev-next-subtitle">précédent</p>
         <p class="prev-next-title">Réseaux convolutifs</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="rnn.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Réseaux récurrents</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
