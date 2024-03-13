@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Réseaux récurrents &#8212; Apprentissage profond</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'rnn';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Auto-encodeurs" href="ae.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Réseaux récurrents</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Définition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement-des-reseaux-recurrents">Entraînement des réseaux récurrents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-architectures">Quelques architectures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">LSTM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gru">GRU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reseaux-recurrents-bidirectionnels">Réseaux récurrents bidirectionnels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machines-de-turing-neuronales">Machines de Turing neuronales</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-applications">Quelques applications</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reseaux-recurrents">
+<h1>Réseaux récurrents<a class="headerlink" href="#reseaux-recurrents" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="definition">
+<h2>Définition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
+<p>Les réseaux de neurones récurrents (RNN, <em>Recurrent Neural Networks</em>)
+sont des réseaux à propagation avant, permettant de prendre en compte le
+temps. Comme dans les réseaux classiques, il n’existe pas de cycle, mais
+les arcs ajoutés pour introduire la notion de temps (les arcs
+récurrents) peuvent en revanche former des cycles, y compris de longueur
+1 (connexion d’un neurone avec lui-même). À l’instant <span class="math notranslate nohighlight">\(t\)</span>, les neurones
+possédant des arcs récurrents reçoivent en entrée la donnée courante
+<span class="math notranslate nohighlight">\(\mathbf{x_t}\)</span> et les valeurs des neurones cachés <span class="math notranslate nohighlight">\({h_{t-1}}\)</span> informant
+sur l’état précédent du réseau. La sortie <span class="math notranslate nohighlight">\(\hat{y}_{t}\)</span> est calculée
+étant donné l’état <span class="math notranslate nohighlight">\(\mathbf{x_t}\)</span> des neurones cachés à l’instant <span class="math notranslate nohighlight">\(t\)</span>.
+La donnée <span class="math notranslate nohighlight">\(\mathbf{x_{t-1}}\)</span> peut influencer <span class="math notranslate nohighlight">\(\hat{y}_{t}\)</span> et la sortie
+aux instants suivants, à l’aide des arcs récurrents.</p>
+<p>Deux équations permettent de calculer les quantités nécessaires à
+l’instant <span class="math notranslate nohighlight">\(t\)</span> dans la phase de propagation avant d’un réseau récurrent
+simple (comme celui de la <code class="xref std std-numref docutils literal notranslate"><span class="pre">ae1</span></code> gauche) :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+h_t&amp;=&amp;\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t-1}} + b_h\right)\\
+\hat{y}_{t}&amp;=&amp;softmax\left({W_{yh}} h_t + b_y  \right)
+\end{aligned}\end{split}\]</div>
+<p>où <span class="math notranslate nohighlight">\(\mathbf{W_{hx}}\)</span> est la matrice des poids reliant
+l’entrée à la couche cachée et <span class="math notranslate nohighlight">\(\mathbf{W_{hh}}\)</span> celle des poids des
+arcs récurrents. Les biais sont notés <span class="math notranslate nohighlight">\(b_h\)</span> et <span class="math notranslate nohighlight">\(b_y\)</span>.<br />
+La dynamique du réseau peut être décrite en dépliant ce réseau dans le
+temps (<code class="xref std std-numref docutils literal notranslate"><span class="pre">ae1</span></code> droite). Le réseau devient donc un réseau profond, avec une couche par instant <span class="math notranslate nohighlight">\(t\)</span> et un partage de poids au cours du temps. Ce dernier peut
+donc être entraîné de manière classique par l’algorithme de
+rétropropagation du gradient, indicé par le temps (<em>Backpropagation
+through time</em>, BPTT algorithm).</p>
+<figure class="align-default" id="ae1">
+<img alt="_images/rnn1.png" src="_images/rnn1.png" />
+<figcaption>
+<p><span class="caption-text">Réseau récurrent et sa version dépliée dans le
+temps.</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Avec ces réseaux, il est possible de traiter des séquences de longueur
+quelconque, la taille du modèle étant indépendante de cette longueur.
+Plusieurs architectures peuvent être déclinées sur ce principe et le
+tableau <a class="reference internal" href="#T:rnn"><span class="xref myst">1.1</span></a>{reference-type= »ref » reference= »T:rnn »} donne un
+panorama de certaines d’entre elles, avec des exemples d’applications.</p>
+</section>
+<section id="entrainement-des-reseaux-recurrents">
+<h2>Entraînement des réseaux récurrents<a class="headerlink" href="#entrainement-des-reseaux-recurrents" title="Link to this heading">#</a></h2>
+<p>L’apprentissage de dépendances long terme peut être difficile. Les
+problèmes d’évanescence (<em>vanishing</em>) ou d’explosion du gradient peuvent
+rapidement survenir, lors de la rétropropagation sur plusieurs pas de
+temps.</p>
+<p>Prenons un exemple simple pour comprendre : considérons un réseau à un
+neurone d’entrée, un neurone récurrent caché et un neurone de sortie. On
+donne au réseau une entrée à l’instant <span class="math notranslate nohighlight">\(t_0\)</span> et on calcule l’erreur à
+l’instant <span class="math notranslate nohighlight">\(t&gt;t_0\)</span>, en supposant des entrées nulles entre <span class="math notranslate nohighlight">\(t_0\)</span> et <span class="math notranslate nohighlight">\(t\)</span>.
+Le lien entre les poids au cours du temps fait que le poids sur l’arc
+récurrent ne change jamais. La contribution de l’entrée au temps <span class="math notranslate nohighlight">\(t_0\)</span> à
+la sortie au temps <span class="math notranslate nohighlight">\(t\)</span> deviendra de plus en plus importante, ou se
+rapprochera de zéro, de manière exponentielle à mesure que <span class="math notranslate nohighlight">\(t-t_0\)</span>
+croît. Et la dérivée de l’erreur par rapport à l’entrée explosera ou
+disparaîtra, selon que le poids de l’arc récurrent a une valeur absolue
+plus grande ou plus petite que 1 et selon la fonction d’activation du
+neurone caché (le problème du gradient évanescent est très présent avec
+une sigmoïde et une activation ReLU force davantage l’explosion).</p>
+<p>Plusieurs solutions ont été proposées (régularisation, retropropagation
+tronquée, conception d’architecture et heuristiques) pour résoudre ces
+problèmes.</p>
+</section>
+<section id="quelques-architectures">
+<h2>Quelques architectures<a class="headerlink" href="#quelques-architectures" title="Link to this heading">#</a></h2>
+<section id="lstm">
+<h3>LSTM<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h3>
+<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id1">[<a class="reference internal" href="#id4" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
+modèle ressemble à un réseau récurrent classique à une couche cachée,
+mais chaque neurone de la couche cachée est remplacé par une cellule de
+mémoire.</p>
+<p>Dans la suite, on note <span class="math notranslate nohighlight">\(\mathbf{x_t}\)</span> l’entrée de la cellule à l’instant
+<span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\({h_{t-1}}\)</span> la sortie de la couche cachée calculée au temps <span class="math notranslate nohighlight">\(t-1\)</span>.
+Au lieu de calculer une sortie du type
+<span class="math notranslate nohighlight">\(\sigma\left( \mathbf{W^\top x}+b\right)\)</span>, la cellule contient plusieurs
+éléments distincts aux fonctions particulières. Les LSTM introduisent la
+notion de portes, qui sont des unités d’activation de type sigmoïde qui
+prennent comme arguments <span class="math notranslate nohighlight">\(\mathbf{x_t}\)</span> et <span class="math notranslate nohighlight">\({h_{t-1}}\)</span> et viennent
+pondérer des valeurs calculées dans la cellule. En particulier, si la
+valeur d’une porte est nulle, alors le flot est coupé dans le graphe,
+alors qu’il transite intégralement si la valeur de la porte est égale à
+1.</p>
+<p>On retrouve dans une cellule (figure
+<a class="reference internal" href="#F:lstmC"><span class="xref myst">1.3</span></a>{reference-type= »ref » reference= »F:lstmC »}) les éléments
+suivants :</p>
+<ul class="simple">
+<li><p><em>Neurone d’entrée</em> : ce neurone prend en entrée <span class="math notranslate nohighlight">\(\mathbf{x_t}\)</span> et
+<span class="math notranslate nohighlight">\({h_{t-1}}\)</span> et calcule, à la manière d’un neurone classique, une
+sortie
+<span class="math notranslate nohighlight">\(g^{t} = \sigma\left(\mathbf{W_C^\top} \left[\mathbf{x_t},  {h_{t-1}}\right ] +b_C\right)\)</span>.</p></li>
+<li><p><em>Porte d’entrée</em> (ou de mise à jour) : la porte calcule
+<span class="math notranslate nohighlight">\(i^{t} = \sigma\left(\mathbf{W_i}^\top \left[\mathbf{x_t},  {h_{t-1}}\right ] +b_i\right)\)</span>
+et vient pondérer la valeur du neurone d’entrée pour décider de
+l’importance à lui donner au temps <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Porte d’oubli : cette porte calcule
+<span class="math notranslate nohighlight">\(f^{t}=\sigma\left(\mathbf{W_f}^\top\left[\mathbf{x_t} , {h_{t-1}}\right ] +b_f\right)\)</span>
+et permet au réseau d’oublier son état interne.</p></li>
+<li><p><em>État interne</em> : le cœur de la cellule de mémoire est son état
+interne, noté <span class="math notranslate nohighlight">\(C^{t}\)</span>, composé d’un neurone récurrent à poids fixe
+unité, assurant que le gradient peut passer par cet arc de
+nombreuses fois sans disparaître ou exploser. La mise à jour de
+l’état interne est effectuée par une opération du type
+<span class="math notranslate nohighlight">\(C^{t} =g^{t}.i^{t} + C^{(t-1)}.f^{t}\)</span>.</p></li>
+<li><p><em>Porte de sortie</em> : la valeur <span class="math notranslate nohighlight">\(h_t\)</span> produite par la cellule de
+mémoire est calculée comme le produit de <span class="math notranslate nohighlight">\(tanh(C^{t})\)</span> par la valeur
+de la porte de sortie <span class="math notranslate nohighlight">\(o^{t}\)</span>. Cette porte sélectionne la part de
+<span class="math notranslate nohighlight">\(C^{t}\)</span> à fournir en sortie et est calculée par
+<span class="math notranslate nohighlight">\(o^{t} = \sigma\left(\mathbf{W_o}^\top\left[\mathbf{x_t} , h_{t-1}\right ] +b_o\right)\)</span>.</p></li>
+</ul>
+<figure id="F:lstmC">
+<figcaption>Cellule LSTM</figcaption>
+</figure>
+<p>En résumé, un LSTM effectue donc les opérations suivantes à l’instant
+<span class="math notranslate nohighlight">\(t\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
+g^{t} &amp;=&amp; \sigma\left(\mathbf{W_C}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_C\right)\\
+i^{t} &amp;=&amp; \sigma\left(\mathbf{W_i}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_i\right)\\
+f^{t} &amp;=&amp; \sigma\left(\mathbf{W_f}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_f\right)\\
+o^{t} &amp;=&amp; \sigma\left(\mathbf{W_o}^\top \left[\mathbf{x_t}, h_{t-1}\right ] +b_o\right)\\
+C^{t} &amp;=&amp;g^{t}.i^{t} + C^{t-1}.f^{t}\\
+h_t &amp;=&amp; o^{t} tanh(C^{t})
+\end{aligned}\)</span>$</p>
+</section>
+<section id="gru">
+<h3>GRU<a class="headerlink" href="#gru" title="Link to this heading">#</a></h3>
+<p>En 2014 [&#64;ChO14], une version simplifiée des réseaux LSTM a été
+introduite, qui nécessite moins de paramètres. Les GRU (<em>Gated Recurrent
+Units</em>) sont en effet des réseaux sans mémoire interne <span class="math notranslate nohighlight">\(C^{t}\)</span>, ni porte
+de sortie <span class="math notranslate nohighlight">\(o^{t}\)</span>. Ces réseaux sont composés de deux portes au lieu de
+trois :</p>
+<ul class="simple">
+<li><p>une <em>porte reset</em> <span class="math notranslate nohighlight">\(r^{t}\)</span>, qui détermine la manière de combiner la
+nouvelle entrée au temps <span class="math notranslate nohighlight">\(t\)</span> avec la mémoire provenant du temps
+<span class="math notranslate nohighlight">\(t-1\)</span>.</p></li>
+<li><p>une <em>porte de mise à jour</em> <span class="math notranslate nohighlight">\(z^{t}\)</span>, qui détermine la quantité de
+mémoire précédente qui doit être conservée. Cette porte est la
+combinaison des portes d’entrée et d’oubli des LSTM.</p></li>
+</ul>
+<p>Formellement : $<span class="math notranslate nohighlight">\(\begin{aligned}
+r^{t} &amp;=&amp; \sigma\left(\mathbf{W_r}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_r\right)\\
+z^{t} &amp;=&amp; \sigma\left(\mathbf{W_z}^\top\left[\mathbf{x_t}, h_{t-1}\right ] +b_z\right)\\
+\tilde{h}^{t} &amp;=&amp; tanh\left(\mathbf{W}^\top\left[\mathbf{x_t} , r^{t} h_{t-1}\right ] +b_h \right)\\ 
+h_t&amp;=&amp;\left(1-z^{t}\right)h_{t-1} + z^{t} \tilde{h}^{t}
+\end{aligned}\)</span>$</p>
+<p>Si, pour tout <span class="math notranslate nohighlight">\(t, r^{t}=1\)</span> et <span class="math notranslate nohighlight">\(z^{t}=0\)</span>, alors on modélise un réseau
+récurrent classique.</p>
+<figure id="F:lstmC">
+<figcaption>Cellule GRU</figcaption>
+</figure>
+</section>
+<section id="reseaux-recurrents-bidirectionnels">
+<h3>Réseaux récurrents bidirectionnels<a class="headerlink" href="#reseaux-recurrents-bidirectionnels" title="Link to this heading">#</a></h3>
+<p>Les réseaux bidirectionnels ont été décrits pour la première fois en
+1997 [&#64;SCH97]. Dans ces réseaux, deux couches cachées sont présentes,
+chacune connectée à l’entrée et la sortie. La première couche cachée a
+des connexions récurrentes depuis le passé vers le futur, tandis que
+l’autre transmet les activations depuis le futur vers le passé
+(figure <a class="reference internal" href="#F:BDRN"><span class="xref myst">1.4</span></a>{reference-type= »ref » reference= »F:BDRN »}).</p>
+<figure id="F:BDRN">
+<embed src="images/bidirectionnel.pdf" />
+<figcaption>Réseau bidirectionnel.</figcaption>
+</figure>
+<p>Étant données une entrée et une sortie du réseau (des séquences), le
+réseau peut être entraîné par rétropropagation après avoir été déplié :
+$<span class="math notranslate nohighlight">\(\begin{aligned}
+x_t &amp;=&amp;\sigma\left(\mathbf{W_h}^\top \left [\mathbf{x_t},h_{t-1} \right ]+b_h \right)\\
+z_{t} &amp;=&amp;\sigma\left(\mathbf{W_z}^\top \left [\mathbf{x_t},z_{t+1} \right ]+b_z \right)\\
+\hat{y}_{t}&amp;=&amp; softmax\left(\mathbf{W_y}^\top \left [x_t,z_{t} \right ]+b_y \right)
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>h_t<span class="math notranslate nohighlight">\( (respectivement \)</span>z_{t}$) représente la valeur
+de la couche cachée dans le sens du temps (respectivement dans le sens
+inverse). Puisque le temps doit être fini dans les deux sens de
+parcours, les réseaux bidirectionnels ne peuvent traiter que des
+séquences finies.</p>
+</section>
+<section id="machines-de-turing-neuronales">
+<h3>Machines de Turing neuronales<a class="headerlink" href="#machines-de-turing-neuronales" title="Link to this heading">#</a></h3>
+<p>Les réseaux récurrents sont performants pour construire une
+représentation implicite de l’information, mais restent relativement peu
+adaptés à la conservation d’informations explicites (des dates précises
+par exemple). S’inspirant des mémoires de travail, théorisées par les
+neurosciences et qui sont responsables du raisonnement inductif et de la
+création de nouveaux concepts, l’idée est alors d’ajouter à ces modèles
+une mémoire de travail externe, ce qui permet de découpler la mémoire
+(assimilable à la RAM d’un ordinateur) des opérations liées à la tâche
+effectuée par le réseau (assimilable à la CPU). Puisque la mémoire des
+LSTM est distribuée dans chaque cellule, elle est donc liée au nombre de
+cellules et à la capacité de calcul et ce modèle ne répond pas
+directement au problème posé.</p>
+<p>Graves et al. [&#64;Graves14] proposent alors une architecture, appelée
+machine de Turing neuronale, constituée de deux éléments principaux :
+une mémoire et un contrôleur doté d’un mécanisme d’attention qui lit et
+écrit dans cette mémoire. Les accès mémoire sont ici des équivalents
+analogiques dérivables, pour permettre d’entraîner le contrôleur par
+descente de gradient. Typiquement, le contrôleur est un réseau de
+neurones ou un réseau récurrent type LSTM
+(figure <a class="reference internal" href="#F:NTM"><span class="xref myst">[F:NTM]</span></a>{reference-type= »ref » reference= »F:NTM »}).</p>
+<p>Les têtes de lecture et d’écriture interagissent avec la mémoire. Chaque
+tête est contrôlée par un vecteur de poids, chaque composante
+définissant le degré d’interaction de la tête avec la zone mémoire
+correspondante. Un <em>mécanisme de mise à jour de ces poids</em>, composé de
+quatre opérations, est mis en place pour permettre l’apprentissage du
+réseau :</p>
+<ol class="arabic simple">
+<li><p>Le réseau s’intéresse tout d’abord aux zones mémoire proches d’une
+clé <span class="math notranslate nohighlight">\(k_t\)</span> donnée. Cela permet au modèle de retrouver une information
+spécifique, en recherchant si la zone mémoire <span class="math notranslate nohighlight">\(M_t(i)\)</span> est proche de
+la clé, au sens d’une similarité <span class="math notranslate nohighlight">\(K\)</span>. Formellement, chaque poids
+correspondant à la zone mémoire <span class="math notranslate nohighlight">\(i\)</span> est calculé par
+<span class="math notranslate nohighlight">\(w_t(i) = softmax(\beta_t K[k_t,M_t(i)])\)</span>.</p></li>
+<li><p>Un mécanisme d’interpolation linéaire permet ensuite de mettre à
+jour les poids en fonction de leur valeur précédente (pour prendre
+plus ou moins en compte l’information issue de la clé, ou au
+contraire la valeur précédente du poids) :
+<span class="math notranslate nohighlight">\(w_t(i)=g_t.w_t(i) + (1-g_t).w_{t-1}(i)\)</span>.</p></li>
+<li><p>Un décalage par convolution translate ensuite les poids, à la
+manière du décalage classique de la tête dans une machine de Turing
+classique : <span class="math notranslate nohighlight">\(w_t(i)=\displaystyle\sum_j w_t(j)\mathbf{s_t}(i-j)\)</span> où
+<span class="math notranslate nohighlight">\(\mathbf{s_t}\)</span> est un vecteur qui définit un décalage des poids à
+l’instant <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Enfin, le vecteur de poids est focalisé :
+<span class="math notranslate nohighlight">\(w_t(i) = w_t(i)^{\gamma_t}\)</span>, <span class="math notranslate nohighlight">\(\gamma_t&gt;1\)</span>.</p></li>
+</ol>
+<p>Une fois que la tête a mis à jour les poids, elle interagit avec la
+mémoire :</p>
+<ul class="simple">
+<li><p>Dans le cas de la tête de lecture, elle calcule une combinaison
+linéaire des zones mémoire, pondérées par les poids <span class="math notranslate nohighlight">\(w_t(i)\)</span>, et
+produit le vecteur <span class="math notranslate nohighlight">\(\mathbf{r_t}\)</span>, fourni au contrôleur de l’instant
+suivant.</p></li>
+<li><p>Dans le cas de la tête d’écriture, le contenu de la mémoire est mis
+à jour selon la formule
+<span class="math notranslate nohighlight">\(M_t(i) = M_{t-1}(i)(1-w_t(i)\mathbf{e_t})+w_t(i)\mathbf{a_t}\)</span>, où
+<span class="math notranslate nohighlight">\(\mathbf{e_t}\)</span> est un vecteur d’effacement, dont les composantes
+sont dans {0,1} et <span class="math notranslate nohighlight">\(\mathbf{a_t}\)</span> est un vecteur d’ajout.</p></li>
+</ul>
+<div class="SCfigure docutils">
+<p><img alt="image" src="images/turing.pdf" />{width= ».6\linewidth »}</p>
+</div>
+<figure>
+<figcaption>Quelques applications des réseaux récurrents.</figcaption>
+</figure>
+</section>
+</section>
+<section id="quelques-applications">
+<h2>Quelques applications<a class="headerlink" href="#quelques-applications" title="Link to this heading">#</a></h2>
+<p>Comme les réseaux convolutifs, les réseaux récurrents ont depuis leur
+introduction trouvé de nombreuses applications.</p>
+<p><strong>Traitement automatique du langage</strong></p>
+<p>Les réseaux récurrents sont utilisés en traitement automatique du
+langage, notamment à des fins génératives. Ces réseaux permettent de
+modéliser un langage (prédire la probabilité d’un mot donné étant donnés
+les mots précédents) et de générer du texte à partir du modèle appris.
+De nombreuses applications découlent de cette modélisation : génération
+de texte au style de (génération d’un texte dans le style de
+Shakespeare, à partir d’un RNN appris sur le corpus des œuvres de
+l’auteur par exemple, génération de textes manuscrits
+(figure <a class="reference internal" href="#F:gener"><span class="xref myst">[F:gener]</span></a>{reference-type= »ref »
+reference= »F:gener »}), génération de pages Wikipedia, ou même génération
+d’articles scientifiques, à partir des sources LaTeXd’un ouvrage et d’un
+LSTM multicouche.</p>
+<p><strong>Traduction automatique</strong></p>
+<p>La traduction automatique de texte procède de la même stratégie que la
+modélisation d’une langue. Deux réseaux récurrents sont entraînés,
+chacun dans une des langues, et le RNN traducteur calcule sa sortie en
+fonction de la couche cachée du premier réseau.</p>
+<p><strong>Analyse de sentiments</strong></p>
+<p>Détecter de manière automatique l’opinion du public sur un sujet donné
+intéresse de plus en plus le domaine commercial. Ce domaine, largement
+alimenté par les réseaux sociaux, les avis et recommandations déposées
+sur les sites Internet, est un champ de prédilection pour les réseaux
+profonds. Des réseaux récurrents (notamment LSTM structurés en arbres)
+sont utilisés à cet effet et servent de base à des systèmes de
+recommandation.</p>
+<p><strong>Résumé automatique</strong></p>
+<p>Les réseaux récurrents permettent de produire des résumés abstraits de
+textes (i.e. générer de nouvelles phrases, en opposition à extraire les
+mots les plus importants d’un texte). Les modèles utilisés sont des
+réseaux récurrents avec mécanisme d’attention. Un système
+d’encodage/décodage est mis en place dans le réseau, où l’encodeur est
+par exemple un GRU bidirectionnel et le décodeur un GRU dont l’état
+caché a la même taille que celui de l’encodeur. Les modèles sont appris
+et validés sur des corpus dédiés (DUC, CNN/Daily Mail par exemple).</p>
+<p><strong>Reconnaissance de la parole</strong></p>
+<p>L’utilisation de réseaux LSTM bidirectionnels, qui permettent à la fois
+d’exploiter les contextes passé et futur, et de garder trace d’un
+contexte à longue échéance, a montré de bonnes performances dans la
+tache de reconnaissance de la parole.</p>
+<p><strong>Annotation d’images</strong></p>
+<p>Couplé à un réseau convolutif, un RNN permet de générer des descriptions
+(légendes) d’images non labelisées. Le réseau convolutif produit des
+descripteurs, qui servent d’entrée à un réseau récurrent type LSTM
+(figure <a class="reference internal" href="#F:caption"><span class="xref myst">[F:caption]</span></a>{reference-type= »ref »
+reference= »F:caption »}).</p>
+<div class="docutils container" id="id2">
+<div role="list" class="citation-list">
+<div class="citation" id="id39" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
+</div>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+<p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
+</div>
+<div class="citation" id="id41" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
+<p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
+</div>
+<div class="citation" id="id42" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
+<p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">9</a><span class="fn-bracket">]</span></span>
+<p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ae.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Auto-encodeurs</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Définition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement-des-reseaux-recurrents">Entraînement des réseaux récurrents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-architectures">Quelques architectures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">LSTM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gru">GRU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reseaux-recurrents-bidirectionnels">Réseaux récurrents bidirectionnels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machines-de-turing-neuronales">Machines de Turing neuronales</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-applications">Quelques applications</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Vincent BARRA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
