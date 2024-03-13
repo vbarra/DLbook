@@ -233,7 +233,7 @@ selon l'{prf:ref}`AEB` ({numref}`ae3`).
 1. Tant que (non stop)
     1. Tirer un exemple $\mathbf x$ de $\mathcal{S}$
     2. Tirer $\mathbf {\tilde{x}}$ selon $C(\mathbf{\tilde{x}},\mathbf{x})$
-    3. Estimer $\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}}) = $\textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf{h},\mathbf{w_D})=g(\mathbf{h},\mathbf{w_D})$ où $\mathbf{h} = f((\mathbf{\tilde{x}},\mathbf{w_E})$
+    3. Estimer $\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}}) = \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf{h},\mathbf{w_D})=g(\mathbf{h},\mathbf{w_D})$ où $\mathbf{h} = f((\mathbf{\tilde{x}},\mathbf{w_E})$
 ```
 
 L'apprentissage peut être vu comme une descente de gradient stochastique
@@ -252,31 +252,26 @@ centré de variance unité (deuxième ligne). Un autoencodeur de débruitage
 est ensuite entraîné. Le code $\mathbf{h}$ de taille 32 est visualisé
 (troisième ligne) sous la forme d'images 8$\times$4. Le
 décodeur produit les images débruitées de la dernière
-ligne.```
+ligne.
+```
 
 
 ## Autoencodeurs variationnels
 
-Le dernier modèle d'autoencodeurs que nous abordons fait le lien avec la
-section suivante sur les réseaux antagonistes générateurs.\
+Le dernier modèle d'autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.
+
 Les autoencodeurs variationnels (VAE) [@Kingma13] sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
-empruntent juste une architecture similaire (figure
-[1.4](#F:VAE){reference-type="ref" reference="F:VAE"}), d'où leur nom.\
+empruntent juste une architecture similaire ({numref}`ae4`), d'où leur nom.
 
-::: center
-<figure id="F:VAE">
-<p><span> myTrapezium/.pic = <span> (0,0) – (0,)̱ – (,)̧ – (,-)̧ – (0,-)̱ –
-cycle ; (-center) at (/2,0); (-out) at (,0); </span> </span></p>
-<p>= [thick, decoration=<span>markings,mark=at position 1 with </span>,
-double distance=1.4pt, shorten &gt;= 5.5pt, preaction =
-<span>decorate</span>, postaction = <span>draw,line width=1.4pt,
-white,shorten &gt;= 4.5pt</span>]</p>
-<figcaption>Architecture générale d’un autoencodeur
-variationnel</figcaption>
-</figure>
-:::
+```{figure} ./images/ae4.png
+:name: ae4
+Architecture générale d’un autoencodeur
+variationnel.
+```
+
+
 
 Au lieu d'apprendre $f(.,\mathbf{w_E})$ et $g(.,\mathbf{w_D})$, un
 autoencodeur variationnel apprend des distributions de probabilité
