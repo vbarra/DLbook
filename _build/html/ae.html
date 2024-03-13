@@ -541,7 +541,7 @@ ligne.</span><a class="headerlink" href="#ae3" title="Link to this image">#</a><
 <section id="autoencodeurs-variationnels">
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Link to this heading">#</a></h2>
 <p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.</p>
-<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="cnn.html#id25" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
+<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="#id18" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
 empruntent juste une architecture similaire (<a class="reference internal" href="#ae4"><span class="std std-numref">Fig. 24</span></a>), d’où leur nom.</p>
@@ -722,7 +722,6 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
     <span class="n">npimg</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-    <span class="c1">#transpose: change array axis to correspond to the plt.imshow() function     </span>
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">npimg</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span> 
     <span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -752,6 +751,31 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <p><span class="caption-number">Fig. 26 </span><span class="caption-text">Images originales (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<p>L’Autoencodeur peut ensuite être utilisé par exemple en reconnaissance de chiffres. Une manière simple consiste à choisir au hasard 10 échantillons d’apprentissage de chaque classe et à leur attribuer une étiquette. Ensuite, étant donné les données de test, il est possible de prédire à quelles classes elles appartiennent en trouvant les échantillons d’apprentissage étiquetés les plus similaires dans l’espace latent <span class="math notranslate nohighlight">\(\mathcal H\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Données d&#39;entraînement</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_loader</span><span class="p">))</span>
+<span class="n">candidates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">train_batch_size</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span><span class="n">candidates</span><span class="p">]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">candidates</span><span class="p">]</span>
+
+<span class="c1"># Données test à étiqueter</span>
+<span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">test_loader</span><span class="p">))</span>
+<span class="n">candidates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">test_batch_size</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">[</span><span class="n">candidates_test</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">[</span><span class="n">candidates</span><span class="p">]</span>
+
+<span class="c1">#Représentation des données dans l&#39;espace latent</span>
+<span class="n">h_train</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">encodeur</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">cuda</span><span class="p">(),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">784</span><span class="p">)))</span>
+<span class="n">h_test</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">encodeur</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_test</span><span class="o">.</span><span class="n">cuda</span><span class="p">(),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">784</span><span class="p">)))</span>
+
+<span class="c1"># Données d&#39;entraînement les plus proches (MSE) de chaque exemple de test</span>
+<span class="n">MSEs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">h_test</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">h_train</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">neighbours</span> <span class="o">=</span> <span class="n">MSEs</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">predicts</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">neighbours</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Taux de reconnaissance des chiffres manuscrits sur l&#39;ensemble de test :  </span><span class="si">%.1f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="n">predicts</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+</pre></div>
+</div>
 <div class="docutils container" id="id2">
 <div role="list" class="citation-list">
 <div class="citation" id="id39" role="doc-biblioentry">

@@ -458,7 +458,6 @@ Pour finalement visualiser les résultats de la reconstruction ({numref}`ae6`)
 def imshow(img):
     npimg = img.numpy()
     ax = plt.gca()
-    #transpose: change array axis to correspond to the plt.imshow() function     
     plt.imshow(np.transpose(npimg, (1, 2, 0))) 
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
@@ -488,6 +487,34 @@ imshow(outputs_example)
 :align: center
 Images originales (gauche) et reconstruites (droite) par l'autoencodeur.
 ```
+
+L'Autoencodeur peut ensuite être utilisé par exemple en reconnaissance de chiffres. Une manière simple consiste à choisir au hasard 10 échantillons d'apprentissage de chaque classe et à leur attribuer une étiquette. Ensuite, étant donné les données de test, il est possible de prédire à quelles classes elles appartiennent en trouvant les échantillons d'apprentissage étiquetés les plus similaires dans l'espace latent $\mathcal H$.
+
+```python
+# Données d'entraînement
+x_train, y_train = next(iter(train_loader))
+candidates = np.random.choice(train_batch_size, 10*10)
+x_train = x_train[candidates]
+y_train = y_train[candidates]
+
+# Données test à étiqueter
+x_test, y_test = next(iter(test_loader))
+candidates = np.random.choice(test_batch_size, 10*10)
+x_test = x_test[candidates_test]
+y_test = y_test[candidates]
+
+#Représentation des données dans l'espace latent
+h_train=model.encodeur(torch.reshape(x_train.cuda(),(-1,784)))
+h_test=model.encodeur(torch.reshape(x_test.cuda(),(-1,784)))
+
+# Données d'entraînement les plus proches (MSE) de chaque exemple de test
+MSEs = np.mean(np.power(np.expand_dims(h_test.detach().cpu(), axis=1) - np.expand_dims(h_train.detach().cpu(), axis=0), 2), axis=2)
+neighbours = MSEs.argmin(axis=1)
+predicts = y_train[neighbours]
+
+print("Taux de reconnaissance des chiffres manuscrits sur l'ensemble de test :  %.1f%%" % (100 * (y_test == predicts).numpy().astype(np.float32).mean()))
+```
+
 
 ```{bibliography}
 :style: unsrt
