@@ -111,10 +111,12 @@ régularisation construit une fonction de perte qui encourage
 l'autoencodeur à avoir des propriétés supplémentaires, en plus de celle
 de reproduire son entrée.\
 Un autoencodeur régularisé minimise la fonction
+
 $$\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ] + \beta \Omega(\mathbf{h})$$
+
 où $\Omega(\mathbf{h})$ est un terme de pénalisation permettant de
 contraindre les paramètres du modèle et $\beta\in\mathbb{R}$ contrôle le
-poids du terme de pénalité dans l'optimisation.\
+poids du terme de pénalité dans l'optimisation.
 
 ### Autoencodeurs parcimonieux
 
@@ -131,7 +133,9 @@ $\mathcal{S} =  \{\mathbf{x_1}\cdots \mathbf{x_m}\}$. On note
 $y^{(l)}_j(\mathbf{x})$ l'activation du neurone caché $j$ de la couche
 $l$ lorsque l'entrée $\mathbf{x}$ est présentée au réseau. On note
 également
+
 $$\hat\rho_j = \frac{1}{m} \sum_{i=1}^m \left[ y^{(l)}_j(\mathbf{x_i}) \right]$$
+
 l'activation moyenne du neurone caché $j$ sur présentation de
 $\mathcal{S}$. L'objectif est alors d'imposer $\hat\rho_j = \rho$, où
 $\rho$ est une valeur proche de zéro (ainsi l'activation moyenne de
@@ -163,18 +167,18 @@ rétropropagation. Les autoencodeurs parcimonieux peuvent également être
 vus d'un point de vue probabiliste comme des algorithmes maximisant la
 vraisemblance maximale d'un modèle génératif à variables latentes
 $\mathbf{h}$. Supposons disposer d'une distribution jointe explicite
-$$\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h}) = \textbf{\textsf{\textup{p}}}_{modele}( \mathbf{h})\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x}|\mathbf{h})$$
+$$\textbf{p}_{modele}(\mathbf{x},\mathbf{h}) = \textbf{p}_{modele}( \mathbf{h})\textbf{p}_{modele}(\mathbf{x}|\mathbf{h})$$
 La log vraisemblance peut alors s'écrire
-$$log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x})) = log \left (\displaystyle\sum_{\mathbf{h}}  \textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h})\right )$$
+$$log(\textbf{p}_{modele}(\mathbf{x})) = log \left (\displaystyle\sum_{\mathbf{h}}  \textbf{p}_{modele}(\mathbf{x},\mathbf{h})\right )$$
 L'autoencodeur approche cette somme juste pour une une valeur de
 $\mathbf{h}$ fortement probable. Pour cette valeur, on maximise alors
-$$log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h})) = log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{h})) + log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x}|\mathbf{h}))$$
-et $log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{h}))$ peut être
+$$log(\textbf{p}_{modele}(\mathbf{x},\mathbf{h})) = log(\textbf{p}_{modele}(\mathbf{h})) + log(\textbf{p}_{modele}(\mathbf{x}|\mathbf{h}))$$
+et $log(\textbf{p}_{modele}(\mathbf{h}))$ peut être
 utilisée pour introduire de la parcimonie.\
 Par exemple si
-$\textbf{\textsf{\textup{p}}}_{modele}(h_i) = \frac{\lambda}{2} e^{-\beta|h_i| }$
+$\textbf{p}_{modele}(h_i) = \frac{\lambda}{2} e^{-\beta|h_i| }$
 (Laplace prior), alors
-$$-log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{h})) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\left (\lambda |h_i| -log\frac{\lambda}{2} \right) = \Omega(\mathbf{h})  + c$$
+$$-log(\textbf{p}_{modele}(\mathbf{h})) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\left (\lambda |h_i| -log\frac{\lambda}{2} \right) = \Omega(\mathbf{h})  + c$$
 et l'on retrouve une régularisation $\ell_1$ (méthode Lasso).
 
 ### Autoencodeurs contractifs
@@ -200,7 +204,7 @@ $$\ell(\mathbf{x} , g\left [f(\mathbf{\tilde{x}} ; \mathbf{w_E}); \mathbf{w_D})\
 où $\mathbf{\tilde{x}}$ est une version de $\mathbf{{x}}$ bruitée par
 une distribution conditionnelle $C(\mathbf{\tilde{x}},\mathbf{x})$.
 L'autoencodeur apprend alors une distribution de reconstruction
-$\textbf{\textsf{\textup{p}}}_R(\mathbf{x}\mid \mathbf{\tilde{x}})$
+$\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}})$
 selon l'algorithme [\[A:DAE\]](#A:DAE){reference-type="ref"
 reference="A:DAE"} (figure [1.3](#F:AEMNISTBruit){reference-type="ref"
 reference="F:AEMNISTBruit"}).
@@ -210,7 +214,7 @@ reference="F:AEMNISTBruit"}).
 
 L'apprentissage peut être vu comme une descente de gradient stochastique
 de
-$$-\mathbb{E}_{\mathbf{x}\sim \textbf{\textsf{\textup{p}}}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log \textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )$$
+$$-\mathbb{E}_{\mathbf{x}\sim \textbf{p}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log \textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )$$
 
 ![Autoencodeur de débruitage sur les données MNIST. Les images
 $\mathbf{x}$ (ligne du haut) sont corrompues par un bruit gaussien
@@ -245,18 +249,18 @@ variationnel</figcaption>
 
 Au lieu d'apprendre $f(.,\mathbf{w_E})$ et $g(.,\mathbf{w_D})$, un
 autoencodeur variationnel apprend des distributions de probabilité
-$\textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})$
+$\textbf{p}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})$
 et
-$\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.\
+$\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.\
 Apprendre des distributions plutôt que des fonctions déterministes
 présente plusieurs avantages, et notamment :
 
 -   les données d'entrée peuvent être bruitées, et un modèle de
-    distribution $\textbf{\textsf{\textup{p}}}_\mathbf{x}$ peut être
+    distribution $\textbf{p}_\mathbf{x}$ peut être
     plus utile
 
 -   il est possible d'utiliser
-    $\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$
+    $\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$
     pour échantillonner $\mathbf{h}$ puis $\mathbf{x}$, et donc de
     générer des données ayant des statistiques similaires aux éléments
     de $\mathcal{S}$ (figure [\[F:VAE2\]](#F:VAE2){reference-type="ref"
@@ -264,30 +268,30 @@ présente plusieurs avantages, et notamment :
 
 Abordons ces autoencodeurs sous l'angle des modèles génératifs.
 Supposons que nous voulions générer des points suivant la distribution
-$\textbf{\textsf{\textup{p}}}_\mathbf{x}$. Plutôt que d'inférer
+$\textbf{p}_\mathbf{x}$. Plutôt que d'inférer
 directement sur cette distribution, nous pouvons utiliser des *variables
 latentes* (le code des autoencodeurs). Les modèles à variables latentes
 font l'hypothèse que les données $\mathbf{x}$ sont issues d'une variable
 non observée $\mathbf{h}$. S'il peut être difficile de modéliser
-directement $\textbf{\textsf{\textup{p}}}_\mathbf{x}$, il peut être plus
+directement $\textbf{p}_\mathbf{x}$, il peut être plus
 facile de choisir*a priori* une distribution
-$\textbf{\textsf{\textup{p}}}_\mathbf{h}$ et chercher à modéliser
-$\textbf{\textsf{\textup{p}}}_{\mathbf{x}|\mathbf{h}}$.\
-Pour générer $\mathbf{x}\sim \textbf{\textsf{\textup{p}}}_\mathbf{x}$,
+$\textbf{p}_\mathbf{h}$ et chercher à modéliser
+$\textbf{p}_{\mathbf{x}|\mathbf{h}}$.\
+Pour générer $\mathbf{x}\sim \textbf{p}_\mathbf{x}$,
 un autoencodeur variationnel tire donc tout d'abord
-$\mathbf{h}\sim \textbf{\textsf{\textup{p}}}_\mathbf{h}$. $\mathbf{h}$
+$\mathbf{h}\sim \textbf{p}_\mathbf{h}$. $\mathbf{h}$
 est ensuite passé à un réseau de neurones et $\mathbf{x}$ est finalement
 tiré selon
-$\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
+$\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
 L'entraînement est réalisé en maximisant la borne inférieure
 variationnelle :
-$$\mathcal{L}(q) = \mathbb{E}_{\mathbf{h}\sim q(\mathbf{h}|\mathbf{x})} log \left (\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\right ) -KL\left (q(\mathbf{h}|\mathbf{x}) ||\textbf{\textsf{\textup{p}}}_\mathbf{h}\right )$$
+$$\mathcal{L}(q) = \mathbb{E}_{\mathbf{h}\sim q(\mathbf{h}|\mathbf{x})} log \left (\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\right ) -KL\left (q(\mathbf{h}|\mathbf{x}) ||\textbf{p}_\mathbf{h}\right )$$
 où $KL$ est la divergence de Kullback Leibler déjà rencontrée dans les
 autoencodeurs parcimonieux. Le premier terme de $\mathcal{L}(q)$ est la
 log vraisemblance de la reconstruction trouvée dans les autoencodeurs
 classiques, tandis que le second terme tend à rapprocher la distribution
 *a posteriori* $q(\mathbf{h}|\mathbf{x})$ et le modèle *a priori*
-$\textbf{\textsf{\textup{p}}}_\mathbf{h}$. Dans les techniques
+$\textbf{p}_\mathbf{h}$. Dans les techniques
 classiques d'inférence, $q$ est approché par optimisation. Dans les
 autoencodeurs variationnels, on entraîne un encodeur paramétrique (un
 réseau de neurones paramétré par $\mathbf{w_E}$) qui produit les
@@ -300,18 +304,18 @@ consiste alors simplement à maximiser $\mathcal{L}$ par rapport à
 $(\mathbf{w_E},\mathbf{w_D})$.
 
 Il est courant de choisir comme prior
-$\textbf{\textsf{\textup{p}}}_\mathbf{h}$ une loi normale centrée
+$\textbf{p}_\mathbf{h}$ une loi normale centrée
 réduite $\mathcal{N}(\mathbf{0},\mathbf{I})$. Cette simplicité apparente
 ne réduit pas le pouvoir d'expression du modèle si l'effort est fait sur
 l'optimisation de la distribution
-$\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
+$\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
 L'encodeur `E` est alors un réseau de neurones générant des paramètres
 de distribution de $q$ dans $\mathcal{H}$, soit un vecteur de moyenne
 $\mu$ et une matrice de covariance $\mathbf{\Sigma}$.\
 Notons enfin que la rétropropagation du gradient nécessite une astuce de
 calcul dans $\mathcal{H}$, dite astuce de reparamétrisation : la
 génération de
-$\mathbf{h}\sim \textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})$
+$\mathbf{h}\sim \textbf{p}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})$
 se fait effectivement en tirant une variable aléatoire
 $\epsilon\sim\mathcal{N}(\mathbf{0},\mathbf{I})$, puis en calculant
 $\mathbf{h}$=$\mu$ + $\Sigma^{1/2} \epsilon$. L'échantillonnage se fait

@@ -45,7 +45,6 @@ données.
 :name: ae1
 Architecture générale d’un autoencodeur
 ```
-::: center
 
 
 ## Influence de la taille de l'espace de codage
@@ -109,7 +108,8 @@ par exemple que `E` et `D` soient des réseaux multicouches à faible
 profondeur et/ou que $\mathcal H$ soit de faible dimension), la
 régularisation construit une fonction de perte qui encourage
 l'autoencodeur à avoir des propriétés supplémentaires, en plus de celle
-de reproduire son entrée.\
+de reproduire son entrée.
+
 Un autoencodeur régularisé minimise la fonction
 
 $$\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ] + \beta \Omega(\mathbf{h})$$
@@ -123,7 +123,8 @@ poids du terme de pénalité dans l'optimisation.
 Les autoencodeurs parcimonieux (ou épars) sont typiquement utilisés pour
 apprendre des caractéristiques pertinentes des données d'entrée, qui
 sont ensuite utilisées comme entrées d'algorithmes de classification ou
-de régression.\
+de régression.
+
 Supposons que `E` et `D` soient des perceptrons multicouches. Il est
 alors par exemple possible d'imposer aux neurones d'être \"inactifs\" la
 plupart du temps, en définissant l'inactivité comme une valeur de sortie
@@ -142,13 +143,16 @@ $\rho$ est une valeur proche de zéro (ainsi l'activation moyenne de
 chaque neurone caché doit être faible), par l'intermédiaire d'une
 définition adaptée de $\Omega$. De nombreux choix sont possibles. Par
 exemple pour un réseau à une couche cachée :
+
 $$\Omega(\mathbf{h}) = \displaystyle\sum_{j=1}^{n^{(2)}} \rho \log \frac{\rho}{\hat\rho_j} + (1-\rho) \log \frac{1-\rho}{1-\hat\rho_j} = \displaystyle\sum_{j=1}^{n^{(2)}} {KL}(\rho || \hat\rho_j),$$
+
 où ${KL}(\rho || \hat\rho_j)$ est la divergence de Kullback-Leibler (KL)
 entre une variable aléatoire de loi de Bernoulli de moyenne $\rho$ et
 une variable aléatoire de loi de Bernoulli de moyenne $\hat\rho_j$.\
 On peut alors montrer que ${KL}(\rho || \hat\rho_j) = 0$ si
 $\hat\rho_j = \rho$, et ${KL}$ croît de façon monotone lorsque
-$\hat\rho_j$ s'éloigne de $\rho$.\
+$\hat\rho_j$ s'éloigne de $\rho$.
+
 Le calcul des dérivées partielles et la descente de gradient changent
 peu pour l'algorithme d'optimisation. Il faut cependant connaître au
 préalable les $\textstyle \hat\rho_j$ et donc faire dans un premier
@@ -163,29 +167,40 @@ Dans le cas contraire, le calcul de $\textstyle \hat\rho_j$ peut être
 fait en accumulant les activations calculées exemple par exemple, mais
 sans sauvegarder les valeurs de ces activations. Une seconde propagation
 sur chaque exemple sera alors nécessaire pour permettre la
-rétropropagation. Les autoencodeurs parcimonieux peuvent également être
+rétropropagation. 
+
+Les autoencodeurs parcimonieux peuvent également être
 vus d'un point de vue probabiliste comme des algorithmes maximisant la
 vraisemblance maximale d'un modèle génératif à variables latentes
 $\mathbf{h}$. Supposons disposer d'une distribution jointe explicite
+
 $$\textbf{p}_{modele}(\mathbf{x},\mathbf{h}) = \textbf{p}_{modele}( \mathbf{h})\textbf{p}_{modele}(\mathbf{x}|\mathbf{h})$$
+
 La log vraisemblance peut alors s'écrire
+
 $$log(\textbf{p}_{modele}(\mathbf{x})) = log \left (\displaystyle\sum_{\mathbf{h}}  \textbf{p}_{modele}(\mathbf{x},\mathbf{h})\right )$$
+
 L'autoencodeur approche cette somme juste pour une une valeur de
 $\mathbf{h}$ fortement probable. Pour cette valeur, on maximise alors
 $$log(\textbf{p}_{modele}(\mathbf{x},\mathbf{h})) = log(\textbf{p}_{modele}(\mathbf{h})) + log(\textbf{p}_{modele}(\mathbf{x}|\mathbf{h}))$$
 et $log(\textbf{p}_{modele}(\mathbf{h}))$ peut être
-utilisée pour introduire de la parcimonie.\
+utilisée pour introduire de la parcimonie.
+
 Par exemple si
 $\textbf{p}_{modele}(h_i) = \frac{\lambda}{2} e^{-\beta|h_i| }$
 (Laplace prior), alors
+
 $$-log(\textbf{p}_{modele}(\mathbf{h})) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\left (\lambda |h_i| -log\frac{\lambda}{2} \right) = \Omega(\mathbf{h})  + c$$
+
 et l'on retrouve une régularisation $\ell_1$ (méthode Lasso).
 
 ### Autoencodeurs contractifs
 
 Une autre stratégie de régularisation consiste à faire dépendre $\Omega$
 du gradient du code en fonction des entrées :
+
 $$\Omega(\mathbf{x},\mathbf{h}) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\|\nabla_{\mathbf{x}} h_i\|^2 =\left  \|\frac{\partial f(\mathbf{x},\mathbf{w_E})}{\partial \mathbf{x}}\right \|_F^2$$
+
 où $\|.\|_F$ est la norme de Frobenius. Le modèle apprend alors une
 fonction qui change peu lorsque $\mathbf{x}$ varie peu. Puisque la
 pénalité n'est appliquée que sur les exemples de $\mathcal{S}$, les
@@ -200,29 +215,45 @@ Plutôt que d'ajouter un terme à la fonction de perte, on peut
 directement changer cette dernière pour apprendre des caractéristiques
 utiles des données.\
 Un autoencodeur de débruitage considère la fonction de perte
+
 $$\ell(\mathbf{x} , g\left [f(\mathbf{\tilde{x}} ; \mathbf{w_E}); \mathbf{w_D})\right ]$$
+
 où $\mathbf{\tilde{x}}$ est une version de $\mathbf{{x}}$ bruitée par
 une distribution conditionnelle $C(\mathbf{\tilde{x}},\mathbf{x})$.
 L'autoencodeur apprend alors une distribution de reconstruction
 $\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}})$
-selon l'algorithme [\[A:DAE\]](#A:DAE){reference-type="ref"
-reference="A:DAE"} (figure [1.3](#F:AEMNISTBruit){reference-type="ref"
-reference="F:AEMNISTBruit"}).
+selon l'{prf:ref}`AEB` ({numref}`ae3`).
 
-::: algorithm
-:::
+```{prf:algorithm} Algorithe d'apprentissage d'un autoencodeur de débruitage
+:label: AEB
+**Entrée :**  $\mathcal{S}$, $C(\mathbf{\tilde{x}},\mathbf{x})$, un autoencodeur $(f,g)$
+
+**Sortie :** Un autoencodeur de débruitage
+
+1. Tant que (non stop)
+    1. Tirer un exemple $\mathbf x$ de $\mathcal{S}$
+    2. Tirer $\mathbf {\tilde{x}}$ selon $C(\mathbf{\tilde{x}},\mathbf{x})$
+    3. Estimer $\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}}) = $\textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf{h},\mathbf{w_D})=g(\mathbf{h},\mathbf{w_D})$ où $\mathbf{h} = f((\mathbf{\tilde{x}},\mathbf{w_E})$
+```
 
 L'apprentissage peut être vu comme une descente de gradient stochastique
 de
+
 $$-\mathbb{E}_{\mathbf{x}\sim \textbf{p}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log \textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )$$
 
-![Autoencodeur de débruitage sur les données MNIST. Les images
+
+
+
+```{figure} ./images/ae3.png
+:name: ae3
+Autoencodeur de débruitage sur les données MNIST. Les images
 $\mathbf{x}$ (ligne du haut) sont corrompues par un bruit gaussien
 centré de variance unité (deuxième ligne). Un autoencodeur de débruitage
 est ensuite entraîné. Le code $\mathbf{h}$ de taille 32 est visualisé
-(troisième ligne) sous la forme d'images 8$\times$`<!-- -->`{=html}4. Le
+(troisième ligne) sous la forme d'images 8$\times$4. Le
 décodeur produit les images débruitées de la dernière
-ligne.](images/denoising_AE){#F:AEMNISTBruit width=".8\\textwidth"}
+ligne.```
+
 
 ## Autoencodeurs variationnels
 

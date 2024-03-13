@@ -389,11 +389,12 @@ profondeur et/ou que <span class="math notranslate nohighlight">\(\mathcal H\)</
 régularisation construit une fonction de perte qui encourage
 l’autoencodeur à avoir des propriétés supplémentaires, en plus de celle
 de reproduire son entrée.<br />
-Un autoencodeur régularisé minimise la fonction
-$<span class="math notranslate nohighlight">\(\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ] + \beta \Omega(\mathbf{h})\)</span><span class="math notranslate nohighlight">\(
-où \)</span>\Omega(\mathbf{h})<span class="math notranslate nohighlight">\( est un terme de pénalisation permettant de
-contraindre les paramètres du modèle et \)</span>\beta\in\mathbb{R}$ contrôle le
-poids du terme de pénalité dans l’optimisation.\</p>
+Un autoencodeur régularisé minimise la fonction</p>
+<div class="math notranslate nohighlight">
+\[\ell(\mathbf{x} , g\left [f(\mathbf{x} ; \mathbf{w_E}); \mathbf{w_D})\right ] + \beta \Omega(\mathbf{h})\]</div>
+<p>où <span class="math notranslate nohighlight">\(\Omega(\mathbf{h})\)</span> est un terme de pénalisation permettant de
+contraindre les paramètres du modèle et <span class="math notranslate nohighlight">\(\beta\in\mathbb{R}\)</span> contrôle le
+poids du terme de pénalité dans l’optimisation.</p>
 <h3 class="rubric" id="autoencodeurs-parcimonieux">Autoencodeurs parcimonieux</h3>
 <p>Les autoencodeurs parcimonieux (ou épars) sont typiquement utilisés pour
 apprendre des caractéristiques pertinentes des données d’entrée, qui
@@ -407,15 +408,16 @@ hyperbolique). Pour cela, on dispose de <span class="math notranslate nohighligh
 <span class="math notranslate nohighlight">\(\mathcal{S} =  \{\mathbf{x_1}\cdots \mathbf{x_m}\}\)</span>. On note
 <span class="math notranslate nohighlight">\(y^{(l)}_j(\mathbf{x})\)</span> l’activation du neurone caché <span class="math notranslate nohighlight">\(j\)</span> de la couche
 <span class="math notranslate nohighlight">\(l\)</span> lorsque l’entrée <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> est présentée au réseau. On note
-également
-$<span class="math notranslate nohighlight">\(\hat\rho_j = \frac{1}{m} \sum_{i=1}^m \left[ y^{(l)}_j(\mathbf{x_i}) \right]\)</span><span class="math notranslate nohighlight">\(
-l'activation moyenne du neurone caché \)</span>j<span class="math notranslate nohighlight">\( sur présentation de
-\)</span>\mathcal{S}<span class="math notranslate nohighlight">\(. L'objectif est alors d'imposer \)</span>\hat\rho_j = \rho<span class="math notranslate nohighlight">\(, où
-\)</span>\rho<span class="math notranslate nohighlight">\( est une valeur proche de zéro (ainsi l'activation moyenne de
-chaque neurone caché doit être faible), par l'intermédiaire d'une
-définition adaptée de \)</span>\Omega<span class="math notranslate nohighlight">\(. De nombreux choix sont possibles. Par
+également</p>
+<div class="math notranslate nohighlight">
+\[\hat\rho_j = \frac{1}{m} \sum_{i=1}^m \left[ y^{(l)}_j(\mathbf{x_i}) \right]\]</div>
+<p>l’activation moyenne du neurone caché <span class="math notranslate nohighlight">\(j\)</span> sur présentation de
+<span class="math notranslate nohighlight">\(\mathcal{S}\)</span>. L’objectif est alors d’imposer <span class="math notranslate nohighlight">\(\hat\rho_j = \rho\)</span>, où
+<span class="math notranslate nohighlight">\(\rho\)</span> est une valeur proche de zéro (ainsi l’activation moyenne de
+chaque neurone caché doit être faible), par l’intermédiaire d’une
+définition adaptée de <span class="math notranslate nohighlight">\(\Omega\)</span>. De nombreux choix sont possibles. Par
 exemple pour un réseau à une couche cachée :
-\)</span><span class="math notranslate nohighlight">\(\Omega(\mathbf{h}) = \displaystyle\sum_{j=1}^{n^{(2)}} \rho \log \frac{\rho}{\hat\rho_j} + (1-\rho) \log \frac{1-\rho}{1-\hat\rho_j} = \displaystyle\sum_{j=1}^{n^{(2)}} {KL}(\rho || \hat\rho_j),\)</span><span class="math notranslate nohighlight">\(
+$<span class="math notranslate nohighlight">\(\Omega(\mathbf{h}) = \displaystyle\sum_{j=1}^{n^{(2)}} \rho \log \frac{\rho}{\hat\rho_j} + (1-\rho) \log \frac{1-\rho}{1-\hat\rho_j} = \displaystyle\sum_{j=1}^{n^{(2)}} {KL}(\rho || \hat\rho_j),\)</span><span class="math notranslate nohighlight">\(
 où \)</span>{KL}(\rho || \hat\rho_j)<span class="math notranslate nohighlight">\( est la divergence de Kullback-Leibler (KL)
 entre une variable aléatoire de loi de Bernoulli de moyenne \)</span>\rho<span class="math notranslate nohighlight">\( et
 une variable aléatoire de loi de Bernoulli de moyenne \)</span>\hat\rho_j<span class="math notranslate nohighlight">\(.\
@@ -440,18 +442,18 @@ rétropropagation. Les autoencodeurs parcimonieux peuvent également être
 vus d'un point de vue probabiliste comme des algorithmes maximisant la
 vraisemblance maximale d'un modèle génératif à variables latentes
 \)</span>\mathbf{h}<span class="math notranslate nohighlight">\(. Supposons disposer d'une distribution jointe explicite
-\)</span><span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h}) = \textbf{\textsf{\textup{p}}}_{modele}( \mathbf{h})\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x}|\mathbf{h})\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\textbf{p}_{modele}(\mathbf{x},\mathbf{h}) = \textbf{p}_{modele}( \mathbf{h})\textbf{p}_{modele}(\mathbf{x}|\mathbf{h})\)</span><span class="math notranslate nohighlight">\(
 La log vraisemblance peut alors s'écrire
-\)</span><span class="math notranslate nohighlight">\(log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x})) = log \left (\displaystyle\sum_{\mathbf{h}}  \textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h})\right )\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(log(\textbf{p}_{modele}(\mathbf{x})) = log \left (\displaystyle\sum_{\mathbf{h}}  \textbf{p}_{modele}(\mathbf{x},\mathbf{h})\right )\)</span><span class="math notranslate nohighlight">\(
 L'autoencodeur approche cette somme juste pour une une valeur de
 \)</span>\mathbf{h}<span class="math notranslate nohighlight">\( fortement probable. Pour cette valeur, on maximise alors
-\)</span><span class="math notranslate nohighlight">\(log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x},\mathbf{h})) = log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{h})) + log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{x}|\mathbf{h}))\)</span><span class="math notranslate nohighlight">\(
-et \)</span>log(\textbf{\textsf{\textup{p}}}<em>{modele}(\mathbf{h}))<span class="math notranslate nohighlight">\( peut être
+\)</span><span class="math notranslate nohighlight">\(log(\textbf{p}_{modele}(\mathbf{x},\mathbf{h})) = log(\textbf{p}_{modele}(\mathbf{h})) + log(\textbf{p}_{modele}(\mathbf{x}|\mathbf{h}))\)</span><span class="math notranslate nohighlight">\(
+et \)</span>log(\textbf{p}<em>{modele}(\mathbf{h}))<span class="math notranslate nohighlight">\( peut être
 utilisée pour introduire de la parcimonie.\
 Par exemple si
-\)</span>\textbf{\textsf{\textup{p}}}</em>{modele}(h_i) = \frac{\lambda}{2} e^{-\beta|h_i| }<span class="math notranslate nohighlight">\(
+\)</span>\textbf{p}</em>{modele}(h_i) = \frac{\lambda}{2} e^{-\beta|h_i| }<span class="math notranslate nohighlight">\(
 (Laplace prior), alors
-\)</span><span class="math notranslate nohighlight">\(-log(\textbf{\textsf{\textup{p}}}_{modele}(\mathbf{h})) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\left (\lambda |h_i| -log\frac{\lambda}{2} \right) = \Omega(\mathbf{h})  + c\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(-log(\textbf{p}_{modele}(\mathbf{h})) = \displaystyle\sum_{i=1}^{|\mathcal{H}|}\left (\lambda |h_i| -log\frac{\lambda}{2} \right) = \Omega(\mathbf{h})  + c\)</span><span class="math notranslate nohighlight">\(
 et l'on retrouve une régularisation \)</span>\ell_1$ (méthode Lasso).</p>
 <h3 class="rubric" id="autoencodeurs-contractifs">Autoencodeurs contractifs</h3>
 <p>Une autre stratégie de régularisation consiste à faire dépendre <span class="math notranslate nohighlight">\(\Omega\)</span>
@@ -473,7 +475,7 @@ $<span class="math notranslate nohighlight">\(\ell(\mathbf{x} , g\left [f(\mathb
 où \)</span>\mathbf{\tilde{x}}<span class="math notranslate nohighlight">\( est une version de \)</span>\mathbf<span class="math notranslate nohighlight">\( bruitée par
 une distribution conditionnelle \)</span>C(\mathbf{\tilde{x}},\mathbf{x})<span class="math notranslate nohighlight">\(.
 L'autoencodeur apprend alors une distribution de reconstruction
-\)</span>\textbf{\textsf{\textup{p}}}_R(\mathbf{x}\mid \mathbf{\tilde{x}})$
+\)</span>\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}})$
 selon l’algorithme <a class="reference internal" href="#A:DAE"><span class="xref myst">[A:DAE]</span></a>{reference-type= »ref »
 reference= »A:DAE »} (figure <a class="reference internal" href="#F:AEMNISTBruit"><span class="xref myst">1.3</span></a>{reference-type= »ref »
 reference= »F:AEMNISTBruit »}).</p>
@@ -482,7 +484,7 @@ reference= »F:AEMNISTBruit »}).</p>
 </div>
 <p>L’apprentissage peut être vu comme une descente de gradient stochastique
 de
-$<span class="math notranslate nohighlight">\(-\mathbb{E}_{\mathbf{x}\sim \textbf{\textsf{\textup{p}}}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log \textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )\)</span>$</p>
+$<span class="math notranslate nohighlight">\(-\mathbb{E}_{\mathbf{x}\sim \textbf{p}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log \textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )\)</span>$</p>
 <p><img alt="Autoencodeur de débruitage sur les données MNIST. Les images (ligne du haut) sont corrompues par un bruit gaussiencentré de variance unité (deuxième ligne). Un autoencodeur de débruitageest ensuite entraîné. Le code  de taille 32 est visualisé(troisième ligne) sous la forme d'images 8{=html}4. Ledécodeur produit les images débruitées de la dernièreligne." src="images/denoising_AE" />{#F:AEMNISTBruit width= ».8\textwidth »}</p>
 </section>
 <section id="autoencodeurs-variationnels">
@@ -508,17 +510,17 @@ variationnel</figcaption>
 </div>
 <p>Au lieu d’apprendre <span class="math notranslate nohighlight">\(f(.,\mathbf{w_E})\)</span> et <span class="math notranslate nohighlight">\(g(.,\mathbf{w_D})\)</span>, un
 autoencodeur variationnel apprend des distributions de probabilité
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>
+<span class="math notranslate nohighlight">\(\textbf{p}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>
 et
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.<br />
+<span class="math notranslate nohighlight">\(\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.<br />
 Apprendre des distributions plutôt que des fonctions déterministes
 présente plusieurs avantages, et notamment :</p>
 <ul class="simple">
 <li><p>les données d’entrée peuvent être bruitées, et un modèle de
-distribution <span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span> peut être
+distribution <span class="math notranslate nohighlight">\(\textbf{p}_\mathbf{x}\)</span> peut être
 plus utile</p></li>
 <li><p>il est possible d’utiliser
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>
+<span class="math notranslate nohighlight">\(\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>
 pour échantillonner <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> puis <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, et donc de
 générer des données ayant des statistiques similaires aux éléments
 de <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> (figure <a class="reference internal" href="#F:VAE2"><span class="xref myst">[F:VAE2]</span></a>{reference-type= »ref »
@@ -526,30 +528,30 @@ reference= »F:VAE2 »}).</p></li>
 </ul>
 <p>Abordons ces autoencodeurs sous l’angle des modèles génératifs.
 Supposons que nous voulions générer des points suivant la distribution
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span>. Plutôt que d’inférer
+<span class="math notranslate nohighlight">\(\textbf{p}_\mathbf{x}\)</span>. Plutôt que d’inférer
 directement sur cette distribution, nous pouvons utiliser des <em>variables
 latentes</em> (le code des autoencodeurs). Les modèles à variables latentes
 font l’hypothèse que les données <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> sont issues d’une variable
 non observée <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. S’il peut être difficile de modéliser
-directement <span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span>, il peut être plus
+directement <span class="math notranslate nohighlight">\(\textbf{p}_\mathbf{x}\)</span>, il peut être plus
 facile de choisir<em>a priori</em> une distribution
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{h}\)</span> et chercher à modéliser
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{\mathbf{x}|\mathbf{h}}\)</span>.<br />
-Pour générer <span class="math notranslate nohighlight">\(\mathbf{x}\sim \textbf{\textsf{\textup{p}}}_\mathbf{x}\)</span>,
+<span class="math notranslate nohighlight">\(\textbf{p}_\mathbf{h}\)</span> et chercher à modéliser
+<span class="math notranslate nohighlight">\(\textbf{p}_{\mathbf{x}|\mathbf{h}}\)</span>.<br />
+Pour générer <span class="math notranslate nohighlight">\(\mathbf{x}\sim \textbf{p}_\mathbf{x}\)</span>,
 un autoencodeur variationnel tire donc tout d’abord
-<span class="math notranslate nohighlight">\(\mathbf{h}\sim \textbf{\textsf{\textup{p}}}_\mathbf{h}\)</span>. <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>
+<span class="math notranslate nohighlight">\(\mathbf{h}\sim \textbf{p}_\mathbf{h}\)</span>. <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>
 est ensuite passé à un réseau de neurones et <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> est finalement
 tiré selon
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.
+<span class="math notranslate nohighlight">\(\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.
 L’entraînement est réalisé en maximisant la borne inférieure
 variationnelle :
-$<span class="math notranslate nohighlight">\(\mathcal{L}(q) = \mathbb{E}_{\mathbf{h}\sim q(\mathbf{h}|\mathbf{x})} log \left (\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\right ) -KL\left (q(\mathbf{h}|\mathbf{x}) ||\textbf{\textsf{\textup{p}}}_\mathbf{h}\right )\)</span><span class="math notranslate nohighlight">\(
+$<span class="math notranslate nohighlight">\(\mathcal{L}(q) = \mathbb{E}_{\mathbf{h}\sim q(\mathbf{h}|\mathbf{x})} log \left (\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\right ) -KL\left (q(\mathbf{h}|\mathbf{x}) ||\textbf{p}_\mathbf{h}\right )\)</span><span class="math notranslate nohighlight">\(
 où \)</span>KL<span class="math notranslate nohighlight">\( est la divergence de Kullback Leibler déjà rencontrée dans les
 autoencodeurs parcimonieux. Le premier terme de \)</span>\mathcal{L}(q)<span class="math notranslate nohighlight">\( est la
 log vraisemblance de la reconstruction trouvée dans les autoencodeurs
 classiques, tandis que le second terme tend à rapprocher la distribution
 *a posteriori* \)</span>q(\mathbf{h}|\mathbf{x})<span class="math notranslate nohighlight">\( et le modèle *a priori*
-\)</span>\textbf{\textsf{\textup{p}}}_\mathbf{h}<span class="math notranslate nohighlight">\(. Dans les techniques
+\)</span>\textbf{p}_\mathbf{h}<span class="math notranslate nohighlight">\(. Dans les techniques
 classiques d'inférence, \)</span>q<span class="math notranslate nohighlight">\( est approché par optimisation. Dans les
 autoencodeurs variationnels, on entraîne un encodeur paramétrique (un
 réseau de neurones paramétré par \)</span>\mathbf{w_E}<span class="math notranslate nohighlight">\() qui produit les
@@ -561,18 +563,18 @@ pour obtenir le gradient par rapport à \)</span>\mathbf{w_E}<span class="math n
 consiste alors simplement à maximiser \)</span>\mathcal{L}<span class="math notranslate nohighlight">\( par rapport à
 \)</span>(\mathbf{w_E},\mathbf{w_D})$.</p>
 <p>Il est courant de choisir comme prior
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_\mathbf{h}\)</span> une loi normale centrée
+<span class="math notranslate nohighlight">\(\textbf{p}_\mathbf{h}\)</span> une loi normale centrée
 réduite <span class="math notranslate nohighlight">\(\mathcal{N}(\mathbf{0},\mathbf{I})\)</span>. Cette simplicité apparente
 ne réduit pas le pouvoir d’expression du modèle si l’effort est fait sur
 l’optimisation de la distribution
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.
+<span class="math notranslate nohighlight">\(\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>.
 L’encodeur <code class="docutils literal notranslate"><span class="pre">E</span></code> est alors un réseau de neurones générant des paramètres
 de distribution de <span class="math notranslate nohighlight">\(q\)</span> dans <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, soit un vecteur de moyenne
 <span class="math notranslate nohighlight">\(\mu\)</span> et une matrice de covariance <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>.<br />
 Notons enfin que la rétropropagation du gradient nécessite une astuce de
 calcul dans <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, dite astuce de reparamétrisation : la
 génération de
-<span class="math notranslate nohighlight">\(\mathbf{h}\sim \textbf{\textsf{\textup{p}}}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>
+<span class="math notranslate nohighlight">\(\mathbf{h}\sim \textbf{p}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>
 se fait effectivement en tirant une variable aléatoire
 <span class="math notranslate nohighlight">\(\epsilon\sim\mathcal{N}(\mathbf{0},\mathbf{I})\)</span>, puis en calculant
 <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>=<span class="math notranslate nohighlight">\(\mu\)</span> + <span class="math notranslate nohighlight">\(\Sigma^{1/2} \epsilon\)</span>. L’échantillonnage se fait
