@@ -532,13 +532,13 @@ fonctions donnent des gradients faibles, qui ont tendance à s’annuler
 (problème du <em>gradient évanescent</em> ou <em>vanishing gradient</em>) lors de la
 phase d’apprentissage par rétropropagation du gradient. Une autre
 fonction, non saturante elle, est très largement utilisée. Il s’agit de
-la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="#id45" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
+la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="#id46" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
 \end{aligned}\]</div>
 <p>Les neurones utilisant la fonction ReLU sont appelés neurones linéaires rectifiés. Glorot
-et Bengio <span id="id2">[<a class="reference internal" href="#id13" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
+et Bengio <span id="id2">[<a class="reference internal" href="#id14" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
 tant que couche non linéaire permettait un entraînement efficace de
 réseaux profonds sans pré-entraînement non supervisé. Plusieurs
 variantes de cette fonction existent, par exemple pour assurer une
@@ -548,7 +548,7 @@ valeurs négatives de l’argument.</p>
 <section id="couches-de-normalisation">
 <h3>Couches de normalisation<a class="headerlink" href="#couches-de-normalisation" title="Link to this heading">#</a></h3>
 <p>La normalisation prend aujourd’hui une place de plus en plus importante,
-notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="#id14" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
+notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="#id15" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
 suggèrent qu’un changement dans la distribution des activations d’un
 réseau profond, résultant de la présentation d’un nouveau mini batch
 d’exemples, ralentit le processus d’apprentissage. Pour pallier ce
@@ -949,7 +949,7 @@ d’agrégation du réseau AlexNet, superposées aux images ayant le plus
 fortement activé ces neurones. Le champ est encadré en blanc, et la
 valeur d’activation correspondante est reportée en haut. On voit par
 exemple que certains neurones sont très sensibles aux textes, d’autres
-aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="#id46" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Link to this image">#</a></p>
+aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="#id47" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -973,7 +973,7 @@ droite). La probabilité de la classe s’effondre lorsque le rectangle
 couvre une partie de la face du chien. Cela suggère que cette face est
 grandement responsable de la forte probabilité de classement de l’image
 comme un loulou. A l’inverse, l’occlusion du fond n’altère pas la forte
-valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="#id11" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Link to this image">#</a></p>
+valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="#id12" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1001,7 +1001,7 @@ ce neurone répond (<a class="reference internal" href="#gradcam"><span class="s
 <figcaption>
 <p><span class="caption-number">Fig. 17 </span><span class="caption-text">Approches par gradient de visualisation du fonctionnement
 d’un réseau convolutif. Comparaison de la méthode de rétropropagation
-guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="#id47" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Link to this image">#</a></p>
+guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="#id48" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Ces gradients peuvent également être utilisés dans la méthode de montée
@@ -1018,7 +1018,7 @@ cette méthode produit des images parfois très artistiques (<a class="reference
 <img alt="_images/monteeg.png" src="_images/monteeg.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 18 </span><span class="caption-text">Visualisation des 4 premières couches de convolution d’un
-réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="#id48" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Link to this image">#</a></p>
+réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="#id49" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1158,47 +1158,60 @@ réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="r
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trainLoss</span><span class="p">,</span> <span class="s1">&#39;-b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">testLoss</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Fonction de perte&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Perte&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">testAcc</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Précision&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Précision en test&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 <figure class="align-center" id="perte">
-<img alt="images/perteprecisionCNN.png" src="images/perteprecisionCNN.png" />
+<img alt="_images/precisionCNN.png" src="_images/precisionCNN.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Fonction de perte et précision en test.</span><a class="headerlink" href="#perte" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Précision en apprentissage.</span><a class="headerlink" href="#perte" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="docutils container" id="id8">
+<figure class="align-center" id="id8">
+<img alt="_images/perteCNN.png" src="_images/perteCNN.png" />
+<figcaption>
+<p><span class="caption-text">Fonction de perte.</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="docutils container" id="id9">
 <div role="list" class="citation-list">
-<div class="citation" id="id45" role="doc-biblioentry">
+<div class="citation" id="id46" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
 </div>
-<div class="citation" id="id13" role="doc-biblioentry">
+<div class="citation" id="id14" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
 <p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
 </div>
-<div class="citation" id="id14" role="doc-biblioentry">
+<div class="citation" id="id15" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </div>
-<div class="citation" id="id46" role="doc-biblioentry">
+<div class="citation" id="id47" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
 <p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
 </div>
-<div class="citation" id="id11" role="doc-biblioentry">
+<div class="citation" id="id12" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
 <p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
 </div>
-<div class="citation" id="id47" role="doc-biblioentry">
+<div class="citation" id="id48" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
 <p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
 </div>
-<div class="citation" id="id48" role="doc-biblioentry">
+<div class="citation" id="id49" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
 <p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
 </div>
-<div class="citation" id="id24" role="doc-biblioentry">
+<div class="citation" id="id25" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
 </div>
