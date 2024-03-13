@@ -13,3 +13,4 @@ parts:
       - file: PMC
       - file: cnn
       - file: ae
+      - file: rnn

@@ -716,7 +716,14 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch: </span><span class="si">{}</span><span class="s1"> perte moyenne: </span><span class="si">{:.9f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Pour finalement visualiser les résultats de la reconstruction (<a class="reference internal" href="#ae6"><span class="std std-numref">Fig. 26</span></a>)</p>
+<p>La figure (<a class="reference internal" href="#ae5b"><span class="std std-numref">Fig. 26</span></a>) montre l’évolution de la reconstruction au cours des itérations.</p>
+<figure class="align-center" id="ae5b">
+<img alt="_images/ae5b.png" src="_images/ae5b.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Reconstruction aux itérations 0,10,20,30 et 40 d’un sous-ensemble de l’ensemble d’apprentissage.</span><a class="headerlink" href="#ae5b" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Pour finalement visualiser les résultats de la reconstruction sur un ensemble de test(<a class="reference internal" href="#ae6"><span class="std std-numref">Fig. 27</span></a>).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
     <span class="n">npimg</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
@@ -746,7 +753,7 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <figure class="align-center" id="ae6">
 <img alt="_images/ae6.png" src="_images/ae6.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Images originales (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Images originales (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>L’Autoencodeur peut ensuite être utilisé par exemple en reconnaissance de chiffres. Une manière simple consiste à choisir au hasard 10 échantillons d’apprentissage de chaque classe et à leur attribuer une étiquette. Ensuite, étant donné les données de test, il est possible de prédire à quelles classes elles appartiennent en trouvant les échantillons d’apprentissage étiquetés les plus similaires dans l’espace latent <span class="math notranslate nohighlight">\(\mathcal H\)</span>.</p>

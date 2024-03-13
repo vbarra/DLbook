@@ -459,7 +459,7 @@ La figure ({numref}`ae5b`) montre l'évolution de la reconstruction au cours des
 Reconstruction aux itérations 0,10,20,30 et 40 d'un sous-ensemble de l'ensemble d'apprentissage.
 ```
 
-Pour finalement visualiser les résultats de la reconstruction sur un ensemble de test({numref}`ae6`).
+Pour finalement visualiser les résultats de la reconstruction sur un ensemble de test ({numref}`ae6`).
 
 ```python
 def imshow(img):
@@ -492,7 +492,7 @@ imshow(outputs_example)
 ```{figure} ./images/ae6.png
 :name: ae6
 :align: center
-Images originales (gauche) et reconstruites (droite) par l'autoencodeur.
+Images originales de test (gauche) et reconstruites (droite) par l'autoencodeur.
 ```
 
 L'Autoencodeur peut ensuite être utilisé par exemple en reconnaissance de chiffres. Une manière simple consiste à choisir au hasard 10 échantillons d'apprentissage de chaque classe et à leur attribuer une étiquette. Ensuite, étant donné les données de test, il est possible de prédire à quelles classes elles appartiennent en trouvant les échantillons d'apprentissage étiquetés les plus similaires dans l'espace latent $\mathcal H$.
