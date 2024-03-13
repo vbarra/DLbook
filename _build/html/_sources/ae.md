@@ -482,7 +482,7 @@ imshow(outputs_example)
 ```
 
 
-```{figure} ./images/ae5.png
+```{figure} ./images/ae6.png
 :name: ae6
 :align: center
 Images originales (gauche) et reconstruites (droite) par l'autoencodeur.
@@ -504,8 +504,8 @@ x_test = x_test[candidates_test]
 y_test = y_test[candidates]
 
 #Représentation des données dans l'espace latent
-h_train=model.encodeur(torch.reshape(x_train.cuda(),(-1,784)))
-h_test=model.encodeur(torch.reshape(x_test.cuda(),(-1,784)))
+h_train=model.encodeur(torch.reshape(x_train,(-1,784)))
+h_test=model.encodeur(torch.reshape(x_test,(-1,784)))
 
 # Données d'entraînement les plus proches (MSE) de chaque exemple de test
 MSEs = np.mean(np.power(np.expand_dims(h_test.detach().cpu(), axis=1) - np.expand_dims(h_train.detach().cpu(), axis=0), 2), axis=2)
