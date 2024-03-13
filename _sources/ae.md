@@ -357,6 +357,138 @@ Visualisation de l’espace latent $\mathcal H = \mathbb{R}^2$ appris par un aut
 
 ## Implémentation
 
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torchsummary import summary
+from torchvision import datasets, transforms
+from torchvision.utils import make_grid
+```
+
+On travaille sur les données MNIST
+
+
+```python
+# taille des batchs
+train_batch_size=128
+test_batch_size = 128
+
+# Paramètres du réseau et de l'apprentissage
+lr = 0.001
+num_epochs = 100
+num_hidden_1 = 256  
+num_hidden_2 = 128  
+num_input = 784  
+
+transform=transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,))
+        ])
+dataset1 = datasets.MNIST('../data', train=True, download=True,
+                       transform=transform)
+dataset2 = datasets.MNIST('../data', train=False,
+                       transform=transform)
+train_kwargs = {'batch_size': train_batch_size}
+test_kwargs = {'batch_size': test_batch_size}
+train_loader = torch.utils.data.DataLoader(dataset1,**train_kwargs)
+test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
+```
+
+et on implémente un autoencodeur : 
+
+```python
+class AE(nn.Module):
+    def __init__(self, x_dim, h_dim1, h_dim2):
+        super(AE, self).__init__()
+        # encodeur 
+        self.fc1 = nn.Linear(x_dim, h_dim1)
+        self.fc2 = nn.Linear(h_dim1, h_dim2)
+        # decodeur part
+        self.fc3 = nn.Linear(h_dim2, h_dim1)
+        self.fc4 = nn.Linear(h_dim1, x_dim)
+
+    def encodeur(self, x):
+        x = torch.sigmoid(self.fc1(x))
+        x = torch.sigmoid(self.fc2(x))
+        return x
+
+    def decodeur(self, x):
+        x = torch.sigmoid(self.fc3(x))
+        x = torch.sigmoid(self.fc4(x))
+        return x
+
+    def forward(self, x):
+        x = self.encodeur(x)
+        x = self.decodeur(x)
+        return x
+```
+
+On instantie le modèle
+
+```python
+model = AE(num_input, num_hidden_1, num_hidden_2)
+summary(model, (1,28,28))
+optimizer = optim.Adam(model.parameters())
+loss_function = nn.MSELoss()```
+```
+
+Et on entraîne
+```python
+for i in range(num_epochs):
+    train_loss = 0
+    for batch_idx, (data, _) in enumerate(train_loader):
+        inputs = torch.reshape(data,(-1, 784)) 
+        optimizer.zero_grad()
+        recons = model(inputs)
+        loss = loss_function(recons, inputs)
+        loss.backward()
+        train_loss += loss.item()
+        optimizer.step()
+        
+    if i%10==0:    
+        print('Epoch: {} perte moyenne: {:.9f}'.format(i, train_loss))
+```
+
+Pour finalement visualiser les résultats de la reconstruction ({numref}`ae6`)
+
+```python
+def imshow(img):
+    npimg = img.numpy()
+    ax = plt.gca()
+    #transpose: change array axis to correspond to the plt.imshow() function     
+    plt.imshow(np.transpose(npimg, (1, 2, 0))) 
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+    plt.tight_layout()
+
+inputs, _ = next(iter(test_loader))
+inputs_example = make_grid(inputs[:16,:,:,:],4)
+inputs=torch.reshape(inputs,(-1,784))
+
+outputs=model(inputs)
+outputs=torch.reshape(outputs,(-1,1,28,28))
+outputs=outputs.detach().cpu()
+outputs_example = make_grid(outputs[:16,:,:,:],4)
+
+fig = plt.figure(122)
+fig.add_subplot(121)
+fig.set_title("Images originales")
+imshow(inputs_example)
+fig.add_subplot(122)
+fig.set_title("Images reconstruites")
+imshow(outputs_example)
+```
+
+
+```{figure} ./images/ae5.png
+:name: ae6
+:align: center
+Images originales (gauche) et reconstruites (droite) par l'autoencodeur.
+```
+
 ```{bibliography}
 :style: unsrt
 ```

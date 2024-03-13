@@ -316,7 +316,7 @@ document.write(`
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Un autoencodeur est algorithme entraîné de manière non supervisée à
 reproduire son entrée <span class="math notranslate nohighlight">\(\mathbf{x}\in \mathcal{X}\)</span>. Il peut être vu
-(<a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 20</span></a>) comme
+(<a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 21</span></a>) comme
 composé de deux parties : un <em>encodeur</em> <code class="docutils literal notranslate"><span class="pre">E</span></code> qui transforme <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>
 en un code déterministe
 <span class="math notranslate nohighlight">\(\mathbf{h} = f(\mathbf{x} ; \mathbf{w_E})\in \mathcal{H}\)</span> ou une
@@ -342,7 +342,7 @@ données.</p>
 <figure class="align-default" id="ae1">
 <img alt="_images/ae1.png" src="_images/ae1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Architecture générale d’un autoencodeur</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Architecture générale d’un autoencodeur</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -369,11 +369,11 @@ d’information utile sur les données.</p>
 <p>L’espace <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> peut être utilisé pour de la visualisation en
 dimension réduite des données, pour des tâches de classification, ou
 plus simplement pour un espace de représentation plus compact des
-données de <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> (<a class="reference internal" href="#ae2"><span class="std std-numref">Fig. 21</span></a>).</p>
+données de <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> (<a class="reference internal" href="#ae2"><span class="std std-numref">Fig. 22</span></a>).</p>
 <figure class="align-default" id="ae2">
 <img alt="_images/ae2.png" src="_images/ae2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Utilisation d’un autoencodeur pour la compression et la génération de
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Utilisation d’un autoencodeur pour la compression et la génération de
 chiffres manuscrits. Les images MNIST (28<span class="math notranslate nohighlight">\(\times\)</span>28,
 ligne du haut) sont encodées par un simple perceptron multicouche à
 activation sigmoïde et une seule couche cachée de taille 36. Le code est
@@ -504,7 +504,7 @@ Un autoencodeur de débruitage considère la fonction de perte</p>
 une distribution conditionnelle <span class="math notranslate nohighlight">\(C(\mathbf{\tilde{x}},\mathbf{x})\)</span>.
 L’autoencodeur apprend alors une distribution de reconstruction
 <span class="math notranslate nohighlight">\(\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}})\)</span>
-selon l”<a class="reference internal" href="#AEB">Algorithm 7</a> (<a class="reference internal" href="#ae3"><span class="std std-numref">Fig. 22</span></a>).</p>
+selon l”<a class="reference internal" href="#AEB">Algorithm 7</a> (<a class="reference internal" href="#ae3"><span class="std std-numref">Fig. 23</span></a>).</p>
 <div class="proof algorithm admonition" id="AEB">
 <p class="admonition-title"><span class="caption-number">Algorithm 7 </span> (Algorithe d’apprentissage d’un autoencodeur de débruitage)</p>
 <section class="algorithm-content" id="proof-content">
@@ -527,7 +527,7 @@ de</p>
 <figure class="align-default" id="ae3">
 <img alt="_images/ae3.png" src="_images/ae3.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Autoencodeur de débruitage sur les données MNIST. Les images
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Autoencodeur de débruitage sur les données MNIST. Les images
 <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (ligne du haut) sont corrompues par un bruit gaussien
 centré de variance unité (deuxième ligne). Un autoencodeur de débruitage
 est ensuite entraîné. Le code <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> de taille 32 est visualisé
@@ -541,14 +541,14 @@ ligne.</span><a class="headerlink" href="#ae3" title="Link to this image">#</a><
 <section id="autoencodeurs-variationnels">
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Link to this heading">#</a></h2>
 <p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.</p>
-<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="cnn.html#id24" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
+<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="cnn.html#id25" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
-empruntent juste une architecture similaire (<a class="reference internal" href="#ae4"><span class="std std-numref">Fig. 23</span></a>), d’où leur nom.</p>
+empruntent juste une architecture similaire (<a class="reference internal" href="#ae4"><span class="std std-numref">Fig. 24</span></a>), d’où leur nom.</p>
 <figure class="align-default" id="ae4">
 <img alt="_images/ae4.png" src="_images/ae4.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Architecture générale d’un autoencodeur
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Architecture générale d’un autoencodeur
 variationnel.</span><a class="headerlink" href="#ae4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -567,7 +567,7 @@ plus utile</p></li>
 <span class="math notranslate nohighlight">\(\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\)</span>
 pour échantillonner <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> puis <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, et donc de
 générer des données ayant des statistiques similaires aux éléments
-de <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> (<a class="reference internal" href="#ae5"><span class="std std-numref">Fig. 24</span></a>).</p></li>
+de <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> (<a class="reference internal" href="#ae5"><span class="std std-numref">Fig. 25</span></a>).</p></li>
 </ul>
 <p>Abordons ces autoencodeurs sous l’angle des modèles génératifs.
 Supposons que nous voulions générer des points suivant la distribution
@@ -626,12 +626,132 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <figure class="align-default" id="ae5">
 <img alt="_images/ae5.png" src="_images/ae5.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Visualisation de l’espace latent <span class="math notranslate nohighlight">\(\mathcal H = \mathbb{R}^2\)</span> appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur <span class="math notranslate nohighlight">\(\mathbf h_i\)</span> discrétisée sur <span class="math notranslate nohighlight">\(\mathcal H\)</span> est affichée une image <span class="math notranslate nohighlight">\(\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w_D})\)</span>. Les chiffres de la même classe sont groupés dans cet espace, et les axes de <span class="math notranslate nohighlight">\(\mathcal H\)</span> ont une interprétation (l’axe horizontal semble souligner le caractère « penché » des chiffres).</span><a class="headerlink" href="#ae5" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Visualisation de l’espace latent <span class="math notranslate nohighlight">\(\mathcal H = \mathbb{R}^2\)</span> appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur <span class="math notranslate nohighlight">\(\mathbf h_i\)</span> discrétisée sur <span class="math notranslate nohighlight">\(\mathcal H\)</span> est affichée une image <span class="math notranslate nohighlight">\(\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w_D})\)</span>. Les chiffres de la même classe sont groupés dans cet espace, et les axes de <span class="math notranslate nohighlight">\(\mathcal H\)</span> ont une interprétation (l’axe horizontal semble souligner le caractère « penché » des chiffres).</span><a class="headerlink" href="#ae5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="implementation">
 <h2>Implémentation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">from</span> <span class="nn">torchsummary</span> <span class="kn">import</span> <span class="n">summary</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+<span class="kn">from</span> <span class="nn">torchvision.utils</span> <span class="kn">import</span> <span class="n">make_grid</span>
+</pre></div>
+</div>
+<p>On travaille sur les données MNIST</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># taille des batchs</span>
+<span class="n">train_batch_size</span><span class="o">=</span><span class="mi">128</span>
+<span class="n">test_batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+
+<span class="c1"># Paramètres du réseau et de l&#39;apprentissage</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">num_hidden_1</span> <span class="o">=</span> <span class="mi">256</span>  
+<span class="n">num_hidden_2</span> <span class="o">=</span> <span class="mi">128</span>  
+<span class="n">num_input</span> <span class="o">=</span> <span class="mi">784</span>  
+
+<span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))</span>
+        <span class="p">])</span>
+<span class="n">dataset1</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s1">&#39;../data&#39;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">dataset2</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s1">&#39;../data&#39;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">train_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="n">train_batch_size</span><span class="p">}</span>
+<span class="n">test_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="n">test_batch_size</span><span class="p">}</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset1</span><span class="p">,</span><span class="o">**</span><span class="n">train_kwargs</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset2</span><span class="p">,</span> <span class="o">**</span><span class="n">test_kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>et on implémente un autoencodeur :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_dim</span><span class="p">,</span> <span class="n">h_dim1</span><span class="p">,</span> <span class="n">h_dim2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># encodeur </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">x_dim</span><span class="p">,</span> <span class="n">h_dim1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">h_dim1</span><span class="p">,</span> <span class="n">h_dim2</span><span class="p">)</span>
+        <span class="c1"># decodeur part</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">h_dim2</span><span class="p">,</span> <span class="n">h_dim1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc4</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">h_dim1</span><span class="p">,</span> <span class="n">x_dim</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">encodeur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">decodeur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc4</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encodeur</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decodeur</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>On instantie le modèle</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">AE</span><span class="p">(</span><span class="n">num_input</span><span class="p">,</span> <span class="n">num_hidden_1</span><span class="p">,</span> <span class="n">num_hidden_2</span><span class="p">)</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">))</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span><span class="err">```</span>
+</pre></div>
+</div>
+<p>Et on entraîne</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">))</span> 
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">recons</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">recons</span><span class="p">,</span> <span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        
+    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">10</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>    
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch: </span><span class="si">{}</span><span class="s1"> perte moyenne: </span><span class="si">{:.9f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Pour finalement visualiser les résultats de la reconstruction (<a class="reference internal" href="#ae6"><span class="std std-numref">Fig. 26</span></a>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="n">npimg</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="c1">#transpose: change array axis to correspond to the plt.imshow() function     </span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">npimg</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">inputs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">test_loader</span><span class="p">))</span>
+<span class="n">inputs_example</span> <span class="o">=</span> <span class="n">make_grid</span><span class="p">(</span><span class="n">inputs</span><span class="p">[:</span><span class="mi">16</span><span class="p">,:,:,:],</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">inputs</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">784</span><span class="p">))</span>
+
+<span class="n">outputs</span><span class="o">=</span><span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">outputs</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">outputs</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">))</span>
+<span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+<span class="n">outputs_example</span> <span class="o">=</span> <span class="n">make_grid</span><span class="p">(</span><span class="n">outputs</span><span class="p">[:</span><span class="mi">16</span><span class="p">,:,:,:],</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Images originales&quot;</span><span class="p">)</span>
+<span class="n">imshow</span><span class="p">(</span><span class="n">inputs_example</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Images reconstruites&quot;</span><span class="p">)</span>
+<span class="n">imshow</span><span class="p">(</span><span class="n">outputs_example</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center" id="ae6">
+<img alt="_images/ae5.png" src="_images/ae5.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Images originales (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="docutils container" id="id2">
 <div role="list" class="citation-list">
 <div class="citation" id="id39" role="doc-biblioentry">
