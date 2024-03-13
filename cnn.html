@@ -186,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
 </ul>
 
     </div>
@@ -532,13 +533,13 @@ fonctions donnent des gradients faibles, qui ont tendance à s’annuler
 (problème du <em>gradient évanescent</em> ou <em>vanishing gradient</em>) lors de la
 phase d’apprentissage par rétropropagation du gradient. Une autre
 fonction, non saturante elle, est très largement utilisée. Il s’agit de
-la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="#id46" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
+la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="rnn.html#id39" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
 \end{aligned}\]</div>
 <p>Les neurones utilisant la fonction ReLU sont appelés neurones linéaires rectifiés. Glorot
-et Bengio <span id="id2">[<a class="reference internal" href="#id14" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
+et Bengio <span id="id2">[<a class="reference internal" href="rnn.html#id7" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
 tant que couche non linéaire permettait un entraînement efficace de
 réseaux profonds sans pré-entraînement non supervisé. Plusieurs
 variantes de cette fonction existent, par exemple pour assurer une
@@ -548,7 +549,7 @@ valeurs négatives de l’argument.</p>
 <section id="couches-de-normalisation">
 <h3>Couches de normalisation<a class="headerlink" href="#couches-de-normalisation" title="Link to this heading">#</a></h3>
 <p>La normalisation prend aujourd’hui une place de plus en plus importante,
-notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="#id15" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
+notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="rnn.html#id8" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
 suggèrent qu’un changement dans la distribution des activations d’un
 réseau profond, résultant de la présentation d’un nouveau mini batch
 d’exemples, ralentit le processus d’apprentissage. Pour pallier ce
@@ -949,7 +950,7 @@ d’agrégation du réseau AlexNet, superposées aux images ayant le plus
 fortement activé ces neurones. Le champ est encadré en blanc, et la
 valeur d’activation correspondante est reportée en haut. On voit par
 exemple que certains neurones sont très sensibles aux textes, d’autres
-aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="#id47" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Link to this image">#</a></p>
+aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="rnn.html#id40" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -973,7 +974,7 @@ droite). La probabilité de la classe s’effondre lorsque le rectangle
 couvre une partie de la face du chien. Cela suggère que cette face est
 grandement responsable de la forte probabilité de classement de l’image
 comme un loulou. A l’inverse, l’occlusion du fond n’altère pas la forte
-valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="#id12" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Link to this image">#</a></p>
+valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="rnn.html#id5" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1001,7 +1002,7 @@ ce neurone répond (<a class="reference internal" href="#gradcam"><span class="s
 <figcaption>
 <p><span class="caption-number">Fig. 17 </span><span class="caption-text">Approches par gradient de visualisation du fonctionnement
 d’un réseau convolutif. Comparaison de la méthode de rétropropagation
-guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="#id48" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Link to this image">#</a></p>
+guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="rnn.html#id41" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Ces gradients peuvent également être utilisés dans la méthode de montée
@@ -1018,7 +1019,7 @@ cette méthode produit des images parfois très artistiques (<a class="reference
 <img alt="_images/monteeg.png" src="_images/monteeg.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 18 </span><span class="caption-text">Visualisation des 4 premières couches de convolution d’un
-réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="#id49" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Link to this image">#</a></p>
+réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="rnn.html#id42" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1214,6 +1215,10 @@ réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="r
 <div class="citation" id="id25" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
+<p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
 </div>
 </div>
 </div>
