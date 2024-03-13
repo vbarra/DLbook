@@ -450,7 +450,16 @@ for i in range(num_epochs):
         print('Epoch: {} perte moyenne: {:.9f}'.format(i, train_loss))
 ```
 
-Pour finalement visualiser les résultats de la reconstruction ({numref}`ae6`)
+
+La figure ({numref}`ae5b`) montre l'évolution de la reconstruction au cours des itérations.
+
+```{figure} ./images/ae5b.png
+:name: ae5b
+:align: center
+Reconstruction aux itérations 0,10,20,30 et 40 d'un sous-ensemble de l'ensemble d'apprentissage.
+```
+
+Pour finalement visualiser les résultats de la reconstruction sur un ensemble de test({numref}`ae6`).
 
 ```python
 def imshow(img):

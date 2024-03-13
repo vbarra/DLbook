@@ -541,7 +541,7 @@ ligne.</span><a class="headerlink" href="#ae3" title="Link to this image">#</a><
 <section id="autoencodeurs-variationnels">
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Link to this heading">#</a></h2>
 <p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.</p>
-<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="#id18" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
+<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="cnn.html#id25" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
 empruntent juste une architecture similaire (<a class="reference internal" href="#ae4"><span class="std std-numref">Fig. 24</span></a>), d’où leur nom.</p>
@@ -637,7 +637,6 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
-<span class="kn">from</span> <span class="nn">torchsummary</span> <span class="kn">import</span> <span class="n">summary</span>
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
 <span class="kn">from</span> <span class="nn">torchvision.utils</span> <span class="kn">import</span> <span class="n">make_grid</span>
 </pre></div>
@@ -697,9 +696,8 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 </div>
 <p>On instantie le modèle</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">AE</span><span class="p">(</span><span class="n">num_input</span><span class="p">,</span> <span class="n">num_hidden_1</span><span class="p">,</span> <span class="n">num_hidden_2</span><span class="p">)</span>
-<span class="n">summary</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">))</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
-<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span><span class="err">```</span>
+<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Et on entraîne</p>

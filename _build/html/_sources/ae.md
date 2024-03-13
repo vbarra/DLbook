@@ -363,7 +363,6 @@ from matplotlib import pyplot as plt
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torchsummary import summary
 from torchvision import datasets, transforms
 from torchvision.utils import make_grid
 ```
@@ -430,9 +429,8 @@ On instantie le modèle
 
 ```python
 model = AE(num_input, num_hidden_1, num_hidden_2)
-summary(model, (1,28,28))
 optimizer = optim.Adam(model.parameters())
-loss_function = nn.MSELoss()```
+loss_function = nn.MSELoss()
 ```
 
 Et on entraîne
