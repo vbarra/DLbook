@@ -297,6 +297,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeurs-de-debruitage">Autoencodeurs de débruitage</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeurs-variationnels">Autoencodeurs variationnels</a></li>
 </ul>
             </nav>
         </div>
@@ -513,7 +514,7 @@ selon l”<a class="reference internal" href="#AEB">Algorithm 7</a> (<a class="r
 <ol class="arabic simple">
 <li><p>Tirer un exemple <span class="math notranslate nohighlight">\(\mathbf x\)</span> de <span class="math notranslate nohighlight">\(\mathcal{S}\)</span></p></li>
 <li><p>Tirer <span class="math notranslate nohighlight">\(\mathbf {\tilde{x}}\)</span> selon <span class="math notranslate nohighlight">\(C(\mathbf{\tilde{x}},\mathbf{x})\)</span></p></li>
-<li><p>Estimer <span class="math notranslate nohighlight">\(\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}}) = \)</span>\textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf{h},\mathbf{w_D})=g(\mathbf{h},\mathbf{w_D})<span class="math notranslate nohighlight">\( où \)</span>\mathbf{h} = f((\mathbf{\tilde{x}},\mathbf{w_E})$</p></li>
+<li><p>Estimer <span class="math notranslate nohighlight">\(\textbf{p}_R(\mathbf{x}\mid \mathbf{\tilde{x}}) = \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf{h},\mathbf{w_D})=g(\mathbf{h},\mathbf{w_D})\)</span> où <span class="math notranslate nohighlight">\(\mathbf{h} = f((\mathbf{\tilde{x}},\mathbf{w_E})\)</span></p></li>
 </ol>
 </li>
 </ol>
@@ -531,28 +532,25 @@ centré de variance unité (deuxième ligne). Un autoencodeur de débruitage
 est ensuite entraîné. Le code <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> de taille 32 est visualisé
 (troisième ligne) sous la forme d’images 8<span class="math notranslate nohighlight">\(\times\)</span>4. Le
 décodeur produit les images débruitées de la dernière
-ligne.```</span><a class="headerlink" href="#ae3" title="Link to this image">#</a></p>
-<div class="legend">
-<h2 class="rubric" id="autoencodeurs-variationnels">Autoencodeurs variationnels</h2>
-<p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec la
-section suivante sur les réseaux antagonistes générateurs.<br />
-Les autoencodeurs variationnels (VAE) [&#64;Kingma13] sont des modèles
+ligne.</span><a class="headerlink" href="#ae3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="autoencodeurs-variationnels">
+<h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Link to this heading">#</a></h2>
+<p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.</p>
+<p>Les autoencodeurs variationnels (VAE) [&#64;Kingma13] sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
-empruntent juste une architecture similaire (figure
-<a class="reference internal" href="#F:VAE"><span class="xref myst">1.4</span></a>{reference-type= »ref » reference= »F:VAE »}), d’où leur nom.\</p>
-<div class="center docutils">
-<figure id="F:VAE">
-<p><span> myTrapezium/.pic = <span> (0,0) – (0,)̱ – (,)̧ – (,-)̧ – (0,-)̱ –
-cycle ; (-center) at (/2,0); (-out) at (,0); </span> </span></p>
-<p>= [thick, decoration=<span>markings,mark=at position 1 with </span>,
-double distance=1.4pt, shorten &gt;= 5.5pt, preaction =
-<span>decorate</span>, postaction = <span>draw,line width=1.4pt,
-white,shorten &gt;= 4.5pt</span>]</p>
-<figcaption>Architecture générale d’un autoencodeur
-variationnel</figcaption>
+empruntent juste une architecture similaire (<a class="reference internal" href="#ae4"><span class="std std-numref">Fig. 23</span></a>), d’où leur nom.</p>
+<figure class="align-default" id="ae4">
+<img alt="_images/ae4.png" src="_images/ae4.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Architecture générale d’un autoencodeur
+variationnel.</span><a class="headerlink" href="#ae4" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-</div>
 <p>Au lieu d’apprendre <span class="math notranslate nohighlight">\(f(.,\mathbf{w_E})\)</span> et <span class="math notranslate nohighlight">\(g(.,\mathbf{w_D})\)</span>, un
 autoencodeur variationnel apprend des distributions de probabilité
 <span class="math notranslate nohighlight">\(\textbf{p}_{encodeur} (\mathbf{h}|\mathbf{x},\mathbf{w_E})\)</span>
@@ -624,55 +622,12 @@ se fait effectivement en tirant une variable aléatoire
 <span class="math notranslate nohighlight">\(\epsilon\sim\mathcal{N}(\mathbf{0},\mathbf{I})\)</span>, puis en calculant
 <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>=<span class="math notranslate nohighlight">\(\mu\)</span> + <span class="math notranslate nohighlight">\(\Sigma^{1/2} \epsilon\)</span>. L’échantillonnage se fait
 alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</span>, qui n’a pas besoin d’être rétropropagé.</p>
-<div class="SCfigure docutils">
-<p><img alt="image" src="images/vae" /></p>
-</div>
-<h2 class="rubric" id="partie-pratique">Partie pratique</h2>
-<h3 class="rubric" id="construction-d-autoencodeurs-simples">Construction d’autoencodeurs simples</h3>
-<p>Les squelettes notebook vous étant donnés, il est demandé de construire
-deux auto-encodeurs :</p>
-<ol class="arabic simple">
-<li><p>un premier avec un encodeur et un décodeur définis par des
-perceptrons multicouches (figure <a class="reference internal" href="#F:AE"><span class="xref myst">1.5</span></a>{reference-type= »ref »
-reference= »F:AE »}-(a))</p></li>
-<li><p>un second dont l’encodeur et le décodeur sont composés de réseaux
-convolutifs (figure <a class="reference internal" href="#F:AE"><span class="xref myst">1.5</span></a>{reference-type= »ref »
-reference= »F:AE »}-(b))</p></li>
-</ol>
-<p>Vous ferez varier les paramètres de vos autoencodeurs (nombre de
-neurones sur les couches cachées, learning rate, nombre d’itérations,
-taille des batchs…), et observerez :</p>
-<ul class="simple">
-<li><p>l’espace latent de l’autoencodeur ;</p></li>
-<li><p>les images reconstruites pour les deux autoencodeurs produits, et
-vous jugerez de la qualité de la reconstruction.</p></li>
-</ul>
-<figure id="F:AE">
-<table>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><img src="images/AEdense"
-alt="image" /></td>
-<td style="text-align: center;"><img src="images/AECNN"
-alt="image" /></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">(a)Autoencodeur à base de PMC</td>
-<td style="text-align: center;">(b) Autoencodeur à base de CNN</td>
-</tr>
-</tbody>
-</table>
-<figcaption>Autoencodeurs </figcaption>
-</figure>
-<h3 class="rubric" id="autoencodeur-de-debruitage">Autoencodeur de débruitage</h3>
-<p>Réalisez un autoencodeur permettant de réaliser du débruitage d’image.
-En vous appuyant sur la partie précédente, apprenez le modèle en
-présentant des données corrompues (changer les valeurs aléatoirement
-pour <span class="math notranslate nohighlight">\(p\)</span>% des pixels de l’image d’entrainement).</p>
-</div>
+<figure class="align-default" id="ae5">
+<img alt="_images/ae5.png" src="_images/ae5.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Visualisation de l’espace latent <span class="math notranslate nohighlight">\(\mathcal H = \mathbb{R}^2\)</span> appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur <span class="math notranslate nohighlight">\(\mathbf h_i\)</span> discrétisée sur <span class="math notranslate nohighlight">\(\mathcal H\)</span> est affichée une image <span class="math notranslate nohighlight">\(\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w-D})\)</span>. Les chiffres de la même classe sont groupés dans cet espace, et les axes de $\mathcal H ont une interprétation (l’axe horizontal semble souligner le caractère « penché » des chiffres).</span><a class="headerlink" href="#ae5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
 </section>
 </section>
 
@@ -743,6 +698,7 @@ pour <span class="math notranslate nohighlight">\(p\)</span>% des pixels de l’
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeurs-de-debruitage">Autoencodeurs de débruitage</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencodeurs-variationnels">Autoencodeurs variationnels</a></li>
 </ul>
   </nav></div>
 
