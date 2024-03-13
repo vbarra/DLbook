@@ -289,8 +289,7 @@ présente plusieurs avantages, et notamment :
     $\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$
     pour échantillonner $\mathbf{h}$ puis $\mathbf{x}$, et donc de
     générer des données ayant des statistiques similaires aux éléments
-    de $\mathcal{S}$ (figure [\[F:VAE2\]](#F:VAE2){reference-type="ref"
-    reference="F:VAE2"}).
+    de $\mathcal{S}$ ({numref}`ae5`).
 
 Abordons ces autoencodeurs sous l'angle des modèles génératifs.
 Supposons que nous voulions générer des points suivant la distribution
@@ -311,7 +310,9 @@ tiré selon
 $\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})$.
 L'entraînement est réalisé en maximisant la borne inférieure
 variationnelle :
+
 $$\mathcal{L}(q) = \mathbb{E}_{\mathbf{h}\sim q(\mathbf{h}|\mathbf{x})} log \left (\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h},\mathbf{w_D})\right ) -KL\left (q(\mathbf{h}|\mathbf{x}) ||\textbf{p}_\mathbf{h}\right )$$
+
 où $KL$ est la divergence de Kullback Leibler déjà rencontrée dans les
 autoencodeurs parcimonieux. Le premier terme de $\mathcal{L}(q)$ est la
 log vraisemblance de la reconstruction trouvée dans les autoencodeurs

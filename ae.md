@@ -239,7 +239,7 @@ selon l'{prf:ref}`AEB` ({numref}`ae3`).
 L'apprentissage peut être vu comme une descente de gradient stochastique
 de
 
-$$-\mathbb{E}_{\mathbf{x}\sim \textbf{p}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log \textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )$$
+$$-\mathbb{E}_{\mathbf{x}\sim \textbf{p}_{\mathcal{S}}(\mathbf{x})} \mathbb{E}_{\mathbf{\tilde{x}}\sim C(\mathbf{\tilde{x}},\mathbf{x})} \left (log\;\textbf{p}_{decodeur} (\mathbf{x}|\mathbf{h}=f(\mathbf{\tilde{x}},\mathbf{w_E}),\mathbf{w_D})\right )$$
 
 
 
@@ -260,7 +260,7 @@ ligne.
 
 Le dernier modèle d'autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.
 
-Les autoencodeurs variationnels (VAE) [@Kingma13] sont des modèles
+Les autoencodeurs variationnels (VAE) sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
 empruntent juste une architecture similaire ({numref}`ae4`), d'où leur nom.
@@ -352,6 +352,6 @@ alors seulement pour $\epsilon$, qui n'a pas besoin d'être rétropropagé.
 
 ```{figure} ./images/ae5.png
 :name: ae5
-Visualisation de l’espace latent $\mathcal H = \mathbb{R}^2$ appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur $\mathbf h_i$ discrétisée sur $\mathcal H$ est affichée une image $\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w-D})$. Les chiffres de la même classe sont groupés dans cet espace, et les axes de $\mathcal H ont une interprétation (l'axe horizontal semble souligner le caractère "penché" des chiffres).
+Visualisation de l’espace latent $\mathcal H = \mathbb{R}^2$ appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur $\mathbf h_i$ discrétisée sur $\mathcal H$ est affichée une image $\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w_D})$. Les chiffres de la même classe sont groupés dans cet espace, et les axes de $\mathcal H$ ont une interprétation (l'axe horizontal semble souligner le caractère "penché" des chiffres).
 ```
 
