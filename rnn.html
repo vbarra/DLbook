@@ -326,7 +326,7 @@ La donnée <span class="math notranslate nohighlight">\(\mathbf{x_{t-1}}\)</span
 aux instants suivants, à l’aide des arcs récurrents.</p>
 <p>Deux équations permettent de calculer les quantités nécessaires à
 l’instant <span class="math notranslate nohighlight">\(t\)</span> dans la phase de propagation avant d’un réseau récurrent
-simple (comme celui de la <a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 28</span></a> gauche) :</p>
+simple (comme celui de la <a class="reference internal" href="#rnn1"><span class="std std-numref">Fig. 28</span></a> gauche) :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 h_t&amp;=&amp;\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t-1}} + b_h\right)\\
@@ -336,22 +336,44 @@ h_t&amp;=&amp;\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t
 l’entrée à la couche cachée et <span class="math notranslate nohighlight">\(\mathbf{W_{hh}}\)</span> celle des poids des
 arcs récurrents. Les biais sont notés <span class="math notranslate nohighlight">\(b_h\)</span> et <span class="math notranslate nohighlight">\(b_y\)</span>.<br />
 La dynamique du réseau peut être décrite en dépliant ce réseau dans le
-temps (<a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 28</span></a> droite). Le réseau devient donc un réseau profond, avec une couche par instant <span class="math notranslate nohighlight">\(t\)</span> et un partage de poids au cours du temps. Ce dernier peut
+temps (<a class="reference internal" href="#rnn1"><span class="std std-numref">Fig. 28</span></a> droite). Le réseau devient donc un réseau profond, avec une couche par instant <span class="math notranslate nohighlight">\(t\)</span> et un partage de poids au cours du temps. Ce dernier peut
 donc être entraîné de manière classique par l’algorithme de
 rétropropagation du gradient, indicé par le temps (<em>Backpropagation
 through time</em>, BPTT algorithm).</p>
-<figure class="align-default" id="ae1">
+<figure class="align-default" id="rnn1">
 <img alt="_images/rnn1.png" src="_images/rnn1.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 28 </span><span class="caption-text">Réseau récurrent et sa version dépliée dans le
-temps.</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
+temps.</span><a class="headerlink" href="#rnn1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Avec ces réseaux, il est possible de traiter des séquences de longueur
 quelconque, la taille du modèle étant indépendante de cette longueur.
-Plusieurs architectures peuvent être déclinées sur ce principe et le
-tableau <a class="reference internal" href="#T:rnn"><span class="xref myst">1.1</span></a>{reference-type= »ref » reference= »T:rnn »} donne un
-panorama de certaines d’entre elles, avec des exemples d’applications.</p>
+Plusieurs architectures peuvent être déclinées sur ce principe</p>
+<figure class="align-default" id="onetomany">
+<img alt="_images/onetomany.pdf" src="_images/onetomany.pdf" />
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Architectures « un vers plusieurs » , utilisées par exemple en génération de musique ou légendage d’images.</span><a class="headerlink" href="#onetomany" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id1">
+<img alt="_images/manytoone.pdf" src="_images/manytoone.pdf" />
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Architectures « un vers plusieurs » , utilisées par exemple en classification de sentiments</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<img alt="_images/manytomany1.pdf" src="_images/manytomany1.pdf" />
+<figcaption>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Architectures « plusieurs vers plusieurs », pour la reconnaissance d’entité dans des textes ou annotation de vidéos.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id3">
+<img alt="_images/manytomany2.pdf" src="_images/manytomany2.pdf" />
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Architectures « plusieurs vers plusieurs », pour la traduction automatique.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="entrainement-des-reseaux-recurrents">
 <h2>Entraînement des réseaux récurrents<a class="headerlink" href="#entrainement-des-reseaux-recurrents" title="Link to this heading">#</a></h2>
@@ -380,7 +402,7 @@ problèmes.</p>
 <h2>Quelques architectures<a class="headerlink" href="#quelques-architectures" title="Link to this heading">#</a></h2>
 <section id="lstm">
 <h3>LSTM<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h3>
-<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id1">[<a class="reference internal" href="#id4" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
+<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id4">[<a class="reference internal" href="#id7" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
 modèle ressemble à un réseau récurrent classique à une couche cachée,
 mais chaque neurone de la couche cachée est remplacé par une cellule de
 mémoire.</p>
@@ -605,42 +627,42 @@ tache de reconnaissance de la parole.</p>
 descripteurs, qui servent d’entrée à un réseau récurrent type LSTM
 (figure <a class="reference internal" href="#F:caption"><span class="xref myst">[F:caption]</span></a>{reference-type= »ref »
 reference= »F:caption »}).</p>
-<div class="docutils container" id="id2">
+<div class="docutils container" id="id5">
 <div role="list" class="citation-list">
-<div class="citation" id="id39" role="doc-biblioentry">
+<div class="citation" id="id42" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
 </div>
-<div class="citation" id="id7" role="doc-biblioentry">
+<div class="citation" id="id10" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
 </div>
-<div class="citation" id="id8" role="doc-biblioentry">
+<div class="citation" id="id11" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </div>
-<div class="citation" id="id40" role="doc-biblioentry">
+<div class="citation" id="id43" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
 </div>
-<div class="citation" id="id5" role="doc-biblioentry">
+<div class="citation" id="id8" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
 </div>
-<div class="citation" id="id41" role="doc-biblioentry">
+<div class="citation" id="id44" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
 </div>
-<div class="citation" id="id42" role="doc-biblioentry">
+<div class="citation" id="id45" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
 <p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
 </div>
-<div class="citation" id="id18" role="doc-biblioentry">
+<div class="citation" id="id21" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
 </div>
-<div class="citation" id="id4" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">9</a><span class="fn-bracket">]</span></span>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">9</a><span class="fn-bracket">]</span></span>
 <p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
 </div>
 </div>
