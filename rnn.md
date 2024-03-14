@@ -9,10 +9,7 @@ kernelspec:
   language: python
   name: python3
 ---
-
 # Réseaux récurrents
-
------------------------------------------------------------------------------------------------
 
 ## Définition
 
@@ -160,7 +157,9 @@ Cellule LSTM
 ```
 
 En résumé, un LSTM effectue donc les opérations suivantes à l'instant
-$t$ : $$\begin{aligned}
+$t$ : 
+
+$$\begin{aligned}
 g^{t} &=& \sigma\left(\mathbf{W_C}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_C\right)\\
 i^{t} &=& \sigma\left(\mathbf{W_i}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_i\right)\\
 f^{t} &=& \sigma\left(\mathbf{W_f}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_f\right)\\
@@ -171,9 +170,9 @@ h_t &=& o^{t} tanh(C^{t})
 
 ### GRU
 
-En 2014 [@ChO14], une version simplifiée des réseaux LSTM a été
+En 2014 {cite:p}`SCHChO1497`, une version simplifiée des réseaux LSTM a été
 introduite, qui nécessite moins de paramètres. Les GRU (*Gated Recurrent
-Units*) sont en effet des réseaux sans mémoire interne $C^{t}$, ni porte
+Units*) ({numref}`gru`) sont en effet des réseaux sans mémoire interne $C^{t}$, ni porte
 de sortie $o^{t}$. Ces réseaux sont composés de deux portes au lieu de
 trois :
 
@@ -185,7 +184,9 @@ trois :
     mémoire précédente qui doit être conservée. Cette porte est la
     combinaison des portes d'entrée et d'oubli des LSTM.
 
-Formellement : $$\begin{aligned}
+Formellement : 
+
+$$\begin{aligned}
 r^{t} &=& \sigma\left(\mathbf{W_r}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_r\right)\\
 z^{t} &=& \sigma\left(\mathbf{W_z}^\top\left[\mathbf{x_t}, h_{t-1}\right ] +b_z\right)\\
 \tilde{h}^{t} &=& tanh\left(\mathbf{W}^\top\left[\mathbf{x_t} , r^{t} h_{t-1}\right ] +b_h \right)\\ 
@@ -195,32 +196,37 @@ h_t&=&\left(1-z^{t}\right)h_{t-1} + z^{t} \tilde{h}^{t}
 Si, pour tout $t, r^{t}=1$ et $z^{t}=0$, alors on modélise un réseau
 récurrent classique.
 
-<figure id="F:lstmC">
-
-<figcaption>Cellule GRU</figcaption>
-</figure>
+```{figure} ./images/gru.png
+:name: gru
+Cellule GRU
+```
 
 ### Réseaux récurrents bidirectionnels
 
 Les réseaux bidirectionnels ont été décrits pour la première fois en
-1997 [@SCH97]. Dans ces réseaux, deux couches cachées sont présentes,
+1997 {cite:p}`SCH97`. Dans ces réseaux, deux couches cachées sont présentes,
 chacune connectée à l'entrée et la sortie. La première couche cachée a
 des connexions récurrentes depuis le passé vers le futur, tandis que
 l'autre transmet les activations depuis le futur vers le passé
-(figure [1.4](#F:BDRN){reference-type="ref" reference="F:BDRN"}).
+({numref}`bidir`).
 
-<figure id="F:BDRN">
-<embed src="images/bidirectionnel.pdf" />
-<figcaption>Réseau bidirectionnel.</figcaption>
-</figure>
+
+```{figure} ./images/bidir.png
+:name: bidir
+Réseau bidirectionnel
+```
+
 
 Étant données une entrée et une sortie du réseau (des séquences), le
 réseau peut être entraîné par rétropropagation après avoir été déplié :
+
 $$\begin{aligned}
 x_t &=&\sigma\left(\mathbf{W_h}^\top \left [\mathbf{x_t},h_{t-1} \right ]+b_h \right)\\
 z_{t} &=&\sigma\left(\mathbf{W_z}^\top \left [\mathbf{x_t},z_{t+1} \right ]+b_z \right)\\
 \hat{y}_{t}&=& softmax\left(\mathbf{W_y}^\top \left [x_t,z_{t} \right ]+b_y \right)
-\end{aligned}$$ où $h_t$ (respectivement $z_{t}$) représente la valeur
+\end{aligned}$$ 
+
+où $h_t$ (respectivement $z_{t}$) représente la valeur
 de la couche cachée dans le sens du temps (respectivement dans le sens
 inverse). Puisque le temps doit être fini dans les deux sens de
 parcours, les réseaux bidirectionnels ne peuvent traiter que des
