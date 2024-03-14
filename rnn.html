@@ -307,7 +307,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reseaux-recurrents">
 <h1>Réseaux récurrents<a class="headerlink" href="#reseaux-recurrents" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
 <section id="definition">
 <h2>Définition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
 <p>Les réseaux de neurones récurrents (RNN, <em>Recurrent Neural Networks</em>)
@@ -400,7 +399,7 @@ problèmes.</p>
 <h2>Quelques architectures<a class="headerlink" href="#quelques-architectures" title="Link to this heading">#</a></h2>
 <section id="lstm">
 <h3>LSTM<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h3>
-<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id4">[<a class="reference internal" href="#id7" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
+<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id4">[<a class="reference internal" href="#id10" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
 modèle ressemble à un réseau récurrent classique à une couche cachée,
 mais chaque neurone de la couche cachée est remplacé par une cellule de
 mémoire.</p>
@@ -447,20 +446,22 @@ de la porte de sortie <span class="math notranslate nohighlight">\(o^{t}\)</span
 </figcaption>
 </figure>
 <p>En résumé, un LSTM effectue donc les opérations suivantes à l’instant
-<span class="math notranslate nohighlight">\(t\)</span> : $<span class="math notranslate nohighlight">\(\begin{aligned}
+<span class="math notranslate nohighlight">\(t\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
 g^{t} &amp;=&amp; \sigma\left(\mathbf{W_C}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_C\right)\\
 i^{t} &amp;=&amp; \sigma\left(\mathbf{W_i}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_i\right)\\
 f^{t} &amp;=&amp; \sigma\left(\mathbf{W_f}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_f\right)\\
 o^{t} &amp;=&amp; \sigma\left(\mathbf{W_o}^\top \left[\mathbf{x_t}, h_{t-1}\right ] +b_o\right)\\
 C^{t} &amp;=&amp;g^{t}.i^{t} + C^{t-1}.f^{t}\\
 h_t &amp;=&amp; o^{t} tanh(C^{t})
-\end{aligned}\)</span>$</p>
+\end{aligned}\end{split}\]</div>
 </section>
 <section id="gru">
 <h3>GRU<a class="headerlink" href="#gru" title="Link to this heading">#</a></h3>
-<p>En 2014 [&#64;ChO14], une version simplifiée des réseaux LSTM a été
+<p>En 2014 <span id="id5">[]</span>, une version simplifiée des réseaux LSTM a été
 introduite, qui nécessite moins de paramètres. Les GRU (<em>Gated Recurrent
-Units</em>) sont en effet des réseaux sans mémoire interne <span class="math notranslate nohighlight">\(C^{t}\)</span>, ni porte
+Units</em>) (<a class="reference internal" href="#id6"><span class="std std-numref">Fig. 34</span></a>) sont en effet des réseaux sans mémoire interne <span class="math notranslate nohighlight">\(C^{t}\)</span>, ni porte
 de sortie <span class="math notranslate nohighlight">\(o^{t}\)</span>. Ces réseaux sont composés de deux portes au lieu de
 trois :</p>
 <ul class="simple">
@@ -471,37 +472,46 @@ nouvelle entrée au temps <span class="math notranslate nohighlight">\(t\)</span
 mémoire précédente qui doit être conservée. Cette porte est la
 combinaison des portes d’entrée et d’oubli des LSTM.</p></li>
 </ul>
-<p>Formellement : $<span class="math notranslate nohighlight">\(\begin{aligned}
+<p>Formellement :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
 r^{t} &amp;=&amp; \sigma\left(\mathbf{W_r}^\top \left[\mathbf{x_t} , h_{t-1}\right ] +b_r\right)\\
 z^{t} &amp;=&amp; \sigma\left(\mathbf{W_z}^\top\left[\mathbf{x_t}, h_{t-1}\right ] +b_z\right)\\
 \tilde{h}^{t} &amp;=&amp; tanh\left(\mathbf{W}^\top\left[\mathbf{x_t} , r^{t} h_{t-1}\right ] +b_h \right)\\ 
 h_t&amp;=&amp;\left(1-z^{t}\right)h_{t-1} + z^{t} \tilde{h}^{t}
-\end{aligned}\)</span>$</p>
+\end{aligned}\end{split}\]</div>
 <p>Si, pour tout <span class="math notranslate nohighlight">\(t, r^{t}=1\)</span> et <span class="math notranslate nohighlight">\(z^{t}=0\)</span>, alors on modélise un réseau
 récurrent classique.</p>
-<figure id="F:lstmC">
-<figcaption>Cellule GRU</figcaption>
+<figure class="align-default" id="id6">
+<img alt="_images/gru.png" src="_images/gru.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Cellule GRU</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 <section id="reseaux-recurrents-bidirectionnels">
 <h3>Réseaux récurrents bidirectionnels<a class="headerlink" href="#reseaux-recurrents-bidirectionnels" title="Link to this heading">#</a></h3>
 <p>Les réseaux bidirectionnels ont été décrits pour la première fois en
-1997 [&#64;SCH97]. Dans ces réseaux, deux couches cachées sont présentes,
+1997 <span id="id7">[<a class="reference internal" href="#id9" title="M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. Trans. Sig. Proc., 45(11):2673–2681, November 1997. URL: http://dx.doi.org/10.1109/78.650093, doi:10.1109/78.650093.">10</a>]</span>. Dans ces réseaux, deux couches cachées sont présentes,
 chacune connectée à l’entrée et la sortie. La première couche cachée a
 des connexions récurrentes depuis le passé vers le futur, tandis que
 l’autre transmet les activations depuis le futur vers le passé
-(figure <a class="reference internal" href="#F:BDRN"><span class="xref myst">1.4</span></a>{reference-type= »ref » reference= »F:BDRN »}).</p>
-<figure id="F:BDRN">
-<embed src="images/bidirectionnel.pdf" />
-<figcaption>Réseau bidirectionnel.</figcaption>
+(<a class="reference internal" href="#bidir"><span class="std std-numref">Fig. 35</span></a>).</p>
+<figure class="align-default" id="bidir">
+<img alt="_images/bidir.png" src="_images/bidir.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Réseau bidirectionnel</span><a class="headerlink" href="#bidir" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 <p>Étant données une entrée et une sortie du réseau (des séquences), le
-réseau peut être entraîné par rétropropagation après avoir été déplié :
-$<span class="math notranslate nohighlight">\(\begin{aligned}
+réseau peut être entraîné par rétropropagation après avoir été déplié :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
 x_t &amp;=&amp;\sigma\left(\mathbf{W_h}^\top \left [\mathbf{x_t},h_{t-1} \right ]+b_h \right)\\
 z_{t} &amp;=&amp;\sigma\left(\mathbf{W_z}^\top \left [\mathbf{x_t},z_{t+1} \right ]+b_z \right)\\
 \hat{y}_{t}&amp;=&amp; softmax\left(\mathbf{W_y}^\top \left [x_t,z_{t} \right ]+b_y \right)
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( où \)</span>h_t<span class="math notranslate nohighlight">\( (respectivement \)</span>z_{t}$) représente la valeur
+\end{aligned}\end{split}\]</div>
+<p>où <span class="math notranslate nohighlight">\(h_t\)</span> (respectivement <span class="math notranslate nohighlight">\(z_{t}\)</span>) représente la valeur
 de la couche cachée dans le sens du temps (respectivement dans le sens
 inverse). Puisque le temps doit être fini dans les deux sens de
 parcours, les réseaux bidirectionnels ne peuvent traiter que des
@@ -626,42 +636,46 @@ tache de reconnaissance de la parole.</p>
 descripteurs, qui servent d’entrée à un réseau récurrent type LSTM
 (figure <a class="reference internal" href="#F:caption"><span class="xref myst">[F:caption]</span></a>{reference-type= »ref »
 reference= »F:caption »}).</p>
-<div class="docutils container" id="id5">
-<div class="citation" id="id42" role="doc-biblioentry">
+<div class="docutils container" id="id8">
+<div class="citation" id="id45" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
 </div>
-<div class="citation" id="id10" role="doc-biblioentry">
+<div class="citation" id="id13" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
 </div>
-<div class="citation" id="id11" role="doc-biblioentry">
+<div class="citation" id="id14" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </div>
-<div class="citation" id="id43" role="doc-biblioentry">
+<div class="citation" id="id46" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
 </div>
-<div class="citation" id="id8" role="doc-biblioentry">
+<div class="citation" id="id11" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
 </div>
-<div class="citation" id="id44" role="doc-biblioentry">
+<div class="citation" id="id47" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
 </div>
-<div class="citation" id="id45" role="doc-biblioentry">
+<div class="citation" id="id48" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
 <p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
 </div>
-<div class="citation" id="id21" role="doc-biblioentry">
+<div class="citation" id="id24" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
 </div>
-<div class="citation" id="id7" role="doc-biblioentry">
+<div class="citation" id="id10" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">9</a><span class="fn-bracket">]</span></span>
 <p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">10</a><span class="fn-bracket">]</span></span>
+<p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
 </div>
 </div>
 </div>
