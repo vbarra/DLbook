@@ -125,9 +125,7 @@ valeur d'une porte est nulle, alors le flot est coupé dans le graphe,
 alors qu'il transite intégralement si la valeur de la porte est égale à
 1.
 
-On retrouve dans une cellule (figure
-[1.3](#F:lstmC){reference-type="ref" reference="F:lstmC"}) les éléments
-suivants :
+On retrouve dans une cellule ({numref}`lstm1`) les éléments suivants :
 
 -   *Neurone d'entrée* : ce neurone prend en entrée $\mathbf{x_t}$ et
     ${h_{t-1}}$ et calcule, à la manière d'un neurone classique, une
@@ -156,10 +154,10 @@ suivants :
     $C^{t}$ à fournir en sortie et est calculée par
     $o^{t} = \sigma\left(\mathbf{W_o}^\top\left[\mathbf{x_t} , h_{t-1}\right ] +b_o\right)$.
 
-<figure id="F:lstmC">
-
-<figcaption>Cellule LSTM</figcaption>
-</figure>
+```{figure} ./images/lstm1.png
+:name: lstm1
+Cellule LSTM
+```
 
 En résumé, un LSTM effectue donc les opérations suivantes à l'instant
 $t$ : $$\begin{aligned}
