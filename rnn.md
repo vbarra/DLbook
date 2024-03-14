@@ -247,14 +247,14 @@ LSTM est distribuée dans chaque cellule, elle est donc liée au nombre de
 cellules et à la capacité de calcul et ce modèle ne répond pas
 directement au problème posé.
 
-Graves et al. [@Graves14] proposent alors une architecture, appelée
+Graves et al. {cite:p}`Graves14` proposent alors une architecture, appelée
 machine de Turing neuronale, constituée de deux éléments principaux :
 une mémoire et un contrôleur doté d'un mécanisme d'attention qui lit et
 écrit dans cette mémoire. Les accès mémoire sont ici des équivalents
 analogiques dérivables, pour permettre d'entraîner le contrôleur par
 descente de gradient. Typiquement, le contrôleur est un réseau de
 neurones ou un réseau récurrent type LSTM
-(figure [\[F:NTM\]](#F:NTM){reference-type="ref" reference="F:NTM"}).
+({numref}`turing`).
 
 Les têtes de lecture et d'écriture interagissent avec la mémoire. Chaque
 tête est contrôlée par un vecteur de poids, chaque composante
@@ -277,7 +277,7 @@ réseau :
     $w_t(i)=g_t.w_t(i) + (1-g_t).w_{t-1}(i)$.
 
 3.  Un décalage par convolution translate ensuite les poids, à la
-    manière du décalage classique de la tête dans une machine de Turing
+    manière du décalage de la tête dans une machine de Turing
     classique : $w_t(i)=\displaystyle\sum_j w_t(j)\mathbf{s_t}(i-j)$ où
     $\mathbf{s_t}$ est un vecteur qui définit un décalage des poids à
     l'instant $t$.
@@ -289,7 +289,7 @@ Une fois que la tête a mis à jour les poids, elle interagit avec la
 mémoire :
 
 -   Dans le cas de la tête de lecture, elle calcule une combinaison
-    linéaire des zones mémoire, pondérées par les poids $w_t(i)$, et
+    linéaire des zones mémoire, pondérées par les poids $w_t(i)$ et
     produit le vecteur $\mathbf{r_t}$, fourni au contrôleur de l'instant
     suivant.
 
@@ -299,78 +299,12 @@ mémoire :
     $\mathbf{e_t}$ est un vecteur d'effacement, dont les composantes
     sont dans {0,1} et $\mathbf{a_t}$ est un vecteur d'ajout.
 
-::: SCfigure
-![image](images/turing.pdf){width=".6\\linewidth"}
-:::
+```{figure} ./images/turing.png
+:name: turing
+Exemple de machine de Turing nuronale dépliée dans le temps, oà le contrôleur est un LSTM. Les accès en écriture du LSTM dans la mémoire sont représentés par des flèches rouges, les accès en lecture en bleu.
+```
 
-<figure>
-
-<figcaption>Quelques applications des réseaux récurrents.</figcaption>
-</figure>
-
-## Quelques applications
-
-Comme les réseaux convolutifs, les réseaux récurrents ont depuis leur
-introduction trouvé de nombreuses applications.
-
-**Traitement automatique du langage**
-
-Les réseaux récurrents sont utilisés en traitement automatique du
-langage, notamment à des fins génératives. Ces réseaux permettent de
-modéliser un langage (prédire la probabilité d'un mot donné étant donnés
-les mots précédents) et de générer du texte à partir du modèle appris.
-De nombreuses applications découlent de cette modélisation : génération
-de texte au style de (génération d'un texte dans le style de
-Shakespeare, à partir d'un RNN appris sur le corpus des œuvres de
-l'auteur par exemple, génération de textes manuscrits
-(figure [\[F:gener\]](#F:gener){reference-type="ref"
-reference="F:gener"}), génération de pages Wikipedia, ou même génération
-d'articles scientifiques, à partir des sources LaTeXd'un ouvrage et d'un
-LSTM multicouche.
-
-**Traduction automatique**
-
-La traduction automatique de texte procède de la même stratégie que la
-modélisation d'une langue. Deux réseaux récurrents sont entraînés,
-chacun dans une des langues, et le RNN traducteur calcule sa sortie en
-fonction de la couche cachée du premier réseau.
-
-**Analyse de sentiments**
-
-Détecter de manière automatique l'opinion du public sur un sujet donné
-intéresse de plus en plus le domaine commercial. Ce domaine, largement
-alimenté par les réseaux sociaux, les avis et recommandations déposées
-sur les sites Internet, est un champ de prédilection pour les réseaux
-profonds. Des réseaux récurrents (notamment LSTM structurés en arbres)
-sont utilisés à cet effet et servent de base à des systèmes de
-recommandation.
-
-**Résumé automatique**
-
-Les réseaux récurrents permettent de produire des résumés abstraits de
-textes (i.e. générer de nouvelles phrases, en opposition à extraire les
-mots les plus importants d'un texte). Les modèles utilisés sont des
-réseaux récurrents avec mécanisme d'attention. Un système
-d'encodage/décodage est mis en place dans le réseau, où l'encodeur est
-par exemple un GRU bidirectionnel et le décodeur un GRU dont l'état
-caché a la même taille que celui de l'encodeur. Les modèles sont appris
-et validés sur des corpus dédiés (DUC, CNN/Daily Mail par exemple).
-
-**Reconnaissance de la parole**
-
-L'utilisation de réseaux LSTM bidirectionnels, qui permettent à la fois
-d'exploiter les contextes passé et futur, et de garder trace d'un
-contexte à longue échéance, a montré de bonnes performances dans la
-tache de reconnaissance de la parole.
-
-**Annotation d'images**
-
-Couplé à un réseau convolutif, un RNN permet de générer des descriptions
-(légendes) d'images non labelisées. Le réseau convolutif produit des
-descripteurs, qui servent d'entrée à un réseau récurrent type LSTM
-(figure [\[F:caption\]](#F:caption){reference-type="ref"
-reference="F:caption"}).
-
+## Implémentation
 
 
 ```{bibliography}
