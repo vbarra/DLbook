@@ -60,20 +60,20 @@ Avec ces réseaux, il est possible de traiter des séquences de longueur
 quelconque, la taille du modèle étant indépendante de cette longueur.
 Plusieurs architectures peuvent être déclinées sur ce principe
 
-```{figure} ./images/onetomany.pdf
+```{figure} ./images/onetomany.png
 :name: onetomany
 Architectures "un vers plusieurs" , utilisées par exemple en génération de musique ou légendage d'images.
 ```
 
-```{figure} ./images/manytoone.pdf
+```{figure} ./images/manytoone.png
 :name: onetomany
 Architectures "un vers plusieurs" , utilisées par exemple en classification de sentiments
 ```
-```{figure} ./images/manytomany1.pdf
+```{figure} ./images/manytomany1.png
 :name: onetomany
 Architectures "plusieurs vers plusieurs", pour la reconnaissance d'entité dans des textes ou annotation de vidéos.
 ```
-```{figure} ./images/manytomany2.pdf
+```{figure} ./images/manytomany2.png
 :name: onetomany
 Architectures "plusieurs vers plusieurs", pour la traduction automatique.
 ```
