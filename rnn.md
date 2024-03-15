@@ -321,7 +321,7 @@ from torch.utils.data import DataLoader
 On s'intéresse aux données financières d'Apple ({numref}`donnees`), et plus particulièrement 
 - au prix d'une action à l'ouverture (open) et à la fermeture (close), par jour
 - au prix le plus bas (low) et haut (high), par jour
-- à l'ajustement de clôture (adj_close) et le volume de vente (volume).
+- à l'ajustement de clôture (adj_close) et le volume de vente (volume), par jour.
 
 ```python
 df = pd.read_csv("./data/finance.csv",index_col=0)
