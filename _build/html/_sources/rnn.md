@@ -306,6 +306,44 @@ Exemple de machine de Turing nuronale dépliée dans le temps, oà le contrôleu
 
 ## Implémentation
 
+```python
+import pandas as pd
+import numpy as np
+import math
+import matplotlib.pyplot as plt 
+import matplotlib.dates as mdates 
+from sklearn.preprocessing import MinMaxScaler
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
+```
+
+On s'intéresse aux données financières d'Apple ({numref}`donnees`), et plus particulièrement 
+- au prix d'une action à l'ouverture (open) et à la fermeture (close), par jour
+- au prix le plus bas (low) et haut (high), par jour
+- à l'ajustement de clôture (adj_close) et le volume de vente (volume), par jour.
+
+```python
+df = pd.read_csv("./data/finance.csv",index_col=0)
+column_names = list(df.columns.values)
+df_plot = df.copy()
+ncols = 2
+nrows = int(round(df_plot.shape[1] / ncols, 0))
+fig, ax = plt.subplots(nrows=nrows, ncols=ncols,sharex=True, figsize=(14, 7))
+for i, ax in enumerate(fig.axes):
+    ax.plot(np.array(df_plot.iloc[:, i]))
+    ax.set_ylabel(column_names[i])
+    ax.tick_params(axis="x", rotation=30, labelsize=10, length=0)
+    ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+fig.tight_layout()
+```
+
+```{figure} ./images/donnees.png
+:name: donnees
+Cellule Données financières d'Apple (source : Yahoo finance)
+```
+
+
 
 ```{bibliography}
 :style: unsrt
