@@ -318,7 +318,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 ```
 
-On s'intéresse aux données financières d'Apple ({numref}`donnees`), et plus particulièrement 
+On s'intéresse aux données financières d'Apple ({numref}`donnees`) et plus particulièrement 
 - au prix d'une action à l'ouverture (open) et à la fermeture (close), par jour
 - au prix le plus bas (low) et haut (high), par jour
 - à l'ajustement de clôture (adj_close) et le volume de vente (volume), par jour.
@@ -340,10 +340,196 @@ fig.tight_layout()
 
 ```{figure} ./images/donnees.png
 :name: donnees
-Cellule Données financières d'Apple (source : Yahoo finance)
+Données financières d'Apple (source : Yahoo finance)
+```
+
+On découpe les données en ensemble d'entraînement et de test, et on s'intéresse au prix à l'ouverture de l'action. On normalise ces données dans [0,1]
+
+
+```python
+l = math.ceil(len(df) * .8)
+train_data = df[:l].iloc[:,:1]
+test_data = df[l:].iloc[:,:1]
+
+dataset_test = test_data.Open.values
+dataset_test = np.reshape(dataset_test, (-1,1))
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler(feature_range=(0,1))
+x_train = scaler.fit_transform(dataset_train)
+x_test = scaler.fit_transform(dataset_test)
+```
+
+On créé les séquences d'entraînement (de longueur 50 ici) et de test (de longueur 30)
+
+```python
+l = 50 
+X_train, y_train = [], []
+for i in range(len(x_train) - l):
+	X_train.append(x_train[i:i+l])
+	y_train.append(x_train[i+1:i+l+1])
+X_train = torch.tensor(np.array(X_train) , dtype=torch.float32)
+y_train = torch.tensor(np.array(y_train), dtype=torch.float32)
+
+l = 30 
+X_test, y_test = [], []
+for i in range(len(x_test) - l):
+	X_test.append(x_test[i:i+l])
+	y_test.append(x_test[i+1:i+l+1])
+X_test = torch.tensor(np.array(X_test), dtype=torch.float32)
+y_test = torch.tensor(np.array(y_test), dtype=torch.float32)
+```
+
+On créé ensuite le modèle. `input_size`est le nombre de caractéristiques de l'entrée à chaque pas de temps. `hidden_size`est le nombre d'unités du LSTM et `num_layers`le nombre de couches LSTM.
+
+```python
+class LSTMModel(nn.Module):
+	def __init__(self, input_size, hidden_size, num_layers): 
+		super(LSTMModel, self).__init__() 
+		self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+		self.linear = nn.Linear(hidden_size, 1)
+
+	def forward(self, x): 
+		out, _ = self.lstm(x)
+		out = self.linear(out)
+		return out
+```
+
+On sélectionne le device d'entraînement, on instantie un modèle que l'on équipe d'une fonction de perte et d'un optimiseur.
+
+```python
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+input_size,num_layers,hidden_size,output_size = 1,2,64,1
+
+model = LSTMModel(input_size, hidden_size, num_layers).to(device)
+loss_fn = torch.nn.MSELoss(reduction='mean')
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+```
+
+On définit les batchs, et on entraîne le réseau
+
+```python
+batch_size = 16
+train_dataset = torch.utils.data.TensorDataset(X_train, y_train)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+
+test_dataset = torch.utils.data.TensorDataset(X_test, y_test)
+test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+num_epochs = 30
+train_hist =[]
+test_hist =[]
+
+for epoch in range(num_epochs):
+	total_loss = 0.0
+
+	model.train()
+	for batch_X, batch_y in train_loader:
+		batch_X, batch_y = batch_X.to(device), batch_y.to(device)
+		predictions = model(batch_X)
+		loss = loss_fn(predictions, batch_y)
+
+		optimizer.zero_grad()
+		loss.backward()
+		optimizer.step()
+
+		total_loss += loss.item()
+
+	average_loss = total_loss / len(train_loader)
+	train_hist.append(average_loss)
+
+	# Validation sur l'ensemble de test
+	model.eval()
+	with torch.no_grad():
+		total_test_loss = 0.0
+
+		for batch_X_test, batch_y_test in test_loader:
+			batch_X_test, batch_y_test = batch_X_test.to(device), batch_y_test.to(device)
+			predictions_test = model(batch_X_test)
+			test_loss = loss_fn(predictions_test, batch_y_test)
+			total_test_loss += test_loss.item()
+		average_test_loss = total_test_loss / len(test_loader)
+		test_hist.append(average_test_loss)
 ```
 
 
+```python
+x = np.linspace(1,num_epochs,num_epochs)
+plt.plot(x,train_hist,scalex=True, label="Perte, entraînement")
+plt.plot(x, test_hist, label="Perte, test")
+plt.xlabel('epoch')
+plt.ylabel('MSE')
+plt.legend()
+plt.tight_layout()
+```
+
+```{figure} ./images/loss.png
+:name: loss
+Fonction de perte en entraînement et en test
+```
+
+On utilise ensuite le modèle pour prédire les valeurs à l'ouverture de l'action sur les 30 jours suivants
+
+```python
+nb_step_predict = 30
+
+sequence_to_plot = X_test.squeeze().cpu().numpy()
+
+# initialisation : 30 derniers pas de temps
+historical_data = sequence_to_plot[-1]
+forecasted_values = []
+
+# Prédiction
+with torch.no_grad():
+	for _ in range(nb_step_predict*2):
+		historical_data_tensor = torch.as_tensor(historical_data).view(1, -1, 1).float().to(device)
+
+		# Prédiction de la valeur suivante
+		predicted_value = model(historical_data_tensor).cpu().numpy()[0, 0]
+		forecasted_values.append(predicted_value[0])
+
+		# déplacement de l'historique
+		historical_data = np.roll(historical_data, shift=-1)
+		historical_data[-1] = predicted_value
+
+		
+# dates futures
+last_date = test_data.index[-1]
+from pandas.tseries.offsets import DateOffset
+future_dates = pd.date_range(start=pd.to_datetime(last_date) + pd.DateOffset(1), periods=nb_step_predict)
+combined_index = test_data.index.append(future_dates).map(str)
+```
+
+et on affiche le résultat ({numref}`pred`)
+
+```python
+fig, ax = plt.subplots(1,1, figsize=(14, 5))
+ax.tick_params(axis="x", rotation=30, labelsize=10, length=0)
+ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+
+#Données test
+plt.plot(test_data.index[-100:-nb_step_predict], test_data.Open[-100:-nb_step_predict], label = "Données test", color = "b") 
+original_cases = scaler.inverse_transform(np.expand_dims(sequence_to_plot[-1], axis=0)).flatten() 
+
+# Données utilisées pour la prédiction 
+plt.plot(test_data.index[-nb_step_predict:], original_cases, label='Valeurs réelles', color='green') 
+
+forecasted_cases = scaler.inverse_transform(np.expand_dims(forecasted_values, axis=0)).flatten() 
+plt.plot(combined_index[-2*nb_step_predict:], forecasted_cases, label='Valeurs prédites', color='red') 
+
+plt.xlabel('Date')
+plt.ylabel('Valeur')
+plt.legend()
+plt.title('Prévision')
+plt.grid(True)
+plt.tight_layout()
+```
+
+
+```{figure} ./images/prediction.png
+:name: pred
+Prédiction du modèle et valeurs réelles
+```
 
 ```{bibliography}
 :style: unsrt
