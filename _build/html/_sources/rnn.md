@@ -170,7 +170,7 @@ h_t &=& o^{t} tanh(C^{t})
 
 ### GRU
 
-En 2014 {cite:p}`SCHChO1497`, une version simplifiée des réseaux LSTM a été
+En 2014 {cite:p}`Cho14`, une version simplifiée des réseaux LSTM a été
 introduite, qui nécessite moins de paramètres. Les GRU (*Gated Recurrent
 Units*) ({numref}`gru`) sont en effet des réseaux sans mémoire interne $C^{t}$, ni porte
 de sortie $o^{t}$. Ces réseaux sont composés de deux portes au lieu de
@@ -354,7 +354,6 @@ test_data = df[l:].iloc[:,:1]
 dataset_test = test_data.Open.values
 dataset_test = np.reshape(dataset_test, (-1,1))
 
-from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0,1))
 x_train = scaler.fit_transform(dataset_train)
 x_test = scaler.fit_transform(dataset_test)
