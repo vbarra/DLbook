@@ -508,13 +508,13 @@ ax.xaxis.set_major_locator(mdates.AutoDateLocator())
 
 #Données test
 plt.plot(test_data.index[-100:-nb_predire], test_data.Open[-100:-nb_predire], label = "Données test", color = "b") 
-original_cases = scaler.inverse_transform(np.expand_dims(seq[-1], axis=0)).flatten() 
+val_reelles = scaler.inverse_transform(np.expand_dims(seq[-1], axis=0)).flatten() 
 
 # Données utilisées pour la prédiction 
-plt.plot(test_data.index[-nb_predire:], original_cases, label='Valeurs réelles', color='green') 
+plt.plot(test_data.index[-nb_predire:], val_reelles, label='Valeurs réelles', color='green') 
 
-forecasted_cases = scaler.inverse_transform(np.expand_dims(val_predites, axis=0)).flatten() 
-plt.plot(index_c[-2*nb_predire:], forecasted_cases, label='Valeurs prédites', color='red') 
+val_predites = scaler.inverse_transform(np.expand_dims(val_predites, axis=0)).flatten() 
+plt.plot(index_c[-2*nb_predire:], val_predites, label='Valeurs prédites', color='red') 
 
 plt.xlabel('Date')
 plt.ylabel('Valeur')
