@@ -470,33 +470,33 @@ Fonction de perte en entraînement et en test
 On utilise ensuite le modèle pour prédire les valeurs à l'ouverture de l'action sur les 30 jours suivants
 
 ```python
-nb_step_predict = 30
+nb_predire = 30
 
-sequence_to_plot = X_test.squeeze().cpu().numpy()
+seq = X_test.squeeze().cpu().numpy()
 
 # initialisation : 30 derniers pas de temps
-historical_data = sequence_to_plot[-1]
-forecasted_values = []
+historique = seq[-1]
+val_predites = []
 
 # Prédiction
 with torch.no_grad():
-	for _ in range(nb_step_predict*2):
-		historical_data_tensor = torch.as_tensor(historical_data).view(1, -1, 1).float().to(device)
+	for _ in range(nb_predire*2):
+		historique_tensor = torch.as_tensor(historique).view(1, -1, 1).float().to(device)
 
 		# Prédiction de la valeur suivante
-		predicted_value = model(historical_data_tensor).cpu().numpy()[0, 0]
-		forecasted_values.append(predicted_value[0])
+		val_predite = model(historique_tensor).cpu().numpy()[0, 0]
+		val_predites.append(val_predite[0])
 
 		# déplacement de l'historique
-		historical_data = np.roll(historical_data, shift=-1)
-		historical_data[-1] = predicted_value
+		historique = np.roll(historique, shift=-1)
+		historique[-1] = val_predite
 
 		
 # dates futures
 last_date = test_data.index[-1]
 from pandas.tseries.offsets import DateOffset
-future_dates = pd.date_range(start=pd.to_datetime(last_date) + pd.DateOffset(1), periods=nb_step_predict)
-combined_index = test_data.index.append(future_dates).map(str)
+future_dates = pd.date_range(start=pd.to_datetime(last_date) + pd.DateOffset(1), periods=nb_predire)
+index_c = test_data.index.append(future_dates).map(str)
 ```
 
 et on affiche le résultat ({numref}`pred`)
@@ -507,14 +507,14 @@ ax.tick_params(axis="x", rotation=30, labelsize=10, length=0)
 ax.xaxis.set_major_locator(mdates.AutoDateLocator())
 
 #Données test
-plt.plot(test_data.index[-100:-nb_step_predict], test_data.Open[-100:-nb_step_predict], label = "Données test", color = "b") 
-original_cases = scaler.inverse_transform(np.expand_dims(sequence_to_plot[-1], axis=0)).flatten() 
+plt.plot(test_data.index[-100:-nb_predire], test_data.Open[-100:-nb_predire], label = "Données test", color = "b") 
+original_cases = scaler.inverse_transform(np.expand_dims(seq[-1], axis=0)).flatten() 
 
 # Données utilisées pour la prédiction 
-plt.plot(test_data.index[-nb_step_predict:], original_cases, label='Valeurs réelles', color='green') 
+plt.plot(test_data.index[-nb_predire:], original_cases, label='Valeurs réelles', color='green') 
 
-forecasted_cases = scaler.inverse_transform(np.expand_dims(forecasted_values, axis=0)).flatten() 
-plt.plot(combined_index[-2*nb_step_predict:], forecasted_cases, label='Valeurs prédites', color='red') 
+forecasted_cases = scaler.inverse_transform(np.expand_dims(val_predites, axis=0)).flatten() 
+plt.plot(index_c[-2*nb_predire:], forecasted_cases, label='Valeurs prédites', color='red') 
 
 plt.xlabel('Date')
 plt.ylabel('Valeur')
