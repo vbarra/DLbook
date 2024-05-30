@@ -358,34 +358,31 @@ L'apprentissage par transfert comporte généralement deux étapes principales :
 - **fine tuning** : le fine tuning pousse le processus un peu plus loin en dégelant certaines des couches du modèle pré-entraîné et en leur permettant d'être mises à jour avec le nouvel ensemble de données. Cette étape permet au modèle de s'adapter et d'apprendre des caractéristiques plus spécifiques liées à la nouvelle tâche ou au nouveau domaine.
 
 
-Plusieurs facteurs influent sur le choix de la méthode à utiliser : la
-taille des données d'apprentissage du nouveau problème ({numref}`tl`) et la
-ressemblance du nouveau jeu de données avec celui qui a servi à
-entraîner le réseau initial :
+Plusieurs facteurs influent sur le choix de la méthode à utiliser, parmi lesquels : 
 
--   pour un jeu de données similaire de petite taille, on utilise du
-    transfer learning, avec un classifieur utilisé sur les
-    caractéristiques calculées sur les dernières couches du réseau
-    initial
-
--   pour un jeu de données de petite taille et un problème différent, on
-    utilise du transfer learning, avec un classifieur utilisé sur les
-    caractéristiques calculées sur les premières couches du réseau
-    initial
-
--   pour un jeu de données, similaire ou non de grande taille, on
-    utilise le fine tuning
+- la taille des données d'apprentissage du nouveau problème ({numref}`tl`) 
 
 ```{figure} ./images/tl.png
 :name: tl
 Stratégies d'apprentissage par transfert.
 ```
 
+- la ressemblance du nouveau jeu de données avec celui qui a servi à
+entraîner le réseau initial ({numref}`domaintask`).
+
+Pour un jeu de données similaire de petite taille, on utilise du
+    transfer learning, avec un classifieur utilisé sur les
+    caractéristiques calculées sur les dernières couches du réseau
+    initial. Pour un jeu de données de petite taille et un problème différent, on utilise du transfer learning, avec un classifieur utilisé sur les caractéristiques calculées sur les premières couches du réseau initial. Pour un jeu de données, similaire ou non de grande taille, on
+    utilise le fine tuning
+
 
 ```{figure} ./images/domaintask.png
 :name: domaintask
 Changement de domaine / tâche.
 ```
+
+
 
 A noter qu'il est toujours possible d'augmenter la taille du jeu de
 données par des technique de \"Data Augmentation\" (changement de

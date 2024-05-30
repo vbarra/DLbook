@@ -864,21 +864,9 @@ Cette approche rentre dans le cadre des méthodes d’apprentissage par transfer
 <li><p><strong>Extraction des caractéristiques</strong> : dans cette étape,le modèle pré-entraîné est utilisé comme un extracteur de caractéristiques fixes. On supprime les couches finales (MLP, responsable de la classification) et on les remplaçe par de nouvelles couches spécifiques à la tâche adressée. Les poids du modèle pré-entraîné sont gelés et seuls les poids des couches nouvellement ajoutées sont entraînés sur l’ensemble de données du problème.</p></li>
 <li><p><strong>fine tuning</strong> : le fine tuning pousse le processus un peu plus loin en dégelant certaines des couches du modèle pré-entraîné et en leur permettant d’être mises à jour avec le nouvel ensemble de données. Cette étape permet au modèle de s’adapter et d’apprendre des caractéristiques plus spécifiques liées à la nouvelle tâche ou au nouveau domaine.</p></li>
 </ul>
-<p>Plusieurs facteurs influent sur le choix de la méthode à utiliser : la
-taille des données d’apprentissage du nouveau problème (<a class="reference internal" href="#tl"><span class="std std-numref">Fig. 46</span></a>) et la
-ressemblance du nouveau jeu de données avec celui qui a servi à
-entraîner le réseau initial :</p>
+<p>Plusieurs facteurs influent sur le choix de la méthode à utiliser, parmi lesquels :</p>
 <ul class="simple">
-<li><p>pour un jeu de données similaire de petite taille, on utilise du
-transfer learning, avec un classifieur utilisé sur les
-caractéristiques calculées sur les dernières couches du réseau
-initial</p></li>
-<li><p>pour un jeu de données de petite taille et un problème différent, on
-utilise du transfer learning, avec un classifieur utilisé sur les
-caractéristiques calculées sur les premières couches du réseau
-initial</p></li>
-<li><p>pour un jeu de données, similaire ou non de grande taille, on
-utilise le fine tuning</p></li>
+<li><p>la taille des données d’apprentissage du nouveau problème (<a class="reference internal" href="#tl"><span class="std std-numref">Fig. 46</span></a>)</p></li>
 </ul>
 <figure class="align-default" id="tl">
 <img alt="_images/tl.png" src="_images/tl.png" />
@@ -886,6 +874,15 @@ utilise le fine tuning</p></li>
 <p><span class="caption-number">Fig. 46 </span><span class="caption-text">Stratégies d’apprentissage par transfert.</span><a class="headerlink" href="#tl" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<ul class="simple">
+<li><p>la ressemblance du nouveau jeu de données avec celui qui a servi à
+entraîner le réseau initial (<a class="reference internal" href="#domaintask"><span class="std std-numref">Fig. 47</span></a>).</p></li>
+</ul>
+<p>Pour un jeu de données similaire de petite taille, on utilise du
+transfer learning, avec un classifieur utilisé sur les
+caractéristiques calculées sur les dernières couches du réseau
+initial. Pour un jeu de données de petite taille et un problème différent, on utilise du transfer learning, avec un classifieur utilisé sur les caractéristiques calculées sur les premières couches du réseau initial. Pour un jeu de données, similaire ou non de grande taille, on
+utilise le fine tuning</p>
 <figure class="align-default" id="domaintask">
 <img alt="_images/domaintask.png" src="_images/domaintask.png" />
 <figcaption>
