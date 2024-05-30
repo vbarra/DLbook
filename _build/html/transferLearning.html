@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Utilisation de réseaux existants &#8212; Apprentissage profond</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transferLearning';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Réseaux récurrents" href="rnn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Utilisation de réseaux existants</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-reseaux-profonds-classiques">Quelques réseaux profonds classiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alexnet">AlexNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg">VGG</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inception">Inception</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resnet">ResNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezenet">SqueezeNet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-de-reseaux-pre-entraines">Utilisation de réseaux pré-entraînés</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-faire-si-j-ai-peu-de-donnees">Que faire si j’ai peu de données ?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="utilisation-de-reseaux-existants">
+<h1>Utilisation de réseaux existants<a class="headerlink" href="#utilisation-de-reseaux-existants" title="Link to this heading">#</a></h1>
+<p>Depuis la fin des années 90, de nombreux réseaux profonds ont vu le jour
+et se sont complexifié, diversifié, pour répondre à des problèmes de
+plus en plus vastes. [&#64;Canziani16] propose une analyse comparative de
+ces réseaux et décrit en particulier leurs performances en fonction du
+nombre d’opérations (figure <a class="reference internal" href="#F:compar"><span class="xref myst">1.1</span></a>{reference-type= »ref »
+reference= »F:compar »}).</p>
+<p>Nous présentons dans la suite cinq réseaux profonds classiques. Nous
+montrons ensuite comment les utiliser directement, ou comment les
+adapter pour répondre à une problématique précise, en lien avec leur
+utilisation originale ou non. Nous introduisons enfin une manière
+d’apprendre un réseau à partir de peu de données.</p>
+<figure id="F:compar">
+<img src="images/comparaison.png" />
+<figcaption>Précision en fonction du nombre d’opérations nécessaire pour
+un calcul en passe avant. La taille des blobs est proportionnelle au
+nombre de paramètres du réseau (source : <span class="citation"
+data-cites="Canziani16"></span>)</figcaption>
+</figure>
+<section id="quelques-reseaux-profonds-classiques">
+<h2>Quelques réseaux profonds classiques<a class="headerlink" href="#quelques-reseaux-profonds-classiques" title="Link to this heading">#</a></h2>
+<p>Les cinq réseaux présentés ici ont prouvé leur efficacité, notamment
+lors des compétitions organisées depuis 2010 sur une base de données
+d’images nommée <a class="reference external" href="http://www.image-net.org/">ImageNet</a>. Initiée à
+l’Université de Stanford, cette base de données comporte aujourd’hui
+plus de 14 millions d’images, classées en 21841 catégories (avions,
+voitures, chats,…). Dans les compétitions ILSVRC ( ImageNet Large
+Scale Visual Recognition Challenge), les chercheurs se voient proposer
+une extraction de 1,2 millions d’images, catégorisées en 1000 classes,
+et le gagnant est celui qui atteint la meilleure précision de
+reconnaissance sur les 5 premières classes (top-5).\</p>
+<section id="alexnet">
+<h3>AlexNet<a class="headerlink" href="#alexnet" title="Link to this heading">#</a></h3>
+<p>En 2012, Krizhevsky et al [&#64;Krizhevsky12] remportent ILSVRC avec un taux
+de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif
+composé de 5 couches de convolution et de pooling, suivies de 3 couches
+complètement connectées (figure <a class="reference internal" href="#F:Alexnet"><span class="xref myst">1.2</span></a>{reference-type= »ref »
+reference= »F:Alexnet »}).</p>
+<figure id="F:Alexnet">
+<embed src="images/AlexNet.pdf" />
+<figcaption>Architecture du réseau AlexNet. Les couches de convolution
+et d’activation sont en orange clair, les couches d’agrégation en orange
+foncé. Les couches complètement connectées sont en violet.</figcaption>
+</figure>
+<p>Si la profondeur du réseau reste faible, le nombre de paramètres était
+déjà important. En regardant uniquement la première couche de
+convolution, on constate que :</p>
+<ul class="simple">
+<li><p>l’entrée est composée d’images
+227<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}227<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3</p></li>
+<li><p>les filtres de convolution sont de taille 11</p></li>
+<li><p>le pas de convolution (stride) est de 4</p></li>
+</ul>
+<p>Ainsi la sortie de la couche de convolution est de taille
+55<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}55<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}96=290 400
+neurones, chacun ayant
+11<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}11<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3=363 poids et un
+biais. Cela implique, sur cette couche de convolution seulement, 105 705
+600 paramètres à ajuster.<br />
+Ce réseau, amélioration d’un réseau existant (LeNet), apportait de
+nombreuses contributions, comme l’utilisation de couches ReLU, de
+dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d’entraînement.</p>
+</section>
+<section id="vgg">
+<h3>VGG<a class="headerlink" href="#vgg" title="Link to this heading">#</a></h3>
+<p>Les réseaux VGG (Visual Geometry Group, université d’Oxford)
+[&#64;Simonyan14] ont été les premiers réseaux à utiliser de petits filtres
+de convolution (3<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3) et à les combiner pour
+décrire des séquences de convolution, l’idée étant d’émuler l’effet de
+larges champs réceptifs par cette séquence. Cette technique amène
+malheureusement à un nombre exponentiel de paramètres (le modèle
+entraîné qui peut être téléchargé a une taille de plus de 500 Mo). VGG a
+concouru à ILSVRC 2014, a obtenu un taux de bonne classification de
+92.3% mais n’a pas remporté le challenge. Aujourd’hui VGG et une famille
+de réseaux profonds (de A à E) qui varient par leur architecture
+(figures <a class="reference internal" href="#F:VGG"><span class="xref myst">1.3</span></a>{reference-type= »ref » reference= »F:VGG »} et
+<a class="reference internal" href="#F:vgg16"><span class="xref myst">1.4</span></a>{reference-type= »ref » reference= »F:vgg16 »}). Le nombre de
+paramètres (en millions) pour les réseaux de A à E est 133, 133, 134,
+138 et 144. Les réseaux VGG-D et VGG-E sont les plus précis et
+populaires.</p>
+<div class="center docutils">
+<figure id="F:VGG">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>A</strong></th>
+<th style="text-align: center;"><strong><span>A-LRN</span></strong></th>
+<th style="text-align: center;"><strong><span>B</span></strong></th>
+<th style="text-align: center;"><strong><span>C</span></strong></th>
+<th style="text-align: center;"><strong><span>D</span></strong></th>
+<th style="text-align: center;"><strong><span>E</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">11 couches</td>
+<td style="text-align: center;">11 couches</td>
+<td style="text-align: center;">13 couches</td>
+<td style="text-align: center;">16 couches</td>
+<td style="text-align: center;">16 couches</td>
+<td style="text-align: center;">19 couches</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">Entrée : image 224<span
+class="math inline">×</span>224 RGB</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LRN</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="odd">
+<td rowspan="4" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv1-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="even">
+<td rowspan="4" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv1-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="odd">
+<td rowspan="4" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv1-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">Couche complètement
+connectée 4096 neurones</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">Couche complètement
+connectée 4096 neurones</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">Couche complètement
+connectée 1000 neurones</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">Classifieur softmax</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Architectures des réseaux VGG</figcaption>
+</figure>
+</div>
+<figure id="F:vgg16">
+<img src="images/VGG16" />
+<figcaption>Réseau VGG16</figcaption>
+</figure>
+</section>
+<section id="inception">
+<h3>Inception<a class="headerlink" href="#inception" title="Link to this heading">#</a></h3>
+<p>Inception, proposé par Google, est le premier réseau dont les
+performances ont été augmentées pas seulement en augmentant le nombre de
+couches, mais en pensant et optimisant le design et l’architecture.
+L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur
+la même image et de concaténer les résultats pour générer une
+représentation plus robuste.<br />
+Inception n’est pas un réseau, c’est une famille de réseaux : Network in
+Network [&#64;Lin13], Inception V1 [&#64;Szegedy14], Inception V2 [&#64;Szegedy15],
+Xception [&#64;Chollet16],…<br />
+L’idée du premier réseau (figure <a class="reference internal" href="#F:NIN"><span class="xref myst">1.5</span></a>{reference-type= »ref »
+reference= »F:NIN »}) est de connecter les couches de convolution par des
+perceptrons multicouches, introduisant des non linéarités dans les
+réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à
+des convolutions par des filtres 1<span class="math notranslate nohighlight">\(\times 1\)</span> et gardent donc la
+cohérence des réseaux. Cette nouvelle architecture rend moins
+indispensable les couches complètement connectées en fin de réseau. Les
+auteurs moyennent spatialement les cartes finales et donnent le résultat
+au classifier softmax. Le nombre de paramètres est alors réduit,
+diminuant de ce fait le risque de sur apprentissage.</p>
+<figure id="F:NIN">
+<img src="images/NIN.png" />
+<figcaption>Réseau Network in Network</figcaption>
+</figure>
+<p>Inception V1, implémenté dans le réseau GoogLeNet vainqueur d’ILSVRC
+2014, est une extension à des réseaux plus profonds de Network to
+Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de
+reconnaissance. D’autres améliorations théoriques (fonctions de pertes
+associées aux couches intermédiaires dans la phase d’apprentissage,
+introduction de caractères épars dans le réseau) ont également permis
+d’améliorer les performances (de calcul et de classification).<br />
+Inception V2, puis V3 (figure <a class="reference internal" href="#F:iv3"><span class="xref myst">1.6</span></a>{reference-type= »ref »
+reference= »F:iv3 »}) adoptent des techniques de factorisation (toute
+convolution par un filtre de taille plus grande que
+3<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3 peut être exprimée de manière plus efficace
+avec une série de filtres de taille réduite) et de normalisation pour
+améliorer encore les performances.<br />
+Inception V4 [&#64;Szegedy16] propose une version rationalisée, à
+l’architecture uniforme et aux performances accrues.</p>
+<figure id="F:iv3">
+<img src="images/inceptionv3.png" />
+<figcaption>Architecture d’inception V3</figcaption>
+</figure>
+</section>
+<section id="resnet">
+<h3>ResNet<a class="headerlink" href="#resnet" title="Link to this heading">#</a></h3>
+<p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet [&#64;He15],
+un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne
+reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le
+problème de vanishing gradient de la manière la plus simple possible, en
+permettant des raccourcis entre chaque couche du réseau. Dans un réseau
+classique, l’activation en sortie de couche est de la forme
+<span class="math notranslate nohighlight">\(y=\sigma(x)\)</span>, et lors de la rétropropagation, le gradient doit
+nécessairement repasser par <span class="math notranslate nohighlight">\(\sigma(x)\)</span>, ce qui peut causer des
+problèmes en raison de la (forte) non linéarité induite par <span class="math notranslate nohighlight">\(\sigma\)</span>.
+Dans un réseau résiduel, la sortie de chaque couche est calculée par
+<span class="math notranslate nohighlight">\(y=\sigma()+x\)</span>, où <span class="math notranslate nohighlight">\(+x\)</span> est le raccourci entre chaque couche, qui permet
+au gradient de transiter directement sans passer par <span class="math notranslate nohighlight">\(\sigma\)</span>.<br />
+Cette représentation donne l’idée générale, mais la réalité est un peu
+plus complexe, et prend la forme d’un module ResNet (figure
+<a class="reference internal" href="#F:ResNet"><span class="xref myst">1.7</span></a>{reference-type= »ref » reference= »F:ResNet »}).</p>
+<figure id="F:ResNet">
+<img src="images/resNet.png" />
+<figcaption>Module ResNet (source : <span class="citation"
+data-cites="He15"></span>)</figcaption>
+</figure>
+</section>
+<section id="squeezenet">
+<h3>SqueezeNet<a class="headerlink" href="#squeezenet" title="Link to this heading">#</a></h3>
+<p>SqueezeNet [&#64;Iandola16] est un réseau produit en 2016, qui n’est pas
+tant remarquable par ses performances (il atteint les mêmes niveaux de
+reconnaissance qu’AlexNet), mais par sa légèreté (le modèle entraîné sur
+ImageNet a une taille de 4.9 Mo, et possède 50 fois moins de paramètres
+qu’AlexNet par exemple) et la rapidité avec laquelle il peut être
+entrainé.<br />
+SqueezeNet introduit des modules « Fire » (figure
+<a class="reference internal" href="#F:SqueezeNet"><span class="xref myst">1.8</span></a>{reference-type= »ref » reference= »F:SqueezeNet »}),
+composés d’une couche de convolution « squeeze », dotée de filtres de
+taille 1<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1, et d’une couche d’expansion dotée de
+filtres de taille 1<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1 et
+3<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3. L’utilisation de filtres
+1<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1 permet une réduction du nombre de
+paramètres.</p>
+<figure id="F:SqueezeNet">
+<img src="images/squeezeNet.png" />
+<figcaption>Module Fire (source : <span class="citation"
+data-cites="Iandola16"></span>)</figcaption>
+</figure>
+<p>Le réseau est composé d’une couche de convolution classique, d’une
+couche d’agrégation max, suivie de 9 modules Fires entrecoupées
+d’agrégation max, et d’une couche de convolution finale. Le nombre de
+filtres est progressivement augmenté entre chaque module (figure
+<a class="reference internal" href="#F:SqueezeNet2"><span class="xref myst">1.9</span></a>{reference-type= »ref » reference= »F:SqueezeNet2 »}).</p>
+<figure id="F:SqueezeNet2">
+<img src="images/squeezeNet2.png" />
+<figcaption>Architecture de SqueezeNet (source : <span class="citation"
+data-cites="Iandola16"></span>)</figcaption>
+</figure>
+</section>
+</section>
+<section id="comment-utiliser-ces-reseaux">
+<h2>Comment utiliser ces réseaux<a class="headerlink" href="#comment-utiliser-ces-reseaux" title="Link to this heading">#</a></h2>
+<p>Il est possible de redéclarer les réseaux classiques depuis TensorFlow
+ou Keras, en définissant une à une les couches et leur paramètres, qui
+sont décrits dans les articles correspondants. On imagine assez bien le
+travail que cela peut représenter sur le ResNet de Microsoft…<br />
+Fort heureusement, il existe d’autres manières d’utiliser ces réseaux.</p>
+<section id="utilisation-de-reseaux-pre-entraines">
+<h3>Utilisation de réseaux pré-entraînés<a class="headerlink" href="#utilisation-de-reseaux-pre-entraines" title="Link to this heading">#</a></h3>
+<p>Il est possible avec TensorFlow et Keras de charger / sauvegarder des
+réseaux qui ont été entraînés. Il est également possible, pendant
+l’entraînement, de créer des sauvegardes (checkpoints) pour reprendre
+éventuellement l’entraînement en cours d’itérations. On peut sauvegarder
+tout le réseau (architecture + optimiseur + poids), ou seulement les
+poids.</p>
+<p>Pour charger / sauver les poids d’un modèle <code class="docutils literal notranslate"><span class="pre">model</span></code> Keras, on utilise
+simplement les fonctions</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = create\_model()\\
+model.load\_weights(&#39;./checkpoints/my\_checkpoint&#39;)
+</pre></div>
+</div>
+<p>et</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model.save\_weights(&#39;./checkpoints/my\_checkpoint&#39;)
+</pre></div>
+</div>
+<p>Pour charger / sauver le modèle complet, on utilise</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = keras.models.load\_model(&#39;my\_model.h5&#39;)
+</pre></div>
+</div>
+<p>et</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = create\_model()
+model.fit(xtrain, ytrain)
+model.save(&#39;my\_model.h5&#39;)
+</pre></div>
+</div>
+<p>La procédure sous Tensorflow est un peu plus complexe et est décrite
+<a class="reference external" href="https://www.tensorflow.org/guide/saved_model">ici</a>.</p>
+</section>
+<section id="transfer-learning-et-fine-tuning">
+<h3>Transfer learning et fine tuning<a class="headerlink" href="#transfer-learning-et-fine-tuning" title="Link to this heading">#</a></h3>
+<p>Il est possible d’utiliser les réseaux classiques pré-entrainés pour de
+nouvelles tâches. L’idée sous-jacente et que les premières couches
+capturent des caractéristiques bas niveau, et que la sémantique vient
+avec les couches profondes. Ainsi, dans un problème de classification,
+où les classes n’ont pas été apprises, on peut supposer qu’en conservant
+les premières couches on extraira des caractéristiques communes des
+images, et qu’en changeant les dernières couches (information sémantique
+et haut niveau et étage de classification), c’est à dire en réapprenant
+les connexions, on spécifiera le nouveau réseau pour la nouvelle tâche
+de classification.<br />
+Cette approche rentre dans le cadre des méthodes de Transfer Learning
+[&#64;Pan10] et de fine tuning, cas particulier d’adaptation de domaine :</p>
+<ul class="simple">
+<li><p>les méthodes de transfer learning prennent un réseau déjà entraîné,
+enlèvent la dernière couche complètement connectée, et traitent le
+réseau restant comme un extracteur de caractéristiques. Un nouveau
+classifieur est alors entraîné sur les caractéristiques calculées
+sur le nouveau problème</p></li>
+<li><p>les méthodes de fine tuning ré-entrainent le classifieur du réseau,
+et remettent à jour les poids du réseau pré-entraîné par
+rétropropagation.</p></li>
+</ul>
+<p>Plusieurs facteurs influent sur le choix de la méthode à utiliser : la
+taille des données d’apprentissage du nouveau problème, et la
+ressemblance du nouveau jeu de données avec celui qui a servi à
+entraîner le réseau initial :</p>
+<ul class="simple">
+<li><p>pour un jeu de données similaire de petite taille, on utilise du
+transfer learning, avec un classifieur utilisé sur les
+caractéristiques calculées sur les dernières couches du réseau
+initial</p></li>
+<li><p>pour un jeu de données de petite taille et un problème différent, on
+utilise du transfer learning, avec un classifieur utilisé sur les
+caractéristiques calculées sur les premières couches du réseau
+initial</p></li>
+<li><p>pour un jeu de données, similaire ou non de grande taille, on
+utilise le fine tuning</p></li>
+</ul>
+<p>A noter qu’il est toujours possible d’augmenter la taille du jeu de
+données par des technique de « Data Augmentation » (changement de
+couleurs des pixels, rotations, cropping, homothéties, translations…)</p>
+</section>
+</section>
+<section id="que-faire-si-j-ai-peu-de-donnees">
+<h2>Que faire si j’ai peu de données ?<a class="headerlink" href="#que-faire-si-j-ai-peu-de-donnees" title="Link to this heading">#</a></h2>
+<p>Les méthodes supervisées nécessitent pour de bonnes performances un
+ensemble d’apprentissage <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> de grand cardinal. Si seulement
+peu d’exemples
+<span class="math notranslate nohighlight">\(\mathcal{S}_s = \{(\mathbf{x}_i,y_i), i\in[\![1\cdots m ]\!]\}\)</span> sont
+disponibles, avec <span class="math notranslate nohighlight">\(m\)</span> petit, les techniques précédemment décrites ne
+sont pour la plupart plus applicables.<br />
+Les méthodes de Few-Shot Learning ont été introduites pour traiter ce
+manque de données. Les exemples applicatifs sont nombreux, allant de la
+classification d’images à l’analyse de sentiments à partir de textes, ou
+encore à la reconnaissance d’objets.<br />
+Vu sous l’angle de la minimisation du risque empirique, l’hypothèse <span class="math notranslate nohighlight">\(h\)</span>
+construite sur la minimisation de
+$<span class="math notranslate nohighlight">\(R(h) = \displaystyle\sum_{i=1}^m \ell(y_i,h(\mathbf{x}_i))\)</span><span class="math notranslate nohighlight">\( conduit à
+un sur apprentissage et un risque \)</span>R(h)<span class="math notranslate nohighlight">\( très loin du risque réel. Pour
+pallier ce problème, des connaissances *a priori* doivent être
+utilisées. Le Few-shot learning propose trois alternatives. Nous
+détaillons ici l'une d'entre elles, l'augmentation de données.\
+Les approches de cette catégorie utilisent des connaissances *a priori*
+sur les données pour enrichir \)</span>\mathcal{S}_s$. On les regroupe parfois
+sous le vocable de méthodes d”<em>augmentation de données</em>. Si elles sont
+faciles à mettre en oeuvre et à comprendre, ces méthodes restent
+cependant dépendantes du domaine d’étude et ne peuvent être facilement
+généralisées.</p>
+<p>Les principales stratégies sont résumées dans le tableau
+<a class="reference internal" href="#T:dataAug"><span class="xref myst">[T:dataAug]</span></a>{reference-type= »ref » reference= »T:dataAug »}
+et un exemple d’illustration est donné figure
+<a class="reference internal" href="#Fig:dataAug"><span class="xref myst">1.10</span></a>{reference-type= »ref » reference= »Fig:dataAug »}.</p>
+<div class="tabular docutils">
+<p>M4cm|M2.5cm|M5cm|M2.5cm **Transformation… &amp; **Entrée &amp; **Opérateur
+&amp; **Sortie\</p>
+<hr class="docutils" />
+<p>… de données de <span class="math notranslate nohighlight">\(\mathcal{S}_s\)</span></p>
+<p>&amp; <span class="math notranslate nohighlight">\((\mathbf{x}_i,y_i)\in \mathcal{S}_s\)</span> &amp;
+<span class="math notranslate nohighlight">\(t:\mathcal{X}\rightarrow \mathcal{X}\)</span> &amp; <span class="math notranslate nohighlight">\((\mathbf{t(x_i)},y_i)\)</span>\</p>
+<p>… d’un ensemble de données non étiquetées</p>
+<p>&amp; <span class="math notranslate nohighlight">\((\mathbf{x},-)\)</span> &amp;</p>
+<p><span class="math notranslate nohighlight">\(h:\mathcal{X}\rightarrow \mathcal{Y}\)</span> entraîné sur <span class="math notranslate nohighlight">\(\mathcal{S}_s\)</span></p>
+<p>&amp; <span class="math notranslate nohighlight">\((\mathbf{x},h(\mathbf{x}))\)</span>\</p>
+<p>… d’un ensemble de données similaires</p>
+<p>&amp; <span class="math notranslate nohighlight">\(\{(\mathbf{\hat{x}_j},\hat{y}_j)\}\)</span> &amp;</p>
+<p>Opérateur de combinaison <span class="math notranslate nohighlight">\(c\)</span></p>
+<p>&amp; <span class="math notranslate nohighlight">\((c(\{\mathbf{\hat{x}_j}\}),c(\{\hat{y}_j\}))\)</span>\</p>
+</div>
+<figure id="Fig:dataAug">
+<img src="images/DataAugmentation" />
+<figcaption>Exemple d’augmentation de données. De gauche à droite :
+image originale, rotation de 20<span
+class="math inline"><sup>∘</sup></span>, flip, ajout de bruit gaussien,
+déformation élastique, changement de contraste par canal
+RGB.</figcaption>
+</figure>
+<div class="docutils container" id="id1">
+<div role="list" class="citation-list">
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
+</div>
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
+</div>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
+</div>
+<div class="citation" id="id39" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+<p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
+<p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
+</div>
+<div class="citation" id="id41" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
+</div>
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
+<p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
+<p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
+<p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
+</div>
+<div class="citation" id="id2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
+<p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
+<p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="rnn.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Réseaux récurrents</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-reseaux-profonds-classiques">Quelques réseaux profonds classiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alexnet">AlexNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg">VGG</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inception">Inception</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resnet">ResNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezenet">SqueezeNet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-de-reseaux-pre-entraines">Utilisation de réseaux pré-entraînés</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-faire-si-j-ai-peu-de-donnees">Que faire si j’ai peu de données ?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Vincent BARRA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
