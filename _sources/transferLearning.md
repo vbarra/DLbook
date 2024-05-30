@@ -16,8 +16,17 @@ d'apprendre un réseau à partir de peu de données.
 
 ## Quelques réseaux profonds classiques
 
-Les cinq réseaux présentés ici ont prouvé leur efficacité, notamment lors des compétitions organisées depuis 2010 sur une base de données d'images nommée [ImageNet](http://www.image-net.org/). Initiée à l'Université de Stanford, cette base de données comporte aujourd'hui plus de 14 millions d'images, classées en 21841 catégories (avions, voitures, chats,...). Dans les compétitions [ILSVRC](https://image-net.org/challenges/LSVRC/) ( ImageNet Large Scale Visual Recognition Challenge), les chercheurs se voient proposer
+Les réseaux présentés ici ont prouvé leur efficacité, notamment lors des compétitions organisées depuis 2010 sur une base de données d'images nommée [ImageNet](http://www.image-net.org/). Initiée à l'Université de Stanford, cette base de données comporte aujourd'hui plus de 14 millions d'images, classées en 21841 catégories (avions, voitures, chats,...). Dans les compétitions [ILSVRC](https://image-net.org/challenges/LSVRC/) ( ImageNet Large Scale Visual Recognition Challenge), les chercheurs se voient proposer
 une extraction de 1,2 millions d'images d'entraînement, 100 000 images de test et 50 000 images de validation, catégorisées en 1000 classes. Le gagnant est celui qui atteint la meilleure précision de reconnaissance sur les 5 premières classes (top-5).
+
+La {numref}`perf` donne un aperçu des performances de plusieurs réseaux profonds suivant cette métrique.
+
+
+```{figure} ./images/classifImagenet.png
+:name: perf
+Performance de réseaux profonds sur une tache de classification (ImageNet)
+```
+
 
 ### AlexNet
 
@@ -320,6 +329,12 @@ poids.
 ```{code-cell} ipython3
 from torchvision import models
 dir(models)
+```
+
+Il est alors facile de charger un tel réseau, par exemple
+
+```python
+resnet = models.resnet101(pretrained=True)
 ```
 
 
