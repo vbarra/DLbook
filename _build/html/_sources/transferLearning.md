@@ -24,7 +24,7 @@ La {numref}`perf` donne un aperçu des performances de plusieurs réseaux profon
 
 ```{figure} ./images/classifImagenet.png
 :name: perf
-Performance de réseaux profonds sur une tache de classification (ImageNet)
+Performance de réseaux profonds sur une tache de classification ([source](https://theaisummer.com/cnn-architectures/)
 ```
 
 
