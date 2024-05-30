@@ -292,7 +292,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resnet">ResNet</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux ?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-de-reseaux-pre-entraines">Utilisation de réseaux pré-entraînés</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
@@ -589,42 +589,22 @@ plus complexe, et prend la forme d’un module ResNet (<code class="xref std std
 </section>
 </section>
 <section id="comment-utiliser-ces-reseaux">
-<h2>Comment utiliser ces réseaux<a class="headerlink" href="#comment-utiliser-ces-reseaux" title="Link to this heading">#</a></h2>
-<p>Il est possible de redéclarer les réseaux classiques depuis TensorFlow
-ou Keras, en définissant une à une les couches et leur paramètres, qui
-sont décrits dans les articles correspondants. On imagine assez bien le
-travail que cela peut représenter sur le ResNet de Microsoft…<br />
-Fort heureusement, il existe d’autres manières d’utiliser ces réseaux.</p>
+<h2>Comment utiliser ces réseaux ?<a class="headerlink" href="#comment-utiliser-ces-reseaux" title="Link to this heading">#</a></h2>
+<p>Il est possible de définir les réseaux classiques en décrivant une à une les couches et leur paramètres, qui sont proposés dans les articles correspondants. On imagine assez bien le travail que cela peut représenter sur ResNet par exemple…</p>
+<p>Fort heureusement, il existe d’autres manières d’utiliser ces réseaux.</p>
 <section id="utilisation-de-reseaux-pre-entraines">
 <h3>Utilisation de réseaux pré-entraînés<a class="headerlink" href="#utilisation-de-reseaux-pre-entraines" title="Link to this heading">#</a></h3>
-<p>Il est possible avec TensorFlow et Keras de charger / sauvegarder des
-réseaux qui ont été entraînés. Il est également possible, pendant
+<p>Il est possible de charger / sauvegarder des
+réseaux qui ont été entraînés sur des grandes bases de données et de les utiliser directement. Il est également possible, pendant
 l’entraînement, de créer des sauvegardes (checkpoints) pour reprendre
 éventuellement l’entraînement en cours d’itérations. On peut sauvegarder
 tout le réseau (architecture + optimiseur + poids), ou seulement les
 poids.</p>
-<p>Pour charger / sauver les poids d’un modèle <code class="docutils literal notranslate"><span class="pre">model</span></code> Keras, on utilise
-simplement les fonctions</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = create\_model()\\
-model.load\_weights(&#39;./checkpoints/my\_checkpoint&#39;)
+<p><code class="docutils literal notranslate"><span class="pre">torchvision</span></code>donne accès à de nombreux modèles pré-entrainés :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>et</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model.save\_weights(&#39;./checkpoints/my\_checkpoint&#39;)
-</pre></div>
-</div>
-<p>Pour charger / sauver le modèle complet, on utilise</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = keras.models.load\_model(&#39;my\_model.h5&#39;)
-</pre></div>
-</div>
-<p>et</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = create\_model()
-model.fit(xtrain, ytrain)
-model.save(&#39;my\_model.h5&#39;)
-</pre></div>
-</div>
-<p>La procédure sous Tensorflow est un peu plus complexe et est décrite
-<a class="reference external" href="https://www.tensorflow.org/guide/saved_model">ici</a>.</p>
 </section>
 <section id="transfer-learning-et-fine-tuning">
 <h3>Transfer learning et fine tuning<a class="headerlink" href="#transfer-learning-et-fine-tuning" title="Link to this heading">#</a></h3>
@@ -872,7 +852,7 @@ RGB.</figcaption>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resnet">ResNet</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux ?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-de-reseaux-pre-entraines">Utilisation de réseaux pré-entraînés</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
