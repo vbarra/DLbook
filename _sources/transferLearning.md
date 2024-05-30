@@ -12,7 +12,7 @@ kernelspec:
 
 # Utilisation de réseaux existants
 
-Nous présentons dans la suite cinq réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
+Nous présentons dans la suite quatre réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
 d'apprendre un réseau à partir de peu de données.
 
 ## Quelques réseaux profonds classiques
@@ -287,14 +287,7 @@ Architecture d’inception V3
 
 ### ResNet
 
-En 2015, Microsoft remporte la compétition ILSVRC avec ResNet {cite:p}`He15`,
-un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne
-reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le
-problème de vanishing gradient de la manière la plus simple possible, en
-permettant des raccourcis entre chaque couche du réseau. Dans un réseau
-classique, l'activation en sortie de couche est de la forme
-$y=\sigma(x)$, et lors de la rétropropagation, le gradient doit
-nécessairement repasser par $\sigma(x)$, ce qui peut causer des
+En 2015, Microsoft remporte la compétition ILSVRC avec ResNet {cite:p}`He15`, un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le problème de vanishing gradient de la manière la plus simple possible, en permettant des raccourcis entre chaque couche du réseau. Dans un réseau classique, l'activation en sortie de couche est de la forme $y=\sigma(x)$, et lors de la rétropropagation, le gradient doit nécessairement repasser par $\sigma(x)$, ce qui peut causer des
 problèmes en raison de la (forte) non linéarité induite par $\sigma$.
 Dans un réseau résiduel, la sortie de chaque couche est calculée par
 $y=\sigma()+x$, où $+x$ est le raccourci entre chaque couche, qui permet
@@ -307,41 +300,6 @@ plus complexe, et prend la forme d'un module ResNet ({numref}`resnet`).
 :name: resnet
 Module ResNet (source : {cite:p}`He15`)
 ```
-
-### SqueezeNet
-
-SqueezeNet {cite:p}`Iandola16` est un réseau produit en 2016, qui n'est pas
-tant remarquable par ses performances (il atteint les mêmes niveaux de
-reconnaissance qu'AlexNet), mais par sa légèreté (le modèle entraîné sur
-ImageNet a une taille de 4.9 Mo, et possède 50 fois moins de paramètres
-qu'AlexNet par exemple) et la rapidité avec laquelle il peut être
-entrainé.\
-SqueezeNet introduit des modules \"Fire\" (figure
-[1.8](#F:SqueezeNet){reference-type="ref" reference="F:SqueezeNet"}),
-composés d'une couche de convolution \"squeeze\", dotée de filtres de
-taille 1$\times$1, et d'une couche d'expansion dotée de
-filtres de taille 1$\times$1 et
-3$\times$3. L'utilisation de filtres
-1$\times$1 permet une réduction du nombre de
-paramètres.
-
-<figure id="F:SqueezeNet">
-<img src="images/squeezeNet.png" />
-<figcaption>Module Fire (source : <span class="citation"
-data-cites="Iandola16"></span>)</figcaption>
-</figure>
-
-Le réseau est composé d'une couche de convolution classique, d'une
-couche d'agrégation max, suivie de 9 modules Fires entrecoupées
-d'agrégation max, et d'une couche de convolution finale. Le nombre de
-filtres est progressivement augmenté entre chaque module (figure
-[1.9](#F:SqueezeNet2){reference-type="ref" reference="F:SqueezeNet2"}).
-
-<figure id="F:SqueezeNet2">
-<img src="images/squeezeNet2.png" />
-<figcaption>Architecture de SqueezeNet (source : <span class="citation"
-data-cites="Iandola16"></span>)</figcaption>
-</figure>
 
 ## Comment utiliser ces réseaux
 

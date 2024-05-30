@@ -290,7 +290,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg">VGG</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inception">Inception</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resnet">ResNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezenet">SqueezeNet</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux</a><ul class="nav section-nav flex-column">
@@ -312,7 +311,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="utilisation-de-reseaux-existants">
 <h1>Utilisation de réseaux existants<a class="headerlink" href="#utilisation-de-reseaux-existants" title="Link to this heading">#</a></h1>
-<p>Nous présentons dans la suite cinq réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
+<p>Nous présentons dans la suite quatre réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
 d’apprendre un réseau à partir de peu de données.</p>
 <section id="quelques-reseaux-profonds-classiques">
 <h2>Quelques réseaux profonds classiques<a class="headerlink" href="#quelques-reseaux-profonds-classiques" title="Link to this heading">#</a></h2>
@@ -320,7 +319,7 @@ d’apprendre un réseau à partir de peu de données.</p>
 une extraction de 1,2 millions d’images d’entraînement, 100 000 images de test et 50 000 images de validation, catégorisées en 1000 classes. Le gagnant est celui qui atteint la meilleure précision de reconnaissance sur les 5 premières classes (top-5).</p>
 <section id="alexnet">
 <h3>AlexNet<a class="headerlink" href="#alexnet" title="Link to this heading">#</a></h3>
-<p>En 2012, Krizhevsky et al  <span id="id1">[<a class="reference internal" href="#id44" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012. 2012.">13</a>]</span> remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 40</span></a>).</p>
+<p>En 2012, Krizhevsky et al  <span id="id1">[<a class="reference internal" href="#id43" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012. 2012.">13</a>]</span> remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 40</span></a>).</p>
 <figure class="align-default" id="id2">
 <img alt="_images/AlexNet.png" src="_images/AlexNet.png" />
 <figcaption>
@@ -346,7 +345,7 @@ dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d’entraînement.</p>
 <section id="vgg">
 <h3>VGG<a class="headerlink" href="#vgg" title="Link to this heading">#</a></h3>
 <p>Les réseaux VGG (Visual Geometry Group, université d’Oxford)
-<span id="id3">[<a class="reference internal" href="#id42" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, 2014. URL: http://arxiv.org/abs/1409.1556.">14</a>]</span> ont été les premiers réseaux à utiliser de petits filtres de convolution (3<span class="math notranslate nohighlight">\(\times\)</span>3) et à les combiner pour
+<span id="id3">[<a class="reference internal" href="#id41" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, 2014. URL: http://arxiv.org/abs/1409.1556.">14</a>]</span> ont été les premiers réseaux à utiliser de petits filtres de convolution (3<span class="math notranslate nohighlight">\(\times\)</span>3) et à les combiner pour
 décrire des séquences de convolution, l’idée étant d’émuler l’effet de
 larges champs réceptifs par cette séquence. Cette technique amène
 malheureusement à un nombre exponentiel de paramètres (le modèle
@@ -548,8 +547,8 @@ connectée 1000 neurones</td>
 performances ont été augmentées non seulement en augmentant le nombre de couches, mais en pensant et optimisant le design et l’architecture.
 L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur la même image et de concaténer les résultats pour générer une
 représentation plus robuste.</p>
-<p>Inception n’est pas un réseau, c’est une famille de réseaux : Network in Network <span id="id4">[<a class="reference internal" href="#id41" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id40" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id39" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
-Xception <span id="id7">[<a class="reference internal" href="#id48" title="François Chollet. Xception: deep learning with depthwise separable convolutions. CoRR, 2016. URL: http://arxiv.org/abs/1610.02357, arXiv:1610.02357.">18</a>]</span>,…</p>
+<p>Inception n’est pas un réseau, c’est une famille de réseaux : Network in Network <span id="id4">[<a class="reference internal" href="#id40" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id39" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id38" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
+Xception <span id="id7">[<a class="reference internal" href="#id47" title="François Chollet. Xception: deep learning with depthwise separable convolutions. CoRR, 2016. URL: http://arxiv.org/abs/1610.02357, arXiv:1610.02357.">18</a>]</span>,…</p>
 <p>L’idée du premier réseau (<a class="reference internal" href="#nin"><span class="std std-numref">Fig. 42</span></a>) est de connecter les couches de convolution par des perceptrons multicouches, introduisant des non linéarités dans les réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à des convolutions par des filtres 1<span class="math notranslate nohighlight">\(\times 1\)</span> et gardent donc la cohérence des réseaux. Cette nouvelle architecture rend moins indispensable les couches complètement connectées en fin de réseau. Les auteurs moyennent spatialement les cartes finales et donnent le résultat au classifier softmax. Le nombre de paramètres est alors réduit, diminuant de ce fait le risque de sur apprentissage.</p>
 <figure class="align-default" id="nin">
 <img alt="_images/NIN.png" src="_images/NIN.png" />
@@ -563,7 +562,7 @@ Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de recon
 <p>Inception V2, puis V3 (<a class="reference internal" href="#inceptionv3"><span class="std std-numref">Fig. 43</span></a>) adoptent des techniques de factorisation (toute convolution par un filtre de taille plus grande que 3<span class="math notranslate nohighlight">\(\times\)</span> 3 peut être exprimée de manière plus efficace
 avec une série de filtres de taille réduite) et de normalisation pour
 améliorer encore les performances.</p>
-<p>Inception V4 <span id="id8">[<a class="reference internal" href="#id38" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
+<p>Inception V4 <span id="id8">[<a class="reference internal" href="#id37" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
 l’architecture uniforme et aux performances accrues.</p>
 <figure class="align-default" id="inceptionv3">
 <img alt="_images/inceptionv3.png" src="_images/inceptionv3.png" />
@@ -574,14 +573,7 @@ l’architecture uniforme et aux performances accrues.</p>
 </section>
 <section id="resnet">
 <h3>ResNet<a class="headerlink" href="#resnet" title="Link to this heading">#</a></h3>
-<p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet <span id="id9">[<a class="reference internal" href="#id37" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>,
-un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne
-reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le
-problème de vanishing gradient de la manière la plus simple possible, en
-permettant des raccourcis entre chaque couche du réseau. Dans un réseau
-classique, l’activation en sortie de couche est de la forme
-<span class="math notranslate nohighlight">\(y=\sigma(x)\)</span>, et lors de la rétropropagation, le gradient doit
-nécessairement repasser par <span class="math notranslate nohighlight">\(\sigma(x)\)</span>, ce qui peut causer des
+<p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet <span id="id9">[<a class="reference internal" href="#id36" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>, un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le problème de vanishing gradient de la manière la plus simple possible, en permettant des raccourcis entre chaque couche du réseau. Dans un réseau classique, l’activation en sortie de couche est de la forme <span class="math notranslate nohighlight">\(y=\sigma(x)\)</span>, et lors de la rétropropagation, le gradient doit nécessairement repasser par <span class="math notranslate nohighlight">\(\sigma(x)\)</span>, ce qui peut causer des
 problèmes en raison de la (forte) non linéarité induite par <span class="math notranslate nohighlight">\(\sigma\)</span>.
 Dans un réseau résiduel, la sortie de chaque couche est calculée par
 <span class="math notranslate nohighlight">\(y=\sigma()+x\)</span>, où <span class="math notranslate nohighlight">\(+x\)</span> est le raccourci entre chaque couche, qui permet
@@ -591,40 +583,8 @@ plus complexe, et prend la forme d’un module ResNet (<code class="xref std std
 <figure class="align-default" id="id11">
 <img alt="_images/resNet.png" src="_images/resNet.png" />
 <figcaption>
-<p><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id37" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>)</span><a class="headerlink" href="#id11" title="Link to this image">#</a></p>
+<p><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id36" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>)</span><a class="headerlink" href="#id11" title="Link to this image">#</a></p>
 </figcaption>
-</figure>
-</section>
-<section id="squeezenet">
-<h3>SqueezeNet<a class="headerlink" href="#squeezenet" title="Link to this heading">#</a></h3>
-<p>SqueezeNet <span id="id12">[<a class="reference internal" href="#id36" title="Forrest N. Iandola, Matthew W. Moskewicz, Khalid Ashraf, Song Han, William J. Dally, and Kurt Keutzer. Squeezenet: alexnet-level accuracy with 50x fewer parameters and \textless 1mb model size. CoRR, 2016. URL: http://arxiv.org/abs/1602.07360.">21</a>]</span> est un réseau produit en 2016, qui n’est pas
-tant remarquable par ses performances (il atteint les mêmes niveaux de
-reconnaissance qu’AlexNet), mais par sa légèreté (le modèle entraîné sur
-ImageNet a une taille de 4.9 Mo, et possède 50 fois moins de paramètres
-qu’AlexNet par exemple) et la rapidité avec laquelle il peut être
-entrainé.<br />
-SqueezeNet introduit des modules « Fire » (figure
-<a class="reference internal" href="#F:SqueezeNet"><span class="xref myst">1.8</span></a>{reference-type= »ref » reference= »F:SqueezeNet »}),
-composés d’une couche de convolution « squeeze », dotée de filtres de
-taille 1<span class="math notranslate nohighlight">\(\times\)</span>1, et d’une couche d’expansion dotée de
-filtres de taille 1<span class="math notranslate nohighlight">\(\times\)</span>1 et
-3<span class="math notranslate nohighlight">\(\times\)</span>3. L’utilisation de filtres
-1<span class="math notranslate nohighlight">\(\times\)</span>1 permet une réduction du nombre de
-paramètres.</p>
-<figure id="F:SqueezeNet">
-<img src="images/squeezeNet.png" />
-<figcaption>Module Fire (source : <span class="citation"
-data-cites="Iandola16"></span>)</figcaption>
-</figure>
-<p>Le réseau est composé d’une couche de convolution classique, d’une
-couche d’agrégation max, suivie de 9 modules Fires entrecoupées
-d’agrégation max, et d’une couche de convolution finale. Le nombre de
-filtres est progressivement augmenté entre chaque module (figure
-<a class="reference internal" href="#F:SqueezeNet2"><span class="xref myst">1.9</span></a>{reference-type= »ref » reference= »F:SqueezeNet2 »}).</p>
-<figure id="F:SqueezeNet2">
-<img src="images/squeezeNet2.png" />
-<figcaption>Architecture de SqueezeNet (source : <span class="citation"
-data-cites="Iandola16"></span>)</figcaption>
 </figure>
 </section>
 </section>
@@ -764,91 +724,87 @@ class="math inline"><sup>∘</sup></span>, flip, ajout de bruit gaussien,
 déformation élastique, changement de contraste par canal
 RGB.</figcaption>
 </figure>
-<div class="docutils container" id="id13">
-<div class="citation" id="id50" role="doc-biblioentry">
+<div class="docutils container" id="id12">
+<div class="citation" id="id49" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
 </div>
-<div class="citation" id="id18" role="doc-biblioentry">
+<div class="citation" id="id17" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
 </div>
-<div class="citation" id="id19" role="doc-biblioentry">
+<div class="citation" id="id18" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </div>
-<div class="citation" id="id51" role="doc-biblioentry">
+<div class="citation" id="id50" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
 </div>
-<div class="citation" id="id16" role="doc-biblioentry">
+<div class="citation" id="id15" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
 </div>
-<div class="citation" id="id52" role="doc-biblioentry">
+<div class="citation" id="id51" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
 </div>
-<div class="citation" id="id53" role="doc-biblioentry">
+<div class="citation" id="id52" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
 <p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
 </div>
-<div class="citation" id="id29" role="doc-biblioentry">
+<div class="citation" id="id28" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
 </div>
-<div class="citation" id="id15" role="doc-biblioentry">
+<div class="citation" id="id14" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
 <p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
 </div>
-<div class="citation" id="id45" role="doc-biblioentry">
+<div class="citation" id="id44" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
 <p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
 </div>
-<div class="citation" id="id14" role="doc-biblioentry">
+<div class="citation" id="id13" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
 <p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
 </div>
-<div class="citation" id="id22" role="doc-biblioentry">
+<div class="citation" id="id21" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
 <p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
 </div>
-<div class="citation" id="id44" role="doc-biblioentry">
+<div class="citation" id="id43" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">13</a><span class="fn-bracket">]</span></span>
 <p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
 </div>
-<div class="citation" id="id42" role="doc-biblioentry">
+<div class="citation" id="id41" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">14</a><span class="fn-bracket">]</span></span>
 <p>Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>.</p>
 </div>
-<div class="citation" id="id41" role="doc-biblioentry">
+<div class="citation" id="id40" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">15</a><span class="fn-bracket">]</span></span>
 <p>Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://arxiv.org/abs/1312.4400">http://arxiv.org/abs/1312.4400</a>.</p>
 </div>
-<div class="citation" id="id40" role="doc-biblioentry">
+<div class="citation" id="id39" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">16</a><span class="fn-bracket">]</span></span>
 <p>Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.4842">http://arxiv.org/abs/1409.4842</a>.</p>
 </div>
-<div class="citation" id="id39" role="doc-biblioentry">
+<div class="citation" id="id38" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">17</a><span class="fn-bracket">]</span></span>
 <p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.</p>
 </div>
-<div class="citation" id="id48" role="doc-biblioentry">
+<div class="citation" id="id47" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">18</a><span class="fn-bracket">]</span></span>
 <p>François Chollet. Xception: deep learning with depthwise separable convolutions. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
 </div>
-<div class="citation" id="id38" role="doc-biblioentry">
+<div class="citation" id="id37" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">19</a><span class="fn-bracket">]</span></span>
 <p>Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07261">http://arxiv.org/abs/1602.07261</a>.</p>
 </div>
-<div class="citation" id="id37" role="doc-biblioentry">
+<div class="citation" id="id36" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id9">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
 <p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
-</div>
-<div class="citation" id="id36" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">21</a><span class="fn-bracket">]</span></span>
-<p>Forrest N. Iandola, Matthew W. Moskewicz, Khalid Ashraf, Song Han, William J. Dally, and Kurt Keutzer. Squeezenet: alexnet-level accuracy with 50x fewer parameters and \textless 1mb model size. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07360">http://arxiv.org/abs/1602.07360</a>.</p>
 </div>
 </div>
 </div>
@@ -914,7 +870,6 @@ RGB.</figcaption>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg">VGG</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inception">Inception</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resnet">ResNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezenet">SqueezeNet</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-utiliser-ces-reseaux">Comment utiliser ces réseaux</a><ul class="nav section-nav flex-column">
