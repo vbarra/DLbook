@@ -25,7 +25,7 @@ une extraction de 1,2 millions d'images d'entraînement, 100 000 images de test 
 En 2012, Krizhevsky et al  {cite:p}`Krizhevsky12` remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées ({numref}`alexnet`).
 
 
-```{figure} ./images/AlexNet.pdf
+```{figure} ./images/AlexNet.png
 :name: alexnet
 Architecture du réseau AlexNet. Les couches de convolution
 et d’activation sont en orange clair, les couches d’agrégation en orange
