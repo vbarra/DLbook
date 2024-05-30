@@ -56,11 +56,6 @@ larges champs réceptifs par cette séquence. Cette technique amène
 malheureusement à un nombre exponentiel de paramètres (le modèle
 entraîné qui peut être téléchargé a une taille de plus de 500 Mo). VGG a concouru à ILSVRC 2014, a obtenu un taux de bonne classification de
 92.3% mais n'a pas remporté le challenge. Aujourd'hui VGG et une famille de réseaux profonds (de A à E) qui varient par leur architecture
-(figures [1.3](#F:VGG){reference-type="ref" reference="F:VGG"} et
-[1.4](#F:vgg16){reference-type="ref" reference="F:vgg16"}). Le nombre de
-paramètres (en millions) pour les réseaux de A à E est 133, 133, 134,
-138 et 144. Les réseaux VGG-D et VGG-E sont les plus précis et
-populaires.
 
 ::: center
 <figure id="F:VGG">
@@ -245,14 +240,17 @@ connectée 1000 neurones</td>
 </tr>
 </tbody>
 </table>
-<figcaption>Architectures des réseaux VGG</figcaption>
 </figure>
 :::
 
-<figure id="F:vgg16">
-<img src="images/VGG16" />
-<figcaption>Réseau VGG16</figcaption>
-</figure>
+
+Le nombre de paramètres (en millions) pour les réseaux de A à E est 133, 133, 134, 138 et 144. Les réseaux VGG-D et VGG-E sont les plus précis et populaires.
+
+
+```{figure} ./images/VGG16.png
+:name: vgg16
+Réseau VGG16
+```
 
 ### Inception
 
