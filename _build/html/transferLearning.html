@@ -321,7 +321,7 @@ une extraction de 1,2 millions d’images d’entraînement, 100 000 images de t
 <figure class="align-default" id="perf">
 <img alt="_images/classifImagenet.png" src="_images/classifImagenet.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Performance de réseaux profonds sur une tache de classification (<a class="reference external" href="https://theaisummer.com/cnn-architectures/">source</a></span><a class="headerlink" href="#perf" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Performance de réseaux profonds sur une tache de classification (<a class="reference external" href="https://theaisummer.com/cnn-architectures/">source</a>)</span><a class="headerlink" href="#perf" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="alexnet">
@@ -852,26 +852,20 @@ poids.</p>
 nouvelles tâches. L’idée sous-jacente et que les premières couches
 capturent des caractéristiques bas niveau, et que la sémantique vient
 avec les couches profondes. Ainsi, dans un problème de classification,
-où les classes n’ont pas été apprises, on peut supposer qu’en conservant
-les premières couches on extraira des caractéristiques communes des
+où les classes n’ont pas été apprises, on peut supposer qu’en conservant les premières couches on extraira des caractéristiques communes des
 images, et qu’en changeant les dernières couches (information sémantique
 et haut niveau et étage de classification), c’est à dire en réapprenant
 les connexions, on spécifiera le nouveau réseau pour la nouvelle tâche
 de classification.<br />
-Cette approche rentre dans le cadre des méthodes de Transfer Learning
-[&#64;Pan10] et de fine tuning, cas particulier d’adaptation de domaine :</p>
+Cette approche rentre dans le cadre des méthodes d’apprentissage par transfert (Transfer Learning)
+[&#64;Pan10] et de fine tuning, cas particulier d’adaptation de domaine.</p>
+<p>L’apprentissage par transfert comporte généralement deux étapes principales :</p>
 <ul class="simple">
-<li><p>les méthodes de transfer learning prennent un réseau déjà entraîné,
-enlèvent la dernière couche complètement connectée, et traitent le
-réseau restant comme un extracteur de caractéristiques. Un nouveau
-classifieur est alors entraîné sur les caractéristiques calculées
-sur le nouveau problème</p></li>
-<li><p>les méthodes de fine tuning ré-entrainent le classifieur du réseau,
-et remettent à jour les poids du réseau pré-entraîné par
-rétropropagation.</p></li>
+<li><p><strong>Extraction des caractéristiques</strong> : dans cette étape,le modèle pré-entraîné est utilisé comme un extracteur de caractéristiques fixes. On supprime les couches finales (MLP, responsable de la classification) et on les remplaçe par de nouvelles couches spécifiques à la tâche adressée. Les poids du modèle pré-entraîné sont gelés et seuls les poids des couches nouvellement ajoutées sont entraînés sur l’ensemble de données du problème.</p></li>
+<li><p><strong>fine tuning</strong> : le fine tuning pousse le processus un peu plus loin en dégelant certaines des couches du modèle pré-entraîné et en leur permettant d’être mises à jour avec le nouvel ensemble de données. Cette étape permet au modèle de s’adapter et d’apprendre des caractéristiques plus spécifiques liées à la nouvelle tâche ou au nouveau domaine.</p></li>
 </ul>
 <p>Plusieurs facteurs influent sur le choix de la méthode à utiliser : la
-taille des données d’apprentissage du nouveau problème, et la
+taille des données d’apprentissage du nouveau problème (<a class="reference internal" href="#tl"><span class="std std-numref">Fig. 46</span></a>) et la
 ressemblance du nouveau jeu de données avec celui qui a servi à
 entraîner le réseau initial :</p>
 <ul class="simple">
@@ -886,6 +880,18 @@ initial</p></li>
 <li><p>pour un jeu de données, similaire ou non de grande taille, on
 utilise le fine tuning</p></li>
 </ul>
+<figure class="align-default" id="tl">
+<img alt="_images/tl.png" src="_images/tl.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Stratégies d’apprentissage par transfert.</span><a class="headerlink" href="#tl" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="domaintask">
+<img alt="_images/domaintask.png" src="_images/domaintask.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Changement de domaine / tâche.</span><a class="headerlink" href="#domaintask" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>A noter qu’il est toujours possible d’augmenter la taille du jeu de
 données par des technique de « Data Augmentation » (changement de
 couleurs des pixels, rotations, cropping, homothéties, translations…)</p>

@@ -24,7 +24,7 @@ La {numref}`perf` donne un aperçu des performances de plusieurs réseaux profon
 
 ```{figure} ./images/classifImagenet.png
 :name: perf
-Performance de réseaux profonds sur une tache de classification ([source](https://theaisummer.com/cnn-architectures/)
+Performance de réseaux profonds sur une tache de classification ([source](https://theaisummer.com/cnn-architectures/))
 ```
 
 
@@ -344,27 +344,22 @@ Il est possible d'utiliser les réseaux classiques pré-entrainés pour de
 nouvelles tâches. L'idée sous-jacente et que les premières couches
 capturent des caractéristiques bas niveau, et que la sémantique vient
 avec les couches profondes. Ainsi, dans un problème de classification,
-où les classes n'ont pas été apprises, on peut supposer qu'en conservant
-les premières couches on extraira des caractéristiques communes des
+où les classes n'ont pas été apprises, on peut supposer qu'en conservant les premières couches on extraira des caractéristiques communes des
 images, et qu'en changeant les dernières couches (information sémantique
 et haut niveau et étage de classification), c'est à dire en réapprenant
 les connexions, on spécifiera le nouveau réseau pour la nouvelle tâche
 de classification.\
-Cette approche rentre dans le cadre des méthodes de Transfer Learning
-[@Pan10] et de fine tuning, cas particulier d'adaptation de domaine :
+Cette approche rentre dans le cadre des méthodes d'apprentissage par transfert (Transfer Learning)
+[@Pan10] et de fine tuning, cas particulier d'adaptation de domaine.
 
--   les méthodes de transfer learning prennent un réseau déjà entraîné,
-    enlèvent la dernière couche complètement connectée, et traitent le
-    réseau restant comme un extracteur de caractéristiques. Un nouveau
-    classifieur est alors entraîné sur les caractéristiques calculées
-    sur le nouveau problème
+L'apprentissage par transfert comporte généralement deux étapes principales :
 
--   les méthodes de fine tuning ré-entrainent le classifieur du réseau,
-    et remettent à jour les poids du réseau pré-entraîné par
-    rétropropagation.
+- **Extraction des caractéristiques** : dans cette étape,le modèle pré-entraîné est utilisé comme un extracteur de caractéristiques fixes. On supprime les couches finales (MLP, responsable de la classification) et on les remplaçe par de nouvelles couches spécifiques à la tâche adressée. Les poids du modèle pré-entraîné sont gelés et seuls les poids des couches nouvellement ajoutées sont entraînés sur l'ensemble de données du problème.
+- **fine tuning** : le fine tuning pousse le processus un peu plus loin en dégelant certaines des couches du modèle pré-entraîné et en leur permettant d'être mises à jour avec le nouvel ensemble de données. Cette étape permet au modèle de s'adapter et d'apprendre des caractéristiques plus spécifiques liées à la nouvelle tâche ou au nouveau domaine.
+
 
 Plusieurs facteurs influent sur le choix de la méthode à utiliser : la
-taille des données d'apprentissage du nouveau problème, et la
+taille des données d'apprentissage du nouveau problème ({numref}`tl`) et la
 ressemblance du nouveau jeu de données avec celui qui a servi à
 entraîner le réseau initial :
 
@@ -380,6 +375,17 @@ entraîner le réseau initial :
 
 -   pour un jeu de données, similaire ou non de grande taille, on
     utilise le fine tuning
+
+```{figure} ./images/tl.png
+:name: tl
+Stratégies d'apprentissage par transfert.
+```
+
+
+```{figure} ./images/domaintask.png
+:name: domaintask
+Changement de domaine / tâche.
+```
 
 A noter qu'il est toujours possible d'augmenter la taille du jeu de
 données par des technique de \"Data Augmentation\" (changement de
