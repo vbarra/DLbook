@@ -300,14 +300,19 @@ Dans un réseau résiduel, la sortie de chaque couche est calculée par
 $y=\sigma()+x$, où $+x$ est le raccourci entre chaque couche, qui permet
 au gradient de transiter directement sans passer par $\sigma$.\
 Cette représentation donne l'idée générale, mais la réalité est un peu
-plus complexe, et prend la forme d'un module ResNet (figure
-[1.7](#F:ResNet){reference-type="ref" reference="F:ResNet"}).
+plus complexe, et prend la forme d'un module ResNet 
+[({numref}`resnet`).
 
 <figure id="F:ResNet">
 <img src="images/resNet.png" />
 <figcaption>Module ResNet (source : <span class="citation"
 data-cites="He15"></span>)</figcaption>
 </figure>
+
+```{figure} ./images/resNet.png
+:name: resnet
+Module ResNet (source : {cite:p}`He15`)
+```
 
 ### SqueezeNet
 
