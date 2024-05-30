@@ -886,20 +886,26 @@ de classification.</p>
 <li><p>la ressemblance du nouveau jeu de données avec celui qui a servi à
 entraîner le réseau initial (<a class="reference internal" href="#domaintask"><span class="std std-numref">Fig. 48</span></a>).</p></li>
 </ul>
-<p>Pour un jeu de données similaire de petite taille, on utilise du
-transfer learning, avec un classifieur utilisé sur les
-caractéristiques calculées sur les dernières couches du réseau
-initial. Pour un jeu de données de petite taille et un problème différent, on utilise du transfer learning, avec un classifieur utilisé sur les caractéristiques calculées sur les premières couches du réseau initial. Pour un jeu de données, similaire ou non de grande taille, on
-utilise le fine tuning</p>
 <figure class="align-default" id="domaintask">
 <img alt="_images/domaintask.png" src="_images/domaintask.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 48 </span><span class="caption-text">Changement de domaine / tâche.</span><a class="headerlink" href="#domaintask" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<p>Pour un jeu de données similaire de petite taille, on utilise du
+transfer learning, avec un classifieur utilisé sur les
+caractéristiques calculées sur les dernières couches du réseau
+initial. Pour un jeu de données de petite taille et un problème différent, on utilise du transfer learning, avec un classifieur utilisé sur les caractéristiques calculées sur les premières couches du réseau initial. Pour un jeu de données, similaire ou non de grande taille, on
+utilise le fine tuning</p>
 <p>A noter qu’il est toujours possible d’augmenter la taille du jeu de
 données par des technique de « Data Augmentation » (changement de
-couleurs des pixels, rotations, cropping, homothéties, translations…)</p>
+couleurs des pixels, rotations, cropping, homothéties, translations…) (<a class="reference internal" href="#dataaugment"><span class="std std-numref">Fig. 49</span></a>).</p>
+<figure class="align-default" id="dataaugment">
+<img alt="_images/dataaugment.png" src="_images/dataaugment.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Augmentation de données : à partir d’un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.</span><a class="headerlink" href="#dataaugment" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 </section>
 <section id="que-faire-si-j-ai-peu-de-donnees">

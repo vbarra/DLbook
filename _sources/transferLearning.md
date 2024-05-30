@@ -378,6 +378,11 @@ Stratégies d'apprentissage par transfert.
 - la ressemblance du nouveau jeu de données avec celui qui a servi à
 entraîner le réseau initial ({numref}`domaintask`).
 
+```{figure} ./images/domaintask.png
+:name: domaintask
+Changement de domaine / tâche.
+```
+
 Pour un jeu de données similaire de petite taille, on utilise du
     transfer learning, avec un classifieur utilisé sur les
     caractéristiques calculées sur les dernières couches du réseau
@@ -385,16 +390,14 @@ Pour un jeu de données similaire de petite taille, on utilise du
     utilise le fine tuning
 
 
-```{figure} ./images/domaintask.png
-:name: domaintask
-Changement de domaine / tâche.
-```
-
-
-
 A noter qu'il est toujours possible d'augmenter la taille du jeu de
 données par des technique de \"Data Augmentation\" (changement de
-couleurs des pixels, rotations, cropping, homothéties, translations\...)
+couleurs des pixels, rotations, cropping, homothéties, translations\...) ({numref}`dataaugment`).
+
+```{figure} ./images/dataaugment.png
+:name: dataaugment
+Augmentation de données : à partir d'un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.
+```
 
 ## Que faire si j'ai peu de données ?
 
