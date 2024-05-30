@@ -348,13 +348,21 @@ où les classes n'ont pas été apprises, on peut supposer qu'en conservant les 
 images, et qu'en changeant les dernières couches (information sémantique
 et haut niveau et étage de classification), c'est à dire en réapprenant
 les connexions, on spécifiera le nouveau réseau pour la nouvelle tâche
-de classification.\
+de classification.
+
 Cette approche rentre dans le cadre des méthodes d'apprentissage par transfert (Transfer Learning)
-[@Pan10] et de fine tuning, cas particulier d'adaptation de domaine.
+{cite:p}`Pan10` et de fine tuning, cas particulier d'adaptation de domaine.
 
 L'apprentissage par transfert comporte généralement deux étapes principales :
 
-- **Extraction des caractéristiques** : dans cette étape,le modèle pré-entraîné est utilisé comme un extracteur de caractéristiques fixes. On supprime les couches finales (MLP, responsable de la classification) et on les remplaçe par de nouvelles couches spécifiques à la tâche adressée. Les poids du modèle pré-entraîné sont gelés et seuls les poids des couches nouvellement ajoutées sont entraînés sur l'ensemble de données du problème.
+- **Extraction des caractéristiques** : dans cette étape,le modèle pré-entraîné est utilisé comme un extracteur de caractéristiques fixes. On supprime les couches finales (MLP, responsable de la classification) et on les remplaçe par de nouvelles couches spécifiques à la tâche adressée ({numref}`tl2`). Les poids du modèle pré-entraîné sont gelés et seuls les poids des couches nouvellement ajoutées sont entraînés sur l'ensemble de données du problème.
+
+```{figure} ./images/tl2.png
+:name: tl2
+Réentrainement d'un classifieur sur des caractéristiques extraites.
+```
+
+
 - **fine tuning** : le fine tuning pousse le processus un peu plus loin en dégelant certaines des couches du modèle pré-entraîné et en leur permettant d'être mises à jour avec le nouvel ensemble de données. Cette étape permet au modèle de s'adapter et d'apprendre des caractéristiques plus spécifiques liées à la nouvelle tâche ou au nouveau domaine.
 
 

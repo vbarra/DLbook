@@ -401,7 +401,7 @@ problèmes.</p>
 <h2>Quelques architectures<a class="headerlink" href="#quelques-architectures" title="Link to this heading">#</a></h2>
 <section id="lstm">
 <h3>LSTM<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h3>
-<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id4">[<a class="reference internal" href="transferLearning.html#id14" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
+<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id4">[<a class="reference internal" href="transferLearning.html#id15" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
 modèle ressemble à un réseau récurrent classique à une couche cachée,
 mais chaque neurone de la couche cachée est remplacé par une cellule de
 mémoire.</p>
@@ -461,7 +461,7 @@ h_t &amp;=&amp; o^{t} tanh(C^{t})
 </section>
 <section id="gru">
 <h3>GRU<a class="headerlink" href="#gru" title="Link to this heading">#</a></h3>
-<p>En 2014 <span id="id5">[<a class="reference internal" href="transferLearning.html#id44" title="J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. CoRR, 2014. URL: http://arxiv.org/abs/1412.3555.">10</a>]</span>, une version simplifiée des réseaux LSTM a été
+<p>En 2014 <span id="id5">[<a class="reference internal" href="transferLearning.html#id45" title="J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. CoRR, 2014. URL: http://arxiv.org/abs/1412.3555.">10</a>]</span>, une version simplifiée des réseaux LSTM a été
 introduite, qui nécessite moins de paramètres. Les GRU (<em>Gated Recurrent
 Units</em>) (<a class="reference internal" href="#id6"><span class="std std-numref">Fig. 34</span></a>) sont en effet des réseaux sans mémoire interne <span class="math notranslate nohighlight">\(C^{t}\)</span>, ni porte
 de sortie <span class="math notranslate nohighlight">\(o^{t}\)</span>. Ces réseaux sont composés de deux portes au lieu de
@@ -494,7 +494,7 @@ récurrent classique.</p>
 <section id="reseaux-recurrents-bidirectionnels">
 <h3>Réseaux récurrents bidirectionnels<a class="headerlink" href="#reseaux-recurrents-bidirectionnels" title="Link to this heading">#</a></h3>
 <p>Les réseaux bidirectionnels ont été décrits pour la première fois en
-1997 <span id="id7">[<a class="reference internal" href="transferLearning.html#id13" title="M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. Trans. Sig. Proc., 45(11):2673–2681, November 1997. URL: http://dx.doi.org/10.1109/78.650093, doi:10.1109/78.650093.">11</a>]</span>. Dans ces réseaux, deux couches cachées sont présentes,
+1997 <span id="id7">[<a class="reference internal" href="transferLearning.html#id14" title="M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. Trans. Sig. Proc., 45(11):2673–2681, November 1997. URL: http://dx.doi.org/10.1109/78.650093, doi:10.1109/78.650093.">11</a>]</span>. Dans ces réseaux, deux couches cachées sont présentes,
 chacune connectée à l’entrée et la sortie. La première couche cachée a
 des connexions récurrentes depuis le passé vers le futur, tandis que
 l’autre transmet les activations depuis le futur vers le passé
@@ -533,7 +533,7 @@ effectuée par le réseau (assimilable à la CPU). Puisque la mémoire des
 LSTM est distribuée dans chaque cellule, elle est donc liée au nombre de
 cellules et à la capacité de calcul et ce modèle ne répond pas
 directement au problème posé.</p>
-<p>Graves et al. <span id="id8">[<a class="reference internal" href="transferLearning.html#id21" title="A Graves, G Wayne, and I Danihelka. Neural turing machines. CoRR, 2014. URL: http://arxiv.org/abs/1410.5401.">12</a>]</span> proposent alors une architecture, appelée
+<p>Graves et al. <span id="id8">[<a class="reference internal" href="transferLearning.html#id22" title="A Graves, G Wayne, and I Danihelka. Neural turing machines. CoRR, 2014. URL: http://arxiv.org/abs/1410.5401.">12</a>]</span> proposent alors une architecture, appelée
 machine de Turing neuronale, constituée de deux éléments principaux :
 une mémoire et un contrôleur doté d’un mécanisme d’attention qui lit et
 écrit dans cette mémoire. Les accès mémoire sont ici des équivalents
@@ -878,6 +878,10 @@ sont dans {0,1} et <span class="math notranslate nohighlight">\(\mathbf{a_t}\)</
 <div class="citation" id="id33" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
 <p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></span>
+<p>Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. <em>IEEE Trans. on Knowl. and Data Eng.</em>, 22(10):1345–1359, October 2010. URL: <a class="reference external" href="http://dx.doi.org/10.1109/TKDE.2009.191">http://dx.doi.org/10.1109/TKDE.2009.191</a>, <a class="reference external" href="https://doi.org/10.1109/TKDE.2009.191">doi:10.1109/TKDE.2009.191</a>.</p>
 </div>
 </div>
 </div>
