@@ -538,7 +538,7 @@ connectée 1000 neurones</td>
 <figure class="align-default" id="vgg16">
 <img alt="_images/VGG16.png" src="_images/VGG16.png" />
 <figcaption>
-<p><span class="caption-text">Réseau VGG16</span><a class="headerlink" href="#vgg16" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Réseau VGG16</span><a class="headerlink" href="#vgg16" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -550,25 +550,27 @@ L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur l
 représentation plus robuste.</p>
 <p>Inception n’est pas un réseau, c’est une famille de réseaux : Network in Network <span id="id4">[<a class="reference internal" href="#id39" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id38" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id37" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
 Xception <span id="id7">[<a class="reference internal" href="#id46" title="François Chollet. Xception: deep learning with depthwise separable convolutions. CoRR, 2016. URL: http://arxiv.org/abs/1610.02357, arXiv:1610.02357.">18</a>]</span>,…</p>
-<p>L’idée du premier réseau (<code class="xref std std-numref docutils literal notranslate"><span class="pre">nin</span></code>) est de connecter les couches de convolution par des perceptrons multicouches, introduisant des non linéarités dans les réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à des convolutions par des filtres 1<span class="math notranslate nohighlight">\(\times 1\)</span> et gardent donc la cohérence des réseaux. Cette nouvelle architecture rend moins indispensable les couches complètement connectées en fin de réseau. Les auteurs moyennent spatialement les cartes finales et donnent le résultat au classifier softmax. Le nombre de paramètres est alors réduit, diminuant de ce fait le risque de sur apprentissage.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">figure</span><span class="p">}</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">NIN</span><span class="o">.</span><span class="n">png</span>
-<span class="p">:</span><span class="n">name</span><span class="p">:</span> <span class="n">nin</span>
-<span class="n">Réseau</span> <span class="n">Network</span> <span class="ow">in</span> <span class="n">Network</span>
-</pre></div>
-</div>
+<p>L’idée du premier réseau (<a class="reference internal" href="#nin"><span class="std std-numref">Fig. 42</span></a>) est de connecter les couches de convolution par des perceptrons multicouches, introduisant des non linéarités dans les réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à des convolutions par des filtres 1<span class="math notranslate nohighlight">\(\times 1\)</span> et gardent donc la cohérence des réseaux. Cette nouvelle architecture rend moins indispensable les couches complètement connectées en fin de réseau. Les auteurs moyennent spatialement les cartes finales et donnent le résultat au classifier softmax. Le nombre de paramètres est alors réduit, diminuant de ce fait le risque de sur apprentissage.</p>
+<figure class="align-default" id="nin">
+<img alt="_images/NIN.png" src="_images/NIN.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Réseau Network in Network</span><a class="headerlink" href="#nin" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Inception V1, implémenté dans le réseau GoogLeNet vainqueur d’ILSVRC
 2014, est une extension à des réseaux plus profonds de Network to
 Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de reconnaissance. D’autres améliorations théoriques (fonctions de pertes associées aux couches intermédiaires dans la phase d’apprentissage, introduction de caractères épars dans le réseau) ont également permis d’améliorer les performances (de calcul et de classification).</p>
-<p>Inception V2, puis V3 (<code class="xref std std-numref docutils literal notranslate"><span class="pre">inceptionv3</span></code>) adoptent des techniques de factorisation (toute convolution par un filtre de taille plus grande que 3<span class="math notranslate nohighlight">\(\times\)</span> 3 peut être exprimée de manière plus efficace
+<p>Inception V2, puis V3 (<a class="reference internal" href="#inceptionv3"><span class="std std-numref">Fig. 43</span></a>) adoptent des techniques de factorisation (toute convolution par un filtre de taille plus grande que 3<span class="math notranslate nohighlight">\(\times\)</span> 3 peut être exprimée de manière plus efficace
 avec une série de filtres de taille réduite) et de normalisation pour
 améliorer encore les performances.</p>
 <p>Inception V4 <span id="id8">[<a class="reference internal" href="#id36" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
 l’architecture uniforme et aux performances accrues.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{figure} ./images/inceptionv3.png
-:name: inceptionv3
-Architecture d’inception V3
-</pre></div>
-</div>
+<figure class="align-default" id="inceptionv3">
+<img alt="_images/inceptionv3.png" src="_images/inceptionv3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Architecture d’inception V3</span><a class="headerlink" href="#inceptionv3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="resnet">
 <h3>ResNet<a class="headerlink" href="#resnet" title="Link to this heading">#</a></h3>

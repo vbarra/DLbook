@@ -263,12 +263,10 @@ Xception {cite:p}`Chollet16`,...
 L'idée du premier réseau ({numref}`nin`) est de connecter les couches de convolution par des perceptrons multicouches, introduisant des non linéarités dans les réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à des convolutions par des filtres 1$\times 1$ et gardent donc la cohérence des réseaux. Cette nouvelle architecture rend moins indispensable les couches complètement connectées en fin de réseau. Les auteurs moyennent spatialement les cartes finales et donnent le résultat au classifier softmax. Le nombre de paramètres est alors réduit, diminuant de ce fait le risque de sur apprentissage.
 
 
-```
-{figure} ./images/NIN.png
+```{figure} ./images/NIN.png
 :name: nin
 Réseau Network in Network
 ```
-
 
 Inception V1, implémenté dans le réseau GoogLeNet vainqueur d'ILSVRC
 2014, est une extension à des réseaux plus profonds de Network to
@@ -281,8 +279,7 @@ améliorer encore les performances.
 Inception V4 {cite:p}`Szegedy16` propose une version rationalisée, à
 l'architecture uniforme et aux performances accrues.
 
-```
-{figure} ./images/inceptionv3.png
+```{figure} ./images/inceptionv3.png
 :name: inceptionv3
 Architecture d’inception V3
 ```
