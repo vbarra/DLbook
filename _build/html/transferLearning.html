@@ -354,13 +354,11 @@ entraîné qui peut être téléchargé a une taille de plus de 500 Mo). VGG a c
 92.3% mais n’a pas remporté le challenge. Aujourd’hui VGG et une famille de réseaux profonds (de A à E) qui varient par leur architecture</p>
 <div class="center docutils">
 <figure id="F:VGG">
- <!-- Start Styles. Move the 'style' tags and everything between them to between the 'head' tags -->
 <style type="text/css">
 .myTable {style="border:1px solid blue; border-collapse:collapse;" }
 .myTable th { background-color:#000;color:white;width:50%; }
 .myTable td, .myTable th { padding:5px;border:1px solid #000; }
 </style>
-<!-- End Styles -->
 <table class="myTable">
 <thead>
 <tr class="header">
@@ -547,47 +545,30 @@ connectée 1000 neurones</td>
 <section id="inception">
 <h3>Inception<a class="headerlink" href="#inception" title="Link to this heading">#</a></h3>
 <p>Inception, proposé par Google, est le premier réseau dont les
-performances ont été augmentées pas seulement en augmentant le nombre de
-couches, mais en pensant et optimisant le design et l’architecture.
-L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur
-la même image et de concaténer les résultats pour générer une
-représentation plus robuste.<br />
-Inception n’est pas un réseau, c’est une famille de réseaux : Network in
-Network <span id="id4">[<a class="reference internal" href="#id39" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id38" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id37" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
+performances ont été augmentées non seulement en augmentant le nombre de couches, mais en pensant et optimisant le design et l’architecture.
+L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur la même image et de concaténer les résultats pour générer une
+représentation plus robuste.</p>
+<p>Inception n’est pas un réseau, c’est une famille de réseaux : Network in Network <span id="id4">[<a class="reference internal" href="#id39" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id38" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id37" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
 Xception <span id="id7">[<a class="reference internal" href="#id46" title="François Chollet. Xception: deep learning with depthwise separable convolutions. CoRR, 2016. URL: http://arxiv.org/abs/1610.02357, arXiv:1610.02357.">18</a>]</span>,…</p>
-<p>L’idée du premier réseau (figure <a class="reference internal" href="#F:NIN"><span class="xref myst">1.5</span></a>{reference-type= »ref »
-reference= »F:NIN »}) est de connecter les couches de convolution par des
-perceptrons multicouches, introduisant des non linéarités dans les
-réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à
-des convolutions par des filtres 1<span class="math notranslate nohighlight">\(\times 1\)</span> et gardent donc la
-cohérence des réseaux. Cette nouvelle architecture rend moins
-indispensable les couches complètement connectées en fin de réseau. Les
-auteurs moyennent spatialement les cartes finales et donnent le résultat
-au classifier softmax. Le nombre de paramètres est alors réduit,
-diminuant de ce fait le risque de sur apprentissage.</p>
-<figure id="F:NIN">
-<img src="images/NIN.png" />
-<figcaption>Réseau Network in Network</figcaption>
-</figure>
+<p>L’idée du premier réseau (<code class="xref std std-numref docutils literal notranslate"><span class="pre">nin</span></code>) est de connecter les couches de convolution par des perceptrons multicouches, introduisant des non linéarités dans les réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à des convolutions par des filtres 1<span class="math notranslate nohighlight">\(\times 1\)</span> et gardent donc la cohérence des réseaux. Cette nouvelle architecture rend moins indispensable les couches complètement connectées en fin de réseau. Les auteurs moyennent spatialement les cartes finales et donnent le résultat au classifier softmax. Le nombre de paramètres est alors réduit, diminuant de ce fait le risque de sur apprentissage.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">figure</span><span class="p">}</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">NIN</span><span class="o">.</span><span class="n">png</span>
+<span class="p">:</span><span class="n">name</span><span class="p">:</span> <span class="n">nin</span>
+<span class="n">Réseau</span> <span class="n">Network</span> <span class="ow">in</span> <span class="n">Network</span>
+</pre></div>
+</div>
 <p>Inception V1, implémenté dans le réseau GoogLeNet vainqueur d’ILSVRC
 2014, est une extension à des réseaux plus profonds de Network to
-Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de
-reconnaissance. D’autres améliorations théoriques (fonctions de pertes
-associées aux couches intermédiaires dans la phase d’apprentissage,
-introduction de caractères épars dans le réseau) ont également permis
-d’améliorer les performances (de calcul et de classification).<br />
-Inception V2, puis V3 (figure <a class="reference internal" href="#F:iv3"><span class="xref myst">1.6</span></a>{reference-type= »ref »
-reference= »F:iv3 »}) adoptent des techniques de factorisation (toute
-convolution par un filtre de taille plus grande que
-3<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3 peut être exprimée de manière plus efficace
+Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de reconnaissance. D’autres améliorations théoriques (fonctions de pertes associées aux couches intermédiaires dans la phase d’apprentissage, introduction de caractères épars dans le réseau) ont également permis d’améliorer les performances (de calcul et de classification).</p>
+<p>Inception V2, puis V3 (<code class="xref std std-numref docutils literal notranslate"><span class="pre">inceptionv3</span></code>) adoptent des techniques de factorisation (toute convolution par un filtre de taille plus grande que 3<span class="math notranslate nohighlight">\(\times\)</span> 3 peut être exprimée de manière plus efficace
 avec une série de filtres de taille réduite) et de normalisation pour
-améliorer encore les performances.<br />
-Inception V4 <span id="id8">[<a class="reference internal" href="#id36" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
+améliorer encore les performances.</p>
+<p>Inception V4 <span id="id8">[<a class="reference internal" href="#id36" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
 l’architecture uniforme et aux performances accrues.</p>
-<figure id="F:iv3">
-<img src="images/inceptionv3.png" />
-<figcaption>Architecture d’inception V3</figcaption>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{figure} ./images/inceptionv3.png
+:name: inceptionv3
+Architecture d’inception V3
+</pre></div>
+</div>
 </section>
 <section id="resnet">
 <h3>ResNet<a class="headerlink" href="#resnet" title="Link to this heading">#</a></h3>
