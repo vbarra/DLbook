@@ -300,45 +300,28 @@ plus complexe, et prend la forme d'un module ResNet ({numref}`resnet`).
 Module ResNet (source : {cite:p}`He15`)
 ```
 
-## Comment utiliser ces réseaux
+## Comment utiliser ces réseaux ?
 
-Il est possible de redéclarer les réseaux classiques depuis TensorFlow
-ou Keras, en définissant une à une les couches et leur paramètres, qui
-sont décrits dans les articles correspondants. On imagine assez bien le
-travail que cela peut représenter sur le ResNet de Microsoft\...\
+Il est possible de définir les réseaux classiques en décrivant une à une les couches et leur paramètres, qui sont proposés dans les articles correspondants. On imagine assez bien le travail que cela peut représenter sur ResNet par exemple...
+
 Fort heureusement, il existe d'autres manières d'utiliser ces réseaux.
 
 ### Utilisation de réseaux pré-entraînés
 
-Il est possible avec TensorFlow et Keras de charger / sauvegarder des
-réseaux qui ont été entraînés. Il est également possible, pendant
+Il est possible de charger / sauvegarder des
+réseaux qui ont été entraînés sur des grandes bases de données et de les utiliser directement. Il est également possible, pendant
 l'entraînement, de créer des sauvegardes (checkpoints) pour reprendre
 éventuellement l'entraînement en cours d'itérations. On peut sauvegarder
 tout le réseau (architecture + optimiseur + poids), ou seulement les
 poids.
 
-Pour charger / sauver les poids d'un modèle `model` Keras, on utilise
-simplement les fonctions
+`torchvision`donne accès à de nombreux modèles pré-entrainés :  
 
-    model = create\_model()\\
-    model.load\_weights('./checkpoints/my\_checkpoint')
+``` python
+from torchvision import models
+dir(models)
+```
 
-et
-
-    model.save\_weights('./checkpoints/my\_checkpoint')
-
-Pour charger / sauver le modèle complet, on utilise
-
-    model = keras.models.load\_model('my\_model.h5')
-
-et
-
-    model = create\_model()
-    model.fit(xtrain, ytrain)
-    model.save('my\_model.h5')
-
-La procédure sous Tensorflow est un peu plus complexe et est décrite
-[ici](https://www.tensorflow.org/guide/saved_model).
 
 ### Transfer learning et fine tuning
 
