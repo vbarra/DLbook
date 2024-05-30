@@ -12,72 +12,47 @@ kernelspec:
 
 # Utilisation de réseaux existants
 
-Depuis la fin des années 90, de nombreux réseaux profonds ont vu le jour
-et se sont complexifié, diversifié, pour répondre à des problèmes de
-plus en plus vastes. [@Canziani16] propose une analyse comparative de
-ces réseaux et décrit en particulier leurs performances en fonction du
-nombre d'opérations (figure [1.1](#F:compar){reference-type="ref"
-reference="F:compar"}).
-
-Nous présentons dans la suite cinq réseaux profonds classiques. Nous
-montrons ensuite comment les utiliser directement, ou comment les
-adapter pour répondre à une problématique précise, en lien avec leur
-utilisation originale ou non. Nous introduisons enfin une manière
+Nous présentons dans la suite cinq réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
 d'apprendre un réseau à partir de peu de données.
-
-<figure id="F:compar">
-<img src="images/comparaison.png" />
-<figcaption>Précision en fonction du nombre d’opérations nécessaire pour
-un calcul en passe avant. La taille des blobs est proportionnelle au
-nombre de paramètres du réseau (source : <span class="citation"
-data-cites="Canziani16"></span>)</figcaption>
-</figure>
 
 ## Quelques réseaux profonds classiques
 
-Les cinq réseaux présentés ici ont prouvé leur efficacité, notamment
-lors des compétitions organisées depuis 2010 sur une base de données
-d'images nommée [ImageNet](http://www.image-net.org/). Initiée à
-l'Université de Stanford, cette base de données comporte aujourd'hui
-plus de 14 millions d'images, classées en 21841 catégories (avions,
-voitures, chats,\...). Dans les compétitions ILSVRC ( ImageNet Large
-Scale Visual Recognition Challenge), les chercheurs se voient proposer
-une extraction de 1,2 millions d'images, catégorisées en 1000 classes,
-et le gagnant est celui qui atteint la meilleure précision de
-reconnaissance sur les 5 premières classes (top-5).\
+Les cinq réseaux présentés ici ont prouvé leur efficacité, notamment lors des compétitions organisées depuis 2010 sur une base de données d'images nommée [ImageNet](http://www.image-net.org/). Initiée à l'Université de Stanford, cette base de données comporte aujourd'hui plus de 14 millions d'images, classées en 21841 catégories (avions, voitures, chats,...). Dans les compétitions [ILSVRC](https://image-net.org/challenges/LSVRC/) ( ImageNet Large Scale Visual Recognition Challenge), les chercheurs se voient proposer
+une extraction de 1,2 millions d'images d'entraînement, 100 000 images de test et 50 000 images de validation, catégorisées en 1000 classes. Le gagnant est celui qui atteint la meilleure précision de reconnaissance sur les 5 premières classes (top-5).
 
 ### AlexNet
 
-En 2012, Krizhevsky et al [@Krizhevsky12] remportent ILSVRC avec un taux
-de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif
-composé de 5 couches de convolution et de pooling, suivies de 3 couches
-complètement connectées (figure [1.2](#F:Alexnet){reference-type="ref"
-reference="F:Alexnet"}).
+En 2012, Krizhevsky et al  {cite:p}`Krizhevsky12` remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées ({numref}`alexnet`).
 
-<figure id="F:Alexnet">
-<embed src="images/AlexNet.pdf" />
-<figcaption>Architecture du réseau AlexNet. Les couches de convolution
+
+```{figure} ./images/AlexNet.pdf
+:name: alexnet
+Architecture du réseau AlexNet. Les couches de convolution
 et d’activation sont en orange clair, les couches d’agrégation en orange
-foncé. Les couches complètement connectées sont en violet.</figcaption>
-</figure>
+foncé. Les couches complètement connectées sont en violet.
+```
+
+
+
 
 Si la profondeur du réseau reste faible, le nombre de paramètres était
 déjà important. En regardant uniquement la première couche de
 convolution, on constate que :
 
 -   l'entrée est composée d'images
-    227$\times$`<!-- -->`{=html}227$\times$`<!-- -->`{=html}3
+    227$\times$227$\times$3
 
 -   les filtres de convolution sont de taille 11
 
 -   le pas de convolution (stride) est de 4
 
 Ainsi la sortie de la couche de convolution est de taille
-55$\times$`<!-- -->`{=html}55$\times$`<!-- -->`{=html}96=290 400
+55$\times$55$\times$96=290 400
 neurones, chacun ayant
-11$\times$`<!-- -->`{=html}11$\times$`<!-- -->`{=html}3=363 poids et un
+11$\times$11$\times$3=363 poids et un
 biais. Cela implique, sur cette couche de convolution seulement, 105 705
-600 paramètres à ajuster.\
+600 paramètres à ajuster.
+
 Ce réseau, amélioration d'un réseau existant (LeNet), apportait de
 nombreuses contributions, comme l'utilisation de couches ReLU, de
 dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d'entraînement.
@@ -85,8 +60,8 @@ dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d'entraînement.
 ### VGG
 
 Les réseaux VGG (Visual Geometry Group, université d'Oxford)
-[@Simonyan14] ont été les premiers réseaux à utiliser de petits filtres
-de convolution (3$\times$`<!-- -->`{=html}3) et à les combiner pour
+{cite:p}`Simonyan14` ont été les premiers réseaux à utiliser de petits filtres
+de convolution (3$\times$3) et à les combiner pour
 décrire des séquences de convolution, l'idée étant d'émuler l'effet de
 larges champs réceptifs par cette séquence. Cette technique amène
 malheureusement à un nombre exponentiel de paramètres (le modèle
@@ -293,8 +268,9 @@ L'idée est ici d'utiliser plusieurs filtres, de tailles différentes, sur
 la même image et de concaténer les résultats pour générer une
 représentation plus robuste.\
 Inception n'est pas un réseau, c'est une famille de réseaux : Network in
-Network [@Lin13], Inception V1 [@Szegedy14], Inception V2 [@Szegedy15],
-Xception [@Chollet16],\...\
+Network {cite:p}`Lin13`, Inception V1 {cite:p}`Szegedy14`, Inception V2 {cite:p}`Szegedy15`,
+Xception {cite:p}`Chollet16`,...
+
 L'idée du premier réseau (figure [1.5](#F:NIN){reference-type="ref"
 reference="F:NIN"}) est de connecter les couches de convolution par des
 perceptrons multicouches, introduisant des non linéarités dans les
@@ -324,7 +300,7 @@ convolution par un filtre de taille plus grande que
 3$\times$`<!-- -->`{=html}3 peut être exprimée de manière plus efficace
 avec une série de filtres de taille réduite) et de normalisation pour
 améliorer encore les performances.\
-Inception V4 [@Szegedy16] propose une version rationalisée, à
+Inception V4 {cite:p}`Szegedy16` propose une version rationalisée, à
 l'architecture uniforme et aux performances accrues.
 
 <figure id="F:iv3">
@@ -334,7 +310,7 @@ l'architecture uniforme et aux performances accrues.
 
 ### ResNet
 
-En 2015, Microsoft remporte la compétition ILSVRC avec ResNet [@He15],
+En 2015, Microsoft remporte la compétition ILSVRC avec ResNet {cite:p}`He15`,
 un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne
 reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le
 problème de vanishing gradient de la manière la plus simple possible, en
@@ -358,7 +334,7 @@ data-cites="He15"></span>)</figcaption>
 
 ### SqueezeNet
 
-SqueezeNet [@Iandola16] est un réseau produit en 2016, qui n'est pas
+SqueezeNet {cite:p}`Iandola16` est un réseau produit en 2016, qui n'est pas
 tant remarquable par ses performances (il atteint les mêmes niveaux de
 reconnaissance qu'AlexNet), mais par sa légèreté (le modèle entraîné sur
 ImageNet a une taille de 4.9 Mo, et possède 50 fois moins de paramètres
@@ -367,10 +343,10 @@ entrainé.\
 SqueezeNet introduit des modules \"Fire\" (figure
 [1.8](#F:SqueezeNet){reference-type="ref" reference="F:SqueezeNet"}),
 composés d'une couche de convolution \"squeeze\", dotée de filtres de
-taille 1$\times$`<!-- -->`{=html}1, et d'une couche d'expansion dotée de
-filtres de taille 1$\times$`<!-- -->`{=html}1 et
-3$\times$`<!-- -->`{=html}3. L'utilisation de filtres
-1$\times$`<!-- -->`{=html}1 permet une réduction du nombre de
+taille 1$\times$1, et d'une couche d'expansion dotée de
+filtres de taille 1$\times$1 et
+3$\times$3. L'utilisation de filtres
+1$\times$1 permet une réduction du nombre de
 paramètres.
 
 <figure id="F:SqueezeNet">

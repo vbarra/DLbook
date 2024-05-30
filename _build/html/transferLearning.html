@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Utilisation de réseaux existants &#8212; Apprentissage profond</title>
   
@@ -18,15 +18,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
@@ -82,13 +82,14 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
+    Back to top
   </button>
 
   
@@ -125,14 +126,11 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -180,12 +178,13 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Utilisation de réseaux existants</a></li>
 </ul>
 
     </div>
@@ -309,77 +308,51 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="utilisation-de-reseaux-existants">
 <h1>Utilisation de réseaux existants<a class="headerlink" href="#utilisation-de-reseaux-existants" title="Link to this heading">#</a></h1>
-<p>Depuis la fin des années 90, de nombreux réseaux profonds ont vu le jour
-et se sont complexifié, diversifié, pour répondre à des problèmes de
-plus en plus vastes. [&#64;Canziani16] propose une analyse comparative de
-ces réseaux et décrit en particulier leurs performances en fonction du
-nombre d’opérations (figure <a class="reference internal" href="#F:compar"><span class="xref myst">1.1</span></a>{reference-type= »ref »
-reference= »F:compar »}).</p>
-<p>Nous présentons dans la suite cinq réseaux profonds classiques. Nous
-montrons ensuite comment les utiliser directement, ou comment les
-adapter pour répondre à une problématique précise, en lien avec leur
-utilisation originale ou non. Nous introduisons enfin une manière
+<p>Nous présentons dans la suite cinq réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
 d’apprendre un réseau à partir de peu de données.</p>
-<figure id="F:compar">
-<img src="images/comparaison.png" />
-<figcaption>Précision en fonction du nombre d’opérations nécessaire pour
-un calcul en passe avant. La taille des blobs est proportionnelle au
-nombre de paramètres du réseau (source : <span class="citation"
-data-cites="Canziani16"></span>)</figcaption>
-</figure>
 <section id="quelques-reseaux-profonds-classiques">
 <h2>Quelques réseaux profonds classiques<a class="headerlink" href="#quelques-reseaux-profonds-classiques" title="Link to this heading">#</a></h2>
-<p>Les cinq réseaux présentés ici ont prouvé leur efficacité, notamment
-lors des compétitions organisées depuis 2010 sur une base de données
-d’images nommée <a class="reference external" href="http://www.image-net.org/">ImageNet</a>. Initiée à
-l’Université de Stanford, cette base de données comporte aujourd’hui
-plus de 14 millions d’images, classées en 21841 catégories (avions,
-voitures, chats,…). Dans les compétitions ILSVRC ( ImageNet Large
-Scale Visual Recognition Challenge), les chercheurs se voient proposer
-une extraction de 1,2 millions d’images, catégorisées en 1000 classes,
-et le gagnant est celui qui atteint la meilleure précision de
-reconnaissance sur les 5 premières classes (top-5).\</p>
+<p>Les cinq réseaux présentés ici ont prouvé leur efficacité, notamment lors des compétitions organisées depuis 2010 sur une base de données d’images nommée <a class="reference external" href="http://www.image-net.org/">ImageNet</a>. Initiée à l’Université de Stanford, cette base de données comporte aujourd’hui plus de 14 millions d’images, classées en 21841 catégories (avions, voitures, chats,…). Dans les compétitions <a class="reference external" href="https://image-net.org/challenges/LSVRC/">ILSVRC</a> ( ImageNet Large Scale Visual Recognition Challenge), les chercheurs se voient proposer
+une extraction de 1,2 millions d’images d’entraînement, 100 000 images de test et 50 000 images de validation, catégorisées en 1000 classes. Le gagnant est celui qui atteint la meilleure précision de reconnaissance sur les 5 premières classes (top-5).</p>
 <section id="alexnet">
 <h3>AlexNet<a class="headerlink" href="#alexnet" title="Link to this heading">#</a></h3>
-<p>En 2012, Krizhevsky et al [&#64;Krizhevsky12] remportent ILSVRC avec un taux
-de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif
-composé de 5 couches de convolution et de pooling, suivies de 3 couches
-complètement connectées (figure <a class="reference internal" href="#F:Alexnet"><span class="xref myst">1.2</span></a>{reference-type= »ref »
-reference= »F:Alexnet »}).</p>
-<figure id="F:Alexnet">
-<embed src="images/AlexNet.pdf" />
-<figcaption>Architecture du réseau AlexNet. Les couches de convolution
+<p>En 2012, Krizhevsky et al  <span id="id1">[<a class="reference internal" href="#id42" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012. 2012.">13</a>]</span> remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 40</span></a>).</p>
+<figure class="align-default" id="id2">
+<img alt="images/AlexNet.pdf" src="images/AlexNet.pdf" />
+<figcaption>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Architecture du réseau AlexNet. Les couches de convolution
 et d’activation sont en orange clair, les couches d’agrégation en orange
-foncé. Les couches complètement connectées sont en violet.</figcaption>
+foncé. Les couches complètement connectées sont en violet.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 <p>Si la profondeur du réseau reste faible, le nombre de paramètres était
 déjà important. En regardant uniquement la première couche de
 convolution, on constate que :</p>
 <ul class="simple">
 <li><p>l’entrée est composée d’images
-227<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}227<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3</p></li>
+227<span class="math notranslate nohighlight">\(\times\)</span>227<span class="math notranslate nohighlight">\(\times\)</span>3</p></li>
 <li><p>les filtres de convolution sont de taille 11</p></li>
 <li><p>le pas de convolution (stride) est de 4</p></li>
 </ul>
 <p>Ainsi la sortie de la couche de convolution est de taille
-55<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}55<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}96=290 400
+55<span class="math notranslate nohighlight">\(\times\)</span>55<span class="math notranslate nohighlight">\(\times\)</span>96=290 400
 neurones, chacun ayant
-11<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}11<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3=363 poids et un
+11<span class="math notranslate nohighlight">\(\times\)</span>11<span class="math notranslate nohighlight">\(\times\)</span>3=363 poids et un
 biais. Cela implique, sur cette couche de convolution seulement, 105 705
-600 paramètres à ajuster.<br />
-Ce réseau, amélioration d’un réseau existant (LeNet), apportait de
+600 paramètres à ajuster.</p>
+<p>Ce réseau, amélioration d’un réseau existant (LeNet), apportait de
 nombreuses contributions, comme l’utilisation de couches ReLU, de
 dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d’entraînement.</p>
 </section>
 <section id="vgg">
 <h3>VGG<a class="headerlink" href="#vgg" title="Link to this heading">#</a></h3>
 <p>Les réseaux VGG (Visual Geometry Group, université d’Oxford)
-[&#64;Simonyan14] ont été les premiers réseaux à utiliser de petits filtres
-de convolution (3<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3) et à les combiner pour
+<span id="id3">[<a class="reference internal" href="#id40" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, 2014. URL: http://arxiv.org/abs/1409.1556.">14</a>]</span> ont été les premiers réseaux à utiliser de petits filtres
+de convolution (3<span class="math notranslate nohighlight">\(\times\)</span>3) et à les combiner pour
 décrire des séquences de convolution, l’idée étant d’émuler l’effet de
 larges champs réceptifs par cette séquence. Cette technique amène
 malheureusement à un nombre exponentiel de paramètres (le modèle
@@ -584,9 +557,9 @@ L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur
 la même image et de concaténer les résultats pour générer une
 représentation plus robuste.<br />
 Inception n’est pas un réseau, c’est une famille de réseaux : Network in
-Network [&#64;Lin13], Inception V1 [&#64;Szegedy14], Inception V2 [&#64;Szegedy15],
-Xception [&#64;Chollet16],…<br />
-L’idée du premier réseau (figure <a class="reference internal" href="#F:NIN"><span class="xref myst">1.5</span></a>{reference-type= »ref »
+Network <span id="id4">[<a class="reference internal" href="#id39" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id38" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id37" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
+Xception <span id="id7">[<a class="reference internal" href="#id46" title="François Chollet. Xception: deep learning with depthwise separable convolutions. CoRR, 2016. URL: http://arxiv.org/abs/1610.02357, arXiv:1610.02357.">18</a>]</span>,…</p>
+<p>L’idée du premier réseau (figure <a class="reference internal" href="#F:NIN"><span class="xref myst">1.5</span></a>{reference-type= »ref »
 reference= »F:NIN »}) est de connecter les couches de convolution par des
 perceptrons multicouches, introduisant des non linéarités dans les
 réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à
@@ -613,7 +586,7 @@ convolution par un filtre de taille plus grande que
 3<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3 peut être exprimée de manière plus efficace
 avec une série de filtres de taille réduite) et de normalisation pour
 améliorer encore les performances.<br />
-Inception V4 [&#64;Szegedy16] propose une version rationalisée, à
+Inception V4 <span id="id8">[<a class="reference internal" href="#id36" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
 l’architecture uniforme et aux performances accrues.</p>
 <figure id="F:iv3">
 <img src="images/inceptionv3.png" />
@@ -622,7 +595,7 @@ l’architecture uniforme et aux performances accrues.</p>
 </section>
 <section id="resnet">
 <h3>ResNet<a class="headerlink" href="#resnet" title="Link to this heading">#</a></h3>
-<p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet [&#64;He15],
+<p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet <span id="id9">[<a class="reference internal" href="#id35" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>,
 un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne
 reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le
 problème de vanishing gradient de la manière la plus simple possible, en
@@ -645,7 +618,7 @@ data-cites="He15"></span>)</figcaption>
 </section>
 <section id="squeezenet">
 <h3>SqueezeNet<a class="headerlink" href="#squeezenet" title="Link to this heading">#</a></h3>
-<p>SqueezeNet [&#64;Iandola16] est un réseau produit en 2016, qui n’est pas
+<p>SqueezeNet <span id="id10">[<a class="reference internal" href="#id34" title="Forrest N. Iandola, Matthew W. Moskewicz, Khalid Ashraf, Song Han, William J. Dally, and Kurt Keutzer. Squeezenet: alexnet-level accuracy with 50x fewer parameters and \textless 1mb model size. CoRR, 2016. URL: http://arxiv.org/abs/1602.07360.">21</a>]</span> est un réseau produit en 2016, qui n’est pas
 tant remarquable par ses performances (il atteint les mêmes niveaux de
 reconnaissance qu’AlexNet), mais par sa légèreté (le modèle entraîné sur
 ImageNet a une taille de 4.9 Mo, et possède 50 fois moins de paramètres
@@ -654,10 +627,10 @@ entrainé.<br />
 SqueezeNet introduit des modules « Fire » (figure
 <a class="reference internal" href="#F:SqueezeNet"><span class="xref myst">1.8</span></a>{reference-type= »ref » reference= »F:SqueezeNet »}),
 composés d’une couche de convolution « squeeze », dotée de filtres de
-taille 1<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1, et d’une couche d’expansion dotée de
-filtres de taille 1<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1 et
-3<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}3. L’utilisation de filtres
-1<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1 permet une réduction du nombre de
+taille 1<span class="math notranslate nohighlight">\(\times\)</span>1, et d’une couche d’expansion dotée de
+filtres de taille 1<span class="math notranslate nohighlight">\(\times\)</span>1 et
+3<span class="math notranslate nohighlight">\(\times\)</span>3. L’utilisation de filtres
+1<span class="math notranslate nohighlight">\(\times\)</span>1 permet une réduction du nombre de
 paramètres.</p>
 <figure id="F:SqueezeNet">
 <img src="images/squeezeNet.png" />
@@ -812,55 +785,90 @@ class="math inline"><sup>∘</sup></span>, flip, ajout de bruit gaussien,
 déformation élastique, changement de contraste par canal
 RGB.</figcaption>
 </figure>
-<div class="docutils container" id="id1">
-<div role="list" class="citation-list">
-<div class="citation" id="id38" role="doc-biblioentry">
+<div class="docutils container" id="id11">
+<div class="citation" id="id48" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
 </div>
-<div class="citation" id="id6" role="doc-biblioentry">
+<div class="citation" id="id16" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
 </div>
-<div class="citation" id="id7" role="doc-biblioentry">
+<div class="citation" id="id17" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </div>
-<div class="citation" id="id39" role="doc-biblioentry">
+<div class="citation" id="id49" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
 </div>
-<div class="citation" id="id4" role="doc-biblioentry">
+<div class="citation" id="id14" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
 </div>
-<div class="citation" id="id40" role="doc-biblioentry">
+<div class="citation" id="id50" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
 </div>
-<div class="citation" id="id41" role="doc-biblioentry">
+<div class="citation" id="id51" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
 <p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
 </div>
-<div class="citation" id="id17" role="doc-biblioentry">
+<div class="citation" id="id27" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
 </div>
-<div class="citation" id="id3" role="doc-biblioentry">
+<div class="citation" id="id13" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
 <p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
 </div>
-<div class="citation" id="id33" role="doc-biblioentry">
+<div class="citation" id="id43" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
 <p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
 </div>
-<div class="citation" id="id2" role="doc-biblioentry">
+<div class="citation" id="id12" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
 <p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
 </div>
-<div class="citation" id="id10" role="doc-biblioentry">
+<div class="citation" id="id20" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
 <p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
+</div>
+<div class="citation" id="id42" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">13</a><span class="fn-bracket">]</span></span>
+<p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">14</a><span class="fn-bracket">]</span></span>
+<p>Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>.</p>
+</div>
+<div class="citation" id="id39" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">15</a><span class="fn-bracket">]</span></span>
+<p>Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://arxiv.org/abs/1312.4400">http://arxiv.org/abs/1312.4400</a>.</p>
+</div>
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">16</a><span class="fn-bracket">]</span></span>
+<p>Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.4842">http://arxiv.org/abs/1409.4842</a>.</p>
+</div>
+<div class="citation" id="id37" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">17</a><span class="fn-bracket">]</span></span>
+<p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.</p>
+</div>
+<div class="citation" id="id46" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">18</a><span class="fn-bracket">]</span></span>
+<p>François Chollet. Xception: deep learning with depthwise separable convolutions. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
+</div>
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">19</a><span class="fn-bracket">]</span></span>
+<p>Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07261">http://arxiv.org/abs/1602.07261</a>.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">20</a><span class="fn-bracket">]</span></span>
+<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">21</a><span class="fn-bracket">]</span></span>
+<p>Forrest N. Iandola, Matthew W. Moskewicz, Khalid Ashraf, Song Han, William J. Dally, and Kurt Keutzer. Squeezenet: alexnet-level accuracy with 50x fewer parameters and \textless 1mb model size. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07360">http://arxiv.org/abs/1602.07360</a>.</p>
 </div>
 </div>
 </div>
@@ -914,7 +922,6 @@ RGB.</figcaption>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -984,8 +991,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
