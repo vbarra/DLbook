@@ -297,6 +297,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
             </nav>
         </div>
@@ -910,25 +911,6 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 <ul class="simple">
 <li><p>d’utiliser plus généralement des méthodes de Few shot / Zero shot learning <span id="id13">[<a class="reference internal" href="#id59" title="Y. Song, T. Wang, P. Cai, S. Mondal, and J. Sahoo. A comprehensive survey of few-shot learning: evolution, applications, challenges, and opportunities. ACM Computing Surveyx, 2023.">22</a>]</span>, dont l’augmentation de données est un exemple.</p></li>
 </ul>
-<p>Les méthodes supervisées nécessitent pour de bonnes performances un
-ensemble d’apprentissage <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> de grand cardinal. Si seulement
-peu d’exemples
-<span class="math notranslate nohighlight">\(\mathcal{S}_s = \{(\mathbf{x}_i,y_i), i\in[\![1,m ]\!]\}\)</span> sont
-disponibles, avec <span class="math notranslate nohighlight">\(m\)</span> petit, les techniques précédemment décrites ne
-sont pour la plupart plus applicables.</p>
-<p>Vu sous l’angle de la minimisation du risque empirique, l’hypothèse <span class="math notranslate nohighlight">\(h\)</span>
-construite sur la minimisation de</p>
-<div class="math notranslate nohighlight">
-\[R(h) = \displaystyle\sum_{i=1}^m \ell(y_i,h(\mathbf{x}_i))\]</div>
-<p>conduit à un sur apprentissage et un risque <span class="math notranslate nohighlight">\(R(h)\)</span> très loin du risque réel. Pour pallier ce problème, des connaissances <em>a priori</em> doivent être
-utilisées. Le Few-shot learning propose trois alternatives. Nous
-détaillons ici l’une d’entre elles, l’augmentation de données.<br />
-Les approches de cette catégorie utilisent des connaissances <em>a priori</em>
-sur les données pour enrichir <span class="math notranslate nohighlight">\(\mathcal{S}_s\)</span>. On les regroupe parfois
-sous le vocable de méthodes d”<em>augmentation de données</em>. Si elles sont
-faciles à mettre en oeuvre et à comprendre, ces méthodes restent
-cependant dépendantes du domaine d’étude et ne peuvent être facilement
-généralisées.</p>
 <div class="docutils container" id="id14">
 <div class="citation" id="id51" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
@@ -1023,6 +1005,9 @@ généralisées.</p>
 </div>
 </section>
 </section>
+<section id="implementation">
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1091,6 +1076,7 @@ généralisées.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
   </nav></div>
 

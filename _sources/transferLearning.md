@@ -401,32 +401,8 @@ Augmentation de données : à partir d'un exemple (image de gauche), on construi
 - d'utiliser plus généralement des méthodes de Few shot / Zero shot learning {cite:p}`Song23`, dont l'augmentation de données est un exemple.
 
 
-Les méthodes supervisées nécessitent pour de bonnes performances un
-ensemble d'apprentissage $\mathcal{S}$ de grand cardinal. Si seulement
-peu d'exemples
-$\mathcal{S}_s = \{(\mathbf{x}_i,y_i), i\in[\![1,m ]\!]\}$ sont
-disponibles, avec $m$ petit, les techniques précédemment décrites ne
-sont pour la plupart plus applicables.
-
-Vu sous l'angle de la minimisation du risque empirique, l'hypothèse $h$
-construite sur la minimisation de
-
-$$R(h) = \displaystyle\sum_{i=1}^m \ell(y_i,h(\mathbf{x}_i))$$ 
-
-conduit à un sur apprentissage et un risque $R(h)$ très loin du risque réel. Pour pallier ce problème, des connaissances *a priori* doivent être
-utilisées. Le Few-shot learning propose trois alternatives. Nous
-détaillons ici l'une d'entre elles, l'augmentation de données.\
-Les approches de cette catégorie utilisent des connaissances *a priori*
-sur les données pour enrichir $\mathcal{S}_s$. On les regroupe parfois
-sous le vocable de méthodes d'*augmentation de données*. Si elles sont
-faciles à mettre en oeuvre et à comprendre, ces méthodes restent
-cependant dépendantes du domaine d'étude et ne peuvent être facilement
-généralisées.
-
-
-
-
-
 ```{bibliography}
 :style: unsrt
 ```
+
+## Implémentation
