@@ -268,7 +268,6 @@ L'idée du premier réseau ({numref}`nin`) est de connecter les couches de convo
 Réseau Network in Network
 ```
 
-
 Inception V1, implémenté dans le réseau GoogLeNet vainqueur d'ILSVRC
 2014, est une extension à des réseaux plus profonds de Network to
 Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de reconnaissance. D'autres améliorations théoriques (fonctions de pertes associées aux couches intermédiaires dans la phase d'apprentissage, introduction de caractères épars dans le réseau) ont également permis d'améliorer les performances (de calcul et de classification).
