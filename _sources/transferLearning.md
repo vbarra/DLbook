@@ -66,7 +66,7 @@ populaires.
 <figure id="F:VGG">
  <!-- Start Styles. Move the 'style' tags and everything between them to between the 'head' tags -->
 <style type="text/css">
-.myTable { background-color:#000;border-collapse:collapse; }
+.myTable {border-collapse:collapse; }
 .myTable th { background-color:#000;color:white;width:50%; }
 .myTable td, .myTable th { padding:5px;border:1px solid #000; }
 </style>
