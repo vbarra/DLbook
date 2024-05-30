@@ -32,26 +32,16 @@ et d’activation sont en orange clair, les couches d’agrégation en orange
 foncé. Les couches complètement connectées sont en violet.
 ```
 
-
-
-
 Si la profondeur du réseau reste faible, le nombre de paramètres était
 déjà important. En regardant uniquement la première couche de
 convolution, on constate que :
 
--   l'entrée est composée d'images
-    227$\times$227$\times$3
-
+-   l'entrée est composée d'images 227$\times$227$\times$3
 -   les filtres de convolution sont de taille 11
-
 -   le pas de convolution (stride) est de 4
 
-Ainsi la sortie de la couche de convolution est de taille
-55$\times$55$\times$96=290 400
-neurones, chacun ayant
-11$\times$11$\times$3=363 poids et un
-biais. Cela implique, sur cette couche de convolution seulement, 105 705
-600 paramètres à ajuster.
+Ainsi la sortie de la couche de convolution est de taille 55$\times$55$\times$96=290 400 neurones, chacun ayant
+11$\times$11$\times$3=363 poids et un biais. Cela implique, sur cette couche de convolution seulement, 105 705 600 paramètres à ajuster.
 
 Ce réseau, amélioration d'un réseau existant (LeNet), apportait de
 nombreuses contributions, comme l'utilisation de couches ReLU, de
@@ -60,15 +50,12 @@ dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d'entraînement.
 ### VGG
 
 Les réseaux VGG (Visual Geometry Group, université d'Oxford)
-{cite:p}`Simonyan14` ont été les premiers réseaux à utiliser de petits filtres
-de convolution (3$\times$3) et à les combiner pour
+{cite:p}`Simonyan14` ont été les premiers réseaux à utiliser de petits filtres de convolution (3$\times$3) et à les combiner pour
 décrire des séquences de convolution, l'idée étant d'émuler l'effet de
 larges champs réceptifs par cette séquence. Cette technique amène
 malheureusement à un nombre exponentiel de paramètres (le modèle
-entraîné qui peut être téléchargé a une taille de plus de 500 Mo). VGG a
-concouru à ILSVRC 2014, a obtenu un taux de bonne classification de
-92.3% mais n'a pas remporté le challenge. Aujourd'hui VGG et une famille
-de réseaux profonds (de A à E) qui varient par leur architecture
+entraîné qui peut être téléchargé a une taille de plus de 500 Mo). VGG a concouru à ILSVRC 2014, a obtenu un taux de bonne classification de
+92.3% mais n'a pas remporté le challenge. Aujourd'hui VGG et une famille de réseaux profonds (de A à E) qui varient par leur architecture
 (figures [1.3](#F:VGG){reference-type="ref" reference="F:VGG"} et
 [1.4](#F:vgg16){reference-type="ref" reference="F:vgg16"}). Le nombre de
 paramètres (en millions) pour les réseaux de A à E est 133, 133, 134,
@@ -77,7 +64,7 @@ populaires.
 
 ::: center
 <figure id="F:VGG">
-<table>
+<table border="1">
 <thead>
 <tr class="header">
 <th style="text-align: center;"><strong>A</strong></th>
