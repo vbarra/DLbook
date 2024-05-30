@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Réseaux convolutifs &#8212; Apprentissage profond</title>
   
@@ -18,15 +18,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
@@ -83,13 +83,14 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
+    Back to top
   </button>
 
   
@@ -126,14 +127,11 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -187,6 +185,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
 </ul>
 
     </div>
@@ -325,7 +324,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reseaux-convolutifs">
 <h1>Réseaux convolutifs<a class="headerlink" href="#reseaux-convolutifs" title="Link to this heading">#</a></h1>
@@ -533,13 +532,13 @@ fonctions donnent des gradients faibles, qui ont tendance à s’annuler
 (problème du <em>gradient évanescent</em> ou <em>vanishing gradient</em>) lors de la
 phase d’apprentissage par rétropropagation du gradient. Une autre
 fonction, non saturante elle, est très largement utilisée. Il s’agit de
-la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="rnn.html#id46" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
+la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="transferLearning.html#id48" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
 \end{aligned}\]</div>
 <p>Les neurones utilisant la fonction ReLU sont appelés neurones linéaires rectifiés. Glorot
-et Bengio <span id="id2">[<a class="reference internal" href="rnn.html#id14" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
+et Bengio <span id="id2">[<a class="reference internal" href="transferLearning.html#id16" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
 tant que couche non linéaire permettait un entraînement efficace de
 réseaux profonds sans pré-entraînement non supervisé. Plusieurs
 variantes de cette fonction existent, par exemple pour assurer une
@@ -549,7 +548,7 @@ valeurs négatives de l’argument.</p>
 <section id="couches-de-normalisation">
 <h3>Couches de normalisation<a class="headerlink" href="#couches-de-normalisation" title="Link to this heading">#</a></h3>
 <p>La normalisation prend aujourd’hui une place de plus en plus importante,
-notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="rnn.html#id15" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
+notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="transferLearning.html#id17" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
 suggèrent qu’un changement dans la distribution des activations d’un
 réseau profond, résultant de la présentation d’un nouveau mini batch
 d’exemples, ralentit le processus d’apprentissage. Pour pallier ce
@@ -950,7 +949,7 @@ d’agrégation du réseau AlexNet, superposées aux images ayant le plus
 fortement activé ces neurones. Le champ est encadré en blanc, et la
 valeur d’activation correspondante est reportée en haut. On voit par
 exemple que certains neurones sont très sensibles aux textes, d’autres
-aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="rnn.html#id47" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Link to this image">#</a></p>
+aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="transferLearning.html#id49" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -974,7 +973,7 @@ droite). La probabilité de la classe s’effondre lorsque le rectangle
 couvre une partie de la face du chien. Cela suggère que cette face est
 grandement responsable de la forte probabilité de classement de l’image
 comme un loulou. A l’inverse, l’occlusion du fond n’altère pas la forte
-valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="rnn.html#id12" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Link to this image">#</a></p>
+valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="transferLearning.html#id14" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1002,7 +1001,7 @@ ce neurone répond (<a class="reference internal" href="#gradcam"><span class="s
 <figcaption>
 <p><span class="caption-number">Fig. 17 </span><span class="caption-text">Approches par gradient de visualisation du fonctionnement
 d’un réseau convolutif. Comparaison de la méthode de rétropropagation
-guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="rnn.html#id48" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Link to this image">#</a></p>
+guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="transferLearning.html#id50" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Ces gradients peuvent également être utilisés dans la méthode de montée
@@ -1019,7 +1018,7 @@ cette méthode produit des images parfois très artistiques (<a class="reference
 <img alt="_images/monteeg.png" src="_images/monteeg.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 18 </span><span class="caption-text">Visualisation des 4 premières couches de convolution d’un
-réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="rnn.html#id49" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Link to this image">#</a></p>
+réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="transferLearning.html#id51" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1183,7 +1182,6 @@ réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="r
 </figcaption>
 </figure>
 <div class="docutils container" id="id9">
-<div role="list" class="citation-list">
 <div class="citation" id="id46" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
@@ -1220,13 +1218,53 @@ réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="r
 <span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
 <p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
 </div>
-<div class="citation" id="id10" role="doc-biblioentry">
+<div class="citation" id="id41" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
+<p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
 <p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
 </div>
 <div class="citation" id="id18" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
 <p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
+<p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
+</div>
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
+<p>Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>.</p>
+</div>
+<div class="citation" id="id37" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></span>
+<p>Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://arxiv.org/abs/1312.4400">http://arxiv.org/abs/1312.4400</a>.</p>
+</div>
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></span>
+<p>Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.4842">http://arxiv.org/abs/1409.4842</a>.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></span>
+<p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.</p>
+</div>
+<div class="citation" id="id44" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
+<p>François Chollet. Xception: deep learning with depthwise separable convolutions. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></span>
+<p>Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07261">http://arxiv.org/abs/1602.07261</a>.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
+<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></span>
+<p>Forrest N. Iandola, Matthew W. Moskewicz, Khalid Ashraf, Song Han, William J. Dally, and Kurt Keutzer. Squeezenet: alexnet-level accuracy with 50x fewer parameters and \textless 1mb model size. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07360">http://arxiv.org/abs/1602.07360</a>.</p>
 </div>
 </div>
 </div>
@@ -1289,7 +1327,6 @@ réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="r
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1374,8 +1411,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
