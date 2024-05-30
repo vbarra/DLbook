@@ -59,13 +59,11 @@ entraîné qui peut être téléchargé a une taille de plus de 500 Mo). VGG a c
 
 ::: center
 <figure id="F:VGG">
- <!-- Start Styles. Move the 'style' tags and everything between them to between the 'head' tags -->
 <style type="text/css">
 .myTable {style="border:1px solid blue; border-collapse:collapse;" }
 .myTable th { background-color:#000;color:white;width:50%; }
 .myTable td, .myTable th { padding:5px;border:1px solid #000; }
 </style>
-<!-- End Styles -->
 
 <table class="myTable">
 <thead>
@@ -255,51 +253,40 @@ Réseau VGG16
 ### Inception
 
 Inception, proposé par Google, est le premier réseau dont les
-performances ont été augmentées pas seulement en augmentant le nombre de
-couches, mais en pensant et optimisant le design et l'architecture.
-L'idée est ici d'utiliser plusieurs filtres, de tailles différentes, sur
-la même image et de concaténer les résultats pour générer une
-représentation plus robuste.\
-Inception n'est pas un réseau, c'est une famille de réseaux : Network in
-Network {cite:p}`Lin13`, Inception V1 {cite:p}`Szegedy14`, Inception V2 {cite:p}`Szegedy15`,
+performances ont été augmentées non seulement en augmentant le nombre de couches, mais en pensant et optimisant le design et l'architecture.
+L'idée est ici d'utiliser plusieurs filtres, de tailles différentes, sur la même image et de concaténer les résultats pour générer une
+représentation plus robuste.
+
+Inception n'est pas un réseau, c'est une famille de réseaux : Network in Network {cite:p}`Lin13`, Inception V1 {cite:p}`Szegedy14`, Inception V2 {cite:p}`Szegedy15`,
 Xception {cite:p}`Chollet16`,...
 
-L'idée du premier réseau (figure [1.5](#F:NIN){reference-type="ref"
-reference="F:NIN"}) est de connecter les couches de convolution par des
-perceptrons multicouches, introduisant des non linéarités dans les
-réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à
-des convolutions par des filtres 1$\times 1$ et gardent donc la
-cohérence des réseaux. Cette nouvelle architecture rend moins
-indispensable les couches complètement connectées en fin de réseau. Les
-auteurs moyennent spatialement les cartes finales et donnent le résultat
-au classifier softmax. Le nombre de paramètres est alors réduit,
-diminuant de ce fait le risque de sur apprentissage.
+L'idée du premier réseau ({numref}`nin`) est de connecter les couches de convolution par des perceptrons multicouches, introduisant des non linéarités dans les réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à des convolutions par des filtres 1$\times 1$ et gardent donc la cohérence des réseaux. Cette nouvelle architecture rend moins indispensable les couches complètement connectées en fin de réseau. Les auteurs moyennent spatialement les cartes finales et donnent le résultat au classifier softmax. Le nombre de paramètres est alors réduit, diminuant de ce fait le risque de sur apprentissage.
 
-<figure id="F:NIN">
-<img src="images/NIN.png" />
-<figcaption>Réseau Network in Network</figcaption>
-</figure>
+
+```
+{figure} ./images/NIN.png
+:name: nin
+Réseau Network in Network
+```
+
 
 Inception V1, implémenté dans le réseau GoogLeNet vainqueur d'ILSVRC
 2014, est une extension à des réseaux plus profonds de Network to
-Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de
-reconnaissance. D'autres améliorations théoriques (fonctions de pertes
-associées aux couches intermédiaires dans la phase d'apprentissage,
-introduction de caractères épars dans le réseau) ont également permis
-d'améliorer les performances (de calcul et de classification).\
-Inception V2, puis V3 (figure [1.6](#F:iv3){reference-type="ref"
-reference="F:iv3"}) adoptent des techniques de factorisation (toute
-convolution par un filtre de taille plus grande que
-3$\times$`<!-- -->`{=html}3 peut être exprimée de manière plus efficace
+Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de reconnaissance. D'autres améliorations théoriques (fonctions de pertes associées aux couches intermédiaires dans la phase d'apprentissage, introduction de caractères épars dans le réseau) ont également permis d'améliorer les performances (de calcul et de classification).
+
+Inception V2, puis V3 ({numref}`inceptionv3`) adoptent des techniques de factorisation (toute convolution par un filtre de taille plus grande que 3$\times$ 3 peut être exprimée de manière plus efficace
 avec une série de filtres de taille réduite) et de normalisation pour
-améliorer encore les performances.\
+améliorer encore les performances.
+
 Inception V4 {cite:p}`Szegedy16` propose une version rationalisée, à
 l'architecture uniforme et aux performances accrues.
 
-<figure id="F:iv3">
-<img src="images/inceptionv3.png" />
-<figcaption>Architecture d’inception V3</figcaption>
-</figure>
+```
+{figure} ./images/inceptionv3.png
+:name: inceptionv3
+Architecture d’inception V3
+```
+
 
 ### ResNet
 
