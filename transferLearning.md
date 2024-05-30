@@ -317,7 +317,7 @@ poids.
 
 `torchvision`donne accès à de nombreux modèles pré-entrainés :  
 
-``` python
+```{code-cell} ipython3
 from torchvision import models
 dir(models)
 ```
