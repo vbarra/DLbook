@@ -389,9 +389,8 @@ Pour un jeu de données similaire de petite taille, on utilise du
     initial. Pour un jeu de données de petite taille et un problème différent, on utilise du transfer learning, avec un classifieur utilisé sur les caractéristiques calculées sur les premières couches du réseau initial. Pour un jeu de données, similaire ou non de grande taille, on
     utilise le fine tuning
 
-
-A noter qu'il est toujours possible d'augmenter la taille du jeu de
-données par des technique de \"Data Augmentation\" (changement de
+A noter que, si peu de données sont disponibles sur la nouvelle tâche/le nouveau domaine, il est toujours possible :
+- d'augmenter la taille du jeu de données par des technique de \"Data Augmentation\" (changement de
 couleurs des pixels, rotations, cropping, homothéties, translations\...) ({numref}`dataaugment`).
 
 ```{figure} ./images/dataaugment.png
@@ -399,23 +398,22 @@ couleurs des pixels, rotations, cropping, homothéties, translations\...) ({numr
 Augmentation de données : à partir d'un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.
 ```
 
-## Que faire si j'ai peu de données ?
+- d'utiliser plus généralement des méthodes de Few shot / Zero shot learning {cite:p}`Song23`, dont l'augmentation de données est un exemple.
+
 
 Les méthodes supervisées nécessitent pour de bonnes performances un
 ensemble d'apprentissage $\mathcal{S}$ de grand cardinal. Si seulement
 peu d'exemples
-$\mathcal{S}_s = \{(\mathbf{x}_i,y_i), i\in[\![1\cdots m ]\!]\}$ sont
+$\mathcal{S}_s = \{(\mathbf{x}_i,y_i), i\in[\![1,m ]\!]\}$ sont
 disponibles, avec $m$ petit, les techniques précédemment décrites ne
-sont pour la plupart plus applicables.\
-Les méthodes de Few-Shot Learning ont été introduites pour traiter ce
-manque de données. Les exemples applicatifs sont nombreux, allant de la
-classification d'images à l'analyse de sentiments à partir de textes, ou
-encore à la reconnaissance d'objets.\
+sont pour la plupart plus applicables.
+
 Vu sous l'angle de la minimisation du risque empirique, l'hypothèse $h$
 construite sur la minimisation de
-$$R(h) = \displaystyle\sum_{i=1}^m \ell(y_i,h(\mathbf{x}_i))$$ conduit à
-un sur apprentissage et un risque $R(h)$ très loin du risque réel. Pour
-pallier ce problème, des connaissances *a priori* doivent être
+
+$$R(h) = \displaystyle\sum_{i=1}^m \ell(y_i,h(\mathbf{x}_i))$$ 
+
+conduit à un sur apprentissage et un risque $R(h)$ très loin du risque réel. Pour pallier ce problème, des connaissances *a priori* doivent être
 utilisées. Le Few-shot learning propose trois alternatives. Nous
 détaillons ici l'une d'entre elles, l'augmentation de données.\
 Les approches de cette catégorie utilisent des connaissances *a priori*
@@ -425,46 +423,7 @@ faciles à mettre en oeuvre et à comprendre, ces méthodes restent
 cependant dépendantes du domaine d'étude et ne peuvent être facilement
 généralisées.
 
-Les principales stratégies sont résumées dans le tableau
-[\[T:dataAug\]](#T:dataAug){reference-type="ref" reference="T:dataAug"}
-et un exemple d'illustration est donné figure
-[1.10](#Fig:dataAug){reference-type="ref" reference="Fig:dataAug"}.
 
-::: tabular
-M4cm\|M2.5cm\|M5cm\|M2.5cm **Transformation\... & **Entrée & **Opérateur
-& **Sortie\
-********
-
-\... de données de $\mathcal{S}_s$
-
-& $(\mathbf{x}_i,y_i)\in \mathcal{S}_s$ &
-$t:\mathcal{X}\rightarrow \mathcal{X}$ & $(\mathbf{t(x_i)},y_i)$\
-
-\... d'un ensemble de données non étiquetées
-
-& $(\mathbf{x},-)$ &
-
-$h:\mathcal{X}\rightarrow \mathcal{Y}$ entraîné sur $\mathcal{S}_s$
-
-& $(\mathbf{x},h(\mathbf{x}))$\
-
-\... d'un ensemble de données similaires
-
-& $\{(\mathbf{\hat{x}_j},\hat{y}_j)\}$ &
-
-Opérateur de combinaison $c$
-
-& $(c(\{\mathbf{\hat{x}_j}\}),c(\{\hat{y}_j\}))$\
-:::
-
-<figure id="Fig:dataAug">
-<img src="images/DataAugmentation" />
-<figcaption>Exemple d’augmentation de données. De gauche à droite :
-image originale, rotation de 20<span
-class="math inline"><sup>∘</sup></span>, flip, ajout de bruit gaussien,
-déformation élastique, changement de contraste par canal
-RGB.</figcaption>
-</figure>
 
 
 
