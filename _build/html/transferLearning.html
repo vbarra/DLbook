@@ -297,7 +297,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-faire-si-j-ai-peu-de-donnees">Que faire si j’ai peu de données ?</a></li>
 </ul>
             </nav>
         </div>
@@ -326,7 +325,7 @@ une extraction de 1,2 millions d’images d’entraînement, 100 000 images de t
 </figure>
 <section id="alexnet">
 <h3>AlexNet<a class="headerlink" href="#alexnet" title="Link to this heading">#</a></h3>
-<p>En 2012, Krizhevsky et al  <span id="id1">[<a class="reference internal" href="#id44" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012. 2012.">13</a>]</span> remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 41</span></a>).</p>
+<p>En 2012, Krizhevsky et al  <span id="id1">[<a class="reference internal" href="#id45" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012. 2012.">13</a>]</span> remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 41</span></a>).</p>
 <figure class="align-default" id="id2">
 <img alt="_images/AlexNet.png" src="_images/AlexNet.png" />
 <figcaption>
@@ -352,7 +351,7 @@ dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d’entraînement.</p>
 <section id="vgg">
 <h3>VGG<a class="headerlink" href="#vgg" title="Link to this heading">#</a></h3>
 <p>Les réseaux VGG (Visual Geometry Group, université d’Oxford)
-<span id="id3">[<a class="reference internal" href="#id42" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, 2014. URL: http://arxiv.org/abs/1409.1556.">14</a>]</span> ont été les premiers réseaux à utiliser de petits filtres de convolution (3<span class="math notranslate nohighlight">\(\times\)</span>3) et à les combiner pour
+<span id="id3">[<a class="reference internal" href="#id43" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, 2014. URL: http://arxiv.org/abs/1409.1556.">14</a>]</span> ont été les premiers réseaux à utiliser de petits filtres de convolution (3<span class="math notranslate nohighlight">\(\times\)</span>3) et à les combiner pour
 décrire des séquences de convolution, l’idée étant d’émuler l’effet de
 larges champs réceptifs par cette séquence. Cette technique amène
 malheureusement à un nombre exponentiel de paramètres (le modèle
@@ -554,8 +553,8 @@ connectée 1000 neurones</td>
 performances ont été augmentées non seulement en augmentant le nombre de couches, mais en pensant et optimisant le design et l’architecture.
 L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur la même image et de concaténer les résultats pour générer une
 représentation plus robuste.</p>
-<p>Inception n’est pas un réseau, c’est une famille de réseaux : Network in Network <span id="id4">[<a class="reference internal" href="#id41" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id40" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id39" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
-Xception <span id="id7">[<a class="reference internal" href="#id48" title="François Chollet. Xception: deep learning with depthwise separable convolutions. CoRR, 2016. URL: http://arxiv.org/abs/1610.02357, arXiv:1610.02357.">18</a>]</span>,…</p>
+<p>Inception n’est pas un réseau, c’est une famille de réseaux : Network in Network <span id="id4">[<a class="reference internal" href="#id42" title="Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. CoRR, 2013. URL: http://arxiv.org/abs/1312.4400.">15</a>]</span>, Inception V1 <span id="id5">[<a class="reference internal" href="#id41" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. CoRR, 2014. URL: http://arxiv.org/abs/1409.4842.">16</a>]</span>, Inception V2 <span id="id6">[<a class="reference internal" href="#id40" title="Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. CoRR, 2015. URL: http://arxiv.org/abs/1512.00567.">17</a>]</span>,
+Xception <span id="id7">[<a class="reference internal" href="#id49" title="François Chollet. Xception: deep learning with depthwise separable convolutions. CoRR, 2016. URL: http://arxiv.org/abs/1610.02357, arXiv:1610.02357.">18</a>]</span>,…</p>
 <p>L’idée du premier réseau (<a class="reference internal" href="#nin"><span class="std std-numref">Fig. 43</span></a>) est de connecter les couches de convolution par des perceptrons multicouches, introduisant des non linéarités dans les réseaux profonds. Mathématiquement, ces perceptrons sont équivalents à des convolutions par des filtres 1<span class="math notranslate nohighlight">\(\times 1\)</span> et gardent donc la cohérence des réseaux. Cette nouvelle architecture rend moins indispensable les couches complètement connectées en fin de réseau. Les auteurs moyennent spatialement les cartes finales et donnent le résultat au classifier softmax. Le nombre de paramètres est alors réduit, diminuant de ce fait le risque de sur apprentissage.</p>
 <figure class="align-default" id="nin">
 <img alt="_images/NIN.png" src="_images/NIN.png" />
@@ -569,7 +568,7 @@ Network. Le réseau est composé de 22 couches et atteint 93.3% de taux de recon
 <p>Inception V2, puis V3 (<a class="reference internal" href="#inceptionv3"><span class="std std-numref">Fig. 44</span></a>) adoptent des techniques de factorisation (toute convolution par un filtre de taille plus grande que 3<span class="math notranslate nohighlight">\(\times\)</span> 3 peut être exprimée de manière plus efficace
 avec une série de filtres de taille réduite) et de normalisation pour
 améliorer encore les performances.</p>
-<p>Inception V4 <span id="id8">[<a class="reference internal" href="#id38" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
+<p>Inception V4 <span id="id8">[<a class="reference internal" href="#id39" title="Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, 2016. URL: http://arxiv.org/abs/1602.07261.">19</a>]</span> propose une version rationalisée, à
 l’architecture uniforme et aux performances accrues.</p>
 <figure class="align-default" id="inceptionv3">
 <img alt="_images/inceptionv3.png" src="_images/inceptionv3.png" />
@@ -580,7 +579,7 @@ l’architecture uniforme et aux performances accrues.</p>
 </section>
 <section id="resnet">
 <h3>ResNet<a class="headerlink" href="#resnet" title="Link to this heading">#</a></h3>
-<p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet <span id="id9">[<a class="reference internal" href="#id37" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>, un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le problème de vanishing gradient de la manière la plus simple possible, en permettant des raccourcis entre chaque couche du réseau. Dans un réseau classique, l’activation en sortie de couche est de la forme <span class="math notranslate nohighlight">\(y=\sigma(x)\)</span>, et lors de la rétropropagation, le gradient doit nécessairement repasser par <span class="math notranslate nohighlight">\(\sigma(x)\)</span>, ce qui peut causer des
+<p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet <span id="id9">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>, un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le problème de vanishing gradient de la manière la plus simple possible, en permettant des raccourcis entre chaque couche du réseau. Dans un réseau classique, l’activation en sortie de couche est de la forme <span class="math notranslate nohighlight">\(y=\sigma(x)\)</span>, et lors de la rétropropagation, le gradient doit nécessairement repasser par <span class="math notranslate nohighlight">\(\sigma(x)\)</span>, ce qui peut causer des
 problèmes en raison de la (forte) non linéarité induite par <span class="math notranslate nohighlight">\(\sigma\)</span>.
 Dans un réseau résiduel, la sortie de chaque couche est calculée par
 <span class="math notranslate nohighlight">\(y=\sigma()+x\)</span>, où <span class="math notranslate nohighlight">\(+x\)</span> est le raccourci entre chaque couche, qui permet
@@ -590,7 +589,7 @@ plus complexe, et prend la forme d’un module ResNet (<a class="reference inter
 <figure class="align-default" id="id11">
 <img alt="_images/resNet.png" src="_images/resNet.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id37" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>)</span><a class="headerlink" href="#id11" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>)</span><a class="headerlink" href="#id11" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -858,7 +857,7 @@ et haut niveau et étage de classification), c’est à dire en réapprenant
 les connexions, on spécifiera le nouveau réseau pour la nouvelle tâche
 de classification.</p>
 <p>Cette approche rentre dans le cadre des méthodes d’apprentissage par transfert (Transfer Learning)
-<span id="id12">[<a class="reference internal" href="#id35" title="Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. IEEE Trans. on Knowl. and Data Eng., 22(10):1345–1359, October 2010. URL: http://dx.doi.org/10.1109/TKDE.2009.191, doi:10.1109/TKDE.2009.191.">21</a>]</span> et de fine tuning, cas particulier d’adaptation de domaine.</p>
+<span id="id12">[<a class="reference internal" href="#id36" title="Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. IEEE Trans. on Knowl. and Data Eng., 22(10):1345–1359, October 2010. URL: http://dx.doi.org/10.1109/TKDE.2009.191, doi:10.1109/TKDE.2009.191.">21</a>]</span> et de fine tuning, cas particulier d’adaptation de domaine.</p>
 <p>L’apprentissage par transfert comporte généralement deux étapes principales :</p>
 <ul class="simple">
 <li><p><strong>Extraction des caractéristiques</strong> : dans cette étape,le modèle pré-entraîné est utilisé comme un extracteur de caractéristiques fixes. On supprime les couches finales (MLP, responsable de la classification) et on les remplaçe par de nouvelles couches spécifiques à la tâche adressée (<a class="reference internal" href="#tl2"><span class="std std-numref">Fig. 46</span></a>). Les poids du modèle pré-entraîné sont gelés et seuls les poids des couches nouvellement ajoutées sont entraînés sur l’ensemble de données du problème.</p></li>
@@ -897,158 +896,132 @@ transfer learning, avec un classifieur utilisé sur les
 caractéristiques calculées sur les dernières couches du réseau
 initial. Pour un jeu de données de petite taille et un problème différent, on utilise du transfer learning, avec un classifieur utilisé sur les caractéristiques calculées sur les premières couches du réseau initial. Pour un jeu de données, similaire ou non de grande taille, on
 utilise le fine tuning</p>
-<p>A noter qu’il est toujours possible d’augmenter la taille du jeu de
-données par des technique de « Data Augmentation » (changement de
-couleurs des pixels, rotations, cropping, homothéties, translations…) (<a class="reference internal" href="#dataaugment"><span class="std std-numref">Fig. 49</span></a>).</p>
+<p>A noter que, si peu de données sont disponibles sur la nouvelle tâche/le nouveau domaine, il est toujours possible :</p>
+<ul class="simple">
+<li><p>d’augmenter la taille du jeu de données par des technique de « Data Augmentation » (changement de
+couleurs des pixels, rotations, cropping, homothéties, translations…) (<a class="reference internal" href="#dataaugment"><span class="std std-numref">Fig. 49</span></a>).</p></li>
+</ul>
 <figure class="align-default" id="dataaugment">
 <img alt="_images/dataaugment.png" src="_images/dataaugment.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 49 </span><span class="caption-text">Augmentation de données : à partir d’un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.</span><a class="headerlink" href="#dataaugment" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-</section>
-<section id="que-faire-si-j-ai-peu-de-donnees">
-<h2>Que faire si j’ai peu de données ?<a class="headerlink" href="#que-faire-si-j-ai-peu-de-donnees" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>d’utiliser plus généralement des méthodes de Few shot / Zero shot learning <span id="id13">[<a class="reference internal" href="#id59" title="Y. Song, T. Wang, P. Cai, S. Mondal, and J. Sahoo. A comprehensive survey of few-shot learning: evolution, applications, challenges, and opportunities. ACM Computing Surveyx, 2023.">22</a>]</span>, dont l’augmentation de données est un exemple.</p></li>
+</ul>
 <p>Les méthodes supervisées nécessitent pour de bonnes performances un
 ensemble d’apprentissage <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> de grand cardinal. Si seulement
 peu d’exemples
-<span class="math notranslate nohighlight">\(\mathcal{S}_s = \{(\mathbf{x}_i,y_i), i\in[\![1\cdots m ]\!]\}\)</span> sont
+<span class="math notranslate nohighlight">\(\mathcal{S}_s = \{(\mathbf{x}_i,y_i), i\in[\![1,m ]\!]\}\)</span> sont
 disponibles, avec <span class="math notranslate nohighlight">\(m\)</span> petit, les techniques précédemment décrites ne
-sont pour la plupart plus applicables.<br />
-Les méthodes de Few-Shot Learning ont été introduites pour traiter ce
-manque de données. Les exemples applicatifs sont nombreux, allant de la
-classification d’images à l’analyse de sentiments à partir de textes, ou
-encore à la reconnaissance d’objets.<br />
-Vu sous l’angle de la minimisation du risque empirique, l’hypothèse <span class="math notranslate nohighlight">\(h\)</span>
-construite sur la minimisation de
-$<span class="math notranslate nohighlight">\(R(h) = \displaystyle\sum_{i=1}^m \ell(y_i,h(\mathbf{x}_i))\)</span><span class="math notranslate nohighlight">\( conduit à
-un sur apprentissage et un risque \)</span>R(h)<span class="math notranslate nohighlight">\( très loin du risque réel. Pour
-pallier ce problème, des connaissances *a priori* doivent être
+sont pour la plupart plus applicables.</p>
+<p>Vu sous l’angle de la minimisation du risque empirique, l’hypothèse <span class="math notranslate nohighlight">\(h\)</span>
+construite sur la minimisation de</p>
+<div class="math notranslate nohighlight">
+\[R(h) = \displaystyle\sum_{i=1}^m \ell(y_i,h(\mathbf{x}_i))\]</div>
+<p>conduit à un sur apprentissage et un risque <span class="math notranslate nohighlight">\(R(h)\)</span> très loin du risque réel. Pour pallier ce problème, des connaissances <em>a priori</em> doivent être
 utilisées. Le Few-shot learning propose trois alternatives. Nous
-détaillons ici l'une d'entre elles, l'augmentation de données.\
-Les approches de cette catégorie utilisent des connaissances *a priori*
-sur les données pour enrichir \)</span>\mathcal{S}_s$. On les regroupe parfois
+détaillons ici l’une d’entre elles, l’augmentation de données.<br />
+Les approches de cette catégorie utilisent des connaissances <em>a priori</em>
+sur les données pour enrichir <span class="math notranslate nohighlight">\(\mathcal{S}_s\)</span>. On les regroupe parfois
 sous le vocable de méthodes d”<em>augmentation de données</em>. Si elles sont
 faciles à mettre en oeuvre et à comprendre, ces méthodes restent
 cependant dépendantes du domaine d’étude et ne peuvent être facilement
 généralisées.</p>
-<p>Les principales stratégies sont résumées dans le tableau
-<a class="reference internal" href="#T:dataAug"><span class="xref myst">[T:dataAug]</span></a>{reference-type= »ref » reference= »T:dataAug »}
-et un exemple d’illustration est donné figure
-<a class="reference internal" href="#Fig:dataAug"><span class="xref myst">1.10</span></a>{reference-type= »ref » reference= »Fig:dataAug »}.</p>
-<div class="tabular docutils">
-<p>M4cm|M2.5cm|M5cm|M2.5cm **Transformation… &amp; **Entrée &amp; **Opérateur
-&amp; **Sortie\</p>
-<hr class="docutils" />
-<p>… de données de <span class="math notranslate nohighlight">\(\mathcal{S}_s\)</span></p>
-<p>&amp; <span class="math notranslate nohighlight">\((\mathbf{x}_i,y_i)\in \mathcal{S}_s\)</span> &amp;
-<span class="math notranslate nohighlight">\(t:\mathcal{X}\rightarrow \mathcal{X}\)</span> &amp; <span class="math notranslate nohighlight">\((\mathbf{t(x_i)},y_i)\)</span>\</p>
-<p>… d’un ensemble de données non étiquetées</p>
-<p>&amp; <span class="math notranslate nohighlight">\((\mathbf{x},-)\)</span> &amp;</p>
-<p><span class="math notranslate nohighlight">\(h:\mathcal{X}\rightarrow \mathcal{Y}\)</span> entraîné sur <span class="math notranslate nohighlight">\(\mathcal{S}_s\)</span></p>
-<p>&amp; <span class="math notranslate nohighlight">\((\mathbf{x},h(\mathbf{x}))\)</span>\</p>
-<p>… d’un ensemble de données similaires</p>
-<p>&amp; <span class="math notranslate nohighlight">\(\{(\mathbf{\hat{x}_j},\hat{y}_j)\}\)</span> &amp;</p>
-<p>Opérateur de combinaison <span class="math notranslate nohighlight">\(c\)</span></p>
-<p>&amp; <span class="math notranslate nohighlight">\((c(\{\mathbf{\hat{x}_j}\}),c(\{\hat{y}_j\}))\)</span>\</p>
-</div>
-<figure id="Fig:dataAug">
-<img src="images/DataAugmentation" />
-<figcaption>Exemple d’augmentation de données. De gauche à droite :
-image originale, rotation de 20<span
-class="math inline"><sup>∘</sup></span>, flip, ajout de bruit gaussien,
-déformation élastique, changement de contraste par canal
-RGB.</figcaption>
-</figure>
-<div class="docutils container" id="id13">
-<div class="citation" id="id50" role="doc-biblioentry">
+<div class="docutils container" id="id14">
+<div class="citation" id="id51" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
 </div>
-<div class="citation" id="id18" role="doc-biblioentry">
+<div class="citation" id="id19" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
 </div>
-<div class="citation" id="id19" role="doc-biblioentry">
+<div class="citation" id="id20" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </div>
-<div class="citation" id="id51" role="doc-biblioentry">
+<div class="citation" id="id52" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
 </div>
-<div class="citation" id="id16" role="doc-biblioentry">
+<div class="citation" id="id17" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
 </div>
-<div class="citation" id="id52" role="doc-biblioentry">
+<div class="citation" id="id53" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
 </div>
-<div class="citation" id="id53" role="doc-biblioentry">
+<div class="citation" id="id54" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
 <p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
 </div>
-<div class="citation" id="id29" role="doc-biblioentry">
+<div class="citation" id="id30" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
 </div>
-<div class="citation" id="id15" role="doc-biblioentry">
+<div class="citation" id="id16" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
 <p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
 </div>
-<div class="citation" id="id45" role="doc-biblioentry">
+<div class="citation" id="id46" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
 <p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
 </div>
-<div class="citation" id="id14" role="doc-biblioentry">
+<div class="citation" id="id15" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
 <p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
 </div>
-<div class="citation" id="id22" role="doc-biblioentry">
+<div class="citation" id="id23" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
 <p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
 </div>
-<div class="citation" id="id44" role="doc-biblioentry">
+<div class="citation" id="id45" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">13</a><span class="fn-bracket">]</span></span>
 <p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
 </div>
-<div class="citation" id="id42" role="doc-biblioentry">
+<div class="citation" id="id43" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">14</a><span class="fn-bracket">]</span></span>
 <p>Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>.</p>
 </div>
-<div class="citation" id="id41" role="doc-biblioentry">
+<div class="citation" id="id42" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">15</a><span class="fn-bracket">]</span></span>
 <p>Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://arxiv.org/abs/1312.4400">http://arxiv.org/abs/1312.4400</a>.</p>
 </div>
-<div class="citation" id="id40" role="doc-biblioentry">
+<div class="citation" id="id41" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">16</a><span class="fn-bracket">]</span></span>
 <p>Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.4842">http://arxiv.org/abs/1409.4842</a>.</p>
 </div>
-<div class="citation" id="id39" role="doc-biblioentry">
+<div class="citation" id="id40" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">17</a><span class="fn-bracket">]</span></span>
 <p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.</p>
 </div>
-<div class="citation" id="id48" role="doc-biblioentry">
+<div class="citation" id="id49" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">18</a><span class="fn-bracket">]</span></span>
 <p>François Chollet. Xception: deep learning with depthwise separable convolutions. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
 </div>
-<div class="citation" id="id38" role="doc-biblioentry">
+<div class="citation" id="id39" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">19</a><span class="fn-bracket">]</span></span>
 <p>Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07261">http://arxiv.org/abs/1602.07261</a>.</p>
 </div>
-<div class="citation" id="id37" role="doc-biblioentry">
+<div class="citation" id="id38" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id9">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
 <p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
 </div>
-<div class="citation" id="id35" role="doc-biblioentry">
+<div class="citation" id="id36" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">21</a><span class="fn-bracket">]</span></span>
 <p>Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. <em>IEEE Trans. on Knowl. and Data Eng.</em>, 22(10):1345–1359, October 2010. URL: <a class="reference external" href="http://dx.doi.org/10.1109/TKDE.2009.191">http://dx.doi.org/10.1109/TKDE.2009.191</a>, <a class="reference external" href="https://doi.org/10.1109/TKDE.2009.191">doi:10.1109/TKDE.2009.191</a>.</p>
 </div>
+<div class="citation" id="id59" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">22</a><span class="fn-bracket">]</span></span>
+<p>Y. Song, T. Wang, P. Cai, S. Mondal, and J. Sahoo. A comprehensive survey of few-shot learning: evolution, applications, challenges, and opportunities. <em>ACM Computing Surveyx</em>, 2023.</p>
 </div>
 </div>
+</div>
+</section>
 </section>
 </section>
 
@@ -1118,7 +1091,6 @@ RGB.</figcaption>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-faire-si-j-ai-peu-de-donnees">Que faire si j’ai peu de données ?</a></li>
 </ul>
   </nav></div>
 
