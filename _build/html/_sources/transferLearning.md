@@ -72,7 +72,7 @@ populaires.
 </style>
 <!-- End Styles -->
 
-<table>
+<table class="myTable">
 <thead>
 <tr class="header">
 <th style="text-align: center;"><strong>A</strong></th>
