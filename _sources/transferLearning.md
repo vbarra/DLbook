@@ -402,8 +402,79 @@ Augmentation de données : à partir d'un exemple (image de gauche), on construi
 
 ## Implémentation
 
+On propose ici d'implémenter deux stratégies : 
+- une première d'entraînement d'un réseau en initialisant les poids à ceux du même réseau préentraîné sur ImageNet
+- une seconde ({numref}`tl2`) qui remplace le réseau de classification du réseau préentraîné par un nouveau réseau de classification, dont les poids sont entrâinés sur la nouvelle tâche.
+
+L'objectif est d'apprendre un réseau à reconnaître des images de bananes, tomates, pizza et sushis.
 
 
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+from tempfile import TemporaryDirectory
+from PIL import Image
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.optim import lr_scheduler
+from torchvision import datasets, models, transforms
+```
+
+On utilise une technique d'[augmentation de données](https://pytorch.org/vision/stable/transforms.html) pour augmenter la taille de la base d'entraînement. On normalise les images d'entraînement et de validation.
+
+```python
+data_transforms = {
+    'train': transforms.Compose([
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomResizedCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ]),
+    'val': transforms.Compose([
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ]),
+}
+
+data_dir = './data'
+image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),data_transforms[x]) for x in ['train', 'val']}
+dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=6, shuffle=True, num_workers=6) for x in ['train', 'val']}
+dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
+class_names = image_datasets['train'].classes
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+```
+
+On donne une fonction d'affichage d'images ({numref}`sushis`), renormalisées.
+
+```python
+def imshow(I, title=None):
+    I = I.numpy().transpose((1, 2, 0))
+    mean = np.array([0.485, 0.456, 0.406])
+    std = np.array([0.229, 0.224, 0.225])
+    I = mean + std * I 
+    I = np.clip(I, 0, 1)
+    ax = plt.gca()
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+    plt.imshow(I)
+    plt.savefig('./images.png',dpi=100)
+    if title is not None:
+        plt.title(title)
+
+inputs, classes = next(iter(dataloaders['train']))
+out = torchvision.utils.make_grid(inputs)
+imshow(out, title=[class_names[x] for x in classes])
+```
+
+```{figure} ./images/sushis.png
+:name: sushis
+Quelques exemples d'images.
+```
 
 
 

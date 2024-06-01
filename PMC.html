@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Perceptrons multicouches &#8212; Apprentissage profond</title>
   
@@ -18,15 +18,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -38,12 +38,12 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -52,21 +52,13 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=d99ca74e"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'PMC';</script>
@@ -83,14 +75,13 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
-    Back to top
+    Haut de page
   </button>
 
   
@@ -127,11 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -315,10 +309,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="perceptrons-multicouches">
-<h1>Perceptrons multicouches<a class="headerlink" href="#perceptrons-multicouches" title="Link to this heading">#</a></h1>
+<h1>Perceptrons multicouches<a class="headerlink" href="#perceptrons-multicouches" title="Lien vers cette rubrique">#</a></h1>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 4 </span> (Perceptron multicouches)</p>
 <section class="definition-content" id="proof-content">
@@ -352,7 +346,7 @@ poids <span class="math notranslate nohighlight">\(w_{i,k}^{(l)}\)</span> et des
 <figure class="align-default" id="mlp">
 <img alt="_images/mlp.png" src="_images/mlp.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Perceptron multicouches à <span class="math notranslate nohighlight">\((L + 1)\)</span> couches, <span class="math notranslate nohighlight">\(D\)</span> entrées et <span class="math notranslate nohighlight">\(C\)</span> sorties.</span><a class="headerlink" href="#mlp" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Perceptron multicouches à <span class="math notranslate nohighlight">\((L + 1)\)</span> couches, <span class="math notranslate nohighlight">\(D\)</span> entrées et <span class="math notranslate nohighlight">\(C\)</span> sorties.</span><a class="headerlink" href="#mlp" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Un tel réseau représente une fonction</p>
@@ -366,7 +360,7 @@ est la matrice de tous les poids du réseau.</p>
 <p>On parlera de <strong>réseau profond (Deep network)</strong> lorsque le nombre de
 couches cachées est « suffisamment important » (supérieur à 3 par exemple).</p>
 <section id="fonctions-d-activation">
-<h2>Fonctions d’activation<a class="headerlink" href="#fonctions-d-activation" title="Link to this heading">#</a></h2>
+<h2>Fonctions d’activation<a class="headerlink" href="#fonctions-d-activation" title="Lien vers cette rubrique">#</a></h2>
 <p>Trois grandes classes de fonction d’activation <span class="math notranslate nohighlight">\(f\)</span> sont généralement
 utilisées : les fonctions de seuils (comme dans le perceptron linéaire à
 seuil), les fonctions linéaires par morceau et les fonctions de type
@@ -431,13 +425,13 @@ l’équation précédente sont appelés neurones linéaires rectifiés
 <figure class="align-default" id="tabact">
 <img alt="_images/tabactivation.png" src="_images/tabactivation.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Quelques fonctions d’activation</span><a class="headerlink" href="#tabact" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Quelques fonctions d’activation</span><a class="headerlink" href="#tabact" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Les fonctions d’activation sous Pytorch sont résumées <a class="reference external" href="https://pytorch.org/docs/stable/nn.functional.html">ici</a>.</p>
 </section>
 <section id="entrainement-des-reseaux-multicouches">
-<h2>Entraînement des réseaux multicouches<a class="headerlink" href="#entrainement-des-reseaux-multicouches" title="Link to this heading">#</a></h2>
+<h2>Entraînement des réseaux multicouches<a class="headerlink" href="#entrainement-des-reseaux-multicouches" title="Lien vers cette rubrique">#</a></h2>
 <p>Pour pouvoir utiliser les réseaux multicouches en apprentissage, deux
 ingrédients sont indispensables :</p>
 <ul class="simple">
@@ -483,7 +477,7 @@ exemple, et incluent l’erreur quadratique</p>
 <p>où <span class="math notranslate nohighlight">\(t^i_{n}\)</span> est la <span class="math notranslate nohighlight">\(i^{\text{e}}\)</span> composante de <span class="math notranslate nohighlight">\(\mathbf t_n\)</span>.</p>
 </section>
 <section id="strategies-d-entrainement">
-<h2>Stratégies d’entraînement<a class="headerlink" href="#strategies-d-entrainement" title="Link to this heading">#</a></h2>
+<h2>Stratégies d’entraînement<a class="headerlink" href="#strategies-d-entrainement" title="Lien vers cette rubrique">#</a></h2>
 <p>Parmi les stratégies d’entraînement qui peuvent être retenues, trois
 sont classiquement utilisées</p>
 <ul class="simple">
@@ -500,7 +494,7 @@ jour en fonction de l’erreur cumulée
 </ul>
 </section>
 <section id="optimisation-des-parametres">
-<h2>Optimisation des paramètres<a class="headerlink" href="#optimisation-des-parametres" title="Link to this heading">#</a></h2>
+<h2>Optimisation des paramètres<a class="headerlink" href="#optimisation-des-parametres" title="Lien vers cette rubrique">#</a></h2>
 <p>Considérons le cas de l’entraînement stochastique. La condition
 nécessaire d’optimalité d’ordre 1 donne</p>
 <div class="math notranslate nohighlight">
@@ -534,14 +528,14 @@ selon le schéma</p>
 </ul>
 </section>
 <section id="initialisation-des-poids">
-<span id="content-references-initw"></span><h2>Initialisation des poids<a class="headerlink" href="#initialisation-des-poids" title="Link to this heading">#</a></h2>
+<span id="content-references-initw"></span><h2>Initialisation des poids<a class="headerlink" href="#initialisation-des-poids" title="Lien vers cette rubrique">#</a></h2>
 <p>Une méthode itérative d’optimisation étant utilisée, l’initialisation
 des poids requiert une attention toute particulière.</p>
 <p>Une première idée est d’initialiser les poids selon une loi normale : <span class="math notranslate nohighlight">\(\forall i\; w_{ij} \rightsquigarrow 10^{-m}\mathcal{N}(0,1)\ m&gt;0 \)</span>. Cependant, cela amène naturellement rapidement à une évolution des poids vers des valeurs nulles (<a class="reference internal" href="#vanishing"><span class="std std-numref">Fig. 4</span></a>) (phénomène de disparition du gradient).</p>
 <figure class="align-default" id="vanishing">
 <img alt="_images/vanishing.png" src="_images/vanishing.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Evolution de la distribution des poids au cours des epochs d’apprentissage (10 epochs à gauche, 20 au centre et 50 epochs à droite).</span><a class="headerlink" href="#vanishing" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Evolution de la distribution des poids au cours des epochs d’apprentissage (10 epochs à gauche, 20 au centre et 50 epochs à droite).</span><a class="headerlink" href="#vanishing" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Plus le réseau est profond, plus l’apprentissage sera sensible à ce phénomène. On parle de <em>disparition du gradient</em> (venishing gradient).</p>
@@ -584,7 +578,7 @@ et</p>
 <p>Si la fonction d’activation du neurone est la fonction ReLU, on peut multiplier par <span class="math notranslate nohighlight">\(\frac{\sqrt{2}}{\sqrt{m^{l-1}}}\)</span> pour prendre en compte la partie négative qui ne participe pas au calcul de la variance.</p>
 </section>
 <section id="retropropagation-de-l-erreur">
-<h2>Rétropropagation de l’erreur<a class="headerlink" href="#retropropagation-de-l-erreur" title="Link to this heading">#</a></h2>
+<h2>Rétropropagation de l’erreur<a class="headerlink" href="#retropropagation-de-l-erreur" title="Lien vers cette rubrique">#</a></h2>
 <p>l”<a class="reference internal" href="#backprop">Algorithm 4</a>, dit algorithme de
 rétropropagation du gradient, est utilisé pour évaluer le gradient
 <span class="math notranslate nohighlight">\(\nabla E_n (\mathbf w[t])\)</span> de l’erreur <span class="math notranslate nohighlight">\(E_n\)</span> à chaque itération, ceci pour tous
@@ -619,7 +613,7 @@ les poids</p>
 jusqu’à convergence, pour estimer les poids du réseau de neurones.</p>
 </section>
 <section id="criteres-d-arret">
-<h2>Critères d’arrêt<a class="headerlink" href="#criteres-d-arret" title="Link to this heading">#</a></h2>
+<h2>Critères d’arrêt<a class="headerlink" href="#criteres-d-arret" title="Lien vers cette rubrique">#</a></h2>
 <p>Plusieurs critères d’arrêt peuvent être utilisés avec l’algorithme de
 rétropropagation du gradient. Le plus commun consiste à fixer un nombre
 maximum de périodes d’entraînement (sur <span class="math notranslate nohighlight">\({\cal E}_a\)</span>), ce qui fixe
@@ -668,7 +662,7 @@ d’entraînement, des exemples peuvent être échangés entre ensembles
 d’apprentissage et de validation.</p>
 </section>
 <section id="propriete-fondamentale">
-<h2>Propriété fondamentale<a class="headerlink" href="#propriete-fondamentale" title="Link to this heading">#</a></h2>
+<h2>Propriété fondamentale<a class="headerlink" href="#propriete-fondamentale" title="Lien vers cette rubrique">#</a></h2>
 <p>Terminons par une dernière remarque sur la puissance de représentation
 des réseaux multicouches. La plupart des fonctions numériques peuvent
 être approximées avec une précision arbitraire par des réseaux à une
@@ -721,18 +715,18 @@ cas non linéaire.</p>
 <figure class="align-center" id="approx2">
 <a class="reference internal image-reference" href="_images/exmlp.png"><img alt="_images/exmlp.png" src="_images/exmlp.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Un perceptron multicouches à une couche cachée</span><a class="headerlink" href="#approx2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Un perceptron multicouches à une couche cachée</span><a class="headerlink" href="#approx2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="approx">
 <img alt="_images/f1.png" src="_images/f1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Approximation de <span class="math notranslate nohighlight">\(f(x)=x^2\)</span> par un réseau à une couche cachée.</span><a class="headerlink" href="#approx" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Approximation de <span class="math notranslate nohighlight">\(f(x)=x^2\)</span> par un réseau à une couche cachée.</span><a class="headerlink" href="#approx" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="regularisation">
-<span id="content-references-reg"></span><h2>Régularisation<a class="headerlink" href="#regularisation" title="Link to this heading">#</a></h2>
+<span id="content-references-reg"></span><h2>Régularisation<a class="headerlink" href="#regularisation" title="Lien vers cette rubrique">#</a></h2>
 <p>La notion d’approximateur universel peut induire également un problème
 de surapprentissage (overfitting) de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>. Les techniques de
 régularisation permettent d’éviter ce problème, et permettent aux
@@ -788,7 +782,7 @@ exemples classiques sont :</p>
 </ul>
 </section>
 <section id="exemple">
-<h2>Exemple<a class="headerlink" href="#exemple" title="Link to this heading">#</a></h2>
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique">#</a></h2>
 <p>On va considérer le réseau décrit sur la (<a class="reference internal" href="#xor"><span class="std std-numref">Fig. 7</span></a>) pour apprendre la fonction du OU
 exclusif (aussi appelé XOR). L’opérateur XOR est défini par sa table de
 vérité donnée par le tableau  suivant</p>
@@ -811,7 +805,7 @@ vérité donnée par le tableau  suivant</p>
 </tbody>
 </table>
 <section id="reseau">
-<h3>Réseau<a class="headerlink" href="#reseau" title="Link to this heading">#</a></h3>
+<h3>Réseau<a class="headerlink" href="#reseau" title="Lien vers cette rubrique">#</a></h3>
 <p>Sur le réseau de la figure
 (<a class="reference internal" href="#xor"><span class="std std-numref">Fig. 7</span></a>) les différentes relations sont
 données par l’équation suivante où les paramètres en rouge correspondent aux poids à
@@ -831,12 +825,12 @@ calculer durant la phase d’apprentissage.</p>
 <figure class="align-default" id="xor">
 <img alt="_images/xor.png" src="_images/xor.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#xor" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Exemple de réseau pour apprendre le XOR</span><a class="headerlink" href="#xor" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="phase-d-apprentissage">
-<h3>Phase d’apprentissage<a class="headerlink" href="#phase-d-apprentissage" title="Link to this heading">#</a></h3>
+<h3>Phase d’apprentissage<a class="headerlink" href="#phase-d-apprentissage" title="Lien vers cette rubrique">#</a></h3>
 <p>Durant la phase d’apprentissage, on minimise un risque empirique par une
 fonction de coût. Dans cet exemple, nous allons choisir la minimisation
 de l’écart quadratique avec la base d’apprentissage labelisée
@@ -859,7 +853,7 @@ l’itération <span class="math notranslate nohighlight">\(n+1\)</span> se fait
 <p>On peut choisir <span class="math notranslate nohighlight">\(E=E_{tot}\)</span> ou
 <span class="math notranslate nohighlight">\(E=E_k\)</span> et pour cet exemple nous choisirons le deuxième cas.</p>
 <section id="couche-de-sortie">
-<h4>Couche de sortie<a class="headerlink" href="#couche-de-sortie" title="Link to this heading">#</a></h4>
+<h4>Couche de sortie<a class="headerlink" href="#couche-de-sortie" title="Lien vers cette rubrique">#</a></h4>
 <p>Pour la couche de sortie, prenons par exemple le paramètre <span class="math notranslate nohighlight">\(w_7\)</span>, sa
 mise à jour est donnée par la relation suivante :</p>
 <div class="math notranslate nohighlight">
@@ -898,12 +892,12 @@ pour obtenir les relations suivantes :</p>
 <figure class="align-center" id="xor2">
 <a class="reference internal image-reference" href="_images/xor2.png"><img alt="_images/xor2.png" src="_images/xor2.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Rétropropagation du gradient sur la couche de sortie.</span><a class="headerlink" href="#xor2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Rétropropagation du gradient sur la couche de sortie.</span><a class="headerlink" href="#xor2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="couche-cachee">
-<h4>Couche cachée<a class="headerlink" href="#couche-cachee" title="Link to this heading">#</a></h4>
+<h4>Couche cachée<a class="headerlink" href="#couche-cachee" title="Lien vers cette rubrique">#</a></h4>
 <p>Pour la couche cachée du réseau, c’est exactement le même raisonnement.
 Prenons par exemple, le paramètre <span class="math notranslate nohighlight">\(w_1\)</span> pour le calcul :</p>
 <div class="math notranslate nohighlight">
@@ -943,7 +937,7 @@ obtenir les relations suivantes :</p>
 <figure class="align-center" id="xor3">
 <a class="reference internal image-reference" href="_images/xor3.png"><img alt="_images/xor3.png" src="_images/xor3.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Rétropropagation du gradient sur la couche cachée.</span><a class="headerlink" href="#xor3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Rétropropagation du gradient sur la couche cachée.</span><a class="headerlink" href="#xor3" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Il suffit de réaliser des calculs identiques pour les autres neurones et
@@ -961,7 +955,7 @@ on obtient les relations suivantes :</p>
         \right.\end{split}\]</div>
 </section>
 <section id="id1">
-<h4>Initialisation des poids<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<h4>Initialisation des poids<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h4>
 <ul class="simple">
 <li><p>les biais sont initialisés à zéro :
 <span class="math notranslate nohighlight">\(( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4\)</span> ;</p></li>
@@ -983,7 +977,7 @@ L’initialisation de Xavier propose un tirage uniforme dans
 </section>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
 <p>Nous reprenons les exemples du perceptron et montrons qu’un PMC à une couche cachée permet de résoudre le problème de séparation non linéaire.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1121,7 +1115,7 @@ L’initialisation de Xavier propose un tirage uniforme dans
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5f7d3652f61e5033ea3d63bcf47fd4ee4239ff3ec8cdb739f4dc28fdfc84f3fc.png" src="_images/5f7d3652f61e5033ea3d63bcf47fd4ee4239ff3ec8cdb739f4dc28fdfc84f3fc.png" />
+<img alt="_images/240950720c91292b558ed4c038a527989babe135fbc697932f2d5b0f8d8a1b9d.png" src="_images/240950720c91292b558ed4c038a527989babe135fbc697932f2d5b0f8d8a1b9d.png" />
 </div>
 </div>
 </section>
@@ -1183,6 +1177,7 @@ L’initialisation de Xavier propose un tirage uniforme dans
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1258,8 +1253,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
