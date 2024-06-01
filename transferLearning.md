@@ -466,13 +466,8 @@ def imshow(I, title=None):
     if title is not None:
         plt.title(title)
 
-
-# Get a batch of training data
 inputs, classes = next(iter(dataloaders['train']))
-
-# Make a grid from batch
 out = torchvision.utils.make_grid(inputs)
-
 imshow(out, title=[class_names[x] for x in classes])
 ```
 
