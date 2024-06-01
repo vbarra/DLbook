@@ -38,7 +38,6 @@ sphinx:
   extra_extensions:
     - sphinx_proof
     - sphinx_togglebutton
-    - sphinxcontrib.tikz
 
 
   config:
