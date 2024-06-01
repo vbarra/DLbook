@@ -400,9 +400,14 @@ Augmentation de données : à partir d'un exemple (image de gauche), on construi
 
 - d'utiliser plus généralement des méthodes de Few shot / Zero shot learning {cite:p}`Song23`, dont l'augmentation de données est un exemple.
 
+## Implémentation
+
+
+
+
+
 
 ```{bibliography}
 :style: unsrt
 ```
 
-## Implémentation
