@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Auto-encodeurs &#8212; Apprentissage profond</title>
   
@@ -18,15 +18,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -38,12 +38,12 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -52,13 +52,21 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ae';</script>
@@ -75,13 +83,14 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
+    Back to top
   </button>
 
   
@@ -118,14 +127,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -303,12 +309,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="auto-encodeurs">
-<h1>Auto-encodeurs<a class="headerlink" href="#auto-encodeurs" title="Lien vers cette rubrique">#</a></h1>
+<h1>Auto-encodeurs<a class="headerlink" href="#auto-encodeurs" title="Link to this heading">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Un autoencodeur est algorithme entraîné de manière non supervisée à
 reproduire son entrée <span class="math notranslate nohighlight">\(\mathbf{x}\in \mathcal{X}\)</span>. Il peut être vu
 (<a class="reference internal" href="#ae1"><span class="std std-numref">Fig. 21</span></a>) comme
@@ -337,14 +343,14 @@ données.</p>
 <figure class="align-default" id="ae1">
 <img alt="_images/ae1.png" src="_images/ae1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Architecture générale d’un autoencodeur</span><a class="headerlink" href="#ae1" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Architecture générale d’un autoencodeur</span><a class="headerlink" href="#ae1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="influence-de-la-taille-de-l-espace-de-codage">
-<h2>Influence de la taille de l’espace de codage<a class="headerlink" href="#influence-de-la-taille-de-l-espace-de-codage" title="Lien vers cette rubrique">#</a></h2>
+<h2>Influence de la taille de l’espace de codage<a class="headerlink" href="#influence-de-la-taille-de-l-espace-de-codage" title="Link to this heading">#</a></h2>
 <section id="le-cas-mathcal-h-mathcal-x">
-<h3>Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|&lt;|\mathcal{X}|\)</span><a class="headerlink" href="#le-cas-mathcal-h-mathcal-x" title="Lien vers cette rubrique">#</a></h3>
+<h3>Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|&lt;|\mathcal{X}|\)</span><a class="headerlink" href="#le-cas-mathcal-h-mathcal-x" title="Link to this heading">#</a></h3>
 <p>Lorsque la dimension du code <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> est inférieure à celle de
 <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, l’encodeur <code class="docutils literal notranslate"><span class="pre">E</span></code> apprend à réduire la dimension. Le
 décodeur, une fois appris, permet de créer une donnée dans <span class="math notranslate nohighlight">\(\mathcal{X}\)</span>
@@ -375,12 +381,12 @@ activation sigmoïde et une seule couche cachée de taille 36. Le code est
 visualisé (ligne du milieu) sous la forme d’images
 6<span class="math notranslate nohighlight">\(\times\)</span>6. Le décodeur produit des images
 reconstruites (ligne du bas) à partir de ce
-code</span><a class="headerlink" href="#ae2" title="Lien vers cette image">#</a></p>
+code</span><a class="headerlink" href="#ae2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="le-cas-mathcal-h-geq-mathcal-x">
-<h3>Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|\geq|\mathcal{X}|\)</span><a class="headerlink" href="#le-cas-mathcal-h-geq-mathcal-x" title="Lien vers cette rubrique">#</a></h3>
+<h3>Le cas <span class="math notranslate nohighlight">\(|\mathcal{H}|\geq|\mathcal{X}|\)</span><a class="headerlink" href="#le-cas-mathcal-h-geq-mathcal-x" title="Link to this heading">#</a></h3>
 <p>Si la taille de l’espace de représentation <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> est supérieure
 à celle de l’espace d’entrée, on comprend assez facilement qu’il est
 très aisé pour l’autoencodeur d’apprendre l’identité, sans extraire
@@ -390,7 +396,7 @@ le modèle.</p>
 </section>
 </section>
 <section id="autoencodeurs-regularises">
-<h2>Autoencodeurs régularisés<a class="headerlink" href="#autoencodeurs-regularises" title="Lien vers cette rubrique">#</a></h2>
+<h2>Autoencodeurs régularisés<a class="headerlink" href="#autoencodeurs-regularises" title="Link to this heading">#</a></h2>
 <p>Régulariser un autoencodeur permet d’entraîner efficacement
 l’algorithme, en choisissant de plus la dimension de <span class="math notranslate nohighlight">\(\mathcal H\)</span> et la
 complexité de <span class="math notranslate nohighlight">\(f\)</span> et <span class="math notranslate nohighlight">\(g\)</span> en fonction de la complexité de la distribution
@@ -407,7 +413,7 @@ de reproduire son entrée.</p>
 contraindre les paramètres du modèle et <span class="math notranslate nohighlight">\(\beta\in\mathbb{R}\)</span> contrôle le
 poids du terme de pénalité dans l’optimisation.</p>
 <section id="autoencodeurs-parcimonieux">
-<h3>Autoencodeurs parcimonieux<a class="headerlink" href="#autoencodeurs-parcimonieux" title="Lien vers cette rubrique">#</a></h3>
+<h3>Autoencodeurs parcimonieux<a class="headerlink" href="#autoencodeurs-parcimonieux" title="Link to this heading">#</a></h3>
 <p>Les autoencodeurs parcimonieux (ou épars) sont typiquement utilisés pour
 apprendre des caractéristiques pertinentes des données d’entrée, qui
 sont ensuite utilisées comme entrées d’algorithmes de classification ou
@@ -474,7 +480,7 @@ utilisée pour introduire de la parcimonie.</p>
 <p>et l’on retrouve une régularisation <span class="math notranslate nohighlight">\(\ell_1\)</span> (méthode Lasso).</p>
 </section>
 <section id="autoencodeurs-contractifs">
-<h3>Autoencodeurs contractifs<a class="headerlink" href="#autoencodeurs-contractifs" title="Lien vers cette rubrique">#</a></h3>
+<h3>Autoencodeurs contractifs<a class="headerlink" href="#autoencodeurs-contractifs" title="Link to this heading">#</a></h3>
 <p>Une autre stratégie de régularisation consiste à faire dépendre <span class="math notranslate nohighlight">\(\Omega\)</span>
 du gradient du code en fonction des entrées :</p>
 <div class="math notranslate nohighlight">
@@ -488,7 +494,7 @@ vivent les données de <span class="math notranslate nohighlight">\(\mathcal{S}\
 à rapprocher des méthodes de <em>Manifold Learning</em>.</p>
 </section>
 <section id="autoencodeurs-de-debruitage">
-<h3>Autoencodeurs de débruitage<a class="headerlink" href="#autoencodeurs-de-debruitage" title="Lien vers cette rubrique">#</a></h3>
+<h3>Autoencodeurs de débruitage<a class="headerlink" href="#autoencodeurs-de-debruitage" title="Link to this heading">#</a></h3>
 <p>Plutôt que d’ajouter un terme à la fonction de perte, on peut
 directement changer cette dernière pour apprendre des caractéristiques
 utiles des données.<br />
@@ -528,13 +534,13 @@ centré de variance unité (deuxième ligne). Un autoencodeur de débruitage
 est ensuite entraîné. Le code <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> de taille 32 est visualisé
 (troisième ligne) sous la forme d’images 8<span class="math notranslate nohighlight">\(\times\)</span>4. Le
 décodeur produit les images débruitées de la dernière
-ligne.</span><a class="headerlink" href="#ae3" title="Lien vers cette image">#</a></p>
+ligne.</span><a class="headerlink" href="#ae3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="autoencodeurs-variationnels">
-<h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien vers cette rubrique">#</a></h2>
+<h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Link to this heading">#</a></h2>
 <p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.</p>
 <p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="transferLearning.html#id30" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
@@ -544,7 +550,7 @@ empruntent juste une architecture similaire (<a class="reference internal" href=
 <img alt="_images/ae4.png" src="_images/ae4.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 24 </span><span class="caption-text">Architecture générale d’un autoencodeur
-variationnel.</span><a class="headerlink" href="#ae4" title="Lien vers cette image">#</a></p>
+variationnel.</span><a class="headerlink" href="#ae4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Au lieu d’apprendre <span class="math notranslate nohighlight">\(f(.,\mathbf{w_E})\)</span> et <span class="math notranslate nohighlight">\(g(.,\mathbf{w_D})\)</span>, un
@@ -621,12 +627,12 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <figure class="align-default" id="ae5">
 <img alt="_images/ae5.png" src="_images/ae5.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Visualisation de l’espace latent <span class="math notranslate nohighlight">\(\mathcal H = \mathbb{R}^2\)</span> appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur <span class="math notranslate nohighlight">\(\mathbf h_i\)</span> discrétisée sur <span class="math notranslate nohighlight">\(\mathcal H\)</span> est affichée une image <span class="math notranslate nohighlight">\(\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w_D})\)</span>. Les chiffres de la même classe sont groupés dans cet espace, et les axes de <span class="math notranslate nohighlight">\(\mathcal H\)</span> ont une interprétation (l’axe horizontal semble souligner le caractère « penché » des chiffres).</span><a class="headerlink" href="#ae5" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Visualisation de l’espace latent <span class="math notranslate nohighlight">\(\mathcal H = \mathbb{R}^2\)</span> appris par un autoencodeur variationnel sur les donneés MNIST. Pour chaque valeur <span class="math notranslate nohighlight">\(\mathbf h_i\)</span> discrétisée sur <span class="math notranslate nohighlight">\(\mathcal H\)</span> est affichée une image <span class="math notranslate nohighlight">\(\mathbf x ∼ \textbf{p}_{decodeur}(\mathbf{x}\mid \mathbf h_i,\mathbf{w_D})\)</span>. Les chiffres de la même classe sont groupés dans cet espace, et les axes de <span class="math notranslate nohighlight">\(\mathcal H\)</span> ont une interprétation (l’axe horizontal semble souligner le caractère « penché » des chiffres).</span><a class="headerlink" href="#ae5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -715,7 +721,7 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <figure class="align-center" id="ae5b">
 <img alt="_images/ae5b.png" src="_images/ae5b.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Reconstruction aux itérations 0,10,20,30 et 40 d’un sous-ensemble de l’ensemble d’apprentissage.</span><a class="headerlink" href="#ae5b" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Reconstruction aux itérations 0,10,20,30 et 40 d’un sous-ensemble de l’ensemble d’apprentissage.</span><a class="headerlink" href="#ae5b" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Pour finalement visualiser les résultats de la reconstruction sur un ensemble de test (<a class="reference internal" href="#ae6"><span class="std std-numref">Fig. 27</span></a>).</p>
@@ -748,7 +754,7 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 <figure class="align-center" id="ae6">
 <img alt="_images/ae6.png" src="_images/ae6.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Images originales de test (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Images originales de test (gauche) et reconstruites (droite) par l’autoencodeur.</span><a class="headerlink" href="#ae6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>L’Autoencodeur peut ensuite être utilisé par exemple en reconnaissance de chiffres. Une manière simple consiste à choisir au hasard 10 échantillons d’apprentissage de chaque classe et à leur attribuer une étiquette. Ensuite, étant donné les données de test, il est possible de prédire à quelles classes elles appartiennent en trouvant les échantillons d’apprentissage étiquetés les plus similaires dans l’espace latent <span class="math notranslate nohighlight">\(\mathcal H\)</span>.</p>
@@ -777,7 +783,6 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 </pre></div>
 </div>
 <div class="docutils container" id="id2">
-<div role="list" class="citation-list">
 <div class="citation" id="id39" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
@@ -928,7 +933,6 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contenu
@@ -997,8 +1001,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Utilisation de réseaux existants &#8212; Apprentissage profond</title>
   
@@ -18,15 +18,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -38,12 +38,12 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -52,13 +52,21 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'transferLearning';</script>
@@ -74,13 +82,14 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
+    Back to top
   </button>
 
   
@@ -117,14 +126,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -291,7 +297,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#premier-entrainement">Premier entraînement</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -301,32 +310,32 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="utilisation-de-reseaux-existants">
-<h1>Utilisation de réseaux existants<a class="headerlink" href="#utilisation-de-reseaux-existants" title="Lien vers cette rubrique">#</a></h1>
+<h1>Utilisation de réseaux existants<a class="headerlink" href="#utilisation-de-reseaux-existants" title="Link to this heading">#</a></h1>
 <p>Nous présentons dans la suite quatre réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
 d’apprendre un réseau à partir de peu de données.</p>
 <section id="quelques-reseaux-profonds-classiques">
-<h2>Quelques réseaux profonds classiques<a class="headerlink" href="#quelques-reseaux-profonds-classiques" title="Lien vers cette rubrique">#</a></h2>
+<h2>Quelques réseaux profonds classiques<a class="headerlink" href="#quelques-reseaux-profonds-classiques" title="Link to this heading">#</a></h2>
 <p>Les réseaux présentés ici ont prouvé leur efficacité, notamment lors des compétitions organisées depuis 2010 sur une base de données d’images nommée <a class="reference external" href="http://www.image-net.org/">ImageNet</a>. Initiée à l’Université de Stanford, cette base de données comporte aujourd’hui plus de 14 millions d’images, classées en 21841 catégories (avions, voitures, chats,…). Dans les compétitions <a class="reference external" href="https://image-net.org/challenges/LSVRC/">ILSVRC</a> ( ImageNet Large Scale Visual Recognition Challenge), les chercheurs se voient proposer
 une extraction de 1,2 millions d’images d’entraînement, 100 000 images de test et 50 000 images de validation, catégorisées en 1000 classes. Le gagnant est celui qui atteint la meilleure précision de reconnaissance sur les 5 premières classes (top-5).</p>
 <p>La <a class="reference internal" href="#perf"><span class="std std-numref">Fig. 40</span></a> donne un aperçu des performances de plusieurs réseaux profonds suivant cette métrique.</p>
 <figure class="align-default" id="perf">
 <img alt="_images/classifImagenet.png" src="_images/classifImagenet.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Performance de réseaux profonds sur une tache de classification (<a class="reference external" href="https://theaisummer.com/cnn-architectures/">source</a>)</span><a class="headerlink" href="#perf" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Performance de réseaux profonds sur une tache de classification (<a class="reference external" href="https://theaisummer.com/cnn-architectures/">source</a>)</span><a class="headerlink" href="#perf" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="alexnet">
-<h3>AlexNet<a class="headerlink" href="#alexnet" title="Lien vers cette rubrique">#</a></h3>
+<h3>AlexNet<a class="headerlink" href="#alexnet" title="Link to this heading">#</a></h3>
 <p>En 2012, Krizhevsky et al  <span id="id1">[<a class="reference internal" href="#id45" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012. 2012.">13</a>]</span> remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 41</span></a>).</p>
 <figure class="align-default" id="id2">
 <img alt="_images/AlexNet.png" src="_images/AlexNet.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 41 </span><span class="caption-text">Architecture du réseau AlexNet. Les couches de convolution
 et d’activation sont en orange clair, les couches d’agrégation en orange
-foncé. Les couches complètement connectées sont en violet.</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
+foncé. Les couches complètement connectées sont en violet.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Si la profondeur du réseau reste faible, le nombre de paramètres était
@@ -344,7 +353,7 @@ nombreuses contributions, comme l’utilisation de couches ReLU, de
 dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d’entraînement.</p>
 </section>
 <section id="vgg">
-<h3>VGG<a class="headerlink" href="#vgg" title="Lien vers cette rubrique">#</a></h3>
+<h3>VGG<a class="headerlink" href="#vgg" title="Link to this heading">#</a></h3>
 <p>Les réseaux VGG (Visual Geometry Group, université d’Oxford)
 <span id="id3">[<a class="reference internal" href="#id43" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, 2014. URL: http://arxiv.org/abs/1409.1556.">14</a>]</span> ont été les premiers réseaux à utiliser de petits filtres de convolution (3<span class="math notranslate nohighlight">\(\times\)</span>3) et à les combiner pour
 décrire des séquences de convolution, l’idée étant d’émuler l’effet de
@@ -538,12 +547,12 @@ connectée 1000 neurones</td>
 <figure class="align-default" id="vgg16">
 <img alt="_images/VGG16.png" src="_images/VGG16.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Réseau VGG16</span><a class="headerlink" href="#vgg16" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Réseau VGG16</span><a class="headerlink" href="#vgg16" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="inception">
-<h3>Inception<a class="headerlink" href="#inception" title="Lien vers cette rubrique">#</a></h3>
+<h3>Inception<a class="headerlink" href="#inception" title="Link to this heading">#</a></h3>
 <p>Inception, proposé par Google, est le premier réseau dont les
 performances ont été augmentées non seulement en augmentant le nombre de couches, mais en pensant et optimisant le design et l’architecture.
 L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur la même image et de concaténer les résultats pour générer une
@@ -554,7 +563,7 @@ Xception <span id="id7">[<a class="reference internal" href="#id49" title="Fran�
 <figure class="align-default" id="nin">
 <img alt="_images/NIN.png" src="_images/NIN.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Réseau Network in Network</span><a class="headerlink" href="#nin" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Réseau Network in Network</span><a class="headerlink" href="#nin" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Inception V1, implémenté dans le réseau GoogLeNet vainqueur d’ILSVRC
@@ -568,12 +577,12 @@ l’architecture uniforme et aux performances accrues.</p>
 <figure class="align-default" id="inceptionv3">
 <img alt="_images/inceptionv3.png" src="_images/inceptionv3.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 44 </span><span class="caption-text">Architecture d’inception V3</span><a class="headerlink" href="#inceptionv3" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">Architecture d’inception V3</span><a class="headerlink" href="#inceptionv3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="resnet">
-<h3>ResNet<a class="headerlink" href="#resnet" title="Lien vers cette rubrique">#</a></h3>
+<h3>ResNet<a class="headerlink" href="#resnet" title="Link to this heading">#</a></h3>
 <p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet <span id="id9">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>, un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le problème de vanishing gradient de la manière la plus simple possible, en permettant des raccourcis entre chaque couche du réseau. Dans un réseau classique, l’activation en sortie de couche est de la forme <span class="math notranslate nohighlight">\(y=\sigma(x)\)</span>, et lors de la rétropropagation, le gradient doit nécessairement repasser par <span class="math notranslate nohighlight">\(\sigma(x)\)</span>, ce qui peut causer des
 problèmes en raison de la (forte) non linéarité induite par <span class="math notranslate nohighlight">\(\sigma\)</span>.
 Dans un réseau résiduel, la sortie de chaque couche est calculée par
@@ -584,17 +593,17 @@ plus complexe, et prend la forme d’un module ResNet (<a class="reference inter
 <figure class="align-default" id="id11">
 <img alt="_images/resNet.png" src="_images/resNet.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>)</span><a class="headerlink" href="#id11" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">20</a>]</span>)</span><a class="headerlink" href="#id11" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="comment-utiliser-ces-reseaux">
-<h2>Comment utiliser ces réseaux ?<a class="headerlink" href="#comment-utiliser-ces-reseaux" title="Lien vers cette rubrique">#</a></h2>
+<h2>Comment utiliser ces réseaux ?<a class="headerlink" href="#comment-utiliser-ces-reseaux" title="Link to this heading">#</a></h2>
 <p>Il est possible de définir les réseaux classiques en décrivant une à une les couches et leur paramètres, qui sont proposés dans les articles correspondants. On imagine assez bien le travail que cela peut représenter sur ResNet par exemple…</p>
 <p>Fort heureusement, il existe d’autres manières d’utiliser ces réseaux.</p>
 <section id="utilisation-de-reseaux-pre-entraines">
-<h3>Utilisation de réseaux pré-entraînés<a class="headerlink" href="#utilisation-de-reseaux-pre-entraines" title="Lien vers cette rubrique">#</a></h3>
+<h3>Utilisation de réseaux pré-entraînés<a class="headerlink" href="#utilisation-de-reseaux-pre-entraines" title="Link to this heading">#</a></h3>
 <p>Il est possible de charger / sauvegarder des
 réseaux qui ont été entraînés sur des grandes bases de données et de les utiliser directement. Il est également possible, pendant
 l’entraînement, de créer des sauvegardes (checkpoints) pour reprendre
@@ -841,7 +850,7 @@ poids.</p>
 </div>
 </section>
 <section id="transfer-learning-et-fine-tuning">
-<h3>Transfer learning et fine tuning<a class="headerlink" href="#transfer-learning-et-fine-tuning" title="Lien vers cette rubrique">#</a></h3>
+<h3>Transfer learning et fine tuning<a class="headerlink" href="#transfer-learning-et-fine-tuning" title="Link to this heading">#</a></h3>
 <p>Il est possible d’utiliser les réseaux classiques pré-entrainés pour de
 nouvelles tâches. L’idée sous-jacente et que les premières couches
 capturent des caractéristiques bas niveau, et que la sémantique vient
@@ -860,7 +869,7 @@ de classification.</p>
 <figure class="align-default" id="tl2">
 <img alt="_images/tl2.png" src="_images/tl2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Réentrainement d’un classifieur sur des caractéristiques extraites.</span><a class="headerlink" href="#tl2" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Réentrainement d’un classifieur sur des caractéristiques extraites.</span><a class="headerlink" href="#tl2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -873,7 +882,7 @@ de classification.</p>
 <figure class="align-default" id="tl">
 <img alt="_images/tl.png" src="_images/tl.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Stratégies d’apprentissage par transfert.</span><a class="headerlink" href="#tl" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Stratégies d’apprentissage par transfert.</span><a class="headerlink" href="#tl" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -883,7 +892,7 @@ entraîner le réseau initial (<a class="reference internal" href="#domaintask">
 <figure class="align-default" id="domaintask">
 <img alt="_images/domaintask.png" src="_images/domaintask.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Changement de domaine / tâche.</span><a class="headerlink" href="#domaintask" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Changement de domaine / tâche.</span><a class="headerlink" href="#domaintask" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Pour un jeu de données similaire de petite taille, on utilise du
@@ -899,7 +908,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 <figure class="align-default" id="dataaugment">
 <img alt="_images/dataaugment.png" src="_images/dataaugment.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Augmentation de données : à partir d’un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.</span><a class="headerlink" href="#dataaugment" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Augmentation de données : à partir d’un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.</span><a class="headerlink" href="#dataaugment" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -908,7 +917,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 </section>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>On propose ici d’implémenter deux stratégies :</p>
 <ul class="simple">
 <li><p>une première d’entraînement d’un réseau en initialisant les poids à ceux du même réseau préentraîné sur ImageNet</p></li>
@@ -975,11 +984,76 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 <figure class="align-default" id="sushis">
 <img alt="_images/sushis.png" src="_images/sushis.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Quelques exemples d’images.</span><a class="headerlink" href="#sushis" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Quelques exemples d’images.</span><a class="headerlink" href="#sushis" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<section id="premier-entrainement">
+<h3>Premier entraînement<a class="headerlink" href="#premier-entrainement" title="Link to this heading">#</a></h3>
+<p>Dans ce premier entraînement, on utilise un réseau pré-entraîné, qui sert d’initialisation à un entraînement complet sur la base d’entraînement</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train1</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+
+    <span class="c1"># Répertoire temporaire pour les checkpoints </span>
+    <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempdir</span><span class="p">:</span>
+        <span class="n">best_model_params_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tempdir</span><span class="p">,</span> <span class="s1">&#39;best_params.pt&#39;</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">best_model_params_path</span><span class="p">)</span>
+
+        <span class="n">best_acc</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">num_epochs</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+            <span class="c1"># Le modèle est utilisé en entraînement et en évaluation</span>
+            <span class="k">for</span> <span class="n">phase</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+                    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>  
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>   
+
+                <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+                <span class="n">running_corrects</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="k">for</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">dataloaders</span><span class="p">[</span><span class="n">phase</span><span class="p">]:</span>
+                    <span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+                    <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+                    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+                    <span class="c1"># passe avant </span>
+                    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">set_grad_enabled</span><span class="p">(</span><span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">):</span>
+                        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+                        <span class="n">_</span><span class="p">,</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+                        <span class="c1"># rétropropagation et mise à jour des poids en entraînement </span>
+                        <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+                            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+                    <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">*</span> <span class="n">inputs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">running_corrects</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">preds</span> <span class="o">==</span> <span class="n">labels</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                <span class="c1"># Mise à jour du learning rate</span>
+                <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+                    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+                <span class="n">epoch_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="n">dataset_sizes</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span>
+                <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">running_corrects</span><span class="o">.</span><span class="n">double</span><span class="p">()</span> <span class="o">/</span> <span class="n">dataset_sizes</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s1"> Perte: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> Précision: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Sauvegarde du modèle si meilleur</span>
+                <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;val&#39;</span> <span class="ow">and</span> <span class="n">epoch_acc</span> <span class="o">&gt;</span> <span class="n">best_acc</span><span class="p">:</span>
+                    <span class="n">best_acc</span> <span class="o">=</span> <span class="n">epoch_acc</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">best_model_params_path</span><span class="p">)</span>
+                    
+        <span class="c1"># Chargement du meilleur modèle</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">best_model_params_path</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+
+</pre></div>
+</div>
 <div class="docutils container" id="id14">
-<div role="list" class="citation-list">
 <div class="citation" id="id51" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
@@ -1073,6 +1147,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 </div>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1122,7 +1197,6 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contenu
@@ -1141,7 +1215,10 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-et-fine-tuning">Transfer learning et fine tuning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#premier-entrainement">Premier entraînement</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -1190,8 +1267,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

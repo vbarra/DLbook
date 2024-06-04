@@ -476,6 +476,74 @@ imshow(out, title=[class_names[x] for x in classes])
 Quelques exemples d'images.
 ```
 
+### Premier entraînement
+
+Dans ce premier entraînement, on utilise un réseau pré-entraîné, qui sert d'initialisation à un entraînement complet sur la base d'entraînement
+
+```python
+def train1(model, criterion, optimizer, scheduler, num_epochs=25):
+
+    # Répertoire temporaire pour les checkpoints 
+    with TemporaryDirectory() as tempdir:
+        best_model_params_path = os.path.join(tempdir, 'best_params.pt')
+        torch.save(model.state_dict(), best_model_params_path)
+
+        best_acc = 0.0
+
+        for epoch in range(num_epochs):
+            print(f'Epoch {epoch}/{num_epochs - 1}')
+            print('*' * 10)
+
+            # Le modèle est utilisé en entraînement et en évaluation
+            for phase in ['train', 'val']:
+                if phase == 'train':
+                    model.train()  
+                else:
+                    model.eval()   
+
+                running_loss = 0.0
+                running_corrects = 0
+
+                for inputs, labels in dataloaders[phase]:
+                    inputs = inputs.to(device)
+                    labels = labels.to(device)
+
+                    optimizer.zero_grad()
+
+                    # passe avant 
+                    with torch.set_grad_enabled(phase == 'train'):
+                        outputs = model(inputs)
+                        _, preds = torch.max(outputs, 1)
+                        loss = criterion(outputs, labels)
+
+                        # rétropropagation et mise à jour des poids en entraînement 
+                        if phase == 'train':
+                            loss.backward()
+                            optimizer.step()
+
+                    running_loss += loss.item() * inputs.size(0)
+                    running_corrects += torch.sum(preds == labels.data)
+                # Mise à jour du learning rate
+                if phase == 'train':
+                    scheduler.step()
+
+                epoch_loss = running_loss / dataset_sizes[phase]
+                epoch_acc = running_corrects.double() / dataset_sizes[phase]
+
+                print(f'{phase} Perte: {epoch_loss:.4f} Précision: {epoch_acc:.4f}')
+
+                # Sauvegarde du modèle si meilleur
+                if phase == 'val' and epoch_acc > best_acc:
+                    best_acc = epoch_acc
+                    torch.save(model.state_dict(), best_model_params_path)
+                    
+        # Chargement du meilleur modèle
+        model.load_state_dict(torch.load(best_model_params_path))
+    return model
+
+
+```
+
 
 
 ```{bibliography}
