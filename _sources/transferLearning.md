@@ -475,13 +475,15 @@ imshow(out, title=[class_names[x] for x in classes])
 :name: sushis
 Quelques exemples d'images.
 ```
+
+
 Et une fonction d'affichage des prédictions des modèles sur l'ensemble de validation
 
 ```python
 def predict(model, num_images=8):
     trained = model.training
     model.eval()
-    images_so_far = 0
+    j = 0
     fig = plt.figure()
 
     with torch.no_grad():
@@ -493,13 +495,13 @@ def predict(model, num_images=8):
             _, preds = torch.max(outputs, 1)
 
             for j in range(inputs.size()[0]):
-                images_so_far += 1
-                ax = plt.subplot(num_images//2, 2, images_so_far)
+                j += 1
+                ax = plt.subplot(num_images//2, 2, j)
                 ax.axis('off')
-                ax.set_title(f'predicted: {class_names[preds[j]]}')
+                ax.set_title(f'Prédit: {class_names[preds[j]]}')
                 imshow(inputs.cpu().data[j])
 
-                if images_so_far == num_images:
+                if j == num_images:
                     model.train(mode=trained)
                     return
         model.train(mode=trained)
@@ -578,6 +580,7 @@ Le réseau utilisé est ResNet18, entraîné sur ImageNet. On ajoute une couche 
 
 ```python
 model1 = models.resnet18(weights='IMAGENET1K_V1')
+# Nombre de carctéristiques extraites avant le réseau de classification
 num_ftrs = model1.fc.in_features
 
 # Ajout d'une couche de classification spécifique
@@ -595,6 +598,35 @@ model1 = train_model(model1, criterion, optimizer_conv,lr_sch, num_epochs=25)
 
 predict(model1)
 ```
+
+
+### Second entraînement
+
+Ici, on ne réentraîne pas les poids du réseau convolutif. On laisse donc ce réseau agir comme un extracteur de caractéristiques et on entraîne uniquement les poids de la couche de classification ajouté en bout.
+
+```python
+model2 = torchvision.models.resnet18(weights='IMAGENET1K_V1')
+# On fige les poids du réseau convolutif
+for param in model_conv.parameters():
+    param.requires_grad = False
+
+# On ajoute une couche de classification
+num_ftrs = model2.fc.in_features
+model2.fc = nn.Linear(num_ftrs, len(class_names))
+
+model2 = model_conv.to(device)
+
+criterion = nn.CrossEntropyLoss()
+
+# On optimise juste les poids de la couche de classification
+optimizer = optim.SGD(model2.fc.parameters(), lr=0.001, momentum=0.9)
+lr_sch = lr_scheduler.StepLR(optimizer_conv, step_size=7, gamma=0.1)
+model_conv = train_model(model2, criterion, optimizer,lr_sch, num_epochs=25)
+
+predict(model2)
+
+```
+
 
 
 ```{bibliography}
