@@ -403,8 +403,8 @@ Augmentation de données : à partir d'un exemple (image de gauche), on construi
 ## Implémentation
 
 On propose ici d'implémenter deux stratégies : 
-- une première d'entraînement d'un réseau en initialisant les poids à ceux du même réseau préentraîné sur ImageNet
-- une seconde ({numref}`tl2`) qui remplace le réseau de classification du réseau préentraîné par un nouveau réseau de classification, dont les poids sont entrâinés sur la nouvelle tâche.
+- une première d'entraînement d'un réseau en initialisant les poids à ceux du même réseau préentraîné sur ImageNet. Une couche de classification spécifique au problème est ajoutée, et tout le réseau est entraîné.
+- une seconde ({numref}`tl2`) qui remplace le réseau de classification du réseau préentraîné par un nouveau réseau de classification, dont les poids sont entrâinés sur la nouvelle tâche. Les poids du réseau initial (hors couche de classification) sont conservés (le réseaux convolutif agit donc comme un extracteur de caractéristiques)
 
 L'objectif est d'apprendre un réseau à reconnaître des images de bananes, tomates, pizza et sushis.
 
@@ -475,10 +475,41 @@ imshow(out, title=[class_names[x] for x in classes])
 :name: sushis
 Quelques exemples d'images.
 ```
+Et une fonction d'affichage des prédictions des modèles sur l'ensemble de validation
+
+```python
+def predict(model, num_images=8):
+    trained = model.training
+    model.eval()
+    images_so_far = 0
+    fig = plt.figure()
+
+    with torch.no_grad():
+        for i, (inputs, labels) in enumerate(dataloaders['val']):
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+
+            outputs = model(inputs)
+            _, preds = torch.max(outputs, 1)
+
+            for j in range(inputs.size()[0]):
+                images_so_far += 1
+                ax = plt.subplot(num_images//2, 2, images_so_far)
+                ax.axis('off')
+                ax.set_title(f'predicted: {class_names[preds[j]]}')
+                imshow(inputs.cpu().data[j])
+
+                if images_so_far == num_images:
+                    model.train(mode=trained)
+                    return
+        model.train(mode=trained)
+
+
+```
 
 ### Premier entraînement
 
-Dans ce premier entraînement, on utilise un réseau pré-entraîné, qui sert d'initialisation à un entraînement complet sur la base d'entraînement
+Dans ce premier entraînement, on utilise un réseau pré-entraîné, qui sert d'initialisation à un entraînement complet sur la base d'entraînement.
 
 ```python
 def train1(model, criterion, optimizer, scheduler, num_epochs=25):
@@ -541,9 +572,29 @@ def train1(model, criterion, optimizer, scheduler, num_epochs=25):
         model.load_state_dict(torch.load(best_model_params_path))
     return model
 
-
 ```
 
+Le réseau utilisé est ResNet18, entraîné sur ImageNet. On ajoute une couche de classification spécifique au problème et on entraîne le tout.
+
+```python
+model1 = models.resnet18(weights='IMAGENET1K_V1')
+num_ftrs = model1.fc.in_features
+
+# Ajout d'une couche de classification spécifique
+model1.fc = nn.Linear(num_ftrs, len(class_names))
+model1 = model1.to(device)
+
+# Fonction de perte
+criterion = nn.CrossEntropyLoss()
+
+# Tous les poids vont être optimisés, y compris ceux du réseau convolutif.
+optimizer = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
+lr_sch = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+
+model1 = train_model(model1, criterion, optimizer_conv,lr_sch, num_epochs=25)
+
+predict(model1)
+```
 
 
 ```{bibliography}
