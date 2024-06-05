@@ -484,26 +484,18 @@ Et une fonction d'affichage des prédictions des modèles sur l'ensemble de vali
 def predict(model):
     was_training = model.training
     model.eval()
-    fig = plt.figure()
 
     with torch.no_grad():
         # Extraction d'un batch d'évaluation
-        dataloader_iterator = iter(dataloaders['val'])
-        try:
-            inputs, labels= next(dataloader_iterator)
-        except:
-            dataloader_iterator = iter(dataloaders['val'])
-            inputs, labels = next(dataloader_iterator)
+        inputs, labels = next(iter(dataloaders['val']))
         inputs = inputs.to(device)
         labels = labels.to(device)
         outputs = model(inputs)
         _, preds = torch.max(outputs, 1)
 
-        for j in range(inputs.size()[0]):
-                ax = plt.subplot(1,4 , j+1)
-                ax.axis('off')
-                ax.set_title(f'Prédit: {class_names[preds[j]]}'  )
-                imshow(inputs.cpu().data[j])
+        out = torchvision.utils.make_grid(inputs)
+        imshow(out, title=[class_names[preds[j]] for j in range(inputs.size()[0])])
+
         model.train(mode=was_training)
 
 
@@ -576,7 +568,7 @@ def train1(model, criterion, optimizer, scheduler, num_epochs=25):
 
 ```
 
-Le réseau utilisé est ResNet18, entraîné sur ImageNet. On ajoute une couche de classification spécifique au problème et on entraîne le tout.
+Le réseau utilisé est ResNet34, entraîné sur ImageNet. On ajoute une couche de classification spécifique au problème et on entraîne le tout.
 
 ```python
 model1 = models.resnet34(weights='IMAGENET1K_V1')
