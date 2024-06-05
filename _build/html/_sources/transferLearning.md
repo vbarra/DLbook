@@ -441,8 +441,9 @@ data_transforms = {
 }
 
 data_dir = './data'
+batch_size = 4
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),data_transforms[x]) for x in ['train', 'val']}
-dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=6, shuffle=True, num_workers=6) for x in ['train', 'val']}
+dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batch_size, shuffle=True, num_workers=6) for x in ['train', 'val']}
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
@@ -480,31 +481,30 @@ Quelques exemples d'images.
 Et une fonction d'affichage des prédictions des modèles sur l'ensemble de validation
 
 ```python
-def predict(model, num_images=8):
-    trained = model.training
+def predict(model):
+    was_training = model.training
     model.eval()
-    j = 0
     fig = plt.figure()
 
     with torch.no_grad():
-        for i, (inputs, labels) in enumerate(dataloaders['val']):
-            inputs = inputs.to(device)
-            labels = labels.to(device)
+        # Extraction d'un batch d'évaluation
+        dataloader_iterator = iter(dataloaders['val'])
+        try:
+            inputs, labels= next(dataloader_iterator)
+        except:
+            dataloader_iterator = iter(dataloaders['val'])
+            inputs, labels = next(dataloader_iterator)
+        inputs = inputs.to(device)
+        labels = labels.to(device)
+        outputs = model(inputs)
+        _, preds = torch.max(outputs, 1)
 
-            outputs = model(inputs)
-            _, preds = torch.max(outputs, 1)
-
-            for j in range(inputs.size()[0]):
-                j += 1
-                ax = plt.subplot(num_images//2, 2, j)
+        for j in range(inputs.size()[0]):
+                ax = plt.subplot(1,4 , j+1)
                 ax.axis('off')
-                ax.set_title(f'Prédit: {class_names[preds[j]]}')
+                ax.set_title(f'Prédit: {class_names[preds[j]]}'  )
                 imshow(inputs.cpu().data[j])
-
-                if j == num_images:
-                    model.train(mode=trained)
-                    return
-        model.train(mode=trained)
+        model.train(mode=was_training)
 
 
 ```
@@ -579,8 +579,8 @@ def train1(model, criterion, optimizer, scheduler, num_epochs=25):
 Le réseau utilisé est ResNet18, entraîné sur ImageNet. On ajoute une couche de classification spécifique au problème et on entraîne le tout.
 
 ```python
-model1 = models.resnet18(weights='IMAGENET1K_V1')
-# Nombre de carctéristiques extraites avant le réseau de classification
+model1 = models.resnet34(weights='IMAGENET1K_V1')
+# Nombre de caractéristiques extraites avant le réseau de classification
 num_ftrs = model1.fc.in_features
 
 # Ajout d'une couche de classification spécifique
@@ -599,13 +599,18 @@ model1 = train_model(model1, criterion, optimizer_conv,lr_sch, num_epochs=25)
 predict(model1)
 ```
 
+```{figure} ./images/val.png
+:name: sushis
+Quelques exemples d'images de validation étiquetées.
+```
+
 
 ### Second entraînement
 
 Ici, on ne réentraîne pas les poids du réseau convolutif. On laisse donc ce réseau agir comme un extracteur de caractéristiques et on entraîne uniquement les poids de la couche de classification ajouté en bout.
 
 ```python
-model2 = torchvision.models.resnet18(weights='IMAGENET1K_V1')
+model2 = torchvision.models.resnet34(weights='IMAGENET1K_V1')
 # On fige les poids du réseau convolutif
 for param in model_conv.parameters():
     param.requires_grad = False
