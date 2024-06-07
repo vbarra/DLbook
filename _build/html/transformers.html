@@ -636,7 +636,7 @@ viande le soir ». Pour simplifier, supposons que les jetons sont les
 mots complets. La probabilité de la phrase complète est :</p>
 <div class="math notranslate nohighlight">
 \[P(\mathcal{P}) = P(\textrm{Henri})P(\textrm{mange}|\textrm{Henri})P(\textrm{beaucoup}|\textrm{Henri mange})\cdots P(\textrm{soir}|\textrm{Henri mange beaucoup de viande le })\]</div>
-<p><strong>auto-attention masquée</strong> : pour entraîner un décodeur, on maximise la log-probabilité du texte
+<p><strong>Auto-attention masquée</strong> : pour entraîner un décodeur, on maximise la log-probabilité du texte
 d’entrée dans le cadre du modèle autorégressif. L’idéal serait de
 transmettre la phrase entière et de calculer simultanément toutes les
 log-probabilités et tous les gradients. Cependant, cela pose un problème
@@ -725,7 +725,7 @@ représentations de l’encodeur.</p>
 </section>
 <section id="les-transformers-en-traitement-d-images">
 <h2>Les transformers en traitement d’images<a class="headerlink" href="#les-transformers-en-traitement-d-images" title="Lien vers cette rubrique">#</a></h2>
-<p>Le succès des transformers en TAL a conduit à se pencher sur leur
+<p>Le succès des transformers en traitement automatique du langage a conduit à se pencher sur leur
 utilisation sur des images. L’idée semblait incongrue, et ce pour deux
 raisons : il y a beaucoup plus de pixels dans une image que de mots dans
 une phrase, de sorte que la complexité quadratique de l’auto-attention
@@ -736,11 +736,11 @@ structure 2D de l’image. Ce qu’il faudrait apprendre dans un réseau
 transformer. Malgré cela, les réseaux transformers ont désormais éclipsé
 les performances des réseaux convolutifs pour entre autres la
 classification d’images. Cela s’explique en partie par l’échelle à
-laquelle ils peuvent être construit et par les grandes quantités de
+laquelle ils peuvent être construits et par les grandes quantités de
 données qui peuvent être utilisées pour pré-entraîner les réseaux.</p>
 <section id="imagegpt">
 <h3>ImageGPT<a class="headerlink" href="#imagegpt" title="Lien vers cette rubrique">#</a></h3>
-<p>ImageGPT est un décodeur. Il construit un modèle autorégressif de pixels
+<p><a class="reference external" href="https://openai.com/index/image-gpt/">ImageGPT</a> est un décodeur. Il construit un modèle autorégressif de pixels
 qui assimile une image partielle et prédit la valeur du pixel suivant.
 La complexité quadratique du réseau de transformers signifie que le plus
 grand modèle (qui contient 6,8 milliards de paramètres) ne peut
@@ -754,8 +754,7 @@ positionnel différent pour chaque pixel. Il doit donc apprendre que
 chaque pixel a une relation étroite avec ses voisins précédents ainsi
 qu’avec les pixels voisins de la rangée supérieure.</p>
 <p>La représentation interne de ce décodeur a été utilisée comme base pour
-la classification des images. Les représentations des pixels finales
-sont moyennées et une couche linéaire les met en correspondance avec des
+la classification des images. Les représentations finales des pixels sont moyennées et une couche linéaire les met en correspondance avec des
 activations qui passent par une couche softmax pour prédire les
 probabilités de classe. Le système est pré-entraîné sur un large corpus
 d’images web, puis affiné sur la base de données ImageNet redimensionnée
@@ -771,7 +770,7 @@ classer les images où l’objet cible est petit ou mince.</p>
 </section>
 <section id="vit-vision-transformer">
 <h3>ViT : Vision Transformer<a class="headerlink" href="#vit-vision-transformer" title="Lien vers cette rubrique">#</a></h3>
-<p>ViT s’est attaqué au problème de la résolution de l’image en divisant
+<p><a class="reference external" href="https://arxiv.org/abs/2010.11929">ViT</a> s’est attaqué au problème de la résolution de l’image en divisant
 l’image en patchs de 16<span class="math notranslate nohighlight">\(\times\)</span>16 . Chaque patch est
 mis en correspondance avec une dimension inférieure par le biais d’une
 transformation linéaire apprise, et ces représentations sont introduites

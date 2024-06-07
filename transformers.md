@@ -210,6 +210,9 @@ $$\begin{aligned}
 \mathbf A_h(\mathbf X) &=& \mathbf V_h(\mathbf X).Softmax\left (\frac{\mathbf K_h(\mathbf X)^T\mathbf Q_h(\mathbf X)}{\sqrt{d_q}}\right) 
 \end{aligned}$$ 
 
+
+
+
 $\mathbf A_h(\mathbf X)$ est le $h$-ième mécanisme
 d'attention ou tête (head). Typiquement, si la dimension des entrées
 $\mathbf x_i$ est $d$ et qu'il y a $H$ têtes, les valeurs, les requêtes
@@ -227,9 +230,9 @@ résistant aux mauvaises initialisations.
 ### Transformers
 
 L'auto-attention n'est qu'une partie d'un mécanisme plus large : les
-transformers. Celui-ci se compose d'une unité d'auto-attention à
+transformers ({numref}`transformer`). Celui-ci se compose d'une unité d'auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d'interagir les
-unes avec les autres) suivie d'un perceptron multicouches $PMC$ qui
+unes avec les autres) suivie d'un perceptron multicouches $MLP$ qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
 résiduels (leur sortie est ajoutée à l'entrée d'origine). En outre, il
 est courant d'ajouter une opération de normalisation de couche
@@ -239,9 +242,15 @@ multicouches. La séquence d'opérations complète peut être décrite par
 $$\begin{aligned}
 \mathbf X &=& \mathbf X+ M_h\mathbf A(X)\\ 
 \mathbf X &=& LayerNorm(\mathbf X)\\
-\mathbf x_i &=& \mathbf x_i + PMC(\mathbf x_i),\; i\in[\![1,N]\!]\\
+\mathbf x_i &=& \mathbf x_i + MLP(\mathbf x_i),\; i\in[\![1,N]\!]\\
 \mathbf X &=& LayerNorm(\mathbf X)
 \end{aligned}$$
+
+
+```{figure} ./images/transformerblock.png
+:name: transformer
+Bloc transformer.
+```
 
 En pratique, les données passent par plusieurs de ces transformers.
 
