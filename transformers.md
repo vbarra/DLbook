@@ -228,6 +228,9 @@ $$M_h\mathbf A(X) = \mathbf W_c [\mathbf A_1(X)^T \cdots \mathbf A_H(X)^T]^T$$
 Mécanisme d'auto attention multiple.
 ```
 
+## Implémentation
+Vu les temps d'entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
+On se propose donc ici d'implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet {cite:p}`Vaswani17`.
 
 
 Les têtes multiples semblent être nécessaires au bon fonctionnement du
