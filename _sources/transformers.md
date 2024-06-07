@@ -770,3 +770,10 @@ plt.plot(np.arange(nb_epochs),l)
 Fonction de perte.
 ```
 
+```python
+src = torch.tensor([[0, 2, 5, 6, 4, 3, 9, 5, 2, 9, 10, 1]])
+trg = torch.tensor([[0]])
+print(src.shape,trg.shape)
+out = transformer.forward(src, trg)
+out
+```

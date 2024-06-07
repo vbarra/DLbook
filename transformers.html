@@ -1038,6 +1038,13 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <p><span class="caption-number">Fig. 57 </span><span class="caption-text">Fonction de perte.</span><a class="headerlink" href="#plot" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">trg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">trg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">)</span>
+<span class="n">out</span>
+</pre></div>
+</div>
 </section>
 </section>
 
