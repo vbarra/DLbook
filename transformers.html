@@ -296,7 +296,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
@@ -512,6 +512,12 @@ concaténées verticalement, et une autre transformation linéaire
 <span class="math notranslate nohighlight">\(\mathbf W_c\)</span> est appliquée pour les combiner</p>
 <div class="math notranslate nohighlight">
 \[M_h\mathbf A(X) = \mathbf W_c [\mathbf A_1(X)^T \cdots \mathbf A_H(X)^T]^T\]</div>
+<figure class="align-default" id="transformer">
+<img alt="_images/multihead.png" src="_images/multihead.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Mécanisme d’auto attention multiple.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
 <p>Les têtes multiples semblent être nécessaires au bon fonctionnement du
 transformer, on pense qu’elles rendent le réseau d’auto-attention plus
 résistant aux mauvaises initialisations.</p>
@@ -520,7 +526,7 @@ résistant aux mauvaises initialisations.</p>
 <section id="id1">
 <h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
 <p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : les
-transformers (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 52</span></a>). Celui-ci se compose d’une unité d’auto-attention à
+transformers (<code class="xref std std-numref docutils literal notranslate"><span class="pre">transformer</span></code>). Celui-ci se compose d’une unité d’auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d’interagir les
 unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(MLP\)</span> qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -535,10 +541,10 @@ multicouches. La séquence d’opérations complète peut être décrite par</p>
 \mathbf x_i &amp;=&amp; \mathbf x_i + MLP(\mathbf x_i),\; i\in[\![1,N]\!]\\
 \mathbf X &amp;=&amp; LayerNorm(\mathbf X)
 \end{aligned}\end{split}\]</div>
-<figure class="align-default" id="transformer">
+<figure class="align-default" id="id2">
 <img alt="_images/transformerblock.png" src="_images/transformerblock.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>En pratique, les données passent par plusieurs de ces transformers.</p>
@@ -595,8 +601,8 @@ n’importe quel autre paramètre du réseau. Une taille <span class="math notra
 donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
 la mise en place des transformers.</p>
 </section>
-<section id="id2">
-<h3>Transformers<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h3>
+<section id="id3">
+<h3>Transformers<a class="headerlink" href="#id3" title="Lien vers cette rubrique">#</a></h3>
 <p>Enfin, la matrice <span class="math notranslate nohighlight">\(X\)</span> représentant le texte passe par une série de <span class="math notranslate nohighlight">\(K\)</span>
 transformers (transformer model). Il existe trois types de ces modèles,
 décrits dans les paragraphes suivants. Globalement, un encodeur
@@ -871,7 +877,7 @@ de quantités extrêmement importantes de données d’entraînement.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
