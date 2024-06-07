@@ -290,16 +290,13 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-auto-attention-multiple">Mécanisme d’auto attention multiple</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
@@ -312,6 +309,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-vision-transformer">ViT : Vision Transformer</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
             </nav>
         </div>
@@ -521,18 +519,13 @@ concaténées verticalement, et une autre transformation linéaire
 <p><span class="caption-number">Fig. 52 </span><span class="caption-text">Mécanisme d’auto attention multiple.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
-</section>
-</section>
-</section>
-<section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
-<p>Vu les temps d’entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
-On se propose donc ici d’implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet <span id="id1">[<a class="reference internal" href="transferLearning.html#id58" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">23</a>]</span>.</p>
 <p>Les têtes multiples semblent être nécessaires au bon fonctionnement du
 transformer, on pense qu’elles rendent le réseau d’auto-attention plus
 résistant aux mauvaises initialisations.</p>
-<section id="id2">
-<h3>Transformers<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h3>
+</section>
+</section>
+<section id="id1">
+<h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
 <p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : les
 transformers (<code class="xref std std-numref docutils literal notranslate"><span class="pre">transformer</span></code>). Celui-ci se compose d’une unité d’auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d’interagir les
@@ -549,10 +542,10 @@ multicouches. La séquence d’opérations complète peut être décrite par</p>
 \mathbf x_i &amp;=&amp; \mathbf x_i + MLP(\mathbf x_i),\; i\in[\![1,N]\!]\\
 \mathbf X &amp;=&amp; LayerNorm(\mathbf X)
 \end{aligned}\end{split}\]</div>
-<figure class="align-default" id="id3">
+<figure class="align-default" id="id2">
 <img alt="_images/transformerblock.png" src="_images/transformerblock.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#id3" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>En pratique, les données passent par plusieurs de ces transformers.</p>
@@ -609,8 +602,8 @@ n’importe quel autre paramètre du réseau. Une taille <span class="math notra
 donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
 la mise en place des transformers.</p>
 </section>
-<section id="id4">
-<h3>Transformers<a class="headerlink" href="#id4" title="Lien vers cette rubrique">#</a></h3>
+<section id="id3">
+<h3>Transformers<a class="headerlink" href="#id3" title="Lien vers cette rubrique">#</a></h3>
 <p>Enfin, la matrice <span class="math notranslate nohighlight">\(X\)</span> représentant le texte passe par une série de <span class="math notranslate nohighlight">\(K\)</span>
 transformers (transformer model). Il existe trois types de ces modèles,
 décrits dans les paragraphes suivants. Globalement, un encodeur
@@ -812,6 +805,11 @@ des réseaux convolutifs ne peut être surmonté que que par l’utilisation
 de quantités extrêmement importantes de données d’entraînement.</p>
 </section>
 </section>
+<section id="implementation">
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<p>Vu les temps d’entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
+On se propose donc ici d’implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet <span id="id4">[<a class="reference internal" href="transferLearning.html#id58" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">23</a>]</span>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -879,16 +877,13 @@ de quantités extrêmement importantes de données d’entraînement.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-auto-attention-multiple">Mécanisme d’auto attention multiple</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
@@ -901,6 +896,7 @@ de quantités extrêmement importantes de données d’entraînement.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-vision-transformer">ViT : Vision Transformer</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
   </nav></div>
 
