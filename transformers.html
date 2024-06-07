@@ -334,8 +334,8 @@ images, qui comportent un très grand nombre de variables d’entrée, ce
 qui exclut l’utilisation de réseaux entièrement connectés. Chaque couche
 d’un réseau convolutif utilise le partage des paramètres de manière à ce
 que les zones locales de l’image soient traitées de la même manière à
-chaque position dans l’image.<br />
-Nous introduisons ici les transformers, initialement destinés aux
+chaque position dans l’image.</p>
+<p>Nous introduisons ici les transformers, initialement destinés aux
 problèmes de traitement des langues naturelles, où l’entrée du réseau
 est une série d’encodages en grande dimension représentant des mots ou
 des fragments de mots. Les ensembles de données linguistiques partagent
@@ -358,13 +358,13 @@ nourriture et le service. »</p>
 représentation adaptée aux tâches ultérieures. Par exemple, il pourrait
 être utilisé pour classer l’avis comme positif ou négatif ou pour
 répondre à des questions telles que « Le restaurant sert-il de la viande
-?</p>
+? »</p>
 <p>Trois observations immédiates peuvent être effectuées :</p>
 <ol class="arabic simple">
 <li><p>l’entrée codée peut être très grande. Dans ce cas, chacun des 41
 mots pourrait être représenté par un vecteur de longueur 1024, de
 sorte que l’entrée codée serait de longueur
-41<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1024=41984, même pour ce petit passage.
+41<span class="math notranslate nohighlight">\(\times\)</span>1024=41984, même pour ce petit passage.
 Un corps de texte de taille plus réaliste peut comporter des
 centaines, voire des milliers de mots, de sorte que les réseaux
 complètement connectés ne sont pas utilisables en pratique.</p></li>
@@ -497,8 +497,9 @@ entrées de la fonction softmax ont désormais peu d’effet sur la sortie
 (les gradients sont très faibles), ce qui rend le modèle difficile à
 entraîner. Pour éviter cet inconvénient, les produits scalaires sont mis
 à l’échelle par la racine carrée de la dimension <span class="math notranslate nohighlight">\(d_q\)</span> des requêtes et
-des clés :
-$<span class="math notranslate nohighlight">\(A(\mathbf X) = \mathbf V(\mathbf X).Softmax(\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}})\)</span>$</p>
+des clés :</p>
+<div class="math notranslate nohighlight">
+\[A(\mathbf X) = \mathbf V(\mathbf X).Softmax(\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}})\]</div>
 </section>
 <section id="mecanisme-d-auto-attention-multiple">
 <h4>Mécanisme d’auto attention multiple<a class="headerlink" href="#mecanisme-d-auto-attention-multiple" title="Lien vers cette rubrique">#</a></h4>
