@@ -228,11 +228,6 @@ $$M_h\mathbf A(X) = \mathbf W_c [\mathbf A_1(X)^T \cdots \mathbf A_H(X)^T]^T$$
 Mécanisme d'auto attention multiple.
 ```
 
-## Implémentation
-Vu les temps d'entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
-On se propose donc ici d'implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet {cite:p}`Vaswani17`.
-
-
 Les têtes multiples semblent être nécessaires au bon fonctionnement du
 transformer, on pense qu'elles rendent le réseau d'auto-attention plus
 résistant aux mauvaises initialisations.
@@ -529,3 +524,8 @@ pas obtenu d'aussi bons résultats que les meilleurs réseaux convolutifs
 contemporains sans pré-entraînement supervisé. Le fort biais inductif
 des réseaux convolutifs ne peut être surmonté que que par l'utilisation
 de quantités extrêmement importantes de données d'entraînement.
+
+
+## Implémentation
+Vu les temps d'entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
+On se propose donc ici d'implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet {cite:p}`Vaswani17`.
