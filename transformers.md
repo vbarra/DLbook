@@ -554,7 +554,7 @@ class Embedding(nn.Module):
 
 On encode ensuite la position d'un mot à l'aide des formules proposées dans {cite:p}`Vaswani17` : 
 
-$$PE_{p,2i} = sin\left( \frac{p}{10000^{\frac{2i}{taille\_emb}}}\right)\quad\textrm{et}\quad  PE_{p,2i+1} = cos\left ( \frac{p}{10000^{\frac{2i}{taille\_emb}}}\right )$$
+$$PE_{p,2i} = sin\left( \frac{p}{10000^{\frac{2i}{\textrm{taille\_emb}}}}\right)\quad\textrm{et}\quad  PE_{p,2i+1} = cos\left ( \frac{p}{10000^{\frac{2i}{\textrm{taille\_emb}}}}\right )$$
 
 où $p$ est la position du mot dans la phrase, et $i$ à la position dans le vecteur encodé.
 
