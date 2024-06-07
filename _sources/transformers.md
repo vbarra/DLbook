@@ -535,6 +535,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import math
+import numpy as np
 ```
 
 
@@ -542,13 +543,13 @@ On implémente le mécanisme d’auto-attention multiple (multihead attention)
 
 ```python
 class MultiHeadAttention(nn.Module):
-    def __init__(self, d, nb_heads):
+    def __init__(self, d, H):
         super(MultiHeadAttention, self).__init__()
-        assert d % nb_heads == 0, 
+        assert d % H == 0, 
         
         self.d = d
-        self.nb_heads = nb_heads
-        self.d_q = d // nb_heads
+        self.H = H
+        self.d_q = d // H
         
         self.W_q = nn.Linear(d, d)
         self.W_k = nn.Linear(d, d)
@@ -568,7 +569,7 @@ class MultiHeadAttention(nn.Module):
     # Redimensionne le tenseur d'entrée pour les têtes
     def tetes(self, x):
         batch_size, N, d = x.size()
-        return x.view(batch_size, N, self.nb_heads, self.d_q).transpose(1, 2)
+        return x.view(batch_size, N, self.H, self.d_q).transpose(1, 2)
 
     # Combine les attentions de toutes les têtes   
     def concateneAttention(self, x):
@@ -630,9 +631,9 @@ Bloc encodeur (source : {cite:p}`Vaswani17`).
 
 ```python
 class EncoderLayer(nn.Module):
-    def __init__(self, d, nb_heads, d_ff, dropout):
+    def __init__(self, d, H, d_ff, dropout):
         super(EncoderLayer, self).__init__()
-        self.self_attn = MultiHeadAttention(d, nb_heads)
+        self.self_attn = MultiHeadAttention(d, H)
         self.feed_forward = PositionWiseFeedForward(d, d_ff)
         self.norm1 = nn.LayerNorm(d)
         self.norm2 = nn.LayerNorm(d)
@@ -650,15 +651,15 @@ class EncoderLayer(nn.Module):
 
 ```{figure} ./images/decoder.png
 :name: decodeur
-Bloc decodeur (source : {cite:p}`Vaswani17`).
+Bloc décodeur (source : {cite:p}`Vaswani17`).
 ```
 
 ```python
 class DecoderLayer(nn.Module):
-    def __init__(self, d, nb_heads, d_ff, dropout):
+    def __init__(self, d, H, d_ff, dropout):
         super(DecoderLayer, self).__init__()
-        self.self_attn = MultiHeadAttention(d, nb_heads)
-        self.cross_attn = MultiHeadAttention(d, nb_heads)
+        self.self_attn = MultiHeadAttention(d, H)
+        self.cross_attn = MultiHeadAttention(d, H)
         self.feed_forward = PositionWiseFeedForward(d, d_ff)
         self.norm1 = nn.LayerNorm(d)
         self.norm2 = nn.LayerNorm(d)
@@ -674,6 +675,98 @@ class DecoderLayer(nn.Module):
         x = self.norm3(x + self.dropout(ff_output))
         return x
 ```
+et on assemble le tout en un bloc transformer ({numref}`transfo`) 
 
 
+```{figure} ./images/transformer.png
+:name: transfo
+Bloc transformer (source : {cite:p}`Vaswani17`).
+```
+
+```python
+class Transformer(nn.Module):
+    def __init__(self, taille_voc_source, taille_voc_cible, d, H, nb_layers, d_ff, max_N, dropout):
+        super(Transformer, self).__init__()
+        self.encoder_embedding = nn.Embedding(taille_voc_source, d)
+        self.decoder_embedding = nn.Embedding(taille_voc_cible, d)
+        self.positional_encoding = PositionalEncoding(d, max_N)
+
+        self.encoder_layers = nn.ModuleList([EncoderLayer(d, H, d_ff, dropout) for _ in range(nb_layers)])
+        self.decoder_layers = nn.ModuleList([DecoderLayer(d, H, d_ff, dropout) for _ in range(nb_layers)])
+
+        self.fc = nn.Linear(d, taille_voc_cible)
+        self.dropout = nn.Dropout(dropout)
+
+    def generate_mask(self, src, cible):
+        src_mask = (src != 0).unsqueeze(1).unsqueeze(2)
+        cible_mask = (cible != 0).unsqueeze(1).unsqueeze(3)
+        N = cible.size(1)
+        nopeak_mask = (1 - torch.triu(torch.ones(1, N, N), diagonal=1)).bool()
+        cible_mask = cible_mask & nopeak_mask
+        return src_mask, cible_mask
+
+    def forward(self, src, cible):
+        src_mask, cible_mask = self.generate_mask(src, cible)
+        src_embedded = self.dropout(self.positional_encoding(self.encoder_embedding(src)))
+        cible_embedded = self.dropout(self.positional_encoding(self.decoder_embedding(cible)))
+
+        enc_output = src_embedded
+        for enc_layer in self.encoder_layers:
+            enc_output = enc_layer(enc_output, src_mask)
+
+        dec_output = cible_embedded
+        for dec_layer in self.decoder_layers:
+            dec_output = dec_layer(dec_output, enc_output, src_mask, cible_mask)
+
+        output = self.fc(dec_output)
+        return output
+```
+
+On peut alors tester ce transformer sur un jeu de données (ici simple et de synthèse)
+
+```python
+taille_voc_source = 5000
+taille_voc_cible = 5000
+d = 512
+H = 8
+nb_layers = 6
+d_ff = 2048
+max_N = 100
+dropout = 0.1
+bath_size = 64
+
+transformer = Transformer(taille_voc_source, taille_voc_cible, d, H, nb_layers, d_ff, max_N, dropout)
+
+# Calcul du nombre de paramètres entraînables
+model_parameters = filter(lambda p: p.requires_grad, transformer.parameters())
+params = sum([np.prod(p.size()) for p in model_parameters])
+print(params)
+
+# Génération de deux séquences
+src_data = torch.randint(1, taille_voc_source, (batch_size, max_N))  
+cible_data = torch.randint(1, taille_voc_cible, (batch_size, max_N))  
+
+criterion = nn.CrossEntropyLoss(ignore_index=0)
+optimizer = optim.Adam(transformer.parameters(), lr=0.0001, betas=(0.9, 0.98), eps=1e-9)
+
+l = []
+transformer.train()
+
+nb_epochs = 100
+for epoch in range(nb_epochs):
+    optimizer.zero_grad()
+    output = transformer(src_data, cible_data[:, :-1])
+    loss = criterion(output.contiguous().view(-1, taille_voc_cible), cible_data[:, 1:].contiguous().view(-1))
+    loss.backward()
+    optimizer.step()
+    l.append(loss.item())
+    print(f"Epoch: {epoch+1}, Loss: {loss.item()}")
+
+plt.plot(np.arange(nb_epochs),l)
+```
+
+```{figure} ./images/plot.png
+:name: plot
+Fonction de perte.
+```
 
