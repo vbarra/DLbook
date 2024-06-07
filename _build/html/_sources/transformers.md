@@ -111,6 +111,7 @@ $a(\bullet ,\mathbf x_j)$ sont positifs et de somme unité.
 
 Pour calculer l'attention, on définit deux transformations linéaires des
 entrées : 
+
 $$\begin{aligned}
 \forall i\in[\![1,N]\!]\; \mathbf q_i&=&\mathbf W_q^T\mathbf x_i + \mathbf b_q\\ 
 \mathbf k_i&=&\mathbf W_k^T\mathbf x_i + \mathbf b_k

@@ -468,7 +468,7 @@ ImageGPT est un décodeur. Il construit un modèle autorégressif de pixels
 qui assimile une image partielle et prédit la valeur du pixel suivant.
 La complexité quadratique du réseau de transformers signifie que le plus
 grand modèle (qui contient 6,8 milliards de paramètres) ne peut
-fonctionner que sur des images de taille 64$\times$`<!-- -->`{=html}64.
+fonctionner que sur des images de taille 64$\times$64.
 En outre, pour que le système soit viable, l'espace colorimétrique RVB
 original de 24 bits a dû originellement être quantifié en un espace
 colorimétrique de neuf bits, de sorte que le système assimile (et
@@ -484,7 +484,7 @@ sont moyennées et une couche linéaire les met en correspondance avec des
 activations qui passent par une couche softmax pour prédire les
 probabilités de classe. Le système est pré-entraîné sur un large corpus
 d'images web, puis affiné sur la base de données ImageNet redimensionnée
-à 48$\times$`<!-- -->`{=html}48 pixels à l'aide d'une fonction de perte
+à 48$\times$48 pixels à l'aide d'une fonction de perte
 qui contient à la fois un terme d'entropie croisée pour la
 classification des images et un terme de perte générative pour la
 prédiction des pixels. Malgré l'utilisation d'une grande quantité de
@@ -497,7 +497,7 @@ classer les images où l'objet cible est petit ou mince.
 ### ViT : Vision Transformer
 
 ViT s'est attaqué au problème de la résolution de l'image en divisant
-l'image en patchs de 16$\times$`<!-- -->`{=html}16 . Chaque patch est
+l'image en patchs de 16$\times$16 . Chaque patch est
 mis en correspondance avec une dimension inférieure par le biais d'une
 transformation linéaire apprise, et ces représentations sont introduites
 dans le réseau du transformer. Les codages positionnels 1D standard sont

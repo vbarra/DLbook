@@ -417,11 +417,12 @@ les entrées. Puis les vecteurs de sortie sont calculés par</p>
 <span class="math notranslate nohighlight">\(j\)</span>-ième sortie accorde à l’entrée <span class="math notranslate nohighlight">\(x_i\)</span>. Les <span class="math notranslate nohighlight">\(N\)</span> valeurs
 <span class="math notranslate nohighlight">\(a(\bullet ,\mathbf x_j)\)</span> sont positifs et de somme unité.</p>
 <p>Pour calculer l’attention, on définit deux transformations linéaires des
-entrées :
-$<span class="math notranslate nohighlight">\(\begin{aligned}
+entrées :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
 \forall i\in[\![1,N]\!]\; \mathbf q_i&amp;=&amp;\mathbf W_q^T\mathbf x_i + \mathbf b_q\\ 
 \mathbf k_i&amp;=&amp;\mathbf W_k^T\mathbf x_i + \mathbf b_k
-\end{aligned}\)</span>$</p>
+\end{aligned}\end{split}\]</div>
 <p>où les <span class="math notranslate nohighlight">\(\mathbf q_i\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf k_i\)</span>) sont
 les requêtes (resp. clés). Ces dénominations proviennent de la théorie
 des bases de données.</p>
