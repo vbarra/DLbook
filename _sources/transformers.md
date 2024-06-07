@@ -126,7 +126,7 @@ Un produit scalaire entre requêtes et clés est alors effectué, et passé
 
 $$a(\mathbf x_i ,\mathbf x_j) = \frac{exp(\mathbf k_i^T\mathbf q_j)}{\displaystyle\sum_{l=1}^N exp(\mathbf k_l^T\mathbf q_j)}$$
 
-Le prodiut scalaire entre requête et clé donne une mesure de similarité
+Le produit scalaire entre requête et clé donne une mesure de similarité
 entre ces deux entités, et l'attention $a(\bullet ,\mathbf x_j)$ dépend
 donc de la similarité entre $q_j$ et toutes les clés.
 
@@ -153,7 +153,7 @@ sur chaque colonne de la matrice argument.
 
 ### Extensions
 
-Le mécanisme précédent, dit d'auto-attention (self attention) eest
+Le mécanisme précédent, dit d'auto-attention (self attention) est
 décliné en plusieurs variantes très utilisées en pratique.
 
 #### Encodage positionnel
@@ -171,7 +171,7 @@ approches principales pour intégrer les informations de position :
     de position de l'entrée correspondante. $\mathbf P$ peut être
     apprise ou fixée.
 
-2.  l'encodage positionnel absolu : l'entrée d'un mécanisme
+2.  l'encodage positionnel relatif : l'entrée d'un mécanisme
     d'auto-attention peut être une phrase entière, plusieurs phrases ou
     un simple fragment de phrase, et la position absolue d'un mot est
     beaucoup moins importante que la position relative entre deux
@@ -197,7 +197,7 @@ entraîner. Pour éviter cet inconvénient, les produits scalaires sont mis
 à l'échelle par la racine carrée de la dimension $d_q$ des requêtes et
 des clés :
 
-$$A(\mathbf X) = \mathbf V(\mathbf X).Softmax(\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}})$$
+$$A(\mathbf X) = \mathbf V(\mathbf X).Softmax\left (\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}}\right )$$
 
 #### Mécanisme d'auto attention multiple
 
