@@ -623,7 +623,7 @@ class PositionalEncoding(nn.Module):
 
 On construit ensuite l'encodeur ({numref}`encodeur`) et le décodeur ({numref}`decodeur`). 
 
-```{figure} ./images/encodeur.png
+```{figure} ./images/encoder.png
 :name: encodeur
 Bloc encodeur (source : {cite:p}`Vaswani17`).
 ```
@@ -648,7 +648,7 @@ class EncoderLayer(nn.Module):
         return x
 ```
 
-```{figure} ./images/decodeur.png
+```{figure} ./images/decoder.png
 :name: decodeur
 Bloc decodeur (source : {cite:p}`Vaswani17`).
 ```
