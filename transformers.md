@@ -18,7 +18,8 @@ images, qui comportent un très grand nombre de variables d'entrée, ce
 qui exclut l'utilisation de réseaux entièrement connectés. Chaque couche
 d'un réseau convolutif utilise le partage des paramètres de manière à ce
 que les zones locales de l'image soient traitées de la même manière à
-chaque position dans l'image.\
+chaque position dans l'image.
+
 Nous introduisons ici les transformers, initialement destinés aux
 problèmes de traitement des langues naturelles, où l'entrée du réseau
 est une série d'encodages en grande dimension représentant des mots ou
@@ -43,15 +44,15 @@ nourriture et le service."
 L'objectif est de concevoir un réseau pour traiter ce texte dans une
 représentation adaptée aux tâches ultérieures. Par exemple, il pourrait
 être utilisé pour classer l'avis comme positif ou négatif ou pour
-répondre à des questions telles que \"Le restaurant sert-il de la viande
-?
+répondre à des questions telles que "Le restaurant sert-il de la viande
+?"
 
 Trois observations immédiates peuvent être effectuées :
 
 1. l'entrée codée peut être très grande. Dans ce cas, chacun des 41
     mots pourrait être représenté par un vecteur de longueur 1024, de
     sorte que l'entrée codée serait de longueur
-    41$\times$`<!-- -->`{=html}1024=41984, même pour ce petit passage.
+    41$\times$1024=41984, même pour ce petit passage.
     Un corps de texte de taille plus réaliste peut comporter des
     centaines, voire des milliers de mots, de sorte que les réseaux
     complètement connectés ne sont pas utilisables en pratique.
@@ -66,14 +67,14 @@ Trois observations immédiates peuvent être effectuées :
     positions d'image.
 
 3. le langage est ambigu : la syntaxe seule ne permet pas de savoir si
-    le pronom \"il\" fait référence au restaurant ou au sandwich au
+    le pronom "il" fait référence au restaurant ou au sandwich au
     jambon. Pour comprendre le texte, le mot \"il\" doit être relié
     d'une manière ou d'une autre au mot \"restaurant\". Dans le langage
     des transformers, le premier mot doit prêter attention au second.
     Cela implique qu'il doit y avoir des liens entre les mots et que la
     force de ces liens dépend des mots eux-mêmes. En outre, ces liens
     doivent s'étendre sur de grandes parties du texte. Par exemple, le
-    mot \"L'\" dans la dernière phrase fait également référence au
+    mot "L'" dans la dernière phrase fait également référence au
     restaurant.
 
 ## Mécanisme d'attention
@@ -197,6 +198,7 @@ entrées de la fonction softmax ont désormais peu d'effet sur la sortie
 entraîner. Pour éviter cet inconvénient, les produits scalaires sont mis
 à l'échelle par la racine carrée de la dimension $d_q$ des requêtes et
 des clés :
+
 $$A(\mathbf X) = \mathbf V(\mathbf X).Softmax(\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}})$$
 
 #### Mécanisme d'auto attention multiple

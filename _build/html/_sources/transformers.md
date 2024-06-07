@@ -245,7 +245,7 @@ $$\begin{aligned}
 
 En pratique, les données passent par plusieurs de ces transformers.
 
-## Les transformers en traitement automatique du langage (TAL/NLP)
+## Les transformers en traitement automatique du langage
 
 Une chaîne classique de traitement en classique en NLP commence par un
 tokenizer qui divise le texte en mots ou en fragments de mots. Chacun de
