@@ -223,6 +223,13 @@ $\mathbf W_c$ est appliquée pour les combiner
 
 $$M_h\mathbf A(X) = \mathbf W_c [\mathbf A_1(X)^T \cdots \mathbf A_H(X)^T]^T$$
 
+```{figure} ./images/multihead.png
+:name: transformer
+Mécanisme d'auto attention multiple.
+```
+
+
+
 Les têtes multiples semblent être nécessaires au bon fonctionnement du
 transformer, on pense qu'elles rendent le réseau d'auto-attention plus
 résistant aux mauvaises initialisations.
