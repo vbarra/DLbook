@@ -383,9 +383,7 @@ d’une manière ou d’une autre au mot « restaurant ». Dans le langage
 des transformers, le premier mot doit prêter attention au second.
 Cela implique qu’il doit y avoir des liens entre les mots et que la
 force de ces liens dépend des mots eux-mêmes. En outre, ces liens
-doivent s’étendre sur de grandes parties du texte. Par exemple, le
-mot « L” » dans la dernière phrase fait également référence au
-restaurant.</p></li>
+doivent s’étendre sur de grandes parties du texte.</p></li>
 </ol>
 </section>
 <section id="mecanisme-d-attention">
@@ -402,7 +400,7 @@ propriétés en utilisant un mécanisme d”(auto-)attention.</p>
 <div class="math notranslate nohighlight">
 \[f(\mathbf x) = ReLU(\mathbf w^T\mathbf x + b)\]</div>
 <p>Un bloc d’attention <span class="math notranslate nohighlight">\(A()\)</span> prend <span class="math notranslate nohighlight">\(N\)</span> entrées
-<span class="math notranslate nohighlight">\(\mathbf x_1,\cdots \mathbf x_N\)</span> de taille <span class="math notranslate nohighlight">\(\mathbb R^d\)</span> et renvoie <span class="math notranslate nohighlight">\(N\)</span>
+<span class="math notranslate nohighlight">\(\mathbf x_1,\cdots \mathbf x_N\)</span> de <span class="math notranslate nohighlight">\(\mathbb R^d\)</span> et renvoie <span class="math notranslate nohighlight">\(N\)</span>
 vecteurs de sortie de la même taille. Dans le contexte du traitement
 automatique du langage, chaque entrée représente un mot ou un fragment
 de mot. Tout d’abord, un ensemble de vecteurs est calculé pour chaque
@@ -434,8 +432,7 @@ des bases de données.</p>
 entre ces deux entités, et l’attention <span class="math notranslate nohighlight">\(a(\bullet ,\mathbf x_j)\)</span> dépend
 donc de la similarité entre <span class="math notranslate nohighlight">\(q_j\)</span> et toutes les clés.</p>
 <p>Cette approche permet d’avoir un jeu de paramètres partagé entre toutes
-les entrées
-(<span class="math notranslate nohighlight">\(\mathbf W_v,\mathbf b_v,\mathbf W_q,\mathbf b_q,\mathbf W_k,\mathbf b_k\)</span>),
+les entrées (<span class="math notranslate nohighlight">\(\mathbf W_v,\mathbf b_v,\mathbf W_q,\mathbf b_q,\mathbf W_k,\mathbf b_k\)</span>),
 indépendant de <span class="math notranslate nohighlight">\(N\)</span> et le réseau correspondant peut être appliqué à des
 entrées de longueur quelconque.</p>
 </section>

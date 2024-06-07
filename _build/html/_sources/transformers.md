@@ -73,9 +73,8 @@ Trois observations immédiates peuvent être effectuées :
     des transformers, le premier mot doit prêter attention au second.
     Cela implique qu'il doit y avoir des liens entre les mots et que la
     force de ces liens dépend des mots eux-mêmes. En outre, ces liens
-    doivent s'étendre sur de grandes parties du texte. Par exemple, le
-    mot "L'" dans la dernière phrase fait également référence au
-    restaurant.
+    doivent s'étendre sur de grandes parties du texte. 
+    
 
 ## Mécanisme d'attention
 
@@ -93,7 +92,7 @@ $\mathbf x\in\mathbb R^d$ et calcule une sortie du type
 $$f(\mathbf x) = ReLU(\mathbf w^T\mathbf x + b)$$
 
 Un bloc d'attention $A()$ prend $N$ entrées
-$\mathbf x_1,\cdots \mathbf x_N$ de taille $\mathbb R^d$ et renvoie $N$
+$\mathbf x_1,\cdots \mathbf x_N$ de $\mathbb R^d$ et renvoie $N$
 vecteurs de sortie de la même taille. Dans le contexte du traitement
 automatique du langage, chaque entrée représente un mot ou un fragment
 de mot. Tout d'abord, un ensemble de vecteurs est calculé pour chaque
@@ -132,8 +131,7 @@ entre ces deux entités, et l'attention $a(\bullet ,\mathbf x_j)$ dépend
 donc de la similarité entre $q_j$ et toutes les clés.
 
 Cette approche permet d'avoir un jeu de paramètres partagé entre toutes
-les entrées
-($\mathbf W_v,\mathbf b_v,\mathbf W_q,\mathbf b_q,\mathbf W_k,\mathbf b_k$),
+les entrées ($\mathbf W_v,\mathbf b_v,\mathbf W_q,\mathbf b_q,\mathbf W_k,\mathbf b_k$),
 indépendant de $N$ et le réseau correspondant peut être appliqué à des
 entrées de longueur quelconque.
 
