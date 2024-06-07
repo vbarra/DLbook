@@ -428,7 +428,7 @@ des bases de données.</p>
 à un softmax (pour assurer la positivité et la somme à un)</p>
 <div class="math notranslate nohighlight">
 \[a(\mathbf x_i ,\mathbf x_j) = \frac{exp(\mathbf k_i^T\mathbf q_j)}{\displaystyle\sum_{l=1}^N exp(\mathbf k_l^T\mathbf q_j)}\]</div>
-<p>Le prodiut scalaire entre requête et clé donne une mesure de similarité
+<p>Le produit scalaire entre requête et clé donne une mesure de similarité
 entre ces deux entités, et l’attention <span class="math notranslate nohighlight">\(a(\bullet ,\mathbf x_j)\)</span> dépend
 donc de la similarité entre <span class="math notranslate nohighlight">\(q_j\)</span> et toutes les clés.</p>
 <p>Cette approche permet d’avoir un jeu de paramètres partagé entre toutes
@@ -453,7 +453,7 @@ sur chaque colonne de la matrice argument.</p>
 </section>
 <section id="extensions">
 <h3>Extensions<a class="headerlink" href="#extensions" title="Lien vers cette rubrique">#</a></h3>
-<p>Le mécanisme précédent, dit d’auto-attention (self attention) eest
+<p>Le mécanisme précédent, dit d’auto-attention (self attention) est
 décliné en plusieurs variantes très utilisées en pratique.</p>
 <section id="encodage-positionnel">
 <h4>Encodage positionnel<a class="headerlink" href="#encodage-positionnel" title="Lien vers cette rubrique">#</a></h4>
@@ -469,7 +469,7 @@ positionnelle <span class="math notranslate nohighlight">\(\mathbf P\)</span> es
 Chaque colonne de <span class="math notranslate nohighlight">\(\mathbf P\)</span> est unique et contient une information
 de position de l’entrée correspondante. <span class="math notranslate nohighlight">\(\mathbf P\)</span> peut être
 apprise ou fixée.</p></li>
-<li><p>l’encodage positionnel absolu : l’entrée d’un mécanisme
+<li><p>l’encodage positionnel relatif : l’entrée d’un mécanisme
 d’auto-attention peut être une phrase entière, plusieurs phrases ou
 un simple fragment de phrase, et la position absolue d’un mot est
 beaucoup moins importante que la position relative entre deux
@@ -496,7 +496,7 @@ entraîner. Pour éviter cet inconvénient, les produits scalaires sont mis
 à l’échelle par la racine carrée de la dimension <span class="math notranslate nohighlight">\(d_q\)</span> des requêtes et
 des clés :</p>
 <div class="math notranslate nohighlight">
-\[A(\mathbf X) = \mathbf V(\mathbf X).Softmax(\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}})\]</div>
+\[A(\mathbf X) = \mathbf V(\mathbf X).Softmax\left (\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}}\right )\]</div>
 </section>
 <section id="mecanisme-d-auto-attention-multiple">
 <h4>Mécanisme d’auto attention multiple<a class="headerlink" href="#mecanisme-d-auto-attention-multiple" title="Lien vers cette rubrique">#</a></h4>

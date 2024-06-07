@@ -207,7 +207,7 @@ $$\begin{aligned}
 \mathbf V_h(\mathbf X) &=& \mathbf b_{vh} \mathbf 1^T + \mathbf W_{vh} \mathbf X\\
 \mathbf Q_h(\mathbf X) &=& \mathbf b_{qh} \mathbf 1^T + \mathbf W_{qh} \mathbf X\\
 \mathbf H_h(\mathbf X) &=& \mathbf b_{kh} \mathbf 1^T + \mathbf W_{kh} \mathbf X\\
-\mathbf A_h(\mathbf X) &=& \mathbf V_h(\mathbf X).Softmax(\frac{\mathbf K_h(\mathbf X)^T\mathbf Q_h(\mathbf X)}{\sqrt{d_q}}) 
+\mathbf A_h(\mathbf X) &=& \mathbf V_h(\mathbf X).Softmax\left (\frac{\mathbf K_h(\mathbf X)^T\mathbf Q_h(\mathbf X)}{\sqrt{d_q}}\right) 
 \end{aligned}$$ 
 
 $\mathbf A_h(\mathbf X)$ est le $h$-ième mécanisme
@@ -279,7 +279,7 @@ Dans la pratique, un compromis entre les lettres et les mots complets
 est utilisé, et le vocabulaire final comprend à la fois des mots
 courants et des fragments de mots à partir desquels des mots plus grands
 et moins fréquents peuvent être composés. Le vocabulaire est calculé à
-l'aide d'un tokeniseur de sous-mots tel que le codage par paires
+l'aide d'un tokeniser de sous-mots tel que le codage par paires
 d'octets, qui fusionne de manière gloutonne les sous-chaînes les plus
 courantes en fonction de leur fréquence.
 
@@ -313,7 +313,7 @@ est convertie en une autre (par exemple, traduction automatique).
 
 #### Exemple de modèle à encodeur : BERT
 
-BERT est un modèle d'encodeur qui utilise un vocabulaire de 30 000 mots.
+[BERT](https://arxiv.org/abs/1810.04805) (Bidirectional Encoder Representations from Transformers) est un modèle d'encodeur qui utilise un vocabulaire de 30 000 mots.
 Les jetons d'entrée sont convertis en représentations de mots à 1024
 dimensions et passent par $K$=24 transformers. Chacun d'eux contient un
 mécanisme d'auto-attention avec 16 têtes. Les requêtes, les clés et les
