@@ -224,7 +224,7 @@ $\mathbf W_c$ est appliquée pour les combiner
 $$M_h\mathbf A(X) = \mathbf W_c [\mathbf A_1(X)^T \cdots \mathbf A_H(X)^T]^T$$
 
 ```{figure} ./images/multihead.png
-:name: transformer
+:name: multihead
 Mécanisme d'auto attention multiple.
 ```
 
