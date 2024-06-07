@@ -398,8 +398,9 @@ pour traiter les longs passages d’entrée de différentes longueurs et
 dépendent des mots eux-mêmes. Le transformer acquiert ces deux
 propriétés en utilisant un mécanisme d”(auto-)attention.</p>
 <p>Une couche standard d’un réseau de neurones prend en entrée un vecteur
-<span class="math notranslate nohighlight">\(\mathbf x\in\mathbb R^d\)</span> et calcule une sortie du type
-$<span class="math notranslate nohighlight">\(f(\mathbf x) = ReLU(\mathbf w^T\mathbf x + b)\)</span>$</p>
+<span class="math notranslate nohighlight">\(\mathbf x\in\mathbb R^d\)</span> et calcule une sortie du type</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf x) = ReLU(\mathbf w^T\mathbf x + b)\]</div>
 <p>Un bloc d’attention <span class="math notranslate nohighlight">\(A()\)</span> prend <span class="math notranslate nohighlight">\(N\)</span> entrées
 <span class="math notranslate nohighlight">\(\mathbf x_1,\cdots \mathbf x_N\)</span> de taille <span class="math notranslate nohighlight">\(\mathbb R^d\)</span> et renvoie <span class="math notranslate nohighlight">\(N\)</span>
 vecteurs de sortie de la même taille. Dans le contexte du traitement

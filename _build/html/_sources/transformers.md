@@ -88,6 +88,7 @@ propriétés en utilisant un mécanisme d'(auto-)attention.
 
 Une couche standard d'un réseau de neurones prend en entrée un vecteur
 $\mathbf x\in\mathbb R^d$ et calcule une sortie du type
+
 $$f(\mathbf x) = ReLU(\mathbf w^T\mathbf x + b)$$
 
 Un bloc d'attention $A()$ prend $N$ entrées
