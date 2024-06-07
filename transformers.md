@@ -528,7 +528,7 @@ de quantités extrêmement importantes de données d'entraînement.
 
 ## Implémentation
 Vu les temps d'entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
-On se propose donc ici d'implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet {cite:p}`Vaswani17`.
+On se propose donc ici d'implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet {cite:p}`Vaswani17`. Dans la mesure du possible, on propose en illustration des codes les figures de l'article.
 
 ```python
 import torch
@@ -537,296 +537,143 @@ import torch.nn.functional as F
 import math
 ```
 
-### Encodages
-On construit tout d'abord une classe permettant d'encoder un mot en un vecteur
 
-```python
-linkcode
-class Embedding(nn.Module):
-    def __init__(self, taille_voc, taille_emb):
-
-        super(Embedding, self).__init__()
-        self.embed = nn.Embedding(taille_voc, taille_emb)
-    def forward(self, x):
-
-        out = self.embed(x)
-        return out
-```
-
-On encode ensuite la position d'un mot à l'aide des formules proposées dans {cite:p}`Vaswani17` : 
-
-$$PE_{p,2i} = sin\left( \frac{p}{10000^{\frac{2i}{\textrm{taille_emb}}}}\right)\quad\textrm{et}\quad  PE_{p,2i+1} = cos\left ( \frac{p}{10000^{\frac{2i}{\textrm{taille_emb}}}}\right )$$
-
-où $p$ est la position du mot dans la phrase, et $i$ à la position dans le vecteur encodé.
-
-```python
-class PositionalEmbedding(nn.Module):
-    def __init__(self,taille_seq,taille_emb):
-        super(PositionalEmbedding, self).__init__()
-        self.taille_emb = taille_emb
-
-        pe = torch.zeros(taille_seq,self.taille_emb)
-        for p in range(taille_seq):
-            for i in range(0,self.taille_emb,2):
-                pe[p, i] = math.sin(p / (10000 ** ((2 * i)/self.taille_emb)))
-                pe[p, i + 1] = math.cos(p / (10000 ** ((2 * (i + 1))/self.taille_emb)))
-        pe = pe.unsqueeze(0)
-        self.register_buffer('pe', pe)
-
-    def forward(self, x):
-        # Taille de l'embedding suffisamment grande
-        x = x * math.sqrt(self.taille_emb)
-        taille_seq = x.size(1)
-        x = x + torch.autograd.Variable(self.pe[:,:taille_seq], requires_grad=False)
-        return x
-```
-
-### Auto-attention multiple
-On implémente ensuite le mécanisme d'auto-attention multiple (multihead attention)
+On implémente le mécanisme d’auto-attention multiple (multihead attention)
 
 ```python
 class MultiHeadAttention(nn.Module):
-    def __init__(self, taille_emb=512, n_heads=8):
-
+    def __init__(self, d, nb_heads):
         super(MultiHeadAttention, self).__init__()
-
-        self.taille_emb = taille_emb    
-        self.n_heads = n_heads   
-        #Taille de chaque clé, reqûete et valeur
-        self.single_head_dim = int(self.taille_emb / self.n_heads) 
-       
-          
-        self.Q = nn.Linear(self.single_head_dim , self.single_head_dim ,bias=False)  
-        self.K = nn.Linear(self.single_head_dim  , self.single_head_dim, bias=False)
-        self.V = nn.Linear(self.single_head_dim ,self.single_head_dim , bias=False)
-        self.out = nn.Linear(self.n_heads*self.single_head_dim ,self.taille_emb) 
-
-    def forward(self,key,query,value,mask=None):  
-        batch_size = key.size(0)
-        taille = key.size(1)
+        assert d % nb_heads == 0, 
         
-        # La taille de la requête change durant l'inférence.
-        taille_query = query.size(1)
+        self.d = d
+        self.nb_heads = nb_heads
+        self.d_q = d // nb_heads
         
-        # 32x10x512
-        key = key.view(batch_size, taille, self.n_heads, self.single_head_dim)  
-        query = query.view(batch_size, taille_query, self.n_heads, self.single_head_dim) 
-        value = value.view(batch_size, taille, self.n_heads, self.single_head_dim) 
-       
-        k = self.K(key)       
-        q = self.Q(query)   
-        v = self.V(value)
+        self.W_q = nn.Linear(d, d)
+        self.W_k = nn.Linear(d, d)
+        self.W_v = nn.Linear(d, d)
+        self.W_o = nn.Linear(d, d)
 
-        # On réordonne les axes
-        q = q.transpose(1,2)  
-        k = k.transpose(1,2)  
-        v = v.transpose(1,2)  
-       
-        # Calcul de l'attention
-        k2 = k.transpose(-1,-2)  
-        product = torch.matmul(q, k2)  
-      
-        
+    # Calcul des attentions     
+    def Ah(self, Q, K, V, mask=None):
+        attn_scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(self.d_q)
         # Cas de l'auto-attention masquée
         if mask is not None:
-             product = product.masked_fill(mask == 0, float("-1e20"))
-
-        # Mise à l'échelle
-        product = product / math.sqrt(self.single_head_dim) 
-
-        # Softmax
-        scores = F.softmax(product, dim=-1)
-        scores = torch.matmul(scores, v)  
+            attn_scores = attn_scores.masked_fill(mask == 0, -1e10)
+        attn_probs = torch.softmax(attn_scores, dim=-1)
+        output = torch.matmul(attn_probs, V)
+        return output
         
-        #Sortie concaténée
-        concat = scores.transpose(1,2).contiguous().view(batch_size, taille_query, self.single_head_dim*self.n_heads) 
-        output = self.out(concat) 
+    # Redimensionne le tenseur d'entrée pour les têtes
+    def tetes(self, x):
+        batch_size, N, d = x.size()
+        return x.view(batch_size, N, self.nb_heads, self.d_q).transpose(1, 2)
+
+    # Combine les attentions de toutes les têtes   
+    def concateneAttention(self, x):
+        batch_size, _, N, d_q = x.size()
+        return x.transpose(1, 2).contiguous().view(batch_size, N, self.d)
+
+    # Calcul l'auto-attention multiple. 
+    def forward(self, Q, K, V, mask=None):
+        Q = self.tetes(self.W_q(Q))
+        K = self.tetes(self.W_k(K))
+        V = self.tetes(self.W_v(V))
+        
+        attn_output = self.Ah(Q, K, V, mask)
+        output = self.W_o(self.concateneAttention(attn_output))
         return output
 ```
 
-### Bloc trnsformer et encodeur
-Et on décrit une classe représentant un bloc transformer
+On s'intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans {cite:p}`Vaswani17`. Pour ce faire, on créé une classe `PositionWiseFFN` qui permet de prendre en compte la position des éléments dans le calcul des prédictions.
 
 ```python
-class TransformerBlock(nn.Module):
-    def __init__(self, taille_emb, facteur=4, n_heads=8):
-        super(TransformerBlock, self).__init__()
+class PositionFFN(nn.Module):
+    def __init__(self, d, d_ff):
+        super(PositionWiseFeedForward, self).__init__()
+        self.fc1 = nn.Linear(d, d_ff)
+        self.fc2 = nn.Linear(d_ff, d)
+        self.relu = nn.ReLU()
 
-        self.attention = MultiHeadAttention(taille_emb, n_heads)
-        self.norm1 = nn.LayerNorm(taille_emb) 
-        self.norm2 = nn.LayerNorm(taille_emb)
-        # facteur est un facteur de taille détermine la dimension des couches linéaires
-        self.feed_forward = nn.Sequential(nn.Linear(taille_emb, facteur*taille_emb),nn.ReLU(),nn.Linear(facteur*taille_emb, taille_emb))
-        self.dropout1 = nn.Dropout(0.2)
-        self.dropout2 = nn.Dropout(0.2)
-
-    def forward(self,key,query,value):
-
-        attention_out = self.attention(key,query,value)  
-        # connexion résiduelle
-        attention_residual_out = attention_out + value  
-        norm1_out = self.dropout1(self.norm1(attention_residual_out)) 
-
-        feed_fwd_out = self.feed_forward(norm1_out) 
-        # connexion résiduelle
-        feed_fwd_residual_out = feed_fwd_out + norm1_out
-        norm2_out = self.dropout2(self.norm2(feed_fwd_residual_out)) 
-
-        return norm2_out
-```
-
-```python
-class TransformerEncoder(nn.Module):
-    """
-    Args:
-        taille_seq : length of input sequence
-        taille_emb: dimension of embedding
-        nb_layers: number of encoder layers
-        facteur: factor which determines number of linear layers in feed forward layer
-        n_heads: number of heads in multihead attention
-        
-    Returns:
-        out: output of the encoder
-    """
-    def __init__(self, taille_seq, taille_voc, taille_emb, nb_layers=2, facteur=4, n_heads=8):
-        super(TransformerEncoder, self).__init__()
-        
-        self.embedding_layer = Embedding(taille_voc, taille_emb)
-        self.positional_encoder = PositionalEmbedding(taille_seq, taille_emb)
-
-        self.layers = nn.ModuleList([TransformerBlock(taille_emb, facteur, n_heads) for i in range(nb_layers)])
-    
     def forward(self, x):
-        embed_out = self.embedding_layer(x)
-        out = self.positional_encoder(embed_out)
-        for layer in self.layers:
-            out = layer(out,out,out)
-
-        return out  #32x10x512
+        return self.fc2(self.relu(self.fc1(x)))
 ```
 
-
-### Blocs décodeurs
+Cette classe est ensuite utilisée dans l'encodage positionnel à proprement parler. On initialise un tenseur de taille $d\times max\_N$ permettant de stocker les valeurs d'encodage.
 
 ```python
-class DecoderBlock(nn.Module):
-    def __init__(self, taille_emb, facteur=4, n_heads=8):
-        super(DecoderBlock, self).__init__()
-
-        self.attention = MultiHeadAttention(taille_emb, n_heads=8)
-        self.norm = nn.LayerNorm(taille_emb)
-        self.dropout = nn.Dropout(0.2)
-        self.transformer_block = TransformerBlock(taille_emb, facteur, n_heads)
+class PositionalEncoding(nn.Module):
+    def __init__(self, d, max_N):
+        super(PositionalEncoding, self).__init__()
         
-    
-    def forward(self, key, query, x,mask):
-                
-        #Le masque n'est passé que sur la première couche d'attention
-        attention = self.attention(x,x,x,mask=mask) 
-        value = self.dropout(self.norm(attention + x))
-        out = self.transformer_block(key, query, value)  
-        return out
-
-
-class TransformerDecoder(nn.Module):
-    def __init__(self, target_taille_voc, taille_emb, taille_seq, nb_layers=2, facteur=4, n_heads=8):
-        super(TransformerDecoder, self).__init__()
-
-        self.word_embedding = nn.Embedding(target_taille_voc, taille_emb)
-        self.position_embedding = PositionalEmbedding(taille_seq, taille_emb)
-
-        self.layers = nn.ModuleList([DecoderBlock(taille_emb, facteur=4, n_heads=8)  for _ in range(nb_layers)])
-        self.fc_out = nn.Linear(taille_emb, target_taille_voc)
-        self.dropout = nn.Dropout(0.2)
-
-    def forward(self, x, enc_out, mask):
-        x = self.word_embedding(x)  
-        x = self.position_embedding(x) 
-        x = self.dropout(x)
-     
-        for layer in self.layers:
-            x = layer(enc_out, x, enc_out, mask) 
-        out = F.softmax(self.fc_out(x))
-        return out
+        # Codage de l'encodage proposé dans l'article
+        pe = torch.zeros(max_N, d)
+        p = torch.arange(0, max_N, dtype=torch.float).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d, 2).float() * -(math.log(10000.0) / d))
+        
+        pe[:, 0::2] = torch.sin(p * div_term)
+        pe[:, 1::2] = torch.cos(p * div_term)
+        
+        self.register_buffer('pe', pe.unsqueeze(0))
+        
+    def forward(self, x):
+        return x + self.pe[:, :x.size(1)]
 ```
-### Architecture finale
 
-On utilise alors les classes précédentes pour construire le transformer
+On construit ensuite l'encodeur ({numref}`encodeur`) et le décodeur ({numref}`decodeur`). 
+
+```{figure} ./images/encodeur.png
+:name: encodeur
+Bloc encodeur (source : {cite:p}`Vaswani17`).
+```
 
 ```python
-class Transformer(nn.Module):
-    def __init__(self, taille_emb, src_taille_voc, target_taille_voc, taille_seq,nb_layers=2, expansion_factor=4, n_heads=8):
-        super(Transformer, self).__init__()
+class EncoderLayer(nn.Module):
+    def __init__(self, d, nb_heads, d_ff, dropout):
+        super(EncoderLayer, self).__init__()
+        self.self_attn = MultiHeadAttention(d, nb_heads)
+        self.feed_forward = PositionWiseFeedForward(d, d_ff)
+        self.norm1 = nn.LayerNorm(d)
+        self.norm2 = nn.LayerNorm(d)
+        self.dropout = nn.Dropout(dropout)
         
-        self.target_taille_voc = target_taille_voc
-
-        self.encoder = TransformerEncoder(taille_seq, src_taille_voc, taille_emb, nb_layers=nb_layers, expansion_factor=expansion_factor, n_heads=n_heads)
-        self.decoder = TransformerDecoder(target_taille_voc, taille_emb, taille_seq, nb_layers=nb_layers, expansion_factor=expansion_factor, n_heads=n_heads)
-        
-    # Cas de l'auto-attention masquée
-    def make_trg_mask(self, trg):
-        batch_size, trg_len = trg.shape
-        # partie triangulaire sur de la matrice remplie de 1
-        trg_mask = torch.tril(torch.ones((trg_len, trg_len))).expand(batch_size, 1, trg_len, trg_len)
-        return trg_mask    
-
-    # Inférence : retourne la prédiction 
-    def decode(self,src,trg):
-
-        trg_mask = self.make_trg_mask(trg)
-        enc_out = self.encoder(src)
-        out_labels = []
-        batch_size,seq_len = src.shape[0],src.shape[1]
-        out = trg
-        for i in range(seq_len): #10
-            out = self.decoder(out,enc_out,trg_mask) 
-            # dernier token
-            out = out[:,-1,:]
-            out = out.argmax(-1)
-            out_labels.append(out.item())
-            out = torch.unsqueeze(out,axis=0)
-
-        return out_labels
-    
-    def forward(self, src, trg):
-
-        trg_mask = self.make_trg_mask(trg)
-        enc_out = self.encoder(src)
-   
-        outputs = self.decoder(trg, enc_out, trg_mask)
-        return outputs
+    def forward(self, x, mask):
+        attn_output = self.self_attn(x, x, x, mask)
+        # connexion résiduelle
+        x = self.norm1(x + self.dropout(attn_output))
+        ff_output = self.feed_forward(x)
+        # connexion résiduelle
+        x = self.norm2(x + self.dropout(ff_output))
+        return x
 ```
 
-Et on test sur les données.
+```{figure} ./images/decodeur.png
+:name: decodeur
+Bloc decodeur (source : {cite:p}`Vaswani17`).
+```
 
 ```python
-src_taille_voc = 11
-target_taille_voc = 11
-nb_layers = 6
-taille_seq= 12
-
-
-#  n créé deux chaînes de caractères (0 encode le début, 1 la fin)
-src = torch.tensor([[0, 2, 5, 6, 4, 3, 9, 5, 2, 9, 10, 1], 
-                    [0, 2, 8, 7, 3, 4, 5, 6, 7, 2, 10, 1]])
-target = torch.tensor([[0, 1, 7, 4, 3, 5, 9, 2, 8, 10, 9, 1], 
-                       [0, 1, 5, 6, 2, 4, 7, 6, 2, 8, 10, 1]])
-
-print(src.shape,target.shape)
-model = Transformer(taille_emb=512, src_taille_voc=src_taille_voc, 
-                    target_taille_voc=target_taille_voc, seq_length=taille_seq,
-                    num_layers=nb_layers, facteur=4, n_heads=8)
-
-out = model(src, target)
-# inférence
-model = Transformer(taille_emb=512, src_taille_voc=src_taille_voc, 
-                    target_taille_voc=target_taille_voc, seq_length=seq_length, 
-                    num_layers=num_layers, expansion_factor=4, n_heads=8)
-                  
-
-src = torch.tensor([[0, 2, 5, 6, 4, 3, 9, 5, 2, 9, 10, 1]])
-trg = torch.tensor([[0]])
-print(src.shape,trg.shape)
-out = model.decode(src, trg)
-out
+class DecoderLayer(nn.Module):
+    def __init__(self, d, nb_heads, d_ff, dropout):
+        super(DecoderLayer, self).__init__()
+        self.self_attn = MultiHeadAttention(d, nb_heads)
+        self.cross_attn = MultiHeadAttention(d, nb_heads)
+        self.feed_forward = PositionWiseFeedForward(d, d_ff)
+        self.norm1 = nn.LayerNorm(d)
+        self.norm2 = nn.LayerNorm(d)
+        self.norm3 = nn.LayerNorm(d)
+        self.dropout = nn.Dropout(dropout)
+        
+    def forward(self, x, enc_output, src_mask, tgt_mask):
+        attn_output = self.self_attn(x, x, x, tgt_mask)
+        x = self.norm1(x + self.dropout(attn_output))
+        attn_output = self.cross_attn(x, enc_output, enc_output, src_mask)
+        x = self.norm2(x + self.dropout(attn_output))
+        ff_output = self.feed_forward(x)
+        x = self.norm3(x + self.dropout(ff_output))
+        return x
 ```
+
+
+

@@ -309,7 +309,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-vision-transformer">ViT : Vision Transformer</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encodages">Encodages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-multiple">Auto-attention multiple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloc-trnsformer-et-encodeur">Bloc trnsformer et encodeur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocs-decodeurs">Blocs décodeurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-finale">Architecture finale</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -815,6 +822,8 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <span class="kn">import</span> <span class="nn">math</span>
 </pre></div>
 </div>
+<section id="encodages">
+<h3>Encodages<a class="headerlink" href="#encodages" title="Lien vers cette rubrique">#</a></h3>
 <p>On construit tout d’abord une classe permettant d’encoder un mot en un vecteur</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">linkcode</span>
 <span class="k">class</span> <span class="nc">Embedding</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -853,6 +862,9 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
+</section>
+<section id="auto-attention-multiple">
+<h3>Auto-attention multiple<a class="headerlink" href="#auto-attention-multiple" title="Lien vers cette rubrique">#</a></h3>
 <p>On implémente ensuite le mécanisme d’auto-attention multiple (multihead attention)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiHeadAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille_emb</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
@@ -913,6 +925,9 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 </div>
+</section>
+<section id="bloc-trnsformer-et-encodeur">
+<h3>Bloc trnsformer et encodeur<a class="headerlink" href="#bloc-trnsformer-et-encodeur" title="Lien vers cette rubrique">#</a></h3>
 <p>Et on décrit une classe représentant un bloc transformer</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransformerBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
@@ -970,7 +985,9 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">out</span>  <span class="c1">#32x10x512</span>
 </pre></div>
 </div>
-<p>On construit ensuite les blocs décodeurs</p>
+</section>
+<section id="blocs-decodeurs">
+<h3>Blocs décodeurs<a class="headerlink" href="#blocs-decodeurs" title="Lien vers cette rubrique">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DecoderBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">DecoderBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1012,6 +1029,86 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">out</span>
 </pre></div>
 </div>
+</section>
+<section id="architecture-finale">
+<h3>Architecture finale<a class="headerlink" href="#architecture-finale" title="Lien vers cette rubrique">#</a></h3>
+<p>On utilise alors les classes précédentes pour construire le transformer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Transformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">src_taille_voc</span><span class="p">,</span> <span class="n">target_taille_voc</span><span class="p">,</span> <span class="n">taille_seq</span><span class="p">,</span><span class="n">nb_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">expansion_factor</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Transformer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_taille_voc</span> <span class="o">=</span> <span class="n">target_taille_voc</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">TransformerEncoder</span><span class="p">(</span><span class="n">taille_seq</span><span class="p">,</span> <span class="n">src_taille_voc</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">nb_layers</span><span class="o">=</span><span class="n">nb_layers</span><span class="p">,</span> <span class="n">expansion_factor</span><span class="o">=</span><span class="n">expansion_factor</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="n">n_heads</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">TransformerDecoder</span><span class="p">(</span><span class="n">target_taille_voc</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">taille_seq</span><span class="p">,</span> <span class="n">nb_layers</span><span class="o">=</span><span class="n">nb_layers</span><span class="p">,</span> <span class="n">expansion_factor</span><span class="o">=</span><span class="n">expansion_factor</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="n">n_heads</span><span class="p">)</span>
+        
+    <span class="c1"># Cas de l&#39;auto-attention masquée</span>
+    <span class="k">def</span> <span class="nf">make_trg_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trg</span><span class="p">):</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">trg_len</span> <span class="o">=</span> <span class="n">trg</span><span class="o">.</span><span class="n">shape</span>
+        <span class="c1"># partie triangulaire sur de la matrice remplie de 1</span>
+        <span class="n">trg_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">trg_len</span><span class="p">,</span> <span class="n">trg_len</span><span class="p">)))</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">trg_len</span><span class="p">,</span> <span class="n">trg_len</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">trg_mask</span>    
+
+    <span class="c1"># Inférence : retourne la prédiction </span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="n">trg</span><span class="p">):</span>
+
+        <span class="n">trg_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_trg_mask</span><span class="p">(</span><span class="n">trg</span><span class="p">)</span>
+        <span class="n">enc_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="n">out_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">batch_size</span><span class="p">,</span><span class="n">seq_len</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">trg</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seq_len</span><span class="p">):</span> <span class="c1">#10</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">enc_out</span><span class="p">,</span><span class="n">trg_mask</span><span class="p">)</span> 
+            <span class="c1"># dernier token</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">out_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out_labels</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">):</span>
+
+        <span class="n">trg_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_trg_mask</span><span class="p">(</span><span class="n">trg</span><span class="p">)</span>
+        <span class="n">enc_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+   
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">trg</span><span class="p">,</span> <span class="n">enc_out</span><span class="p">,</span> <span class="n">trg_mask</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">outputs</span>
+</pre></div>
+</div>
+<p>Et on test sur les données.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src_taille_voc</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">target_taille_voc</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">nb_layers</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">taille_seq</span><span class="o">=</span> <span class="mi">12</span>
+
+
+<span class="c1">#  n créé deux chaînes de caractères (0 encode le début, 1 la fin)</span>
+<span class="n">src</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+                       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span><span class="n">taille_emb</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">src_taille_voc</span><span class="o">=</span><span class="n">src_taille_voc</span><span class="p">,</span> 
+                    <span class="n">target_taille_voc</span><span class="o">=</span><span class="n">target_taille_voc</span><span class="p">,</span> <span class="n">seq_length</span><span class="o">=</span><span class="n">taille_seq</span><span class="p">,</span>
+                    <span class="n">num_layers</span><span class="o">=</span><span class="n">nb_layers</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<span class="c1"># inférence</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span><span class="n">taille_emb</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">src_taille_voc</span><span class="o">=</span><span class="n">src_taille_voc</span><span class="p">,</span> 
+                    <span class="n">target_taille_voc</span><span class="o">=</span><span class="n">target_taille_voc</span><span class="p">,</span> <span class="n">seq_length</span><span class="o">=</span><span class="n">seq_length</span><span class="p">,</span> 
+                    <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">expansion_factor</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+                  
+
+<span class="n">src</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">trg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">trg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">)</span>
+<span class="n">out</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -1099,7 +1196,14 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-vision-transformer">ViT : Vision Transformer</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encodages">Encodages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-multiple">Auto-attention multiple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloc-trnsformer-et-encodeur">Bloc trnsformer et encodeur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocs-decodeurs">Blocs décodeurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-finale">Architecture finale</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
