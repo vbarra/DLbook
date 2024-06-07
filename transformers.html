@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transformers &#8212; Apprentissage profond</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transformers';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Utilisation de réseaux existants" href="transferLearning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Transformers</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transformers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-attention">Mécanisme d’attention</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mise-en-place">Mise en place</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulation-matricielle">Formulation matricielle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions">Extensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encodage-positionnel">Encodage positionnel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-par-produit-scalaire-mis-a-l-echelle">Auto attention par produit scalaire mis à l’échelle</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-auto-attention-multiple">Mécanisme d’auto attention multiple</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage-tal-nlp">Les transformers en traitement automatique du langage (TAL/NLP)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#modelisation-du-langage">Modélisation du langage</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-masquee">auto-attention masquée</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-de-texte">Génération de texte</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-d-images">Les transformers en traitement d’images</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagegpt">ImageGPT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-vision-transformer">ViT : Vision Transformer</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="transformers">
+<h1>Transformers<a class="headerlink" href="#transformers" title="Lien vers cette rubrique">#</a></h1>
+<p>Nous avons précédemment présenté les réseaux convolutifs, qui sont
+spécialisés dans le traitement des données qui se trouvent sur une
+grille régulière. Ils sont particulièrement adaptés au traitement des
+images, qui comportent un très grand nombre de variables d’entrée, ce
+qui exclut l’utilisation de réseaux entièrement connectés. Chaque couche
+d’un réseau convolutif utilise le partage des paramètres de manière à ce
+que les zones locales de l’image soient traitées de la même manière à
+chaque position dans l’image.<br />
+Nous introduisons ici les transformers, initialement destinés aux
+problèmes de traitement des langues naturelles, où l’entrée du réseau
+est une série d’encodages en grande dimension représentant des mots ou
+des fragments de mots. Les ensembles de données linguistiques partagent
+certaines des caractéristiques des données d’image. Le nombre de
+variables d’entrée peut être très important et les statistiques sont
+similaires à chaque position ; il n’est pas judicieux de réapprendre la
+signification du mot « maison » à chaque position possible dans un corps
+de texte. Cependant, les ensembles de données linguistiques présentent
+la complication suivante : les séquences de texte varient en longueur
+et, contrairement aux images, il n’existe pas de moyen facile de les
+redimensionner.</p>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Lien vers cette rubrique">#</a></h2>
+<p>Pour motiver l’utilisation de transformers, considérons le texte suivant
+: « Le restaurant a refusé de me servir un sandwich au jambon parce
+qu’il ne cuisine que des plats végétariens. Finalement, ils m’ont donné
+deux tranches de pain. L’ambiance était tout aussi bonne que la
+nourriture et le service. »</p>
+<p>L’objectif est de concevoir un réseau pour traiter ce texte dans une
+représentation adaptée aux tâches ultérieures. Par exemple, il pourrait
+être utilisé pour classer l’avis comme positif ou négatif ou pour
+répondre à des questions telles que « Le restaurant sert-il de la viande
+?</p>
+<p>Trois observations immédiates peuvent être effectuées :</p>
+<ol class="arabic simple">
+<li><p>l’entrée codée peut être très grande. Dans ce cas, chacun des 41
+mots pourrait être représenté par un vecteur de longueur 1024, de
+sorte que l’entrée codée serait de longueur
+41<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}1024=41984, même pour ce petit passage.
+Un corps de texte de taille plus réaliste peut comporter des
+centaines, voire des milliers de mots, de sorte que les réseaux
+complètement connectés ne sont pas utilisables en pratique.</p></li>
+<li><p>l’une des caractéristiques des problèmes de reconnaissance
+automatique du langage est que chaque entrée (une ou plusieurs
+phrases) est de longueur différente ; il n’est donc même pas évident
+d’appliquer un réseau complètement connecté. Ces observations
+suggèrent que le réseau devrait partager des paramètres entre les
+mots à différentes positions d’entrée, de la même manière que les
+réseaux convolutifs partagent des paramètres entre différentes
+positions d’image.</p></li>
+<li><p>le langage est ambigu : la syntaxe seule ne permet pas de savoir si
+le pronom « il » fait référence au restaurant ou au sandwich au
+jambon. Pour comprendre le texte, le mot « il » doit être relié
+d’une manière ou d’une autre au mot « restaurant ». Dans le langage
+des transformers, le premier mot doit prêter attention au second.
+Cela implique qu’il doit y avoir des liens entre les mots et que la
+force de ces liens dépend des mots eux-mêmes. En outre, ces liens
+doivent s’étendre sur de grandes parties du texte. Par exemple, le
+mot « L” » dans la dernière phrase fait également référence au
+restaurant.</p></li>
+</ol>
+</section>
+<section id="mecanisme-d-attention">
+<h2>Mécanisme d’attention<a class="headerlink" href="#mecanisme-d-attention" title="Lien vers cette rubrique">#</a></h2>
+<section id="mise-en-place">
+<h3>Mise en place<a class="headerlink" href="#mise-en-place" title="Lien vers cette rubrique">#</a></h3>
+<p>Un modèle de traitement de texte (i) utilise le partage des paramètres
+pour traiter les longs passages d’entrée de différentes longueurs et
+(ii) contient des connexions entre les représentations de mots qui
+dépendent des mots eux-mêmes. Le transformer acquiert ces deux
+propriétés en utilisant un mécanisme d”(auto-)attention.</p>
+<p>Une couche standard d’un réseau de neurones prend en entrée un vecteur
+<span class="math notranslate nohighlight">\(\mathbf x\in\mathbb R^d\)</span> et calcule une sortie du type
+$<span class="math notranslate nohighlight">\(f(\mathbf x) = ReLU(\mathbf w^T\mathbf x + b)\)</span>$</p>
+<p>Un bloc d’attention <span class="math notranslate nohighlight">\(A()\)</span> prend <span class="math notranslate nohighlight">\(N\)</span> entrées
+<span class="math notranslate nohighlight">\(\mathbf x_1,\cdots \mathbf x_N\)</span> de taille <span class="math notranslate nohighlight">\(\mathbb R^d\)</span> et renvoie <span class="math notranslate nohighlight">\(N\)</span>
+vecteurs de sortie de la même taille. Dans le contexte du traitement
+automatique du langage, chaque entrée représente un mot ou un fragment
+de mot. Tout d’abord, un ensemble de vecteurs est calculé pour chaque
+entrée</p>
+<div class="math notranslate nohighlight">
+\[\forall i\in[\![1,N]\!]\; \mathbf v_i=\mathbf W_v^T\mathbf x_i + \mathbf b_v, \mathbf b_v\in \mathbb R^d, \mathbf W_v\in\mathcal{M}_d(\mathbb R)\]</div>
+<p>Les poids et biais <span class="math notranslate nohighlight">\(\mathbf W_v,\mathbf b_v\)</span> sont les mêmes pour toutes
+les entrées. Puis les vecteurs de sortie sont calculés par</p>
+<div class="math notranslate nohighlight">
+\[\forall j\in[\![1,N]\!]\; \mathbf A_j(\mathbf x_1,\cdots \mathbf x_N) = \displaystyle\sum_{i=1}^N a(\mathbf x_i,\mathbf x_j)\mathbf v_i\]</div>
+<p>le scalaire <span class="math notranslate nohighlight">\(a(\mathbf x_i,\mathbf x_j)\)</span> étant l’attention que la
+<span class="math notranslate nohighlight">\(j\)</span>-ième sortie accorde à l’entrée <span class="math notranslate nohighlight">\(x_i\)</span>. Les <span class="math notranslate nohighlight">\(N\)</span> valeurs
+<span class="math notranslate nohighlight">\(a(\bullet ,\mathbf x_j)\)</span> sont positifs et de somme unité.</p>
+<p>Pour calculer l’attention, on définit deux transformations linéaires des
+entrées :
+$<span class="math notranslate nohighlight">\(\begin{aligned}
+\forall i\in[\![1,N]\!]\; \mathbf q_i&amp;=&amp;\mathbf W_q^T\mathbf x_i + \mathbf b_q\\ 
+\mathbf k_i&amp;=&amp;\mathbf W_k^T\mathbf x_i + \mathbf b_k
+\end{aligned}\)</span>$</p>
+<p>où les <span class="math notranslate nohighlight">\(\mathbf q_i\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf k_i\)</span>) sont
+les requêtes (resp. clés). Ces dénominations proviennent de la théorie
+des bases de données.</p>
+<p>Un produit scalaire entre requêtes et clés est alors effectué, et passé
+à un softmax (pour assurer la positivité et la somme à un)</p>
+<div class="math notranslate nohighlight">
+\[a(\mathbf x_i ,\mathbf x_j) = \frac{exp(\mathbf k_i^T\mathbf q_j)}{\displaystyle\sum_{l=1}^N exp(\mathbf k_l^T\mathbf q_j)}\]</div>
+<p>Le prodiut scalaire entre requête et clé donne une mesure de similarité
+entre ces deux entités, et l’attention <span class="math notranslate nohighlight">\(a(\bullet ,\mathbf x_j)\)</span> dépend
+donc de la similarité entre <span class="math notranslate nohighlight">\(q_j\)</span> et toutes les clés.</p>
+<p>Cette approche permet d’avoir un jeu de paramètres partagé entre toutes
+les entrées
+(<span class="math notranslate nohighlight">\(\mathbf W_v,\mathbf b_v,\mathbf W_q,\mathbf b_q,\mathbf W_k,\mathbf b_k\)</span>),
+indépendant de <span class="math notranslate nohighlight">\(N\)</span> et le réseau correspondant peut être appliqué à des
+entrées de longueur quelconque.</p>
+</section>
+<section id="formulation-matricielle">
+<h3>Formulation matricielle<a class="headerlink" href="#formulation-matricielle" title="Lien vers cette rubrique">#</a></h3>
+<p>En formant la matrice <span class="math notranslate nohighlight">\(\mathbf X\in\mathcal{M}_{d,N}(\mathbb R)\)</span> dont
+les colonnes sont les <span class="math notranslate nohighlight">\(\mathbf x_i\)</span>, alors le mécanisme d’attention peut
+s’écrire :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\mathbf V(\mathbf X) &amp;=&amp; \mathbf b_v \mathbf 1^T + \mathbf W_v \mathbf X\\
+\mathbf Q(\mathbf X) &amp;=&amp; \mathbf b_q \mathbf 1^T + \mathbf W_q \mathbf X\\
+\mathbf K(\mathbf X) &amp;=&amp; \mathbf b_k \mathbf 1^T + \mathbf W_k \mathbf X\\
+\mathbf A(\mathbf X) &amp;=&amp; \mathbf V(\mathbf X).Softmax(\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)) 
+\end{aligned}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(Softmax\)</span> appliquant des fonctions softmax indépendantes
+sur chaque colonne de la matrice argument.</p>
+</section>
+<section id="extensions">
+<h3>Extensions<a class="headerlink" href="#extensions" title="Lien vers cette rubrique">#</a></h3>
+<p>Le mécanisme précédent, dit d’auto-attention (self attention) eest
+décliné en plusieurs variantes très utilisées en pratique.</p>
+<section id="encodage-positionnel">
+<h4>Encodage positionnel<a class="headerlink" href="#encodage-positionnel" title="Lien vers cette rubrique">#</a></h4>
+<p>Le mécanisme d’auto-attention ne tient pas compte d’une information
+importante : le calcul est le même quel que soit l’ordre des entrées
+<span class="math notranslate nohighlight">\(\mathbf x_i\)</span>. Plus précisément, il est équivariant par rapport aux
+permutations des entrées. Cependant, l’ordre est important lorsque les
+entrées correspondent aux mots d’une phrase. Il existe alors deux
+approches principales pour intégrer les informations de position :</p>
+<ol class="arabic simple">
+<li><p>l’encodage positionnel absolu : une matrice encodant l’information
+positionnelle <span class="math notranslate nohighlight">\(\mathbf P\)</span> est ajoutée aux entrées <span class="math notranslate nohighlight">\(\mathbf X\)</span>.
+Chaque colonne de <span class="math notranslate nohighlight">\(\mathbf P\)</span> est unique et contient une information
+de position de l’entrée correspondante. <span class="math notranslate nohighlight">\(\mathbf P\)</span> peut être
+apprise ou fixée.</p></li>
+<li><p>l’encodage positionnel absolu : l’entrée d’un mécanisme
+d’auto-attention peut être une phrase entière, plusieurs phrases ou
+un simple fragment de phrase, et la position absolue d’un mot est
+beaucoup moins importante que la position relative entre deux
+entrées. Si le système connaît la position absolue des deux entrées,
+la position relative peut être déterminée, mais les codages
+positionnels relatifs encodent directement cette information. Chaque
+élément de la matrice d’attention correspond à un décalage
+particulier entre la position <span class="math notranslate nohighlight">\(pq\)</span> de la requête et la position <span class="math notranslate nohighlight">\(pk\)</span>
+de la clé. Les codages positionnels relatifs apprennent un paramètre
+<span class="math notranslate nohighlight">\(\pi_{pq,pk}\)</span> pour chaque décalage et l’utilisent pour modifier la
+matrice d’attention en ajoutant ces valeurs, en les multipliant ou
+en les utilisant pour modifier la matrice d’attention d’une autre
+manière.</p></li>
+</ol>
+</section>
+<section id="auto-attention-par-produit-scalaire-mis-a-l-echelle">
+<h4>Auto attention par produit scalaire mis à l’échelle<a class="headerlink" href="#auto-attention-par-produit-scalaire-mis-a-l-echelle" title="Lien vers cette rubrique">#</a></h4>
+<p>Les produits scalaires dans le calcul de l’attention peuvent avoir de
+grandes amplitudes et déplacer les arguments de la fonction softmax dans
+une région où la plus grande valeur domine. De petites modifications des
+entrées de la fonction softmax ont désormais peu d’effet sur la sortie
+(les gradients sont très faibles), ce qui rend le modèle difficile à
+entraîner. Pour éviter cet inconvénient, les produits scalaires sont mis
+à l’échelle par la racine carrée de la dimension <span class="math notranslate nohighlight">\(d_q\)</span> des requêtes et
+des clés :
+$<span class="math notranslate nohighlight">\(A(\mathbf X) = \mathbf V(\mathbf X).Softmax(\frac{\mathbf K(\mathbf X)^T\mathbf Q(\mathbf X)}{\sqrt{d_q}})\)</span>$</p>
+</section>
+<section id="mecanisme-d-auto-attention-multiple">
+<h4>Mécanisme d’auto attention multiple<a class="headerlink" href="#mecanisme-d-auto-attention-multiple" title="Lien vers cette rubrique">#</a></h4>
+<p><span class="math notranslate nohighlight">\(H\)</span> ensembles de requêtes et clés sont calculés</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\mathbf V_h(\mathbf X) &amp;=&amp; \mathbf b_{vh} \mathbf 1^T + \mathbf W_{vh} \mathbf X\\
+\mathbf Q_h(\mathbf X) &amp;=&amp; \mathbf b_{qh} \mathbf 1^T + \mathbf W_{qh} \mathbf X\\
+\mathbf H_h(\mathbf X) &amp;=&amp; \mathbf b_{kh} \mathbf 1^T + \mathbf W_{kh} \mathbf X\\
+\mathbf A_h(\mathbf X) &amp;=&amp; \mathbf V_h(\mathbf X).Softmax(\frac{\mathbf K_h(\mathbf X)^T\mathbf Q_h(\mathbf X)}{\sqrt{d_q}}) 
+\end{aligned}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf A_h(\mathbf X)\)</span> est le <span class="math notranslate nohighlight">\(h\)</span>-ième mécanisme
+d’attention ou tête (head). Typiquement, si la dimension des entrées
+<span class="math notranslate nohighlight">\(\mathbf x_i\)</span> est <span class="math notranslate nohighlight">\(d\)</span> et qu’il y a <span class="math notranslate nohighlight">\(H\)</span> têtes, les valeurs, les requêtes
+et les clés seront toutes de taille <span class="math notranslate nohighlight">\(d/H\)</span> pour une implémentation
+efficiente. Les sorties de ces mécanismes d’auto-attention sont
+concaténées verticalement, et une autre transformation linéaire
+<span class="math notranslate nohighlight">\(\mathbf W_c\)</span> est appliquée pour les combiner</p>
+<div class="math notranslate nohighlight">
+\[M_h\mathbf A(X) = \mathbf W_c [\mathbf A_1(X)^T \cdots \mathbf A_H(X)^T]^T\]</div>
+<p>Les têtes multiples semblent être nécessaires au bon fonctionnement du
+transformer, on pense qu’elles rendent le réseau d’auto-attention plus
+résistant aux mauvaises initialisations.</p>
+</section>
+</section>
+<section id="id1">
+<h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
+<p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : les
+transformers. Celui-ci se compose d’une unité d’auto-attention à
+plusieurs têtes (qui permet aux représentations de mots d’interagir les
+unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(PMC\)</span> qui
+opère séparément sur chaque mot. Les deux unités sont des réseaux
+résiduels (leur sortie est ajoutée à l’entrée d’origine). En outre, il
+est courant d’ajouter une opération de normalisation de couche
+<span class="math notranslate nohighlight">\(LayerNorm\)</span> après les réseaux d’auto-attention et les perceptrons
+multicouches. La séquence d’opérations complète peut être décrite par</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\mathbf X &amp;=&amp; \mathbf X+ M_h\mathbf A(X)\\ 
+\mathbf X &amp;=&amp; LayerNorm(\mathbf X)\\
+\mathbf x_i &amp;=&amp; \mathbf x_i + PMC(\mathbf x_i),\; i\in[\![1,N]\!]\\
+\mathbf X &amp;=&amp; LayerNorm(\mathbf X)
+\end{aligned}\end{split}\]</div>
+<p>En pratique, les données passent par plusieurs de ces transformers.</p>
+</section>
+</section>
+<section id="les-transformers-en-traitement-automatique-du-langage-tal-nlp">
+<h2>Les transformers en traitement automatique du langage (TAL/NLP)<a class="headerlink" href="#les-transformers-en-traitement-automatique-du-langage-tal-nlp" title="Lien vers cette rubrique">#</a></h2>
+<p>Une chaîne classique de traitement en classique en NLP commence par un
+tokenizer qui divise le texte en mots ou en fragments de mots. Chacun de
+ces tokens est ensuite mis en correspondance avec une représentation
+apprise. Ces représentations passent par une série de transformers.</p>
+<section id="tokenizer">
+<h3>Tokenizer<a class="headerlink" href="#tokenizer" title="Lien vers cette rubrique">#</a></h3>
+<p>Le texte est tout d’abord divisé en unités constitutives plus petites
+(jetons ou tokens) à partir d’un vocabulaire de jetons possibles. Ces
+jetons ne représentent pas nécessairement ces mots car :</p>
+<ul class="simple">
+<li><p>inévitablement, certains mots (par exemple, des noms propres) ne
+figureront pas dans le vocabulaire.</p></li>
+<li><p>la manière de gérer la ponctuation n’est pas claire, mais elle est
+importante. Si une phrase se termine par un point d’interrogation,
+il faut encoder cette information.</p></li>
+<li><p>Le vocabulaire aurait besoin de différents jetons pour les versions
+d’un même mot avec des suffixes différents (par exemple, marche,
+marches, marché, marchés), et il n’y a aucun moyen de clarifier que
+ces variations sont liées.</p></li>
+</ul>
+<p>Une approche consisterait à utiliser les lettres et les signes de
+ponctuation comme vocabulaire, mais cela impliquerait de découper le
+texte en très petites parties et d’exiger du réseau subséquent qu’il
+réapprenne les relations entre elles.</p>
+<p>Dans la pratique, un compromis entre les lettres et les mots complets
+est utilisé, et le vocabulaire final comprend à la fois des mots
+courants et des fragments de mots à partir desquels des mots plus grands
+et moins fréquents peuvent être composés. Le vocabulaire est calculé à
+l’aide d’un tokeniseur de sous-mots tel que le codage par paires
+d’octets, qui fusionne de manière gloutonne les sous-chaînes les plus
+courantes en fonction de leur fréquence.</p>
+</section>
+<section id="representation">
+<h3>Représentation<a class="headerlink" href="#representation" title="Lien vers cette rubrique">#</a></h3>
+<p>Chaque jeton du vocabulaire <span class="math notranslate nohighlight">\(V\)</span> est associé à une représentation
+(embedding) de mot unique, et les représentations pour l’ensemble du
+vocabulaire sont stockées dans une matrice
+<span class="math notranslate nohighlight">\(\mathbf W_e\in\mathcal{M}_{d,|V|}(\mathbb{R})\)</span>. Pour ce faire, les <span class="math notranslate nohighlight">\(N\)</span>
+jetons d’entrée sont d’abord encodés dans une matrice
+<span class="math notranslate nohighlight">\(\mathbf T \in\mathcal{M}_{|V|,N}(\mathbb{R})\)</span>, où la <span class="math notranslate nohighlight">\(n\)</span>-ième colonne
+correspond au <span class="math notranslate nohighlight">\(n\)</span>-ième jeton et est un vecteur one-hot (un vecteur où
+chaque entrée est zéro, sauf l’entrée correspondant au jeton, de valeur
+1). Les représentations des entrées sont calculées sous la forme
+<span class="math notranslate nohighlight">\(\mathbf X =\mathbf W_e\mathbf T\)</span> et <span class="math notranslate nohighlight">\(\mathbf W_e\)</span> est appris comme
+n’importe quel autre paramètre du réseau. Une taille <span class="math notranslate nohighlight">\(d\)</span> typique est de
+1024, et une taille totale de vocabulaire <span class="math notranslate nohighlight">\(|V|\)</span> typique est de 30 000,
+donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
+la mise en place des transformers.</p>
+</section>
+<section id="id2">
+<h3>Transformers<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h3>
+<p>Enfin, la matrice <span class="math notranslate nohighlight">\(X\)</span> représentant le texte passe par une série de <span class="math notranslate nohighlight">\(K\)</span>
+transformers (transformer model). Il existe trois types de ces modèles,
+décrits dans les paragraphes suivants. Globalement, un encodeur
+transforme la représentation du texte en une représentation qui peut
+prendre en charge une variété de tâches. Un décodeur prédit le prochain
+jeton pour poursuivre le texte d’entrée. Les encodeurs-décodeurs sont
+utilisés dans les tâches de séquence à séquence, où une chaîne de texte
+est convertie en une autre (par exemple, traduction automatique).</p>
+<section id="exemple-de-modele-a-encodeur-bert">
+<h4>Exemple de modèle à encodeur : BERT<a class="headerlink" href="#exemple-de-modele-a-encodeur-bert" title="Lien vers cette rubrique">#</a></h4>
+<p>BERT est un modèle d’encodeur qui utilise un vocabulaire de 30 000 mots.
+Les jetons d’entrée sont convertis en représentations de mots à 1024
+dimensions et passent par <span class="math notranslate nohighlight">\(K\)</span>=24 transformers. Chacun d’eux contient un
+mécanisme d’auto-attention avec 16 têtes. Les requêtes, les clés et les
+valeurs de chaque tête sont de dimension 64. La dimension de la couche
+cachée unique dans le réseau complètement connecté du transformer est de
+4096. Le nombre total de paramètres est de 340 millions. Lors de la
+publication de BERT, ce nombre était considéré comme élevé, mais il est
+aujourd’hui bien inférieur à celui des modèles les plus récents. Les
+modèles d’encodeurs comme BERT exploitent l’apprentissage par transfert.
+Pendant le préapprentissage, les paramètres de l’architecture du
+transformer sont appris par auto-supervision (pas besoin de labels) à
+partir d’un large corpus de texte. L’objectif est ici que le modèle
+apprenne des informations générales sur les statistiques de la langue.
+Au cours de la phase de fine tuning, le réseau résultant est adapté pour
+résoudre une tâche particulière à l’aide d’un plus petit corpus de
+données d’apprentissage supervisé.</p>
+</section>
+<section id="exemple-de-modele-a-decodeur-gpt3">
+<h4>Exemple de modèle à décodeur : GPT3<a class="headerlink" href="#exemple-de-modele-a-decodeur-gpt3" title="Lien vers cette rubrique">#</a></h4>
+<p>On présente ici une description de haut niveau de GPT3. L’architecture
+de base est très similaire à celle du modèle d’encodage et comprend une
+série de transformers qui opèrent sur les représentations de mots
+appris. Cependant, l’objectif est différent. L’encodeur vise à
+construire une représentation du texte qui peut être affinée pour
+résoudre une variété de tâches plus spécifiques. À l’inverse, le
+décodeur n’a qu’un seul objectif : générer le jeton suivant dans une
+séquence. Il peut générer un passage de texte cohérent en réinjectant la
+séquence étendue dans le modèle.</p>
+<section id="modelisation-du-langage">
+<h5>Modélisation du langage<a class="headerlink" href="#modelisation-du-langage" title="Lien vers cette rubrique">#</a></h5>
+<p>: GPT3 construit un modèle linguistique autorégressif. Pour illustrer ce
+modèle, considérons la phrase <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> = « Henri mange beaucoup de
+viande le soir ». Pour simplifier, supposons que les jetons sont les
+mots complets. La probabilité de la phrase complète est :</p>
+<div class="math notranslate nohighlight">
+\[P(\mathcal{P}) = P(\textrm{Henri})P(\textrm{mange}|\textrm{Henri})P(\textrm{beaucoup}|\textrm{Henri mange})\cdots P(\textrm{soir}|\textrm{Henri mange beaucoup de viande le })\]</div>
+</section>
+<section id="auto-attention-masquee">
+<h5>auto-attention masquée<a class="headerlink" href="#auto-attention-masquee" title="Lien vers cette rubrique">#</a></h5>
+<p>: pour entraîner un décodeur, on maximise la log-probabilité du texte
+d’entrée dans le cadre du modèle autorégressif. L’idéal serait de
+transmettre la phrase entière et de calculer simultanément toutes les
+log-probabilités et tous les gradients. Cependant, cela pose un problème
+: si on transmet la phrase complète, le terme qui calcule
+<span class="math notranslate nohighlight">\(log P(\textrm{beaucoup}|\textrm{Henri mange})\)</span> a accès à la fois à la
+réponse attendue « beaucoup » et au contexte suivant « de viande le
+soir ». Par conséquent, le système peut tricher au lieu d’apprendre à
+prédire les mots suivants et ne s’entraînera pas correctement. Fort
+heureusement, les jetons n’interagissent que dans les couches
+d’auto-attention d’un réseau transformer. Le problème peut donc être
+résolu en s’assurant que l’attention portée à la réponse et au contexte
+est nulle. Pour ce faire, les produits scalaires correspondants dans le
+calcul de l’auto-attention sont réglés à <span class="math notranslate nohighlight">\(-\infty\)</span> avant d’être passés à
+la fonction softmax. C’est le principe de l’auto-attention masquée.
+L’ensemble du réseau du décodeur fonctionne comme suit. Le texte
+d’entrée est encodé en jetons, et les jetons sont convertis en
+embeddings. Ces derniers sont transmis au réseau de transformers, qui
+utilisent l’auto-attention masquée, de sorte qu’ils ne peuvent
+s’intéresser qu’aux jetons actuels et précédents. Chacune des
+représentations de sortie peut être considérée comme représentant une
+phrase partielle, et pour chacune d’entre elles, l’objectif est de
+prédire le jeton suivant dans la séquence.</p>
+<p>Après les transformers, une couche linéaire fait correspondre chaque
+représentation de mot à la taille du vocabulaire, suivie d’une fonction
+softmax qui convertit ces valeurs en probabilités. Pendant
+l’apprentissage, on cherche à maximiser la somme des log-probabilités de
+l’élément suivant dans la séquence de référence à chaque position en
+utilisant une fonction de perte d’entropie croisée multiclasse standard.</p>
+</section>
+<section id="generation-de-texte">
+<h5>Génération de texte<a class="headerlink" href="#generation-de-texte" title="Lien vers cette rubrique">#</a></h5>
+<p>: puisque ce modèle définit un modèle de probabilité sur des séquences
+de texte, il peut être utilisé pour échantillonner de nouveaux exemples
+de texte plausibles. Pour générer à partir du modèle, on débute par une
+séquence de texte en entrée (qui peut être simplement un jeton spécial
+<span class="math notranslate nohighlight">\(&lt;\)</span>start<span class="math notranslate nohighlight">\(&gt;\)</span> indiquant le début de la séquence) et on l’introduit dans le
+réseau, qui produit alors les probabilités sur les jetons suivants
+possibles. On peut alors choisir le jeton le plus probable ou
+échantillonner à partir de la distribution de probabilités construite.
+La nouvelle séquence étendue peut être réinjectée dans le réseau du
+décodeur qui fournit la distribution de probabilités sur le jeton
+suivant. En répétant ce processus, on génère un texte entier.</p>
+<p>En pratique, de nombreuses stratégies peuvent rendre le texte de sortie
+plus cohérent. Par exemple, la recherche par faisceau tient compte des
+nombreux compléments de phrases possibles pour trouver le plus probable
+(qui n’est pas nécessairement trouvé en choisissant de manière gloutonne
+le mot suivant le plus probable à chaque étape). L’échantillonnage top-k
+tire aléatoirement le mot suivant parmi les <span class="math notranslate nohighlight">\(k\)</span> possibilités les plus
+probables afin d’éviter que le système ne choisisse accidentellement
+dans la longue traîne des jetons à faible probabilité, ce qui conduirait
+à une impasse linguistique.</p>
+<p>GPT3 est un exemple de LLM (Large Language Model). La longueur des
+séquences est de 2048 jetons. Il y a <span class="math notranslate nohighlight">\(K\)</span>=96 transformers, chacun
+calculant une représentation de taille 12288. Dans les couches d’auto
+attention, on compte 96 têtes et la dimension des requêtes et des clés
+est de 128. Tout celà amène à un nombre de paramètres de 175 milliards,
+entraînés sur 300 milliards de jetons (taille d’un batch : 3.2 million
+de jetons)</p>
+</section>
+</section>
+<section id="exemple-de-modele-a-encodeur-decodeur-traduction-automatique">
+<h4>Exemple de modèle à encodeur-décodeur : traduction automatique<a class="headerlink" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique" title="Lien vers cette rubrique">#</a></h4>
+<p>La traduction entre langues est un exemple de tâche de séquence à
+séquence. Cette tâche nécessite un encodeur (pour calculer une bonne
+représentation de la phrase source) et un décodeur (pour générer la
+phrase dans la langue cible). Cette tâche peut être abordée à l’aide
+d’un modèle encodeur-décodeur. Prenons l’exemple d’une traduction de
+l’anglais vers le français. L’encodeur reçoit la phrase en anglais et la
+traite à travers une série de transformers pour créer une représentation
+de sortie pour chaque jeton. Pendant l’entraînement, le décodeur reçoit
+la traduction de référence en français et la fait passer par une série
+de transformers qui utilisent l’auto-attention masquée et prédisent le
+mot suivant à chaque position.</p>
+<p>Cependant, les couches du décodeur s’occupent également de la sortie de
+l’encodeur. Par conséquent, chaque mot français en sortie est
+conditionné par les mots précédents en sortie et par l’ensemble de la
+phrase anglaise qu’il traduit. Pour ce faire, on modifie les
+transformers du décodeur. Le transformer original du décodeur consistait
+en une couche d’auto-attention masquée suivie d’un réseau appliqué
+individuellement à chaque représentation. Une nouvelle couche
+d’auto-attention est alors ajoutée entre ces deux composants, dans
+laquelle les représentations du décodeur s’intéressent aux
+représentations de l’encodeur. Cette méthode utilise une version de
+l’auto-attention connue sous le nom d’attention encodeur-décodeur ou
+d’attention croisée, où les requêtes sont calculées à partir des
+représentations du décodeur et les clés et valeurs à partir des
+représentations de l’encodeur.</p>
+</section>
+</section>
+</section>
+<section id="les-transformers-en-traitement-d-images">
+<h2>Les transformers en traitement d’images<a class="headerlink" href="#les-transformers-en-traitement-d-images" title="Lien vers cette rubrique">#</a></h2>
+<p>Le succès des transformers en TAL a conduit à se pencher sur leur
+utilisation sur des images. L’idée semblait incongrue, et ce pour deux
+raisons : il y a beaucoup plus de pixels dans une image que de mots dans
+une phrase, de sorte que la complexité quadratique de l’auto-attention
+constitue un goulot d’étranglement pratique. De plus, les réseaux
+convolutifs ont un bon biais inductif parce que chaque couche est
+équivariante à la translation spatiale et qu’ils prennent en compte la
+structure 2D de l’image. Ce qu’il faudrait apprendre dans un réseau
+transformer. Malgré cela, les réseaux transformers ont désormais éclipsé
+les performances des réseaux convolutifs pour entre autres la
+classification d’images. Cela s’explique en partie par l’échelle à
+laquelle ils peuvent être construit et par les grandes quantités de
+données qui peuvent être utilisées pour pré-entraîner les réseaux.</p>
+<section id="imagegpt">
+<h3>ImageGPT<a class="headerlink" href="#imagegpt" title="Lien vers cette rubrique">#</a></h3>
+<p>ImageGPT est un décodeur. Il construit un modèle autorégressif de pixels
+qui assimile une image partielle et prédit la valeur du pixel suivant.
+La complexité quadratique du réseau de transformers signifie que le plus
+grand modèle (qui contient 6,8 milliards de paramètres) ne peut
+fonctionner que sur des images de taille 64<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}64.
+En outre, pour que le système soit viable, l’espace colorimétrique RVB
+original de 24 bits a dû originellement être quantifié en un espace
+colorimétrique de neuf bits, de sorte que le système assimile (et
+prédit) l’un des 512 jetons possibles à chaque position. Les images sont
+naturellement des objets 2D, mais ImageGPT apprend simplement un codage
+positionnel différent pour chaque pixel. Il doit donc apprendre que
+chaque pixel a une relation étroite avec ses voisins précédents ainsi
+qu’avec les pixels voisins de la rangée supérieure.</p>
+<p>La représentation interne de ce décodeur a été utilisée comme base pour
+la classification des images. Les représentations des pixels finales
+sont moyennées et une couche linéaire les met en correspondance avec des
+activations qui passent par une couche softmax pour prédire les
+probabilités de classe. Le système est pré-entraîné sur un large corpus
+d’images web, puis affiné sur la base de données ImageNet redimensionnée
+à 48<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}48 pixels à l’aide d’une fonction de perte
+qui contient à la fois un terme d’entropie croisée pour la
+classification des images et un terme de perte générative pour la
+prédiction des pixels. Malgré l’utilisation d’une grande quantité de
+données d’apprentissage externes, le système a obtenu un taux d’erreur
+de 27,4% sur ImageNet. Ce taux est inférieur à celui des architectures
+convolutives de l’époque, mais reste impressionnant compte tenu de la
+petite taille de l’image d’entrée ; sans surprise, il ne parvient pas à
+classer les images où l’objet cible est petit ou mince.</p>
+</section>
+<section id="vit-vision-transformer">
+<h3>ViT : Vision Transformer<a class="headerlink" href="#vit-vision-transformer" title="Lien vers cette rubrique">#</a></h3>
+<p>ViT s’est attaqué au problème de la résolution de l’image en divisant
+l’image en patchs de 16<span class="math notranslate nohighlight">\(\times\)</span><code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">--&gt;</span></code>{=html}16 . Chaque patch est
+mis en correspondance avec une dimension inférieure par le biais d’une
+transformation linéaire apprise, et ces représentations sont introduites
+dans le réseau du transformer. Les codages positionnels 1D standard sont
+appris. Il s’agit d’un modèle encodeur avec un jeton <span class="math notranslate nohighlight">\(&lt;\)</span>cls<span class="math notranslate nohighlight">\(&gt;\)</span>.
+Cependant, contrairement à BERT, il utilise un pré-entraînement
+supervisé sur une grande base de données de 303 millions d’images
+étiquetées provenant de 18 000 classes. Le jeton <span class="math notranslate nohighlight">\(&lt;\)</span>cls<span class="math notranslate nohighlight">\(&gt;\)</span> est mappé via
+une couche finale du réseau pour créer des activations qui sont
+introduites dans une fonction softmax pour générer des probabilités de
+classe.</p>
+<p>Après le pré-entraînement, le système est appliqué en classification en
+remplaçant la couche finale par une couche qui correspond au nombre de
+classes souhaité et qui est ajustée par fine tuning. Ce système a obtenu
+un taux d’erreur de 11,45% pour le top 1 sur ImageNet. Cependant, il n’a
+pas obtenu d’aussi bons résultats que les meilleurs réseaux convolutifs
+contemporains sans pré-entraînement supervisé. Le fort biais inductif
+des réseaux convolutifs ne peut être surmonté que que par l’utilisation
+de quantités extrêmement importantes de données d’entraînement.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="transferLearning.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Utilisation de réseaux existants</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-attention">Mécanisme d’attention</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mise-en-place">Mise en place</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulation-matricielle">Formulation matricielle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions">Extensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encodage-positionnel">Encodage positionnel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-par-produit-scalaire-mis-a-l-echelle">Auto attention par produit scalaire mis à l’échelle</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-auto-attention-multiple">Mécanisme d’auto attention multiple</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage-tal-nlp">Les transformers en traitement automatique du langage (TAL/NLP)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#modelisation-du-langage">Modélisation du langage</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-masquee">auto-attention masquée</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-de-texte">Génération de texte</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-d-images">Les transformers en traitement d’images</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagegpt">ImageGPT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-vision-transformer">ViT : Vision Transformer</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Vincent BARRA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
