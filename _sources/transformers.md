@@ -350,7 +350,7 @@ mots complets. La probabilité de la phrase complète est :
 
 $$P(\mathcal{P}) = P(\textrm{Henri})P(\textrm{mange}|\textrm{Henri})P(\textrm{beaucoup}|\textrm{Henri mange})\cdots P(\textrm{soir}|\textrm{Henri mange beaucoup de viande le })$$
 
-**auto-attention masquée** : pour entraîner un décodeur, on maximise la log-probabilité du texte
+**Auto-attention masquée** : pour entraîner un décodeur, on maximise la log-probabilité du texte
 d'entrée dans le cadre du modèle autorégressif. L'idéal serait de
 transmettre la phrase entière et de calculer simultanément toutes les
 log-probabilités et tous les gradients. Cependant, cela pose un problème
@@ -442,7 +442,7 @@ représentations de l'encodeur.
 
 ## Les transformers en traitement d'images
 
-Le succès des transformers en TAL a conduit à se pencher sur leur
+Le succès des transformers en traitement automatique du langage a conduit à se pencher sur leur
 utilisation sur des images. L'idée semblait incongrue, et ce pour deux
 raisons : il y a beaucoup plus de pixels dans une image que de mots dans
 une phrase, de sorte que la complexité quadratique de l'auto-attention
@@ -453,12 +453,12 @@ structure 2D de l'image. Ce qu'il faudrait apprendre dans un réseau
 transformer. Malgré cela, les réseaux transformers ont désormais éclipsé
 les performances des réseaux convolutifs pour entre autres la
 classification d'images. Cela s'explique en partie par l'échelle à
-laquelle ils peuvent être construit et par les grandes quantités de
+laquelle ils peuvent être construits et par les grandes quantités de
 données qui peuvent être utilisées pour pré-entraîner les réseaux.
 
 ### ImageGPT
 
-ImageGPT est un décodeur. Il construit un modèle autorégressif de pixels
+[ImageGPT](https://openai.com/index/image-gpt/) est un décodeur. Il construit un modèle autorégressif de pixels
 qui assimile une image partielle et prédit la valeur du pixel suivant.
 La complexité quadratique du réseau de transformers signifie que le plus
 grand modèle (qui contient 6,8 milliards de paramètres) ne peut
@@ -473,8 +473,7 @@ chaque pixel a une relation étroite avec ses voisins précédents ainsi
 qu'avec les pixels voisins de la rangée supérieure.
 
 La représentation interne de ce décodeur a été utilisée comme base pour
-la classification des images. Les représentations des pixels finales
-sont moyennées et une couche linéaire les met en correspondance avec des
+la classification des images. Les représentations finales des pixels sont moyennées et une couche linéaire les met en correspondance avec des
 activations qui passent par une couche softmax pour prédire les
 probabilités de classe. Le système est pré-entraîné sur un large corpus
 d'images web, puis affiné sur la base de données ImageNet redimensionnée
@@ -490,7 +489,7 @@ classer les images où l'objet cible est petit ou mince.
 
 ### ViT : Vision Transformer
 
-ViT s'est attaqué au problème de la résolution de l'image en divisant
+[ViT](https://arxiv.org/abs/2010.11929) s'est attaqué au problème de la résolution de l'image en divisant
 l'image en patchs de 16$\times$16 . Chaque patch est
 mis en correspondance avec une dimension inférieure par le biais d'une
 transformation linéaire apprise, et ces représentations sont introduites
