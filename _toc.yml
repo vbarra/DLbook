@@ -14,4 +14,5 @@ parts:
       - file: cnn
       - file: ae
       - file: rnn
-      - file: transferLearning
+      - file: transferLearning      
+      - file: transformers

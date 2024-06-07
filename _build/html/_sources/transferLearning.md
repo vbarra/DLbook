@@ -573,26 +573,26 @@ Le réseau utilisé est ResNet34, entraîné sur ImageNet. On ajoute une couche 
 ```python
 model1 = models.resnet34(weights='IMAGENET1K_V1')
 # Nombre de caractéristiques extraites avant le réseau de classification
-num_ftrs = model1.fc.in_features
+nb = model1.fc.in_features
 
 # Ajout d'une couche de classification spécifique
-model1.fc = nn.Linear(num_ftrs, len(class_names))
+model1.fc = nn.Linear(nb, len(class_names))
 model1 = model1.to(device)
 
 # Fonction de perte
 criterion = nn.CrossEntropyLoss()
 
 # Tous les poids vont être optimisés, y compris ceux du réseau convolutif.
-optimizer = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.SGD(model1.parameters(), lr=0.001, momentum=0.9)
 lr_sch = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
 
-model1 = train_model(model1, criterion, optimizer_conv,lr_sch, num_epochs=25)
+model1 = train_model(model1, criterion, optimizer,lr_sch, num_epochs=25)
 
 predict(model1)
 ```
 
 ```{figure} ./images/val.png
-:name: sushis
+:name: val
 Quelques exemples d'images de validation étiquetées.
 ```
 
@@ -604,21 +604,21 @@ Ici, on ne réentraîne pas les poids du réseau convolutif. On laisse donc ce r
 ```python
 model2 = torchvision.models.resnet34(weights='IMAGENET1K_V1')
 # On fige les poids du réseau convolutif
-for param in model_conv.parameters():
+for param in model2.parameters():
     param.requires_grad = False
 
 # On ajoute une couche de classification
-num_ftrs = model2.fc.in_features
-model2.fc = nn.Linear(num_ftrs, len(class_names))
+nb = model2.fc.in_features
+model2.fc = nn.Linear(nb, len(class_names))
 
-model2 = model_conv.to(device)
+model2 = model2.to(device)
 
 criterion = nn.CrossEntropyLoss()
 
 # On optimise juste les poids de la couche de classification
 optimizer = optim.SGD(model2.fc.parameters(), lr=0.001, momentum=0.9)
-lr_sch = lr_scheduler.StepLR(optimizer_conv, step_size=7, gamma=0.1)
-model_conv = train_model(model2, criterion, optimizer,lr_sch, num_epochs=25)
+lr_sch = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+model2 = train_model(model2, criterion, optimizer,lr_sch, num_epochs=25)
 
 predict(model2)
 
