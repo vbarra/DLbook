@@ -235,7 +235,7 @@ résistant aux mauvaises initialisations.
 ### Transformers
 
 L'auto-attention n'est qu'une partie d'un mécanisme plus large : les
-transformers ({numref}`transformer`). Celui-ci se compose d'une unité d'auto-attention à
+transformers (figure {numref}`transformer`). Celui-ci se compose d'une unité d'auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d'interagir les
 unes avec les autres) suivie d'un perceptron multicouches $MLP$ qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -529,3 +529,52 @@ de quantités extrêmement importantes de données d'entraînement.
 ## Implémentation
 Vu les temps d'entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
 On se propose donc ici d'implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet {cite:p}`Vaswani17`.
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import math
+```
+
+On construit tout d'abord une classe permettant d'encoder un mot en un vecteur
+
+```python
+linkcode
+class Embedding(nn.Module):
+    def __init__(self, taille_voc, taille_emb):
+
+        super(Embedding, self).__init__()
+        self.embed = nn.Embedding(taille_voc, taille_emb)
+    def forward(self, x):
+
+        out = self.embed(x)
+        return out
+```
+
+On encode ensuite la position d'un mot à l'aide des formules proposées dans {cite:p}`Vaswani17` : 
+
+$$PE_{p,2i} = sin\left ( \frac{p}{10000^{\frac{2i}{taille\_emb}}}\right )\quad\textrm{et}\quad  PE_{p,2i+1} = cos\left ( \frac{p}{10000^{\frac{2i}{taille\_emb}}}$$
+
+où $p$ est la position du mot dans la phrase, et $i$ à la position dans le vecteur encodé.
+
+```python
+class PositionalEmbedding(nn.Module):
+    def __init__(self,taille_seq,taille_emb):
+        """
+        Args:
+            seq_len: length of input sequence
+            taille_emb: demension of embedding
+        """
+        super(PositionalEmbedding, self).__init__()
+        self.taille_emb = taille_emb
+
+        pe = torch.zeros(taille_seq,self.taille_emb)
+        for pos in range(taille_seq):
+            for i in range(0,self.taille_emb,2):
+                pe[pos, i] = math.sin(pos / (10000 ** ((2 * i)/self.taille_emb)))
+                pe[pos, i + 1] = math.cos(pos / (10000 ** ((2 * (i + 1))/self.taille_emb)))
+        pe = pe.unsqueeze(0)
+        self.register_buffer('pe', pe)
+
+```
