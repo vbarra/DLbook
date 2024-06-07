@@ -520,9 +520,9 @@ résistant aux mauvaises initialisations.</p>
 <section id="id1">
 <h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
 <p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : les
-transformers. Celui-ci se compose d’une unité d’auto-attention à
+transformers (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 52</span></a>). Celui-ci se compose d’une unité d’auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d’interagir les
-unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(PMC\)</span> qui
+unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(MLP\)</span> qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
 résiduels (leur sortie est ajoutée à l’entrée d’origine). En outre, il
 est courant d’ajouter une opération de normalisation de couche
@@ -532,9 +532,15 @@ multicouches. La séquence d’opérations complète peut être décrite par</p>
 \[\begin{split}\begin{aligned}
 \mathbf X &amp;=&amp; \mathbf X+ M_h\mathbf A(X)\\ 
 \mathbf X &amp;=&amp; LayerNorm(\mathbf X)\\
-\mathbf x_i &amp;=&amp; \mathbf x_i + PMC(\mathbf x_i),\; i\in[\![1,N]\!]\\
+\mathbf x_i &amp;=&amp; \mathbf x_i + MLP(\mathbf x_i),\; i\in[\![1,N]\!]\\
 \mathbf X &amp;=&amp; LayerNorm(\mathbf X)
 \end{aligned}\end{split}\]</div>
+<figure class="align-default" id="transformer">
+<img alt="_images/transformerblock.png" src="_images/transformerblock.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
 <p>En pratique, les données passent par plusieurs de ces transformers.</p>
 </section>
 </section>
