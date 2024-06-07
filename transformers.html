@@ -298,12 +298,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#modelisation-du-langage">Modélisation du langage</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-masquee">auto-attention masquée</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-de-texte">Génération de texte</a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
 </ul>
 </li>
@@ -626,7 +621,7 @@ données d’apprentissage supervisé.</p>
 </section>
 <section id="exemple-de-modele-a-decodeur-gpt3">
 <h4>Exemple de modèle à décodeur : GPT3<a class="headerlink" href="#exemple-de-modele-a-decodeur-gpt3" title="Lien vers cette rubrique">#</a></h4>
-<p>On présente ici une description de haut niveau de GPT3. L’architecture
+<p>On présente ici une description de haut niveau de <a class="reference external" href="https://arxiv.org/pdf/2005.14165">GPT3</a>. L’architecture
 de base est très similaire à celle du modèle d’encodage et comprend une
 série de transformers qui opèrent sur les représentations de mots
 appris. Cependant, l’objectif est différent. L’encodeur vise à
@@ -635,18 +630,13 @@ résoudre une variété de tâches plus spécifiques. À l’inverse, le
 décodeur n’a qu’un seul objectif : générer le jeton suivant dans une
 séquence. Il peut générer un passage de texte cohérent en réinjectant la
 séquence étendue dans le modèle.</p>
-<section id="modelisation-du-langage">
-<h5>Modélisation du langage<a class="headerlink" href="#modelisation-du-langage" title="Lien vers cette rubrique">#</a></h5>
-<p>: GPT3 construit un modèle linguistique autorégressif. Pour illustrer ce
+<p><strong>Modélisation du langage</strong> : GPT3 construit un modèle linguistique autorégressif. Pour illustrer ce
 modèle, considérons la phrase <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> = « Henri mange beaucoup de
 viande le soir ». Pour simplifier, supposons que les jetons sont les
 mots complets. La probabilité de la phrase complète est :</p>
 <div class="math notranslate nohighlight">
 \[P(\mathcal{P}) = P(\textrm{Henri})P(\textrm{mange}|\textrm{Henri})P(\textrm{beaucoup}|\textrm{Henri mange})\cdots P(\textrm{soir}|\textrm{Henri mange beaucoup de viande le })\]</div>
-</section>
-<section id="auto-attention-masquee">
-<h5>auto-attention masquée<a class="headerlink" href="#auto-attention-masquee" title="Lien vers cette rubrique">#</a></h5>
-<p>: pour entraîner un décodeur, on maximise la log-probabilité du texte
+<p><strong>auto-attention masquée</strong> : pour entraîner un décodeur, on maximise la log-probabilité du texte
 d’entrée dans le cadre du modèle autorégressif. L’idéal serait de
 transmettre la phrase entière et de calculer simultanément toutes les
 log-probabilités et tous les gradients. Cependant, cela pose un problème
@@ -675,10 +665,7 @@ softmax qui convertit ces valeurs en probabilités. Pendant
 l’apprentissage, on cherche à maximiser la somme des log-probabilités de
 l’élément suivant dans la séquence de référence à chaque position en
 utilisant une fonction de perte d’entropie croisée multiclasse standard.</p>
-</section>
-<section id="generation-de-texte">
-<h5>Génération de texte<a class="headerlink" href="#generation-de-texte" title="Lien vers cette rubrique">#</a></h5>
-<p>: puisque ce modèle définit un modèle de probabilité sur des séquences
+<p><strong>Génération de texte</strong> : puisque ce modèle définit un modèle de probabilité sur des séquences
 de texte, il peut être utilisé pour échantillonner de nouveaux exemples
 de texte plausibles. Pour générer à partir du modèle, on débute par une
 séquence de texte en entrée (qui peut être simplement un jeton spécial
@@ -705,7 +692,6 @@ attention, on compte 96 têtes et la dimension des requêtes et des clés
 est de 128. Tout celà amène à un nombre de paramètres de 175 milliards,
 entraînés sur 300 milliards de jetons (taille d’un batch : 3.2 million
 de jetons)</p>
-</section>
 </section>
 <section id="exemple-de-modele-a-encodeur-decodeur-traduction-automatique">
 <h4>Exemple de modèle à encodeur-décodeur : traduction automatique<a class="headerlink" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique" title="Lien vers cette rubrique">#</a></h4>
@@ -882,12 +868,7 @@ de quantités extrêmement importantes de données d’entraînement.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#modelisation-du-langage">Modélisation du langage</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-attention-masquee">auto-attention masquée</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-de-texte">Génération de texte</a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
 </ul>
 </li>

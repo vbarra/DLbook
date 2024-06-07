@@ -333,7 +333,7 @@ données d'apprentissage supervisé.
 
 #### Exemple de modèle à décodeur : GPT3
 
-On présente ici une description de haut niveau de GPT3. L'architecture
+On présente ici une description de haut niveau de [GPT3](https://arxiv.org/pdf/2005.14165). L'architecture
 de base est très similaire à celle du modèle d'encodage et comprend une
 série de transformers qui opèrent sur les représentations de mots
 appris. Cependant, l'objectif est différent. L'encodeur vise à
@@ -343,18 +343,14 @@ décodeur n'a qu'un seul objectif : générer le jeton suivant dans une
 séquence. Il peut générer un passage de texte cohérent en réinjectant la
 séquence étendue dans le modèle.
 
-##### Modélisation du langage
-
-: GPT3 construit un modèle linguistique autorégressif. Pour illustrer ce
+**Modélisation du langage** : GPT3 construit un modèle linguistique autorégressif. Pour illustrer ce
 modèle, considérons la phrase $\mathcal{P}$ = \"Henri mange beaucoup de
 viande le soir\". Pour simplifier, supposons que les jetons sont les
 mots complets. La probabilité de la phrase complète est :
 
 $$P(\mathcal{P}) = P(\textrm{Henri})P(\textrm{mange}|\textrm{Henri})P(\textrm{beaucoup}|\textrm{Henri mange})\cdots P(\textrm{soir}|\textrm{Henri mange beaucoup de viande le })$$
 
-##### auto-attention masquée
-
-: pour entraîner un décodeur, on maximise la log-probabilité du texte
+**auto-attention masquée** : pour entraîner un décodeur, on maximise la log-probabilité du texte
 d'entrée dans le cadre du modèle autorégressif. L'idéal serait de
 transmettre la phrase entière et de calculer simultanément toutes les
 log-probabilités et tous les gradients. Cependant, cela pose un problème
@@ -385,9 +381,7 @@ l'apprentissage, on cherche à maximiser la somme des log-probabilités de
 l'élément suivant dans la séquence de référence à chaque position en
 utilisant une fonction de perte d'entropie croisée multiclasse standard.
 
-##### Génération de texte
-
-: puisque ce modèle définit un modèle de probabilité sur des séquences
+**Génération de texte** : puisque ce modèle définit un modèle de probabilité sur des séquences
 de texte, il peut être utilisé pour échantillonner de nouveaux exemples
 de texte plausibles. Pour générer à partir du modèle, on débute par une
 séquence de texte en entrée (qui peut être simplement un jeton spécial
