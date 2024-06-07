@@ -579,3 +579,76 @@ class PositionalEmbedding(nn.Module):
         x = x + torch.autograd.Variable(self.pe[:,:seq_len], requires_grad=False)
         return x
 ```
+
+On implémente ensuite le mécanisme d'auto-attention multiple (multihead attention)
+
+```python
+class MultiHeadAttention(nn.Module):
+    def __init__(self, taille_emb=512, n_heads=8):
+
+        super(MultiHeadAttention, self).__init__()
+
+        self.taille_emb = taille_emb    
+        self.n_heads = n_heads   
+        #Taille de chaque clé, reqûete et valeur
+        self.single_head_dim = int(self.taille_emb / self.n_heads) 
+       
+          
+        self.Q = nn.Linear(self.single_head_dim , self.single_head_dim ,bias=False)  # single key matrix for all 8 keys #512x512
+        self.K = nn.Linear(self.single_head_dim  , self.single_head_dim, bias=False)
+        self.V = nn.Linear(self.single_head_dim ,self.single_head_dim , bias=False)
+        self.out = nn.Linear(self.n_heads*self.single_head_dim ,self.taille_emb) 
+
+    def forward(self,key,query,value,mask=None):    #batch_size x sequence_length x embedding_dim    # 32 x 10 x 512
+        
+        """
+        Args:
+           key : key vector
+           query : query vector
+           value : value vector
+           mask: mask for decoder
+        
+        Returns:
+           output vector from multihead attention
+        """
+        batch_size = key.size(0)
+        taille = key.size(1)
+        
+        # La taille de la requête change durant l'inférence.
+        taille_query = query.size(1)
+        
+        # 32x10x512
+        key = key.view(batch_size, taille, self.n_heads, self.single_head_dim)  
+        query = query.view(batch_size, taille_query, self.n_heads, self.single_head_dim) 
+        value = value.view(batch_size, taille, self.n_heads, self.single_head_dim) 
+       
+        k = self.K(key)       
+        q = self.Q(query)   
+        v = self.V(value)
+
+        # On réordonne les axes
+        q = q.transpose(1,2)  
+        k = k.transpose(1,2)  
+        v = v.transpose(1,2)  
+       
+        # Calcul de l'attention
+        k2 = k.transpose(-1,-2)  
+        product = torch.matmul(q, k2)  
+      
+        
+        # Cas de l'auto-attention masquée
+        if mask is not None:
+             product = product.masked_fill(mask == 0, float("-1e20"))
+
+        # Mise à l'échelle
+        product = product / math.sqrt(self.single_head_dim) 
+
+        # Softmax
+        scores = F.softmax(product, dim=-1)
+        scores = torch.matmul(scores, v)  ##(32x8x 10x 10) x (32 x 8 x 10 x 64) = (32 x 8 x 10 x 64) 
+        
+        #Sortie concaténée
+        concat = scores.transpose(1,2).contiguous().view(batch_size, taille_query, self.single_head_dim*self.n_heads) 
+        output = self.out(concat) 
+        return output
+```
