@@ -561,20 +561,21 @@ où $p$ est la position du mot dans la phrase, et $i$ à la position dans le vec
 ```python
 class PositionalEmbedding(nn.Module):
     def __init__(self,taille_seq,taille_emb):
-        """
-        Args:
-            seq_len: length of input sequence
-            taille_emb: demension of embedding
-        """
         super(PositionalEmbedding, self).__init__()
         self.taille_emb = taille_emb
 
         pe = torch.zeros(taille_seq,self.taille_emb)
-        for pos in range(taille_seq):
+        for p in range(taille_seq):
             for i in range(0,self.taille_emb,2):
-                pe[pos, i] = math.sin(pos / (10000 ** ((2 * i)/self.taille_emb)))
-                pe[pos, i + 1] = math.cos(pos / (10000 ** ((2 * (i + 1))/self.taille_emb)))
+                pe[p, i] = math.sin(p / (10000 ** ((2 * i)/self.taille_emb)))
+                pe[p, i + 1] = math.cos(p / (10000 ** ((2 * (i + 1))/self.taille_emb)))
         pe = pe.unsqueeze(0)
         self.register_buffer('pe', pe)
 
+    def forward(self, x):
+        # Taille de l'embedding suffisamment grande
+        x = x * math.sqrt(self.taille_emb)
+        seq_len = x.size(1)
+        x = x + torch.autograd.Variable(self.pe[:,:seq_len], requires_grad=False)
+        return x
 ```
