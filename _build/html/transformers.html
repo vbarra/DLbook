@@ -527,7 +527,7 @@ résistant aux mauvaises initialisations.</p>
 <section id="id1">
 <h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
 <p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : les
-transformers (figure <a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 53</span></a>). Celui-ci se compose d’une unité d’auto-attention à
+transformers (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 53</span></a>). Celui-ci se compose d’une unité d’auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d’interagir les
 unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(MLP\)</span> qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -848,8 +848,8 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="c1"># Taille de l&#39;embedding suffisamment grande</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille_emb</span><span class="p">)</span>
-        <span class="n">seq_len</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pe</span><span class="p">[:,:</span><span class="n">seq_len</span><span class="p">],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">taille_seq</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pe</span><span class="p">[:,:</span><span class="n">taille_seq</span><span class="p">],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
@@ -865,23 +865,12 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille_emb</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_heads</span><span class="p">)</span> 
        
           
-        <span class="bp">self</span><span class="o">.</span><span class="n">Q</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="p">,</span><span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># single key matrix for all 8 keys #512x512</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Q</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="p">,</span><span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
         <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span>  <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_heads</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">taille_emb</span><span class="p">)</span> 
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">query</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>    <span class="c1">#batch_size x sequence_length x embedding_dim    # 32 x 10 x 512</span>
-<span class="w">        </span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">           key : key vector</span>
-<span class="sd">           query : query vector</span>
-<span class="sd">           value : value vector</span>
-<span class="sd">           mask: mask for decoder</span>
-<span class="sd">        </span>
-<span class="sd">        Returns:</span>
-<span class="sd">           output vector from multihead attention</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">query</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  
         <span class="n">batch_size</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">taille</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         
@@ -916,12 +905,111 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 
         <span class="c1"># Softmax</span>
         <span class="n">scores</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1">##(32x8x 10x 10) x (32 x 8 x 10 x 64) = (32 x 8 x 10 x 64) </span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  
         
         <span class="c1">#Sortie concaténée</span>
         <span class="n">concat</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">taille_query</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_head_dim</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n_heads</span><span class="p">)</span> 
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">concat</span><span class="p">)</span> 
         <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+<p>Et on décrit une classe représentant un bloc transformer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransformerBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TransformerBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">n_heads</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">)</span>
+        <span class="c1"># facteur est un facteur de taille détermine la dimension des couches linéaires</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feed_forward</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="o">*</span><span class="n">taille_emb</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">facteur</span><span class="o">*</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">query</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+
+        <span class="n">attention_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">query</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>  
+        <span class="c1"># connexion résiduelle</span>
+        <span class="n">attention_residual_out</span> <span class="o">=</span> <span class="n">attention_out</span> <span class="o">+</span> <span class="n">value</span>  
+        <span class="n">norm1_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">norm1</span><span class="p">(</span><span class="n">attention_residual_out</span><span class="p">))</span> 
+
+        <span class="n">feed_fwd_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">norm1_out</span><span class="p">)</span> 
+        <span class="c1"># connexion résiduelle</span>
+        <span class="n">feed_fwd_residual_out</span> <span class="o">=</span> <span class="n">feed_fwd_out</span> <span class="o">+</span> <span class="n">norm1_out</span>
+        <span class="n">norm2_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="n">feed_fwd_residual_out</span><span class="p">))</span> 
+
+        <span class="k">return</span> <span class="n">norm2_out</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransformerEncoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        taille_seq : length of input sequence</span>
+<span class="sd">        taille_emb: dimension of embedding</span>
+<span class="sd">        nb_layers: number of encoder layers</span>
+<span class="sd">        facteur: factor which determines number of linear layers in feed forward layer</span>
+<span class="sd">        n_heads: number of heads in multihead attention</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        out: output of the encoder</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille_seq</span><span class="p">,</span> <span class="n">taille_voc</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">nb_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TransformerEncoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_layer</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="n">taille_voc</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positional_encoder</span> <span class="o">=</span> <span class="n">PositionalEmbedding</span><span class="p">(</span><span class="n">taille_seq</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">TransformerBlock</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="p">,</span> <span class="n">n_heads</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_layers</span><span class="p">)])</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">embed_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positional_encoder</span><span class="p">(</span><span class="n">embed_out</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">out</span><span class="p">,</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>  <span class="c1">#32x10x512</span>
+</pre></div>
+</div>
+<p>On construit ensuite les blocs décodeurs</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DecoderBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DecoderBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer_block</span> <span class="o">=</span> <span class="n">TransformerBlock</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="p">,</span> <span class="n">n_heads</span><span class="p">)</span>
+        
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">mask</span><span class="p">):</span>
+                
+        <span class="c1">#Le masque n&#39;est passé que sur la première couche d&#39;attention</span>
+        <span class="n">attention</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span> 
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">attention</span> <span class="o">+</span> <span class="n">x</span><span class="p">))</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer_block</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>  
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">class</span> <span class="nc">TransformerDecoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_taille_voc</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">,</span> <span class="n">taille_seq</span><span class="p">,</span> <span class="n">nb_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TransformerDecoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">target_taille_voc</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_embedding</span> <span class="o">=</span> <span class="n">PositionalEmbedding</span><span class="p">(</span><span class="n">taille_seq</span><span class="p">,</span> <span class="n">taille_emb</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">DecoderBlock</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">facteur</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_layers</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc_out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">taille_emb</span><span class="p">,</span> <span class="n">target_taille_voc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">enc_out</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position_embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+     
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">enc_out</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">enc_out</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span> 
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc_out</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">out</span>
 </pre></div>
 </div>
 </section>

@@ -537,6 +537,7 @@ import torch.nn.functional as F
 import math
 ```
 
+### Encodages
 On construit tout d'abord une classe permettant d'encoder un mot en un vecteur
 
 ```python
@@ -580,6 +581,7 @@ class PositionalEmbedding(nn.Module):
         return x
 ```
 
+### Auto-attention multiple
 On implémente ensuite le mécanisme d'auto-attention multiple (multihead attention)
 
 ```python
@@ -642,6 +644,7 @@ class MultiHeadAttention(nn.Module):
         return output
 ```
 
+### Bloc trnsformer et encodeur
 Et on décrit une classe représentant un bloc transformer
 
 ```python
@@ -703,7 +706,7 @@ class TransformerEncoder(nn.Module):
 ```
 
 
-On construit ensuite les blocs décodeurs
+### Blocs décodeurs
 
 ```python
 class DecoderBlock(nn.Module):
@@ -746,4 +749,84 @@ class TransformerDecoder(nn.Module):
         out = F.softmax(self.fc_out(x))
         return out
 ```
+### Architecture finale
 
+On utilise alors les classes précédentes pour construire le transformer
+
+```python
+class Transformer(nn.Module):
+    def __init__(self, taille_emb, src_taille_voc, target_taille_voc, taille_seq,nb_layers=2, expansion_factor=4, n_heads=8):
+        super(Transformer, self).__init__()
+        
+        self.target_taille_voc = target_taille_voc
+
+        self.encoder = TransformerEncoder(taille_seq, src_taille_voc, taille_emb, nb_layers=nb_layers, expansion_factor=expansion_factor, n_heads=n_heads)
+        self.decoder = TransformerDecoder(target_taille_voc, taille_emb, taille_seq, nb_layers=nb_layers, expansion_factor=expansion_factor, n_heads=n_heads)
+        
+    # Cas de l'auto-attention masquée
+    def make_trg_mask(self, trg):
+        batch_size, trg_len = trg.shape
+        # partie triangulaire sur de la matrice remplie de 1
+        trg_mask = torch.tril(torch.ones((trg_len, trg_len))).expand(batch_size, 1, trg_len, trg_len)
+        return trg_mask    
+
+    # Inférence : retourne la prédiction 
+    def decode(self,src,trg):
+
+        trg_mask = self.make_trg_mask(trg)
+        enc_out = self.encoder(src)
+        out_labels = []
+        batch_size,seq_len = src.shape[0],src.shape[1]
+        out = trg
+        for i in range(seq_len): #10
+            out = self.decoder(out,enc_out,trg_mask) 
+            # dernier token
+            out = out[:,-1,:]
+            out = out.argmax(-1)
+            out_labels.append(out.item())
+            out = torch.unsqueeze(out,axis=0)
+
+        return out_labels
+    
+    def forward(self, src, trg):
+
+        trg_mask = self.make_trg_mask(trg)
+        enc_out = self.encoder(src)
+   
+        outputs = self.decoder(trg, enc_out, trg_mask)
+        return outputs
+```
+
+Et on test sur les données.
+
+```python
+src_taille_voc = 11
+target_taille_voc = 11
+nb_layers = 6
+taille_seq= 12
+
+
+#  n créé deux chaînes de caractères (0 encode le début, 1 la fin)
+src = torch.tensor([[0, 2, 5, 6, 4, 3, 9, 5, 2, 9, 10, 1], 
+                    [0, 2, 8, 7, 3, 4, 5, 6, 7, 2, 10, 1]])
+target = torch.tensor([[0, 1, 7, 4, 3, 5, 9, 2, 8, 10, 9, 1], 
+                       [0, 1, 5, 6, 2, 4, 7, 6, 2, 8, 10, 1]])
+
+print(src.shape,target.shape)
+model = Transformer(taille_emb=512, src_taille_voc=src_taille_voc, 
+                    target_taille_voc=target_taille_voc, seq_length=taille_seq,
+                    num_layers=nb_layers, facteur=4, n_heads=8)
+
+out = model(src, target)
+# inférence
+model = Transformer(taille_emb=512, src_taille_voc=src_taille_voc, 
+                    target_taille_voc=target_taille_voc, seq_length=seq_length, 
+                    num_layers=num_layers, expansion_factor=4, n_heads=8)
+                  
+
+src = torch.tensor([[0, 2, 5, 6, 4, 3, 9, 5, 2, 9, 10, 1]])
+trg = torch.tensor([[0]])
+print(src.shape,trg.shape)
+out = model.decode(src, trg)
+out
+```

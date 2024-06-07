@@ -235,7 +235,7 @@ résistant aux mauvaises initialisations.
 ### Transformers
 
 L'auto-attention n'est qu'une partie d'un mécanisme plus large : les
-transformers (figure {numref}`transformer`). Celui-ci se compose d'une unité d'auto-attention à
+transformers ({numref}`transformer`). Celui-ci se compose d'une unité d'auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d'interagir les
 unes avec les autres) suivie d'un perceptron multicouches $MLP$ qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -575,8 +575,8 @@ class PositionalEmbedding(nn.Module):
     def forward(self, x):
         # Taille de l'embedding suffisamment grande
         x = x * math.sqrt(self.taille_emb)
-        seq_len = x.size(1)
-        x = x + torch.autograd.Variable(self.pe[:,:seq_len], requires_grad=False)
+        taille_seq = x.size(1)
+        x = x + torch.autograd.Variable(self.pe[:,:taille_seq], requires_grad=False)
         return x
 ```
 
@@ -594,23 +594,12 @@ class MultiHeadAttention(nn.Module):
         self.single_head_dim = int(self.taille_emb / self.n_heads) 
        
           
-        self.Q = nn.Linear(self.single_head_dim , self.single_head_dim ,bias=False)  # single key matrix for all 8 keys #512x512
+        self.Q = nn.Linear(self.single_head_dim , self.single_head_dim ,bias=False)  
         self.K = nn.Linear(self.single_head_dim  , self.single_head_dim, bias=False)
         self.V = nn.Linear(self.single_head_dim ,self.single_head_dim , bias=False)
         self.out = nn.Linear(self.n_heads*self.single_head_dim ,self.taille_emb) 
 
-    def forward(self,key,query,value,mask=None):    #batch_size x sequence_length x embedding_dim    # 32 x 10 x 512
-        
-        """
-        Args:
-           key : key vector
-           query : query vector
-           value : value vector
-           mask: mask for decoder
-        
-        Returns:
-           output vector from multihead attention
-        """
+    def forward(self,key,query,value,mask=None):  
         batch_size = key.size(0)
         taille = key.size(1)
         
@@ -645,10 +634,116 @@ class MultiHeadAttention(nn.Module):
 
         # Softmax
         scores = F.softmax(product, dim=-1)
-        scores = torch.matmul(scores, v)  ##(32x8x 10x 10) x (32 x 8 x 10 x 64) = (32 x 8 x 10 x 64) 
+        scores = torch.matmul(scores, v)  
         
         #Sortie concaténée
         concat = scores.transpose(1,2).contiguous().view(batch_size, taille_query, self.single_head_dim*self.n_heads) 
         output = self.out(concat) 
         return output
 ```
+
+Et on décrit une classe représentant un bloc transformer
+
+```python
+class TransformerBlock(nn.Module):
+    def __init__(self, taille_emb, facteur=4, n_heads=8):
+        super(TransformerBlock, self).__init__()
+
+        self.attention = MultiHeadAttention(taille_emb, n_heads)
+        self.norm1 = nn.LayerNorm(taille_emb) 
+        self.norm2 = nn.LayerNorm(taille_emb)
+        # facteur est un facteur de taille détermine la dimension des couches linéaires
+        self.feed_forward = nn.Sequential(nn.Linear(taille_emb, facteur*taille_emb),nn.ReLU(),nn.Linear(facteur*taille_emb, taille_emb))
+        self.dropout1 = nn.Dropout(0.2)
+        self.dropout2 = nn.Dropout(0.2)
+
+    def forward(self,key,query,value):
+
+        attention_out = self.attention(key,query,value)  
+        # connexion résiduelle
+        attention_residual_out = attention_out + value  
+        norm1_out = self.dropout1(self.norm1(attention_residual_out)) 
+
+        feed_fwd_out = self.feed_forward(norm1_out) 
+        # connexion résiduelle
+        feed_fwd_residual_out = feed_fwd_out + norm1_out
+        norm2_out = self.dropout2(self.norm2(feed_fwd_residual_out)) 
+
+        return norm2_out
+```
+
+```python
+class TransformerEncoder(nn.Module):
+    """
+    Args:
+        taille_seq : length of input sequence
+        taille_emb: dimension of embedding
+        nb_layers: number of encoder layers
+        facteur: factor which determines number of linear layers in feed forward layer
+        n_heads: number of heads in multihead attention
+        
+    Returns:
+        out: output of the encoder
+    """
+    def __init__(self, taille_seq, taille_voc, taille_emb, nb_layers=2, facteur=4, n_heads=8):
+        super(TransformerEncoder, self).__init__()
+        
+        self.embedding_layer = Embedding(taille_voc, taille_emb)
+        self.positional_encoder = PositionalEmbedding(taille_seq, taille_emb)
+
+        self.layers = nn.ModuleList([TransformerBlock(taille_emb, facteur, n_heads) for i in range(nb_layers)])
+    
+    def forward(self, x):
+        embed_out = self.embedding_layer(x)
+        out = self.positional_encoder(embed_out)
+        for layer in self.layers:
+            out = layer(out,out,out)
+
+        return out  #32x10x512
+```
+
+
+On construit ensuite les blocs décodeurs
+
+```python
+class DecoderBlock(nn.Module):
+    def __init__(self, taille_emb, facteur=4, n_heads=8):
+        super(DecoderBlock, self).__init__()
+
+        self.attention = MultiHeadAttention(taille_emb, n_heads=8)
+        self.norm = nn.LayerNorm(taille_emb)
+        self.dropout = nn.Dropout(0.2)
+        self.transformer_block = TransformerBlock(taille_emb, facteur, n_heads)
+        
+    
+    def forward(self, key, query, x,mask):
+                
+        #Le masque n'est passé que sur la première couche d'attention
+        attention = self.attention(x,x,x,mask=mask) 
+        value = self.dropout(self.norm(attention + x))
+        out = self.transformer_block(key, query, value)  
+        return out
+
+
+class TransformerDecoder(nn.Module):
+    def __init__(self, target_taille_voc, taille_emb, taille_seq, nb_layers=2, facteur=4, n_heads=8):
+        super(TransformerDecoder, self).__init__()
+
+        self.word_embedding = nn.Embedding(target_taille_voc, taille_emb)
+        self.position_embedding = PositionalEmbedding(taille_seq, taille_emb)
+
+        self.layers = nn.ModuleList([DecoderBlock(taille_emb, facteur=4, n_heads=8)  for _ in range(nb_layers)])
+        self.fc_out = nn.Linear(taille_emb, target_taille_voc)
+        self.dropout = nn.Dropout(0.2)
+
+    def forward(self, x, enc_out, mask):
+        x = self.word_embedding(x)  
+        x = self.position_embedding(x) 
+        x = self.dropout(x)
+     
+        for layer in self.layers:
+            x = layer(enc_out, x, enc_out, mask) 
+        out = F.softmax(self.fc_out(x))
+        return out
+```
+
