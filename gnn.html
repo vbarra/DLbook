@@ -367,8 +367,7 @@ l’arc (ou l’arête) <span class="math notranslate nohighlight">\(i\in[\![1,N
 </ol>
 <p>Dans un premier temps, on considérera uniquement le cas où <span class="math notranslate nohighlight">\(\mathbf X\)</span>
 existe (seuls les sommets sont pondérés). On reviendra sur le cas de
-<span class="math notranslate nohighlight">\(\mathbf E\)</span> dans la section <a class="reference internal" href="#S:E"><span class="xref myst">1.2.7</span></a>{reference-type= »ref »
-reference= »S:E »}.</p>
+<span class="math notranslate nohighlight">\(\mathbf E\)</span> plus tard.</p>
 </section>
 <section id="proprietes">
 <h3>Propriétés<a class="headerlink" href="#proprietes" title="Lien vers cette rubrique">#</a></h3>
@@ -463,15 +462,15 @@ inductif relationnel (une tendance à donner la priorité aux informations
 provenant des voisins). On suppose de plus que les convolutions
 s’opèrent dans le domaine spatial (utilisant la structure de <span class="math notranslate nohighlight">\(G\)</span>),
 plutôt que dans l’espace de Fourier (méthodes basées spectre). Chaque
-couche du GCN est une fonction <span class="math notranslate nohighlight">\(\mathbf F_{\bm \phi}\)</span>, de paramètres
-<span class="math notranslate nohighlight">\({\bm \phi}\)</span>, qui prend en entrée les représentations des sommets
+couche du GCN est une fonction <span class="math notranslate nohighlight">\(\mathbf F_{\boldsymbol \phi}\)</span>, de paramètres
+<span class="math notranslate nohighlight">\({\boldsymbol \phi}\)</span>, qui prend en entrée les représentations des sommets
 <span class="math notranslate nohighlight">\(\mathbf X\)</span> et la matrice d’adjacence <span class="math notranslate nohighlight">\(\mathbf A\)</span> de <span class="math notranslate nohighlight">\(G\)</span> et produit de
 nouvelles représentations des sommets : $<span class="math notranslate nohighlight">\(\begin{aligned}
-\mathbf H_1 &amp;=&amp; \mathbf F_{\bm \phi_O}(\mathbf X,\mathbf A)\\ 
-\mathbf H_2 &amp;=&amp; \mathbf F_{\bm \phi_1}(\mathbf H_1,\mathbf A)\\ 
+\mathbf H_1 &amp;=&amp; \mathbf F_{\boldsymbol \phi_O}(\mathbf X,\mathbf A)\\ 
+\mathbf H_2 &amp;=&amp; \mathbf F_{\boldsymbol \phi_1}(\mathbf H_1,\mathbf A)\\ 
 \cdots &amp;&amp;\\ 
-\mathbf H_K &amp;=&amp; \mathbf F_{\bm \phi_{K-1}}(\mathbf H_{K-1},\mathbf A)
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( les \)</span>\bm \phi_{k}<span class="math notranslate nohighlight">\( étant les paramètres du réseau entre
+\mathbf H_K &amp;=&amp; \mathbf F_{\boldsymbol \phi_{K-1}}(\mathbf H_{K-1},\mathbf A)
+\end{aligned}\)</span><span class="math notranslate nohighlight">\( les \)</span>\boldsymbol \phi_{k}<span class="math notranslate nohighlight">\( étant les paramètres du réseau entre
 la couche \)</span>k<span class="math notranslate nohighlight">\( et la couche \)</span>k+1$</p>
 <section id="equivariance-et-invariance">
 <h4>Equivariance et invariance<a class="headerlink" href="#equivariance-et-invariance" title="Lien vers cette rubrique">#</a></h4>
@@ -479,7 +478,7 @@ la couche \)</span>k<span class="math notranslate nohighlight">\( et la couche \
 indispensable que tout modèle respecte cette propriété. Chaque couche
 doit donc être équivariante<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> par rapport aux permutations des indices
 des sommets, soit pour toute permutation <span class="math notranslate nohighlight">\(\mathbf P\)</span> et tout <span class="math notranslate nohighlight">\(k\)</span>:
-$<span class="math notranslate nohighlight">\(\mathbf{H_{k+1}}\mathbf P = F_{\bm \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)\)</span>$</p>
+$<span class="math notranslate nohighlight">\(\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)\)</span>$</p>
 <p>Pour les tâches de classification des sommets et de prédiction des arcs
 ou arêtes, les résultats doivent également être équivariants pour les
 permutations des indices des sommets. Toutefois, pour les tâches en
@@ -534,19 +533,19 @@ vecteur :
 <span class="math notranslate nohighlight">\(\mathbf f_1(i) = \displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_1(j)\)</span></p></li>
 <li><p>appliquant pour tout <span class="math notranslate nohighlight">\(i\)</span> une transformation linéaire <span class="math notranslate nohighlight">\(\mathbf L\)</span>
 au sommet initial <span class="math notranslate nohighlight">\(\mathbf x^{i}\)</span> et aux sommets agrégés et en
-ajoutant un biais <span class="math notranslate nohighlight">\(\bm\beta_0\)</span> :
-<span class="math notranslate nohighlight">\(\bm \beta_0 + \mathbf L\mathbf x^{i} +  \mathbf L \mathbf f_1(i)\)</span></p></li>
+ajoutant un biais <span class="math notranslate nohighlight">\(\boldsymbol\beta_0\)</span> :
+<span class="math notranslate nohighlight">\(\boldsymbol \beta_0 + \mathbf L\mathbf x^{i} +  \mathbf L \mathbf f_1(i)\)</span></p></li>
 <li><p>appliquant une fonction non linéaire <span class="math notranslate nohighlight">\(g\)</span> au résultat précédent :
-<span class="math notranslate nohighlight">\(\mathbf h_1^{i} =g(\bm \beta_0 + \mathbf L \mathbf x^{i} + \mathbf L f_1(i))\)</span></p></li>
+<span class="math notranslate nohighlight">\(\mathbf h_1^{i} =g(\boldsymbol \beta_0 + \mathbf L \mathbf x^{i} + \mathbf L f_1(i))\)</span></p></li>
 </ol>
 </li>
 <li><p>à droite, le processus répété pour toute couche <span class="math notranslate nohighlight">\(k\)</span> :
-$<span class="math notranslate nohighlight">\((\forall i)\; \; \mathbf h_{k+1}^{i} = g \left (\bm \beta_k+\mathbf L_k \mathbf h_k^{i} + \mathbf L_k\left (\displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_k(j)\right ) \right )\)</span>$</p></li>
+$<span class="math notranslate nohighlight">\((\forall i)\; \; \mathbf h_{k+1}^{i} = g \left (\boldsymbol \beta_k+\mathbf L_k \mathbf h_k^{i} + \mathbf L_k\left (\displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_k(j)\right ) \right )\)</span>$</p></li>
 </ul>
 <p>On peut écrire ce processus de manière matricielle : Si
 <span class="math notranslate nohighlight">\(\mathbf H_k\in\mathcal{M}_{D,N}(\mathbb{R})\)</span> est la matrice dont les
 colonnes sont les représentations des sommets, alors
-$<span class="math notranslate nohighlight">\(\mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k+\mathbf L_k\mathbf H_k \mathbf A\right ) = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span><span class="math notranslate nohighlight">\(
+$<span class="math notranslate nohighlight">\(\mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k+\mathbf L_k\mathbf H_k \mathbf A\right ) = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span><span class="math notranslate nohighlight">\(
 où \)</span>g<span class="math notranslate nohighlight">\( est appliquée point à point sur les éléments de la matrice
 argument. On remarque que la couche \)</span>k+1<span class="math notranslate nohighlight">\( est bien équivariante à la
 permutation de la numérotation des sommets, utilise la structure du
@@ -565,13 +564,13 @@ de <span class="math notranslate nohighlight">\(\{0,1\}^D\)</span>, où la seule
 identifie le type de l’atome. On s’intéresse alors de savoir si une
 molécule donnée est toxique (<span class="math notranslate nohighlight">\(y=1\)</span>) ou pas (<span class="math notranslate nohighlight">\(y=0\)</span>).<br />
 Les équations du réseau sont alors :
-$<span class="math notranslate nohighlight">\(\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span><span class="math notranslate nohighlight">\(
+$<span class="math notranslate nohighlight">\(\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span><span class="math notranslate nohighlight">\(
 et
-\)</span><span class="math notranslate nohighlight">\(f(\mathbf X,\mathbf A,\bm\phi) = P(y=1\mid \mathbf X,\mathbf A) = \sigma(\bm \beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)\)</span><span class="math notranslate nohighlight">\(
-où \)</span>\bm \phi=(\bm \beta_k,\mathbf L_k)_{k\in[![0,K]!]}<span class="math notranslate nohighlight">\( sont les
+\)</span><span class="math notranslate nohighlight">\(f(\mathbf X,\mathbf A,\boldsymbol\phi) = P(y=1\mid \mathbf X,\mathbf A) = \sigma(\boldsymbol \beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)\)</span><span class="math notranslate nohighlight">\(
+où \)</span>\boldsymbol \phi=(\boldsymbol \beta_k,\mathbf L_k)_{k\in[![0,K]!]}<span class="math notranslate nohighlight">\( sont les
 paramètres du réseau à apprendre et \)</span>\sigma$ la fonction sigmoïde.</p>
 <p>Étant donnés <span class="math notranslate nohighlight">\(n\)</span> exemples d’entraînement
-<span class="math notranslate nohighlight">\((\mathbf X_i,\mathbf A_i,y_i)_{i\in[\![1,n]\!]}\)</span>, <span class="math notranslate nohighlight">\(\bm \phi\)</span> peut être
+<span class="math notranslate nohighlight">\((\mathbf X_i,\mathbf A_i,y_i)_{i\in[\![1,n]\!]}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol \phi\)</span> peut être
 classiquement appris par minimisation de l’entropie croisée binaire sur
 des batchs d’exemples. Si dans les MLP et les CNN, les entrées sont de
 taille identique (et donc les exemples sont concaténés en un tenseur de
@@ -626,8 +625,8 @@ alors d’étiqueter les sommets non étiquetés restants. Le réseau est le
 même que dans l’exemple <a class="reference internal" href="#S:excl"><span class="xref myst">1.2.3</span></a>{reference-type= »ref »
 reference= »S:excl »} avec une couche finale différente qui produit un
 vecteur de sortie de taille <span class="math notranslate nohighlight">\(1\times N\)</span> :
-$<span class="math notranslate nohighlight">\(f(\mathbf X,\mathbf A,\bm\phi) =  \sigma(\bm \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)\)</span><span class="math notranslate nohighlight">\(
-la fonction \)</span>\sigma<span class="math notranslate nohighlight">\( agissant point à point. On trouve \)</span>\bm \phi<span class="math notranslate nohighlight">\( par
+$<span class="math notranslate nohighlight">\(f(\mathbf X,\mathbf A,\boldsymbol\phi) =  \sigma(\boldsymbol \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)\)</span><span class="math notranslate nohighlight">\(
+la fonction \)</span>\sigma<span class="math notranslate nohighlight">\( agissant point à point. On trouve \)</span>\boldsymbol \phi<span class="math notranslate nohighlight">\( par
 minimisation de l'entropie croisée binaire, mais seulement à partir des
 valeurs des sommets pour lesquels les étiquettes \)</span>y_i$ sont connues.</p>
 <p>L’entraînement de ce réseau pose deux problèmes. Tout d’abord, il est
@@ -693,23 +692,23 @@ suite de ce paragraphe, on présente des alternatives à cette approche.</p>
 <section id="amelioration-de-la-diagonale">
 <h4>Amélioration de la diagonale<a class="headerlink" href="#amelioration-de-la-diagonale" title="Lien vers cette rubrique">#</a></h4>
 <p>La mise à jour proposée jusqu’à lors
-$<span class="math notranslate nohighlight">\(\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span>$</p>
+$<span class="math notranslate nohighlight">\(\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span>$</p>
 <p>peut être modifiée en</p>
 <div class="math notranslate nohighlight">
-\[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+(1+\epsilon_k)\mathbf I)\right )\]</div>
+\[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+(1+\epsilon_k)\mathbf I)\right )\]</div>
 <p>où <span class="math notranslate nohighlight">\(\epsilon_k\)</span> est appris, ou en</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\begin{split}\begin{aligned}
-\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} &amp;=&amp; g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A+\bm \psi_k \mathbf H_k\right )\\
-&amp;=&amp;g\left (\bm\beta_k \mathbf 1^T + \begin{pmatrix}\mathbf L_k &amp;\bm \psi_k\end{pmatrix} \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )\\ 
-&amp;=&amp;g\left (\bm\beta_k \mathbf 1^T + \mathbf L'_k \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )
+\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} &amp;=&amp; g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A+\boldsymbol \psi_k \mathbf H_k\right )\\
+&amp;=&amp;g\left (\boldsymbol\beta_k \mathbf 1^T + \begin{pmatrix}\mathbf L_k &amp;\boldsymbol \psi_k\end{pmatrix} \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )\\ 
+&amp;=&amp;g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L'_k \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )
 \end{aligned}$$ où
-$\mathbf L'_k=\begin{pmatrix}\mathbf L_k &amp;\bm \psi_k\end{pmatrix}$
+$\mathbf L'_k=\begin{pmatrix}\mathbf L_k &amp;\boldsymbol \psi_k\end{pmatrix}$
 permet d'appliquer une transformation linéaire différente au sommet
 courant.\end{split}\\#### Connexions résiduelles\\\begin{split}Avec les connexions résiduelles, la représentation agrégée des voisins
 est transformée et passe par la fonction d'activation avant d'être
 additionnée ou concaténée avec le sommet actuel :
-$$\mathbf H_{k+1} = \begin{pmatrix}g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}\end{split}\end{aligned}\end{align} \]</div>
+$$\mathbf H_{k+1} = \begin{pmatrix}g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}\end{split}\end{aligned}\end{align} \]</div>
 </section>
 <section id="agregation-moyenne">
 <h4>Agrégation moyenne<a class="headerlink" href="#agregation-moyenne" title="Lien vers cette rubrique">#</a></h4>
@@ -726,7 +725,7 @@ contribution du voisinage ne dépend pas du nombre de voisins :</p>
 notation matricielle, si <span class="math notranslate nohighlight">\(\mathbf D\)</span> est la matrice diagonale des degrés
 alors</p>
 <div class="math notranslate nohighlight">
-\[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A\mathbf D^{-1} + I) \right )\]</div>
+\[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A\mathbf D^{-1} + I) \right )\]</div>
 </section>
 <section id="normalisation-de-kipf">
 <h4>Normalisation de Kipf<a class="headerlink" href="#normalisation-de-kipf" title="Lien vers cette rubrique">#</a></h4>
@@ -737,7 +736,7 @@ devant être revue à la baisse (il existe un grand nombre d’arcs qui
 fournissent moins d’information unique). En notation matricielle, cette
 normalisation s’écrit</p>
 <div class="math notranslate nohighlight">
-\[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I) \right )\]</div>
+\[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I) \right )\]</div>
 </section>
 <section id="agregation-par-max-pooling">
 <h4>Agrégation par max pooling<a class="headerlink" href="#agregation-par-max-pooling" title="Lien vers cette rubrique">#</a></h4>
@@ -753,13 +752,13 @@ la topologie du graphe. Inversement, dans les couches d’attention de
 graphe, les poids dépendent des données aux sommets. Une transformation
 linéaire est appliquée aux représentations des sommets</p>
 <div class="math notranslate nohighlight">
-\[\forall k\in[\![0,K-1]\!]\; \mathbf H'_{k} = \bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\]</div>
+\[\forall k\in[\![0,K-1]\!]\; \mathbf H'_{k} = \boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\]</div>
 <p>La similarité <span class="math notranslate nohighlight">\(s_{ij}\)</span> entre les représentations transformées
 <span class="math notranslate nohighlight">\(\mathbf h'_i, \mathbf h'_j\)</span> des sommets <span class="math notranslate nohighlight">\(i\)</span> et <span class="math notranslate nohighlight">\(j\)</span> est calculée en
 concaténant les paires, en effectuant un produit scalaire avec un
-vecteur colonne <span class="math notranslate nohighlight">\(\bm \phi_k\)</span> de paramètres appris et en appliquant une
+vecteur colonne <span class="math notranslate nohighlight">\(\boldsymbol \phi_k\)</span> de paramètres appris et en appliquant une
 fonction d’activation
-$<span class="math notranslate nohighlight">\(s_{ij} = g\left (\bm \phi_k^T \begin{pmatrix}\mathbf h'_i\\ \mathbf h'_j \end{pmatrix}\right )\)</span><span class="math notranslate nohighlight">\(
+$<span class="math notranslate nohighlight">\(s_{ij} = g\left (\boldsymbol \phi_k^T \begin{pmatrix}\mathbf h'_i\\ \mathbf h'_j \end{pmatrix}\right )\)</span><span class="math notranslate nohighlight">\(
 Les similarités sont stockées dans une matrice \)</span>\mathbf S$. Comme pour
 les mécanismes d’attention, les poids doivent être positifs et de somme
 1, mais pour un sommet donné, seuls lui et ses voisins doivent

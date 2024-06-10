@@ -51,8 +51,7 @@ respectivement la struture de $G$, les sommets et arcs (ou arêtes):
 
 Dans un premier temps, on considérera uniquement le cas où $\mathbf X$
 existe (seuls les sommets sont pondérés). On reviendra sur le cas de
-$\mathbf E$ dans la section [1.2.7](#S:E){reference-type="ref"
-reference="S:E"}.
+$\mathbf E$ plus tard.
 
 ### Propriétés
 
@@ -147,15 +146,15 @@ inductif relationnel (une tendance à donner la priorité aux informations
 provenant des voisins). On suppose de plus que les convolutions
 s'opèrent dans le domaine spatial (utilisant la structure de $G$),
 plutôt que dans l'espace de Fourier (méthodes basées spectre). Chaque
-couche du GCN est une fonction $\mathbf F_{\bm \phi}$, de paramètres
-${\bm \phi}$, qui prend en entrée les représentations des sommets
+couche du GCN est une fonction $\mathbf F_{\boldsymbol \phi}$, de paramètres
+${\boldsymbol \phi}$, qui prend en entrée les représentations des sommets
 $\mathbf X$ et la matrice d'adjacence $\mathbf A$ de $G$ et produit de
 nouvelles représentations des sommets : $$\begin{aligned}
-\mathbf H_1 &=& \mathbf F_{\bm \phi_O}(\mathbf X,\mathbf A)\\ 
-\mathbf H_2 &=& \mathbf F_{\bm \phi_1}(\mathbf H_1,\mathbf A)\\ 
+\mathbf H_1 &=& \mathbf F_{\boldsymbol \phi_O}(\mathbf X,\mathbf A)\\ 
+\mathbf H_2 &=& \mathbf F_{\boldsymbol \phi_1}(\mathbf H_1,\mathbf A)\\ 
 \cdots &&\\ 
-\mathbf H_K &=& \mathbf F_{\bm \phi_{K-1}}(\mathbf H_{K-1},\mathbf A)
-\end{aligned}$$ les $\bm \phi_{k}$ étant les paramètres du réseau entre
+\mathbf H_K &=& \mathbf F_{\boldsymbol \phi_{K-1}}(\mathbf H_{K-1},\mathbf A)
+\end{aligned}$$ les $\boldsymbol \phi_{k}$ étant les paramètres du réseau entre
 la couche $k$ et la couche $k+1$
 
 #### Equivariance et invariance
@@ -164,7 +163,7 @@ L'indexation des sommets dans le graphe étant arbitraire, il est
 indispensable que tout modèle respecte cette propriété. Chaque couche
 doit donc être équivariante[^1] par rapport aux permutations des indices
 des sommets, soit pour toute permutation $\mathbf P$ et tout $k$:
-$$\mathbf{H_{k+1}}\mathbf P = F_{\bm \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)$$
+$$\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)$$
 
 Pour les tâches de classification des sommets et de prédiction des arcs
 ou arêtes, les résultats doivent également être équivariants pour les
@@ -224,19 +223,19 @@ GCN</figcaption>
 
     2.  appliquant pour tout $i$ une transformation linéaire $\mathbf L$
         au sommet initial $\mathbf x^{i}$ et aux sommets agrégés et en
-        ajoutant un biais $\bm\beta_0$ :
-        $\bm \beta_0 + \mathbf L\mathbf x^{i} +  \mathbf L \mathbf f_1(i)$
+        ajoutant un biais $\boldsymbol\beta_0$ :
+        $\boldsymbol \beta_0 + \mathbf L\mathbf x^{i} +  \mathbf L \mathbf f_1(i)$
 
     3.  appliquant une fonction non linéaire $g$ au résultat précédent :
-        $\mathbf h_1^{i} =g(\bm \beta_0 + \mathbf L \mathbf x^{i} + \mathbf L f_1(i))$
+        $\mathbf h_1^{i} =g(\boldsymbol \beta_0 + \mathbf L \mathbf x^{i} + \mathbf L f_1(i))$
 
 -   à droite, le processus répété pour toute couche $k$ :
-    $$(\forall i)\; \; \mathbf h_{k+1}^{i} = g \left (\bm \beta_k+\mathbf L_k \mathbf h_k^{i} + \mathbf L_k\left (\displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_k(j)\right ) \right )$$
+    $$(\forall i)\; \; \mathbf h_{k+1}^{i} = g \left (\boldsymbol \beta_k+\mathbf L_k \mathbf h_k^{i} + \mathbf L_k\left (\displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_k(j)\right ) \right )$$
 
 On peut écrire ce processus de manière matricielle : Si
 $\mathbf H_k\in\mathcal{M}_{D,N}(\mathbb{R})$ est la matrice dont les
 colonnes sont les représentations des sommets, alors
-$$\mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k+\mathbf L_k\mathbf H_k \mathbf A\right ) = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
+$$\mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k+\mathbf L_k\mathbf H_k \mathbf A\right ) = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
 où $g$ est appliquée point à point sur les éléments de la matrice
 argument. On remarque que la couche $k+1$ est bien équivariante à la
 permutation de la numérotation des sommets, utilise la structure du
@@ -254,14 +253,14 @@ de $\{0,1\}^D$, où la seule composante qui vaille 1 est celle qui
 identifie le type de l'atome. On s'intéresse alors de savoir si une
 molécule donnée est toxique ($y=1$) ou pas ($y=0$).\
 Les équations du réseau sont alors :
-$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
+$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
 et
-$$f(\mathbf X,\mathbf A,\bm\phi) = P(y=1\mid \mathbf X,\mathbf A) = \sigma(\bm \beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)$$
-où $\bm \phi=(\bm \beta_k,\mathbf L_k)_{k\in[\![0,K]\!]}$ sont les
+$$f(\mathbf X,\mathbf A,\boldsymbol\phi) = P(y=1\mid \mathbf X,\mathbf A) = \sigma(\boldsymbol \beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)$$
+où $\boldsymbol \phi=(\boldsymbol \beta_k,\mathbf L_k)_{k\in[\![0,K]\!]}$ sont les
 paramètres du réseau à apprendre et $\sigma$ la fonction sigmoïde.
 
 Étant donnés $n$ exemples d'entraînement
-$(\mathbf X_i,\mathbf A_i,y_i)_{i\in[\![1,n]\!]}$, $\bm \phi$ peut être
+$(\mathbf X_i,\mathbf A_i,y_i)_{i\in[\![1,n]\!]}$, $\boldsymbol \phi$ peut être
 classiquement appris par minimisation de l'entropie croisée binaire sur
 des batchs d'exemples. Si dans les MLP et les CNN, les entrées sont de
 taille identique (et donc les exemples sont concaténés en un tenseur de
@@ -319,8 +318,8 @@ alors d'étiqueter les sommets non étiquetés restants. Le réseau est le
 même que dans l'exemple [1.2.3](#S:excl){reference-type="ref"
 reference="S:excl"} avec une couche finale différente qui produit un
 vecteur de sortie de taille $1\times N$ :
-$$f(\mathbf X,\mathbf A,\bm\phi) =  \sigma(\bm \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)$$
-la fonction $\sigma$ agissant point à point. On trouve $\bm \phi$ par
+$$f(\mathbf X,\mathbf A,\boldsymbol\phi) =  \sigma(\boldsymbol \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)$$
+la fonction $\sigma$ agissant point à point. On trouve $\boldsymbol \phi$ par
 minimisation de l'entropie croisée binaire, mais seulement à partir des
 valeurs des sommets pour lesquels les étiquettes $y_i$ sont connues.
 
@@ -389,19 +388,19 @@ suite de ce paragraphe, on présente des alternatives à cette approche.
 #### Amélioration de la diagonale
 
 La mise à jour proposée jusqu'à lors
-$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
+$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
 
 peut être modifiée en
 
-$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+(1+\epsilon_k)\mathbf I)\right )$$
+$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+(1+\epsilon_k)\mathbf I)\right )$$
 où $\epsilon_k$ est appris, ou en
 
 $$\begin{aligned}
-\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} &=& g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A+\bm \psi_k \mathbf H_k\right )\\
-&=&g\left (\bm\beta_k \mathbf 1^T + \begin{pmatrix}\mathbf L_k &\bm \psi_k\end{pmatrix} \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )\\ 
-&=&g\left (\bm\beta_k \mathbf 1^T + \mathbf L'_k \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )
+\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} &=& g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A+\boldsymbol \psi_k \mathbf H_k\right )\\
+&=&g\left (\boldsymbol\beta_k \mathbf 1^T + \begin{pmatrix}\mathbf L_k &\boldsymbol \psi_k\end{pmatrix} \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )\\ 
+&=&g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L'_k \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )
 \end{aligned}$$ où
-$\mathbf L'_k=\begin{pmatrix}\mathbf L_k &\bm \psi_k\end{pmatrix}$
+$\mathbf L'_k=\begin{pmatrix}\mathbf L_k &\boldsymbol \psi_k\end{pmatrix}$
 permet d'appliquer une transformation linéaire différente au sommet
 courant.
 
@@ -410,7 +409,7 @@ courant.
 Avec les connexions résiduelles, la représentation agrégée des voisins
 est transformée et passe par la fonction d'activation avant d'être
 additionnée ou concaténée avec le sommet actuel :
-$$\mathbf H_{k+1} = \begin{pmatrix}g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}$$
+$$\mathbf H_{k+1} = \begin{pmatrix}g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}$$
 
 #### Agrégation moyenne
 
@@ -427,7 +426,7 @@ où $\mathcal{V}_i$ désigne l'ensemble des voisins du sommet $i$. En
 notation matricielle, si $\mathbf D$ est la matrice diagonale des degrés
 alors
 
-$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A\mathbf D^{-1} + I) \right )$$
+$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A\mathbf D^{-1} + I) \right )$$
 
 #### Normalisation de Kipf
 
@@ -438,7 +437,7 @@ devant être revue à la baisse (il existe un grand nombre d'arcs qui
 fournissent moins d'information unique). En notation matricielle, cette
 normalisation s'écrit
 
-$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I) \right )$$
+$$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I) \right )$$
 
 #### Agrégation par max pooling
 
@@ -454,14 +453,14 @@ la topologie du graphe. Inversement, dans les couches d'attention de
 graphe, les poids dépendent des données aux sommets. Une transformation
 linéaire est appliquée aux représentations des sommets
 
-$$\forall k\in[\![0,K-1]\!]\; \mathbf H'_{k} = \bm\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k$$
+$$\forall k\in[\![0,K-1]\!]\; \mathbf H'_{k} = \boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k$$
 
 La similarité $s_{ij}$ entre les représentations transformées
 $\mathbf h'_i, \mathbf h'_j$ des sommets $i$ et $j$ est calculée en
 concaténant les paires, en effectuant un produit scalaire avec un
-vecteur colonne $\bm \phi_k$ de paramètres appris et en appliquant une
+vecteur colonne $\boldsymbol \phi_k$ de paramètres appris et en appliquant une
 fonction d'activation
-$$s_{ij} = g\left (\bm \phi_k^T \begin{pmatrix}\mathbf h'_i\\ \mathbf h'_j \end{pmatrix}\right )$$
+$$s_{ij} = g\left (\boldsymbol \phi_k^T \begin{pmatrix}\mathbf h'_i\\ \mathbf h'_j \end{pmatrix}\right )$$
 Les similarités sont stockées dans une matrice $\mathbf S$. Comme pour
 les mécanismes d'attention, les poids doivent être positifs et de somme
 1, mais pour un sommet donné, seuls lui et ses voisins doivent
