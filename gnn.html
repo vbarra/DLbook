@@ -1040,18 +1040,204 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
 
 
 <span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> \<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">39</span>
-    <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> \<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                                                  <span class="o">^</span>
-<span class="ne">SyntaxError</span>: unexpected character after line continuation character
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">40</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">40</span> <span class="n">html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1289,</span> in <span class="ni">Animation.to_html5_video</span><span class="nt">(self, embed_limit)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1285</span> <span class="n">Writer</span> <span class="o">=</span> <span class="n">writers</span><span class="p">[</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.writer&#39;</span><span class="p">]]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1286</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">Writer</span><span class="p">(</span><span class="n">codec</span><span class="o">=</span><span class="s1">&#39;h264&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1287</span>                 <span class="n">bitrate</span><span class="o">=</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.bitrate&#39;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1288</span>                 <span class="n">fps</span><span class="o">=</span><span class="mf">1000.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interval</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1289</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">writer</span><span class="o">=</span><span class="n">writer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1290</span> <span class="c1"># Now open and base64 encode.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1291</span> <span class="n">vid64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">encodebytes</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">())</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1092,</span> in <span class="ni">Animation.save</span><span class="nt">(self, filename, writer, fps, dpi, codec, bitrate, extra_args, metadata, extra_anim, savefig_kwargs, progress_callback)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1089</span> <span class="k">with</span> <span class="n">writer</span><span class="o">.</span><span class="n">saving</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fig</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="p">),</span> \
+<span class="g g-Whitespace">   </span><span class="mi">1090</span>      <span class="n">cbook</span><span class="o">.</span><span class="n">_setattr_cm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fig</span><span class="o">.</span><span class="n">canvas</span><span class="p">,</span> <span class="n">_is_saving</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1091</span>     <span class="k">for</span> <span class="n">anim</span> <span class="ow">in</span> <span class="n">all_anim</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1092</span>         <span class="n">anim</span><span class="o">.</span><span class="n">_init_draw</span><span class="p">()</span>  <span class="c1"># Clear the initial frame</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span>     <span class="n">frame_number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span>     <span class="c1"># TODO: Currently only FuncAnimation has a save_count</span>
+<span class="g g-Whitespace">   </span><span class="mi">1095</span>     <span class="c1">#       attribute. Can we generalize this to all Animations?</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1749,</span> in <span class="ni">FuncAnimation._init_draw</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1741</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1742</span>             <span class="s2">&quot;Can not start iterating the frames for the initial draw. &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1743</span>             <span class="s2">&quot;This can be caused by passing in a 0 length sequence &quot;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1746</span>             <span class="s2">&quot;it may be exhausted due to a previous display or save.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1747</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1748</span>         <span class="k">return</span>
+<span class="ne">-&gt; </span><span class="mi">1749</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_draw_frame</span><span class="p">(</span><span class="n">frame_data</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1750</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1751</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_drawn_artists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_func</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1768,</span> in <span class="ni">FuncAnimation._draw_frame</span><span class="nt">(self, framedata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1764</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_save_seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_seq</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_save_count</span><span class="p">:]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1766</span> <span class="c1"># Call the func with framedata and args. If blitting is desired,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1767</span> <span class="c1"># func needs to return a sequence of any artists that were modified.</span>
+<span class="ne">-&gt; </span><span class="mi">1768</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drawn_artists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func</span><span class="p">(</span><span class="n">framedata</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1770</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_blit</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1772</span>     <span class="n">err</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;The animation function must return a sequence &#39;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1773</span>                        <span class="s1">&#39;of Artist objects.&#39;</span><span class="p">)</span>
+
+<span class="nn">Cell In[8], line 27,</span> in <span class="ni">animate</span><span class="nt">(i)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>                 <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>                 <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>                 <span class="n">node_color</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>                 <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>                 <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>                 <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>                 <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>                 <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>                 <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>                 <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> | Précision: </span><span class="si">{</span><span class="n">accuracies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;outputs&#39; is not defined
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in callback &lt;function _draw_all_if_interactive at 0x12ae36d40&gt; (for post_execute), with arguments args (),kwargs {}:
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/pyplot.py:197,</span> in <span class="ni">_draw_all_if_interactive</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="k">def</span> <span class="nf">_draw_all_if_interactive</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span>     <span class="k">if</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">is_interactive</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">197</span>         <span class="n">draw_all</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/_pylab_helpers.py:132,</span> in <span class="ni">Gcf.draw_all</span><span class="nt">(cls, force)</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="k">for</span> <span class="n">manager</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_all_fig_managers</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span>     <span class="k">if</span> <span class="n">force</span> <span class="ow">or</span> <span class="n">manager</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">stale</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">132</span>         <span class="n">manager</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/backend_bases.py:1893,</span> in <span class="ni">FigureCanvasBase.draw_idle</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_idle_drawing</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1892</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idle_draw_cntx</span><span class="p">():</span>
+<span class="ne">-&gt; </span><span class="mi">1893</span>         <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py:388,</span> in <span class="ni">FigureCanvasAgg.draw</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">385</span> <span class="c1"># Acquire a lock on the shared font cache.</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span> <span class="k">with</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">_wait_cursor_for_draw_cm</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span>
+<span class="g g-Whitespace">    </span><span class="mi">387</span>       <span class="k">else</span> <span class="n">nullcontext</span><span class="p">()):</span>
+<span class="ne">--&gt; </span><span class="mi">388</span>     <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">389</span>     <span class="c1"># A GUI class may be need to update a window using this draw, so</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span>     <span class="c1"># don&#39;t forget to call the superclass.</span>
+<span class="g g-Whitespace">    </span><span class="mi">391</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/artist.py:95,</span> in <span class="ni">_finalize_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">draw</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">def</span> <span class="nf">draw_wrapper</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">95</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>     <span class="k">if</span> <span class="n">renderer</span><span class="o">.</span><span class="n">_rasterizing</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">stop_rasterizing</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/artist.py:72,</span> in <span class="ni">allow_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">72</span>     <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/figure.py:3164,</span> in <span class="ni">Figure.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3161</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3162</span>     <span class="bp">self</span><span class="o">.</span><span class="n">stale</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">-&gt; </span><span class="mi">3164</span> <span class="n">DrawEvent</span><span class="p">(</span><span class="s2">&quot;draw_event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span><span class="o">.</span><span class="n">_process</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/backend_bases.py:1271,</span> in <span class="ni">Event._process</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1269</span> <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1270</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Process this event on ``self.canvas``, then unset ``guiEvent``.&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1271</span>     <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1272</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_guiEvent_deleted</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/cbook.py:303,</span> in <span class="ni">CallbackRegistry.process</span><span class="nt">(self, s, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">302</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception_handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">303</span>         <span class="bp">self</span><span class="o">.</span><span class="n">exception_handler</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span>         <span class="k">raise</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/cbook.py:87,</span> in <span class="ni">_exception_printer</span><span class="nt">(exc)</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span> <span class="k">def</span> <span class="nf">_exception_printer</span><span class="p">(</span><span class="n">exc</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>     <span class="k">if</span> <span class="n">_get_running_interactive_framework</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;headless&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="ne">---&gt; </span><span class="mi">87</span>         <span class="k">raise</span> <span class="n">exc</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/cbook.py:298,</span> in <span class="ni">CallbackRegistry.process</span><span class="nt">(self, s, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">298</span>         <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="c1"># this does not capture KeyboardInterrupt, SystemExit,</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="c1"># and GeneratorExit</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/animation.py:912,</span> in <span class="ni">Animation._start</span><span class="nt">(self, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">909</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_first_draw_id</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">911</span> <span class="c1"># Now do any initial draw</span>
+<span class="ne">--&gt; </span><span class="mi">912</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_draw</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">914</span> <span class="c1"># Add our callback for stepping the animation and</span>
+<span class="g g-Whitespace">    </span><span class="mi">915</span> <span class="c1"># actually start the event_source.</span>
+<span class="g g-Whitespace">    </span><span class="mi">916</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_source</span><span class="o">.</span><span class="n">add_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_step</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1749,</span> in <span class="ni">FuncAnimation._init_draw</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1741</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1742</span>             <span class="s2">&quot;Can not start iterating the frames for the initial draw. &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1743</span>             <span class="s2">&quot;This can be caused by passing in a 0 length sequence &quot;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1746</span>             <span class="s2">&quot;it may be exhausted due to a previous display or save.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1747</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1748</span>         <span class="k">return</span>
+<span class="ne">-&gt; </span><span class="mi">1749</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_draw_frame</span><span class="p">(</span><span class="n">frame_data</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1750</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1751</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_drawn_artists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_func</span><span class="p">()</span>
+
+<span class="nn">File /usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1768,</span> in <span class="ni">FuncAnimation._draw_frame</span><span class="nt">(self, framedata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1764</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_save_seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_seq</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_save_count</span><span class="p">:]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1766</span> <span class="c1"># Call the func with framedata and args. If blitting is desired,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1767</span> <span class="c1"># func needs to return a sequence of any artists that were modified.</span>
+<span class="ne">-&gt; </span><span class="mi">1768</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drawn_artists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func</span><span class="p">(</span><span class="n">framedata</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1770</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_blit</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1772</span>     <span class="n">err</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;The animation function must return a sequence &#39;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1773</span>                        <span class="s1">&#39;of Artist objects.&#39;</span><span class="p">)</span>
+
+<span class="nn">Cell In[8], line 27,</span> in <span class="ni">animate</span><span class="nt">(i)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>                 <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>                 <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>                 <span class="n">node_color</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>                 <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>                 <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>                 <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>                 <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>                 <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>                 <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>                 <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> | Précision: </span><span class="si">{</span><span class="n">accuracies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;outputs&#39; is not defined
+</pre></div>
+</div>
+<img alt="_images/5581c661d7ce0745120a30192381ecd191a80f4bcdd22f4664ce9eaeb1d64960.png" src="_images/5581c661d7ce0745120a30192381ecd191a80f4bcdd22f4664ce9eaeb1d64960.png" />
 </div>
 </div>
 <div class="cell docutils container">
