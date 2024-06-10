@@ -926,41 +926,27 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
 <span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
-                <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
-                <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-                <span class="n">node_color</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
-                <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
-                <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
-                <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-                <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
-                <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
-                <span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span><span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">node_color</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
+<span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span><span class="n">font_size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graphe avec labels des classes (couleurs)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
-                <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
-                <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-                <span class="n">node_color</span><span class="o">=</span><span class="n">oneHotEncoder</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">mask</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]),</span>
-                <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
-                <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-                <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
-                <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
-                <span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span><span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">node_color</span><span class="o">=</span><span class="n">oneHotEncoder</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">mask</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]),</span>
+<span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span><span class="n">font_size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noeuds d&#39;apprentissage (noeuds jaunes)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span><span class="err">```</span>
-
-<span class="n">On</span> <span class="n">construit</span> <span class="n">ensuite</span> <span class="n">un</span> <span class="n">GCN</span> <span class="n">simple</span>
-
-
-<span class="err">```</span><span class="p">{</span><span class="n">code</span><span class="o">-</span><span class="n">cell</span><span class="p">}</span> <span class="n">ipython3</span>
-<span class="k">class</span> <span class="nc">GCN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/651a0d691b9a10e02350ee00021bfe7bb81ed0451ec8f681451cbb3f29b038c5.png" src="_images/651a0d691b9a10e02350ee00021bfe7bb81ed0451ec8f681451cbb3f29b038c5.png" />
+</div>
+</div>
+<p>On construit ensuite un GCN simple</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GCN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gcn</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -972,14 +958,6 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
         <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">z</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">38</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span><span class="err">```</span>
-                      <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
@@ -1064,6 +1042,14 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
 <span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> \<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">39</span>
+    <span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> \<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                                  <span class="o">^</span>
+<span class="ne">SyntaxError</span>: unexpected character after line continuation character
 </pre></div>
 </div>
 </div>

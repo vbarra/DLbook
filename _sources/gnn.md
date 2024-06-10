@@ -592,6 +592,7 @@ On affiche le graphe avec les groupes, et le graphe qui servira pour l'entraîne
 On encode les informations des noeuds par un vecteur one hot encoder.
 
 ```{code-cell} ipython3
+
 def oneHotEncoder(labels):
     return np.sum([(labels[:, i] == 1) * (i + 1) for i in range(4)], axis=0)
 
@@ -601,35 +602,17 @@ G = to_networkx(data, to_undirected=True)
 fig,axs = plt.subplots(1,2,figsize=(10,5))
 plt.subplot(121)
 plt.axis('off')
-nx.draw_networkx(G,
-                pos=nx.kamada_kawai_layout(G),
-                with_labels=True,
-                node_size=200,
-                node_color=data.y,
-                cmap="hsv",
-                vmin=-2,
-                vmax=3,
-                width=0.8,
-                edge_color="grey",
-                font_size=14
-                )
+nx.draw_networkx(G,pos=nx.kamada_kawai_layout(G),with_labels=True,node_size=200,node_color=data.y,cmap="hsv",
+vmin=-2,vmax=3,width=0.8,edge_color="grey",font_size=14)
 
 plt.title("Graphe avec labels des classes (couleurs)")
 plt.subplot(122)
 plt.axis('off')
-nx.draw_networkx(G,
-                pos=nx.kamada_kawai_layout(G),
-                with_labels=True,
-                node_size=200,
-                node_color=oneHotEncoder(data.y * mask[:,np.newaxis]),
-                vmin=-2,
-                vmax=3,
-                width=0.8,
-                edge_color="grey",
-                font_size=14
-                )
+nx.draw_networkx(G,pos=nx.kamada_kawai_layout(G),with_labels=True,node_size=200,node_color=oneHotEncoder(data.y * mask[:,np.newaxis]),
+vmin=-2,vmax=3,width=0.8,edge_color="grey",font_size=14)
 plt.title("Noeuds d'apprentissage (noeuds jaunes)")
-plt.tight_layout()```
+plt.tight_layout()
+```
 
 On construit ensuite un GCN simple
 
