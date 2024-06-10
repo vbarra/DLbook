@@ -713,8 +713,9 @@ courant.</p>
 <h4>Connexions résiduelles<a class="headerlink" href="#connexions-residuelles" title="Lien vers cette rubrique">#</a></h4>
 <p>Avec les connexions résiduelles, la représentation agrégée des voisins
 est transformée et passe par la fonction d’activation avant d’être
-additionnée ou concaténée avec le sommet actuel :
-$<span class="math notranslate nohighlight">\(\mathbf H_{k+1} = \begin{pmatrix}g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}\)</span>$</p>
+additionnée ou concaténée avec le sommet actuel :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf H_{k+1} = \begin{pmatrix}g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}\end{split}\]</div>
 </section>
 <section id="agregation-moyenne">
 <h4>Agrégation moyenne<a class="headerlink" href="#agregation-moyenne" title="Lien vers cette rubrique">#</a></h4>
@@ -735,9 +736,10 @@ alors</p>
 </section>
 <section id="normalisation-de-kipf">
 <h4>Normalisation de Kipf<a class="headerlink" href="#normalisation-de-kipf" title="Lien vers cette rubrique">#</a></h4>
-<p>Ici
-$<span class="math notranslate nohighlight">\(\mathbf f(i) = \displaystyle\sum_{j\in\mathcal{V}_i} \frac{\mathbf h(j)}{\sqrt{|\mathcal{V}_i||\mathcal{V}_j|}}\)</span>$
-l’information provenant des sommets ayant un grand nombre de voisins
+<p>Ici</p>
+<div class="math notranslate nohighlight">
+\[\mathbf f(i) = \displaystyle\sum_{j\in\mathcal{V}_i} \frac{\mathbf h(j)}{\sqrt{|\mathcal{V}_i||\mathcal{V}_j|}}\]</div>
+<p>l’information provenant des sommets ayant un grand nombre de voisins
 devant être revue à la baisse (il existe un grand nombre d’arcs qui
 fournissent moins d’information unique). En notation matricielle, cette
 normalisation s’écrit</p>
@@ -747,8 +749,9 @@ normalisation s’écrit</p>
 <section id="agregation-par-max-pooling">
 <h4>Agrégation par max pooling<a class="headerlink" href="#agregation-par-max-pooling" title="Lien vers cette rubrique">#</a></h4>
 <p>Comme dans le cas des CNN, on peut envisager d’agréger par le max, qui
-s’effectue alors composante par composante.
-$<span class="math notranslate nohighlight">\(\mathbf f(i) = \displaystyle\max_{j\in\mathcal{V}_i} \mathbf h(j)\)</span>$</p>
+s’effectue alors composante par composante.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf f(i) = \displaystyle\max_{j\in\mathcal{V}_i} \mathbf h(j)\]</div>
 </section>
 <section id="agregation-par-attention">
 <h4>Agrégation par attention<a class="headerlink" href="#agregation-par-attention" title="Lien vers cette rubrique">#</a></h4>
@@ -763,9 +766,10 @@ linéaire est appliquée aux représentations des sommets</p>
 <span class="math notranslate nohighlight">\(\mathbf h'_i, \mathbf h'_j\)</span> des sommets <span class="math notranslate nohighlight">\(i\)</span> et <span class="math notranslate nohighlight">\(j\)</span> est calculée en
 concaténant les paires, en effectuant un produit scalaire avec un
 vecteur colonne <span class="math notranslate nohighlight">\(\boldsymbol \phi_k\)</span> de paramètres appris et en appliquant une
-fonction d’activation
-$<span class="math notranslate nohighlight">\(s_{ij} = g\left (\boldsymbol \phi_k^T \begin{pmatrix}\mathbf h'_i\\ \mathbf h'_j \end{pmatrix}\right )\)</span><span class="math notranslate nohighlight">\(
-Les similarités sont stockées dans une matrice \)</span>\mathbf S$. Comme pour
+fonction d’activation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}s_{ij} = g\left (\boldsymbol \phi_k^T \begin{pmatrix}\mathbf h'_i\\ \mathbf h'_j \end{pmatrix}\right )\end{split}\]</div>
+<p>Les similarités sont stockées dans une matrice <span class="math notranslate nohighlight">\(\mathbf S\)</span>. Comme pour
 les mécanismes d’attention, les poids doivent être positifs et de somme
 1, mais pour un sommet donné, seuls lui et ses voisins doivent
 contribuer. On effectue donc l’opération</p>
