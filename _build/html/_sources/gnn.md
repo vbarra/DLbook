@@ -705,7 +705,7 @@ def animate(i):
                     edge_color="grey",
                     font_size=14
                     )
-    plt.title(f'Epoch {i} | Précision: {accuracies[i]*100:.2f}%', pad=20)
+    plt.title(f'Epoch {i} | Précision: {precisions[i]*100:.2f}%', pad=20)
 
 
 fig,axs = plt.subplots(1,2,figsize=(10,5))
