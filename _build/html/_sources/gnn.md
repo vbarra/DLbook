@@ -612,6 +612,7 @@ nx.draw_networkx(G,pos=nx.kamada_kawai_layout(G),with_labels=True,node_size=200,
 vmin=-2,vmax=3,width=0.8,edge_color="grey",font_size=14)
 plt.title("Noeuds d'apprentissage (noeuds jaunes)")
 plt.tight_layout()
+
 ```
 
 On construit ensuite un GCN simple
@@ -708,7 +709,7 @@ def animate(i):
 
 
 fig,axs = plt.subplots(1,2,figsize=(10,5))
-anim = animation.FuncAnimation(fig, animate, \np.arange(0, 200, 10), interval=500, repeat=True)
+anim = animation.FuncAnimation(fig, animate, np.arange(0, 200, 10), interval=500, repeat=True)
 html = HTML(anim.to_html5_video())
 ```
 

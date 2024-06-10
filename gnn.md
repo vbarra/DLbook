@@ -697,7 +697,7 @@ def animate(i):
                     pos=nx.kamada_kawai_layout(G, ),
                     with_labels=True,
                     node_size=200,
-                    node_color=outputs[i],
+                    node_color=res[i],
                     cmap="hsv",
                     vmin=-2,
                     vmax=3,
