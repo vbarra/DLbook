@@ -202,14 +202,14 @@ particulier.
 
 #### Exemple
 
-La figure [1.1](#F:gcn){reference-type="ref" reference="F:gcn"} présente
-un exemple simple de GCN.
+La ({numref}`gcn`) présente un exemple simple de GCN.
 
-<figure id="F:gcn">
-<img src="images/gcn.png" />
-<figcaption><span id="F:gcn" label="F:gcn"></span>Exemple de
-GCN</figcaption>
-</figure>
+
+
+```{figure} ./images/gcn.png
+:name: gcn
+Exemple de GCN
+```
 
 -   à gauche le graphe $G$ initial, les colonnes de $\mathbf X$ étant
     reportées à côté des sommets correspondants.
@@ -230,19 +230,22 @@ GCN</figcaption>
         $\mathbf h_1^{i} =g(\boldsymbol \beta_0 + \mathbf L \mathbf x^{i} + \mathbf L f_1(i))$
 
 -   à droite, le processus répété pour toute couche $k$ :
+
     $$(\forall i)\; \; \mathbf h_{k+1}^{i} = g \left (\boldsymbol \beta_k+\mathbf L_k \mathbf h_k^{i} + \mathbf L_k\left (\displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_k(j)\right ) \right )$$
 
 On peut écrire ce processus de manière matricielle : Si
 $\mathbf H_k\in\mathcal{M}_{D,N}(\mathbb{R})$ est la matrice dont les
 colonnes sont les représentations des sommets, alors
+
 $$\mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k+\mathbf L_k\mathbf H_k \mathbf A\right ) = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
+
 où $g$ est appliquée point à point sur les éléments de la matrice
 argument. On remarque que la couche $k+1$ est bien équivariante à la
 permutation de la numérotation des sommets, utilise la structure du
 graphe ($\mathbf A$) pour produire un biais inductif et partage les
 paramètres sur tout le graphe.
 
-### Application en classification {#S:excl}
+### Application en classification 
 
 Pour l'exemple, on s'intéresse à un problème de classification binaire.
 On modélise une molécule comme un graphe, sont les sommets sont les
@@ -251,11 +254,16 @@ la matrice $\mathbf X$ donne le nom de l'atome : si la table périodique
 des éléments comporte $D$ atomes, le sommet (l'atome) $i$ est un vecteur
 de $\{0,1\}^D$, où la seule composante qui vaille 1 est celle qui
 identifie le type de l'atome. On s'intéresse alors de savoir si une
-molécule donnée est toxique ($y=1$) ou pas ($y=0$).\
+molécule donnée est toxique ($y=1$) ou pas ($y=0$).
+
 Les équations du réseau sont alors :
+
 $$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )$$
+
 et
+
 $$f(\mathbf X,\mathbf A,\boldsymbol\phi) = P(y=1\mid \mathbf X,\mathbf A) = \sigma(\boldsymbol \beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)$$
+
 où $\boldsymbol \phi=(\boldsymbol \beta_k,\mathbf L_k)_{k\in[\![0,K]\!]}$ sont les
 paramètres du réseau à apprendre et $\sigma$ la fonction sigmoïde.
 

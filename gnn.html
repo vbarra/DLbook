@@ -299,7 +299,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple">Exemple</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-en-classification-s-excl">Application en classification {#S:excl}</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-en-classification">Application en classification</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-inductifs-et-transductifs">Modèles inductifs et transductifs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-en-classification-de-sommets">Exemple en classification de sommets</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#echantillonnage-du-voisinage">Échantillonnage du voisinage</a></li>
@@ -477,7 +477,7 @@ la couche \)</span>k<span class="math notranslate nohighlight">\( et la couche \
 <h4>Equivariance et invariance<a class="headerlink" href="#equivariance-et-invariance" title="Lien vers cette rubrique">#</a></h4>
 <p>L’indexation des sommets dans le graphe étant arbitraire, il est
 indispensable que tout modèle respecte cette propriété. Chaque couche
-doit donc être équivariante<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> par rapport aux permutations des indices
+doit donc être équivariante<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> par rapport aux permutations des indices
 des sommets, soit pour toute permutation <span class="math notranslate nohighlight">\(\mathbf P\)</span> et tout <span class="math notranslate nohighlight">\(k\)</span>:
 $<span class="math notranslate nohighlight">\(\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)\)</span>$</p>
 <p>Pour les tâches de classification des sommets et de prédiction des arcs
@@ -516,14 +516,14 @@ particulier.</p>
 </section>
 <section id="exemple">
 <h4>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique">#</a></h4>
-<p>La figure <a class="reference internal" href="#F:gcn"><span class="xref myst">1.1</span></a>{reference-type= »ref » reference= »F:gcn »} présente
-un exemple simple de GCN.</p>
-<figure id="F:gcn">
-<img src="images/gcn.png" />
-<figcaption><span id="F:gcn" label="F:gcn"></span>Exemple de
-GCN</figcaption>
+<p>La (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 58</span></a>) présente un exemple simple de GCN.</p>
+<figure class="align-default" id="id2">
+<img alt="_images/gcn.png" src="_images/gcn.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Exemple de GCN</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
+</figcaption>
 </figure>
-<ul class="simple">
+<ul>
 <li><p>à gauche le graphe <span class="math notranslate nohighlight">\(G\)</span> initial, les colonnes de <span class="math notranslate nohighlight">\(\mathbf X\)</span> étant
 reportées à côté des sommets correspondants.</p></li>
 <li><p>au milieu, chaque sommet de la première couche cachée est mis à jour
@@ -540,22 +540,25 @@ ajoutant un biais <span class="math notranslate nohighlight">\(\boldsymbol\beta_
 <span class="math notranslate nohighlight">\(\mathbf h_1^{i} =g(\boldsymbol \beta_0 + \mathbf L \mathbf x^{i} + \mathbf L f_1(i))\)</span></p></li>
 </ol>
 </li>
-<li><p>à droite, le processus répété pour toute couche <span class="math notranslate nohighlight">\(k\)</span> :
-$<span class="math notranslate nohighlight">\((\forall i)\; \; \mathbf h_{k+1}^{i} = g \left (\boldsymbol \beta_k+\mathbf L_k \mathbf h_k^{i} + \mathbf L_k\left (\displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_k(j)\right ) \right )\)</span>$</p></li>
+<li><p>à droite, le processus répété pour toute couche <span class="math notranslate nohighlight">\(k\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[(\forall i)\; \; \mathbf h_{k+1}^{i} = g \left (\boldsymbol \beta_k+\mathbf L_k \mathbf h_k^{i} + \mathbf L_k\left (\displaystyle\sum_{j\textrm{ voisin de }i} \mathbf h_k(j)\right ) \right )\]</div>
+</li>
 </ul>
 <p>On peut écrire ce processus de manière matricielle : Si
 <span class="math notranslate nohighlight">\(\mathbf H_k\in\mathcal{M}_{D,N}(\mathbb{R})\)</span> est la matrice dont les
-colonnes sont les représentations des sommets, alors
-$<span class="math notranslate nohighlight">\(\mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k+\mathbf L_k\mathbf H_k \mathbf A\right ) = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span><span class="math notranslate nohighlight">\(
-où \)</span>g<span class="math notranslate nohighlight">\( est appliquée point à point sur les éléments de la matrice
-argument. On remarque que la couche \)</span>k+1<span class="math notranslate nohighlight">\( est bien équivariante à la
+colonnes sont les représentations des sommets, alors</p>
+<div class="math notranslate nohighlight">
+\[\mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k+\mathbf L_k\mathbf H_k \mathbf A\right ) = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\]</div>
+<p>où <span class="math notranslate nohighlight">\(g\)</span> est appliquée point à point sur les éléments de la matrice
+argument. On remarque que la couche <span class="math notranslate nohighlight">\(k+1\)</span> est bien équivariante à la
 permutation de la numérotation des sommets, utilise la structure du
-graphe (\)</span>\mathbf A$) pour produire un biais inductif et partage les
+graphe (<span class="math notranslate nohighlight">\(\mathbf A\)</span>) pour produire un biais inductif et partage les
 paramètres sur tout le graphe.</p>
 </section>
 </section>
-<section id="application-en-classification-s-excl">
-<h3>Application en classification {#S:excl}<a class="headerlink" href="#application-en-classification-s-excl" title="Lien vers cette rubrique">#</a></h3>
+<section id="application-en-classification">
+<h3>Application en classification<a class="headerlink" href="#application-en-classification" title="Lien vers cette rubrique">#</a></h3>
 <p>Pour l’exemple, on s’intéresse à un problème de classification binaire.
 On modélise une molécule comme un graphe, sont les sommets sont les
 atomes. La matrice <span class="math notranslate nohighlight">\(\mathbf A\)</span> donne les liaisons entre les atomes, et
@@ -563,13 +566,15 @@ la matrice <span class="math notranslate nohighlight">\(\mathbf X\)</span> donne
 des éléments comporte <span class="math notranslate nohighlight">\(D\)</span> atomes, le sommet (l’atome) <span class="math notranslate nohighlight">\(i\)</span> est un vecteur
 de <span class="math notranslate nohighlight">\(\{0,1\}^D\)</span>, où la seule composante qui vaille 1 est celle qui
 identifie le type de l’atome. On s’intéresse alors de savoir si une
-molécule donnée est toxique (<span class="math notranslate nohighlight">\(y=1\)</span>) ou pas (<span class="math notranslate nohighlight">\(y=0\)</span>).<br />
-Les équations du réseau sont alors :
-$<span class="math notranslate nohighlight">\(\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span><span class="math notranslate nohighlight">\(
-et
-\)</span><span class="math notranslate nohighlight">\(f(\mathbf X,\mathbf A,\boldsymbol\phi) = P(y=1\mid \mathbf X,\mathbf A) = \sigma(\boldsymbol \beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)\)</span><span class="math notranslate nohighlight">\(
-où \)</span>\boldsymbol \phi=(\boldsymbol \beta_k,\mathbf L_k)_{k\in[![0,K]!]}<span class="math notranslate nohighlight">\( sont les
-paramètres du réseau à apprendre et \)</span>\sigma$ la fonction sigmoïde.</p>
+molécule donnée est toxique (<span class="math notranslate nohighlight">\(y=1\)</span>) ou pas (<span class="math notranslate nohighlight">\(y=0\)</span>).</p>
+<p>Les équations du réseau sont alors :</p>
+<div class="math notranslate nohighlight">
+\[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\]</div>
+<p>et</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf X,\mathbf A,\boldsymbol\phi) = P(y=1\mid \mathbf X,\mathbf A) = \sigma(\boldsymbol \beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)\]</div>
+<p>où <span class="math notranslate nohighlight">\(\boldsymbol \phi=(\boldsymbol \beta_k,\mathbf L_k)_{k\in[\![0,K]\!]}\)</span> sont les
+paramètres du réseau à apprendre et <span class="math notranslate nohighlight">\(\sigma\)</span> la fonction sigmoïde.</p>
 <p>Étant donnés <span class="math notranslate nohighlight">\(n\)</span> exemples d’entraînement
 <span class="math notranslate nohighlight">\((\mathbf X_i,\mathbf A_i,y_i)_{i\in[\![1,n]\!]}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol \phi\)</span> peut être
 classiquement appris par minimisation de l’entropie croisée binaire sur
@@ -840,7 +845,7 @@ gère les citations. Les deux colonnes donne l’article cité
 colonnes : “paper_id”, “subject”, et 1433 descripteurs binaires.</p>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="doc-footnote">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Une fonction <span class="math notranslate nohighlight">\(f\)</span> est équivariante pour une transformation <span class="math notranslate nohighlight">\(t\)</span> si
 pour tout <span class="math notranslate nohighlight">\(x, f(t(x)) = t(f(x))\)</span></p>
@@ -922,7 +927,7 @@ pour tout <span class="math notranslate nohighlight">\(x, f(t(x)) = t(f(x))\)</s
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple">Exemple</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-en-classification-s-excl">Application en classification {#S:excl}</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-en-classification">Application en classification</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-inductifs-et-transductifs">Modèles inductifs et transductifs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-en-classification-de-sommets">Exemple en classification de sommets</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#echantillonnage-du-voisinage">Échantillonnage du voisinage</a></li>
