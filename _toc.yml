@@ -16,3 +16,4 @@ parts:
       - file: rnn
       - file: transferLearning      
       - file: transformers
+      - file: gnn
