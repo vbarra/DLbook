@@ -103,7 +103,9 @@ régression, le décalage entre le résultat et les valeurs de vérité
 terrain est calculé à l'aide de la fonction de perte moindres carrés.
 Pour la classification binaire, la sortie passe par une fonction
 sigmoïde et la perte est calculée à l'aide de l'entropie croisée binaire
+
 $$P(y=1\mid \mathbf X,\mathbf A) = \sigma(\beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)$$
+
 où $\beta_K$ et $\mathbf w_K^T\in\mathbb{R}^D$ sont des paramètres à
 apprendre. Multiplier à droite par le vecteur colonne $\mathbf 1$ somme
 toutes les représentations, et diviser par $N$ calcule la moyenne. La
@@ -149,12 +151,16 @@ plutôt que dans l'espace de Fourier (méthodes basées spectre). Chaque
 couche du GCN est une fonction $\mathbf F_{\boldsymbol \phi}$, de paramètres
 ${\boldsymbol \phi}$, qui prend en entrée les représentations des sommets
 $\mathbf X$ et la matrice d'adjacence $\mathbf A$ de $G$ et produit de
-nouvelles représentations des sommets : $$\begin{aligned}
+nouvelles représentations des sommets : 
+
+$$\begin{aligned}
 \mathbf H_1 &=& \mathbf F_{\boldsymbol \phi_O}(\mathbf X,\mathbf A)\\ 
 \mathbf H_2 &=& \mathbf F_{\boldsymbol \phi_1}(\mathbf H_1,\mathbf A)\\ 
 \cdots &&\\ 
 \mathbf H_K &=& \mathbf F_{\boldsymbol \phi_{K-1}}(\mathbf H_{K-1},\mathbf A)
-\end{aligned}$$ les $\boldsymbol \phi_{k}$ étant les paramètres du réseau entre
+\end{aligned}$$ 
+
+les $\boldsymbol \phi_{k}$ étant les paramètres du réseau entre
 la couche $k$ et la couche $k+1$
 
 #### Equivariance et invariance
@@ -326,7 +332,9 @@ alors d'étiqueter les sommets non étiquetés restants. Le réseau est le
 même que dans l'exemple [1.2.3](#S:excl){reference-type="ref"
 reference="S:excl"} avec une couche finale différente qui produit un
 vecteur de sortie de taille $1\times N$ :
+
 $$f(\mathbf X,\mathbf A,\boldsymbol\phi) =  \sigma(\boldsymbol \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)$$
+
 la fonction $\sigma$ agissant point à point. On trouve $\boldsymbol \phi$ par
 minimisation de l'entropie croisée binaire, mais seulement à partir des
 valeurs des sommets pour lesquels les étiquettes $y_i$ sont connues.
