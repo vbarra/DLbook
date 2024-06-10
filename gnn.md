@@ -411,6 +411,7 @@ courant.
 Avec les connexions résiduelles, la représentation agrégée des voisins
 est transformée et passe par la fonction d'activation avant d'être
 additionnée ou concaténée avec le sommet actuel :
+
 $$\mathbf H_{k+1} = \begin{pmatrix}g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}$$
 
 #### Agrégation moyenne
@@ -433,7 +434,9 @@ $$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \math
 #### Normalisation de Kipf
 
 Ici
+
 $$\mathbf f(i) = \displaystyle\sum_{j\in\mathcal{V}_i} \frac{\mathbf h(j)}{\sqrt{|\mathcal{V}_i||\mathcal{V}_j|}}$$
+
 l'information provenant des sommets ayant un grand nombre de voisins
 devant être revue à la baisse (il existe un grand nombre d'arcs qui
 fournissent moins d'information unique). En notation matricielle, cette
@@ -445,6 +448,7 @@ $$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \math
 
 Comme dans le cas des CNN, on peut envisager d'agréger par le max, qui
 s'effectue alors composante par composante.
+
 $$\mathbf f(i) = \displaystyle\max_{j\in\mathcal{V}_i} \mathbf h(j)$$
 
 #### Agrégation par attention
@@ -462,13 +466,16 @@ $\mathbf h'_i, \mathbf h'_j$ des sommets $i$ et $j$ est calculée en
 concaténant les paires, en effectuant un produit scalaire avec un
 vecteur colonne $\boldsymbol \phi_k$ de paramètres appris et en appliquant une
 fonction d'activation
+
 $$s_{ij} = g\left (\boldsymbol \phi_k^T \begin{pmatrix}\mathbf h'_i\\ \mathbf h'_j \end{pmatrix}\right )$$
+
 Les similarités sont stockées dans une matrice $\mathbf S$. Comme pour
 les mécanismes d'attention, les poids doivent être positifs et de somme
 1, mais pour un sommet donné, seuls lui et ses voisins doivent
 contribuer. On effectue donc l'opération
 
 $$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\mathbf H'_{k}.\textrm{Softmax}(\mathbf S,\mathbf A+\mathbf I) \right )$$
+
 la fonction $\textrm{Softmax}(\bullet,\bullet)$ calcule les valeurs
 d'attention en appliquant l'opération softmax séparément à chaque
 colonne de son premier argument $\mathbf S$, mais seulement après avoir

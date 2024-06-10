@@ -399,7 +399,9 @@ $$\begin{aligned}
 \forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} &=& g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A+\boldsymbol \psi_k \mathbf H_k\right )\\
 &=&g\left (\boldsymbol\beta_k \mathbf 1^T + \begin{pmatrix}\mathbf L_k &\boldsymbol \psi_k\end{pmatrix} \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )\\ 
 &=&g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L'_k \begin{pmatrix}\mathbf H_k\mathbf A\\ \mathbf H_k\end{pmatrix}\right )
-\end{aligned}$$ où
+\end{aligned}$$ 
+
+où
 $\mathbf L'_k=\begin{pmatrix}\mathbf L_k &\boldsymbol \psi_k\end{pmatrix}$
 permet d'appliquer une transformation linéaire différente au sommet
 courant.
