@@ -418,11 +418,12 @@ d’une transformation linéaire ou d’un réseau de neurones. Pour la
 régression, le décalage entre le résultat et les valeurs de vérité
 terrain est calculé à l’aide de la fonction de perte moindres carrés.
 Pour la classification binaire, la sortie passe par une fonction
-sigmoïde et la perte est calculée à l’aide de l’entropie croisée binaire
-$<span class="math notranslate nohighlight">\(P(y=1\mid \mathbf X,\mathbf A) = \sigma(\beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)\)</span><span class="math notranslate nohighlight">\(
-où \)</span>\beta_K<span class="math notranslate nohighlight">\( et \)</span>\mathbf w_K^T\in\mathbb{R}^D<span class="math notranslate nohighlight">\( sont des paramètres à
-apprendre. Multiplier à droite par le vecteur colonne \)</span>\mathbf 1<span class="math notranslate nohighlight">\( somme
-toutes les représentations, et diviser par \)</span>N$ calcule la moyenne. La
+sigmoïde et la perte est calculée à l’aide de l’entropie croisée binaire</p>
+<div class="math notranslate nohighlight">
+\[P(y=1\mid \mathbf X,\mathbf A) = \sigma(\beta_K+\mathbf w_K\mathbf H_K\mathbf 1/N)\]</div>
+<p>où <span class="math notranslate nohighlight">\(\beta_K\)</span> et <span class="math notranslate nohighlight">\(\mathbf w_K^T\in\mathbb{R}^D\)</span> sont des paramètres à
+apprendre. Multiplier à droite par le vecteur colonne <span class="math notranslate nohighlight">\(\mathbf 1\)</span> somme
+toutes les représentations, et diviser par <span class="math notranslate nohighlight">\(N\)</span> calcule la moyenne. La
 technique résultante est dite <em>mean pooling</em>.</p>
 </section>
 <section id="en-relation-avec-les-sommets">
@@ -466,13 +467,16 @@ plutôt que dans l’espace de Fourier (méthodes basées spectre). Chaque
 couche du GCN est une fonction <span class="math notranslate nohighlight">\(\mathbf F_{\boldsymbol \phi}\)</span>, de paramètres
 <span class="math notranslate nohighlight">\({\boldsymbol \phi}\)</span>, qui prend en entrée les représentations des sommets
 <span class="math notranslate nohighlight">\(\mathbf X\)</span> et la matrice d’adjacence <span class="math notranslate nohighlight">\(\mathbf A\)</span> de <span class="math notranslate nohighlight">\(G\)</span> et produit de
-nouvelles représentations des sommets : $<span class="math notranslate nohighlight">\(\begin{aligned}
+nouvelles représentations des sommets :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
 \mathbf H_1 &amp;=&amp; \mathbf F_{\boldsymbol \phi_O}(\mathbf X,\mathbf A)\\ 
 \mathbf H_2 &amp;=&amp; \mathbf F_{\boldsymbol \phi_1}(\mathbf H_1,\mathbf A)\\ 
 \cdots &amp;&amp;\\ 
 \mathbf H_K &amp;=&amp; \mathbf F_{\boldsymbol \phi_{K-1}}(\mathbf H_{K-1},\mathbf A)
-\end{aligned}\)</span><span class="math notranslate nohighlight">\( les \)</span>\boldsymbol \phi_{k}<span class="math notranslate nohighlight">\( étant les paramètres du réseau entre
-la couche \)</span>k<span class="math notranslate nohighlight">\( et la couche \)</span>k+1$</p>
+\end{aligned}\end{split}\]</div>
+<p>les <span class="math notranslate nohighlight">\(\boldsymbol \phi_{k}\)</span> étant les paramètres du réseau entre
+la couche <span class="math notranslate nohighlight">\(k\)</span> et la couche <span class="math notranslate nohighlight">\(k+1\)</span></p>
 <section id="equivariance-et-invariance">
 <h4>Equivariance et invariance<a class="headerlink" href="#equivariance-et-invariance" title="Lien vers cette rubrique">#</a></h4>
 <p>L’indexation des sommets dans le graphe étant arbitraire, il est
@@ -630,11 +634,12 @@ sommets, certains ayant des étiquettes binaires <span class="math notranslate n
 alors d’étiqueter les sommets non étiquetés restants. Le réseau est le
 même que dans l’exemple <a class="reference internal" href="#S:excl"><span class="xref myst">1.2.3</span></a>{reference-type= »ref »
 reference= »S:excl »} avec une couche finale différente qui produit un
-vecteur de sortie de taille <span class="math notranslate nohighlight">\(1\times N\)</span> :
-$<span class="math notranslate nohighlight">\(f(\mathbf X,\mathbf A,\boldsymbol\phi) =  \sigma(\boldsymbol \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)\)</span><span class="math notranslate nohighlight">\(
-la fonction \)</span>\sigma<span class="math notranslate nohighlight">\( agissant point à point. On trouve \)</span>\boldsymbol \phi<span class="math notranslate nohighlight">\( par
-minimisation de l'entropie croisée binaire, mais seulement à partir des
-valeurs des sommets pour lesquels les étiquettes \)</span>y_i$ sont connues.</p>
+vecteur de sortie de taille <span class="math notranslate nohighlight">\(1\times N\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf X,\mathbf A,\boldsymbol\phi) =  \sigma(\boldsymbol \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)\]</div>
+<p>la fonction <span class="math notranslate nohighlight">\(\sigma\)</span> agissant point à point. On trouve <span class="math notranslate nohighlight">\(\boldsymbol \phi\)</span> par
+minimisation de l’entropie croisée binaire, mais seulement à partir des
+valeurs des sommets pour lesquels les étiquettes <span class="math notranslate nohighlight">\(y_i\)</span> sont connues.</p>
 <p>L’entraînement de ce réseau pose deux problèmes. Tout d’abord, il est
 difficile d’entraîner un réseau de cette taille, ne serait-ce que parce
 qu’il faut stocker les représentations des sommets à chaque couche du

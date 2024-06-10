@@ -528,40 +528,207 @@ mettent à jour les arêtes), qui peuvent être alternées à volonté ou,
 moyennant des modifications mineures, les sommets peuvent être mis à
 jour simultanément à partir des sommets et des arêtes.
 
-## Partie pratique
+## Implémentation
 
-Pour bien comprendre la structure d'un GNN, on propose de ne pas
-utiliser de librairie dédiée (type
-[Spectral](https://graphneural.network/),
-[StellarGraph](https://stellargraph.readthedocs.io/en/stable/README.html)
-ou encore [GraphNets](https://github.com/deepmind/graph_nets)), mais
-plutôt de l'implémenter directement à partir de Tensorflow et Keras.
+On étudie ici la classification semi-supervisée des sommets d'un graphe sur un jeu de données classique ([club de karaté de Zachary](https://en.wikipedia.org/wiki/Zachary%27s_karate_club)) . 
+Ce jeu de données est un réseau d'amitiés entre 34 membres d'un club de karaté d'une université dans les années 1970. Une arête entre deux sommets indique que les deux membres ont interagi en dehors du club. Pendant que l'auteur collectait les données, un conflit est survenu entre le président du club (Mr. Hi) et l'entraîneur (Officer), ce qui a conduit à la division du club. Certains membres ont formé un nouveau club autour de l'entraîneur, tandis que d'autres ont trouvé un nouvel entraîneur ou ont abandonné le karaté. 
+Au total, 4 sous-groupes ont été créés.
 
-\# Classification de sommets par GNN
+En utilisant uniquement les informations de connectivité (les arêtes), il est possible de retrouver ces sous-groupes.
 
-On propose ici de construire et apprendre un GNN pour prédire le sujet
-d'un article à partir de son contenu et de ses citations. Nous
-utiliserons pour cela le \[jeu de données
-Cora\](https://relational.fit.cvut.cz/dataset/CORA)
+On se pose donc la question suivante : Peut-on utiliser les GCN pour prédire l'affiliation de chaque membre étant donné les seules informations du président du club et de l'entraîneur ?
 
-\## Jeu de données
+On utilise dans la suite la librairie [PyG](https://pytorch-geometric.readthedocs.io/en/latest/)
 
-Le jeu de données Cora comprend 2 708 articles scientifiques de machine
-learning étiquetés avec l'un des 7 thèmes suivants : Neural_Networks,
-Probabilistic_Methods, Genetic_Algorithms, Theory ,Case_Based,
-Reinforcement_Learning et Rule_Learning.
+```{code-cell} ipython3
+import torch
+import torch.nn as nn
 
-Les articles sont reliés par une arc indiquant quel article cite quel
-autre. Il existe 5 429 citations dans la base.
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import animation
+from IPython.display import HTML
 
-Chaque article possède un vecteur de mots binaire de taille 1433,
-indiquant la présence d'un mot correspondant.
+import networkx as nx
 
-En pratique, le jeu de données comporte deux fichiers - 'cora.cites' qui
-gère les citations. Les deux colonnes donne l'article cité
-('cited_paper_id') et l'article qui cite ('citing_paper_id'). -
-'cora.content' qui gère le contenu des papiers, et qui contient 1435
-colonnes : 'paper_id', 'subject', et 1433 descripteurs binaires.
+from torch_geometric.datasets import KarateClub
+from torch_geometric.utils import to_dense_adj,to_networkx
+from torch_geometric.nn import GCNConv
+```
 
-[^1]: Une fonction $f$ est équivariante pour une transformation $t$ si
-    pour tout $x, f(t(x)) = t(f(x))$
+On récupère les données et on affiche les caractéristiques du réseau
+
+```{code-cell} ipython3
+dataset = KarateClub()
+data = dataset[0]
+
+print(f'Nombre de noeuds: {dataset.num_features}')
+print(f'Nombre de classes: {dataset.num_classes}')
+
+# Matrice d'adjacence
+A = to_dense_adj(data.edge_index)[0].numpy().astype(int)
+plt.imshow(A,cmap=plt.cm.gray)
+plt.colorbar(ticks=[0, 1])
+plt.title("Matrice d'adjacence")
+```
+
+Dans les données initiales, le champ `data.train_mask`contient un masque permettant de ne sélectionner dans les données qu'un membre de chaque classe
+
+```{code-cell} ipython3
+mask =  data.train_mask
+print(mask)
+```
+
+On souhaite juste retrouver les groupes en fonction des données de l'entraîneur et du président. On modifie donc ce masque
+```{code-cell} ipython3
+mask[4]= False
+mask[8]= False
+mask[24]= False
+mask[33]= True
+print(mask)
+```
+
+On affiche le graphe avec les groupes, et le graphe qui servira pour l'entraînement : seules les données des noeuds jaunes seront connues.
+On encode les informations des noeuds par un vecteur one hot encoder.
+
+```{code-cell} ipython3
+def oneHotEncoder(labels):
+    return np.sum([(labels[:, i] == 1) * (i + 1) for i in range(4)], axis=0)
+
+
+np.random.seed(2)
+G = to_networkx(data, to_undirected=True)
+fig,axs = plt.subplots(1,2,figsize=(10,5))
+plt.subplot(121)
+plt.axis('off')
+nx.draw_networkx(G,
+                pos=nx.kamada_kawai_layout(G),
+                with_labels=True,
+                node_size=200,
+                node_color=data.y,
+                cmap="hsv",
+                vmin=-2,
+                vmax=3,
+                width=0.8,
+                edge_color="grey",
+                font_size=14
+                )
+
+plt.title("Graphe avec labels des classes (couleurs)")
+plt.subplot(122)
+plt.axis('off')
+nx.draw_networkx(G,
+                pos=nx.kamada_kawai_layout(G),
+                with_labels=True,
+                node_size=200,
+                node_color=oneHotEncoder(data.y * mask[:,np.newaxis]),
+                vmin=-2,
+                vmax=3,
+                width=0.8,
+                edge_color="grey",
+                font_size=14
+                )
+plt.title("Noeuds d'apprentissage (noeuds jaunes)")
+plt.tight_layout()```
+
+On construit ensuite un GCN simple
+
+
+```{code-cell} ipython3
+class GCN(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.gcn = GCNConv(dataset.num_features, 3)
+        self.out = nn.Linear(3, dataset.num_classes)
+
+    def forward(self, x, edge_index):
+        h = self.gcn(x, edge_index).relu()
+        z = self.out(h)
+        return h, z
+
+model = GCN()
+```
+
+et on apprend ce modèle
+
+```{code-cell} ipython3
+# Foncion de perte en classification
+criterion = nn.CrossEntropyLoss() 
+optimizer = torch.optim.Adam(model.parameters(), lr=0.02)
+
+def precision(pred_y, y):
+    return (pred_y == y).sum() / len(y)
+
+pertes = []
+precisions = []
+res = []
+
+# Training loop
+for epoch in range(201):
+    # Clear gradients
+    optimizer.zero_grad()
+
+    # Forward pass
+    _, z = model(data.x, data.edge_index)
+
+    # Calculate loss function
+    perte = criterion(z, data.y)
+
+    p = precision(z.argmax(dim=1), data.y)
+
+    perte.backward()
+    optimizer.step()
+
+    pertes.append(perte)
+    precisions.append(p)
+    res.append(z.argmax(dim=1))
+```
+
+On affiche ensuite l'évolution de l'entraînement
+
+```{code-cell} ipython3
+plt.rcParams["animation.bitrate"] = 3000
+
+def animate(i):
+    G = to_networkx(data, to_undirected=True)
+    plt.subplot(121)
+    plt.axis('off')
+    nx.draw_networkx(G,
+                pos=nx.kamada_kawai_layout(G),
+                with_labels=True,
+                node_size=200,
+                node_color=data.y,
+                cmap="hsv",
+                vmin=-2,
+                vmax=3,
+                width=0.8,
+                edge_color="grey",
+                font_size=14
+                )
+
+    plt.title("Graphe avec labels des classes")
+    plt.subplot(122)
+    plt.axis('off')
+    nx.draw_networkx(G,
+                    pos=nx.kamada_kawai_layout(G, ),
+                    with_labels=True,
+                    node_size=200,
+                    node_color=outputs[i],
+                    cmap="hsv",
+                    vmin=-2,
+                    vmax=3,
+                    width=0.8,
+                    edge_color="grey",
+                    font_size=14
+                    )
+    plt.title(f'Epoch {i} | Précision: {accuracies[i]*100:.2f}%', pad=20)
+
+
+fig,axs = plt.subplots(1,2,figsize=(10,5))
+anim = animation.FuncAnimation(fig, animate, \np.arange(0, 200, 10), interval=500, repeat=True)
+html = HTML(anim.to_html5_video())
+```
+
+```{code-cell} ipython3
+display(html)
+```
