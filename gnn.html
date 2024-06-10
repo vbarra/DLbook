@@ -1028,7 +1028,7 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
                     <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">),</span>
                     <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-                    <span class="n">node_color</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">node_color</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
                     <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
                     <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
                     <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
@@ -1092,27 +1092,20 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
 <span class="g g-Whitespace">   </span><span class="mi">1772</span>     <span class="n">err</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;The animation function must return a sequence &#39;</span>
 <span class="g g-Whitespace">   </span><span class="mi">1773</span>                        <span class="s1">&#39;of Artist objects.&#39;</span><span class="p">)</span>
 
-<span class="nn">Cell In[8], line 27,</span> in <span class="ni">animate</span><span class="nt">(i)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="nn">Cell In[8], line 35,</span> in <span class="ni">animate</span><span class="nt">(i)</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">24</span>                 <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">),</span>
 <span class="g g-Whitespace">     </span><span class="mi">25</span>                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>                 <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>                 <span class="n">node_color</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>                 <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>                 <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>                 <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>                 <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>                 <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">33</span>                 <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
 <span class="g g-Whitespace">     </span><span class="mi">34</span>                 <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> | Précision: </span><span class="si">{</span><span class="n">accuracies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> | Précision: </span><span class="si">{</span><span class="n">accuracies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-<span class="ne">NameError</span>: name &#39;outputs&#39; is not defined
+<span class="ne">NameError</span>: name &#39;accuracies&#39; is not defined
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in callback &lt;function _draw_all_if_interactive at 0x12ae36d40&gt; (for post_execute), with arguments args (),kwargs {}:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in callback &lt;function _draw_all_if_interactive at 0x1337c2d40&gt; (for post_execute), with arguments args (),kwargs {}:
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -1217,27 +1210,20 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
 <span class="g g-Whitespace">   </span><span class="mi">1772</span>     <span class="n">err</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;The animation function must return a sequence &#39;</span>
 <span class="g g-Whitespace">   </span><span class="mi">1773</span>                        <span class="s1">&#39;of Artist objects.&#39;</span><span class="p">)</span>
 
-<span class="nn">Cell In[8], line 27,</span> in <span class="ni">animate</span><span class="nt">(i)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="nn">Cell In[8], line 35,</span> in <span class="ni">animate</span><span class="nt">(i)</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">24</span>                 <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">),</span>
 <span class="g g-Whitespace">     </span><span class="mi">25</span>                 <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>                 <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>                 <span class="n">node_color</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>                 <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>                 <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>                 <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>                 <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>                 <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">33</span>                 <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
 <span class="g g-Whitespace">     </span><span class="mi">34</span>                 <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> | Précision: </span><span class="si">{</span><span class="n">accuracies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> | Précision: </span><span class="si">{</span><span class="n">accuracies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-<span class="ne">NameError</span>: name &#39;outputs&#39; is not defined
+<span class="ne">NameError</span>: name &#39;accuracies&#39; is not defined
 </pre></div>
 </div>
-<img alt="_images/5581c661d7ce0745120a30192381ecd191a80f4bcdd22f4664ce9eaeb1d64960.png" src="_images/5581c661d7ce0745120a30192381ecd191a80f4bcdd22f4664ce9eaeb1d64960.png" />
+<img alt="_images/b80899d661f1b825c95598babc54b98c7ba06e9227de6fd7951a9be2c2e3796b.png" src="_images/b80899d661f1b825c95598babc54b98c7ba06e9227de6fd7951a9be2c2e3796b.png" />
 </div>
 </div>
 <div class="cell docutils container">
