@@ -500,7 +500,7 @@ $\mathbf A+\mathbf I$ est égal à zéro, de sorte qu'elles ne contribuent
 pas. Cela garantit que l'attention accordée aux sommets non voisins est
 nulle.
 
-### Prise en compte de l'information des arcs ou arêtes {#S:E}
+### Prise en compte de l'information des arcs ou arêtes
 
 Les paragraphes précédents ont abordé le traitement des représentrations
 des sommets. Ceux-ci évoluent au fur et à mesure qu'ils sont transmis
