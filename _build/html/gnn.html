@@ -318,7 +318,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prise-en-compte-de-l-information-des-arcs-ou-aretes-s-e">Prise en compte de l’information des arcs ou arêtes {#S:E}</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
             </nav>
         </div>
@@ -481,7 +481,7 @@ la couche <span class="math notranslate nohighlight">\(k\)</span> et la couche <
 <h4>Equivariance et invariance<a class="headerlink" href="#equivariance-et-invariance" title="Lien vers cette rubrique">#</a></h4>
 <p>L’indexation des sommets dans le graphe étant arbitraire, il est
 indispensable que tout modèle respecte cette propriété. Chaque couche
-doit donc être équivariante<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> par rapport aux permutations des indices
+doit donc être équivariante[^1] par rapport aux permutations des indices
 des sommets, soit pour toute permutation <span class="math notranslate nohighlight">\(\mathbf P\)</span> et tout <span class="math notranslate nohighlight">\(k\)</span>:
 $<span class="math notranslate nohighlight">\(\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)\)</span>$</p>
 <p>Pour les tâches de classification des sommets et de prédiction des arcs
@@ -520,11 +520,11 @@ particulier.</p>
 </section>
 <section id="exemple">
 <h4>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique">#</a></h4>
-<p>La (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 58</span></a>) présente un exemple simple de GCN.</p>
-<figure class="align-default" id="id2">
+<p>La (<a class="reference internal" href="#id1"><span class="std std-numref">Fig. 58</span></a>) présente un exemple simple de GCN.</p>
+<figure class="align-default" id="id1">
 <img alt="_images/gcn.png" src="_images/gcn.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Exemple de GCN</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Exemple de GCN</span><a class="headerlink" href="#id1" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <ul>
@@ -821,41 +821,260 @@ moyennant des modifications mineures, les sommets peuvent être mis à
 jour simultanément à partir des sommets et des arêtes.</p>
 </section>
 </section>
-<section id="partie-pratique">
-<h2>Partie pratique<a class="headerlink" href="#partie-pratique" title="Lien vers cette rubrique">#</a></h2>
-<p>Pour bien comprendre la structure d’un GNN, on propose de ne pas
-utiliser de librairie dédiée (type
-<a class="reference external" href="https://graphneural.network/">Spectral</a>,
-<a class="reference external" href="https://stellargraph.readthedocs.io/en/stable/README.html">StellarGraph</a>
-ou encore <a class="reference external" href="https://github.com/deepmind/graph_nets">GraphNets</a>), mais
-plutôt de l’implémenter directement à partir de Tensorflow et Keras.</p>
-<p># Classification de sommets par GNN</p>
-<p>On propose ici de construire et apprendre un GNN pour prédire le sujet
-d’un article à partir de son contenu et de ses citations. Nous
-utiliserons pour cela le [jeu de données
-Cora](<a class="reference external" href="https://relational.fit.cvut.cz/dataset/CORA">https://relational.fit.cvut.cz/dataset/CORA</a>)</p>
-<p>## Jeu de données</p>
-<p>Le jeu de données Cora comprend 2 708 articles scientifiques de machine
-learning étiquetés avec l’un des 7 thèmes suivants : Neural_Networks,
-Probabilistic_Methods, Genetic_Algorithms, Theory ,Case_Based,
-Reinforcement_Learning et Rule_Learning.</p>
-<p>Les articles sont reliés par une arc indiquant quel article cite quel
-autre. Il existe 5 429 citations dans la base.</p>
-<p>Chaque article possède un vecteur de mots binaire de taille 1433,
-indiquant la présence d’un mot correspondant.</p>
-<p>En pratique, le jeu de données comporte deux fichiers - “cora.cites” qui
-gère les citations. Les deux colonnes donne l’article cité
-(“cited_paper_id”) et l’article qui cite (“citing_paper_id”). -
-“cora.content” qui gère le contenu des papiers, et qui contient 1435
-colonnes : “paper_id”, “subject”, et 1433 descripteurs binaires.</p>
-<hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id3" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Une fonction <span class="math notranslate nohighlight">\(f\)</span> est équivariante pour une transformation <span class="math notranslate nohighlight">\(t\)</span> si
-pour tout <span class="math notranslate nohighlight">\(x, f(t(x)) = t(f(x))\)</span></p>
-</aside>
-</aside>
+<section id="implementation">
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<p>On étudie ici la classification semi-supervisée des sommets d’un graphe sur un jeu de données classique (<a class="reference external" href="https://en.wikipedia.org/wiki/Zachary%27s_karate_club">club de karaté de Zachary</a>) .
+Ce jeu de données est un réseau d’amitiés entre 34 membres d’un club de karaté d’une université dans les années 1970. Une arête entre deux sommets indique que les deux membres ont interagi en dehors du club. Pendant que l’auteur collectait les données, un conflit est survenu entre le président du club (Mr. Hi) et l’entraîneur (Officer), ce qui a conduit à la division du club. Certains membres ont formé un nouveau club autour de l’entraîneur, tandis que d’autres ont trouvé un nouvel entraîneur ou ont abandonné le karaté.
+Au total, 4 sous-groupes ont été créés.</p>
+<p>En utilisant uniquement les informations de connectivité (les arêtes), il est possible de retrouver ces sous-groupes.</p>
+<p>On se pose donc la question suivante : Peut-on utiliser les GCN pour prédire l’affiliation de chaque membre étant donné les seules informations du président du club et de l’entraîneur ?</p>
+<p>On utilise dans la suite la librairie <a class="reference external" href="https://pytorch-geometric.readthedocs.io/en/latest/">PyG</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">animation</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="kn">from</span> <span class="nn">torch_geometric.datasets</span> <span class="kn">import</span> <span class="n">KarateClub</span>
+<span class="kn">from</span> <span class="nn">torch_geometric.utils</span> <span class="kn">import</span> <span class="n">to_dense_adj</span><span class="p">,</span><span class="n">to_networkx</span>
+<span class="kn">from</span> <span class="nn">torch_geometric.nn</span> <span class="kn">import</span> <span class="n">GCNConv</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On récupère les données et on affiche les caractéristiques du réseau</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">KarateClub</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Nombre de noeuds: </span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_features</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Nombre de classes: </span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Matrice d&#39;adjacence</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">to_dense_adj</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matrice d&#39;adjacence&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nombre de noeuds: 34
+Nombre de classes: 4
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &quot;Matrice d&#39;adjacence&quot;)
+</pre></div>
+</div>
+<img alt="_images/2a1cb19d035798dad9722c50a577df7039967132f89bade3022d6a76ca65067a.png" src="_images/2a1cb19d035798dad9722c50a577df7039967132f89bade3022d6a76ca65067a.png" />
+</div>
+</div>
+<p>Dans les données initiales, le champ <code class="docutils literal notranslate"><span class="pre">data.train_mask</span></code>contient un masque permettant de ne sélectionner dans les données qu’un membre de chaque classe</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span>  <span class="n">data</span><span class="o">.</span><span class="n">train_mask</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ True, False, False, False,  True, False, False, False,  True, False,
+        False, False, False, False, False, False, False, False, False, False,
+        False, False, False, False,  True, False, False, False, False, False,
+        False, False, False, False])
+</pre></div>
+</div>
+</div>
+</div>
+<p>On souhaite juste retrouver les groupes en fonction des données de l’entraîneur et du président. On modifie donc ce masque</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span> <span class="kc">False</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">=</span> <span class="kc">False</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span><span class="o">=</span> <span class="kc">False</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">33</span><span class="p">]</span><span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ True, False, False, False, False, False, False, False, False, False,
+        False, False, False, False, False, False, False, False, False, False,
+        False, False, False, False, False, False, False, False, False, False,
+        False, False, False,  True])
+</pre></div>
+</div>
+</div>
+</div>
+<p>On affiche le graphe avec les groupes, et le graphe qui servira pour l’entraînement : seules les données des noeuds jaunes seront connues.
+On encode les informations des noeuds par un vecteur one hot encoder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">oneHotEncoder</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([(</span><span class="n">labels</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">to_networkx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to_undirected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+                <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
+                <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                <span class="n">node_color</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
+                <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+                <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
+                <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graphe avec labels des classes (couleurs)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+                <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
+                <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                <span class="n">node_color</span><span class="o">=</span><span class="n">oneHotEncoder</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">mask</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]),</span>
+                <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+                <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
+                <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noeuds d&#39;apprentissage (noeuds jaunes)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span><span class="err">```</span>
+
+<span class="n">On</span> <span class="n">construit</span> <span class="n">ensuite</span> <span class="n">un</span> <span class="n">GCN</span> <span class="n">simple</span>
+
+
+<span class="err">```</span><span class="p">{</span><span class="n">code</span><span class="o">-</span><span class="n">cell</span><span class="p">}</span> <span class="n">ipython3</span>
+<span class="k">class</span> <span class="nc">GCN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gcn</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gcn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span><span class="o">.</span><span class="n">relu</span><span class="p">()</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">z</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">38</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span><span class="err">```</span>
+                      <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<p>et on apprend ce modèle</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Foncion de perte en classification</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span> 
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">precision</span><span class="p">(</span><span class="n">pred_y</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pred_y</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">pertes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">precisions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Training loop</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">):</span>
+    <span class="c1"># Clear gradients</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+    <span class="c1"># Forward pass</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>
+
+    <span class="c1"># Calculate loss function</span>
+    <span class="n">perte</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">precision</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">perte</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="n">pertes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perte</span><span class="p">)</span>
+    <span class="n">precisions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On affiche ensuite l’évolution de l’entraînement</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;animation.bitrate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3000</span>
+
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">to_networkx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to_undirected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+                <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
+                <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                <span class="n">node_color</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
+                <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+                <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
+                <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graphe avec labels des classes&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+                    <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">kamada_kawai_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">),</span>
+                    <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">node_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                    <span class="n">node_color</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;hsv&quot;</span><span class="p">,</span>
+                    <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                    <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+                    <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span>
+                    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> | Précision: </span><span class="si">{</span><span class="n">accuracies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> \<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -951,7 +1170,7 @@ pour tout <span class="math notranslate nohighlight">\(x, f(t(x)) = t(f(x))\)</s
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prise-en-compte-de-l-information-des-arcs-ou-aretes-s-e">Prise en compte de l’information des arcs ou arêtes {#S:E}</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
   </nav></div>
 

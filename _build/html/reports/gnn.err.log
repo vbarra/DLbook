@@ -1,0 +1,84 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+def oneHotEncoder(labels):
+    return np.sum([(labels[:, i] == 1) * (i + 1) for i in range(4)], axis=0)
+
+
+np.random.seed(2)
+G = to_networkx(data, to_undirected=True)
+fig,axs = plt.subplots(1,2,figsize=(10,5))
+plt.subplot(121)
+plt.axis('off')
+nx.draw_networkx(G,
+                pos=nx.kamada_kawai_layout(G),
+                with_labels=True,
+                node_size=200,
+                node_color=data.y,
+                cmap="hsv",
+                vmin=-2,
+                vmax=3,
+                width=0.8,
+                edge_color="grey",
+                font_size=14
+                )
+
+plt.title("Graphe avec labels des classes (couleurs)")
+plt.subplot(122)
+plt.axis('off')
+nx.draw_networkx(G,
+                pos=nx.kamada_kawai_layout(G),
+                with_labels=True,
+                node_size=200,
+                node_color=oneHotEncoder(data.y * mask[:,np.newaxis]),
+                vmin=-2,
+                vmax=3,
+                width=0.8,
+                edge_color="grey",
+                font_size=14
+                )
+plt.title("Noeuds d'apprentissage (noeuds jaunes)")
+plt.tight_layout()```
+
+On construit ensuite un GCN simple
+
+
+```{code-cell} ipython3
+class GCN(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.gcn = GCNConv(dataset.num_features, 3)
+        self.out = nn.Linear(3, dataset.num_classes)
+
+    def forward(self, x, edge_index):
+        h = self.gcn(x, edge_index).relu()
+        z = self.out(h)
+        return h, z
+
+model = GCN()
+------------------
+
+
+[0;36m  Cell [0;32mIn[5], line 38[0;36m[0m
+[0;31m    plt.tight_layout()```[0m
+[0m                      ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+
+
