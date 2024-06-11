@@ -18,163 +18,26 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-plt.rcParams["animation.bitrate"] = 3000
+dataset = KarateClub()
+data = dataset[0]
 
-def animate(i):
-    G = to_networkx(data, to_undirected=True)
-    plt.subplot(121)
-    plt.axis('off')
-    nx.draw_networkx(G,
-                pos=nx.kamada_kawai_layout(G),
-                with_labels=True,
-                node_size=200,
-                node_color=data.y,
-                cmap="hsv",
-                vmin=-2,
-                vmax=3,
-                width=0.8,
-                edge_color="grey",
-                font_size=14
-                )
+print(f'Nombre de noeuds: {dataset.num_features}')
+print(f'Nombre de classes: {dataset.num_classes}')
 
-    plt.title("Graphe avec labels des classes")
-    plt.subplot(122)
-    plt.axis('off')
-    nx.draw_networkx(G,
-                    pos=nx.kamada_kawai_layout(G, ),
-                    with_labels=True,
-                    node_size=200,
-                    node_color=res[i],
-                    cmap="hsv",
-                    vmin=-2,
-                    vmax=3,
-                    width=0.8,
-                    edge_color="grey",
-                    font_size=14
-                    )
-    plt.title(f'Epoch {i} | Précision: {accuracies[i]*100:.2f}%', pad=20)
-
-
-fig,axs = plt.subplots(1,2,figsize=(10,5))
-anim = animation.FuncAnimation(fig, animate, np.arange(0, 200, 10), interval=500, repeat=True)
-html = HTML(anim.to_html5_video())
+# Matrice d'adjacence
+A = to_dense_adj(data.edge_index)[0].numpy().astype(int)
+plt.imshow(A,cmap=plt.cm.gray)
+plt.colorbar(ticks=[0, 1])
+plt.title("Matrice d'adjacence")
 ------------------
 
------ stdout -----
-Error in callback <function _draw_all_if_interactive at 0x1337c2d40> (for post_execute), with arguments args (),kwargs {}:
-------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/pyplot.py:197[0m, in [0;36m_draw_all_if_interactive[0;34m()[0m
-[1;32m    195[0m [38;5;28;01mdef[39;00m [38;5;21m_draw_all_if_interactive[39m() [38;5;241m-[39m[38;5;241m>[39m [38;5;28;01mNone[39;00m:
-[1;32m    196[0m     [38;5;28;01mif[39;00m matplotlib[38;5;241m.[39mis_interactive():
-[0;32m--> 197[0m         [43mdraw_all[49m[43m([49m[43m)[49m
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m dataset [38;5;241m=[39m [43mKarateClub[49m()
+[1;32m      2[0m data [38;5;241m=[39m dataset[[38;5;241m0[39m]
+[1;32m      4[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m'[39m[38;5;124mNombre de noeuds: [39m[38;5;132;01m{[39;00mdataset[38;5;241m.[39mnum_features[38;5;132;01m}[39;00m[38;5;124m'[39m)
 
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/_pylab_helpers.py:132[0m, in [0;36mGcf.draw_all[0;34m(cls, force)[0m
-[1;32m    130[0m [38;5;28;01mfor[39;00m manager [38;5;129;01min[39;00m [38;5;28mcls[39m[38;5;241m.[39mget_all_fig_managers():
-[1;32m    131[0m     [38;5;28;01mif[39;00m force [38;5;129;01mor[39;00m manager[38;5;241m.[39mcanvas[38;5;241m.[39mfigure[38;5;241m.[39mstale:
-[0;32m--> 132[0m         [43mmanager[49m[38;5;241;43m.[39;49m[43mcanvas[49m[38;5;241;43m.[39;49m[43mdraw_idle[49m[43m([49m[43m)[49m
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/backend_bases.py:1893[0m, in [0;36mFigureCanvasBase.draw_idle[0;34m(self, *args, **kwargs)[0m
-[1;32m   1891[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_is_idle_drawing:
-[1;32m   1892[0m     [38;5;28;01mwith[39;00m [38;5;28mself[39m[38;5;241m.[39m_idle_draw_cntx():
-[0;32m-> 1893[0m         [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdraw[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py:388[0m, in [0;36mFigureCanvasAgg.draw[0;34m(self)[0m
-[1;32m    385[0m [38;5;66;03m# Acquire a lock on the shared font cache.[39;00m
-[1;32m    386[0m [38;5;28;01mwith[39;00m ([38;5;28mself[39m[38;5;241m.[39mtoolbar[38;5;241m.[39m_wait_cursor_for_draw_cm() [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mtoolbar
-[1;32m    387[0m       [38;5;28;01melse[39;00m nullcontext()):
-[0;32m--> 388[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mfigure[49m[38;5;241;43m.[39;49m[43mdraw[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mrenderer[49m[43m)[49m
-[1;32m    389[0m     [38;5;66;03m# A GUI class may be need to update a window using this draw, so[39;00m
-[1;32m    390[0m     [38;5;66;03m# don't forget to call the superclass.[39;00m
-[1;32m    391[0m     [38;5;28msuper[39m()[38;5;241m.[39mdraw()
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/artist.py:95[0m, in [0;36m_finalize_rasterization.<locals>.draw_wrapper[0;34m(artist, renderer, *args, **kwargs)[0m
-[1;32m     93[0m [38;5;129m@wraps[39m(draw)
-[1;32m     94[0m [38;5;28;01mdef[39;00m [38;5;21mdraw_wrapper[39m(artist, renderer, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
-[0;32m---> 95[0m     result [38;5;241m=[39m [43mdraw[49m[43m([49m[43martist[49m[43m,[49m[43m [49m[43mrenderer[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
-[1;32m     96[0m     [38;5;28;01mif[39;00m renderer[38;5;241m.[39m_rasterizing:
-[1;32m     97[0m         renderer[38;5;241m.[39mstop_rasterizing()
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/artist.py:72[0m, in [0;36mallow_rasterization.<locals>.draw_wrapper[0;34m(artist, renderer)[0m
-[1;32m     69[0m     [38;5;28;01mif[39;00m artist[38;5;241m.[39mget_agg_filter() [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-[1;32m     70[0m         renderer[38;5;241m.[39mstart_filter()
-[0;32m---> 72[0m     [38;5;28;01mreturn[39;00m [43mdraw[49m[43m([49m[43martist[49m[43m,[49m[43m [49m[43mrenderer[49m[43m)[49m
-[1;32m     73[0m [38;5;28;01mfinally[39;00m:
-[1;32m     74[0m     [38;5;28;01mif[39;00m artist[38;5;241m.[39mget_agg_filter() [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/figure.py:3164[0m, in [0;36mFigure.draw[0;34m(self, renderer)[0m
-[1;32m   3161[0m [38;5;28;01mfinally[39;00m:
-[1;32m   3162[0m     [38;5;28mself[39m[38;5;241m.[39mstale [38;5;241m=[39m [38;5;28;01mFalse[39;00m
-[0;32m-> 3164[0m [43mDrawEvent[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mdraw_event[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mcanvas[49m[43m,[49m[43m [49m[43mrenderer[49m[43m)[49m[38;5;241;43m.[39;49m[43m_process[49m[43m([49m[43m)[49m
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/backend_bases.py:1271[0m, in [0;36mEvent._process[0;34m(self)[0m
-[1;32m   1269[0m [38;5;28;01mdef[39;00m [38;5;21m_process[39m([38;5;28mself[39m):
-[1;32m   1270[0m [38;5;250m    [39m[38;5;124;03m"""Process this event on ``self.canvas``, then unset ``guiEvent``."""[39;00m
-[0;32m-> 1271[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mcanvas[49m[38;5;241;43m.[39;49m[43mcallbacks[49m[38;5;241;43m.[39;49m[43mprocess[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mname[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m)[49m
-[1;32m   1272[0m     [38;5;28mself[39m[38;5;241m.[39m_guiEvent_deleted [38;5;241m=[39m [38;5;28;01mTrue[39;00m
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/cbook.py:303[0m, in [0;36mCallbackRegistry.process[0;34m(self, s, *args, **kwargs)[0m
-[1;32m    301[0m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m exc:
-[1;32m    302[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mexception_handler [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-[0;32m--> 303[0m         [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mexception_handler[49m[43m([49m[43mexc[49m[43m)[49m
-[1;32m    304[0m     [38;5;28;01melse[39;00m:
-[1;32m    305[0m         [38;5;28;01mraise[39;00m
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/cbook.py:87[0m, in [0;36m_exception_printer[0;34m(exc)[0m
-[1;32m     85[0m [38;5;28;01mdef[39;00m [38;5;21m_exception_printer[39m(exc):
-[1;32m     86[0m     [38;5;28;01mif[39;00m _get_running_interactive_framework() [38;5;129;01min[39;00m [[38;5;124m"[39m[38;5;124mheadless[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m]:
-[0;32m---> 87[0m         [38;5;28;01mraise[39;00m exc
-[1;32m     88[0m     [38;5;28;01melse[39;00m:
-[1;32m     89[0m         traceback[38;5;241m.[39mprint_exc()
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/cbook.py:298[0m, in [0;36mCallbackRegistry.process[0;34m(self, s, *args, **kwargs)[0m
-[1;32m    296[0m [38;5;28;01mif[39;00m func [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-[1;32m    297[0m     [38;5;28;01mtry[39;00m:
-[0;32m--> 298[0m         [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
-[1;32m    299[0m     [38;5;66;03m# this does not capture KeyboardInterrupt, SystemExit,[39;00m
-[1;32m    300[0m     [38;5;66;03m# and GeneratorExit[39;00m
-[1;32m    301[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m exc:
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/animation.py:912[0m, in [0;36mAnimation._start[0;34m(self, *args)[0m
-[1;32m    909[0m [38;5;28mself[39m[38;5;241m.[39m_fig[38;5;241m.[39mcanvas[38;5;241m.[39mmpl_disconnect([38;5;28mself[39m[38;5;241m.[39m_first_draw_id)
-[1;32m    911[0m [38;5;66;03m# Now do any initial draw[39;00m
-[0;32m--> 912[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_init_draw[49m[43m([49m[43m)[49m
-[1;32m    914[0m [38;5;66;03m# Add our callback for stepping the animation and[39;00m
-[1;32m    915[0m [38;5;66;03m# actually start the event_source.[39;00m
-[1;32m    916[0m [38;5;28mself[39m[38;5;241m.[39mevent_source[38;5;241m.[39madd_callback([38;5;28mself[39m[38;5;241m.[39m_step)
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1749[0m, in [0;36mFuncAnimation._init_draw[0;34m(self)[0m
-[1;32m   1741[0m         warnings[38;5;241m.[39mwarn(
-[1;32m   1742[0m             [38;5;124m"[39m[38;5;124mCan not start iterating the frames for the initial draw. [39m[38;5;124m"[39m
-[1;32m   1743[0m             [38;5;124m"[39m[38;5;124mThis can be caused by passing in a 0 length sequence [39m[38;5;124m"[39m
-[0;32m   (...)[0m
-[1;32m   1746[0m             [38;5;124m"[39m[38;5;124mit may be exhausted due to a previous display or save.[39m[38;5;124m"[39m
-[1;32m   1747[0m         )
-[1;32m   1748[0m         [38;5;28;01mreturn[39;00m
-[0;32m-> 1749[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_draw_frame[49m[43m([49m[43mframe_data[49m[43m)[49m
-[1;32m   1750[0m [38;5;28;01melse[39;00m:
-[1;32m   1751[0m     [38;5;28mself[39m[38;5;241m.[39m_drawn_artists [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_init_func()
-
-File [0;32m/usr/local/lib/python3.12/site-packages/matplotlib/animation.py:1768[0m, in [0;36mFuncAnimation._draw_frame[0;34m(self, framedata)[0m
-[1;32m   1764[0m     [38;5;28mself[39m[38;5;241m.[39m_save_seq [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_save_seq[[38;5;241m-[39m[38;5;28mself[39m[38;5;241m.[39m_save_count:]
-[1;32m   1766[0m [38;5;66;03m# Call the func with framedata and args. If blitting is desired,[39;00m
-[1;32m   1767[0m [38;5;66;03m# func needs to return a sequence of any artists that were modified.[39;00m
-[0;32m-> 1768[0m [38;5;28mself[39m[38;5;241m.[39m_drawn_artists [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_func[49m[43m([49m[43mframedata[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_args[49m[43m)[49m
-[1;32m   1770[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_blit:
-[1;32m   1772[0m     err [38;5;241m=[39m [38;5;167;01mRuntimeError[39;00m([38;5;124m'[39m[38;5;124mThe animation function must return a sequence [39m[38;5;124m'[39m
-[1;32m   1773[0m                        [38;5;124m'[39m[38;5;124mof Artist objects.[39m[38;5;124m'[39m)
-
-Cell [0;32mIn[8], line 35[0m, in [0;36manimate[0;34m(i)[0m
-[1;32m     22[0m plt[38;5;241m.[39maxis([38;5;124m'[39m[38;5;124moff[39m[38;5;124m'[39m)
-[1;32m     23[0m nx[38;5;241m.[39mdraw_networkx(G,
-[1;32m     24[0m                 pos[38;5;241m=[39mnx[38;5;241m.[39mkamada_kawai_layout(G, ),
-[1;32m     25[0m                 with_labels[38;5;241m=[39m[38;5;28;01mTrue[39;00m,
-[0;32m   (...)[0m
-[1;32m     33[0m                 font_size[38;5;241m=[39m[38;5;241m14[39m
-[1;32m     34[0m                 )
-[0;32m---> 35[0m plt[38;5;241m.[39mtitle([38;5;124mf[39m[38;5;124m'[39m[38;5;124mEpoch [39m[38;5;132;01m{[39;00mi[38;5;132;01m}[39;00m[38;5;124m | Précision: [39m[38;5;132;01m{[39;00m[43maccuracies[49m[i][38;5;241m*[39m[38;5;241m100[39m[38;5;132;01m:[39;00m[38;5;124m.2f[39m[38;5;132;01m}[39;00m[38;5;124m%[39m[38;5;124m'[39m, pad[38;5;241m=[39m[38;5;241m20[39m)
-
-[0;31mNameError[0m: name 'accuracies' is not defined
+[0;31mNameError[0m: name 'KarateClub' is not defined
 
