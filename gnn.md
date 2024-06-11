@@ -639,13 +639,13 @@ fig,axs = plt.subplots(1,2,figsize=(10,5))
 plt.subplot(121)
 plt.axis('off')
 nx.draw_networkx(G,pos=nx.kamada_kawai_layout(G),with_labels=True,node_size=200,node_color=data.y,cmap="hsv",
-vmin=-2,vmax=3,width=0.8,edge_color="grey",font_size=14)
+vmin=-2,vmax=3,width=0.8,edge_color="black",font_size=14)
 
 plt.title("Graphe avec labels des classes (couleurs)")
 plt.subplot(122)
 plt.axis('off')
 nx.draw_networkx(G,pos=nx.kamada_kawai_layout(G),with_labels=True,node_size=200,node_color=oneHotEncoder(data.y * mask[:,np.newaxis]),
-vmin=-2,vmax=3,width=0.8,edge_color="grey",font_size=14)
+vmin=-2,vmax=3,width=0.8,edge_color="black",font_size=14)
 plt.title("Noeuds d'apprentissage (noeuds jaunes)")
 plt.tight_layout()
 
@@ -720,26 +720,17 @@ def animate(i):
                 vmin=-2,
                 vmax=3,
                 width=0.8,
-                edge_color="grey",
+                edge_color="black",
                 font_size=14
                 )
 
     plt.title("Graphe avec labels des classes")
     plt.subplot(122)
     plt.axis('off')
-    nx.draw_networkx(G,
-                    pos=nx.kamada_kawai_layout(G, ),
-                    with_labels=True,
-                    node_size=200,
-                    node_color=res[i],
-                    cmap="hsv",
-                    vmin=-2,
-                    vmax=3,
-                    width=0.8,
-                    edge_color="grey",
-                    font_size=14
+    nx.draw_networkx(G,pos=nx.kamada_kawai_layout(G, ),with_labels=True,node_size=200,
+                    node_color=res[i],cmap="hsv",vmin=-2,vmax=3,width=0.8,edge_color="black",font_size=14
                     )
-    plt.title(f'Epoch {i} | Précision: {precisions[i]*100:.2f}%', pad=20)
+    plt.title(f'Epoch {i} - Précision: {precisions[i]*100:.2f}%', pad=20)
 
 
 fig,axs = plt.subplots(1,2,figsize=(7,5))
