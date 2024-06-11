@@ -80,7 +80,7 @@ fait passer par une série de $K$ couches. Les représentations des
 sommets sont mises à jour à chaque couche pour créer des représentations
 intermédiaires cachées $\mathbf H_k$ avant de calculer les
 représentations de sortie $\mathbf H_K$, dont les colonnes comprennent
-des informations sur les sommets correspondants et leur contexte dans le
+des informations sur les sommets correspondants et leur contexte dans   
 $G$.
 
 Les GNN peuvent être utilisés en exploitant la structure de $G$, les
@@ -161,16 +161,21 @@ $$\begin{aligned}
 \end{aligned}$$ 
 
 les $\boldsymbol \phi_{k}$ étant les paramètres du réseau entre
-la couche $k$ et la couche $k+1$
+la couche $k$ et la couche $k+1$.
 
 #### Equivariance et invariance
 
 L'indexation des sommets dans le graphe étant arbitraire, il est
 indispensable que tout modèle respecte cette propriété. Chaque couche
-doit donc être équivariante[^1] par rapport aux permutations des indices
+doit donc être équivariante par rapport aux permutations des indices
 des sommets, soit pour toute permutation $\mathbf P$ et tout $k$:
 
 $$\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)$$
+
+```prf{remark}
+Une fonction $f$ est équivariante pour une transformation $t$ si pour tout $x, $f (t(x)) = t( f (x))$
+```
+
 
 Pour les tâches de classification des sommets et de prédiction des arcs
 ou arêtes, les résultats doivent également être équivariants pour les
