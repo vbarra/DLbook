@@ -471,19 +471,18 @@ Exemple de graphe
 ```
 
 Chaque noeud $i\in [\![1,5]\!]$ est décrit par $\mathbf v_i\in\mathbb{R}^3$, $d=3$
-\vskip 6pt
 
 $\mathbf A+\mathbf I = \begin{pmatrix}1&1&0&0&0\\ 1&1&1&0&0\\ 0&1&1&1&0\\ 0&0&1&1&1\\ 0&0&0&1&1\end{pmatrix}$
 
-$\mathbf D: N\times N$ matrice des degrés de  $\mathbf A+\mathbf I$, $\mathbf D = \begin{pmatrix}2&0&0&0&0\\ 0& 3&0&0&0\\ 0&0&3&0&0\\ 0&0&0&3&0\\ 0&0&0&0&2 \end{pmatrix}$
+$\mathbf D: matrice $N\times N$ des degrés de  $\mathbf A+\mathbf I$, $\mathbf D = \begin{pmatrix}2&0&0&0&0\\ 0& 3&0&0&0\\ 0&0&3&0&0\\ 0&0&0&3&0\\ 0&0&0&0&2 \end{pmatrix}$
 
 $\mathbf H_0=\begin{pmatrix} \mathbf v_1&\mathbf v_2&\mathbf v_3&\mathbf v_4&\mathbf v_5\end{pmatrix}$
 
-$\mathbf L_0: matrice 2\times d$ 
+$\mathbf L_0$: matrice $2\times d$ 
 
 $\boldsymbol\beta_0 \in\mathbb R^2$, $\mathbf 1\in\mathbb R^N$
 
-$\mathbf H_1= \left (\boldsymbol\beta_0 \mathbf 1^T + \mathbf L_0\mathbf H_0(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I)\right ): matrice 2\times N$  : représentation des noeuds à l'itération 1
+$\mathbf H_1= \left (\boldsymbol\beta_0 \mathbf 1^T + \mathbf L_0\mathbf H_0(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I)\right )$: matrice $2\times N$  : représentation des noeuds à l'itération 1.
 ```
 
 
