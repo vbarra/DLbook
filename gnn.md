@@ -683,15 +683,14 @@ pertes = []
 precisions = []
 res = []
 
-# Training loop
-for epoch in range(201):
+nb_epohs = 300
+
+for epoch in range(nb_epochs):
     # Clear gradients
     optimizer.zero_grad()
 
-    # Forward pass
     _, z = model(data.x, data.edge_index)
 
-    # Calculate loss function
     perte = criterion(z, data.y)
 
     p = precision(z.argmax(dim=1), data.y)
