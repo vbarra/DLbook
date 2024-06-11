@@ -18,26 +18,47 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-dataset = KarateClub()
-data = dataset[0]
+# Fonction de perte en classification
+criterion = nn.CrossEntropyLoss() 
+optimizer = torch.optim.Adam(model.parameters(), lr=0.02)
 
-print(f'Nombre de noeuds: {dataset.num_features}')
-print(f'Nombre de classes: {dataset.num_classes}')
+def precision(pred_y, y):
+    return (pred_y == y).sum() / len(y)
 
-# Matrice d'adjacence
-A = to_dense_adj(data.edge_index)[0].numpy().astype(int)
-plt.imshow(A,cmap=plt.cm.gray)
-plt.colorbar(ticks=[0, 1])
-plt.title("Matrice d'adjacence")
+pertes = []
+precisions = []
+res = []
+
+nb_epohs = 300
+
+for epoch in range(nb_epochs):
+    # Clear gradients
+    optimizer.zero_grad()
+
+    _, z = model(data.x, data.edge_index)
+
+    perte = criterion(z, data.y)
+
+    p = precision(z.argmax(dim=1), data.y)
+
+    perte.backward()
+    optimizer.step()
+
+    pertes.append(perte)
+    precisions.append(p)
+    res.append(z.argmax(dim=1))
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m dataset [38;5;241m=[39m [43mKarateClub[49m()
-[1;32m      2[0m data [38;5;241m=[39m dataset[[38;5;241m0[39m]
-[1;32m      4[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m'[39m[38;5;124mNombre de noeuds: [39m[38;5;132;01m{[39;00mdataset[38;5;241m.[39mnum_features[38;5;132;01m}[39;00m[38;5;124m'[39m)
+Cell [0;32mIn[7], line 14[0m
+[1;32m     10[0m res [38;5;241m=[39m []
+[1;32m     12[0m nb_epohs [38;5;241m=[39m [38;5;241m300[39m
+[0;32m---> 14[0m [38;5;28;01mfor[39;00m epoch [38;5;129;01min[39;00m [38;5;28mrange[39m([43mnb_epochs[49m):
+[1;32m     15[0m     [38;5;66;03m# Clear gradients[39;00m
+[1;32m     16[0m     optimizer[38;5;241m.[39mzero_grad()
+[1;32m     18[0m     _, z [38;5;241m=[39m model(data[38;5;241m.[39mx, data[38;5;241m.[39medge_index)
 
-[0;31mNameError[0m: name 'KarateClub' is not defined
+[0;31mNameError[0m: name 'nb_epochs' is not defined
 
