@@ -683,7 +683,7 @@ pertes = []
 precisions = []
 res = []
 
-nb_epochs = 150
+nb_epochs = 70
 
 for epoch in range(nb_epochs):
     optimizer.zero_grad()
@@ -733,7 +733,7 @@ def animate(i):
 
 
 fig,axs = plt.subplots(1,2,figsize=(7,5))
-anim = animation.FuncAnimation(fig, animate, np.arange(0, nb_epochs, 5), interval=500, repeat=True)
+anim = animation.FuncAnimation(fig, animate, np.arange(0, nb_epochs, 1), interval=500, repeat=True)
 html = HTML(anim.to_html5_video())
 ```
 
