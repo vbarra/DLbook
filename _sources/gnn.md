@@ -172,7 +172,8 @@ des sommets, soit pour toute permutation $\mathbf P$ et tout $k$:
 
 $$\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)$$
 
-```prf{remark}
+```{prf:remark}
+:class: dropdown
 Une fonction $f$ est équivariante pour une transformation $t$ si pour tout $x, $f (t(x)) = t( f (x))$
 ```
 
