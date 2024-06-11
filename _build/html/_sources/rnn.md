@@ -9,7 +9,10 @@ kernelspec:
   language: python
   name: python3
 ---
+
+
 # Réseaux récurrents
+
 
 ## Définition
 
@@ -28,7 +31,8 @@ aux instants suivants, à l'aide des arcs récurrents.
 
 Deux équations permettent de calculer les quantités nécessaires à
 l'instant $t$ dans la phase de propagation avant d'un réseau récurrent
-simple (comme celui de la {numref}`rnn1` gauche) : 
+simple (comme celui de la figure [1.1](#F:rnn2){reference-type="ref"
+reference="F:rnn2"} gauche) : 
 
 $$\begin{aligned}
 h_t&=&\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t-1}} + b_h\right)\\
@@ -37,9 +41,11 @@ h_t&=&\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t-1}} + b
 
 où $\mathbf{W_{hx}}$ est la matrice des poids reliant
 l'entrée à la couche cachée et $\mathbf{W_{hh}}$ celle des poids des
-arcs récurrents. Les biais sont notés $b_h$ et $b_y$.\
+arcs récurrents. Les biais sont notés $b_h$ et $b_y$.
+
 La dynamique du réseau peut être décrite en dépliant ce réseau dans le
-temps ({numref}`rnn1` droite). Le réseau devient donc un réseau profond, avec une couche par instant $t$ et un partage de poids au cours du temps. Ce dernier peut
+temps (({numref}`rnn1`)). Le réseau devient donc un réseau profond, avec une couche par
+instant $t$ et un partage de poids au cours du temps. Ce dernier peut
 donc être entraîné de manière classique par l'algorithme de
 rétropropagation du gradient, indicé par le temps (*Backpropagation
 through time*, BPTT algorithm).
@@ -47,34 +53,30 @@ through time*, BPTT algorithm).
 
 ```{figure} ./images/rnn1.png
 :name: rnn1
+:width: 500px
+:align: center
 Réseau récurrent et sa version dépliée dans le
 temps.
 ```
 
 
-
 Avec ces réseaux, il est possible de traiter des séquences de longueur
 quelconque, la taille du modèle étant indépendante de cette longueur.
-Plusieurs architectures peuvent être déclinées sur ce principe
+Plusieurs architectures peuvent être déclinées sur ce principe et le
+tableau [1.1](#T:rnn){reference-type="ref" reference="T:rnn"} donne un
+panorama de certaines d'entre elles, avec des exemples d'applications.
 
-```{figure} ./images/onetomany.png
-:name: onetomany
-Architectures "un vers plusieurs" , utilisées par exemple en génération de musique ou légendage d'images.
-```
+::: {#T:rnn}
+  **Architecture**           **Réseau**                                              **Applications**
+  -------------------------- ------------------------------------------------------- ---------------------------------------------------------------
+  Un vers plusieurs          ![image](images/onetomany.pdf){width="\\linewidth"}     Génération de musique, légendage d'images
+  Plusieurs vers un          ![image](images/manytoone.pdf){width="\\linewidth"}     Classification de sentiments
+  Plusieurs vers plusieurs   ![image](images/manytomany1.pdf){width="\\linewidth"}   Reconnaissance d'entité dans des textes, annotation de vidéos
+  Plusieurs vers plusieurs   ![image](images/manytomany2.pdf){width="\\linewidth"}   Traduction
 
-```{figure} ./images/manytoone.png
-:name: onetomany
-Architectures "un vers plusieurs" , utilisées par exemple en classification de sentiments
-```
-```{figure} ./images/manytomany1.png
-:name: onetomany
-Architectures "plusieurs vers plusieurs", pour la reconnaissance d'entité dans des textes ou annotation de vidéos.
-```
-```{figure} ./images/manytomany2.png
-:name: onetomany
-Architectures "plusieurs vers plusieurs", pour la traduction automatique.
-```
-
+  : Différentes architectures de réseaux récurrents et leurs
+  applications
+:::
 
 ## Entraînement des réseaux récurrents
 
@@ -105,7 +107,8 @@ problèmes.
 
 ### LSTM
 
-Les réseaux *Long Short-Term Memory* (LSTM) ont été introduits en 1997 {cite:p}`HO97` pour résoudre le problème de l'évanescence du gradient. Ce
+Les réseaux *Long Short-Term Memory* (LSTM) ont été introduits en 1997
+[@HO97] pour résoudre le problème de l'évanescence du gradient. Ce
 modèle ressemble à un réseau récurrent classique à une couche cachée,
 mais chaque neurone de la couche cachée est remplacé par une cellule de
 mémoire.
@@ -122,7 +125,9 @@ valeur d'une porte est nulle, alors le flot est coupé dans le graphe,
 alors qu'il transite intégralement si la valeur de la porte est égale à
 1.
 
-On retrouve dans une cellule ({numref}`lstm1`) les éléments suivants :
+On retrouve dans une cellule (figure
+[1.3](#F:lstmC){reference-type="ref" reference="F:lstmC"}) les éléments
+suivants :
 
 -   *Neurone d'entrée* : ce neurone prend en entrée $\mathbf{x_t}$ et
     ${h_{t-1}}$ et calcule, à la manière d'un neurone classique, une
@@ -151,10 +156,10 @@ On retrouve dans une cellule ({numref}`lstm1`) les éléments suivants :
     $C^{t}$ à fournir en sortie et est calculée par
     $o^{t} = \sigma\left(\mathbf{W_o}^\top\left[\mathbf{x_t} , h_{t-1}\right ] +b_o\right)$.
 
-```{figure} ./images/lstm1.png
-:name: lstm1
-Cellule LSTM
-```
+<figure id="F:lstmC">
+
+<figcaption>Cellule LSTM</figcaption>
+</figure>
 
 En résumé, un LSTM effectue donc les opérations suivantes à l'instant
 $t$ : 
@@ -170,9 +175,9 @@ h_t &=& o^{t} tanh(C^{t})
 
 ### GRU
 
-En 2014 {cite:p}`Cho14`, une version simplifiée des réseaux LSTM a été
+En 2014 [@ChO14], une version simplifiée des réseaux LSTM a été
 introduite, qui nécessite moins de paramètres. Les GRU (*Gated Recurrent
-Units*) ({numref}`gru`) sont en effet des réseaux sans mémoire interne $C^{t}$, ni porte
+Units*) sont en effet des réseaux sans mémoire interne $C^{t}$, ni porte
 de sortie $o^{t}$. Ces réseaux sont composés de deux portes au lieu de
 trois :
 
@@ -196,26 +201,24 @@ h_t&=&\left(1-z^{t}\right)h_{t-1} + z^{t} \tilde{h}^{t}
 Si, pour tout $t, r^{t}=1$ et $z^{t}=0$, alors on modélise un réseau
 récurrent classique.
 
-```{figure} ./images/gru.png
-:name: gru
-Cellule GRU
-```
+<figure id="F:lstmC">
+
+<figcaption>Cellule GRU</figcaption>
+</figure>
 
 ### Réseaux récurrents bidirectionnels
 
 Les réseaux bidirectionnels ont été décrits pour la première fois en
-1997 {cite:p}`SCH97`. Dans ces réseaux, deux couches cachées sont présentes,
+1997 [@SCH97]. Dans ces réseaux, deux couches cachées sont présentes,
 chacune connectée à l'entrée et la sortie. La première couche cachée a
 des connexions récurrentes depuis le passé vers le futur, tandis que
 l'autre transmet les activations depuis le futur vers le passé
-({numref}`bidir`).
+(figure [1.4](#F:BDRN){reference-type="ref" reference="F:BDRN"}).
 
-
-```{figure} ./images/bidir.png
-:name: bidir
-Réseau bidirectionnel
-```
-
+<figure id="F:BDRN">
+<embed src="images/bidirectionnel.pdf" />
+<figcaption>Réseau bidirectionnel.</figcaption>
+</figure>
 
 Étant données une entrée et une sortie du réseau (des séquences), le
 réseau peut être entraîné par rétropropagation après avoir été déplié :
@@ -247,14 +250,14 @@ LSTM est distribuée dans chaque cellule, elle est donc liée au nombre de
 cellules et à la capacité de calcul et ce modèle ne répond pas
 directement au problème posé.
 
-Graves et al. {cite:p}`Graves14` proposent alors une architecture, appelée
+Graves et al. [@Graves14] proposent alors une architecture, appelée
 machine de Turing neuronale, constituée de deux éléments principaux :
 une mémoire et un contrôleur doté d'un mécanisme d'attention qui lit et
 écrit dans cette mémoire. Les accès mémoire sont ici des équivalents
 analogiques dérivables, pour permettre d'entraîner le contrôleur par
 descente de gradient. Typiquement, le contrôleur est un réseau de
 neurones ou un réseau récurrent type LSTM
-({numref}`turing`).
+(figure [\[F:NTM\]](#F:NTM){reference-type="ref" reference="F:NTM"}).
 
 Les têtes de lecture et d'écriture interagissent avec la mémoire. Chaque
 tête est contrôlée par un vecteur de poids, chaque composante
@@ -277,7 +280,7 @@ réseau :
     $w_t(i)=g_t.w_t(i) + (1-g_t).w_{t-1}(i)$.
 
 3.  Un décalage par convolution translate ensuite les poids, à la
-    manière du décalage de la tête dans une machine de Turing
+    manière du décalage classique de la tête dans une machine de Turing
     classique : $w_t(i)=\displaystyle\sum_j w_t(j)\mathbf{s_t}(i-j)$ où
     $\mathbf{s_t}$ est un vecteur qui définit un décalage des poids à
     l'instant $t$.
@@ -289,7 +292,7 @@ Une fois que la tête a mis à jour les poids, elle interagit avec la
 mémoire :
 
 -   Dans le cas de la tête de lecture, elle calcule une combinaison
-    linéaire des zones mémoire, pondérées par les poids $w_t(i)$ et
+    linéaire des zones mémoire, pondérées par les poids $w_t(i)$, et
     produit le vecteur $\mathbf{r_t}$, fourni au contrôleur de l'instant
     suivant.
 
@@ -299,237 +302,160 @@ mémoire :
     $\mathbf{e_t}$ est un vecteur d'effacement, dont les composantes
     sont dans {0,1} et $\mathbf{a_t}$ est un vecteur d'ajout.
 
-```{figure} ./images/turing.png
-:name: turing
-Exemple de machine de Turing nuronale dépliée dans le temps, oà le contrôleur est un LSTM. Les accès en écriture du LSTM dans la mémoire sont représentés par des flèches rouges, les accès en lecture en bleu.
-```
+::: SCfigure
+![image](images/turing.pdf){width=".6\\linewidth"}
+:::
 
-## Implémentation
+<figure>
 
-```python
-import pandas as pd
-import numpy as np
-import math
-import matplotlib.pyplot as plt 
-import matplotlib.dates as mdates 
-from sklearn.preprocessing import MinMaxScaler
-import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader
-```
+<figcaption>Quelques applications des réseaux récurrents.</figcaption>
+</figure>
 
-On s'intéresse aux données financières d'Apple ({numref}`donnees`) et plus particulièrement 
-- au prix d'une action à l'ouverture (open) et à la fermeture (close), par jour
-- au prix le plus bas (low) et haut (high), par jour
-- à l'ajustement de clôture (adj_close) et le volume de vente (volume), par jour.
+## Quelques applications
 
-```python
-df = pd.read_csv("./data/finance.csv",index_col=0)
-column_names = list(df.columns.values)
-df_plot = df.copy()
-ncols = 2
-nrows = int(round(df_plot.shape[1] / ncols, 0))
-fig, ax = plt.subplots(nrows=nrows, ncols=ncols,sharex=True, figsize=(14, 7))
-for i, ax in enumerate(fig.axes):
-    ax.plot(np.array(df_plot.iloc[:, i]))
-    ax.set_ylabel(column_names[i])
-    ax.tick_params(axis="x", rotation=30, labelsize=10, length=0)
-    ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-fig.tight_layout()
-```
+Comme les réseaux convolutifs, les réseaux récurrents ont depuis leur
+introduction trouvé de nombreuses applications.
 
-```{figure} ./images/donnees.png
-:name: donnees
-Données financières d'Apple (source : Yahoo finance)
-```
+**Traitement automatique du langage**
 
-On découpe les données en ensemble d'entraînement et de test, et on s'intéresse au prix à l'ouverture de l'action. On normalise ces données dans [0,1]
+Les réseaux récurrents sont utilisés en traitement automatique du
+langage, notamment à des fins génératives. Ces réseaux permettent de
+modéliser un langage (prédire la probabilité d'un mot donné étant donnés
+les mots précédents) et de générer du texte à partir du modèle appris.
+De nombreuses applications découlent de cette modélisation : génération
+de texte au style de (génération d'un texte dans le style de
+Shakespeare, à partir d'un RNN appris sur le corpus des œuvres de
+l'auteur par exemple, génération de textes manuscrits
+(figure [\[F:gener\]](#F:gener){reference-type="ref"
+reference="F:gener"}), génération de pages Wikipedia, ou même génération
+d'articles scientifiques, à partir des sources LaTeXd'un ouvrage et d'un
+LSTM multicouche.
 
+**Traduction automatique**
 
-```python
-l = math.ceil(len(df) * .8)
-train_data = df[:l].iloc[:,:1]
-test_data = df[l:].iloc[:,:1]
+La traduction automatique de texte procède de la même stratégie que la
+modélisation d'une langue. Deux réseaux récurrents sont entraînés,
+chacun dans une des langues, et le RNN traducteur calcule sa sortie en
+fonction de la couche cachée du premier réseau.
 
-dataset_test = test_data.Open.values
-dataset_test = np.reshape(dataset_test, (-1,1))
+**Analyse de sentiments**
 
-scaler = MinMaxScaler(feature_range=(0,1))
-x_train = scaler.fit_transform(dataset_train)
-x_test = scaler.fit_transform(dataset_test)
-```
+Détecter de manière automatique l'opinion du public sur un sujet donné
+intéresse de plus en plus le domaine commercial. Ce domaine, largement
+alimenté par les réseaux sociaux, les avis et recommandations déposées
+sur les sites Internet, est un champ de prédilection pour les réseaux
+profonds. Des réseaux récurrents (notamment LSTM structurés en arbres)
+sont utilisés à cet effet et servent de base à des systèmes de
+recommandation.
 
-On créé les séquences d'entraînement (de longueur 50 ici) et de test (de longueur 30)
+**Résumé automatique**
 
-```python
-l = 50 
-X_train, y_train = [], []
-for i in range(len(x_train) - l):
-	X_train.append(x_train[i:i+l])
-	y_train.append(x_train[i+1:i+l+1])
-X_train = torch.tensor(np.array(X_train) , dtype=torch.float32)
-y_train = torch.tensor(np.array(y_train), dtype=torch.float32)
+Les réseaux récurrents permettent de produire des résumés abstraits de
+textes (i.e. générer de nouvelles phrases, en opposition à extraire les
+mots les plus importants d'un texte). Les modèles utilisés sont des
+réseaux récurrents avec mécanisme d'attention. Un système
+d'encodage/décodage est mis en place dans le réseau, où l'encodeur est
+par exemple un GRU bidirectionnel et le décodeur un GRU dont l'état
+caché a la même taille que celui de l'encodeur. Les modèles sont appris
+et validés sur des corpus dédiés (DUC, CNN/Daily Mail par exemple).
 
-l = 30 
-X_test, y_test = [], []
-for i in range(len(x_test) - l):
-	X_test.append(x_test[i:i+l])
-	y_test.append(x_test[i+1:i+l+1])
-X_test = torch.tensor(np.array(X_test), dtype=torch.float32)
-y_test = torch.tensor(np.array(y_test), dtype=torch.float32)
-```
+**Reconnaissance de la parole**
 
-On créé ensuite le modèle. `input_size`est le nombre de caractéristiques de l'entrée à chaque pas de temps. `hidden_size`est le nombre d'unités du LSTM et `num_layers`le nombre de couches LSTM.
+L'utilisation de réseaux LSTM bidirectionnels, qui permettent à la fois
+d'exploiter les contextes passé et futur, et de garder trace d'un
+contexte à longue échéance, a montré de bonnes performances dans la
+tache de reconnaissance de la parole.
 
-```python
-class LSTMModel(nn.Module):
-	def __init__(self, input_size, hidden_size, num_layers): 
-		super(LSTMModel, self).__init__() 
-		self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
-		self.linear = nn.Linear(hidden_size, 1)
+**Annotation d'images**
 
-	def forward(self, x): 
-		out, _ = self.lstm(x)
-		out = self.linear(out)
-		return out
-```
+Couplé à un réseau convolutif, un RNN permet de générer des descriptions
+(légendes) d'images non labelisées. Le réseau convolutif produit des
+descripteurs, qui servent d'entrée à un réseau récurrent type LSTM
+(figure [\[F:caption\]](#F:caption){reference-type="ref"
+reference="F:caption"}).
 
-On sélectionne le device d'entraînement, on instantie un modèle que l'on équipe d'une fonction de perte et d'un optimiseur.
+## Partie pratique
 
-```python
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-input_size,num_layers,hidden_size,output_size = 1,2,64,1
+### Classification de séquences
 
-model = LSTMModel(input_size, hidden_size, num_layers).to(device)
-loss_fn = torch.nn.MSELoss(reduction='mean')
-optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
-```
+L'objectif de cette partie est d'apprendre à l'aide de réseaux
+récurrents à classifier des séquences (ici des phrases) en plusieurs
+classes. Le cas d'étude est une base de données d'avis de films (IMDB) :
+pour chaque film, un avis est rédigé, et un label positif (1) ou négatif
+(0) est assigné à cet avis. Il s'agit alors d'apprendre à reconnaître la
+qualité de l'avis, et de pouvoir assigner un label 0/1 à un nouvel avis,
+jamais vu par le réseau.\
+Vous avez à disposition un notebook donnant l'essentiel des codes
+permettant de :
 
-On définit les batchs, et on entraîne le réseau
+-   lire la base de données
 
-```python
-batch_size = 16
-train_dataset = torch.utils.data.TensorDataset(X_train, y_train)
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+-   mettre en forme les données
 
-test_dataset = torch.utils.data.TensorDataset(X_test, y_test)
-test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+-   proposer un modèle de base auquel comparer vos résultats
 
-num_epochs = 30
-train_hist =[]
-test_hist =[]
+Votre travail consiste alors à construire un réseau récurrent permettant
+d'effectuer la tâche et de le tester. Pour ceci, vous aurez à :
 
-for epoch in range(num_epochs):
-	total_loss = 0.0
+-   utiliser la fonction [
+    keras.preprocessing.sequence.pad_sequences()](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences)
+    pour prétraiter les données d'entraînement. Cette fonction créera un
+    tableau 2D, avec en ligne les 25000 avis et en colonnes les `maxlen`
+    premiers mots de l'avis. Si l'avis est plus long, il sera coupé, si
+    l'avis est plus court il sera complété par des 0.
 
-	model.train()
-	for batch_X, batch_y in train_loader:
-		batch_X, batch_y = batch_X.to(device), batch_y.to(device)
-		predictions = model(batch_X)
-		loss = loss_fn(predictions, batch_y)
+-   construire un réseau avec
 
-		optimizer.zero_grad()
-		loss.backward()
-		optimizer.step()
+    1.  une couche
+        d'[Embedding](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding),
+        à la dimension d'entrée appropriée, et dont la dimension de
+        sortie est égale à 10. Le modèle apprendra donc à représenter
+        chaque mot par un vecteur de $\mathbb{R}^{10}$
 
-		total_loss += loss.item()
+    2.  une (ou plusieurs) couche(s)
+        [LSTM](https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM)
+        à 32 neurones
 
-	average_loss = total_loss / len(train_loader)
-	train_hist.append(average_loss)
+    3.  une couche dense de sortie, à activation sigmoïde (problème de
+        classification binaire)
 
-	# Validation sur l'ensemble de test
-	model.eval()
-	with torch.no_grad():
-		total_test_loss = 0.0
+    Le modèle sera compilé avec la fonction de perte adéquate pour un
+    tel problème, et entraîné sur des batchs de taille 128.
 
-		for batch_X_test, batch_y_test in test_loader:
-			batch_X_test, batch_y_test = batch_X_test.to(device), batch_y_test.to(device)
-			predictions_test = model(batch_X_test)
-			test_loss = loss_fn(predictions_test, batch_y_test)
-			total_test_loss += test_loss.item()
-		average_test_loss = total_test_loss / len(test_loader)
-		test_hist.append(average_test_loss)
-```
+-   améliorer ce réseau en utilisant un modèle bidirectionnel. Pour
+    ceci, il suffit d'encapsuler la ou les couche(s) LSTM dans une
+    [couche
+    bidirectionnelle](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional).
+    Si le modèle sur apprend, vous pouvez ajouter une couche de
+    [Dropout](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dropout).
 
+### Prévision de séries temporelles
 
-```python
-x = np.linspace(1,num_epochs,num_epochs)
-plt.plot(x,train_hist,scalex=True, label="Perte, entraînement")
-plt.plot(x, test_hist, label="Perte, test")
-plt.xlabel('epoch')
-plt.ylabel('MSE')
-plt.legend()
-plt.tight_layout()
-```
+En utilisant l'API Keras, on se propose d'implémenter un RNN permettant
+de faire de la prédiction de série temporelle. Le notebook
+`RNN prevision` propose de construire un réseau récurrent simple (sans
+module LSTM ou GRU) permettant de faire de la prévision méteo à partir
+de données de température, pression et humidité mesurées pendant 5 ans.
+Les données sont issues d'un challenge
+[Kaggle](https://www.kaggle.com/selfishgene/historical-hourly-weather-data).
+Elles sont mises en forme pour un RNN simple, implémenté sous Keras via
+la couche [SimpleRNN](https://keras.io/layers/recurrent/). Votre travail
+consiste simplement à :
 
-```{figure} ./images/loss.png
-:name: loss
-Fonction de perte en entraînement et en test
-```
+-   définir (fonction `myRNN`) un réseau récurrent comportant une couche
+    `SimpleRNN` et deux couches complètement connectées (figure
+    [1.5](#F:simple){reference-type="ref" reference="F:simple"}).
 
-On utilise ensuite le modèle pour prédire les valeurs à l'ouverture de l'action sur les 30 jours suivants
+-   Proposer des graphiques de comparaison des courbes réelles et
+    prédites.
 
-```python
-nb_predire = 30
+-   Comparer les prédictions avec celles calculées par des réseaux
+    [LSTM](https://keras.io/layers/recurrent/) et
+    [GRU](https://keras.io/layers/recurrent/).
 
-seq = X_test.squeeze().cpu().numpy()
-
-# initialisation : 30 derniers pas de temps
-historique = seq[-1]
-val_predites = []
-
-# Prédiction
-with torch.no_grad():
-	for _ in range(nb_predire*2):
-		historique_tensor = torch.as_tensor(historique).view(1, -1, 1).float().to(device)
-
-		# Prédiction de la valeur suivante
-		val_predite = model(historique_tensor).cpu().numpy()[0, 0]
-		val_predites.append(val_predite[0])
-
-		# déplacement de l'historique
-		historique = np.roll(historique, shift=-1)
-		historique[-1] = val_predite
-
-		
-# dates futures
-last_date = test_data.index[-1]
-from pandas.tseries.offsets import DateOffset
-future_dates = pd.date_range(start=pd.to_datetime(last_date) + pd.DateOffset(1), periods=nb_predire)
-index_c = test_data.index.append(future_dates).map(str)
-```
-
-et on affiche le résultat ({numref}`pred`)
-
-```python
-fig, ax = plt.subplots(1,1, figsize=(14, 5))
-ax.tick_params(axis="x", rotation=30, labelsize=10, length=0)
-ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-
-#Données test
-plt.plot(test_data.index[-100:-nb_predire], test_data.Open[-100:-nb_predire], label = "Données test", color = "b") 
-val_reelles = scaler.inverse_transform(np.expand_dims(seq[-1], axis=0)).flatten() 
-
-# Données utilisées pour la prédiction 
-plt.plot(test_data.index[-nb_predire:], val_reelles, label='Valeurs réelles', color='green') 
-
-val_predites = scaler.inverse_transform(np.expand_dims(val_predites, axis=0)).flatten() 
-plt.plot(index_c[-2*nb_predire:], val_predites, label='Valeurs prédites', color='red') 
-
-plt.xlabel('Date')
-plt.ylabel('Valeur')
-plt.legend()
-plt.title('Prévision')
-plt.grid(True)
-plt.tight_layout()
-```
-
-
-```{figure} ./images/prediction.png
-:name: pred
-Prédiction du modèle et valeurs réelles
-```
-
-```{bibliography}
-:style: unsrt
-```
+<figure id="F:simple">
+<div class="center">
+<img src="images/simpleRNN" />
+</div>
+<figcaption>Réseau récurrent à réaliser</figcaption>
+</figure>

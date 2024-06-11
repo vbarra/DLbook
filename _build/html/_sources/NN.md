@@ -104,7 +104,7 @@ C'est la tentative de donner à l'ordinateur les qualités de perception
 du cerveau humain qui a conduit à une modélisation électrique de
 celui-ci. C'est cette modélisation que tentent de réaliser les réseaux
 de neurones artificiels, dont l'élaboration repose sur base de la
-définition suivante, proposée par Haykin :
+définition suivante, proposée par Haykin :\
 
 Un réseau de neurones est un processus distribué de manière massivement
 parallèle, qui a une propension naturelle à mémoriser des connaissances

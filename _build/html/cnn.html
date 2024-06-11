@@ -43,7 +43,7 @@
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -52,19 +52,27 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cnn';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
-    <link rel="next" title="Auto-encodeurs" href="ae.html" />
+    <link rel="next" title="Auto-encodeurs" href="AE.html" />
     <link rel="prev" title="Perceptrons multicouches" href="PMC.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="fr"/>
@@ -177,10 +185,8 @@
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Réseaux convolutifs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AE.html">Auto-encodeurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
 
     </div>
@@ -322,11 +328,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reseaux-convolutifs">
-<h1>Réseaux convolutifs<a class="headerlink" href="#reseaux-convolutifs" title="Lien vers cette rubrique">#</a></h1>
+<h1>Réseaux convolutifs<a class="headerlink" href="#reseaux-convolutifs" title="Link to this heading">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <section id="inspiration-biologique">
-<h3>Inspiration biologique<a class="headerlink" href="#inspiration-biologique" title="Lien vers cette rubrique">#</a></h3>
+<h3>Inspiration biologique<a class="headerlink" href="#inspiration-biologique" title="Link to this heading">#</a></h3>
 <p>Un réseau de neurones convolutif (CNN, <em>Convolutional Neural Network</em>) est un type de réseau de neurones artificiels acyclique à
 propagation avant, dans lequel le motif de connexion entre les neurones
 est inspiré par le cortex visuel des animaux. Les neurones de cette
@@ -386,7 +392,7 @@ gris, de taille <span class="math notranslate nohighlight">\(n_1 \times n_2\)</s
 <p><span class="math notranslate nohighlight">\(\mathbf{I}\)</span> sera indifféremment vue comme une fonction ou une matrice.</p>
 </section>
 <section id="convolution-discrete">
-<h3>Convolution discrète<a class="headerlink" href="#convolution-discrete" title="Lien vers cette rubrique">#</a></h3>
+<h3>Convolution discrète<a class="headerlink" href="#convolution-discrete" title="Link to this heading">#</a></h3>
 <p>Pour reproduire la notion de champ réceptif, et ainsi permettre aux
 neurones de détecter des caractéristiques de petite taille mais porteurs
 d’information, l’idée est de laisser un neurone caché voir et traiter
@@ -434,12 +440,12 @@ est réalisée sans padding, l’image convoluée est de taille
 </section>
 </section>
 <section id="definition-des-couches">
-<h2>Définition des couches<a class="headerlink" href="#definition-des-couches" title="Lien vers cette rubrique">#</a></h2>
+<h2>Définition des couches<a class="headerlink" href="#definition-des-couches" title="Link to this heading">#</a></h2>
 <p>Nous introduisons ici les principaux types de couches utilisées dans les
 réseaux convolutifs. L’assemblage de ces couches permet de construire
 des architectures complexes pour la classification ou la régression.</p>
 <section id="couche-de-convolution">
-<h3>Couche de convolution<a class="headerlink" href="#couche-de-convolution" title="Lien vers cette rubrique">#</a></h3>
+<h3>Couche de convolution<a class="headerlink" href="#couche-de-convolution" title="Link to this heading">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\(l\in\mathbb{N}\)</span> une couche de convolution. L’entrée de la couche
 <span class="math notranslate nohighlight">\(l\)</span> est composée de <span class="math notranslate nohighlight">\(n^{(l-1)}\)</span> cartes provenant de la couche
 précédente, de taille <span class="math notranslate nohighlight">\(n_1^{(l-1)} \times n_2^{(l-1)}\)</span>. Dans le cas de
@@ -460,7 +466,7 @@ carte de la couche <span class="math notranslate nohighlight">\((l-1)\)</span> �
 <a class="reference internal image-reference" href="_images/cnn1.png"><img alt="_images/cnn1.png" src="_images/cnn1.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 10 </span><span class="caption-text">Illustration des calculs effectués dans une opération de convolution discrète. Le pixel (2,2) de
-l’image <span class="math notranslate nohighlight">\({\mathbf Y_i^{l}}\)</span> est une combinaison linéaire des pixels <span class="math notranslate nohighlight">\((i,j)\in[\![1,3]\!]^2\)</span> de <span class="math notranslate nohighlight">\({\mathbf Y_i^{l-1}}\)</span> les coefficients de la combinaison étant portés par le filtre <span class="math notranslate nohighlight">\(\mathbf K\)</span>.</span><a class="headerlink" href="#cnn1" title="Lien vers cette image">#</a></p>
+l’image <span class="math notranslate nohighlight">\({\mathbf Y_i^{l}}\)</span> est une combinaison linéaire des pixels <span class="math notranslate nohighlight">\((i,j)\in[\![1,3]\!]^2\)</span> de <span class="math notranslate nohighlight">\({\mathbf Y_i^{l-1}}\)</span> les coefficients de la combinaison étant portés par le filtre <span class="math notranslate nohighlight">\(\mathbf K\)</span>.</span><a class="headerlink" href="#cnn1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><span class="math notranslate nohighlight">\(n_1^{(l)}\)</span> et <span class="math notranslate nohighlight">\(n_2^{(l)}\)</span> doivent prendre en compte les effets de bords
@@ -504,7 +510,7 @@ spatiale des données. L’utilisation des noyaux permet d’alléger le
 modèle, plutôt que d’utiliser des couches complètement connectées.</p>
 </section>
 <section id="couche-non-lineaire">
-<h3>Couche non linéaire<a class="headerlink" href="#couche-non-lineaire" title="Lien vers cette rubrique">#</a></h3>
+<h3>Couche non linéaire<a class="headerlink" href="#couche-non-lineaire" title="Link to this heading">#</a></h3>
 <p>Pour augmenter le pouvoir d’expression
 des réseaux profonds, on utilise des couches non linéaires. Les entrées
 d’une couche non linéaire sont <span class="math notranslate nohighlight">\(n^{(l-1)}\)</span> cartes et ses sorties
@@ -527,13 +533,13 @@ fonctions donnent des gradients faibles, qui ont tendance à s’annuler
 (problème du <em>gradient évanescent</em> ou <em>vanishing gradient</em>) lors de la
 phase d’apprentissage par rétropropagation du gradient. Une autre
 fonction, non saturante elle, est très largement utilisée. Il s’agit de
-la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="transferLearning.html#id51" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
+la fonction ReLU (Rectified Linear Unit) <span id="id1">[<a class="reference internal" href="#id45" title="V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, ICML, 807-814. Omnipress, 2010. URL: http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10.">1</a>]</span> :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \mathbf{Y_i^{(l)}} = max\left (0,\mathbf{Y_i^{(l-1)}}\right )
 \end{aligned}\]</div>
 <p>Les neurones utilisant la fonction ReLU sont appelés neurones linéaires rectifiés. Glorot
-et Bengio <span id="id2">[<a class="reference internal" href="transferLearning.html#id19" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
+et Bengio <span id="id2">[<a class="reference internal" href="#id13" title="Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, AISTATS, volume 15 of JMLR Proceedings, 315-323. JMLR.org, 2011. URL: http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11.">2</a>]</span> ont montré que l’utilisation d’une couche ReLU en
 tant que couche non linéaire permettait un entraînement efficace de
 réseaux profonds sans pré-entraînement non supervisé. Plusieurs
 variantes de cette fonction existent, par exemple pour assurer une
@@ -541,9 +547,9 @@ différentiabilité en 0 ou pour proposer des valeurs non nulles pour des
 valeurs négatives de l’argument.</p>
 </section>
 <section id="couches-de-normalisation">
-<h3>Couches de normalisation<a class="headerlink" href="#couches-de-normalisation" title="Lien vers cette rubrique">#</a></h3>
+<h3>Couches de normalisation<a class="headerlink" href="#couches-de-normalisation" title="Link to this heading">#</a></h3>
 <p>La normalisation prend aujourd’hui une place de plus en plus importante,
-notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="transferLearning.html#id20" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
+notamment depuis les travaux de Ioffe et Szegedy <span id="id3">[<a class="reference internal" href="#id14" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, 448-456. JMLR.org, 2015. URL: http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15.">3</a>]</span>. Les auteurs
 suggèrent qu’un changement dans la distribution des activations d’un
 réseau profond, résultant de la présentation d’un nouveau mini batch
 d’exemples, ralentit le processus d’apprentissage. Pour pallier ce
@@ -600,7 +606,7 @@ Entrées : {un réseau <span class="math notranslate nohighlight">\(N\)</span>, 
 </section>
 </div></section>
 <section id="couche-d-agregation-et-de-sous-echantillonnage">
-<h3>Couche d’agrégation et de sous-échantillonnage<a class="headerlink" href="#couche-d-agregation-et-de-sous-echantillonnage" title="Lien vers cette rubrique">#</a></h3>
+<h3>Couche d’agrégation et de sous-échantillonnage<a class="headerlink" href="#couche-d-agregation-et-de-sous-echantillonnage" title="Link to this heading">#</a></h3>
 <p>Le sous-échantillonnage (pooling) des cartes obtenues par les couches
 précédentes a pour objectif d’assurer une robustesse au bruit et aux
 distorsions.</p>
@@ -614,7 +620,7 @@ valeur, affectée à la position centrale dans la carte de sortie.</p>
 <figure class="align-center" id="pooling">
 <a class="reference internal image-reference" href="_images/pooling.png"><img alt="_images/pooling.png" src="_images/pooling.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Couche d’agrégation et de sous-échantillonnage <span class="math notranslate nohighlight">\(l\)</span>. Chacune des <span class="math notranslate nohighlight">\(n^{(l−1)}\)</span> cartes de la couche <span class="math notranslate nohighlight">\(l-1\)</span> est traitée individuellement. Chaque neurone des <span class="math notranslate nohighlight">\(n^(l) = n^{(l−1)}\)</span> cartes de sortie est la moyenne (ou le maximum) des valeurs contenues dans une fenêtre de taille donnée dans la carte correspondante de la couche <span class="math notranslate nohighlight">\(l-1\)</span>.</span><a class="headerlink" href="#pooling" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Couche d’agrégation et de sous-échantillonnage <span class="math notranslate nohighlight">\(l\)</span>. Chacune des <span class="math notranslate nohighlight">\(n^{(l−1)}\)</span> cartes de la couche <span class="math notranslate nohighlight">\(l-1\)</span> est traitée individuellement. Chaque neurone des <span class="math notranslate nohighlight">\(n^(l) = n^{(l−1)}\)</span> cartes de sortie est la moyenne (ou le maximum) des valeurs contenues dans une fenêtre de taille donnée dans la carte correspondante de la couche <span class="math notranslate nohighlight">\(l-1\)</span>.</span><a class="headerlink" href="#pooling" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>On distingue généralement deux types d’agrégation :</p>
@@ -631,7 +637,7 @@ durant la phase d’entraînement. L’agrégation avec recouvrement, elle,
 semble assurer une réduction du phénomène de surapprentissage</p>
 </section>
 <section id="couche-completement-connectee">
-<h3>Couche complètement connectée<a class="headerlink" href="#couche-completement-connectee" title="Lien vers cette rubrique">#</a></h3>
+<h3>Couche complètement connectée<a class="headerlink" href="#couche-completement-connectee" title="Link to this heading">#</a></h3>
 <p>Si <span class="math notranslate nohighlight">\(l\)</span> et <span class="math notranslate nohighlight">\((l-1)\)</span> sont des couches complètement connectées, l’équation :</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
@@ -675,7 +681,7 @@ exemple s’écrire :</p>
 </section>
 </section>
 <section id="regularisation">
-<h2>Régularisation<a class="headerlink" href="#regularisation" title="Lien vers cette rubrique">#</a></h2>
+<h2>Régularisation<a class="headerlink" href="#regularisation" title="Link to this heading">#</a></h2>
 <p>Un des enjeux principaux en apprentissage automatique est de construire
 des algorithmes ayant une bonne capacité de généralisation. Les
 stratégies mises en œuvre pour arriver à cette fin rentrent dans la
@@ -683,7 +689,7 @@ catégorie générale de la régularisation et de nombreuses méthodes sont
 aujourd’hui proposées en ce sens. La régularisation a déjà été abordée dans le chapitre consacré aux perceptrons multicouches (voir section <a class="reference internal" href="PMC.html#content-references-reg"><span class="std std-ref">Régularisation</span></a>). Nous faisons ici un focus sur trois
 stratégies largement utilisées en apprentissage profond.</p>
 <section id="regularisation-de-la-fonction-de-cout">
-<h3>Régularisation de la fonction de coût<a class="headerlink" href="#regularisation-de-la-fonction-de-cout" title="Lien vers cette rubrique">#</a></h3>
+<h3>Régularisation de la fonction de coût<a class="headerlink" href="#regularisation-de-la-fonction-de-cout" title="Link to this heading">#</a></h3>
 <p>L’équation précédente est un exemple de régularisation de la
 fonction de coût, utilisée lors de la phase d’entraînement. À la
 fonction d’erreur est ajoutée une fonction des poids du réseau, qui peut
@@ -699,7 +705,7 @@ poids, est ajouté à la fonction objectif.</p></li>
 </ul>
 </section>
 <section id="dropout">
-<h3>Dropout<a class="headerlink" href="#dropout" title="Lien vers cette rubrique">#</a></h3>
+<h3>Dropout<a class="headerlink" href="#dropout" title="Link to this heading">#</a></h3>
 <p>Les techniques de dropout se rapprochent des stratégies classiques de
 bagging en apprentissage automatique. L’objectif est d’entraîner un
 ensemble constitué de tous les sous-réseaux qui peuvent être construits
@@ -723,7 +729,7 @@ identiques à celles durant l’apprentissage.</p>
 un poids. La stratégie correspondante est appelée DropConnect.</p>
 </section>
 <section id="partage-de-parametres">
-<h3>Partage de paramètres<a class="headerlink" href="#partage-de-parametres" title="Lien vers cette rubrique">#</a></h3>
+<h3>Partage de paramètres<a class="headerlink" href="#partage-de-parametres" title="Link to this heading">#</a></h3>
 <p>La régularisation de la fonction de coût permet d’imposer aux poids
 certaines contraintes (par exemple de rester faibles en amplitude pour
 la régularisation <span class="math notranslate nohighlight">\(\ell_2\)</span>, ou de s’annuler pour la régularisation
@@ -751,13 +757,13 @@ réseau appris.</p>
 <figure class="align-center" id="partage">
 <a class="reference internal image-reference" href="_images/partage.png"><img alt="_images/partage.png" src="_images/partage.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Partage de paramètres : les neurones voient des champs réceptifs distincts, mais partagent les mêmes paramètres (poids). Leur capacité de détection d’un triangle restera la même, quelle que soit la position de l’objet dans l’image.</span><a class="headerlink" href="#partage" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Partage de paramètres : les neurones voient des champs réceptifs distincts, mais partagent les mêmes paramètres (poids). Leur capacité de détection d’un triangle restera la même, quelle que soit la position de l’objet dans l’image.</span><a class="headerlink" href="#partage" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="initialisation">
-<h2>Initialisation<a class="headerlink" href="#initialisation" title="Lien vers cette rubrique">#</a></h2>
+<h2>Initialisation<a class="headerlink" href="#initialisation" title="Link to this heading">#</a></h2>
 <p>Une initialisation convenable des poids est essentielle pour assurer une
 convergence de la phase d’entraînement. Un choix arbitraire des poids (à
 zéro, à de petites ou grandes valeurs aléatoires) peut ralentir, voire
@@ -769,7 +775,7 @@ causer de la redondance dans le réseau (problème de la symétrie). Ces aspects
 <p>a été notamment détaillée.</p>
 </section>
 <section id="apprentissage">
-<h2>Apprentissage<a class="headerlink" href="#apprentissage" title="Lien vers cette rubrique">#</a></h2>
+<h2>Apprentissage<a class="headerlink" href="#apprentissage" title="Link to this heading">#</a></h2>
 <p>La présence de nombreuses couches cachées va permettre de calculer des
 caractéristiques beaucoup plus complexes et informatives des entrées.
 Chaque couche calculant une transformation non linéaire de la couche
@@ -780,7 +786,7 @@ nombre de neurones cachés qui est polynomial en le nombre des entrées),
 alors qu’un réseau à <span class="math notranslate nohighlight">\(k-1\)</span> couches ne peut pas le faire, à moins d’avoir
 une combinatoire exponentielle sur le nombre de neurones cachés.</p>
 <section id="le-probleme-de-l-entrainement">
-<h3>Le problème de l’entraînement<a class="headerlink" href="#le-probleme-de-l-entrainement" title="Lien vers cette rubrique">#</a></h3>
+<h3>Le problème de l’entraînement<a class="headerlink" href="#le-probleme-de-l-entrainement" title="Link to this heading">#</a></h3>
 <p>Si l’intérêt de ces réseaux est manifeste, la complexité de leur
 utilisation vient de l’étape d’apprentissage. Jusqu’à récemment,
 l’algorithme utilisé était classique et consistait en une initialisation
@@ -840,7 +846,7 @@ problème (<a class="reference internal" href="#transfer"><span class="std std-n
 <figure class="align-center" id="transfer">
 <img alt="_images/transferLearning.png" src="_images/transferLearning.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Illustration de la technique de transfer Learning. Le réseau appris à classer des images de chat est amputé de sa partie classification. Un nouveau classifieur est mis au bout du réseau, dont les poids sont entraînés sur la nouvelle tâche de classification.</span><a class="headerlink" href="#transfer" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Illustration de la technique de transfer Learning. Le réseau appris à classer des images de chat est amputé de sa partie classification. Un nouveau classifieur est mis au bout du réseau, dont les poids sont entraînés sur la nouvelle tâche de classification.</span><a class="headerlink" href="#transfer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -873,7 +879,7 @@ optimisation reste possible mais peut nécessiter des ressources de calcul impor
 </ul>
 </section>
 <section id="visualisation-du-mecanisme-des-reseaux-convolutifs">
-<h3>Visualisation du mécanisme des réseaux convolutifs<a class="headerlink" href="#visualisation-du-mecanisme-des-reseaux-convolutifs" title="Lien vers cette rubrique">#</a></h3>
+<h3>Visualisation du mécanisme des réseaux convolutifs<a class="headerlink" href="#visualisation-du-mecanisme-des-reseaux-convolutifs" title="Link to this heading">#</a></h3>
 <p>Le mécanisme interne des réseaux convolutifs est mal compris et
 l’analyse des raisons qui font que leur puissance de prédiction est
 importante n’est pas aisée. S’il est toujours possible de rétroprojeter
@@ -886,7 +892,7 @@ peuvent être rangées en trois catégories, décrites brièvement dans les para
 suivants.</p>
 </section>
 <section id="methodes-de-visualisation-de-base">
-<h3>Méthodes de visualisation de base<a class="headerlink" href="#methodes-de-visualisation-de-base" title="Lien vers cette rubrique">#</a></h3>
+<h3>Méthodes de visualisation de base<a class="headerlink" href="#methodes-de-visualisation-de-base" title="Link to this heading">#</a></h3>
 <p>Les méthodes les plus simples consistent à visualiser les activations
 lors du passage d’une image dans le réseau. Pour des activations type
 ReLU, ces activations sont ininterprétables au début de l’entraînement,
@@ -906,12 +912,12 @@ de dimension.</p>
 <a class="reference internal image-reference" href="_images/visufiltres.png"><img alt="_images/visufiltres.png" src="_images/visufiltres.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 14 </span><span class="caption-text">Visualisation des filtres de la première couche d’AlexNet (à
-gauche, 64 filtres 11<span class="math notranslate nohighlight">\(\times\)</span>11) et de ResNet-18 (à droite, 64 filtres 7<span class="math notranslate nohighlight">\(\times 7\)</span>).</span><a class="headerlink" href="#visufiltres" title="Lien vers cette image">#</a></p>
+gauche, 64 filtres 11<span class="math notranslate nohighlight">\(\times\)</span>11) et de ResNet-18 (à droite, 64 filtres 7<span class="math notranslate nohighlight">\(\times 7\)</span>).</span><a class="headerlink" href="#visufiltres" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="methodes-fondees-sur-les-activations">
-<h3>Méthodes fondées sur les activations<a class="headerlink" href="#methodes-fondees-sur-les-activations" title="Lien vers cette rubrique">#</a></h3>
+<h3>Méthodes fondées sur les activations<a class="headerlink" href="#methodes-fondees-sur-les-activations" title="Link to this heading">#</a></h3>
 <p>Plusieurs stratégies peuvent être adoptées pour sonder le fonctionnement
 d’un réseau convolutif, en utilisant les informations portées par les
 cartes <span class="math notranslate nohighlight">\(\mathbf{Y_i^{(l)}}\)</span>, parmi lesquelles :</p>
@@ -944,7 +950,7 @@ d’agrégation du réseau AlexNet, superposées aux images ayant le plus
 fortement activé ces neurones. Le champ est encadré en blanc, et la
 valeur d’activation correspondante est reportée en haut. On voit par
 exemple que certains neurones sont très sensibles aux textes, d’autres
-aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="transferLearning.html#id52" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Lien vers cette image">#</a></p>
+aux réflexions spéculaires, ou encore aux hauts du corps (source :<span id="id4">[<a class="reference internal" href="#id46" title="R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In 2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 00, 580-587. June 2014. URL: https://ieeexplore.ieee.org/abstract/document/6909475/, doi:10.1109/CVPR.2014.81.">4</a>]</span>)</span><a class="headerlink" href="#champr" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -968,12 +974,12 @@ droite). La probabilité de la classe s’effondre lorsque le rectangle
 couvre une partie de la face du chien. Cela suggère que cette face est
 grandement responsable de la forte probabilité de classement de l’image
 comme un loulou. A l’inverse, l’occlusion du fond n’altère pas la forte
-valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="transferLearning.html#id17" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Lien vers cette image">#</a></p>
+valeur de probabilité de la classe  (source :<span id="id5">[<a class="reference internal" href="#id11" title="Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13.">5</a>]</span>)</span><a class="headerlink" href="#occlusion" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="methodes-fondees-sur-le-gradient">
-<h3>Méthodes fondées sur le gradient<a class="headerlink" href="#methodes-fondees-sur-le-gradient" title="Lien vers cette rubrique">#</a></h3>
+<h3>Méthodes fondées sur le gradient<a class="headerlink" href="#methodes-fondees-sur-le-gradient" title="Link to this heading">#</a></h3>
 <p>Pour comprendre quelle(s) partie(s) de l’image est (sont) utilisée(s)
 par le réseau pour effectuer une prédiction, il est possible de calculer
 des cartes de saillance (saliency maps). L’idée est relativement simple
@@ -996,7 +1002,7 @@ ce neurone répond (<a class="reference internal" href="#gradcam"><span class="s
 <figcaption>
 <p><span class="caption-number">Fig. 17 </span><span class="caption-text">Approches par gradient de visualisation du fonctionnement
 d’un réseau convolutif. Comparaison de la méthode de rétropropagation
-guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="transferLearning.html#id53" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Lien vers cette image">#</a></p>
+guidée et de Grad-CAM (source :<span id="id6">[<a class="reference internal" href="#id47" title="Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In ICCV, 618-626. IEEE Computer Society, 2017. URL: http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17.">6</a>]</span>)</span><a class="headerlink" href="#gradcam" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Ces gradients peuvent également être utilisés dans la méthode de montée
@@ -1013,13 +1019,13 @@ cette méthode produit des images parfois très artistiques (<a class="reference
 <img alt="_images/monteeg.png" src="_images/monteeg.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 18 </span><span class="caption-text">Visualisation des 4 premières couches de convolution d’un
-réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="transferLearning.html#id54" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Lien vers cette image">#</a></p>
+réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="reference internal" href="#id48" title="Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15.">7</a>]</span>)</span><a class="headerlink" href="#monteeg" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -1153,118 +1159,49 @@ réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="r
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trainLoss</span><span class="p">,</span> <span class="s1">&#39;-b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">testLoss</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Fonction de perte&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Perte&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">testAcc</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Précision&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Précision en test&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 <figure class="align-center" id="perte">
-<img alt="_images/precisionCNN.png" src="_images/precisionCNN.png" />
+<img alt="_images/perteprecisionCNN.png" src="_images/perteprecisionCNN.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Précision en apprentissage.</span><a class="headerlink" href="#perte" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Fonction de perte et précision en test.</span><a class="headerlink" href="#perte" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id8">
-<img alt="_images/perteCNN.png" src="_images/perteCNN.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Fonction de perte.</span><a class="headerlink" href="#id8" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<div class="docutils container" id="id9">
+<div class="docutils container" id="id8">
 <div role="list" class="citation-list">
-<div class="citation" id="id46" role="doc-biblioentry">
+<div class="citation" id="id45" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
 </div>
-<div class="citation" id="id14" role="doc-biblioentry">
+<div class="citation" id="id13" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
 <p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
 </div>
-<div class="citation" id="id15" role="doc-biblioentry">
+<div class="citation" id="id14" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
 </div>
-<div class="citation" id="id47" role="doc-biblioentry">
+<div class="citation" id="id46" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
 <p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
 </div>
-<div class="citation" id="id12" role="doc-biblioentry">
+<div class="citation" id="id11" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
 <p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
 </div>
-<div class="citation" id="id48" role="doc-biblioentry">
+<div class="citation" id="id47" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
 <p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
 </div>
-<div class="citation" id="id49" role="doc-biblioentry">
+<div class="citation" id="id48" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
 <p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
 </div>
-<div class="citation" id="id25" role="doc-biblioentry">
+<div class="citation" id="id24" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
-</div>
-<div class="citation" id="id11" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
-<p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
-</div>
-<div class="citation" id="id41" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
-<p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
-</div>
-<div class="citation" id="id10" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
-<p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
-</div>
-<div class="citation" id="id18" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
-<p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
-</div>
-<div class="citation" id="id40" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
-<p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
-</div>
-<div class="citation" id="id38" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
-<p>Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>.</p>
-</div>
-<div class="citation" id="id37" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></span>
-<p>Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://arxiv.org/abs/1312.4400">http://arxiv.org/abs/1312.4400</a>.</p>
-</div>
-<div class="citation" id="id36" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.4842">http://arxiv.org/abs/1409.4842</a>.</p>
-</div>
-<div class="citation" id="id35" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.</p>
-</div>
-<div class="citation" id="id44" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
-<p>François Chollet. Xception: deep learning with depthwise separable convolutions. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
-</div>
-<div class="citation" id="id34" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07261">http://arxiv.org/abs/1602.07261</a>.</p>
-</div>
-<div class="citation" id="id33" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
-<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
-</div>
-<div class="citation" id="id31" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></span>
-<p>Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. <em>IEEE Trans. on Knowl. and Data Eng.</em>, 22(10):1345–1359, October 2010. URL: <a class="reference external" href="http://dx.doi.org/10.1109/TKDE.2009.191">http://dx.doi.org/10.1109/TKDE.2009.191</a>, <a class="reference external" href="https://doi.org/10.1109/TKDE.2009.191">doi:10.1109/TKDE.2009.191</a>.</p>
-</div>
-<div class="citation" id="id54" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>22<span class="fn-bracket">]</span></span>
-<p>Y. Song, T. Wang, P. Cai, S. Mondal, and J. Sahoo. A comprehensive survey of few-shot learning: evolution, applications, challenges, and opportunities. <em>ACM Computing Surveyx</em>, 2023.</p>
 </div>
 </div>
 </div>
@@ -1311,7 +1248,7 @@ réseau convolutif par montée de gradient  (source :<span id="id7">[<a class="r
       </div>
     </a>
     <a class="right-next"
-       href="ae.html"
+       href="AE.html"
        title="page suivante">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">suivant</p>

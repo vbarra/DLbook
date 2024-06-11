@@ -9,6 +9,7 @@ kernelspec:
   language: python
   name: python3
 ---
+
 # Réseaux convolutifs
 
 ## Introduction
@@ -913,29 +914,16 @@ for epoch in range(1, num_epochs + 1):
 plt.plot(trainLoss, '-b',label='train')
 plt.plot(testLoss, 'r',label='test')
 plt.legend(loc='best')
-plt.title("Fonction de perte")
-plt.xlabel("epoch")
-plt.ylabel("Perte")
 plt.figure()
 plt.plot(testAcc)
-plt.xlabel("epoch")
-plt.ylabel("Précision")
-plt.title("Précision en test")
-plt.tight_layout()
 ```
 
-```{figure} ./images/precisionCNN.png
+
+```{figure} ./images/perteprecisionCNN.png
 :name: perte
 :align: center
-Précision en apprentissage.
+Fonction de perte et précision en test.
 ```
-
-```{figure} ./images/perteCNN.png
-:name: perte
-:align: center
-Fonction de perte.
-```
-
 
 ```{bibliography}
 :style: unsrt

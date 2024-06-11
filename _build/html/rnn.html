@@ -43,7 +43,7 @@
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -52,20 +52,27 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'rnn';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
-    <link rel="next" title="Utilisation de réseaux existants" href="transferLearning.html" />
-    <link rel="prev" title="Auto-encodeurs" href="ae.html" />
+    <link rel="prev" title="Auto-encodeurs" href="AE.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="fr"/>
   </head>
@@ -177,10 +184,8 @@
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AE.html">Auto-encodeurs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Réseaux récurrents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
 
     </div>
@@ -290,7 +295,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machines-de-turing-neuronales">Machines de Turing neuronales</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-applications">Quelques applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-sequences">Classification de séquences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prevision-de-series-temporelles">Prévision de séries temporelles</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -303,9 +313,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reseaux-recurrents">
-<h1>Réseaux récurrents<a class="headerlink" href="#reseaux-recurrents" title="Lien vers cette rubrique">#</a></h1>
+<h1>Réseaux récurrents<a class="headerlink" href="#reseaux-recurrents" title="Link to this heading">#</a></h1>
 <section id="definition">
-<h2>Définition<a class="headerlink" href="#definition" title="Lien vers cette rubrique">#</a></h2>
+<h2>Définition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
 <p>Les réseaux de neurones récurrents (RNN, <em>Recurrent Neural Networks</em>)
 sont des réseaux à propagation avant, permettant de prendre en compte le
 temps. Comme dans les réseaux classiques, il n’existe pas de cycle, mais
@@ -320,7 +330,8 @@ La donnée <span class="math notranslate nohighlight">\(\mathbf{x_{t-1}}\)</span
 aux instants suivants, à l’aide des arcs récurrents.</p>
 <p>Deux équations permettent de calculer les quantités nécessaires à
 l’instant <span class="math notranslate nohighlight">\(t\)</span> dans la phase de propagation avant d’un réseau récurrent
-simple (comme celui de la <a class="reference internal" href="#rnn1"><span class="std std-numref">Fig. 28</span></a> gauche) :</p>
+simple (comme celui de la figure <a class="reference internal" href="#F:rnn2"><span class="xref myst">1.1</span></a>{reference-type= »ref »
+reference= »F:rnn2 »} gauche) :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 h_t&amp;=&amp;\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t-1}} + b_h\right)\\
@@ -328,49 +339,28 @@ h_t&amp;=&amp;\sigma\left ( \mathbf{W_{hx}^\top x_t} +  \mathbf{W_{hh}^\top x_{t
 \end{aligned}\end{split}\]</div>
 <p>où <span class="math notranslate nohighlight">\(\mathbf{W_{hx}}\)</span> est la matrice des poids reliant
 l’entrée à la couche cachée et <span class="math notranslate nohighlight">\(\mathbf{W_{hh}}\)</span> celle des poids des
-arcs récurrents. Les biais sont notés <span class="math notranslate nohighlight">\(b_h\)</span> et <span class="math notranslate nohighlight">\(b_y\)</span>.<br />
-La dynamique du réseau peut être décrite en dépliant ce réseau dans le
-temps (<a class="reference internal" href="#rnn1"><span class="std std-numref">Fig. 28</span></a> droite). Le réseau devient donc un réseau profond, avec une couche par instant <span class="math notranslate nohighlight">\(t\)</span> et un partage de poids au cours du temps. Ce dernier peut
+arcs récurrents. Les biais sont notés <span class="math notranslate nohighlight">\(b_h\)</span> et <span class="math notranslate nohighlight">\(b_y\)</span>.</p>
+<p>La dynamique du réseau peut être décrite en dépliant ce réseau dans le
+temps ((<a class="reference internal" href="#rnn1"><span class="std std-numref">Fig. 25</span></a>)). Le réseau devient donc un réseau profond, avec une couche par
+instant <span class="math notranslate nohighlight">\(t\)</span> et un partage de poids au cours du temps. Ce dernier peut
 donc être entraîné de manière classique par l’algorithme de
 rétropropagation du gradient, indicé par le temps (<em>Backpropagation
 through time</em>, BPTT algorithm).</p>
-<figure class="align-default" id="rnn1">
-<img alt="_images/rnn1.png" src="_images/rnn1.png" />
+<figure class="align-center" id="rnn1">
+<a class="reference internal image-reference" href="_images/rnn1.png"><img alt="_images/rnn1.png" src="_images/rnn1.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Réseau récurrent et sa version dépliée dans le
-temps.</span><a class="headerlink" href="#rnn1" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Réseau récurrent et sa version dépliée dans le
+temps.</span><a class="headerlink" href="#rnn1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Avec ces réseaux, il est possible de traiter des séquences de longueur
 quelconque, la taille du modèle étant indépendante de cette longueur.
-Plusieurs architectures peuvent être déclinées sur ce principe</p>
-<figure class="align-default" id="onetomany">
-<img alt="_images/onetomany.png" src="_images/onetomany.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Architectures « un vers plusieurs » , utilisées par exemple en génération de musique ou légendage d’images.</span><a class="headerlink" href="#onetomany" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id1">
-<img alt="_images/manytoone.png" src="_images/manytoone.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Architectures « un vers plusieurs » , utilisées par exemple en classification de sentiments</span><a class="headerlink" href="#id1" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id2">
-<img alt="_images/manytomany1.png" src="_images/manytomany1.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Architectures « plusieurs vers plusieurs », pour la reconnaissance d’entité dans des textes ou annotation de vidéos.</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id3">
-<img alt="_images/manytomany2.png" src="_images/manytomany2.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Architectures « plusieurs vers plusieurs », pour la traduction automatique.</span><a class="headerlink" href="#id3" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
+Plusieurs architectures peuvent être déclinées sur ce principe et le
+tableau <a class="reference internal" href="#T:rnn"><span class="xref myst">1.1</span></a>{reference-type= »ref » reference= »T:rnn »} donne un
+panorama de certaines d’entre elles, avec des exemples d’applications.</p>
 </section>
 <section id="entrainement-des-reseaux-recurrents">
-<h2>Entraînement des réseaux récurrents<a class="headerlink" href="#entrainement-des-reseaux-recurrents" title="Lien vers cette rubrique">#</a></h2>
+<h2>Entraînement des réseaux récurrents<a class="headerlink" href="#entrainement-des-reseaux-recurrents" title="Link to this heading">#</a></h2>
 <p>L’apprentissage de dépendances long terme peut être difficile. Les
 problèmes d’évanescence (<em>vanishing</em>) ou d’explosion du gradient peuvent
 rapidement survenir, lors de la rétropropagation sur plusieurs pas de
@@ -393,10 +383,11 @@ tronquée, conception d’architecture et heuristiques) pour résoudre ces
 problèmes.</p>
 </section>
 <section id="quelques-architectures">
-<h2>Quelques architectures<a class="headerlink" href="#quelques-architectures" title="Lien vers cette rubrique">#</a></h2>
+<h2>Quelques architectures<a class="headerlink" href="#quelques-architectures" title="Link to this heading">#</a></h2>
 <section id="lstm">
-<h3>LSTM<a class="headerlink" href="#lstm" title="Lien vers cette rubrique">#</a></h3>
-<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997 <span id="id4">[<a class="reference internal" href="transferLearning.html#id16" title="S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735–1780, November 1997. URL: http://dx.doi.org/10.1162/neco.1997.9.8.1735, doi:10.1162/neco.1997.9.8.1735.">9</a>]</span> pour résoudre le problème de l’évanescence du gradient. Ce
+<h3>LSTM<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h3>
+<p>Les réseaux <em>Long Short-Term Memory</em> (LSTM) ont été introduits en 1997
+[&#64;HO97] pour résoudre le problème de l’évanescence du gradient. Ce
 modèle ressemble à un réseau récurrent classique à une couche cachée,
 mais chaque neurone de la couche cachée est remplacé par une cellule de
 mémoire.</p>
@@ -411,7 +402,9 @@ pondérer des valeurs calculées dans la cellule. En particulier, si la
 valeur d’une porte est nulle, alors le flot est coupé dans le graphe,
 alors qu’il transite intégralement si la valeur de la porte est égale à
 1.</p>
-<p>On retrouve dans une cellule (<a class="reference internal" href="#lstm1"><span class="std std-numref">Fig. 33</span></a>) les éléments suivants :</p>
+<p>On retrouve dans une cellule (figure
+<a class="reference internal" href="#F:lstmC"><span class="xref myst">1.3</span></a>{reference-type= »ref » reference= »F:lstmC »}) les éléments
+suivants :</p>
 <ul class="simple">
 <li><p><em>Neurone d’entrée</em> : ce neurone prend en entrée <span class="math notranslate nohighlight">\(\mathbf{x_t}\)</span> et
 <span class="math notranslate nohighlight">\({h_{t-1}}\)</span> et calcule, à la manière d’un neurone classique, une
@@ -436,11 +429,8 @@ de la porte de sortie <span class="math notranslate nohighlight">\(o^{t}\)</span
 <span class="math notranslate nohighlight">\(C^{t}\)</span> à fournir en sortie et est calculée par
 <span class="math notranslate nohighlight">\(o^{t} = \sigma\left(\mathbf{W_o}^\top\left[\mathbf{x_t} , h_{t-1}\right ] +b_o\right)\)</span>.</p></li>
 </ul>
-<figure class="align-default" id="lstm1">
-<img alt="_images/lstm1.png" src="_images/lstm1.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Cellule LSTM</span><a class="headerlink" href="#lstm1" title="Lien vers cette image">#</a></p>
-</figcaption>
+<figure id="F:lstmC">
+<figcaption>Cellule LSTM</figcaption>
 </figure>
 <p>En résumé, un LSTM effectue donc les opérations suivantes à l’instant
 <span class="math notranslate nohighlight">\(t\)</span> :</p>
@@ -455,10 +445,10 @@ h_t &amp;=&amp; o^{t} tanh(C^{t})
 \end{aligned}\end{split}\]</div>
 </section>
 <section id="gru">
-<h3>GRU<a class="headerlink" href="#gru" title="Lien vers cette rubrique">#</a></h3>
-<p>En 2014 <span id="id5">[<a class="reference internal" href="transferLearning.html#id46" title="J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. CoRR, 2014. URL: http://arxiv.org/abs/1412.3555.">10</a>]</span>, une version simplifiée des réseaux LSTM a été
+<h3>GRU<a class="headerlink" href="#gru" title="Link to this heading">#</a></h3>
+<p>En 2014 [&#64;ChO14], une version simplifiée des réseaux LSTM a été
 introduite, qui nécessite moins de paramètres. Les GRU (<em>Gated Recurrent
-Units</em>) (<a class="reference internal" href="#id6"><span class="std std-numref">Fig. 34</span></a>) sont en effet des réseaux sans mémoire interne <span class="math notranslate nohighlight">\(C^{t}\)</span>, ni porte
+Units</em>) sont en effet des réseaux sans mémoire interne <span class="math notranslate nohighlight">\(C^{t}\)</span>, ni porte
 de sortie <span class="math notranslate nohighlight">\(o^{t}\)</span>. Ces réseaux sont composés de deux portes au lieu de
 trois :</p>
 <ul class="simple">
@@ -479,26 +469,21 @@ h_t&amp;=&amp;\left(1-z^{t}\right)h_{t-1} + z^{t} \tilde{h}^{t}
 \end{aligned}\end{split}\]</div>
 <p>Si, pour tout <span class="math notranslate nohighlight">\(t, r^{t}=1\)</span> et <span class="math notranslate nohighlight">\(z^{t}=0\)</span>, alors on modélise un réseau
 récurrent classique.</p>
-<figure class="align-default" id="id6">
-<img alt="_images/gru.png" src="_images/gru.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Cellule GRU</span><a class="headerlink" href="#id6" title="Lien vers cette image">#</a></p>
-</figcaption>
+<figure id="F:lstmC">
+<figcaption>Cellule GRU</figcaption>
 </figure>
 </section>
 <section id="reseaux-recurrents-bidirectionnels">
-<h3>Réseaux récurrents bidirectionnels<a class="headerlink" href="#reseaux-recurrents-bidirectionnels" title="Lien vers cette rubrique">#</a></h3>
+<h3>Réseaux récurrents bidirectionnels<a class="headerlink" href="#reseaux-recurrents-bidirectionnels" title="Link to this heading">#</a></h3>
 <p>Les réseaux bidirectionnels ont été décrits pour la première fois en
-1997 <span id="id7">[<a class="reference internal" href="transferLearning.html#id15" title="M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. Trans. Sig. Proc., 45(11):2673–2681, November 1997. URL: http://dx.doi.org/10.1109/78.650093, doi:10.1109/78.650093.">11</a>]</span>. Dans ces réseaux, deux couches cachées sont présentes,
+1997 [&#64;SCH97]. Dans ces réseaux, deux couches cachées sont présentes,
 chacune connectée à l’entrée et la sortie. La première couche cachée a
 des connexions récurrentes depuis le passé vers le futur, tandis que
 l’autre transmet les activations depuis le futur vers le passé
-(<a class="reference internal" href="#bidir"><span class="std std-numref">Fig. 35</span></a>).</p>
-<figure class="align-default" id="bidir">
-<img alt="_images/bidir.png" src="_images/bidir.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Réseau bidirectionnel</span><a class="headerlink" href="#bidir" title="Lien vers cette image">#</a></p>
-</figcaption>
+(figure <a class="reference internal" href="#F:BDRN"><span class="xref myst">1.4</span></a>{reference-type= »ref » reference= »F:BDRN »}).</p>
+<figure id="F:BDRN">
+<embed src="images/bidirectionnel.pdf" />
+<figcaption>Réseau bidirectionnel.</figcaption>
 </figure>
 <p>Étant données une entrée et une sortie du réseau (des séquences), le
 réseau peut être entraîné par rétropropagation après avoir été déplié :</p>
@@ -515,7 +500,7 @@ parcours, les réseaux bidirectionnels ne peuvent traiter que des
 séquences finies.</p>
 </section>
 <section id="machines-de-turing-neuronales">
-<h3>Machines de Turing neuronales<a class="headerlink" href="#machines-de-turing-neuronales" title="Lien vers cette rubrique">#</a></h3>
+<h3>Machines de Turing neuronales<a class="headerlink" href="#machines-de-turing-neuronales" title="Link to this heading">#</a></h3>
 <p>Les réseaux récurrents sont performants pour construire une
 représentation implicite de l’information, mais restent relativement peu
 adaptés à la conservation d’informations explicites (des dates précises
@@ -528,14 +513,14 @@ effectuée par le réseau (assimilable à la CPU). Puisque la mémoire des
 LSTM est distribuée dans chaque cellule, elle est donc liée au nombre de
 cellules et à la capacité de calcul et ce modèle ne répond pas
 directement au problème posé.</p>
-<p>Graves et al. <span id="id8">[<a class="reference internal" href="transferLearning.html#id23" title="A Graves, G Wayne, and I Danihelka. Neural turing machines. CoRR, 2014. URL: http://arxiv.org/abs/1410.5401.">12</a>]</span> proposent alors une architecture, appelée
+<p>Graves et al. [&#64;Graves14] proposent alors une architecture, appelée
 machine de Turing neuronale, constituée de deux éléments principaux :
 une mémoire et un contrôleur doté d’un mécanisme d’attention qui lit et
 écrit dans cette mémoire. Les accès mémoire sont ici des équivalents
 analogiques dérivables, pour permettre d’entraîner le contrôleur par
 descente de gradient. Typiquement, le contrôleur est un réseau de
 neurones ou un réseau récurrent type LSTM
-(<a class="reference internal" href="#turing"><span class="std std-numref">Fig. 36</span></a>).</p>
+(figure <a class="reference internal" href="#F:NTM"><span class="xref myst">[F:NTM]</span></a>{reference-type= »ref » reference= »F:NTM »}).</p>
 <p>Les têtes de lecture et d’écriture interagissent avec la mémoire. Chaque
 tête est contrôlée par un vecteur de poids, chaque composante
 définissant le degré d’interaction de la tête avec la zone mémoire
@@ -555,7 +540,7 @@ plus ou moins en compte l’information issue de la clé, ou au
 contraire la valeur précédente du poids) :
 <span class="math notranslate nohighlight">\(w_t(i)=g_t.w_t(i) + (1-g_t).w_{t-1}(i)\)</span>.</p></li>
 <li><p>Un décalage par convolution translate ensuite les poids, à la
-manière du décalage de la tête dans une machine de Turing
+manière du décalage classique de la tête dans une machine de Turing
 classique : <span class="math notranslate nohighlight">\(w_t(i)=\displaystyle\sum_j w_t(j)\mathbf{s_t}(i-j)\)</span> où
 <span class="math notranslate nohighlight">\(\mathbf{s_t}\)</span> est un vecteur qui définit un décalage des poids à
 l’instant <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
@@ -566,7 +551,7 @@ l’instant <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 mémoire :</p>
 <ul class="simple">
 <li><p>Dans le cas de la tête de lecture, elle calcule une combinaison
-linéaire des zones mémoire, pondérées par les poids <span class="math notranslate nohighlight">\(w_t(i)\)</span> et
+linéaire des zones mémoire, pondérées par les poids <span class="math notranslate nohighlight">\(w_t(i)\)</span>, et
 produit le vecteur <span class="math notranslate nohighlight">\(\mathbf{r_t}\)</span>, fourni au contrôleur de l’instant
 suivant.</p></li>
 <li><p>Dans le cas de la tête d’écriture, le contenu de la mémoire est mis
@@ -575,316 +560,144 @@ suivant.</p></li>
 <span class="math notranslate nohighlight">\(\mathbf{e_t}\)</span> est un vecteur d’effacement, dont les composantes
 sont dans {0,1} et <span class="math notranslate nohighlight">\(\mathbf{a_t}\)</span> est un vecteur d’ajout.</p></li>
 </ul>
-<figure class="align-default" id="turing">
-<img alt="_images/turing.png" src="_images/turing.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Exemple de machine de Turing nuronale dépliée dans le temps, oà le contrôleur est un LSTM. Les accès en écriture du LSTM dans la mémoire sont représentés par des flèches rouges, les accès en lecture en bleu.</span><a class="headerlink" href="#turing" title="Lien vers cette image">#</a></p>
-</figcaption>
+<div class="SCfigure docutils">
+<p><img alt="image" src="images/turing.pdf" />{width= ».6\linewidth »}</p>
+</div>
+<figure>
+<figcaption>Quelques applications des réseaux récurrents.</figcaption>
 </figure>
 </section>
 </section>
-<section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
-<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span> 
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
-</pre></div>
-</div>
-<p>On s’intéresse aux données financières d’Apple (<a class="reference internal" href="#donnees"><span class="std std-numref">Fig. 37</span></a>) et plus particulièrement</p>
+<section id="quelques-applications">
+<h2>Quelques applications<a class="headerlink" href="#quelques-applications" title="Link to this heading">#</a></h2>
+<p>Comme les réseaux convolutifs, les réseaux récurrents ont depuis leur
+introduction trouvé de nombreuses applications.</p>
+<p><strong>Traitement automatique du langage</strong></p>
+<p>Les réseaux récurrents sont utilisés en traitement automatique du
+langage, notamment à des fins génératives. Ces réseaux permettent de
+modéliser un langage (prédire la probabilité d’un mot donné étant donnés
+les mots précédents) et de générer du texte à partir du modèle appris.
+De nombreuses applications découlent de cette modélisation : génération
+de texte au style de (génération d’un texte dans le style de
+Shakespeare, à partir d’un RNN appris sur le corpus des œuvres de
+l’auteur par exemple, génération de textes manuscrits
+(figure <a class="reference internal" href="#F:gener"><span class="xref myst">[F:gener]</span></a>{reference-type= »ref »
+reference= »F:gener »}), génération de pages Wikipedia, ou même génération
+d’articles scientifiques, à partir des sources LaTeXd’un ouvrage et d’un
+LSTM multicouche.</p>
+<p><strong>Traduction automatique</strong></p>
+<p>La traduction automatique de texte procède de la même stratégie que la
+modélisation d’une langue. Deux réseaux récurrents sont entraînés,
+chacun dans une des langues, et le RNN traducteur calcule sa sortie en
+fonction de la couche cachée du premier réseau.</p>
+<p><strong>Analyse de sentiments</strong></p>
+<p>Détecter de manière automatique l’opinion du public sur un sujet donné
+intéresse de plus en plus le domaine commercial. Ce domaine, largement
+alimenté par les réseaux sociaux, les avis et recommandations déposées
+sur les sites Internet, est un champ de prédilection pour les réseaux
+profonds. Des réseaux récurrents (notamment LSTM structurés en arbres)
+sont utilisés à cet effet et servent de base à des systèmes de
+recommandation.</p>
+<p><strong>Résumé automatique</strong></p>
+<p>Les réseaux récurrents permettent de produire des résumés abstraits de
+textes (i.e. générer de nouvelles phrases, en opposition à extraire les
+mots les plus importants d’un texte). Les modèles utilisés sont des
+réseaux récurrents avec mécanisme d’attention. Un système
+d’encodage/décodage est mis en place dans le réseau, où l’encodeur est
+par exemple un GRU bidirectionnel et le décodeur un GRU dont l’état
+caché a la même taille que celui de l’encodeur. Les modèles sont appris
+et validés sur des corpus dédiés (DUC, CNN/Daily Mail par exemple).</p>
+<p><strong>Reconnaissance de la parole</strong></p>
+<p>L’utilisation de réseaux LSTM bidirectionnels, qui permettent à la fois
+d’exploiter les contextes passé et futur, et de garder trace d’un
+contexte à longue échéance, a montré de bonnes performances dans la
+tache de reconnaissance de la parole.</p>
+<p><strong>Annotation d’images</strong></p>
+<p>Couplé à un réseau convolutif, un RNN permet de générer des descriptions
+(légendes) d’images non labelisées. Le réseau convolutif produit des
+descripteurs, qui servent d’entrée à un réseau récurrent type LSTM
+(figure <a class="reference internal" href="#F:caption"><span class="xref myst">[F:caption]</span></a>{reference-type= »ref »
+reference= »F:caption »}).</p>
+</section>
+<section id="partie-pratique">
+<h2>Partie pratique<a class="headerlink" href="#partie-pratique" title="Link to this heading">#</a></h2>
+<section id="classification-de-sequences">
+<h3>Classification de séquences<a class="headerlink" href="#classification-de-sequences" title="Link to this heading">#</a></h3>
+<p>L’objectif de cette partie est d’apprendre à l’aide de réseaux
+récurrents à classifier des séquences (ici des phrases) en plusieurs
+classes. Le cas d’étude est une base de données d’avis de films (IMDB) :
+pour chaque film, un avis est rédigé, et un label positif (1) ou négatif
+(0) est assigné à cet avis. Il s’agit alors d’apprendre à reconnaître la
+qualité de l’avis, et de pouvoir assigner un label 0/1 à un nouvel avis,
+jamais vu par le réseau.<br />
+Vous avez à disposition un notebook donnant l’essentiel des codes
+permettant de :</p>
 <ul class="simple">
-<li><p>au prix d’une action à l’ouverture (open) et à la fermeture (close), par jour</p></li>
-<li><p>au prix le plus bas (low) et haut (high), par jour</p></li>
-<li><p>à l’ajustement de clôture (adj_close) et le volume de vente (volume), par jour.</p></li>
+<li><p>lire la base de données</p></li>
+<li><p>mettre en forme les données</p></li>
+<li><p>proposer un modèle de base auquel comparer vos résultats</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/finance.csv&quot;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">column_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-<span class="n">df_plot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">ncols</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">nrows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">df_plot</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">ncols</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_plot</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">column_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">AutoDateLocator</span><span class="p">())</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
+<p>Votre travail consiste alors à construire un réseau récurrent permettant
+d’effectuer la tâche et de le tester. Pour ceci, vous aurez à :</p>
+<ul>
+<li><p>utiliser la fonction <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences">
+keras.preprocessing.sequence.pad_sequences()</a>
+pour prétraiter les données d’entraînement. Cette fonction créera un
+tableau 2D, avec en ligne les 25000 avis et en colonnes les <code class="docutils literal notranslate"><span class="pre">maxlen</span></code>
+premiers mots de l’avis. Si l’avis est plus long, il sera coupé, si
+l’avis est plus court il sera complété par des 0.</p></li>
+<li><p>construire un réseau avec</p>
+<ol class="arabic simple">
+<li><p>une couche
+d”<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding">Embedding</a>,
+à la dimension d’entrée appropriée, et dont la dimension de
+sortie est égale à 10. Le modèle apprendra donc à représenter
+chaque mot par un vecteur de <span class="math notranslate nohighlight">\(\mathbb{R}^{10}\)</span></p></li>
+<li><p>une (ou plusieurs) couche(s)
+<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM">LSTM</a>
+à 32 neurones</p></li>
+<li><p>une couche dense de sortie, à activation sigmoïde (problème de
+classification binaire)</p></li>
+</ol>
+<p>Le modèle sera compilé avec la fonction de perte adéquate pour un
+tel problème, et entraîné sur des batchs de taille 128.</p>
+</li>
+<li><p>améliorer ce réseau en utilisant un modèle bidirectionnel. Pour
+ceci, il suffit d’encapsuler la ou les couche(s) LSTM dans une
+<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional">couche
+bidirectionnelle</a>.
+Si le modèle sur apprend, vous pouvez ajouter une couche de
+<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dropout">Dropout</a>.</p></li>
+</ul>
+</section>
+<section id="prevision-de-series-temporelles">
+<h3>Prévision de séries temporelles<a class="headerlink" href="#prevision-de-series-temporelles" title="Link to this heading">#</a></h3>
+<p>En utilisant l’API Keras, on se propose d’implémenter un RNN permettant
+de faire de la prédiction de série temporelle. Le notebook
+<code class="docutils literal notranslate"><span class="pre">RNN</span> <span class="pre">prevision</span></code> propose de construire un réseau récurrent simple (sans
+module LSTM ou GRU) permettant de faire de la prévision méteo à partir
+de données de température, pression et humidité mesurées pendant 5 ans.
+Les données sont issues d’un challenge
+<a class="reference external" href="https://www.kaggle.com/selfishgene/historical-hourly-weather-data">Kaggle</a>.
+Elles sont mises en forme pour un RNN simple, implémenté sous Keras via
+la couche <a class="reference external" href="https://keras.io/layers/recurrent/">SimpleRNN</a>. Votre travail
+consiste simplement à :</p>
+<ul class="simple">
+<li><p>définir (fonction <code class="docutils literal notranslate"><span class="pre">myRNN</span></code>) un réseau récurrent comportant une couche
+<code class="docutils literal notranslate"><span class="pre">SimpleRNN</span></code> et deux couches complètement connectées (figure
+<a class="reference internal" href="#F:simple"><span class="xref myst">1.5</span></a>{reference-type= »ref » reference= »F:simple »}).</p></li>
+<li><p>Proposer des graphiques de comparaison des courbes réelles et
+prédites.</p></li>
+<li><p>Comparer les prédictions avec celles calculées par des réseaux
+<a class="reference external" href="https://keras.io/layers/recurrent/">LSTM</a> et
+<a class="reference external" href="https://keras.io/layers/recurrent/">GRU</a>.</p></li>
+</ul>
+<figure id="F:simple">
+<div class="center">
+<img src="images/simpleRNN" />
 </div>
-<figure class="align-default" id="donnees">
-<img alt="_images/donnees.png" src="_images/donnees.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Données financières d’Apple (source : Yahoo finance)</span><a class="headerlink" href="#donnees" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<p>On découpe les données en ensemble d’entraînement et de test, et on s’intéresse au prix à l’ouverture de l’action. On normalise ces données dans [0,1]</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.8</span><span class="p">)</span>
-<span class="n">train_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">test_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">l</span><span class="p">:]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="n">dataset_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">Open</span><span class="o">.</span><span class="n">values</span>
-<span class="n">dataset_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dataset_test</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">(</span><span class="n">feature_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">x_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">)</span>
-<span class="n">x_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_test</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>On créé les séquences d’entraînement (de longueur 50 ici) et de test (de longueur 30)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="mi">50</span> 
-<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span> <span class="o">-</span> <span class="n">l</span><span class="p">):</span>
-	<span class="n">X_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">])</span>
-	<span class="n">y_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span> <span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-
-<span class="n">l</span> <span class="o">=</span> <span class="mi">30</span> 
-<span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span> <span class="o">-</span> <span class="n">l</span><span class="p">):</span>
-	<span class="n">X_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_test</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">])</span>
-	<span class="n">y_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_test</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>On créé ensuite le modèle. <code class="docutils literal notranslate"><span class="pre">input_size</span></code>est le nombre de caractéristiques de l’entrée à chaque pas de temps. <code class="docutils literal notranslate"><span class="pre">hidden_size</span></code>est le nombre d’unités du LSTM et <code class="docutils literal notranslate"><span class="pre">num_layers</span></code>le nombre de couches LSTM.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LSTMModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">):</span> 
-		<span class="nb">super</span><span class="p">(</span><span class="n">LSTMModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> 
-		<span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-	<span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> 
-		<span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-		<span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-		<span class="k">return</span> <span class="n">out</span>
-</pre></div>
-</div>
-<p>On sélectionne le device d’entraînement, on instantie un modèle que l’on équipe d’une fonction de perte et d’un optimiseur.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
-<span class="n">input_size</span><span class="p">,</span><span class="n">num_layers</span><span class="p">,</span><span class="n">hidden_size</span><span class="p">,</span><span class="n">output_size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">1</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">LSTMModel</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>On définit les batchs, et on entraîne le réseau</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TensorDataset</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TensorDataset</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">train_hist</span> <span class="o">=</span><span class="p">[]</span>
-<span class="n">test_hist</span> <span class="o">=</span><span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
-	<span class="n">total_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-	<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-	<span class="k">for</span> <span class="n">batch_X</span><span class="p">,</span> <span class="n">batch_y</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
-		<span class="n">batch_X</span><span class="p">,</span> <span class="n">batch_y</span> <span class="o">=</span> <span class="n">batch_X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">batch_y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-		<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch_X</span><span class="p">)</span>
-		<span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">batch_y</span><span class="p">)</span>
-
-		<span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-		<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-		<span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-
-		<span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-
-	<span class="n">average_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
-	<span class="n">train_hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">average_loss</span><span class="p">)</span>
-
-	<span class="c1"># Validation sur l&#39;ensemble de test</span>
-	<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-	<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-		<span class="n">total_test_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-		<span class="k">for</span> <span class="n">batch_X_test</span><span class="p">,</span> <span class="n">batch_y_test</span> <span class="ow">in</span> <span class="n">test_loader</span><span class="p">:</span>
-			<span class="n">batch_X_test</span><span class="p">,</span> <span class="n">batch_y_test</span> <span class="o">=</span> <span class="n">batch_X_test</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">batch_y_test</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-			<span class="n">predictions_test</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch_X_test</span><span class="p">)</span>
-			<span class="n">test_loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">predictions_test</span><span class="p">,</span> <span class="n">batch_y_test</span><span class="p">)</span>
-			<span class="n">total_test_loss</span> <span class="o">+=</span> <span class="n">test_loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-		<span class="n">average_test_loss</span> <span class="o">=</span> <span class="n">total_test_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="p">)</span>
-		<span class="n">test_hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">average_test_loss</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_epochs</span><span class="p">,</span><span class="n">num_epochs</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">train_hist</span><span class="p">,</span><span class="n">scalex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Perte, entraînement&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">test_hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Perte, test&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;MSE&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-<figure class="align-default" id="loss">
-<img alt="_images/loss.png" src="_images/loss.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Fonction de perte en entraînement et en test</span><a class="headerlink" href="#loss" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<p>On utilise ensuite le modèle pour prédire les valeurs à l’ouverture de l’action sur les 30 jours suivants</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nb_predire</span> <span class="o">=</span> <span class="mi">30</span>
-
-<span class="n">seq</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-
-<span class="c1"># initialisation : 30 derniers pas de temps</span>
-<span class="n">historique</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">val_predites</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Prédiction</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-	<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_predire</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span>
-		<span class="n">historique_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">historique</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-
-		<span class="c1"># Prédiction de la valeur suivante</span>
-		<span class="n">val_predite</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">historique_tensor</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-		<span class="n">val_predites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_predite</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-		<span class="c1"># déplacement de l&#39;historique</span>
-		<span class="n">historique</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">historique</span><span class="p">,</span> <span class="n">shift</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-		<span class="n">historique</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_predite</span>
-
-		
-<span class="c1"># dates futures</span>
-<span class="n">last_date</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="kn">from</span> <span class="nn">pandas.tseries.offsets</span> <span class="kn">import</span> <span class="n">DateOffset</span>
-<span class="n">future_dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">last_date</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">periods</span><span class="o">=</span><span class="n">nb_predire</span><span class="p">)</span>
-<span class="n">index_c</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future_dates</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>et on affiche le résultat (<a class="reference internal" href="#pred"><span class="std std-numref">Fig. 39</span></a>)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">AutoDateLocator</span><span class="p">())</span>
-
-<span class="c1">#Données test</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:</span><span class="o">-</span><span class="n">nb_predire</span><span class="p">],</span> <span class="n">test_data</span><span class="o">.</span><span class="n">Open</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:</span><span class="o">-</span><span class="n">nb_predire</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Données test&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span> 
-<span class="n">val_reelles</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> 
-
-<span class="c1"># Données utilisées pour la prédiction </span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">nb_predire</span><span class="p">:],</span> <span class="n">val_reelles</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Valeurs réelles&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span> 
-
-<span class="n">val_predites</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">val_predites</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">index_c</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">nb_predire</span><span class="p">:],</span> <span class="n">val_predites</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Valeurs prédites&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span> 
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Valeur&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prévision&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-<figure class="align-default" id="pred">
-<img alt="_images/prediction.png" src="_images/prediction.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Prédiction du modèle et valeurs réelles</span><a class="headerlink" href="#pred" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<div class="docutils container" id="id9">
-<div role="list" class="citation-list">
-<div class="citation" id="id46" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
-</div>
-<div class="citation" id="id14" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
-<p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
-</div>
-<div class="citation" id="id15" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
-<p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
-</div>
-<div class="citation" id="id47" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
-<p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
-</div>
-<div class="citation" id="id12" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
-<p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
-</div>
-<div class="citation" id="id48" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
-<p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
-</div>
-<div class="citation" id="id49" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
-<p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
-</div>
-<div class="citation" id="id25" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
-<p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
-</div>
-<div class="citation" id="id11" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">9</a><span class="fn-bracket">]</span></span>
-<p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
-</div>
-<div class="citation" id="id41" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">10</a><span class="fn-bracket">]</span></span>
-<p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
-</div>
-<div class="citation" id="id10" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">11</a><span class="fn-bracket">]</span></span>
-<p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
-</div>
-<div class="citation" id="id18" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">12</a><span class="fn-bracket">]</span></span>
-<p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
-</div>
-<div class="citation" id="id40" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
-<p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
-</div>
-<div class="citation" id="id38" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
-<p>Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>.</p>
-</div>
-<div class="citation" id="id37" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></span>
-<p>Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://arxiv.org/abs/1312.4400">http://arxiv.org/abs/1312.4400</a>.</p>
-</div>
-<div class="citation" id="id36" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.4842">http://arxiv.org/abs/1409.4842</a>.</p>
-</div>
-<div class="citation" id="id35" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.</p>
-</div>
-<div class="citation" id="id44" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
-<p>François Chollet. Xception: deep learning with depthwise separable convolutions. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
-</div>
-<div class="citation" id="id34" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07261">http://arxiv.org/abs/1602.07261</a>.</p>
-</div>
-<div class="citation" id="id33" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
-<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
-</div>
-<div class="citation" id="id31" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></span>
-<p>Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. <em>IEEE Trans. on Knowl. and Data Eng.</em>, 22(10):1345–1359, October 2010. URL: <a class="reference external" href="http://dx.doi.org/10.1109/TKDE.2009.191">http://dx.doi.org/10.1109/TKDE.2009.191</a>, <a class="reference external" href="https://doi.org/10.1109/TKDE.2009.191">doi:10.1109/TKDE.2009.191</a>.</p>
-</div>
-<div class="citation" id="id54" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>22<span class="fn-bracket">]</span></span>
-<p>Y. Song, T. Wang, P. Cai, S. Mondal, and J. Sahoo. A comprehensive survey of few-shot learning: evolution, applications, challenges, and opportunities. <em>ACM Computing Surveyx</em>, 2023.</p>
-</div>
-</div>
-</div>
+<figcaption>Réseau récurrent à réaliser</figcaption>
+</figure></section>
 </section>
 </section>
 
@@ -919,22 +732,13 @@ sont dans {0,1} et <span class="math notranslate nohighlight">\(\mathbf{a_t}\)</
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ae.html"
+       href="AE.html"
        title="page précédente">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">précédent</p>
         <p class="prev-next-title">Auto-encodeurs</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="transferLearning.html"
-       title="page suivante">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">suivant</p>
-        <p class="prev-next-title">Utilisation de réseaux existants</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -961,7 +765,12 @@ sont dans {0,1} et <span class="math notranslate nohighlight">\(\mathbf{a_t}\)</
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machines-de-turing-neuronales">Machines de Turing neuronales</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelques-applications">Quelques applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-pratique">Partie pratique</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-sequences">Classification de séquences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prevision-de-series-temporelles">Prévision de séries temporelles</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
