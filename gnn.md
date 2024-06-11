@@ -465,10 +465,7 @@ $$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \math
 
 ```{prf:example}
 
-```{figure} ./images/graph.png
-:name:graph
-Exemple de graphe
-```
+< img src=./images/graph.png>
 
 Chaque noeud $i\in [\![1,5]\!]$ est décrit par $\mathbf v_i\in\mathbb{R}^3$, $d=3$
 
