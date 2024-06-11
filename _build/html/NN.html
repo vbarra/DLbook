@@ -43,7 +43,7 @@
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -52,21 +52,13 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=d99ca74e"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'NN';</script>
@@ -185,8 +177,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AE.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
 </ul>
 
     </div>
@@ -314,9 +309,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-aux-reseaux-de-neurones">
-<h1>Introduction aux réseaux de neurones<a class="headerlink" href="#introduction-aux-reseaux-de-neurones" title="Link to this heading">#</a></h1>
+<h1>Introduction aux réseaux de neurones<a class="headerlink" href="#introduction-aux-reseaux-de-neurones" title="Lien vers cette rubrique">#</a></h1>
 <section id="reseaux-de-neurones-et-apprentissage-automatique">
-<h2>Réseaux de neurones et apprentissage automatique<a class="headerlink" href="#reseaux-de-neurones-et-apprentissage-automatique" title="Link to this heading">#</a></h2>
+<h2>Réseaux de neurones et apprentissage automatique<a class="headerlink" href="#reseaux-de-neurones-et-apprentissage-automatique" title="Lien vers cette rubrique">#</a></h2>
 <p>Les réseaux de neurones artificiels sont des techniques
 issues du domaine du connexionisme. Le courant connexionniste insiste
 sur le grand nombre de connexions (sous forme de réseau) réalisées entre
@@ -342,7 +337,7 @@ approche « ascendante » qui tente de produire des phénomènes complexes
 à partir
 d’opérations très élémentaires.</p>
 <section id="du-neurone-biologique-au-neurone-formel">
-<h3>Du neurone biologique au neurone formel<a class="headerlink" href="#du-neurone-biologique-au-neurone-formel" title="Link to this heading">#</a></h3>
+<h3>Du neurone biologique au neurone formel<a class="headerlink" href="#du-neurone-biologique-au-neurone-formel" title="Lien vers cette rubrique">#</a></h3>
 <p>La reconnaissance du fait que le cerveau fonctionne de manière
 entièrement différente de celle d’un ordinateur conventionnel a joué un
 rôle très important dans le développement des réseaux de neurones
@@ -370,7 +365,7 @@ fonctionnement du système nerveux.</p></li>
 <figure class="align-default" id="neurone">
 <img alt="_images/neurone.png" src="_images/neurone.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Neurone biologique</span><a class="headerlink" href="#neurone" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Neurone biologique</span><a class="headerlink" href="#neurone" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>La transmission de l’information d’un neurone à l’autre s’effectue au
@@ -400,7 +395,7 @@ de toute l’information contenue dans le système.</p>
 du cerveau humain qui a conduit à une modélisation électrique de
 celui-ci. C’est cette modélisation que tentent de réaliser les réseaux
 de neurones artificiels, dont l’élaboration repose sur base de la
-définition suivante, proposée par Haykin :\</p>
+définition suivante, proposée par Haykin :</p>
 <p>Un réseau de neurones est un processus distribué de manière massivement
 parallèle, qui a une propension naturelle à mémoriser des connaissances
 de façon expérimentale et de les rendre disponibles pour utilisation. Il
@@ -416,7 +411,7 @@ neuropsychiatre McCulloch et au logicien Pitts qui s’inspirèrent de
 leurs travaux sur les neurones biologiques.</p>
 </section>
 <section id="classification-des-reseaux-de-neurones">
-<h3>Classification des réseaux de neurones<a class="headerlink" href="#classification-des-reseaux-de-neurones" title="Link to this heading">#</a></h3>
+<h3>Classification des réseaux de neurones<a class="headerlink" href="#classification-des-reseaux-de-neurones" title="Lien vers cette rubrique">#</a></h3>
 <p>Un réseau de neurones est constitué d’un grand nombre de
 cellules de base interconnectées. De nombreuses variantes sont définies
 selon le choix de la cellule élémentaire, de l’architecture et de la
@@ -444,7 +439,7 @@ une dynamique asynchrone séquentielle, on obtient le modèle du
 Perceptron multi-couches (PMC).</p>
 </section>
 <section id="applications">
-<h3>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h3>
+<h3>Applications<a class="headerlink" href="#applications" title="Lien vers cette rubrique">#</a></h3>
 <p>En apprentissage, les réseaux de neurones sont essentiellement utilisés pour :</p>
 <ul class="simple">
 <li><p>l’apprentissage supervisé ;</p></li>
@@ -458,9 +453,9 @@ restreintes (RBM) et les autoencodeurs.</p>
 </section>
 </section>
 <section id="perceptron">
-<h2>Perceptron<a class="headerlink" href="#perceptron" title="Link to this heading">#</a></h2>
+<h2>Perceptron<a class="headerlink" href="#perceptron" title="Lien vers cette rubrique">#</a></h2>
 <section id="definitions">
-<h3>Définitions<a class="headerlink" href="#definitions" title="Link to this heading">#</a></h3>
+<h3>Définitions<a class="headerlink" href="#definitions" title="Lien vers cette rubrique">#</a></h3>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 1 </span> (Neurone)</p>
 <section class="definition-content" id="proof-content">
@@ -525,8 +520,7 @@ le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sorti
 le seuil par un poids supplémentaire <span class="math notranslate nohighlight">\(w_0\)</span> associé à une entrée <span class="math notranslate nohighlight">\(x_0=1\)</span>. L’équivalence entre le modèle avec
 seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
 coefficient <span class="math notranslate nohighlight">\(w_0\)</span> est l’opposé du seuil <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<div class="figure" style="text-align: center"><p><img  src="_images/tikz-dd600909db7d6122a1eb2f5ab122b5a8739fa91e.png" alt="Figure made with TikZ" /></p>
-</div><p>On note <span class="math notranslate nohighlight">\(\mathbf w\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf x\)</span>) <span class="math notranslate nohighlight">\(\in\mathbb R^{D+1}\)</span> le vecteur des poids
+<p>On note <span class="math notranslate nohighlight">\(\mathbf w\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf x\)</span>) <span class="math notranslate nohighlight">\(\in\mathbb R^{D+1}\)</span> le vecteur des poids
 (resp. des entrées), augmenté de <span class="math notranslate nohighlight">\(w_0\)</span> (resp. <span class="math notranslate nohighlight">\(x_0\)</span>=1). Comme suggéré
 par la définition, on peut décomposer le calcul de la sortie <span class="math notranslate nohighlight">\(y\)</span> en un
 premier calcul de la quantité <span class="math notranslate nohighlight">\(\mathbf w^T\mathbf x=\displaystyle\sum_{i=0}^Dw_ix_i\)</span>
@@ -538,7 +532,7 @@ sortie est en {0,1}, et <span class="math notranslate nohighlight">\(g(x) = 2f(x
 {-1,1}.</p>
 </section>
 <section id="utilisation-discrimination-lineaire">
-<h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Link to this heading">#</a></h3>
+<h3>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien vers cette rubrique">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span>{0,1} . On
 note</p>
 <div class="math notranslate nohighlight">
@@ -560,7 +554,7 @@ Toute fonction de <span class="math notranslate nohighlight">\(\mathbb R^D\)</sp
 un tel perceptron.</p>
 </section>
 <section id="algorithme-d-apprentissage-par-correction-d-erreur">
-<h3>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Link to this heading">#</a></h3>
+<h3>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Lien vers cette rubrique">#</a></h3>
 <p>Étant donné un échantillon d’apprentissage <span class="math notranslate nohighlight">\({\cal E}_a\)</span> de
 <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span> {0,1} (respectivement <span class="math notranslate nohighlight">\(\{0,1\}^n\times\)</span> {0,1}),
 c’est-à-dire un ensemble d’exemples dont les descriptions sont <span class="math notranslate nohighlight">\(D\)</span>
@@ -861,7 +855,7 @@ une même description peut représenter des éléments de classes
 différentes, ne peuvent pas être traités à l’aide d’un perceptron.</p>
 </section>
 <section id="algorithme-d-apprentissage-par-descente-de-gradient">
-<h3>Algorithme d’apprentissage par descente de gradient<a class="headerlink" href="#algorithme-d-apprentissage-par-descente-de-gradient" title="Link to this heading">#</a></h3>
+<h3>Algorithme d’apprentissage par descente de gradient<a class="headerlink" href="#algorithme-d-apprentissage-par-descente-de-gradient" title="Lien vers cette rubrique">#</a></h3>
 <p>Plutôt que d’obtenir un perceptron qui classifie correctement tous les
 exemples, il s’agit maintenant de calculer une erreur et d’essayer de
 minimiser cette erreur. Pour introduire cette notion d’erreur, on
@@ -977,7 +971,7 @@ pour cet algorithme de faire diminuer la valeur de <span class="math notranslate
 fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 </section>
 <section id="implementation">
-<h3>Implémentation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
+<h3>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h3>
 <p>On illustre le pouvoir de séparation linéaire d’un perceptron sur trois jeux de données :</p>
 <ul class="simple">
 <li><p>un jeu de données linéairement séparable</p></li>
@@ -1114,12 +1108,12 @@ fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/911b2e4d3762c7aecac1f2673880d9bc8a6737aad97e802b61d5a56b939891d0.png" src="_images/911b2e4d3762c7aecac1f2673880d9bc8a6737aad97e802b61d5a56b939891d0.png" />
+<img alt="_images/d417a62ba80d0a0248cc907eda1b61a043e140daf4447ddf865a0b7a4bba26ed.png" src="_images/d417a62ba80d0a0248cc907eda1b61a043e140daf4447ddf865a0b7a4bba26ed.png" />
 </div>
 </div>
 </section>
 <section id="pour-en-finir-avec-le-perceptron">
-<h3>Pour en finir avec le perceptron<a class="headerlink" href="#pour-en-finir-avec-le-perceptron" title="Link to this heading">#</a></h3>
+<h3>Pour en finir avec le perceptron<a class="headerlink" href="#pour-en-finir-avec-le-perceptron" title="Lien vers cette rubrique">#</a></h3>
 <p>L’apprentissage par correction ou par la méthode du gradient ne sont
 rien d’autre que des techniques de séparation linéaire qu’il faudrait
 comparer aux techniques utilisées habituellement en statistiques

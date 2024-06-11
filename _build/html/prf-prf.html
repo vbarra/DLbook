@@ -42,7 +42,7 @@
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -51,21 +51,13 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=d99ca74e"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'prf-prf';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
@@ -189,8 +181,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AE.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
 </ul>
 
     </div>
@@ -297,6 +292,7 @@ document.write(`
    <h1>Proof Index</h1>
 
    <div class="modindex-jumpbox">
+   <a href="#cap-AEB"><strong>AEB</strong></a> | 
    <a href="#cap-adaline"><strong>adaline</strong></a> | 
    <a href="#cap-backprop"><strong>backprop</strong></a> | 
    <a href="#cap-correction"><strong>correction</strong></a> | 
@@ -304,13 +300,21 @@ document.write(`
    <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
    <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
    <a href="#cap-descente"><strong>descente</strong></a> | 
+   <a href="#cap-example-0"><strong>example-0</strong></a> | 
    <a href="#cap-example-4"><strong>example-4</strong></a> | 
    <a href="#cap-norm"><strong>norm</strong></a> | 
-   <a href="#cap-norm2"><strong>norm2</strong></a> | 
-   <a href="#cap-vaebruit"><strong>vaebruit</strong></a>
+   <a href="#cap-norm2"><strong>norm2</strong></a>
    </div>
 
    <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-AEB"><td></td><td>
+       <strong>AEB</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ae.html#AEB"><code class="xref">AEB</code></a> <em>(ae)</em></td><td>
+       <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-adaline"><td></td><td>
        <strong>adaline</strong></td><td></td></tr>
@@ -368,6 +372,14 @@ document.write(`
        <a href="NN.html#descente"><code class="xref">descente</code></a> <em>(NN)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-0"><td></td><td>
+       <strong>example-0</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="gnn.html#example-0"><code class="xref">example-0</code></a> <em>(gnn)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-4"><td></td><td>
        <strong>example-4</strong></td><td></td></tr>
      <tr>
@@ -390,14 +402,6 @@ document.write(`
        <td></td>
        <td>
        <a href="cnn.html#norm2"><code class="xref">norm2</code></a> <em>(cnn)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-vaebruit"><td></td><td>
-       <strong>vaebruit</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="AE.html#vaebruit"><code class="xref">vaebruit</code></a> <em>(AE)</em></td><td>
        <em>algorithm</em></td></tr>
    </table>
 
