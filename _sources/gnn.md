@@ -465,13 +465,13 @@ $$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \math
 
 ```{prf:example}
 
-< img src=./images/graph.png>
+![](./images/graph.png)
 
 Chaque noeud $i\in [\![1,5]\!]$ est décrit par $\mathbf v_i\in\mathbb{R}^3$, $d=3$
 
 $\mathbf A+\mathbf I = \begin{pmatrix}1&1&0&0&0\\ 1&1&1&0&0\\ 0&1&1&1&0\\ 0&0&1&1&1\\ 0&0&0&1&1\end{pmatrix}$
 
-$\mathbf D: matrice $N\times N$ des degrés de  $\mathbf A+\mathbf I$, $\mathbf D = \begin{pmatrix}2&0&0&0&0\\ 0& 3&0&0&0\\ 0&0&3&0&0\\ 0&0&0&3&0\\ 0&0&0&0&2 \end{pmatrix}$
+$\mathbf D$: matrice $N\times N$ des degrés de  $\mathbf A+\mathbf I$, $\mathbf D = \begin{pmatrix}2&0&0&0&0\\ 0& 3&0&0&0\\ 0&0&3&0&0\\ 0&0&0&3&0\\ 0&0&0&0&2 \end{pmatrix}$
 
 $\mathbf H_0=\begin{pmatrix} \mathbf v_1&\mathbf v_2&\mathbf v_3&\mathbf v_4&\mathbf v_5\end{pmatrix}$
 
