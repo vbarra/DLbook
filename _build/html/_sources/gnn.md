@@ -683,7 +683,7 @@ pertes = []
 precisions = []
 res = []
 
-nb_epochs = 300
+nb_epochs = 150
 
 for epoch in range(nb_epochs):
     optimizer.zero_grad()
