@@ -728,13 +728,12 @@ def animate(i):
     plt.subplot(122)
     plt.axis('off')
     nx.draw_networkx(G,pos=nx.kamada_kawai_layout(G, ),with_labels=True,node_size=200,
-                    node_color=res[i],cmap="hsv",vmin=-2,vmax=3,width=0.8,edge_color="black",font_size=14
-                    )
+                    node_color=res[i],cmap="hsv",vmin=-2,vmax=3,width=0.8,edge_color="black",font_size=14)
     plt.title(f'Epoch {i} - Précision: {precisions[i]*100:.2f}%', pad=20)
 
 
 fig,axs = plt.subplots(1,2,figsize=(7,5))
-anim = animation.FuncAnimation(fig, animate, np.arange(0, 200, 10), interval=500, repeat=True)
+anim = animation.FuncAnimation(fig, animate, np.arange(0, nb_epochs, 5), interval=500, repeat=True)
 html = HTML(anim.to_html5_video())
 ```
 
