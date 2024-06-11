@@ -169,6 +169,7 @@ L'indexation des sommets dans le graphe étant arbitraire, il est
 indispensable que tout modèle respecte cette propriété. Chaque couche
 doit donc être équivariante[^1] par rapport aux permutations des indices
 des sommets, soit pour toute permutation $\mathbf P$ et tout $k$:
+
 $$\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \mathbf P^T\mathbf A\mathbf P)$$
 
 Pour les tâches de classification des sommets et de prédiction des arcs
@@ -250,6 +251,10 @@ argument. On remarque que la couche $k+1$ est bien équivariante à la
 permutation de la numérotation des sommets, utilise la structure du
 graphe ($\mathbf A$) pour produire un biais inductif et partage les
 paramètres sur tout le graphe.
+
+En pratique, on normalise la matrice d'adjacence (moyenne sur les noeuds voisins) en utilisant la matrice des degrés $D$ : 
+
+$$\mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf D^{-\frac12}AD^{-\frac12}+\mathbf I)\right )$$
 
 ### Application en classification 
 
