@@ -479,7 +479,9 @@ $\mathbf L_0$: matrice $2\times d$
 
 $\boldsymbol\beta_0 \in\mathbb R^2$, $\mathbf 1\in\mathbb R^N$
 
-$\mathbf H_1= \left (\boldsymbol\beta_0 \mathbf 1^T + \mathbf L_0\mathbf H_0(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I)\right )$: matrice $2\times N$  : représentation des noeuds à l'itération 1.
+$\mathbf H_1= \left (\boldsymbol\beta_0 \mathbf 1^T + \mathbf L_0\mathbf H_0(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I)\right )$ matrice $2\times N$  : représentation des noeuds à l'itération 1, avec
+
+$$\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I = \begin{pmatrix} \frac12 & \frac{1}{\sqrt{6}}& 0& 0 &0\\ \frac{1}{\sqrt{6}}&\frac13&\frac13&0&0\\0&\frac13&\frac13&\frac13&0\\0&0&\frac13&\frac13&\frac{1}{\sqrt{6}}\\0&0&0&\frac{1}{\sqrt{6}}&\frac12\end{pmatrix}$$
 ```
 
 
