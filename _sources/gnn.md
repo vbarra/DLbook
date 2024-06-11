@@ -337,8 +337,7 @@ On s'intéresse ici à un problème de classification binaire des sommet
 dans un cadre transductif. Le graphe considéré comporte des millions de
 sommets, certains ayant des étiquettes binaires $y_i$. L'objectif est
 alors d'étiqueter les sommets non étiquetés restants. Le réseau est le
-même que dans l'exemple [1.2.3](#S:excl){reference-type="ref"
-reference="S:excl"} avec une couche finale différente qui produit un
+même que pour la classification binaire avec une couche finale différente qui produit un
 vecteur de sortie de taille $1\times N$ :
 
 $$f(\mathbf X,\mathbf A,\boldsymbol\phi) =  \sigma(\boldsymbol \beta_K\mathbf 1^T+\mathbf w_K\mathbf H_K)$$
@@ -673,7 +672,7 @@ model = GCN()
 et on apprend ce modèle
 
 ```{code-cell} ipython3
-# Foncion de perte en classification
+# Fonction de perte en classification
 criterion = nn.CrossEntropyLoss() 
 optimizer = torch.optim.Adam(model.parameters(), lr=0.02)
 
@@ -684,15 +683,13 @@ pertes = []
 precisions = []
 res = []
 
-# Training loop
-for epoch in range(201):
-    # Clear gradients
+nb_epohs = 300
+
+for epoch in range(nb_epochs):
     optimizer.zero_grad()
 
-    # Forward pass
     _, z = model(data.x, data.edge_index)
 
-    # Calculate loss function
     perte = criterion(z, data.y)
 
     p = precision(z.argmax(dim=1), data.y)
