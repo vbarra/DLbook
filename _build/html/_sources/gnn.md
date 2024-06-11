@@ -686,7 +686,6 @@ res = []
 nb_epohs = 300
 
 for epoch in range(nb_epochs):
-    # Clear gradients
     optimizer.zero_grad()
 
     _, z = model(data.x, data.edge_index)
