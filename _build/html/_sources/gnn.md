@@ -708,7 +708,7 @@ def animate(i):
     plt.title(f'Epoch {i} | Précision: {precisions[i]*100:.2f}%', pad=20)
 
 
-fig,axs = plt.subplots(1,2,figsize=(10,5))
+fig,axs = plt.subplots(1,2,figsize=(7,5))
 anim = animation.FuncAnimation(fig, animate, np.arange(0, 200, 10), interval=500, repeat=True)
 html = HTML(anim.to_html5_video())
 ```
