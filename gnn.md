@@ -464,27 +464,26 @@ $$\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \math
 
 
 ```{prf:example}
-\begin{tikzpicture}[main/.style = {draw, circle}] 
-\node[main] (1) {$1$}; 
-\node[main] (2) [right of=1] {$2$};
-\node[main] (3) [right of=2] {$3$}; 
-\node[main] (4) [right of=3] {$4$};
-\node[main] (5) [right of=4] {$5$};
-\draw (1) -- (2); 
-\draw (2) -- (3);
-\draw (3) -- (4);
-\draw (4) -- (5);
-\end{tikzpicture} 
-\end{center}
-Each node $i\in [\![1,5]\!]$ is described by $\mathbf v_i\in\mathbb{R}^3$, $d=3$
+
+```{figure} ./images/graph.png
+:name:graph
+Exemple de graphe
+```
+
+Chaque noeud $i\in [\![1,5]\!]$ est décrit par $\mathbf v_i\in\mathbb{R}^3$, $d=3$
 \vskip 6pt
 
-$\mathbf A+\mathbf I = \begin{pmatrix}1&1&0&0&0\\ 1&1&1&0&0\\ 0&1&1&1&0\\ 0&0&1&1&1\\ 0&0&0&1&1\end{pmatrix}$\\ 
-$\mathbf D: N\times N$ degree matrix of $\mathbf A+\mathbf I$, $\mathbf D = \begin{pmatrix}2&0&0&0&0\\ 0& 3&0&0&0\\ 0&0&3&0&0\\ 0&0&0&3&0\\ 0&0&0&0&2 \end{pmatrix}$\\ 
-$\mathbf H_0=\begin{pmatrix} \mathbf v_1&\mathbf v_2&\mathbf v_3&\mathbf v_4&\mathbf v_5\end{pmatrix}$\\ 
-$\mathbf L_0: 2\times d$ matrix\\
-$\bm\beta_0 \in\mathbb R^2$, $\mathbf 1\in\mathbb R^N$\\ 
-$\mathbf H_1= \left (\bm\beta_0 \mathbf 1^T + \mathbf L_0\mathbf H_0(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I)\right ): 2\times N$ matrix : nodes representation at iteration 1. 
+$\mathbf A+\mathbf I = \begin{pmatrix}1&1&0&0&0\\ 1&1&1&0&0\\ 0&1&1&1&0\\ 0&0&1&1&1\\ 0&0&0&1&1\end{pmatrix}$
+
+$\mathbf D: N\times N$ matrice des degrés de  $\mathbf A+\mathbf I$, $\mathbf D = \begin{pmatrix}2&0&0&0&0\\ 0& 3&0&0&0\\ 0&0&3&0&0\\ 0&0&0&3&0\\ 0&0&0&0&2 \end{pmatrix}$
+
+$\mathbf H_0=\begin{pmatrix} \mathbf v_1&\mathbf v_2&\mathbf v_3&\mathbf v_4&\mathbf v_5\end{pmatrix}$
+
+$\mathbf L_0: matrice 2\times d$ 
+
+$\boldsymbol\beta_0 \in\mathbb R^2$, $\mathbf 1\in\mathbb R^N$
+
+$\mathbf H_1= \left (\boldsymbol\beta_0 \mathbf 1^T + \mathbf L_0\mathbf H_0(\mathbf D^{-\frac12}\mathbf A\mathbf D^{-\frac12} + I)\right ): matrice 2\times N$  : représentation des noeuds à l'itération 1
 ```
 
 
