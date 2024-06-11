@@ -174,7 +174,7 @@ $$\mathbf{H_{k+1}}\mathbf P = F_{\boldsymbol \phi_{k}}(\mathbf H_k\mathbf P, \ma
 
 ```{prf:remark}
 :class: dropdown
-Une fonction $f$ est équivariante pour une transformation $t$ si pour tout $x, $f (t(x)) = t( f (x))$
+Une fonction $f$ est équivariante pour une transformation $t$ si pour tout $x, f(t(x)) = t(f(x))$
 ```
 
 
