@@ -54,13 +54,13 @@ $$\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\bolds
 
 En pratique, ce problème d'optimisation minimax est approché par une descente de gradient par batch alternée : 
 
-1. $\boldsymbol\phi = \boldsymbol\phi+\eta\grad_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)$ ({numref}`gan2`)
+1. $\boldsymbol\phi = \boldsymbol\phi+\eta\nabla_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)$ ({numref}`gan2`)
 ```{figure} ./images/overview2.png
 :name: gan2
 Optimisation des paramètres de $D$, à $G$ fixé
 ```
 
-2. $\boldsymbol\theta = \boldsymbol\theta-\eta\grad_{\boldsymbol\theta}f(\boldsymbol\theta,\boldsymbol\phi)$ ({numref}`gan3`)
+2. $\boldsymbol\theta = \boldsymbol\theta-\eta\nabla_{\boldsymbol\theta}f(\boldsymbol\theta,\boldsymbol\phi)$ ({numref}`gan3`)
 
 ```{figure} ./images/overview3.png
 :name: gan3

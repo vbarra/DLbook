@@ -322,7 +322,7 @@ document.write(`
 \[\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)\]</div>
 <p>En pratique, ce problème d’optimisation minimax est approché par une descente de gradient par batch alternée :</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol\phi = \boldsymbol\phi+\eta\grad_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)\)</span> (<a class="reference internal" href="#gan2"><span class="std std-numref">Fig. 60</span></a>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol\phi = \boldsymbol\phi+\eta\nabla_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)\)</span> (<a class="reference internal" href="#gan2"><span class="std std-numref">Fig. 60</span></a>)</p></li>
 </ol>
 <figure class="align-default" id="gan2">
 <img alt="_images/overview2.png" src="_images/overview2.png" />
@@ -331,7 +331,7 @@ document.write(`
 </figcaption>
 </figure>
 <ol class="arabic simple" start="2">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol\theta = \boldsymbol\theta-\eta\grad_{\boldsymbol\theta}f(\boldsymbol\theta,\boldsymbol\phi)\)</span> (<a class="reference internal" href="#gan3"><span class="std std-numref">Fig. 61</span></a>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol\theta = \boldsymbol\theta-\eta\nabla_{\boldsymbol\theta}f(\boldsymbol\theta,\boldsymbol\phi)\)</span> (<a class="reference internal" href="#gan3"><span class="std std-numref">Fig. 61</span></a>)</p></li>
 </ol>
 <figure class="align-default" id="gan3">
 <img alt="_images/overview3.png" src="_images/overview3.png" />
