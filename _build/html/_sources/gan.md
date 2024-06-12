@@ -50,4 +50,4 @@ Alors :
 
 Tout ceci implique que l'on recherche $G=G(.,\boldsymbol\theta^*)$ tel que 
 
-$$,\boldsymbol\theta^* = Arg min_{\boldsymbol\theta^}max_{\boldsymbol\phi^}f(\boldsymbol\theta,\boldsymbol\phi)$$
+$$\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi^}f(\boldsymbol\theta,\boldsymbol\phi)$$
