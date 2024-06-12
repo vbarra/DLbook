@@ -44,10 +44,10 @@ Soit
 $$f(\boldsymbol\theta,\boldsymbol\phi) = \mathbb{E}_{x\sim p(x)}[log D(x_i,\boldsymbol \phi)] + \mathbb{E}_{z\sim p(z)}log (1-D(G(z_i,\boldsymbol\theta),\boldsymbol\phi))$$
 
 Alors : 
-- pour $G$ fixé $f(\boldsymbol\theta,\boldsymbol\phi)$ est élevée su $D$ discrimine les vrais exemples des faux
+- pour $G$ fixé $f(\boldsymbol\theta,\boldsymbol\phi)$ est élevée si $D$ discrimine les vrais exemples des faux
 - si $\hat D$ est le meilleur classifieur étnt donné $G$, et si $f(\boldsymbol\theta,\boldsymbol\phi)$ est élevée, alors $G$ n'arrive pas à reproduire la distribution des données $p(x)$
 - Inversement, $G$ est un bon modèle génératif, capable de reproduire $p(x)$, si $f(\boldsymbol\theta,\boldsymbol\phi)$ est faible lorsque $\hat D$ est le meilleur classifieur.
 
 Tout ceci implique que l'on recherche $G=G(.,\boldsymbol\theta^*)$ tel que 
 
-$$\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi^}f(\boldsymbol\theta,\boldsymbol\phi)$$
+$$\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)$$
