@@ -339,6 +339,13 @@ document.write(`
 <p><span class="caption-number">Fig. 61 </span><span class="caption-text">Optimisation des paramètres de <span class="math notranslate nohighlight">\(G\)</span>, à <span class="math notranslate nohighlight">\(D\)</span> fixé</span><a class="headerlink" href="#gan3" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
+<p>Goodfellow propose dans <span id="id1">[<a class="reference internal" href="transferLearning.html#id35" title="Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Z. Ghahramani, M. Welling, C. Cortes, N. D. Lawrence, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 27, pages 2672–2680. Curran Associates, Inc., 2014. URL: http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf.">24</a>]</span> une illustration du processus d’apprentissage d’un GAN (<a class="reference internal" href="#gan4"><span class="std std-numref">Fig. 62</span></a>). Dans cette figure, on illustre de gauche à droite un modèle à l’état initial, l’évolution après la mise à jour de <span class="math notranslate nohighlight">\(D\)</span>, puis de <span class="math notranslate nohighlight">\(G\)</span>, et enfin l’état à convergence. La courbe en points noir est la distribution des données <span class="math notranslate nohighlight">\(p(x)\)</span>, la courbe verte la distribution <span class="math notranslate nohighlight">\(p(z)\)</span> de <span class="math notranslate nohighlight">\(G\)</span>, la courbe bleue pointillée la sortie de <span class="math notranslate nohighlight">\(D\)</span>. Les <span class="math notranslate nohighlight">\(z\in\mathcal Z\)</span> sont tirés uniformément (partie inférieure des graphiques)</p>
+<figure class="align-default" id="gan4">
+<img alt="_images/illustrationGan1D.png" src="_images/illustrationGan1D.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Processus d’apprentissage d’un GAN.</span><a class="headerlink" href="#gan4" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
 </section>
 
     <script type="text/x-thebe-config">
