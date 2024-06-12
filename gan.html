@@ -313,13 +313,13 @@ document.write(`
 \[f(\boldsymbol\theta,\boldsymbol\phi) = \mathbb{E}_{x\sim p(x)}[log D(x_i,\boldsymbol \phi)] + \mathbb{E}_{z\sim p(z)}log (1-D(G(z_i,\boldsymbol\theta),\boldsymbol\phi))\]</div>
 <p>Alors :</p>
 <ul class="simple">
-<li><p>pour <span class="math notranslate nohighlight">\(G\)</span> fixé <span class="math notranslate nohighlight">\(f(\boldsymbol\theta,\boldsymbol\phi)\)</span> est élevée su <span class="math notranslate nohighlight">\(D\)</span> discrimine les vrais exemples des faux</p></li>
+<li><p>pour <span class="math notranslate nohighlight">\(G\)</span> fixé <span class="math notranslate nohighlight">\(f(\boldsymbol\theta,\boldsymbol\phi)\)</span> est élevée si <span class="math notranslate nohighlight">\(D\)</span> discrimine les vrais exemples des faux</p></li>
 <li><p>si <span class="math notranslate nohighlight">\(\hat D\)</span> est le meilleur classifieur étnt donné <span class="math notranslate nohighlight">\(G\)</span>, et si <span class="math notranslate nohighlight">\(f(\boldsymbol\theta,\boldsymbol\phi)\)</span> est élevée, alors <span class="math notranslate nohighlight">\(G\)</span> n’arrive pas à reproduire la distribution des données <span class="math notranslate nohighlight">\(p(x)\)</span></p></li>
 <li><p>Inversement, <span class="math notranslate nohighlight">\(G\)</span> est un bon modèle génératif, capable de reproduire <span class="math notranslate nohighlight">\(p(x)\)</span>, si <span class="math notranslate nohighlight">\(f(\boldsymbol\theta,\boldsymbol\phi)\)</span> est faible lorsque <span class="math notranslate nohighlight">\(\hat D\)</span> est le meilleur classifieur.</p></li>
 </ul>
 <p>Tout ceci implique que l’on recherche <span class="math notranslate nohighlight">\(G=G(.,\boldsymbol\theta^*)\)</span> tel que</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi^}f(\boldsymbol\theta,\boldsymbol\phi)\]</div>
+\[\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)\]</div>
 </section>
 
     <script type="text/x-thebe-config">
