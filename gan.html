@@ -6,7 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Recherche - Apprentissage profond</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Réseaux antagonistes générateurs &#8212; Apprentissage profond</title>
   
   
   
@@ -57,12 +59,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'search';</script>
-  <script src="_static/searchtools.js"></script>
-  <script src="_static/language_data.js"></script>
-  <script src="searchindex.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gan';</script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Recherche" href="#" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Graph Neural Networks" href="gnn.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="fr"/>
   </head>
@@ -98,7 +100,7 @@
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="#"
+      action="search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -123,8 +125,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -172,7 +172,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
@@ -181,7 +181,7 @@
 <li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Réseaux antagonistes générateurs</a></li>
 </ul>
 
     </div>
@@ -268,42 +268,58 @@ document.write(`
 </div>
               
               
-  <div class="bd-search-container">
-    <h1>Recherche</h1>
-    <noscript>
-      <div class="admonition error">
-        <p class="admonition-title">Erreur</p>
-        <p>Veuillez activer le JavaScript pour que la recherche fonctionne.</p>
-      </div>
-    </noscript>
-    
-<form class="bd-search d-flex align-items-center"
-      action="#"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search..."
-         aria-label="Search..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-    <div id="search-results"></div>
-  </div>
-  <script>
-    // Activate the search field on page load
-    let searchInput = document.querySelector("form.bd-search input");
-    if (searchInput) {
-        searchInput.focus();
-        searchInput.select();
-        console.log("[PST]: Set focus on search field.");
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Réseaux antagonistes générateurs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reseaux-antagonistes-generateurs">
+<h1>Réseaux antagonistes générateurs<a class="headerlink" href="#reseaux-antagonistes-generateurs" title="Lien vers cette rubrique">#</a></h1>
+<p>Dans les réseaux antagonistes génératifs (GAN: Generative Adversarial Networks), la tâche d’apprentissage d’un modèle génératif est exprimée comme un jeu à somme nulle à deux joueurs entre deux réseaux, le générateur <span class="math notranslate nohighlight">\(G\)</span> et le discriminateur <span class="math notranslate nohighlight">\(D\)</span> (<a class="reference internal" href="#gan1"><span class="std std-numref">Fig. 59</span></a>).</p>
+<figure class="align-default" id="gan1">
+<img alt="_images/overview.png" src="_images/overview.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Architecture globale d’un GAN</span><a class="headerlink" href="#gan1" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Le générateur <span class="math notranslate nohighlight">\(G=G(.,\boldsymbol\theta): \mathcal Z\rightarrow \mathcal X\)</span> met en correspondance un espace latent équipé d’une distribution <span class="math notranslate nohighlight">\(p(z)\)</span> avec l’espace des données, induisant ainsi une distribution</p>
+<div class="math notranslate nohighlight">
+\[x\sim q(x,\boldsymbol\theta) \Leftrightarrow z\sim p(z), x=G(z,\boldsymbol\theta)\]</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
     }
-  </script>
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
 
               
               
@@ -312,6 +328,15 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="gnn.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Graph Neural Networks</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
