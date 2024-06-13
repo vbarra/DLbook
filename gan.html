@@ -259,7 +259,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -275,6 +277,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principe">Principe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse">Analyse</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -286,6 +297,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reseaux-antagonistes-generateurs">
 <h1>Réseaux antagonistes générateurs<a class="headerlink" href="#reseaux-antagonistes-generateurs" title="Lien vers cette rubrique">#</a></h1>
+<section id="principe">
+<h2>Principe<a class="headerlink" href="#principe" title="Lien vers cette rubrique">#</a></h2>
 <p>Dans les réseaux antagonistes génératifs (GAN: Generative Adversarial Networks), la tâche d’apprentissage d’un modèle génératif est exprimée comme un jeu à somme nulle à deux joueurs entre deux réseaux, le générateur <span class="math notranslate nohighlight">\(G\)</span> et le discriminateur <span class="math notranslate nohighlight">\(D\)</span> (<a class="reference internal" href="#gan1"><span class="std std-numref">Fig. 59</span></a>).</p>
 <figure class="align-default" id="gan1">
 <img alt="_images/overview.png" src="_images/overview.png" />
@@ -347,6 +360,24 @@ document.write(`
 </figcaption>
 </figure>
 </section>
+<section id="analyse">
+<h2>Analyse<a class="headerlink" href="#analyse" title="Lien vers cette rubrique">#</a></h2>
+<p>A <span class="math notranslate nohighlight">\(G\)</span> fixé (donc <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> fixé), le classifieur <span class="math notranslate nohighlight">\(D\)</span> de paramètres optimaux <span class="math notranslate nohighlight">\(\boldsymbol\phi_{\boldsymbol\theta}^*\)</span>  est optimal si et seulement si</p>
+<div class="math notranslate nohighlight">
+\[\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta}\]</div>
+<p>Ainsi :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; \min _\theta \max _\phi V(\phi, \theta)=\min _\theta V\left(\phi_\theta^*, \theta\right) \\
+&amp; =\min _\theta \mathbb{E}_{\mathbf{x} \sim p(\mathbf{x})}\left[\log \frac{p(\mathbf{x})}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right]+\mathbb{E}_{\mathbf{x} \sim q(\mathbf{x} ; \theta)}\left[\log \frac{q(\mathbf{x} ; \theta)}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right] \\
+&amp; =\min _\theta \mathrm{KL}\left(p(\mathbf{x}) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right) \\
+&amp; \quad+\mathrm{KL}\left(q(\mathbf{x} ; \theta) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right)-\log 4 \\
+&amp; =\min _\theta 2 \mathrm{JSD}(p(\mathbf{x}) \| q(\mathbf{x} ; \theta))-\log 4
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -394,7 +425,21 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principe">Principe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse">Analyse</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
