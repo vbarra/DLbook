@@ -111,3 +111,9 @@ $$\boldsymbol\theta^* = Arg\; min_{\boldsymbol\theta}\;max_{\boldsymbol\phi}f(\b
 
 Puisque $\mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$ est minimum si et seulement si $\forall x, p(x) = q(x ; \boldsymbol\theta)$, alors la solution du problème minimax correspond à un modèle génératif qui reproduit la distribution des données d'entrée.
 
+## Problèmes
+L'entraînement d'un tel GAN, formulé de manière standard, pose souvent des comportements pathologiques :
+- *Oscillations sans convergence* : contrairement à la minimisation de perte standard, la descente de gradient stochastique alternée n'a aucune garantie de convergence.
+- *Gradients disparus (vanishing gradients)* : lorsque le classificateur $D$ est trop bon, la fonction $f$ sature et les gradients deviennent nuls, empêchant $G$ de se mettre à jour.
+- *Effondrement des modes (mode collapsing)* : le générateur $G$ modélise très bien une petite sous-population, en se concentrant sur quelques modes de la distribution des données : lorsque $G$ et entraîné à $D$ fixé, il produit un mode $x^*$ qui trompe au mieux $D$. Lorsque $D$ est entraîné, la meilleure manière pour lui de détecter des données générées par $G$ est de se concentrer sur ce mode $x^*$. Ainsi $G$ est encouragé à ne produire que $x^*$.
+
