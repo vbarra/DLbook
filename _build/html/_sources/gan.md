@@ -90,7 +90,7 @@ $$
 & =\min _\boldsymbol\theta \mathrm{KL}\left(p(x) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right) \\
 & \quad+\mathrm{KL}\left(q(x ; \boldsymbol\theta) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right)-\log 4 \\
 & =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))-\log 4
-\end{aligned}
+\end{aligned} 
 $$
 
 ```{prf:remark}
@@ -104,3 +104,10 @@ La divergence de Jensen-Shannon est une autre méthode de mesure de la similarit
 $$JSD(p,q)=\frac12 (KL(p\|m) + KL(q\|m))\quad\textrm{avec }m = \frac12(p+q)$$
 
  ```
+
+Ainsi 
+
+$$\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi) = Arg min_{\boldsymbol\theta} \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$$
+
+Puisque $\mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$ est minimum si et seulement si $\forall x, p(x) = q(x ; \boldsymbol\theta)$, alors la solution du problème minimax correspond à un modèle génératif qui reproduit la distribution des données d'entrée.
+
