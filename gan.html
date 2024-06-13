@@ -374,7 +374,7 @@ document.write(`
 &amp; =\min _\boldsymbol\theta \mathrm{KL}\left(p(x) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right) \\
 &amp; \quad+\mathrm{KL}\left(q(x ; \boldsymbol\theta) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right)-\log 4 \\
 &amp; =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))-\log 4
-\end{aligned}
+\end{aligned} 
 \end{split}\]</div>
 <div class="proof remark dropdown admonition" id="remark-0">
 <p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
@@ -386,7 +386,11 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[JSD(p,q)=\frac12 (KL(p\|m) + KL(q\|m))\quad\textrm{avec }m = \frac12(p+q)\]</div>
 </section>
-</div></section>
+</div><p>Ainsi</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi) = Arg min_{\boldsymbol\theta} \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))\]</div>
+<p>Puisque <span class="math notranslate nohighlight">\(\mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))\)</span> est minimum si et seulement si <span class="math notranslate nohighlight">\(\forall x, p(x) = q(x ; \boldsymbol\theta)\)</span>, alors la solution du problème minimax correspond à un modèle génératif qui reproduit la distribution des données d’entrée.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
