@@ -120,8 +120,33 @@ L'entraînement d'un tel GAN, formulé de manière standard, pose des comporteme
 
 ```{figure} ./images/collapse.png
 :name: collapse
-Mode collapsing (source :{cite:p}`Metz2016` )
+Mode collapsing (source :{cite:p}`Metz2016`)
 ```
 
 Des solutions existent pour chacun de ces problèmes, mais ne sont pas abordées ici. On trouvera [ici](https://github.com/hindupuravinash/the-gan-zoo) des modèles de GAN répondant à ces problématiques, ainsi que de nombreux autres.
+
+## Quelques exemples
+
+### Apprentissage d'une fonction de $\mathbb{R}\rightarrow \mathbb{R}$
+Le points bleus sont les données générées prr $G$, la courbe rouge est la courbe réelle. Sans jamais avoir vu cette courbe, $G$ apprend à positionner les points qu'il génère près de la courbe.
+```{code-cell} ipython3
+from IPython.display import Video
+Video("videos/GAN1D.mp4",embed =True,width=500)
+```
+
+### Apprentissage d'une fonction de $\mathbb{R}\rightarrow \mathbb{R}$
+L'illustration est la même que précédemment, mais pour l'apprentissage de'une surface de $\mathbb{R}^3$
+```{code-cell} ipython3
+from IPython.display import Video
+Video("videos/GAN2D.mp4",embed =True,width=500)
+```
+
+### Génération de chiffres manuscrits
+Le générateur $G$ apprend à générer le chiffre 9 lorsque $D$ est entraîné à l'aide des données de [MNIST](http://yann.lecun.com/exdb/mnist/).
+```{code-cell} ipython3
+from IPython.display import Video
+Video("videos/GANMNIST9.mp4",embed =True,width=500)
+```
+
+
 
