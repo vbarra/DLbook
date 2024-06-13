@@ -365,7 +365,7 @@ document.write(`
 <p>A <span class="math notranslate nohighlight">\(G\)</span> fixé (donc <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> fixé), le classifieur <span class="math notranslate nohighlight">\(D\)</span> de paramètres optimaux <span class="math notranslate nohighlight">\(\boldsymbol\phi_{\boldsymbol\theta}^*\)</span>  est optimal si et seulement si</p>
 <div class="math notranslate nohighlight">
 \[\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta)}\]</div>
-<p>Ainsi :</p>
+<p>En notant <span class="math notranslate nohighlight">\(KL(p||q)\)</span> la divergence de Kullback-Leibler entre <span class="math notranslate nohighlight">\(p\)</span> et <span class="math notranslate nohighlight">\(q\)</span> et <span class="math notranslate nohighlight">\(JSD\)</span> la divergence de Jensen-Shannon, on a ainsi :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -376,7 +376,14 @@ document.write(`
 &amp; =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))-\log 4
 \end{aligned}
 \end{split}\]</div>
+<div class="proof remark dropdown admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
+<section class="remark-content" id="proof-content">
+<p>La divergence de Kullback-Leiblerest une mesure de dissimilarité entre deux distributions de probabilités. Pour deux distributions <span class="math notranslate nohighlight">\(p\)</span> et <span class="math notranslate nohighlight">\(q\)</span>, elle est définie par</p>
+<div class="math notranslate nohighlight">
+\[KL(p\|q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}\]</div>
 </section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
