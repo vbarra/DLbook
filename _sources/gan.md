@@ -95,8 +95,12 @@ $$
 
 ```{prf:remark}
 :class: dropdown
- La divergence de Kullback-Leiblerest une mesure de dissimilarité entre deux distributions de probabilités. Pour deux distributions $p$ et $q$, elle est définie par 
+ La divergence de Kullback-Leibler est une mesure de dissimilarité entre deux distributions de probabilités. Pour deux distributions $p$ et $q$, elle est définie par 
  
  $$KL(p\|q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}$$
+
+La divergence de Jensen-Shannon est une autre méthode de mesure de la similarité entre deux distributions de probabilité, définie par 
+
+$$JSD(p,q)=\frac12 (KL(p\|m) + KL(q\|m))\quad\textrm{avec }m = \frac12(p+q)$$
 
  ```

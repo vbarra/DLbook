@@ -379,9 +379,12 @@ document.write(`
 <div class="proof remark dropdown admonition" id="remark-0">
 <p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
 <section class="remark-content" id="proof-content">
-<p>La divergence de Kullback-Leiblerest une mesure de dissimilarité entre deux distributions de probabilités. Pour deux distributions <span class="math notranslate nohighlight">\(p\)</span> et <span class="math notranslate nohighlight">\(q\)</span>, elle est définie par</p>
+<p>La divergence de Kullback-Leibler est une mesure de dissimilarité entre deux distributions de probabilités. Pour deux distributions <span class="math notranslate nohighlight">\(p\)</span> et <span class="math notranslate nohighlight">\(q\)</span>, elle est définie par</p>
 <div class="math notranslate nohighlight">
 \[KL(p\|q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}\]</div>
+<p>La divergence de Jensen-Shannon est une autre méthode de mesure de la similarité entre deux distributions de probabilité, définie par</p>
+<div class="math notranslate nohighlight">
+\[JSD(p,q)=\frac12 (KL(p\|m) + KL(q\|m))\quad\textrm{avec }m = \frac12(p+q)\]</div>
 </section>
 </div></section>
 </section>
