@@ -85,7 +85,7 @@ Ainsi :
 
 $$
 \begin{aligned}
-& \min _\boldsymbol\theta \max _\boldsymbol\phi f(\boldsymbol\theta,\boldsymbol\phi)=\min _\boldsymbol\theta f(\boldsymbol\theta,\boldsymbol\phi)_{\boldsymbol\theta^*}\right) \\
+& \min _\boldsymbol\theta \max _\boldsymbol\phi f(\boldsymbol\theta,\boldsymbol\phi)=\min _\boldsymbol\theta f(\boldsymbol\theta,\boldsymbol\phi)_{\boldsymbol\theta^*}) \\
 & =\min _\boldsymbol\theta \mathbb{E}_{x \sim p(x)}\left[\log \frac{p(x)}{q(x ; \boldsymbol\theta)+p(x)}\right]+\mathbb{E}_{x \sim q(x ; \theta)}\left[\log \frac{q(x ; \boldsymbol\theta)}{q(x ; \boldsymbol\theta)+p(x)}\right] \\
 & =\min _\boldsymbol\theta \mathrm{KL}\left(p(x) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right) \\
 & \quad+\mathrm{KL}\left(q(x ; \boldsymbol\theta) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right)-\log 4 \\
