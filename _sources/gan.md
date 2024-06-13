@@ -81,7 +81,7 @@ A $G$ fixé (donc $\boldsymbol\theta$ fixé), le classifieur $D$ de paramètres 
 
 $$\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta)}$$
 
-Ainsi : 
+En notant $KL(p||q)$ la divergence de Kullback-Leibler entre $p$ et $q$ et $JSD$ la divergence de Jensen-Shannon, on a ainsi : 
 
 $$
 \begin{aligned}
@@ -92,3 +92,11 @@ $$
 & =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))-\log 4
 \end{aligned}
 $$
+
+```{prf:remark}
+:class: dropdown
+ La divergence de Kullback-Leiblerest une mesure de dissimilarité entre deux distributions de probabilités. Pour deux distributions $p$ et $q$, elle est définie par 
+ 
+ $$KL(p\|q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}$$
+
+ ```
