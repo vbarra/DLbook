@@ -394,12 +394,19 @@ document.write(`
 </section>
 <section id="problemes">
 <h2>Problèmes<a class="headerlink" href="#problemes" title="Lien vers cette rubrique">#</a></h2>
-<p>L’entraînement d’un tel GAN, formulé de manière standard, pose souvent des comportements pathologiques :</p>
+<p>L’entraînement d’un tel GAN, formulé de manière standard, pose des comportements pathologiques :</p>
 <ul class="simple">
 <li><p><em>Oscillations sans convergence</em> : contrairement à la minimisation de perte standard, la descente de gradient stochastique alternée n’a aucune garantie de convergence.</p></li>
 <li><p><em>Gradients disparus (vanishing gradients)</em> : lorsque le classificateur <span class="math notranslate nohighlight">\(D\)</span> est trop bon, la fonction <span class="math notranslate nohighlight">\(f\)</span> sature et les gradients deviennent nuls, empêchant <span class="math notranslate nohighlight">\(G\)</span> de se mettre à jour.</p></li>
-<li><p><em>Effondrement des modes (mode collapsing)</em> : le générateur <span class="math notranslate nohighlight">\(G\)</span> modélise très bien une petite sous-population, en se concentrant sur quelques modes de la distribution des données : lorsque <span class="math notranslate nohighlight">\(G\)</span> et entraîné à <span class="math notranslate nohighlight">\(D\)</span> fixé, il produit un mode <span class="math notranslate nohighlight">\(x^*\)</span> qui trompe au mieux <span class="math notranslate nohighlight">\(D\)</span>. Lorsque <span class="math notranslate nohighlight">\(D\)</span> est entraîné, la meilleure manière pour lui de détecter des données générées par <span class="math notranslate nohighlight">\(G\)</span> est de se concentrer sur ce mode <span class="math notranslate nohighlight">\(x^*\)</span>. Ainsi <span class="math notranslate nohighlight">\(G\)</span> est encouragé à ne produire que <span class="math notranslate nohighlight">\(x^*\)</span>.</p></li>
+<li><p><em>Effondrement des modes (mode collapsing)</em> : le générateur <span class="math notranslate nohighlight">\(G\)</span> modélise très bien une petite sous-population, en se concentrant sur quelques modes de la distribution des données : lorsque <span class="math notranslate nohighlight">\(G\)</span> et entraîné à <span class="math notranslate nohighlight">\(D\)</span> fixé, il produit un mode <span class="math notranslate nohighlight">\(x^*\)</span> qui trompe au mieux <span class="math notranslate nohighlight">\(D\)</span>. Lorsque <span class="math notranslate nohighlight">\(D\)</span> est entraîné, la meilleure manière pour lui de détecter des données générées par <span class="math notranslate nohighlight">\(G\)</span> est de se concentrer sur ce mode <span class="math notranslate nohighlight">\(x^*\)</span>. Ainsi <span class="math notranslate nohighlight">\(G\)</span> est encouragé à ne produire que <span class="math notranslate nohighlight">\(x^*\)</span> (<a class="reference internal" href="#collapse"><span class="std std-numref">Fig. 63</span></a>)</p></li>
 </ul>
+<figure class="align-default" id="collapse">
+<img alt="_images/collapse.png" src="_images/collapse.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Mode collapsing (source :<span id="id2">[<a class="reference internal" href="transferLearning.html#id60" title="Luke Metz, Ben Poole, David Pfau, and Jascha Narain Sohl-Dickstein. Unrolled generative adversarial networks. ArXiv, 2016. URL: https://api.semanticscholar.org/CorpusID:6610705.">25</a>]</span> )</span><a class="headerlink" href="#collapse" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Des solutions existent pour chacun de ces problèmes, mais ne sont pas abordées ici. On trouvera <a class="reference external" href="https://github.com/hindupuravinash/the-gan-zoo">ici</a> des modèles de GAN répondant à ces problématiques, ainsi que de nombreux autres.</p>
 </section>
 </section>
 
