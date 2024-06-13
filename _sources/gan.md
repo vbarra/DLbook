@@ -51,7 +51,7 @@ Alors :
 
 Tout ceci implique que l'on recherche $G=G(.,\boldsymbol\theta^*)$ tel que 
 
-$$\boldsymbol\theta^* = Arg min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)$$
+$$\boldsymbol\theta^* = Arg\; min_{\boldsymbol\theta}\;max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi)$$
 
 En pratique, ce problème d'optimisation minimax est approché par une descente de gradient par batch alternée : 
 
@@ -107,7 +107,7 @@ $$JSD(p,q)=\frac12 (KL(p\|m) + KL(q\|m))\quad\textrm{avec }m = \frac12(p+q)$$
 
 Ainsi 
 
-$$\boldsymbol\theta^* = Arg\; min_{\boldsymbol\theta}max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi) = Arg min_{\boldsymbol\theta} \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$$
+$$\boldsymbol\theta^* = Arg\; min_{\boldsymbol\theta}\;max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi) = Arg\; min_{\boldsymbol\theta}\; \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$$
 
 Puisque $\mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$ est minimum si et seulement si $\forall x, p(x) = q(x ; \boldsymbol\theta)$, alors la solution du problème minimax correspond à un modèle génératif qui reproduit la distribution des données d'entrée.
 
