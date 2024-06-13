@@ -11,6 +11,7 @@ kernelspec:
 ---
 # Réseaux antagonistes générateurs
 
+## Principe
 Dans les réseaux antagonistes génératifs (GAN: Generative Adversarial Networks), la tâche d'apprentissage d'un modèle génératif est exprimée comme un jeu à somme nulle à deux joueurs entre deux réseaux, le générateur $G$ et le discriminateur $D$ ({numref}`gan1`).
 
 
@@ -75,3 +76,19 @@ Goodfellow propose dans {cite:p}`Goodfellow14` une illustration du processus d'a
 Processus d'apprentissage d'un GAN.
 ```
 
+## Analyse
+A $G$ fixé (donc $\boldsymbol\theta$ fixé), le classifieur $D$ de paramètres optimaux $\boldsymbol\phi_{\boldsymbol\theta}^*$  est optimal si et seulement si 
+
+$$\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta}$$
+
+Ainsi : 
+
+$$
+\begin{aligned}
+& \min _\theta \max _\phi V(\phi, \theta)=\min _\theta V\left(\phi_\theta^*, \theta\right) \\
+& =\min _\theta \mathbb{E}_{\mathbf{x} \sim p(\mathbf{x})}\left[\log \frac{p(\mathbf{x})}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right]+\mathbb{E}_{\mathbf{x} \sim q(\mathbf{x} ; \theta)}\left[\log \frac{q(\mathbf{x} ; \theta)}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right] \\
+& =\min _\theta \mathrm{KL}\left(p(\mathbf{x}) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right) \\
+& \quad+\mathrm{KL}\left(q(\mathbf{x} ; \theta) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right)-\log 4 \\
+& =\min _\theta 2 \mathrm{JSD}(p(\mathbf{x}) \| q(\mathbf{x} ; \theta))-\log 4
+\end{aligned}
+$$

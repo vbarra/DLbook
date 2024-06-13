@@ -67,3 +67,11 @@ Optimisation des paramètres de $D$, à $G$ fixé
 Optimisation des paramètres de $G$, à $D$ fixé
 ```
 
+Goodfellow propose dans {cite:p}`Goodfellow14` une illustration du processus d'apprentissage d'un GAN ({numref}`gan4`). Dans cette figure, on illustre de gauche à droite un modèle à l'état initial, l'évolution après la mise à jour de $D$, puis de $G$, et enfin l'état à convergence. La courbe en points noir est la distribution des données $p(x)$, la courbe verte la distribution $p(z)$ de $G$, la courbe bleue pointillée la sortie de $D$. Les $z\in\mathcal Z$ sont tirés uniformément (partie inférieure des graphiques)
+
+
+```{figure} ./images/illustrationGan1D.png
+:name: gan4
+Processus d'apprentissage d'un GAN.
+```
+
