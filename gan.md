@@ -131,14 +131,14 @@ Des solutions existent pour chacun de ces problèmes, mais ne sont pas abordées
 Le points bleus sont les données générées prr $G$, la courbe rouge est la courbe réelle. Sans jamais avoir vu cette courbe, $G$ apprend à positionner les points qu'il génère près de la courbe.
 ```{code-cell} ipython3
 from IPython.display import Video
-Video("videos/GAN1D.mp4",embed =True,width=500)
+Video("videos/GAN1D.mp4",embed =True,width=800)
 ```
 
 ### Apprentissage d'une fonction de $\mathbb{R}\rightarrow \mathbb{R}$
 L'illustration est la même que précédemment, mais pour l'apprentissage de'une surface de $\mathbb{R}^3$
 ```{code-cell} ipython3
 from IPython.display import Video
-Video("videos/GAN2D.mp4",embed =True,width=500)
+Video("videos/GAN2D.mp4",embed =True,width=800)
 ```
 
 ### Génération de chiffres manuscrits
