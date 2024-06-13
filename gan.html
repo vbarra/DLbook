@@ -364,16 +364,16 @@ document.write(`
 <h2>Analyse<a class="headerlink" href="#analyse" title="Lien vers cette rubrique">#</a></h2>
 <p>A <span class="math notranslate nohighlight">\(G\)</span> fixé (donc <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> fixé), le classifieur <span class="math notranslate nohighlight">\(D\)</span> de paramètres optimaux <span class="math notranslate nohighlight">\(\boldsymbol\phi_{\boldsymbol\theta}^*\)</span>  est optimal si et seulement si</p>
 <div class="math notranslate nohighlight">
-\[\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta}\]</div>
+\[\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta)}\]</div>
 <p>Ainsi :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
-&amp; \min _\theta \max _\phi V(\phi, \theta)=\min _\theta V\left(\phi_\theta^*, \theta\right) \\
-&amp; =\min _\theta \mathbb{E}_{\mathbf{x} \sim p(\mathbf{x})}\left[\log \frac{p(\mathbf{x})}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right]+\mathbb{E}_{\mathbf{x} \sim q(\mathbf{x} ; \theta)}\left[\log \frac{q(\mathbf{x} ; \theta)}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right] \\
-&amp; =\min _\theta \mathrm{KL}\left(p(\mathbf{x}) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right) \\
-&amp; \quad+\mathrm{KL}\left(q(\mathbf{x} ; \theta) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right)-\log 4 \\
-&amp; =\min _\theta 2 \mathrm{JSD}(p(\mathbf{x}) \| q(\mathbf{x} ; \theta))-\log 4
+&amp; \min _\boldsymbol\theta \max _\boldsymbol\phi f(\boldsymbol\theta,\boldsymbol\phi)=\min _\boldsymbol\theta f(\boldsymbol\theta,\boldsymbol\phi)_{\boldsymbol\theta^*}\right) \\
+&amp; =\min _\boldsymbol\theta \mathbb{E}_{x \sim p(x)}\left[\log \frac{p(x)}{q(x ; \boldsymbol\theta)+p(x)}\right]+\mathbb{E}_{x \sim q(x ; \theta)}\left[\log \frac{q(x ; \boldsymbol\theta)}{q(x ; \boldsymbol\theta)+p(x)}\right] \\
+&amp; =\min _\boldsymbol\theta \mathrm{KL}\left(p(x) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right) \\
+&amp; \quad+\mathrm{KL}\left(q(x ; \boldsymbol\theta) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right)-\log 4 \\
+&amp; =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))-\log 4
 \end{aligned}
 \end{split}\]</div>
 </section>
