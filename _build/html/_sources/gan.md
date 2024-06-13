@@ -79,16 +79,16 @@ Processus d'apprentissage d'un GAN.
 ## Analyse
 A $G$ fixé (donc $\boldsymbol\theta$ fixé), le classifieur $D$ de paramètres optimaux $\boldsymbol\phi_{\boldsymbol\theta}^*$  est optimal si et seulement si 
 
-$$\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta}$$
+$$\forall x, D(x,\boldsymbol\phi_{\boldsymbol\theta}^*) = \frac{p(x)}{p(x)+q(x\boldsymbol\theta)}$$
 
 Ainsi : 
 
 $$
 \begin{aligned}
-& \min _\theta \max _\phi V(\phi, \theta)=\min _\theta V\left(\phi_\theta^*, \theta\right) \\
-& =\min _\theta \mathbb{E}_{\mathbf{x} \sim p(\mathbf{x})}\left[\log \frac{p(\mathbf{x})}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right]+\mathbb{E}_{\mathbf{x} \sim q(\mathbf{x} ; \theta)}\left[\log \frac{q(\mathbf{x} ; \theta)}{q(\mathbf{x} ; \theta)+p(\mathbf{x})}\right] \\
-& =\min _\theta \mathrm{KL}\left(p(\mathbf{x}) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right) \\
-& \quad+\mathrm{KL}\left(q(\mathbf{x} ; \theta) \| \frac{p(\mathbf{x})+q(\mathbf{x} ; \theta)}{2}\right)-\log 4 \\
-& =\min _\theta 2 \mathrm{JSD}(p(\mathbf{x}) \| q(\mathbf{x} ; \theta))-\log 4
+& \min _\boldsymbol\theta \max _\boldsymbol\phi f(\boldsymbol\theta,\boldsymbol\phi)=\min _\boldsymbol\theta f(\boldsymbol\theta,\boldsymbol\phi)_{\boldsymbol\theta^*}\right) \\
+& =\min _\boldsymbol\theta \mathbb{E}_{x \sim p(x)}\left[\log \frac{p(x)}{q(x ; \boldsymbol\theta)+p(x)}\right]+\mathbb{E}_{x \sim q(x ; \theta)}\left[\log \frac{q(x ; \boldsymbol\theta)}{q(x ; \boldsymbol\theta)+p(x)}\right] \\
+& =\min _\boldsymbol\theta \mathrm{KL}\left(p(x) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right) \\
+& \quad+\mathrm{KL}\left(q(x ; \boldsymbol\theta) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right)-\log 4 \\
+& =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))-\log 4
 \end{aligned}
 $$
