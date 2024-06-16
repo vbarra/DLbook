@@ -75,9 +75,9 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&=&\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsym
 &=& \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\color{blue}{log(p(\boldsymbol{x}|\boldsymbol h))}\right ]-\color{red}{KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))}
 \end{align}$$
 
-Maximiser la fonction $ELBO(\boldsymbol x,\boldsymbol\phi)$:
-- <span style="color:blue">The first term encourages distributions to be centered on configurations of latent variables $\boldsymbol h$ explaining the observed data</span>
-- <span style="color:red">The second term enforces distributions to be close to the prior.</span>
+En maximisant la fonction $ELBO(\boldsymbol x,\boldsymbol\phi)$ :
+- <span style="color:blue"> le premier terme encourage les distribitions à converger dans les configurations des variables latentes $\boldsymbol h$ expliquant les données observées </span>
+- <span style="color:red"> le second terme force les distribution à être proches du prior.</span>
 
 
 

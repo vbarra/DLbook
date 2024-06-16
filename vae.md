@@ -75,9 +75,16 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&=&\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsym
 &=& \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\color{blue}{log(p(\boldsymbol{x}|\boldsymbol h))}\right ]-\color{red}{KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))}
 \end{align}$$
 
-En maximisant la fonction $ELBO(\boldsymbol x,\boldsymbol\phi)$ :
+Dans l'équation prédécente, on a éliminé $\displaystyle\min_\phi log(p(\boldsymbol x))$ qui ne dépend pas de $\boldsymbol\phi$.
+
+E<n maximisant la fonction $ELBO(\boldsymbol x,\boldsymbol\phi)$ :
 - <span style="color:blue"> le premier terme encourage les distribitions à converger dans les configurations des variables latentes $\boldsymbol h$ expliquant les données observées </span>
 - <span style="color:red"> le second terme force les distribution à être proches du prior.</span>
+
+Finalement, étant donné un échantillon  $E_a = \{\boldsymbol x_i,i\in[\![1,N]\!]\}$, la fonction objectif finale est 
+
+$$\displaystyle\sum_{\boldsymbol x_i\in E_a}ELBO(\boldsymbol x_i,\boldsymbol \phi)$$
+
 
 
 
