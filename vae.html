@@ -304,7 +304,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="autoencodeurs-variationnels">
 <h1>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien vers cette rubrique">#</a></h1>
 <p>Les autoencodeurs variationnels sont, comme les GAN (abordés dans le cours suivant), des modèles génératifs, c’est-à-dire des modèles probabilistes <span class="math notranslate nohighlight">\(p\)</span> pouvant être utilisés pour
-simuler (ou générer) des données réalistes <span class="math notranslate nohighlight">\(x\sim p(x,\boldsymbol\theta)\)</span>, aussi proches que possible de la vraie (mais inconnue) distribution des données <span class="math notranslate nohighlight">\(p(x)\)</span>, pour laquelle seul un échantillon de données est disponible.</p>
+simuler (ou générer) des données réalistes <span class="math notranslate nohighlight">\(\boldsymbol x\sim p(\boldsymbol x,\boldsymbol\theta)\)</span>, aussi proches que possible de la vraie (mais inconnue) distribution des données <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span>, pour laquelle seul un échantillon de données est disponible.</p>
 <p>Le paysage de ces modèles génératifs s’est beaucoup peuplé depuis 2014 (<a class="reference internal" href="#landscape"><span class="std std-numref">Fig. 59</span></a>).</p>
 <figure class="align-default" id="landscape">
 <img alt="_images/landscapegen.png" src="_images/landscapegen.png" />
@@ -320,7 +320,7 @@ simuler (ou générer) des données réalistes <span class="math notranslate noh
 <p>Un modèle à variables latentes met en relation un ensemble de variables observables <span class="math notranslate nohighlight">\(\boldsymbol x\in \mathcal X\)</span> avec un ensemble de variables latentes  <span class="math notranslate nohighlight">\(\boldsymbol h\in \mathcal H\)</span></p>
 <div class="math notranslate nohighlight">
 \[p(\boldsymbol x,\boldsymbol h) = p(\boldsymbol x|\boldsymbol h)p(\boldsymbol h)\]</div>
-<p>Si <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> sont des facteurs causaux pour  <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>, alors échantillonner selon <span class="math notranslate nohighlight">\(p(\boldsymbol x|\boldsymbol h)\)</span> permet de créer n modèle génératif de  <span class="math notranslate nohighlight">\(\mathcal H\)</span> vers <span class="math notranslate nohighlight">\(\mathcal X\)</span>.</p>
+<p>Si <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> sont des facteurs causaux pour  <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>, alors échantillonner selon <span class="math notranslate nohighlight">\(p(\boldsymbol x|\boldsymbol h)\)</span> permet de créer un modèle génératif de  <span class="math notranslate nohighlight">\(\mathcal H\)</span> vers <span class="math notranslate nohighlight">\(\mathcal X\)</span>.</p>
 <p>Pour l’inférence, étant donnée <span class="math notranslate nohighlight">\(p(\boldsymbol x,\boldsymbol h)\)</span>, il « suffit » de calculer</p>
 <div class="math notranslate nohighlight">
 \[ p(\boldsymbol h|\boldsymbol x) = \frac{p(\boldsymbol x|\boldsymbol h)p(\boldsymbol h)}{p(\boldsymbol x)}\]</div>
@@ -353,10 +353,10 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x}|\boldsymbol h))p(\boldsymbol h) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
 &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\color{blue}{log(p(\boldsymbol{x}|\boldsymbol h))}\right ]-\color{red}{KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))}
 \end{align}\end{split}\]</div>
-<p>Dans l’équation prédécente, on a éliminé <span class="math notranslate nohighlight">\(\displaystyle\min_\phi log(p(\boldsymbol x))\)</span> qui ne dépend pas de <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span>.</p>
-<p>E&lt;n maximisant la fonction <span class="math notranslate nohighlight">\(ELBO(\boldsymbol x,\boldsymbol\phi)\)</span> :</p>
+<p>Dans l’équation prédécente, on a éliminé <span class="math notranslate nohighlight">\(log(p(\boldsymbol x))\)</span> qui ne dépend pas de <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span>.</p>
+<p>En maximisant la fonction <span class="math notranslate nohighlight">\(ELBO(\boldsymbol x,\boldsymbol\phi)\)</span> :</p>
 <ul class="simple">
-<li><p><span style="color:blue"> le premier terme encourage les distribitions à converger dans les configurations des variables latentes <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> expliquant les données observées </span></p></li>
+<li><p><span style="color:blue"> le premier terme encourage les distributions à converger dans les configurations des variables latentes <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> expliquant les données observées </span></p></li>
 <li><p><span style="color:red"> le second terme force les distribution à être proches du prior.</span></p></li>
 </ul>
 <p>Finalement, étant donné un échantillon  <span class="math notranslate nohighlight">\(E_a = \{\boldsymbol x_i,i\in[\![1,N]\!]\}\)</span>, la fonction objectif finale est</p>

@@ -11,7 +11,7 @@ kernelspec:
 ---
 # Autoencodeurs variationnels
 Les autoencodeurs variationnels sont, comme les GAN (abordés dans le cours suivant), des modèles génératifs, c'est-à-dire des modèles probabilistes $p$ pouvant être utilisés pour 
-simuler (ou générer) des données réalistes $x\sim p(x,\boldsymbol\theta)$, aussi proches que possible de la vraie (mais inconnue) distribution des données $p(x)$, pour laquelle seul un échantillon de données est disponible.
+simuler (ou générer) des données réalistes $\boldsymbol x\sim p(\boldsymbol x,\boldsymbol\theta)$, aussi proches que possible de la vraie (mais inconnue) distribution des données $p(\boldsymbol x)$, pour laquelle seul un échantillon de données est disponible.
 
 Le paysage de ces modèles génératifs s'est beaucoup peuplé depuis 2014 ({numref}`landscape`).
 
@@ -34,7 +34,7 @@ Un modèle à variables latentes met en relation un ensemble de variables observ
 
 $$p(\boldsymbol x,\boldsymbol h) = p(\boldsymbol x|\boldsymbol h)p(\boldsymbol h)$$
 
-Si $\boldsymbol h$ sont des facteurs causaux pour  $\boldsymbol x$, alors échantillonner selon $p(\boldsymbol x|\boldsymbol h)$ permet de créer n modèle génératif de  $\mathcal H$ vers $\mathcal X$.
+Si $\boldsymbol h$ sont des facteurs causaux pour  $\boldsymbol x$, alors échantillonner selon $p(\boldsymbol x|\boldsymbol h)$ permet de créer un modèle génératif de  $\mathcal H$ vers $\mathcal X$.
 
 Pour l'inférence, étant donnée $p(\boldsymbol x,\boldsymbol h)$, il "suffit" de calculer 
 
@@ -75,10 +75,10 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&=&\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsym
 &=& \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\color{blue}{log(p(\boldsymbol{x}|\boldsymbol h))}\right ]-\color{red}{KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))}
 \end{align}$$
 
-Dans l'équation prédécente, on a éliminé $\displaystyle\min_\phi log(p(\boldsymbol x))$ qui ne dépend pas de $\boldsymbol\phi$.
+Dans l'équation prédécente, on a éliminé $log(p(\boldsymbol x))$ qui ne dépend pas de $\boldsymbol\phi$.
 
-E<n maximisant la fonction $ELBO(\boldsymbol x,\boldsymbol\phi)$ :
-- <span style="color:blue"> le premier terme encourage les distribitions à converger dans les configurations des variables latentes $\boldsymbol h$ expliquant les données observées </span>
+En maximisant la fonction $ELBO(\boldsymbol x,\boldsymbol\phi)$ :
+- <span style="color:blue"> le premier terme encourage les distributions à converger dans les configurations des variables latentes $\boldsymbol h$ expliquant les données observées </span>
 - <span style="color:red"> le second terme force les distribution à être proches du prior.</span>
 
 Finalement, étant donné un échantillon  $E_a = \{\boldsymbol x_i,i\in[\![1,N]\!]\}$, la fonction objectif finale est 
