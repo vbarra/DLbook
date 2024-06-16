@@ -128,7 +128,7 @@ Des solutions existent pour chacun de ces problèmes, mais ne sont pas abordées
 ## Quelques exemples
 
 ### Apprentissage d'une fonction de $\mathbb{R}\rightarrow \mathbb{R}$
-Le points bleus sont les données générées prr $G$, la courbe rouge est la courbe réelle. Sans jamais avoir vu cette courbe, $G$ apprend à positionner les points qu'il génère près de la courbe.
+Le points bleus sont les données générées par $G$, la courbe rouge est la courbe réelle. Sans jamais avoir vu cette courbe, $G$ apprend à positionner les points qu'il génère près de la courbe.
 ```{code-cell} ipython3
 from IPython.display import Video
 Video("videos/GAN1D.mp4",embed =True,width=800)
@@ -190,7 +190,7 @@ plt.tight_layout()
 On définit ensuite certains paramètres pour le GAN et l'apprentissage
 
 ```python
-data_dim = samples.shape[-1]
+data_dim = exemples.shape[-1]
 hidden_dim = 5
 nbepochs = 8000
 batch_size = 100
@@ -203,21 +203,21 @@ Le générateur $G$ et le discriminateur $D$ sont de simples perceptrons à une 
 
 
 ```python
-generator = nn.Sequential(
+G = nn.Sequential(
     nn.Linear(hidden_dim, 32),
     nn.ReLU(),
     nn.Linear(32, data_dim)
 )
-G_optimizer = torch.optim.Adam(generator.parameters())
+G_optimizer = torch.optim.Adam(G.parameters())
 
 
-discriminator = nn.Sequential(
+D = nn.Sequential(
     nn.Linear(data_dim, 32),
     nn.ReLU(),
     nn.Linear(32, 1),
     nn.Sigmoid()
 )
-D_optimizer = torch.optim.Adam(discriminator.parameters())
+D_optimizer = torch.optim.Adam(D.parameters())
 ```
 
 On entraîne enfin le GAN
@@ -229,9 +229,9 @@ for epoch in range(nbepochs):
         # Échantillonne des codes au hasard dans l'espace latent
         z = torch.randn((len(real_data), hidden_dim))
         # Génère les fakes
-        fake = generator(z)
+        fake = G(z)
         # Prédiction de D sur ces données
-        predictions = discriminator(f)
+        predictions = D(fake)
 
         # Classe "faux" = 0
         fake_labels =  torch.zeros(len(f))
@@ -246,8 +246,8 @@ for epoch in range(nbepochs):
 
         # Entraîne le discriminateur
         D_optimizer.zero_grad()
-        predictions = discriminator(fake.detach())[:,0]
-        true_predictions = discriminator(real_data)[:,0]
+        predictions = D(fake.detach())[:,0]
+        true_predictions = D(real_data)[:,0]
         D_loss = 0.5 * (F.binary_cross_entropy(predictions, fake_labels) + F.binary_cross_entropy(true_predictions, true_labels))
 
         D_loss.backward()
