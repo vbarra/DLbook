@@ -289,7 +289,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Inférence variationnelle</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Autoencodeurs variationnels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Autoencodeurs variationnels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principe">Principe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple">Exemple</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -367,6 +371,8 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 </section>
 <section id="id2">
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h2>
+<section id="principe">
+<h3>Principe<a class="headerlink" href="#principe" title="Lien vers cette rubrique">#</a></h3>
 <p>Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes (<a class="reference internal" href="#vae0"><span class="std std-numref">Fig. 60</span></a>) tel que :</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(\boldsymbol h)\)</span> est prescrit à l’avance</p></li>
@@ -405,7 +411,20 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <p>Un choix classique est</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \varepsilon,\quad \varepsilon\sim \mathcal{N}(0,I)\]</div>
-<p>On montre alors que <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\)</span> peut</p>
+<p>On montre alors que <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\)</span> peut être estimé par méthode de Monte Carlo.</p>
+</section>
+<section id="exemple">
+<h3>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique">#</a></h3>
+<p>Soit <span class="math notranslate nohighlight">\(\boldsymbol h\in\mathbb{R}^d\)</span>. On suppose que la distribution de la variable latente suit une loi normale centrée réduite <span class="math notranslate nohighlight">\(p(\boldsymbol h) = \mathcal N(\boldsymbol 0,\boldsymbol I)\)</span>.</p>
+<p>Alors $<span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h),\sigma^2_{\boldsymbol\theta}(\boldsymbol h)\boldsymbol I)\)</span><span class="math notranslate nohighlight">\(
+où on modéliser le décodeur \)</span>D_{\boldsymbol\theta}$ par :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h) = \boldsymbol W_1^\top \boldsymbol h + \boldsymbol b_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(log(\boldsymbol\sigma_{\boldsymbol\theta}(\boldsymbol h)) = \boldsymbol W_2^\top \boldsymbol h + \boldsymbol b_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol h = ReLU(\boldsymbol W_3^\top \boldsymbol h + \boldsymbol b_3)\)</span></p></li>
+</ul>
+<p>avec donc <span class="math notranslate nohighlight">\(\boldsymbol\theta = (\boldsymbol W_1,\boldsymbol W_2,\boldsymbol W_3,\boldsymbol b_1,\boldsymbol b_2,\boldsymbol b_3)\)</span></p>
+</section>
 </section>
 </section>
 
@@ -478,7 +497,11 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Inférence variationnelle</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Autoencodeurs variationnels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Autoencodeurs variationnels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principe">Principe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple">Exemple</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
