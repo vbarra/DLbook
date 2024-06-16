@@ -332,11 +332,12 @@ simuler (ou générer) des données réalistes <span class="math notranslate noh
 <p>On considère une famille de distributions <span class="math notranslate nohighlight">\(q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)\)</span> approchant <span class="math notranslate nohighlight">\(p(\boldsymbol{h}|\boldsymbol x)\)</span>, où <span class="math notranslate nohighlight">\(\boldsymbol \phi\)</span> sont les paramètres variationnels. Ces paramètres sont optimisés pour minimiser une distance entre <span class="math notranslate nohighlight">\(q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)\)</span> et <span class="math notranslate nohighlight">\(p(\boldsymbol x,\boldsymbol h)\)</span>. Parmi toutes les distances possibles, on retient la divergence de Kullback-Leibler</p>
 <div class="math notranslate nohighlight">
 \[KL(p\|q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}\]</div>
-<p>et ainsi :
-$<span class="math notranslate nohighlight">\(\begin{align}
+<p>et ainsi :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
 KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h| \boldsymbol  x)) &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)} \left [log\frac{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}{ p(\boldsymbol{h}|\boldsymbol x)} \right ]\\
 &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [ log(q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))-log(p(\boldsymbol{x},\boldsymbol h))\right ] +log(p(\boldsymbol x))
-\end{align}\)</span>$</p>
+\end{align}\end{split}\]</div>
 <p>Le dernier terme <span class="math notranslate nohighlight">\(log(p(\boldsymbol x)\)</span> reste cependant toujours inaccessible.</p>
 </section>
 </section>
