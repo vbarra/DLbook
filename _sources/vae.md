@@ -168,10 +168,11 @@ $$
 \begin{align}
 ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &=& \mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left (log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right )-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))\\
 &=& \mathbb{E}_{p(\boldsymbol\varepsilon)}\left (log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h=F(\boldsymbol\phi,\boldsymbol x,\boldsymbol\varepsilon)))\right )-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))
+\end{align}
 $$
 
 où 
 
 $$KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h)) = \frac12\displaystyle\sum_{i=1}^d \left (1+log({\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)) - {\mu_j}^2_{\boldsymbol\phi}(\boldsymbol x)-{\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)\right )$$
 
-
+dont les dérivées peuvent être évaluées analytiquement.
