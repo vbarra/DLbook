@@ -136,13 +136,27 @@ On montre alors que $\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\thet
 ### Exemple
 Soit $\boldsymbol h\in\mathbb{R}^d$. On suppose que la distribution de la variable latente suit une loi normale centrée réduite $p(\boldsymbol h) = \mathcal N(\boldsymbol 0,\boldsymbol I)$.
 
-Alors $$p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h),\sigma^2_{\boldsymbol\theta}(\boldsymbol h)\boldsymbol I)$$
-où on modéliser le décodeur $D_{\boldsymbol\theta}$ par : 
-- $\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h) = \boldsymbol W_1^\top \boldsymbol h + \boldsymbol b_1$
-- $log(\boldsymbol\sigma_{\boldsymbol\theta}(\boldsymbol h)) = \boldsymbol W_2^\top \boldsymbol h + \boldsymbol b_2$
-- $\boldsymbol h = ReLU(\boldsymbol W_3^\top \boldsymbol h + \boldsymbol b_3)$
+Alors 
+
+$$p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h),\sigma^2_{\boldsymbol\theta}(\boldsymbol h)\boldsymbol I)$$
+
+où on modélise le décodeur $D_{\boldsymbol\theta}$ par : 
+- $\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h) = \boldsymbol W_1^\top \boldsymbol z + \boldsymbol b_1$
+- $log(\boldsymbol\sigma^2_{\boldsymbol\theta}(\boldsymbol h)) = \boldsymbol W_2^\top \boldsymbol z + \boldsymbol b_2$
+- $\boldsymbol z = ReLU(\boldsymbol W_3^\top \boldsymbol h + \boldsymbol b_3)$
 
 avec donc $\boldsymbol\theta = (\boldsymbol W_1,\boldsymbol W_2,\boldsymbol W_3,\boldsymbol b_1,\boldsymbol b_2,\boldsymbol b_3)$
 
+De même, on modélise l'encodeur $E_{\boldsymbol\phi}$ par : 
 
+$$q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x) = \mathcal N(\boldsymbol h,\boldsymbol\mu_{\boldsymbol\phi}(\boldsymbol x),\sigma^2_{\boldsymbol\phi}(\boldsymbol x)\boldsymbol I)$$
+
+où 
+- $p(\varepsilon) = \mathcal N(\boldsymbol 0,\boldsymbol I)$
+- $\boldsymbol h = \boldsymbol\mu_{\boldsymbol\phi}(\boldsymbol x) + \sigma_{\boldsymbol\phi}(\boldsymbol x)\odot\varepsilon$
+- $\boldsymbol\mu_{\boldsymbol\phi}(\boldsymbol x) = \boldsymbol W_4^\top \boldsymbol z + \boldsymbol b_4$
+- $log(\boldsymbol\sigma^2_{\boldsymbol\phi}(\boldsymbol x)) = \boldsymbol W_5^\top \boldsymbol z + \boldsymbol b_5$
+- $\boldsymbol z = ReLU(\boldsymbol W_6^\top \boldsymbol h + \boldsymbol b_6)$
+
+avec donc $\boldsymbol\phi = (\boldsymbol W_4,\boldsymbol W_5,\boldsymbol W_6,\boldsymbol b_4,\boldsymbol b_5,\boldsymbol b_6)$
 

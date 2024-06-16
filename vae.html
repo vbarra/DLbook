@@ -416,14 +416,28 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <section id="exemple">
 <h3>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\(\boldsymbol h\in\mathbb{R}^d\)</span>. On suppose que la distribution de la variable latente suit une loi normale centrée réduite <span class="math notranslate nohighlight">\(p(\boldsymbol h) = \mathcal N(\boldsymbol 0,\boldsymbol I)\)</span>.</p>
-<p>Alors $<span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h),\sigma^2_{\boldsymbol\theta}(\boldsymbol h)\boldsymbol I)\)</span><span class="math notranslate nohighlight">\(
-où on modéliser le décodeur \)</span>D_{\boldsymbol\theta}$ par :</p>
+<p>Alors</p>
+<div class="math notranslate nohighlight">
+\[p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h),\sigma^2_{\boldsymbol\theta}(\boldsymbol h)\boldsymbol I)\]</div>
+<p>où on modélise le décodeur <span class="math notranslate nohighlight">\(D_{\boldsymbol\theta}\)</span> par :</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h) = \boldsymbol W_1^\top \boldsymbol h + \boldsymbol b_1\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(log(\boldsymbol\sigma_{\boldsymbol\theta}(\boldsymbol h)) = \boldsymbol W_2^\top \boldsymbol h + \boldsymbol b_2\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol h = ReLU(\boldsymbol W_3^\top \boldsymbol h + \boldsymbol b_3)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h) = \boldsymbol W_1^\top \boldsymbol z + \boldsymbol b_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(log(\boldsymbol\sigma^2_{\boldsymbol\theta}(\boldsymbol h)) = \boldsymbol W_2^\top \boldsymbol z + \boldsymbol b_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol z = ReLU(\boldsymbol W_3^\top \boldsymbol h + \boldsymbol b_3)\)</span></p></li>
 </ul>
 <p>avec donc <span class="math notranslate nohighlight">\(\boldsymbol\theta = (\boldsymbol W_1,\boldsymbol W_2,\boldsymbol W_3,\boldsymbol b_1,\boldsymbol b_2,\boldsymbol b_3)\)</span></p>
+<p>De même, on modélise l’encodeur <span class="math notranslate nohighlight">\(E_{\boldsymbol\phi}\)</span> par :</p>
+<div class="math notranslate nohighlight">
+\[q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x) = \mathcal N(\boldsymbol h,\boldsymbol\mu_{\boldsymbol\phi}(\boldsymbol x),\sigma^2_{\boldsymbol\phi}(\boldsymbol x)\boldsymbol I)\]</div>
+<p>où</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(\varepsilon) = \mathcal N(\boldsymbol 0,\boldsymbol I)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol h = \boldsymbol\mu_{\boldsymbol\phi}(\boldsymbol x) + \sigma_{\boldsymbol\phi}(\boldsymbol x)\odot\varepsilon\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol\mu_{\boldsymbol\phi}(\boldsymbol x) = \boldsymbol W_4^\top \boldsymbol z + \boldsymbol b_4\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(log(\boldsymbol\sigma^2_{\boldsymbol\phi}(\boldsymbol x)) = \boldsymbol W_5^\top \boldsymbol z + \boldsymbol b_5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol z = ReLU(\boldsymbol W_6^\top \boldsymbol h + \boldsymbol b_6)\)</span></p></li>
+</ul>
+<p>avec donc <span class="math notranslate nohighlight">\(\boldsymbol\phi = (\boldsymbol W_4,\boldsymbol W_5,\boldsymbol W_6,\boldsymbol b_4,\boldsymbol b_5,\boldsymbol b_6)\)</span></p>
 </section>
 </section>
 </section>
