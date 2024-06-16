@@ -125,7 +125,7 @@ L'optimisation peut se faire par montée de gradients :
 
 La solution à ce problème est appelée *astuce de reparamétrisation* (reparameterization trick) : on exprime $\boldsymbol h$ à l'aide d'une transformation différentiable et inversible $F$ d'une autre variable aléatoire $\varepsilon$, étant donnés $\boldsymbol x$ et $\boldsymbol\phi$, de telle sorte que la distribution de $\varepsilon$ est indépendante de  $\boldsymbol x$ et $\boldsymbol\phi$ : 
 
-$$\boldsymbol h = F(\boldsymbol\phi\boldsymbol x,\boldsymbol\varepsilon)$$
+$$\boldsymbol h = F(\boldsymbol\phi,\boldsymbol x,\boldsymbol\varepsilon)$$
 
 Un choix classique est 
 
@@ -159,4 +159,19 @@ où
 - $\boldsymbol z = ReLU(\boldsymbol W_6^\top \boldsymbol x + \boldsymbol b_6)$
 
 avec donc $\boldsymbol\phi = (\boldsymbol W_4,\boldsymbol W_5,\boldsymbol W_6,\boldsymbol b_4,\boldsymbol b_5,\boldsymbol b_6)$
+
+
+Le calcul de ELBO est alors 
+
+$$
+
+\begin{align}
+ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &=& \mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left (log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right )-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))\\
+&=& \mathbb{E}_{p(\boldsymbol\varepsilon)}\left (log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h=F(\boldsymbol\phi,\boldsymbol x,\boldsymbol\varepsilon)))\right )-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))
+$$
+
+où 
+
+$$KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h)) = \frac12\displaystyle\sum_{i=1}^d \left (1+log({\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)) - {\mu_j}^2_{\boldsymbol\phi}(\boldsymbol x)-{\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)\right )$$
+
 
