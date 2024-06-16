@@ -9,52 +9,27 @@ kernelspec:
   language: python
   name: python3
 ---
+# Autoencodeurs variationnels
+Les autoencodeurs variationnels sont, comme les GAN (abordés dans le cours suivant), des modèles génératifs, c'est-à-dire des modèles probabilistes $p$ pouvant être utilisés pour 
+simuler (ou générer) des données réalistes $x\sim p(x,\boldsymbol\theta)$, aussi proches que possible de la vraie (mais inconnue) distribution des données $p(x)$, pour laquelle seul un échantillon de données est disponible.
 
-::: frame
-::: center
-![image](../images/VAE2.png){height="80pt"}
-:::
-:::
+Le paysage de ces modèles génératifs s'est beaucoup peuplé depuis 2014 ({numref}`landscape`).
 
-# Generative models
 
-::: frame
-Generative models
 
-::: Lblock
-Learning a model that represents the distribution of data, with input
-training samples
+```{figure} ./images/landscapegen.png
+:name: landscape
+Paysage des modèles génératifs (Source: [Song et al., CVPR 2023](https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546))
+```
 
-$$\mathcal{P}_{model}(x)\sim  \mathcal{P}_{data}(x)$$
-:::
+Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE) et les réseaux antagonistes générateurs (GAN).
 
-![image](../images/mnist.png)$\quad \Longrightarrow\quad$
-![image](../images/mnist2.png)
-:::
 
-::: frame
-Generative models
 
-![image](../images/generativemodels.png)
+# Inférence variationnelle
 
-Source: G Louppe
-:::
 
-::: frame
-Generative models
 
-### The landscape of generative models
-
-![image](../images/landscapegen)
-
-Source: Song et al., CVPR 2023.
-
-::: Lblock
--   Variational Autoencoders
-
--   Generative Adversarial Networks
-:::
-:::
 
 # Latent models
 
