@@ -187,7 +187,7 @@ plt.legend()
 plt.tight_layout()
 ```
 
-![](images/f.png)
+![](images/f.png =250x)
 
 On définit ensuite certains paramètres pour le GAN et l'apprentissage
 
