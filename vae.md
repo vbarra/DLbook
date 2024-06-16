@@ -92,7 +92,7 @@ Pour la maximiser, on peut utiliser une montée de gradient, maix $\nabla_{\bold
 
 Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes tel que :
 - $p(\boldsymbol h)$ est prescrit à l'avance
-- la vraisemblance $p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h)$ est un décodeur (réseau génératif) $D__{\boldsymbol\theta}$ tel que $\boldsymbol\Phi = D_{\boldsymbol\theta}(\boldsymbol h)$ où $\\boldsymbol Phi$  sont les paramètres de la distribution des données. Par exemple 
+- la vraisemblance $p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h)$ est un décodeur (réseau génératif) $D_{\boldsymbol\theta}$ tel que $\boldsymbol\Phi = D_{\boldsymbol\theta}(\boldsymbol h)$ où $\\boldsymbol Phi$  sont les paramètres de la distribution des données. Par exemple 
 
 $$\mu,\sigma  = D_{\boldsymbol\theta}(\boldsymbol h), \quad p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\mu,\sigma^2 \boldsymbol I)$$
 - la distribution approchée $q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)$ est paramétrée par un encodeur (réseau d'inférence) $E_{\boldsymbol\phi}$  tel que $\boldsymbol\nu = E_{\boldsymbol\phi}(\boldsymbol x)$ sont les paramètres de la distribution approchée. Par exemple : 
