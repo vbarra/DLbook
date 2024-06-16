@@ -301,7 +301,7 @@ document.write(`
                   
   <div class="frame docutils">
 <div class="center docutils">
-<p><img alt="image" src="../../images/VAE2" />{height= »80pt »}</p>
+<p><img alt="image" src="../images/VAE2" />{height= »80pt »}</p>
 </div>
 </div>
 <div class="docutils">
@@ -316,19 +316,19 @@ training samples</p>
 </div>
 </div>
 </div>
-<p><img alt="image" src="../../images/mnist" />{width= ».4\textwidth »}<span class="math notranslate nohighlight">\(\quad \Longrightarrow\quad\)</span>
-<img alt="image" src="../../images/mnist2" />{width= ».3\textwidth »}</p>
+<p><img alt="image" src="../images/mnist" />{width= ».4\textwidth »}<span class="math notranslate nohighlight">\(\quad \Longrightarrow\quad\)</span>
+<img alt="image" src="../images/mnist2" />{width= ».3\textwidth »}</p>
 <div class="docutils">
 <div class="frame docutils">
 <p>Generative models</p>
-<p><img alt="image" src="../../images/generativemodels" />{width= »\textwidth »}<br />
+<p><img alt="image" src="../images/generativemodels" />{width= »\textwidth »}<br />
 Source: G Louppe</p>
 </div>
 </div>
 <div class="frame docutils">
 <p>Generative models</p>
 <h3 class="rubric" id="the-landscape-of-generative-models">The landscape of generative models</h3>
-<p><img alt="image" src="../../images/landscapegen" />{width= »\textwidth »}<br />
+<p><img alt="image" src="../images/landscapegen" />{width= »\textwidth »}<br />
 Source: Song et al., CVPR 2023.</p>
 <div class="Lblock docutils">
 <ul class="simple">
@@ -413,7 +413,7 @@ draw,line width=1.4pt, white,shorten &gt;= 4.5pt]</p>
 <div class="frame docutils">
 <p>Variational Autoencoders</p>
 <div class="center docutils">
-<p><img alt="image" src="../../images/xhx" />{width= ».8\textwidth »}</p>
+<p><img alt="image" src="../images/xhx" />{width= ».8\textwidth »}</p>
 </div>
 </div>
 </div>
@@ -459,7 +459,7 @@ transformation of another random variable <span class="math notranslate nohighli
 backpropagation is possible.</p>
 </div>
 <div class="frame docutils">
-<p>Summary <img alt="image" src="../../images/VAE2" />{height= »80pt »}</p>
+<p>Summary <img alt="image" src="../images/VAE2" />{height= »80pt »}</p>
 <div class="Lblock docutils">
 <ol class="arabic simple">
 <li><p>Define Encoder and Decoder</p></li>
@@ -480,33 +480,33 @@ trick</p></li>
 features.</p></li>
 </ul>
 <div class="center docutils">
-<p><img alt="image" src="../../images/mnistlatent" />{width= ».45\textwidth »}
-<img alt="image" src="../../images/fashionmnistlatent" />{width= ».45\textwidth »}</p>
+<p><img alt="image" src="../images/mnistlatent" />{width= ».45\textwidth »}
+<img alt="image" src="../images/fashionmnistlatent" />{width= ».45\textwidth »}</p>
 </div>
 </div>
 </div>
 <div class="docutils">
 <div class="frame docutils">
 <p>Disentanglement
-<img alt="image" src="../../images/disentangle" />{width= ».7\textwidth »}<br />
+<img alt="image" src="../images/disentangle" />{width= ».7\textwidth »}<br />
 Kingma et al, 2014</p>
 </div>
 </div>
 <div class="frame docutils">
 <p>Disentanglement
-<img alt="image" src="../../images/disentangle2" />{width= »\textwidth »} Amini and
+<img alt="image" src="../images/disentangle2" />{width= »\textwidth »} Amini and
 Soleimany, 2019</p>
 </div>
 <div class="frame docutils">
 <p>Disentanglement <span class="math notranslate nohighlight">\(\beta-VAE\)</span>: enforces disentanglement
 $<span class="math notranslate nohighlight">\(\displaystyle\min_{\phi,\theta} (-ELBO(\boldsymbol x,\phi)) = -\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\textcolor{bluelimos}{log(\textbf{\textsf{\textup{p}}}_\theta(\boldsymbol{x}|\boldsymbol h))}\right ]+\beta \textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))}\)</span>$
-<img alt="image" src="../../images/betavae" />{width= ».6\textwidth »} Higgins et al.,
+<img alt="image" src="../images/betavae" />{width= ».6\textwidth »} Higgins et al.,
 2017</p>
 </div>
 <div class="frame docutils">
 <p>Exploration</p>
 <div class="center docutils">
-<p><img alt="image" src="../../images/interpol" />{width= ».7\textwidth »}</p>
+<p><img alt="image" src="../images/interpol" />{width= ».7\textwidth »}</p>
 </div>
 </div>
 <div class="columns docutils">
@@ -517,7 +517,7 @@ Interpolation in the latent space</p>
 </div>
 <div class="docutils">
 <div class="frame docutils">
-<p>Sampling <img alt="image" src="../../images/vaesampling" />{width= ».8\textwidth »}</p>
+<p>Sampling <img alt="image" src="../images/vaesampling" />{width= ».8\textwidth »}</p>
 </div>
 </div>
 </section>
@@ -553,14 +553,14 @@ draw,line width=1.4pt, white,shorten &gt;= 4.5pt]</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \epsilon,\quad \epsilon\sim \mathcal{N}(0,I)\]</div>
 <div class="center docutils">
-<p><img alt="image" src="../../images/trick" />{width= »\textwidth »}</p>
+<p><img alt="image" src="../images/trick" />{width= »\textwidth »}</p>
 </div>
 <div class="docutils">
 <div class="frame docutils">
 <p>KL divergence
 $<span class="math notranslate nohighlight">\(\textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))} =\frac 1n\left [ -\frac 12 \displaystyle\sum_{i=1}^d \left ( 1+log\sigma^f_i(\boldsymbol x)-(\mu^f_i(\boldsymbol x))^2-\sigma^f_i(x)\right )\right ]\)</span>$</p>
 <div class="center docutils">
-<p><img alt="image" src="../../images/KL" />{width= »\textwidth »}</p>
+<p><img alt="image" src="../images/KL" />{width= »\textwidth »}</p>
 </div>
 </div>
 </div>
@@ -568,7 +568,7 @@ $<span class="math notranslate nohighlight">\(\textcolor{orange}{KL( \textbf{\te
 <div class="frame docutils">
 <p>And now gather all the stuff</p>
 <div class="center docutils">
-<p><img alt="image" src="../../images/allvae" />{width= »\textwidth »}</p>
+<p><img alt="image" src="../images/allvae" />{width= »\textwidth »}</p>
 </div>
 </div>
 </div>

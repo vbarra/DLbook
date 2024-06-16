@@ -12,7 +12,7 @@ kernelspec:
 
 ::: frame
 ::: center
-![image](../../images/VAE2){height="80pt"}
+![image](../images/VAE2){height="80pt"}
 :::
 :::
 
@@ -28,14 +28,14 @@ training samples
 $$\mathcal{P}_{model}(x)\sim  \mathcal{P}_{data}(x)$$
 :::
 
-![image](../../images/mnist){width=".4\\textwidth"}$\quad \Longrightarrow\quad$
-![image](../../images/mnist2){width=".3\\textwidth"}
+![image](../images/mnist){width=".4\\textwidth"}$\quad \Longrightarrow\quad$
+![image](../images/mnist2){width=".3\\textwidth"}
 :::
 
 ::: frame
 Generative models
 
-![image](../../images/generativemodels){width="\\textwidth"}\
+![image](../images/generativemodels){width="\\textwidth"}\
 Source: G Louppe
 :::
 
@@ -44,7 +44,7 @@ Generative models
 
 ### The landscape of generative models
 
-![image](../../images/landscapegen){width="\\textwidth"}\
+![image](../images/landscapegen){width="\\textwidth"}\
 Source: Song et al., CVPR 2023.
 
 ::: Lblock
@@ -138,7 +138,7 @@ $$\hat{\boldsymbol x} = g[f(\boldsymbol x)]\quad h = f(\boldsymbol x)$$
 Variational Autoencoders
 
 ::: center
-![image](../../images/xhx){width=".8\\textwidth"}
+![image](../images/xhx){width=".8\\textwidth"}
 :::
 :::
 
@@ -186,7 +186,7 @@ backpropagation is possible.
 :::
 
 ::: frame
-Summary ![image](../../images/VAE2){height="80pt"}
+Summary ![image](../images/VAE2){height="80pt"}
 
 ::: Lblock
 1.  Define Encoder and Decoder
@@ -211,27 +211,27 @@ Exploration
     features.
 
 ::: center
-![image](../../images/mnistlatent){width=".45\\textwidth"}
-![image](../../images/fashionmnistlatent){width=".45\\textwidth"}
+![image](../images/mnistlatent){width=".45\\textwidth"}
+![image](../images/fashionmnistlatent){width=".45\\textwidth"}
 :::
 :::
 
 ::: frame
 Disentanglement
-![image](../../images/disentangle){width=".7\\textwidth"}\
+![image](../images/disentangle){width=".7\\textwidth"}\
 Kingma et al, 2014
 :::
 
 ::: frame
 Disentanglement
-![image](../../images/disentangle2){width="\\textwidth"} Amini and
+![image](../images/disentangle2){width="\\textwidth"} Amini and
 Soleimany, 2019
 :::
 
 ::: frame
 Disentanglement $\beta-VAE$: enforces disentanglement
 $$\displaystyle\min_{\phi,\theta} (-ELBO(\boldsymbol x,\phi)) = -\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\textcolor{bluelimos}{log(\textbf{\textsf{\textup{p}}}_\theta(\boldsymbol{x}|\boldsymbol h))}\right ]+\beta \textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))}$$
-![image](../../images/betavae){width=".6\\textwidth"} Higgins et al.,
+![image](../images/betavae){width=".6\\textwidth"} Higgins et al.,
 2017
 :::
 
@@ -239,7 +239,7 @@ $$\displaystyle\min_{\phi,\theta} (-ELBO(\boldsymbol x,\phi)) = -\mathbb{E}_{ \t
 Exploration
 
 ::: center
-![image](../../images/interpol){width=".7\\textwidth"}
+![image](../images/interpol){width=".7\\textwidth"}
 :::
 
 ::: columns
@@ -252,7 +252,7 @@ Interpolation in the latent space
 :::
 
 ::: frame
-Sampling ![image](../../images/vaesampling){width=".8\\textwidth"}
+Sampling ![image](../images/vaesampling){width=".8\\textwidth"}
 :::
 
 # Implementation
@@ -291,7 +291,7 @@ draw,line width=1.4pt, white,shorten \>= 4.5pt\]
 $$\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \epsilon,\quad \epsilon\sim \mathcal{N}(0,I)$$
 
 ::: center
-![image](../../images/trick){width="\\textwidth"}
+![image](../images/trick){width="\\textwidth"}
 :::
 :::
 
@@ -300,7 +300,7 @@ KL divergence
 $$\textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))} =\frac 1n\left [ -\frac 12 \displaystyle\sum_{i=1}^d \left ( 1+log\sigma^f_i(\boldsymbol x)-(\mu^f_i(\boldsymbol x))^2-\sigma^f_i(x)\right )\right ]$$
 
 ::: center
-![image](../../images/KL){width="\\textwidth"}
+![image](../images/KL){width="\\textwidth"}
 :::
 :::
 
@@ -308,6 +308,6 @@ $$\textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\bo
 And now gather all the stuff
 
 ::: center
-![image](../../images/allvae){width="\\textwidth"}
+![image](../images/allvae){width="\\textwidth"}
 :::
 :::
