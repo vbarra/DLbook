@@ -105,3 +105,14 @@ $$ \mu,\sigma  = \boldsymbol\nu = E_{\boldsymbol\phi}(\boldsymbol x)\quad q_{\bo
 :name: vae0
 Architecture générale d'un autoencodeur variationnel
 ```
+
+Comme précédemment, on peut utiliser l'inférence variationnelle pour optimiser de manière jointe $\boldsymbol\theta$ et $\boldsymbol\phi$ : 
+
+$$
+\begin{align}
+\boldsymbol\theta^*,\boldsymbol\phi^* &=& Arg\; max_{\boldsymbol\theta,\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\\
+&=&Arg\; max_{\boldsymbol\theta,\boldsymbol\phi}\mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left [log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right ]-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))
+\end{align}
+$$
+
+Etant donné $D_{\boldsymbol\theta}$, on veut ajuster les variables latentes, en optimissant $\boldsymbol\phi$, de sorte à ce qu'elles expliquent les données observées, tout en restant près de données générées par $p(\boldsymbol h)$. De même, étant donné $E_{\boldsymbol\phi}$, on veut ajuster les variables observées, , en optimissant $\boldsymbol\theta$, de telle sorte qu'elles soient le plus possible expliquées par les variables latentes.
