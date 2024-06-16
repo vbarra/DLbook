@@ -12,7 +12,7 @@ kernelspec:
 
 ::: frame
 ::: center
-![image](../images/VAE2){height="80pt"}
+![image](../images/VAE2.png){height="80pt"}
 :::
 :::
 
@@ -28,14 +28,15 @@ training samples
 $$\mathcal{P}_{model}(x)\sim  \mathcal{P}_{data}(x)$$
 :::
 
-![image](../images/mnist){width=".4\\textwidth"}$\quad \Longrightarrow\quad$
-![image](../images/mnist2){width=".3\\textwidth"}
+![image](../images/mnist.png)$\quad \Longrightarrow\quad$
+![image](../images/mnist2.png)
 :::
 
 ::: frame
 Generative models
 
-![image](../images/generativemodels){width="\\textwidth"}\
+![image](../images/generativemodels.png)
+
 Source: G Louppe
 :::
 
@@ -44,7 +45,8 @@ Generative models
 
 ### The landscape of generative models
 
-![image](../images/landscapegen){width="\\textwidth"}\
+![image](../images/landscapegen)
+
 Source: Song et al., CVPR 2023.
 
 ::: Lblock
