@@ -351,12 +351,13 @@ KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h| \bolds
 \[\begin{split}\begin{align}
 ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x},\boldsymbol h)) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ] \\
 &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x}|\boldsymbol h))p(\boldsymbol h) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
-&amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [&lt;span style=&quot;color:blue&quot;&gt;log(p(\boldsymbol{x}|\boldsymbol h))&lt;/span&gt;\right ]-&lt;span style=&quot;color:red&quot;&gt;KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))&lt;/span&gt;
+&amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\color{red}{log(p(\boldsymbol{x}|\boldsymbol h))}\right ]-&lt;span style=&quot;color:red&quot;&gt;KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))&lt;/span&gt;
 \end{align}\end{split}\]</div>
-<p>Maximiser la fonction <span class="math notranslate nohighlight">\(ELBO(\boldsymbol x,\boldsymbol\phi)\)</span>:
-\begin{itemize}
-\item <span style="color:blue">The first term encourages distributions to be centered on configurations of latent variables <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> explaining the observed data</span>
-\item <span style="color:red">The second term enforces distributions to be close to the prior.</span></p>
+<p>Maximiser la fonction <span class="math notranslate nohighlight">\(ELBO(\boldsymbol x,\boldsymbol\phi)\)</span>:</p>
+<ul class="simple">
+<li><p><span style="color:blue">The first term encourages distributions to be centered on configurations of latent variables <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> explaining the observed data</span></p></li>
+<li><p><span style="color:red">The second term enforces distributions to be close to the prior.</span></p></li>
+</ul>
 </section>
 </section>
 <section id="id2">
