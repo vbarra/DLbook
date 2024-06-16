@@ -187,6 +187,8 @@ plt.legend()
 plt.tight_layout()
 ```
 
+![](images/f.png)
+
 On définit ensuite certains paramètres pour le GAN et l'apprentissage
 
 ```python
