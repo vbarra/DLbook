@@ -32,19 +32,31 @@ Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE) 
 
 Un modèle à variables latentes met en relation un ensemble de variables observables $\boldsymbol x\in \mathcal X$ avec un ensemble de variables latentes  $\boldsymbol h\in \mathcal H$
 
-$$\prob(\boldsymbol x,\boldsymbol h) = \prob(\boldsymbol x|\boldsymbol h)\prob(\boldsymbol h)$$
+$$p(\boldsymbol x,\boldsymbol h) = p(\boldsymbol x|\boldsymbol h)p(\boldsymbol h)$$
 
-Si $\boldsymbol h$ sont des facteurs causaux pour  $\boldsymbol x$, alors échantillonner selon $\prob(\boldsymbol x|\boldsymbol h)$ permet de créer n modèle génératif de  $\mathcal H$ vers $\mathcal X$.
+Si $\boldsymbol h$ sont des facteurs causaux pour  $\boldsymbol x$, alors échantillonner selon $p(\boldsymbol x|\boldsymbol h)$ permet de créer n modèle génératif de  $\mathcal H$ vers $\mathcal X$.
 
-Pour l'inférence, étant donnée $\prob(\boldsymbol x,\boldsymbol h)$, il "suffit" de calculer 
+Pour l'inférence, étant donnée $p(\boldsymbol x,\boldsymbol h)$, il "suffit" de calculer 
 
-$$ \prob(\boldsymbol h|\boldsymbol x) = \frac{\prob(\boldsymbol x|\boldsymbol h)\prob(\boldsymbol h)}{\prob(\boldsymbol x)}$$
+$$ p(\boldsymbol h|\boldsymbol x) = \frac{p(\boldsymbol x|\boldsymbol h)p(\boldsymbol h)}{p(\boldsymbol x)}$$
 
-Malheureusement, $\prob(\boldsymbol x)$ est inaccessible.
+Malheureusement, $p(\boldsymbol x)$ est inaccessible.
 
 ### Inférence variationnelle
 
-L'inférence variationnelle transforme l'estimation de $\prob(\boldsymbol h|\boldsymbol x)$ en un problème d'optimisation.
+L'inférence variationnelle transforme l'estimation de $p(\boldsymbol h|\boldsymbol x)$ en un problème d'optimisation.
+
+On considère une famille de distributions $q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)$ approchant $p(\boldsymbol{h}|\boldsymbol x)$, où $\boldsymbol \phi$ sont les paramètres variationnels. Ces paramètres sont optimisés pour minimiser une distance entre $q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)$ et $p(\boldsymbol x,\boldsymbol h)$. Parmi toutes les distances possibles, on retient la divergence de Kullback-Leibler
+
+ $$KL(p\|q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}$$
+
+et ainsi : 
+$$\begin{align}
+KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h| \boldsymbol  x)) &=& \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)} \left [log\frac{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}{ p(\boldsymbol{h}|\boldsymbol x)} \right ]\\
+&=& \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [ log(q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))-log(p(\boldsymbol{x},\boldsymbol h))\right ] +log(p(\boldsymbol x))
+\end{align}$$
+
+Le dernier terme $log(p(\boldsymbol x)$ reste cependant toujours inaccessible.
 
 
 ## Autoencodeurs variationnels

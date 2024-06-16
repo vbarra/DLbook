@@ -183,8 +183,6 @@
 <li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Autoencodeurs variationnels</a></li>
-
-
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
 </ul>
 
@@ -286,11 +284,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Autoencodeurs variationnels</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-variationnelle">Inférence variationnelle</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Autoencodeurs variationnels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-variationnelle">Inférence variationnelle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-a-variables-latentes">Modèles à variables latentes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Inférence variationnelle</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Autoencodeurs variationnels</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -313,12 +313,27 @@ simuler (ou générer) des données réalistes <span class="math notranslate noh
 </figcaption>
 </figure>
 <p>Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE) et les réseaux antagonistes générateurs (GAN).</p>
+<section id="inference-variationnelle">
+<h2>Inférence variationnelle<a class="headerlink" href="#inference-variationnelle" title="Lien vers cette rubrique">#</a></h2>
+<section id="modeles-a-variables-latentes">
+<h3>Modèles à variables latentes<a class="headerlink" href="#modeles-a-variables-latentes" title="Lien vers cette rubrique">#</a></h3>
+<p>Un modèle à variables latentes met en relation un ensemble de variables observables <span class="math notranslate nohighlight">\(\boldsymbol x\in \mathcal X\)</span> avec un ensemble de variables latentes  <span class="math notranslate nohighlight">\(\boldsymbol h\in \mathcal H\)</span></p>
+<div class="math notranslate nohighlight">
+\[\prob(\boldsymbol x,\boldsymbol h) = \prob(\boldsymbol x|\boldsymbol h)\prob(\boldsymbol h)\]</div>
+<p>Si <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> sont des facteurs causaux pour  <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>, alors échantillonner selon <span class="math notranslate nohighlight">\(\prob(\boldsymbol x|\boldsymbol h)\)</span> permet de créer n modèle génératif de  <span class="math notranslate nohighlight">\(\mathcal H\)</span> vers <span class="math notranslate nohighlight">\(\mathcal X\)</span>.</p>
+<p>Pour l’inférence, étant donnée <span class="math notranslate nohighlight">\(\prob(\boldsymbol x,\boldsymbol h)\)</span>, il « suffit » de calculer</p>
+<div class="math notranslate nohighlight">
+\[ \prob(\boldsymbol h|\boldsymbol x) = \frac{\prob(\boldsymbol x|\boldsymbol h)\prob(\boldsymbol h)}{\prob(\boldsymbol x)}\]</div>
+<p>Malheureusement, <span class="math notranslate nohighlight">\(\prob(\boldsymbol x)\)</span> est inaccessible.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="inference-variationnelle">
-<h1>Inférence variationnelle<a class="headerlink" href="#inference-variationnelle" title="Lien vers cette rubrique">#</a></h1>
+<section id="id1">
+<h3>Inférence variationnelle<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
+<p>L’inférence variationnelle transforme l’estimation de <span class="math notranslate nohighlight">\(\prob(\boldsymbol h|\boldsymbol x)\)</span> en un problème d’optimisation.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Autoencodeurs variationnels<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h1>
+</section>
+<section id="id2">
+<h2>Autoencodeurs variationnels<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -385,11 +400,13 @@ simuler (ou générer) des données réalistes <span class="math notranslate noh
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Autoencodeurs variationnels</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-variationnelle">Inférence variationnelle</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Autoencodeurs variationnels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-variationnelle">Inférence variationnelle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-a-variables-latentes">Modèles à variables latentes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Inférence variationnelle</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Autoencodeurs variationnels</a></li>
+</ul>
   </nav></div>
 
 </div></div>
