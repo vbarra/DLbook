@@ -85,6 +85,8 @@ Finalement, étant donné un échantillon  $E_a = \{\boldsymbol x_i,i\in[\![1,N]
 
 $$\displaystyle\sum_{\boldsymbol x_i\in E_a}ELBO(\boldsymbol x_i,\boldsymbol \phi)$$
 
+Pour la maximiser, on peut utiliser une montée de gradient, maix $\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x_i,\boldsymbol \phi)$ est en général difficile à calculer.
+
 
 
 

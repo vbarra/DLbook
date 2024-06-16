@@ -362,6 +362,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <p>Finalement, étant donné un échantillon  <span class="math notranslate nohighlight">\(E_a = \{\boldsymbol x_i,i\in[\![1,N]\!]\}\)</span>, la fonction objectif finale est</p>
 <div class="math notranslate nohighlight">
 \[\displaystyle\sum_{\boldsymbol x_i\in E_a}ELBO(\boldsymbol x_i,\boldsymbol \phi)\]</div>
+<p>Pour la maximiser, on peut utiliser une montée de gradient, maix <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x_i,\boldsymbol \phi)\)</span> est en général difficile à calculer.</p>
 </section>
 </section>
 <section id="id2">
