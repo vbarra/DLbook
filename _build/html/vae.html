@@ -341,13 +341,13 @@ Source: Song et al., CVPR 2023.</p>
 <h1 class="rubric" id="latent-models">Latent models</h1>
 <div class="frame docutils">
 <p>Latent models A latent variable model relates a set of observable
-variables <span class="math notranslate nohighlight">\(\boldsymbol x\in X\)</span> to a set of latent variables
-<span class="math notranslate nohighlight">\(\boldsymbol h\in H\)</span>
-$<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}(\boldsymbol x,\boldsymbol h) = \textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)\textbf{\textsf{\textup{p}}}(\boldsymbol h)\)</span><span class="math notranslate nohighlight">\(
-if \)</span>\boldsymbol h<span class="math notranslate nohighlight">\( are causal factors for \)</span>\boldsymbol x<span class="math notranslate nohighlight">\( \)</span>\Rightarrow<span class="math notranslate nohighlight">\(
+variables <span class="math notranslate nohighlight">\(\boldsymbol x\in X\)</span> to a set of latent variables <span class="math notranslate nohighlight">\(\boldsymbol h\in H\)</span></p>
+<div class="math notranslate nohighlight">
+\[\textbf{\textsf{\textup{p}}}(\boldsymbol x,\boldsymbol h) = \textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)\textbf{\textsf{\textup{p}}}(\boldsymbol h)\]</div>
+<p>if <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> are causal factors for <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span>
 sampling from
-\)</span>\textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)<span class="math notranslate nohighlight">\( = generative
-process from \)</span>H<span class="math notranslate nohighlight">\( to \)</span>X$.</p>
+<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)\)</span> = generative
+process from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <div class="Lblock docutils">
 <p>Inference: given
 <span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}(\boldsymbol x,\boldsymbol h)\)</span>, compute
@@ -368,20 +368,24 @@ family of distributions approximating
 distributions.</p></li>
 <li><p>Among all similarity measures: Kullback Leibler divergence</p></li>
 </ul>
-<p>$<span class="math notranslate nohighlight">\(\begin{aligned}
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
 KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h| \boldsymbol  x)) &amp;=&amp; \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)} \left [log\frac{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}{ \textbf{\textsf{\textup{p}}}(\boldsymbol{h}|\boldsymbol x)} \right ]\\
 &amp;=&amp; \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [ log(\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))-log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h))\right ] +\textcolor{red}{log(\textbf{\textsf{\textup{p}}}(\boldsymbol x))}
-\end{aligned}\)</span>$ [Still intractable]{style= »color: red »}</p>
+\end{aligned}\end{split}\]</div>
+<p>[Still intractable]{style= »color: red »}</p>
 </div>
 </div>
 </div>
 <div class="docutils">
 <div class="frame docutils">
-<p>Latent models But… $<span class="math notranslate nohighlight">\(\begin{aligned}
+<p>Latent models But…</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
 \displaystyle\min_\phi KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h| \boldsymbol  x)) 
 &amp;=&amp;\displaystyle\min_\phi log(\textbf{\textsf{\textup{p}}}(\boldsymbol x))- \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h)) - log (\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
 &amp;=&amp;\displaystyle\max_\phi \underbrace{\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h)) - log (\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))\right ]}_{ELBO(\boldsymbol x,\phi)}
-\end{aligned}\)</span>$</p>
+\end{aligned}\end{split}\]</div>
 </div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="vae">
