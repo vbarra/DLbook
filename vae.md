@@ -59,6 +59,28 @@ KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h| \bolds
 
 Le dernier terme $log(p(\boldsymbol x)$ reste cependant toujours inaccessible.
 
+Cependant, 
+
+$$\begin{align}
+\displaystyle\min_\boldsymbol\phi KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h| \boldsymbol  x)) 
+&=&\displaystyle\min_\phi log(p(\boldsymbol x))- \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x},\boldsymbol h)) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
+&=&\displaystyle\max_\phi \underbrace{\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x},\boldsymbol h)) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]}_{ELBO(\boldsymbol x,\phi)}
+\end{align}$$
+
+avec ELBO(Evidence Lower Bound Objective) définie par 
+
+$$\begin{align}
+ELBO(\boldsymbol x,\boldsymbol\phi)&=&\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x},\boldsymbol h)) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ] \\
+&=& \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x}|\boldsymbol h))p(\boldsymbol h) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
+&=& \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [<span style="color:blue">log(p(\boldsymbol{x}|\boldsymbol h))</span>\right ]-<span style="color:red">KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))</span>
+\end{align}$$
+
+Maximiser la fonction $ELBO(\boldsymbol x,\boldsymbol\phi)$:
+\begin{itemize}
+\item <span style="color:blue">The first term encourages distributions to be centered on configurations of latent variables $\boldsymbol h$ explaining the observed data</span>
+\item <span style="color:red">The second term enforces distributions to be close to the prior.</span>
+
+
 
 ## Autoencodeurs variationnels
 
