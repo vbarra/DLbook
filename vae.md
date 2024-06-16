@@ -26,10 +26,26 @@ Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE) 
 
 
 
-# Inférence variationnelle
+## Inférence variationnelle
+
+### Modèles à variables latentes
+
+Un modèle à variables latentes met en relation un ensemble de variables observables $\boldsymbol x\in \mathcal X$ avec un ensemble de variables latentes  $\boldsymbol h\in \mathcal H$
+
+$$\prob(\boldsymbol x,\boldsymbol h) = \prob(\boldsymbol x|\boldsymbol h)\prob(\boldsymbol h)$$
+
+Si $\boldsymbol h$ sont des facteurs causaux pour  $\boldsymbol x$, alors échantillonner selon $\prob(\boldsymbol x|\boldsymbol h)$ permet de créer n modèle génératif de  $\mathcal H$ vers $\mathcal X$.
+
+Pour l'inférence, étant donnée $\prob(\boldsymbol x,\boldsymbol h)$, il "suffit" de calculer 
+
+$$ \prob(\boldsymbol h|\boldsymbol x) = \frac{\prob(\boldsymbol x|\boldsymbol h)\prob(\boldsymbol h)}{\prob(\boldsymbol x)}$$
+
+Malheureusement, $\prob(\boldsymbol x)$ est inaccessible.
+
+### Inférence variationnelle
+
+L'inférence variationnelle transforme l'estimation de $\prob(\boldsymbol h|\boldsymbol x)$ en un problème d'optimisation.
 
 
-
-
-# Autoencodeurs variationnels
+## Autoencodeurs variationnels
 

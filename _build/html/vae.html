@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>VAE &#8212; Apprentissage profond</title>
+    <title>Autoencodeurs variationnels &#8212; Apprentissage profond</title>
   
   
   
@@ -182,7 +182,8 @@
 <li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">VAE</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Autoencodeurs variationnels</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
 </ul>
@@ -275,7 +276,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>VAE</h1>
+    <h1>Autoencodeurs variationnels</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -285,8 +286,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">VAE</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Autoencodeurs variationnels</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-variationnelle">Inférence variationnelle</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Autoencodeurs variationnels</a></li>
 </ul>
 
             </nav>
@@ -299,281 +301,24 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="frame docutils">
-<div class="center docutils">
-<p><img alt="image" src="../images/VAE2.png" />{height= »80pt »}</p>
-</div>
-</div>
-<div class="docutils">
-<h1 class="rubric" id="generative-models">Generative models</h1>
-<div class="frame docutils">
-<p>Generative models</p>
-<div class="Lblock docutils">
-<p>Learning a model that represents the distribution of data, with input
-training samples</p>
-<div class="math notranslate nohighlight">
-\[\mathcal{P}_{model}(x)\sim  \mathcal{P}_{data}(x)\]</div>
-</div>
-</div>
-</div>
-<p><img alt="image" src="../images/mnist.png" /><span class="math notranslate nohighlight">\(\quad \Longrightarrow\quad\)</span>
-<img alt="image" src="../images/mnist2.png" /></p>
-<div class="docutils">
-<div class="frame docutils">
-<p>Generative models</p>
-<p><img alt="image" src="../images/generativemodels.png" /></p>
-<p>Source: G Louppe</p>
-</div>
-</div>
-<div class="frame docutils">
-<p>Generative models</p>
-<h3 class="rubric" id="the-landscape-of-generative-models">The landscape of generative models</h3>
-<p><img alt="image" src="../images/landscapegen" /></p>
-<p>Source: Song et al., CVPR 2023.</p>
-<div class="Lblock docutils">
-<ul class="simple">
-<li><p>Variational Autoencoders</p></li>
-<li><p>Generative Adversarial Networks</p></li>
-</ul>
-</div>
-</div>
-<div class="docutils">
-<h1 class="rubric" id="latent-models">Latent models</h1>
-<div class="frame docutils">
-<p>Latent models A latent variable model relates a set of observable
-variables <span class="math notranslate nohighlight">\(\boldsymbol x\in X\)</span> to a set of latent variables <span class="math notranslate nohighlight">\(\boldsymbol h\in H\)</span></p>
-<div class="math notranslate nohighlight">
-\[\textbf{\textsf{\textup{p}}}(\boldsymbol x,\boldsymbol h) = \textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)\textbf{\textsf{\textup{p}}}(\boldsymbol h)\]</div>
-<p>if <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> are causal factors for <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> <span class="math notranslate nohighlight">\(\Rightarrow\)</span>
-sampling from
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)\)</span> = generative
-process from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(X\)</span>.</p>
-<div class="Lblock docutils">
-<p>Inference: given
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}(\boldsymbol x,\boldsymbol h)\)</span>, compute
-$<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}(\boldsymbol h|\boldsymbol x) = \frac{\textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)\textbf{\textsf{\textup{p}}}(\boldsymbol h)}{\textcolor{red}{\textbf{\textsf{\textup{p}}}(\boldsymbol x)}}\)</span>$
-[Intractable]{style= »color: red »}</p>
-</div>
-</div>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>Latent models</p>
-<div class="Lblock docutils">
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)\)</span>:
-family of distributions approximating
-<span class="math notranslate nohighlight">\(\textbf{\textsf{\textup{p}}}(\boldsymbol{h}|\boldsymbol x)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\phi\)</span> is optimized to minimize the « distance » between both
-distributions.</p></li>
-<li><p>Among all similarity measures: Kullback Leibler divergence</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h| \boldsymbol  x)) &amp;=&amp; \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)} \left [log\frac{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}{ \textbf{\textsf{\textup{p}}}(\boldsymbol{h}|\boldsymbol x)} \right ]\\
-&amp;=&amp; \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [ log(\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))-log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h))\right ] +\textcolor{red}{log(\textbf{\textsf{\textup{p}}}(\boldsymbol x))}
-\end{aligned}\end{split}\]</div>
-<p>[Still intractable]{style= »color: red »}</p>
-</div>
-</div>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>Latent models But…</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-\displaystyle\min_\phi KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h| \boldsymbol  x)) 
-&amp;=&amp;\displaystyle\min_\phi log(\textbf{\textsf{\textup{p}}}(\boldsymbol x))- \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h)) - log (\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
-&amp;=&amp;\displaystyle\max_\phi \underbrace{\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h)) - log (\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))\right ]}_{ELBO(\boldsymbol x,\phi)}
-\end{aligned}\end{split}\]</div>
-</div>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="vae">
-<h1>VAE<a class="headerlink" href="#vae" title="Lien vers cette rubrique">#</a></h1>
-<div class="frame docutils">
-<p>Autoencoders</p>
-<p>myTrapezium/.pic = (0,0) – (0,)̱ – (,)̧ – (,-)̧ – (0,-)̱ – cycle ;
-(-center) at (/2,0); (-out) at (,0);</p>
-<p>= [thick, decoration=markings,mark=at position 1 with , double
-distance=1.4pt, shorten &gt;= 5.5pt, preaction = decorate, postaction =
-draw,line width=1.4pt, white,shorten &gt;= 4.5pt]</p>
-<div class="center docutils">
-</div>
-</div>
-<div class="Lblock docutils">
-<ul class="simple">
-<li><p>A neural network trained using unsupervised learning</p></li>
-<li><p>Trained to copy its input to its output</p></li>
-<li><p>Learns an embedding <span class="math notranslate nohighlight">\(h\)</span></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\hat{\boldsymbol x} = g[f(\boldsymbol x)]\quad h = f(\boldsymbol x)\]</div>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>Variational Autoencoders</p>
-<div class="center docutils">
-<p><img alt="image" src="../images/xhx" />{width= ».8\textwidth »}</p>
-</div>
-</div>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>ELBO</p>
-<div class="Lblock docutils">
-<div class="math notranslate nohighlight">
-\[\displaystyle\min_{\phi,\theta} (-ELBO(\boldsymbol x,\phi)) = -\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\textcolor{bluelimos}{log(\textbf{\textsf{\textup{p}}}_\theta(\boldsymbol{x}|\boldsymbol h))}\right ]+\textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))}\]</div>
-<ul class="simple">
-<li><p>Given <span class="math notranslate nohighlight">\(\theta\)</span>, optimize <span class="math notranslate nohighlight">\(\phi\)</span> so that latent variable distribution
-explains the observed data, while remaining close to the prior</p></li>
-<li><p>Given <span class="math notranslate nohighlight">\(\phi\)</span>, optimize <span class="math notranslate nohighlight">\(\theta\)</span> so that observed data is well
-explained by the latent variables.</p></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>Variational Autoencoders</p>
-</div>
-</div>
-<div class="frame docutils">
-<p>Variational Autoencoders</p>
-<p>Let <span class="math notranslate nohighlight">\(\boldsymbol x_1\cdots \boldsymbol x_n\)</span> be the training inputs.
-<span class="math notranslate nohighlight">\(\textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))} =\frac 1n\left [ -\frac 12 \displaystyle\sum_{i=1}^d \left ( 1+log\sigma^f_i(\boldsymbol x)-(\mu^f_i(\boldsymbol x))^2-\sigma^f_i(x)\right )\right ]\)</span></p>
-</div>
-<div class="frame docutils">
-<p>Reparameterization trick</p>
-<div class="columns docutils">
-<div class="Lblock docutils">
-<p>Expressing <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> as some differentiable and invertible
-transformation of another random variable <span class="math notranslate nohighlight">\(\epsilon\)</span> given
-<span class="math notranslate nohighlight">\(\boldsymbol x\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \epsilon,\quad \epsilon\sim \mathcal{N}(0,I)\]</div>
-</div>
-</div>
-</div>
-<div class="docutils">
-<p>Gradient can flow out of any random variable <span class="math notranslate nohighlight">\(\Rightarrow\)</span>
-backpropagation is possible.</p>
-</div>
-<div class="frame docutils">
-<p>Summary <img alt="image" src="../images/VAE2" />{height= »80pt »}</p>
-<div class="Lblock docutils">
-<ol class="arabic simple">
-<li><p>Define Encoder and Decoder</p></li>
-<li><p>Define the latent space distribution using the reparametrization
-trick</p></li>
-<li><p>Define the ELBO loss</p></li>
-<li><p>Train and play with VAE !</p></li>
-</ol>
-</div>
-</div>
-<div class="docutils">
-<h1 class="rubric" id="latent-space">Latent space</h1>
-<div class="frame docutils">
-<p>Exploration</p>
-<ul class="simple">
-<li><p>Changing one single variable <span class="math notranslate nohighlight">\(h_i\)</span> and keep all other <span class="math notranslate nohighlight">\(h_j\)</span> fixed.</p></li>
-<li><p>Dimensions of <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> encode different interpretable latent
-features.</p></li>
-</ul>
-<div class="center docutils">
-<p><img alt="image" src="../images/mnistlatent" />{width= ».45\textwidth »}
-<img alt="image" src="../images/fashionmnistlatent" />{width= ».45\textwidth »}</p>
-</div>
-</div>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>Disentanglement
-<img alt="image" src="../images/disentangle" />{width= ».7\textwidth »}<br />
-Kingma et al, 2014</p>
-</div>
-</div>
-<div class="frame docutils">
-<p>Disentanglement
-<img alt="image" src="../images/disentangle2" />{width= »\textwidth »} Amini and
-Soleimany, 2019</p>
-</div>
-<div class="frame docutils">
-<p>Disentanglement <span class="math notranslate nohighlight">\(\beta-VAE\)</span>: enforces disentanglement
-$<span class="math notranslate nohighlight">\(\displaystyle\min_{\phi,\theta} (-ELBO(\boldsymbol x,\phi)) = -\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\textcolor{bluelimos}{log(\textbf{\textsf{\textup{p}}}_\theta(\boldsymbol{x}|\boldsymbol h))}\right ]+\beta \textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))}\)</span>$
-<img alt="image" src="../images/betavae" />{width= ».6\textwidth »} Higgins et al.,
-2017</p>
-</div>
-<div class="frame docutils">
-<p>Exploration</p>
-<div class="center docutils">
-<p><img alt="image" src="../images/interpol" />{width= ».7\textwidth »}</p>
-</div>
-</div>
-<div class="columns docutils">
-<p><br />
-Interpolation in the image space</p>
-<p><br />
-Interpolation in the latent space</p>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>Sampling <img alt="image" src="../images/vaesampling" />{width= ».8\textwidth »}</p>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="autoencodeurs-variationnels">
+<h1>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien vers cette rubrique">#</a></h1>
+<p>Les autoencodeurs variationnels sont, comme les GAN (abordés dans le cours suivant), des modèles génératifs, c’est-à-dire des modèles probabilistes <span class="math notranslate nohighlight">\(p\)</span> pouvant être utilisés pour
+simuler (ou générer) des données réalistes <span class="math notranslate nohighlight">\(x\sim p(x,\boldsymbol\theta)\)</span>, aussi proches que possible de la vraie (mais inconnue) distribution des données <span class="math notranslate nohighlight">\(p(x)\)</span>, pour laquelle seul un échantillon de données est disponible.</p>
+<p>Le paysage de ces modèles génératifs s’est beaucoup peuplé depuis 2014 (<a class="reference internal" href="#landscape"><span class="std std-numref">Fig. 59</span></a>).</p>
+<figure class="align-default" id="landscape">
+<img alt="_images/landscapegen.png" src="_images/landscapegen.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Paysage des modèles génératifs (Source: <a class="reference external" href="https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546">Song et al., CVPR 2023</a>)</span><a class="headerlink" href="#landscape" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE) et les réseaux antagonistes générateurs (GAN).</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="implementation">
-<h1>Implementation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h1>
-<div class="frame docutils">
-<p>Encoder-Decoder myTrapezium/.pic = (0,0) – (0,)̱ – (,)̧ – (,-)̧ – (0,-)̱
-– cycle ; (-center) at (/2,0); (-out) at (,0);</p>
-<p>= [thick, decoration=markings,mark=at position 1 with , double
-distance=1.4pt, shorten &gt;= 5.5pt, preaction = decorate, postaction =
-draw,line width=1.4pt, white,shorten &gt;= 4.5pt]</p>
-<div class="center docutils">
-</div>
-</div>
-<div class="Lblock docutils">
-<ul class="simple">
-<li><p>MLP</p></li>
-<li><p>CNN</p></li>
-<li><p>RNN</p></li>
-</ul>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>Reparameterization trick myTrapezium/.pic = (0,0) – (0,)̱ – (,)̧ – (,-)̧
-– (0,-)̱ – cycle ; (-center) at (/2,0); (-out) at (,0);</p>
-<p>= [thick, decoration=markings,mark=at position 1 with , double
-distance=1.4pt, shorten &gt;= 5.5pt, preaction = decorate, postaction =
-draw,line width=1.4pt, white,shorten &gt;= 4.5pt]</p>
-<div class="center docutils">
-</div>
-</div>
-</div>
-<div class="math notranslate nohighlight">
-\[\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \epsilon,\quad \epsilon\sim \mathcal{N}(0,I)\]</div>
-<div class="center docutils">
-<p><img alt="image" src="../images/trick" />{width= »\textwidth »}</p>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>KL divergence
-$<span class="math notranslate nohighlight">\(\textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))} =\frac 1n\left [ -\frac 12 \displaystyle\sum_{i=1}^d \left ( 1+log\sigma^f_i(\boldsymbol x)-(\mu^f_i(\boldsymbol x))^2-\sigma^f_i(x)\right )\right ]\)</span>$</p>
-<div class="center docutils">
-<p><img alt="image" src="../images/KL" />{width= »\textwidth »}</p>
-</div>
-</div>
-</div>
-<div class="docutils">
-<div class="frame docutils">
-<p>And now gather all the stuff</p>
-<div class="center docutils">
-<p><img alt="image" src="../images/allvae" />{width= »\textwidth »}</p>
-</div>
-</div>
-</div>
-<div class="docutils">
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="inference-variationnelle">
+<h1>Inférence variationnelle<a class="headerlink" href="#inference-variationnelle" title="Lien vers cette rubrique">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Autoencodeurs variationnels<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -640,8 +385,9 @@ $<span class="math notranslate nohighlight">\(\textcolor{orange}{KL( \textbf{\te
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">VAE</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Autoencodeurs variationnels</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-variationnelle">Inférence variationnelle</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Autoencodeurs variationnels</a></li>
 </ul>
 
   </nav></div>
