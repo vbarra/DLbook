@@ -134,7 +134,7 @@ from IPython.display import Video
 Video("videos/GAN1D.mp4",embed =True,width=800)
 ```
 
-### Apprentissage d'une fonction de $\mathbb{R}\rightarrow \mathbb{R}$
+### Apprentissage d'une fonction de $\mathbb{R}^2\rightarrow \mathbb{R}$
 L'illustration est la même que précédemment, mais pour l'apprentissage de'une surface de $\mathbb{R}^3$
 ```{code-cell} ipython3
 from IPython.display import Video
@@ -149,4 +149,110 @@ Video("videos/GANMNIST9.mp4",embed =True,width=500)
 ```
 
 
+## Implémentation
 
+On propose ici d'implémenter un code permettant de générer des exemples suivant une fonction inconnue $f: \mathbb{R}\rightarrow \mathbb{R}$ (voir exemple précédent)
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils import data
+%matplotlib inline
+import matplotlib.pyplot as plt
+import numpy as np
+```
+
+On définit la fonction à reproduire, et on génère des exemples (données réelles)
+```python
+def f(x):
+  return x*x*x
+
+def real_data(n=100,l=-1,h=1):
+    X1 = (l+(h-l)*np.random.random(size=n)).reshape(n,1)
+    X2 = f(X1).reshape(n,1)
+    X = np.hstack((X1, X2))
+    
+    y = np.ones((n, 1))
+    return X, y
+
+x = np.linspace(-1,1,500)
+y = f(x)  
+plt.plot(x,y,color='red',label='f')
+(exemples,_)= real_data()
+plt.scatter(exemples[:, 0], exemples[:, 1],alpha=0.5,label='exemples')
+plt.axhline(color='black', lw=0.5)
+plt.axvline(color='black', lw=0.5)
+plt.legend()
+plt.tight_layout()
+```
+
+On définit ensuite certains paramètres pour le GAN et l'apprentissage
+
+```python
+data_dim = samples.shape[-1]
+hidden_dim = 5
+nbepochs = 8000
+batch_size = 100
+
+dataset = data.TensorDataset(torch.Tensor(exemples))
+dataloader = data.DataLoader(dataset, batch_size=batch_size)
+```
+
+Le générateur $G$ et le discriminateur $D$ sont de simples perceptrons à une couche cachée
+
+
+```python
+generator = nn.Sequential(
+    nn.Linear(hidden_dim, 32),
+    nn.ReLU(),
+    nn.Linear(32, data_dim)
+)
+G_optimizer = torch.optim.Adam(generator.parameters())
+
+
+discriminator = nn.Sequential(
+    nn.Linear(data_dim, 32),
+    nn.ReLU(),
+    nn.Linear(32, 1),
+    nn.Sigmoid()
+)
+D_optimizer = torch.optim.Adam(discriminator.parameters())
+```
+
+On entraîne enfin le GAN
+```python
+for epoch in range(nbepochs):
+    for real_data, in dataloader:
+        bs = len(real_data)
+
+        # Échantillonne des codes au hasard dans l'espace latent
+        z = torch.randn((len(real_data), hidden_dim))
+        # Génère les fakes
+        fake = generator(z)
+        # Prédiction de D sur ces données
+        predictions = discriminator(f)
+
+        # Classe "faux" = 0
+        fake_labels =  torch.zeros(len(f))
+        # Classe "vrai" = 1
+        true_labels = torch.ones(len(real_data))
+
+        # Entraîne le générateur
+        G_optimizer.zero_grad()
+        G_loss = torch.log(1 - predictions).mean()
+        G_loss.backward()
+        G_optimizer.step()
+
+        # Entraîne le discriminateur
+        D_optimizer.zero_grad()
+        predictions = discriminator(fake.detach())[:,0]
+        true_predictions = discriminator(real_data)[:,0]
+        D_loss = 0.5 * (F.binary_cross_entropy(predictions, fake_labels) + F.binary_cross_entropy(true_predictions, true_labels))
+
+        D_loss.backward()
+        D_optimizer.step()
+```
+
+Le résultat de l'apprentissage est alors visualisé en fonction des epochs.
+![](images/GAN1D.gif)
