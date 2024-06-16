@@ -90,6 +90,8 @@ Pour la maximiser, on peut utiliser une montée de gradient, maix $\nabla_{\bold
 
 ## Autoencodeurs variationnels
 
+### Principe
+
 Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes ({numref}`vae0`) tel que :
 - $p(\boldsymbol h)$ est prescrit à l'avance
 - la vraisemblance $p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h)$ est un décodeur (réseau génératif) $D_{\boldsymbol\theta}$ tel que $\boldsymbol\Phi = D_{\boldsymbol\theta}(\boldsymbol h)$ où $\boldsymbol \Phi$  sont les paramètres de la distribution des données. Par exemple 
@@ -129,7 +131,18 @@ Un choix classique est
 
 $$\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \varepsilon,\quad \varepsilon\sim \mathcal{N}(0,I)$$ 
 
-On montre alors que $\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)$ peut 
+On montre alors que $\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)$ peut être estimé par méthode de Monte Carlo.
+
+### Exemple
+Soit $\boldsymbol h\in\mathbb{R}^d$. On suppose que la distribution de la variable latente suit une loi normale centrée réduite $p(\boldsymbol h) = \mathcal N(\boldsymbol 0,\boldsymbol I)$.
+
+Alors $$p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h),\sigma^2_{\boldsymbol\theta}(\boldsymbol h)\boldsymbol I)$$
+où on modéliser le décodeur $D_{\boldsymbol\theta}$ par : 
+- $\boldsymbol\mu_{\boldsymbol\theta}(\boldsymbol h) = \boldsymbol W_1^\top \boldsymbol h + \boldsymbol b_1$
+- $log(\boldsymbol\sigma_{\boldsymbol\theta}(\boldsymbol h)) = \boldsymbol W_2^\top \boldsymbol h + \boldsymbol b_2$
+- $\boldsymbol h = ReLU(\boldsymbol W_3^\top \boldsymbol h + \boldsymbol b_3)$
+
+avec donc $\boldsymbol\theta = (\boldsymbol W_1,\boldsymbol W_2,\boldsymbol W_3,\boldsymbol b_1,\boldsymbol b_2,\boldsymbol b_3)$
 
 
 
