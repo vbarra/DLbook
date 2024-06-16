@@ -121,10 +121,15 @@ L'optimisation peut se faire par montée de gradients :
 - $\nabla_{\boldsymbol\theta}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) = \mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left [\nabla_{\boldsymbol\theta}(log p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right ]$ peut être estimé (par exemple par méthode de Monte Carlo)
 - $\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)$ est plus difficile à estimer (on ne peut rétropropager le gradient à travers $\boldsymbol h$ pour calculer $\nabla_{\boldsymbol\phi}$)
 
-La solution à ce problème est appelée *astuce de reparamétrisation* (reparameterization trick) : on exprime $\boldsymbol h$ à l'aide d'une transformation différentiable et inversible d'une autre variable aléatoire $\varepsilon$, étant donnés $\boldsymbol x$ et ${\boldsymbol\phi$
+La solution à ce problème est appelée *astuce de reparamétrisation* (reparameterization trick) : on exprime $\boldsymbol h$ à l'aide d'une transformation différentiable et inversible $F$ d'une autre variable aléatoire $\varepsilon$, étant donnés $\boldsymbol x$ et $\boldsymbol\phi$, de telle sorte que la distribution de $\varepsilon$ est indépendante de  $\boldsymbol x$ et $\boldsymbol\phi$ : 
+
+$$\boldsymbol h = F(\boldsymbol\phi\boldsymbol x,\boldsymbol\varepsilon)$$
+
+Un choix classique est 
 
 $$\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \varepsilon,\quad \varepsilon\sim \mathcal{N}(0,I)$$ 
 
-de telle sorte que la distribution de $\varepsilon$ est indépendante de  $\boldsymbol x$ et ${\boldsymbol\phi$.
+On montre alors que $\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)$ peut 
+
 
 
