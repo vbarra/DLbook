@@ -399,10 +399,13 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <li><p><span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\theta}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) = \mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left [\nabla_{\boldsymbol\theta}(log p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right ]\)</span> peut être estimé (par exemple par méthode de Monte Carlo)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\)</span> est plus difficile à estimer (on ne peut rétropropager le gradient à travers <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> pour calculer <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}\)</span>)</p></li>
 </ul>
-<p>La solution à ce problème est appelée <em>astuce de reparamétrisation</em> (reparameterization trick) : on exprime <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> à l’aide d’une transformation différentiable et inversible d’une autre variable aléatoire <span class="math notranslate nohighlight">\(\varepsilon\)</span>, étant donnés <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span></p>
+<p>La solution à ce problème est appelée <em>astuce de reparamétrisation</em> (reparameterization trick) : on exprime <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> à l’aide d’une transformation différentiable et inversible <span class="math notranslate nohighlight">\(F\)</span> d’une autre variable aléatoire <span class="math notranslate nohighlight">\(\varepsilon\)</span>, étant donnés <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span>, de telle sorte que la distribution de <span class="math notranslate nohighlight">\(\varepsilon\)</span> est indépendante de  <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol h = F(\boldsymbol\phi\boldsymbol x,\boldsymbol\varepsilon)\]</div>
+<p>Un choix classique est</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \varepsilon,\quad \varepsilon\sim \mathcal{N}(0,I)\]</div>
-<p>de telle sorte que la distribution de <span class="math notranslate nohighlight">\(\varepsilon\)</span> est indépendante de  <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> et <span class="math notranslate nohighlight">\({\boldsymbol\phi\)</span>.</p>
+<p>On montre alors que <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\)</span> peut</p>
 </section>
 </section>
 
