@@ -339,6 +339,24 @@ KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h| \bolds
 &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [ log(q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))-log(p(\boldsymbol{x},\boldsymbol h))\right ] +log(p(\boldsymbol x))
 \end{align}\end{split}\]</div>
 <p>Le dernier terme <span class="math notranslate nohighlight">\(log(p(\boldsymbol x)\)</span> reste cependant toujours inaccessible.</p>
+<p>Cependant,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\displaystyle\min_\boldsymbol\phi KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h| \boldsymbol  x)) 
+&amp;=&amp;\displaystyle\min_\phi log(p(\boldsymbol x))- \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x},\boldsymbol h)) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
+&amp;=&amp;\displaystyle\max_\phi \underbrace{\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x},\boldsymbol h)) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]}_{ELBO(\boldsymbol x,\phi)}
+\end{align}\end{split}\]</div>
+<p>avec ELBO(Evidence Lower Bound Objective) définie par</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x},\boldsymbol h)) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ] \\
+&amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x}|\boldsymbol h))p(\boldsymbol h) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
+&amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [&lt;span style=&quot;color:blue&quot;&gt;log(p(\boldsymbol{x}|\boldsymbol h))&lt;/span&gt;\right ]-&lt;span style=&quot;color:red&quot;&gt;KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))&lt;/span&gt;
+\end{align}\end{split}\]</div>
+<p>Maximiser la fonction <span class="math notranslate nohighlight">\(ELBO(\boldsymbol x,\boldsymbol\phi)\)</span>:
+\begin{itemize}
+\item <span style="color:blue">The first term encourages distributions to be centered on configurations of latent variables <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> explaining the observed data</span>
+\item <span style="color:red">The second term enforces distributions to be close to the prior.</span></p>
 </section>
 </section>
 <section id="id2">
