@@ -58,9 +58,10 @@ Source: Song et al., CVPR 2023.
 
 ::: frame
 Latent models A latent variable model relates a set of observable
-variables $\boldsymbol x\in X$ to a set of latent variables
-$\boldsymbol h\in H$
+variables $\boldsymbol x\in X$ to a set of latent variables $\boldsymbol h\in H$
+
 $$\textbf{\textsf{\textup{p}}}(\boldsymbol x,\boldsymbol h) = \textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)\textbf{\textsf{\textup{p}}}(\boldsymbol h)$$
+
 if $\boldsymbol h$ are causal factors for $\boldsymbol x$ $\Rightarrow$
 sampling from
 $\textbf{\textsf{\textup{p}}}(\boldsymbol x|\boldsymbol h)$ = generative
@@ -90,16 +91,21 @@ Latent models
 $$\begin{aligned}
 KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h| \boldsymbol  x)) &=& \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)} \left [log\frac{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}{ \textbf{\textsf{\textup{p}}}(\boldsymbol{h}|\boldsymbol x)} \right ]\\
 &=& \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [ log(\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))-log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h))\right ] +\textcolor{red}{log(\textbf{\textsf{\textup{p}}}(\boldsymbol x))}
-\end{aligned}$$ [Still intractable]{style="color: red"}
+\end{aligned}$$ 
+
+[Still intractable]{style="color: red"}
 :::
 :::
 
 ::: frame
-Latent models But\... $$\begin{aligned}
+Latent models But\... 
+
+$$\begin{aligned}
 \displaystyle\min_\phi KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h| \boldsymbol  x)) 
 &=&\displaystyle\min_\phi log(\textbf{\textsf{\textup{p}}}(\boldsymbol x))- \mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h)) - log (\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
 &=&\displaystyle\max_\phi \underbrace{\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(\textbf{\textsf{\textup{p}}}(\boldsymbol{x},\boldsymbol h)) - log (\textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x))\right ]}_{ELBO(\boldsymbol x,\phi)}
 \end{aligned}$$
+
 :::
 
 # VAE
@@ -140,6 +146,7 @@ Variational Autoencoders
 ELBO
 
 ::: Lblock
+
 $$\displaystyle\min_{\phi,\theta} (-ELBO(\boldsymbol x,\phi)) = -\mathbb{E}_{ \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\textcolor{bluelimos}{log(\textbf{\textsf{\textup{p}}}_\theta(\boldsymbol{x}|\boldsymbol h))}\right ]+\textcolor{orange}{KL( \textbf{\textsf{\textup{p}}}_{\phi} (\boldsymbol{h}|\boldsymbol x)|| \textbf{\textsf{\textup{p}}}(\boldsymbol h))}$$
 
 -   Given $\theta$, optimize $\phi$ so that latent variable distribution

@@ -114,7 +114,7 @@ Puisque $\mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$ est minimum si et seule
 L'entraînement d'un tel GAN, formulé de manière standard, pose des comportements pathologiques :
 - *Oscillations sans convergence* : contrairement à la minimisation de perte standard, la descente de gradient stochastique alternée n'a aucune garantie de convergence.
 - *Gradients disparus (vanishing gradients)* : lorsque le classificateur $D$ est trop bon, la fonction $f$ sature et les gradients deviennent nuls, empêchant $G$ de se mettre à jour.
-- *Effondrement des modes (mode collapsing)* : le générateur $G$ modélise très bien une petite sous-population, en se concentrant sur quelques modes de la distribution des données : lorsque $G$ et entraîné à $D$ fixé, il produit un mode $x^*$ qui trompe au mieux $D$. Lorsque $D$ est entraîné, la meilleure manière pour lui de détecter des données générées par $G$ est de se concentrer sur ce mode $x^*$. Ainsi $G$ est encouragé à ne produire que $x^*$ ({numref}`collapse`)
+- *Effondrement des modes (mode collapsing)* : le générateur $G$ modélise très bien une petite sous-population, en se concentrant sur quelques modes de la distribution des données : lorsque $G$ est entraîné à $D$ fixé, il produit un mode $x^*$ qui trompe au mieux $D$. Lorsque $D$ est entraîné, la meilleure manière pour lui de détecter des données générées par $G$ est de se concentrer sur ce mode $x^*$. Ainsi $G$ est encouragé à ne produire que $x^*$ ({numref}`collapse`).
 
 
 ```{figure} ./images/collapse.png
@@ -122,7 +122,7 @@ L'entraînement d'un tel GAN, formulé de manière standard, pose des comporteme
 Mode collapsing (source :{cite:p}`Metz2016`)
 ```
 
-Des solutions existent pour chacun de ces problèmes, mais ne sont pas abordées ici. On trouvera [ici](https://github.com/hindupuravinash/the-gan-zoo) des modèles de GAN répondant à ces problématiques, ainsi que de nombreux autres.
+Des solutions existent pour chacun de ces problèmes, mais ne sont pas abordées dans ce cours. On trouvera [ici](https://github.com/hindupuravinash/the-gan-zoo) des modèles de GAN répondant à ces problématiques, ainsi que de nombreux autres.
 
 ## Quelques exemples
 
@@ -134,7 +134,7 @@ Video("videos/GAN1D.mp4",embed =True,width=800)
 ```
 
 ### Apprentissage d'une fonction de $\mathbb{R}^2\rightarrow \mathbb{R}$
-L'illustration est la même que précédemment, mais pour l'apprentissage de'une surface de $\mathbb{R}^3$
+L'illustration est la même que précédemment, mais pour l'apprentissage d'une surface de $\mathbb{R}^3$
 ```{code-cell} ipython3
 from IPython.display import Video
 Video("videos/GAN2D.mp4",embed =True,width=800)
@@ -150,7 +150,7 @@ Video("videos/GANMNIST9.mp4",embed =True,width=500)
 
 ## Implémentation
 
-On propose ici d'implémenter un code permettant de générer des exemples suivant une fonction inconnue $f: \mathbb{R}\rightarrow \mathbb{R}$ (voir exemple précédent)
+On propose ici d'implémenter un code permettant de générer des exemples suivant une fonction inconnue $f: \mathbb{R}\rightarrow \mathbb{R}$ (voir exemple précédent).
 
 ```python
 import torch
@@ -162,7 +162,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 ```
 
-On définit la fonction à reproduire, et on génère des exemples (données réelles)
+On définit la fonction à reproduire, et on génère des exemples (données réelles).
 ```python
 def f(x):
   return x*x*x
@@ -189,7 +189,7 @@ plt.tight_layout()
 ![](images/f.png)
 
 
-On définit ensuite certains paramètres pour le GAN et l'apprentissage
+On définit ensuite certains paramètres pour le GAN et l'apprentissage.
 
 ```python
 data_dim = exemples.shape[-1]
@@ -201,7 +201,7 @@ dataset = data.TensorDataset(torch.Tensor(exemples))
 dataloader = data.DataLoader(dataset, batch_size=batch_size)
 ```
 
-Le générateur $G$ et le discriminateur $D$ sont de simples perceptrons à une couche cachée
+Le générateur $G$ et le discriminateur $D$ sont de simples perceptrons à une couche cachée.
 
 
 ```python
@@ -222,7 +222,7 @@ D = nn.Sequential(
 D_optimizer = torch.optim.Adam(D.parameters())
 ```
 
-On entraîne enfin le GAN
+On entraîne enfin le GAN.
 ```python
 for epoch in range(nbepochs):
     for real_data, in dataloader:
