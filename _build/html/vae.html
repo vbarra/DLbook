@@ -353,11 +353,15 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [log(p(\boldsymbol{x}|\boldsymbol h))p(\boldsymbol h) - log (q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x))\right ]\\
 &amp;=&amp; \mathbb{E}_{ q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)}  \left [\color{blue}{log(p(\boldsymbol{x}|\boldsymbol h))}\right ]-\color{red}{KL( q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)|| p(\boldsymbol h))}
 \end{align}\end{split}\]</div>
-<p>En maximisant la fonction <span class="math notranslate nohighlight">\(ELBO(\boldsymbol x,\boldsymbol\phi)\)</span> :</p>
+<p>Dans l’équation prédécente, on a éliminé <span class="math notranslate nohighlight">\(\displaystyle\min_\phi log(p(\boldsymbol x))\)</span> qui ne dépend pas de <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span>.</p>
+<p>E&lt;n maximisant la fonction <span class="math notranslate nohighlight">\(ELBO(\boldsymbol x,\boldsymbol\phi)\)</span> :</p>
 <ul class="simple">
 <li><p><span style="color:blue"> le premier terme encourage les distribitions à converger dans les configurations des variables latentes <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> expliquant les données observées </span></p></li>
 <li><p><span style="color:red"> le second terme force les distribution à être proches du prior.</span></p></li>
 </ul>
+<p>Finalement, étant donné un échantillon  <span class="math notranslate nohighlight">\(E_a = \{\boldsymbol x_i,i\in[\![1,N]\!]\}\)</span>, la fonction objectif finale est</p>
+<div class="math notranslate nohighlight">
+\[\displaystyle\sum_{\boldsymbol x_i\in E_a}ELBO(\boldsymbol x_i,\boldsymbol \phi)\]</div>
 </section>
 </section>
 <section id="id2">
