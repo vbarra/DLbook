@@ -389,11 +389,16 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-\boldsymbol\theta^*,\boldsymbol\phi^* &amp;=&amp; Arg\; max_{\boldsymbol\theta,\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\\
+\boldsymbol\theta^*,\boldsymbol\phi^* &amp;=&amp; Arg\; max_{\boldsymbol\theta,\boldsymbol\phi}\; ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\\
 &amp;=&amp;Arg\; max_{\boldsymbol\theta,\boldsymbol\phi}\left [\mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left (log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right )-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))\right ]
 \end{align}
 \end{split}\]</div>
 <p>Etant donné <span class="math notranslate nohighlight">\(D_{\boldsymbol\theta}\)</span>, on veut ajuster les variables latentes, en optimissant <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span>, de sorte à ce qu’elles expliquent les données observées, tout en restant près de données générées par <span class="math notranslate nohighlight">\(p(\boldsymbol h)\)</span>. De même, étant donné <span class="math notranslate nohighlight">\(E_{\boldsymbol\phi}\)</span>, on veut ajuster les variables observées, en optimissant <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>, de telle sorte qu’elles soient le plus possible expliquées par les variables latentes.</p>
+<p>L’optimisation peut se faire par montée de gradients :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\theta}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) = \mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left [\nabla_{\boldsymbol\theta}(log p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right ]\)</span> peut être estimé (par exemple par méthode de Monte Carlo)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\)</span> est plus difficile à estimer.</p></li>
+</ul>
 </section>
 </section>
 
