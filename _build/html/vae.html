@@ -370,7 +370,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <p>Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes tel que :</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(\boldsymbol h)\)</span> est prescrit à l’avance</p></li>
-<li><p>la vraisemblance <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h)\)</span> est un décodeur (réseau génératif) <span class="math notranslate nohighlight">\(D__{\boldsymbol\theta}\)</span> tel que <span class="math notranslate nohighlight">\(\boldsymbol\Phi = D_{\boldsymbol\theta}(\boldsymbol h)\)</span> où <span class="math notranslate nohighlight">\(\\boldsymbol Phi\)</span>  sont les paramètres de la distribution des données. Par exemple</p></li>
+<li><p>la vraisemblance <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h)\)</span> est un décodeur (réseau génératif) <span class="math notranslate nohighlight">\(D_{\boldsymbol\theta}\)</span> tel que <span class="math notranslate nohighlight">\(\boldsymbol\Phi = D_{\boldsymbol\theta}(\boldsymbol h)\)</span> où <span class="math notranslate nohighlight">\(\\boldsymbol Phi\)</span>  sont les paramètres de la distribution des données. Par exemple</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\mu,\sigma  = D_{\boldsymbol\theta}(\boldsymbol h), \quad p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h) = \mathcal N(\boldsymbol x,\mu,\sigma^2 \boldsymbol I)\]</div>
