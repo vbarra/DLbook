@@ -86,9 +86,9 @@ En notant $KL(p||q)$ la divergence de Kullback-Leibler entre $p$ et $q$ et $JSD$
 $$
 \begin{aligned}
 & \min _\boldsymbol\theta \max _\boldsymbol\phi f(\boldsymbol\theta,\boldsymbol\phi)=\min _\boldsymbol\theta f(\boldsymbol\theta,\boldsymbol\phi_{\boldsymbol\theta}^*) \\
-& =\min _\boldsymbol\theta \mathbb{E}_{x \sim p(x)}\left[\log \frac{p(x)}{q(x ; \boldsymbol\theta)+p(x)}\right]+\mathbb{E}_{x \sim q(x ; \theta)}\left[\log \frac{q(x ; \boldsymbol\theta)}{q(x ; \boldsymbol\theta)+p(x)}\right] \\
-& =\min _\boldsymbol\theta \mathrm{KL}\left(p(x) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right) +\mathrm{KL}\left(q(x ; \boldsymbol\theta) \| \frac{p(x)+q(x ; \boldsymbol\theta)}{2}\right)-\log 4 \\
-& =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))-\log 4
+& =\min _\boldsymbol\theta \mathbb{E}_{x \sim p(x)}\left[\log \frac{p(x)}{q(x, \boldsymbol\theta)+p(x)}\right]+\mathbb{E}_{x \sim q(x, \theta)}\left[\log \frac{q(x, \boldsymbol\theta)}{q(x, \boldsymbol\theta)+p(x)}\right] \\
+& =\min _\boldsymbol\theta \mathrm{KL}\left(p(x) \| \frac{p(x)+q(x, \boldsymbol\theta)}{2}\right) +\mathrm{KL}\left(q(x, \boldsymbol\theta) \| \frac{p(x)+q(x, \boldsymbol\theta)}{2}\right)-\log 4 \\
+& =\min _\boldsymbol\theta 2 \mathrm{JSD}(p(x) \| q(x, \boldsymbol\theta))-\log 4
 \end{aligned} 
 $$
 
@@ -106,9 +106,9 @@ $$JSD(p,q)=\frac12 (KL(p\|m) + KL(q\|m))\quad\textrm{avec }m = \frac12(p+q)$$
 
 Ainsi 
 
-$$\boldsymbol\theta^* = Arg\; min_{\boldsymbol\theta}\;max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi) = Arg\; min_{\boldsymbol\theta}\; \mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$$
+$$\boldsymbol\theta^* = Arg\; min_{\boldsymbol\theta}\;max_{\boldsymbol\phi}f(\boldsymbol\theta,\boldsymbol\phi) = Arg\; min_{\boldsymbol\theta}\; \mathrm{JSD}(p(x) \| q(x, \boldsymbol\theta))$$
 
-Puisque $\mathrm{JSD}(p(x) \| q(x ; \boldsymbol\theta))$ est minimum si et seulement si $\forall x, p(x) = q(x ; \boldsymbol\theta)$, alors la solution du problème minimax correspond à un modèle génératif qui reproduit la distribution des données d'entrée.
+Puisque $\mathrm{JSD}(p(x) \| q(x, \boldsymbol\theta))$ est minimum si et seulement si $\forall x, p(x) = q(x, \boldsymbol\theta)$, alors la solution du problème minimax correspond à un modèle génératif qui reproduit la distribution des données d'entrée.
 
 ## Problèmes
 L'entraînement d'un tel GAN, formulé de manière standard, pose des comportements pathologiques :
