@@ -407,7 +407,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 </ul>
 <p>La solution à ce problème est appelée <em>astuce de reparamétrisation</em> (reparameterization trick) : on exprime <span class="math notranslate nohighlight">\(\boldsymbol h\)</span> à l’aide d’une transformation différentiable et inversible <span class="math notranslate nohighlight">\(F\)</span> d’une autre variable aléatoire <span class="math notranslate nohighlight">\(\varepsilon\)</span>, étant donnés <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span>, de telle sorte que la distribution de <span class="math notranslate nohighlight">\(\varepsilon\)</span> est indépendante de  <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span> :</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol h = F(\boldsymbol\phi\boldsymbol x,\boldsymbol\varepsilon)\]</div>
+\[\boldsymbol h = F(\boldsymbol\phi,\boldsymbol x,\boldsymbol\varepsilon)\]</div>
 <p>Un choix classique est</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol h = \mu(\boldsymbol x,\phi) + \sigma(\boldsymbol x,\phi)\odot \varepsilon,\quad \varepsilon\sim \mathcal{N}(0,I)\]</div>
@@ -438,6 +438,15 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol z = ReLU(\boldsymbol W_6^\top \boldsymbol x + \boldsymbol b_6)\)</span></p></li>
 </ul>
 <p>avec donc <span class="math notranslate nohighlight">\(\boldsymbol\phi = (\boldsymbol W_4,\boldsymbol W_5,\boldsymbol W_6,\boldsymbol b_4,\boldsymbol b_5,\boldsymbol b_6)\)</span></p>
+<p>Le calcul de ELBO est alors</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)}\left (log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h))\right )-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))\\
+&amp;=&amp; \mathbb{E}_{p(\boldsymbol\varepsilon)}\left (log(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h=F(\boldsymbol\phi,\boldsymbol x,\boldsymbol\varepsilon)))\right )-KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h))
+\end{split}\]</div>
+<p>où</p>
+<div class="math notranslate nohighlight">
+\[KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h)) = \frac12\displaystyle\sum_{i=1}^d \left (1+log({\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)) - {\mu_j}^2_{\boldsymbol\phi}(\boldsymbol x)-{\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)\right )\]</div>
 </section>
 </section>
 </section>
