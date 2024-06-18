@@ -297,7 +297,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-classique">VAE classique</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-condiitonnel">VAE condiitonnel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-conditionnel">VAE conditionnel</a></li>
 </ul>
 </li>
 </ul>
@@ -632,8 +632,8 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 </figure>
 <p>Le nombre d’epoches est faible, la génération n’est pas optimale.</p>
 </section>
-<section id="vae-condiitonnel">
-<h3>VAE condiitonnel<a class="headerlink" href="#vae-condiitonnel" title="Lien vers cette rubrique">#</a></h3>
+<section id="vae-conditionnel">
+<h3>VAE conditionnel<a class="headerlink" href="#vae-conditionnel" title="Lien vers cette rubrique">#</a></h3>
 <p>On modifie légèrement l’architecture précédente en ajoutant l’information du label de l’exemple au décodeur. Pour cela il faut d’abord encoder le label (en one-hot)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_classes</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">def</span> <span class="nf">l_2_onehot</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="n">nb_classes</span><span class="o">=</span><span class="n">n_classes</span><span class="p">):</span>
@@ -783,7 +783,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-classique">VAE classique</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-condiitonnel">VAE condiitonnel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-conditionnel">VAE conditionnel</a></li>
 </ul>
 </li>
 </ul>

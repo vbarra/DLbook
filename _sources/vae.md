@@ -362,7 +362,7 @@ Le nombre d'epoches est faible, la génération n'est pas optimale.
 
 
 
-### VAE condiitonnel
+### VAE conditionnel
 
 On modifie légèrement l'architecture précédente en ajoutant l'information du label de l'exemple au décodeur. Pour cela il faut d'abord encoder le label (en one-hot)
 
