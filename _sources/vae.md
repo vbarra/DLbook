@@ -337,3 +337,24 @@ plt.legend(loc='best')
 Apprentissage du VAE
 ```
 
+On affiche alors des exemples d'images reconstruites
+```python
+plot_reconstruction(model)
+```
+
+```{figure} ./images/reconstruction.png
+:name: recons
+Exemples d'images reconstruites $\hat x = D(E(x))$ 
+```
+
+
+et des exemples d'images générées
+```python
+plot_generation(model)
+```
+
+```{figure} ./images/generation.png
+:name: generation
+Exemples d'images générées $x=D(h)$
+```
+

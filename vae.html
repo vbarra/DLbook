@@ -609,6 +609,26 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <p><span class="caption-number">Fig. 61 </span><span class="caption-text">Apprentissage du VAE</span><a class="headerlink" href="#recon" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
+<p>On affiche alors des exemples d’images reconstruites</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_reconstruction</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="recons">
+<img alt="_images/reconstruction.png" src="_images/reconstruction.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Exemples d’images reconstruites <span class="math notranslate nohighlight">\(\hat x = D(E(x))\)</span></span><a class="headerlink" href="#recons" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>et des exemples d’images générées</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_generation</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="generation">
+<img alt="_images/generation.png" src="_images/generation.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h)\)</span></span><a class="headerlink" href="#generation" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
 </section>
 </section>
 </section>
