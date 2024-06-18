@@ -285,6 +285,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-de-diffusion">Modèle de diffusion</a></li>
 </ul>
             </nav>
         </div>
@@ -317,6 +318,28 @@ document.write(`
 <p><span class="caption-number">Fig. 70 </span><span class="caption-text">Illustration du modèle de diffusion (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id1">[<a class="reference internal" href="transferLearning.html#id61" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">26</a>]</span></a>)</span><a class="headerlink" href="#diffusion" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="modele-de-diffusion">
+<h2>Modèle de diffusion<a class="headerlink" href="#modele-de-diffusion" title="Lien vers cette rubrique">#</a></h2>
+<p>Soit <span class="math notranslate nohighlight">\((q(\mathbf{x}_0)\)</span>) la distribution des données réelles. On échantillonne <span class="math notranslate nohighlight">\((\mathbf{x}_0 \sim q(\mathbf{x}_0)\)</span>) et on définit un processus de diffusion avant <span class="math notranslate nohighlight">\((q(\mathbf{x}_t | \mathbf{x}_{t-1})\)</span>) qui ajoute un bruit gaussien à chaque pas de temps <span class="math notranslate nohighlight">\(t\)</span>, selon une mise à jour de la variance connue  <span class="math notranslate nohighlight">\(0 &lt; \beta_1 &lt; \beta_2 &lt; ... &lt; \beta_T &lt; 1\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[
+q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t} \mathbf{x}_{t-1}, \beta_t \mathbf{I})
+\]</div>
+<p>Chaque donnée <span class="math notranslate nohighlight">\(\boldsymbol x_t\)</span> est ainsi tirée selon une distribution conditionnelle gaussienne  <span class="math notranslate nohighlight">\(\mathbf{\mu}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1}\)</span> et  <span class="math notranslate nohighlight">\(\sigma^2_t = \beta_t\)</span>,ce qui peut être réalisé en échantillonnant selon  <span class="math notranslate nohighlight">\(\mathbf{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})\)</span> et en posant  <span class="math notranslate nohighlight">\(\mathbf{x}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1} +  \sqrt{\beta_t} \mathbf{\epsilon}\)</span>.</p>
+<p>Note that the <span class="math notranslate nohighlight">\((\beta_t\)</span>) aren’t constant at each time step <span class="math notranslate nohighlight">\((t\)</span>) (hence the subscript) — in fact one defines a so-called <strong>« variance schedule »</strong>, which can be linear, quadratic, cosine, etc. as we will see further (a bit like a learning rate schedule).</p>
+<p>So starting from <span class="math notranslate nohighlight">\((\mathbf{x}_0\)</span>), we end up with <span class="math notranslate nohighlight">\((\mathbf{x}_1,  ..., \mathbf{x}_t, ..., \mathbf{x}_T\)</span>), where <span class="math notranslate nohighlight">\((\mathbf{x}_T\)</span>) is pure Gaussian noise if we set the schedule appropriately.</p>
+<p>Now, if we knew the conditional distribution <span class="math notranslate nohighlight">\((p(\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span>), then we could run the process in reverse: by sampling some random Gaussian noise <span class="math notranslate nohighlight">\((\mathbf{x}_T\)</span>), and then gradually « denoise » it so that we end up with a sample from the real distribution <span class="math notranslate nohighlight">\((\mathbf{x}_0\)</span>).</p>
+<p>However, we don’t know <span class="math notranslate nohighlight">\((p(\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span>). It’s intractable since it requires knowing the distribution of all possible images in order to calculate this conditional probability. Hence, we’re going to leverage a neural network to <strong>approximate (learn) this conditional probability distribution</strong>, let’s call it <span class="math notranslate nohighlight">\((p_\theta (\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span>), with <span class="math notranslate nohighlight">\((\theta\)</span>) being the parameters of the neural network, updated by gradient descent.</p>
+<p>Ok, so we need a neural network to represent a (conditional) probability distribution of the backward process. If we assume this reverse process is Gaussian as well, then recall that any Gaussian distribution is defined by 2 parameters:</p>
+<ul class="simple">
+<li><p>a mean parametrized by <span class="math notranslate nohighlight">\(\mu_\theta\)</span>;</p></li>
+<li><p>a variance parametrized by <span class="math notranslate nohighlight">\(\Sigma_\theta\)</span>;</p></li>
+</ul>
+<p>so we can parametrize the process as</p>
+<div class="math notranslate nohighlight">
+\[ p_\theta (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))\]</div>
+<p>where the mean and variance are also conditioned on the noise level <span class="math notranslate nohighlight">\((t\)</span>).</p>
 </section>
 </section>
 
@@ -376,6 +399,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-de-diffusion">Modèle de diffusion</a></li>
 </ul>
   </nav></div>
 
