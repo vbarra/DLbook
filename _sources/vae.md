@@ -293,13 +293,13 @@ class VAE(nn.Module):
         return mu + eps * std
 
     def decode(self, z):
-        h = F.relu(self.fc4(z))
-        return torch.sigmoid(self.fc5(h))
+        z = F.relu(self.fc4(z))
+        return torch.sigmoid(self.fc5(z))
     
     def forward(self, x):
         mu, log_var = self.encode(x)
-        z = self.reparameterize(mu, log_var)
-        x_reconst = self.decode(z)
+        h = self.reparameterize(mu, log_var)
+        x_reconst = self.decode(h)
         return x_reconst, mu, log_var
 
 model = VAE().to(device)
@@ -357,4 +357,80 @@ plot_generation(model)
 :name: generation
 Exemples d'images générées $x=D(h)$
 ```
+
+Le nombre d'epoches est faible, la génération n'est pas optimale.
+
+
+
+### VAE condiitonnel
+
+On modifie légèrement l'architecture précédente en ajoutant l'information du label de l'exemple au décodeur. Pour cela il faut d'abord encoder le label (en one-hot)
+
+```python
+n_classes = 10
+def l_2_onehot(labels,nb_classes=n_classes):
+    l_onehot = torch.FloatTensor(labels.shape[0], nb_digits)
+    l_onehot.zero_()
+    l_onehot.scatter_(1, labels.unsqueeze(1), 1)
+    return l_onehot
+```
+
+On modifie ensuite l'architecture précédente
+
+```python
+class VAE_Cond(nn.Module):
+    def __init__(self, image_size=784, h_dim=400, z_dim=20, n_classes = 10):
+        super(VAE_Cond, self).__init__()
+        self.fc1 = nn.Linear(image_size, h_dim)
+        self.fc2 = nn.Linear(h_dim, z_dim)
+        self.fc3 = nn.Linear(h_dim, z_dim)
+        self.fc4 = nn.Linear(z_dim+n_classes, h_dim)
+        self.fc5 = nn.Linear(h_dim, image_size)
+        
+    def encode(self, x):
+        h = F.relu(self.fc1(x))
+        return self.fc2(h), self.fc3(h)
+    
+    def reparameterize(self, mu, log_var):
+        std = torch.exp(log_var/2)
+        eps = torch.randn_like(std)
+        return mu + eps * std
+
+    def decode(self, z, l_onehot):
+        # Concaténation de l'information de classe à la variable latente
+        x = torch.cat([z, l_onehot], 1)
+        z = F.relu(self.fc4(x))
+        return torch.sigmoid(self.fc5(z))     
+    
+    def forward(self, x, l_onehot):
+        mu, log_var = self.encode(x)
+        h = self.reparameterize(mu, log_var)
+        x_reconst = self.decode(h,l_onehot)
+        return x_reconst, mu, log_var
+```
+
+et on entraîne. Ici $\beta$ permet de mettre à l'échelle la KL-divergence (voir [$\beta$-VAE](https://openreview.net/forum?id=Sy2fzU9gl))
+
+```python
+def train_C(model, data_loader=data_loader,num_epochs=num_epochs, beta=10., verbose=True):
+    model.train(True)
+    for epoch in range(num_epochs):
+        for i, (x, labels) in enumerate(data_loader):
+            # Forward pass
+            x = x.to(device).view(-1, image_size)
+            l_onehot = l_2_onehot(labels)
+            l_onehot = l_onehot.to(device)
+            labels = labels.to(device)
+            x_reconst, mu, log_var = model(x,l_onehot)
+            
+            reconst_loss = F.mse_loss(x_reconst, x, reduction='sum')
+            kl_div =  - 0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
+            
+            loss = reconst_loss + beta*kl_div
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+```
+
+
 
