@@ -416,7 +416,6 @@ def train_C(model, data_loader=data_loader,num_epochs=num_epochs, beta=10., verb
     model.train(True)
     for epoch in range(num_epochs):
         for i, (x, labels) in enumerate(data_loader):
-            # Forward pass
             x = x.to(device).view(-1, image_size)
             l_onehot = l_2_onehot(labels)
             l_onehot = l_onehot.to(device)

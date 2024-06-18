@@ -6,8 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proof Index &#8212; Apprentissage profond</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modèles de diffusion &#8212; Apprentissage profond</title>
   
   
   
@@ -58,18 +59,14 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'prf-prf';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'diffusion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
-
+    <link rel="prev" title="Réseaux antagonistes générateurs" href="gan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="fr"/>
-
-    <script>
-      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
-    </script>
-
-
   </head>
   
   
@@ -129,8 +126,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -177,7 +172,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
@@ -188,7 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modèles de diffusion</a></li>
 </ul>
 
     </div>
@@ -266,7 +261,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -277,11 +274,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>Modèles de diffusion</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -291,132 +296,43 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="modeles-de-diffusion">
+<h1>Modèles de diffusion<a class="headerlink" href="#modeles-de-diffusion" title="Lien vers cette rubrique">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique">#</a></h2>
+<p>Un modèle de diffusion (de débruitage) trnsforment du bruit à partir d’une distribution simple en un échantillon de données. Lorsque les données sont des images, le modèle se compose de deux processus</p>
+<ul class="simple">
+<li><p>un processus de diffusion vers l’avant <span class="math notranslate nohighlight">\(q\)</span>, choisi, qui ajoute progressivement du bruit gaussien à une image, jusqu’à aboutir à du bruit pur</p></li>
+<li><p>un processus de diffusion inverse de débruitage <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span> , modélisé par un réseau de neurones, entraîné à débruiter progressivement une image à partir d’un bruit pur, jusqu’à obtenir une image réelle.</p></li>
+</ul>
+<p>Les processus sont temporels, indexés par le temps <span class="math notranslate nohighlight">\(t\in[\![0,T]\!]. A \)</span>t=0<span class="math notranslate nohighlight">\(, on  échantillonne une image réelle \)</span>\boldsymbol 𝐱_0<span class="math notranslate nohighlight">\( de la distribution de données. Le processus \)</span>q<span class="math notranslate nohighlight">\( échantillonne un bruit provenant d'une distribution gaussienne à chaque pas de temps \)</span>t<span class="math notranslate nohighlight">\( ,  ajouté à l'image du pas de temps précédent. Si \)</span>T<span class="math notranslate nohighlight">\( est suffisamment et que les processus d'ajout de bruit est correcton obtient une distribution gaussienne isotrope à \)</span>t=T$.</p>
+<div class="proof remark dropdown admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Une distribution gaussienne isotrope <span class="math notranslate nohighlight">\(\mathcal N(\boldsymbol \mu,\boldsymbol \Sigma)\)</span> est telle que <span class="math notranslate nohighlight">\(\boldsymbol \Sigma = \sigma^2\boldsymbol I\)</span>.</p>
+</section>
+</div></section>
+</section>
 
-   <h1>Proof Index</h1>
-
-   <div class="modindex-jumpbox">
-   <a href="#cap-AEB"><strong>AEB</strong></a> | 
-   <a href="#cap-adaline"><strong>adaline</strong></a> | 
-   <a href="#cap-backprop"><strong>backprop</strong></a> | 
-   <a href="#cap-correction"><strong>correction</strong></a> | 
-   <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
-   <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
-   <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
-   <a href="#cap-descente"><strong>descente</strong></a> | 
-   <a href="#cap-example-1"><strong>example-1</strong></a> | 
-   <a href="#cap-example-4"><strong>example-4</strong></a> | 
-   <a href="#cap-norm"><strong>norm</strong></a> | 
-   <a href="#cap-norm2"><strong>norm2</strong></a> | 
-   <a href="#cap-remark-0"><strong>remark-0</strong></a>
-   </div>
-
-   <table class="indextable modindextable">
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-AEB"><td></td><td>
-       <strong>AEB</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="ae.html#AEB"><code class="xref">AEB</code></a> <em>(ae)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-adaline"><td></td><td>
-       <strong>adaline</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="NN.html#adaline"><code class="xref">adaline</code></a> <em>(NN)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-backprop"><td></td><td>
-       <strong>backprop</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="PMC.html#backprop"><code class="xref">backprop</code></a> <em>(PMC)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-correction"><td></td><td>
-       <strong>correction</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="NN.html#correction"><code class="xref">correction</code></a> <em>(NN)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-0"><td></td><td>
-       <strong>definition-0</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="cnn.html#definition-0"><code class="xref">definition-0</code></a> <em>(cnn)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-1"><td></td><td>
-       <strong>definition-1</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="NN.html#definition-1"><code class="xref">definition-1</code></a> <em>(NN)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-2"><td></td><td>
-       <strong>definition-2</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="NN.html#definition-2"><code class="xref">definition-2</code></a> <em>(NN)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-descente"><td></td><td>
-       <strong>descente</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="NN.html#descente"><code class="xref">descente</code></a> <em>(NN)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-1"><td></td><td>
-       <strong>example-1</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="gnn.html#example-1"><code class="xref">example-1</code></a> <em>(gnn)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-4"><td></td><td>
-       <strong>example-4</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="NN.html#example-4"><code class="xref">example-4</code></a> <em>(NN)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-norm"><td></td><td>
-       <strong>norm</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="cnn.html#norm"><code class="xref">norm</code></a> <em>(cnn)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-norm2"><td></td><td>
-       <strong>norm2</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="cnn.html#norm2"><code class="xref">norm2</code></a> <em>(cnn)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-remark-0"><td></td><td>
-       <strong>remark-0</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="diffusion.html#remark-0"><code class="xref">remark-0</code></a> <em>(diffusion)</em></td><td>
-       <em>remark</em></td></tr>
-   </table>
-
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -428,6 +344,15 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="gan.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Réseaux antagonistes générateurs</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -435,7 +360,20 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
