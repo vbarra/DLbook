@@ -300,18 +300,24 @@ document.write(`
 <h1>Modèles de diffusion<a class="headerlink" href="#modeles-de-diffusion" title="Lien vers cette rubrique">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique">#</a></h2>
-<p>Un modèle de diffusion (de débruitage) trnsforment du bruit à partir d’une distribution simple en un échantillon de données. Lorsque les données sont des images, le modèle se compose de deux processus</p>
+<p>Un modèle de diffusion (de débruitage) transforme du bruit à partir d’une distribution simple en un échantillon de données. Lorsque les données sont des images, le modèle se compose de deux processus (<a class="reference internal" href="#diffusion"><span class="std std-numref">Fig. 70</span></a>):</p>
 <ul class="simple">
 <li><p>un processus de diffusion vers l’avant <span class="math notranslate nohighlight">\(q\)</span>, choisi, qui ajoute progressivement du bruit gaussien à une image, jusqu’à aboutir à du bruit pur</p></li>
 <li><p>un processus de diffusion inverse de débruitage <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span> , modélisé par un réseau de neurones, entraîné à débruiter progressivement une image à partir d’un bruit pur, jusqu’à obtenir une image réelle.</p></li>
 </ul>
-<p>Les processus sont temporels, indexés par le temps <span class="math notranslate nohighlight">\(t\in[\![0,T]\!]\)</span>. A <span class="math notranslate nohighlight">\(t=0\)</span>, on  échantillonne une image réelle <span class="math notranslate nohighlight">\(\boldsymbol 𝐱_0\)</span> de la distribution de données. Le processus <span class="math notranslate nohighlight">\(q\)</span> échantillonne un bruit provenant d’une distribution gaussienne à chaque pas de temps <span class="math notranslate nohighlight">\(t\)</span> ,  ajouté à l’image du pas de temps précédent. Si <span class="math notranslate nohighlight">\(T\)</span> est suffisamment et que les processus d’ajout de bruit est correcton obtient une distribution gaussienne isotrope à <span class="math notranslate nohighlight">\(t=T\)</span>.</p>
+<p>Les processus sont temporels, indexés par le temps <span class="math notranslate nohighlight">\(t\in[\![0,T]\!]\)</span>. A <span class="math notranslate nohighlight">\(t=0\)</span>, on  échantillonne une image réelle <span class="math notranslate nohighlight">\(\boldsymbol 𝐱_0\)</span> de la distribution de données. Le processus <span class="math notranslate nohighlight">\(q\)</span> échantillonne un bruit provenant d’une distribution gaussienne à chaque pas de temps <span class="math notranslate nohighlight">\(t\)</span> ,  ajouté à l’image du pas de temps précédent. Si <span class="math notranslate nohighlight">\(T\)</span> est suffisamment et que les processus d’ajout de bruit est correct, on obtient une distribution gaussienne isotrope à <span class="math notranslate nohighlight">\(t=T\)</span>.</p>
 <div class="proof remark dropdown admonition" id="remark-0">
 <p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
 <section class="remark-content" id="proof-content">
 <p>Une distribution gaussienne isotrope <span class="math notranslate nohighlight">\(\mathcal N(\boldsymbol \mu,\boldsymbol \Sigma)\)</span> est telle que <span class="math notranslate nohighlight">\(\boldsymbol \Sigma = \sigma^2\boldsymbol I\)</span>.</p>
 </section>
-</div></section>
+</div><figure class="align-default" id="diffusion">
+<img alt="_images/diffusion.png" src="_images/diffusion.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Illustration du modèle de diffusion (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id1">[<a class="reference internal" href="transferLearning.html#id61" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">26</a>]</span></a>)</span><a class="headerlink" href="#diffusion" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
