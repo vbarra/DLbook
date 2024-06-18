@@ -176,3 +176,164 @@ où
 $$KL(q_{\boldsymbol\phi}(\boldsymbol h|\boldsymbol x)||p(\boldsymbol h)) = \frac12\displaystyle\sum_{i=1}^d \left (1+log({\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)) - {\mu_j}^2_{\boldsymbol\phi}(\boldsymbol x)-{\sigma_j}_{\boldsymbol\phi}^2(\boldsymbol x)\right )$$
 
 dont les dérivées peuvent être évaluées analytiquement.
+
+### En résumé
+
+Pour utiliser un VAE il suffit donc 
+- de définir l'encodeur et le décodeur
+- de définir la distribution de l'espace latent en utilisant l'astuce de reparamétrisation
+- de définir la fonction de perte ELBO
+- d'entraîner le tout et d'apprécier les données générées !
+
+## Implémentation
+
+On propose ici d'implémenter un auto-encodeur variationnel, et une variation de ce modèle intégrant une génération conditionnelle. Le jeu de données utilisé est [Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist).
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torchvision
+from torchvision import transforms
+```
+
+On se donne des fonctions d'affichage des images reconstruites et générées.
+
+```python
+def show(img):
+    plt.imshow(np.transpose(img.numpy(), (1,2,0)), interpolation='nearest')
+    
+# Affichage d'images reconstruites
+def plot_reconstruction(model, n=24):
+    x,_ = next(iter(data_loader))
+    x = x[:n,:,:,:].to(device)
+    try:
+        out, _, _, log_p = model(x.view(-1, image_size)) 
+    except:
+        out, _, _ = model(x.view(-1, image_size)) 
+    x_concat = torch.cat([x.view(-1, 1, 28, 28), out.view(-1, 1, 28, 28)], dim=3)
+    out_grid = torchvision.utils.make_grid(x_concat).cpu().data
+    show(out_grid)
+
+# Affichage d'images générées par le VAE classique
+def plot_generation(model, n=24):
+    with torch.no_grad():
+        z = torch.randn(n, z_dim).to(device)
+        out = model.decode(z).view(-1, 1, 28, 28)
+
+    out_grid = torchvision.utils.make_grid(out).cpu()
+    show(out_grid)
+
+# Affichage d'images générées par le VAE où la génération est conditionnée par la classe.
+def plot_conditional_generation(model, n=8):
+    plt.figure()
+    with torch.no_grad():
+        matrix = np.zeros((n,n_classes))
+        matrix[:,0] = 1
+
+        final = matrix[:]
+        for i in range(1,n_classes):
+            final = np.vstack((final,np.roll(matrix,i)))
+        z = torch.randn(8, z_dim)
+        z = z.repeat(n_classes,1).to(device)
+        y_onehot = torch.tensor(final).type(torch.FloatTensor).to(device)
+        out = model.decode(z,y_onehot).view(-1, 1, 28, 28)
+
+    out_grid = torchvision.utils.make_grid(out).cpu()
+    show(out_grid)
+```
+
+On charge ensuite les données
+
+```python
+data_dir = 'data'
+trainbatch_size = 128
+testbatch_size = 16
+
+dataset = torchvision.datasets.FashionMNIST(root=data_dir,train=True,transform=transforms.ToTensor(),download=True)
+data_loader = torch.utils.data.DataLoader(dataset=dataset,batch_size=trainbatch_size, shuffle=True)
+test_loader = torch.utils.data.DataLoader(torchvision.datasets.MNIST(data_dir, train=False, download=True, transform=transforms.ToTensor()),batch_size=testbatch_size, shuffle=False)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+```
+
+### VAE classique
+
+On construit tout d'abord un VAE classique
+
+```python
+image_size = 784
+h_dim = 400
+z_dim = 20
+num_epochs = 15
+learning_rate = 1e-3
+```
+
+```python
+class VAE(nn.Module):
+    def __init__(self, image_size=784, h_dim=400, z_dim=20):
+        super(VAE, self).__init__()
+        self.fc1 = nn.Linear(image_size, h_dim)
+        self.fc2 = nn.Linear(h_dim, z_dim)
+        self.fc3 = nn.Linear(h_dim, z_dim)
+        self.fc4 = nn.Linear(z_dim, h_dim)
+        self.fc5 = nn.Linear(h_dim, image_size)
+        
+    def encode(self, x):
+        h = F.relu(self.fc1(x))
+        return self.fc2(h), self.fc3(h)
+    
+    # Astuce de reparamétrisation
+    def reparameterize(self, mu, log_var):
+        std = torch.exp(log_var/2)
+        eps = torch.randn_like(std)
+        return mu + eps * std
+
+    def decode(self, z):
+        h = F.relu(self.fc4(z))
+        return torch.sigmoid(self.fc5(h))
+    
+    def forward(self, x):
+        mu, log_var = self.encode(x)
+        z = self.reparameterize(mu, log_var)
+        x_reconst = self.decode(z)
+        return x_reconst, mu, log_var
+
+model = VAE().to(device)
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+```
+
+On entraîne ensuite ce modèle
+```python 
+Recon = []
+KL = []
+
+for epoch in range(num_epochs):
+    for i,(x, _) in enumerate(data_loader):
+        x = x.to(device).view(-1, image_size)
+        x_reconst, mu, log_var = model(x)
+        
+        reconst_loss = F.mse_loss(x_reconst, x, reduction='sum')
+        kl_div = - 0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
+        
+        loss = reconst_loss + kl_div
+        if i%10==0:
+            Recon.append( reconst_loss.item()/len(x))
+            KL.append(kl_div.item()/len(x))
+        
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+plt.plot(Recon,color='r',label='Reconstruction Loss')
+plt.plot(KL,color='b',label='Divergence KL')
+plt.legend(loc='best')
+```
+
+```{figure} ./images/recon.png
+:name: recon
+Apprentissage du VAE
+```
+
