@@ -432,5 +432,9 @@ def train_C(model, data_loader=data_loader,num_epochs=num_epochs, beta=10., verb
             optimizer.step()
 ```
 
+```{figure} ./images/generationc.png
+:name: generation2
+Exemples d'images générées $x=D(h,c)$
+```
 
 
