@@ -33,7 +33,7 @@ Illustration du modèle de diffusion (source : [{cite:p}`Ho20`](https://proceedi
 
 ## Modèle de diffusion
 
-Soit $(q(\mathbf{x}_0)$) la distribution des données réelles. On échantillonne $(\mathbf{x}_0 \sim q(\mathbf{x}_0)$) et on définit un processus de diffusion avant $(q(\mathbf{x}_t | \mathbf{x}_{t-1})$) qui ajoute un bruit gaussien à chaque pas de temps $t$, selon une mise à jour de la variance connue  $0 < \beta_1 < \beta_2 < ... < \beta_T < 1$ : 
+Soit $q(\mathbf{x}_0)$ la distribution des données réelles. On échantillonne (\mathbf{x}_0 \sim q(\mathbf{x}_0)$ et on définit un processus de diffusion avant $q(\mathbf{x}_t | \mathbf{x}_{t-1})$ qui ajoute un bruit gaussien à chaque pas de temps $t\in[\![1,T]\!]$, selon une mise à jour de la variance connue  $0 < \beta_1 < \beta_2 < ... < \beta_T < 1$ : 
 
 $$
 q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t} \mathbf{x}_{t-1}, \beta_t \mathbf{I})
@@ -41,20 +41,10 @@ $$
 
 Chaque donnée $\boldsymbol x_t$ est ainsi tirée selon une distribution conditionnelle gaussienne  $\mathbf{\mu}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1}$ et  $\sigma^2_t = \beta_t$,ce qui peut être réalisé en échantillonnant selon  $\mathbf{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$ et en posant  $\mathbf{x}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1} +  \sqrt{\beta_t} \mathbf{\epsilon}$. 
 
-Note that the $(\beta_t$) aren't constant at each time step $(t$) (hence the subscript) --- in fact one defines a so-called **"variance schedule"**, which can be linear, quadratic, cosine, etc. as we will see further (a bit like a learning rate schedule). 
+En définissant les $\beta_t$ correctement, $\mathbf{x}_T$ est un bruit gaussien.
 
-So starting from $(\mathbf{x}_0$), we end up with $(\mathbf{x}_1,  ..., \mathbf{x}_t, ..., \mathbf{x}_T$), where $(\mathbf{x}_T$) is pure Gaussian noise if we set the schedule appropriately.
+Si on connaissait la distribution conditionnelle  $p(\mathbf{x}_{t-1} | \mathbf{x}_t)$, alors on pourrait calculer le processus inverse en tirant $\mathbf{x}_T$ selon une distribution gaussienne isotrope, et en "débruitant" progressivement pour aboutir en $t=0$ à une réalisation $\mathbf{x}_0$$ de la distribution des données. Cependant, $p(\mathbf{x}_{t-1} | \mathbf{x}_t)$ n'est pas accessible et on utiliser un réseau de neurones $p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t)$ pour approcher cette distribution conditionnelle, où $\boldsymbol \theta$ est l'ensemble des paramètres du réseau.
 
-Now, if we knew the conditional distribution $(p(\mathbf{x}_{t-1} | \mathbf{x}_t)$), then we could run the process in reverse: by sampling some random Gaussian noise $(\mathbf{x}_T$), and then gradually "denoise" it so that we end up with a sample from the real distribution $(\mathbf{x}_0$).
+SI on suppose que le processus inverse est gaussien, alors on peut écrire 
 
-However, we don't know $(p(\mathbf{x}_{t-1} | \mathbf{x}_t)$). It's intractable since it requires knowing the distribution of all possible images in order to calculate this conditional probability. Hence, we're going to leverage a neural network to **approximate (learn) this conditional probability distribution**, let's call it $(p_\theta (\mathbf{x}_{t-1} | \mathbf{x}_t)$), with $(\theta$) being the parameters of the neural network, updated by gradient descent. 
-
-Ok, so we need a neural network to represent a (conditional) probability distribution of the backward process. If we assume this reverse process is Gaussian as well, then recall that any Gaussian distribution is defined by 2 parameters:
-- a mean parametrized by $\mu_\theta$;
-- a variance parametrized by $\Sigma_\theta$;
-
-so we can parametrize the process as 
-
-$$ p_\theta (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))$$
-
-where the mean and variance are also conditioned on the noise level $(t$).
+$$ p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))$$
