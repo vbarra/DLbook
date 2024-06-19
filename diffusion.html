@@ -288,8 +288,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-de-diffusion">Modèle de diffusion</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele">Modèle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apprentissage">Apprentissage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reseau-de-neurones">Réseau de neurones</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
             </nav>
         </div>
@@ -305,7 +307,7 @@ document.write(`
 <h1>Modèles de diffusion<a class="headerlink" href="#modeles-de-diffusion" title="Lien vers cette rubrique">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique">#</a></h2>
-<p>Un modèle de diffusion (de débruitage) transforme du bruit à partir d’une distribution simple en un échantillon de données. Lorsque les données sont des images, le modèle se compose de deux processus (<a class="reference internal" href="#diffusion"><span class="std std-numref">Fig. 70</span></a>):</p>
+<p>Un modèle de diffusion (de débruitage) transforme du bruit à partir d’une distribution simple en un échantillon de données. Lorsque les données sont des images, le modèle se compose de deux processus (<a class="reference internal" href="#diffusion"><span class="std std-numref">Fig. 70</span></a>) :</p>
 <ul class="simple">
 <li><p>un processus de diffusion vers l’avant <span class="math notranslate nohighlight">\(q\)</span>, choisi, qui ajoute progressivement du bruit gaussien à une image, jusqu’à aboutir à du bruit pur</p></li>
 <li><p>un processus de diffusion inverse de débruitage <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span> , modélisé par un réseau de neurones, entraîné à débruiter progressivement une image à partir d’un bruit pur, jusqu’à obtenir une image réelle.</p></li>
@@ -334,11 +336,14 @@ q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t
 \]</div>
 <p>Chaque donnée <span class="math notranslate nohighlight">\(\boldsymbol x_t\)</span> est ainsi tirée selon une distribution conditionnelle gaussienne  <span class="math notranslate nohighlight">\(\mathbf{\mu}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1}\)</span> et  <span class="math notranslate nohighlight">\(\sigma^2_t = \beta_t\)</span>,ce qui peut être réalisé en échantillonnant selon  <span class="math notranslate nohighlight">\(\mathbf{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})\)</span> et en posant  <span class="math notranslate nohighlight">\(\mathbf{x}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1} +  \sqrt{\beta_t} \mathbf{\varepsilon}\)</span>.</p>
 <p>En définissant les <span class="math notranslate nohighlight">\(\beta_t\)</span> correctement, <span class="math notranslate nohighlight">\(\mathbf{x}_T\)</span> est un bruit gaussien.</p>
+<p>Originellement, la croissance des <span class="math notranslate nohighlight">\(\beta_t\)</span> a été supposée linéaire, de <span class="math notranslate nohighlight">\(\beta_1 = 10^{−4}\)</span> à <span class="math notranslate nohighlight">\(\beta_T = 0.02\)</span> <span id="id2">[<a class="reference internal" href="transferLearning.html#id61" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">26</a>]</span>. Cependant, des auteurs ont montré qu’une mise à jour des coefficients <span class="math notranslate nohighlight">\(\beta_t\)</span> à l’aide d’un cosinus était plus efficace :</p>
+<div class="math notranslate nohighlight">
+\[\beta_t = 1-\frac{\bar{\alpha_t}}{\bar{\alpha_t}-1}\textrm{ avec } \bar{\alpha_t} = \frac{f(t)}{f(0)}\textrm{où } f(t) = cos\left (\frac{\pi}{2}\frac{t/T+s}{1+s}\right ), s \textrm{ offset}\]</div>
 <p>Si on connaissait la distribution conditionnelle  <span class="math notranslate nohighlight">\(p(\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span>, alors on pourrait calculer le processus inverse en tirant <span class="math notranslate nohighlight">\(\mathbf{x}_T\)</span> selon une distribution gaussienne isotrope, et en « débruitant » progressivement pour aboutir en <span class="math notranslate nohighlight">\(t=0\)</span> à une réalisation <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> de la distribution des données. Cependant, <span class="math notranslate nohighlight">\(p(\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span> n’est pas accessible et on utilise un réseau de neurones <span class="math notranslate nohighlight">\(p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span> pour approcher cette distribution conditionnelle, où <span class="math notranslate nohighlight">\(\boldsymbol \theta\)</span> est l’ensemble des paramètres du réseau.</p>
 <p>Si on suppose que le processus inverse est gaussien, alors on peut écrire</p>
 <div class="math notranslate nohighlight">
 \[ p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))\]</div>
-<p>Le réseau doit donc apprendre la moyenne et la variance, qui dependent du temps. Dans l’implémentation initiale <span id="id2">[<a class="reference internal" href="transferLearning.html#id61" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">26</a>]</span>, les auteurs relaxent la contrainte de la variance (<span class="math notranslate nohighlight">\(\Sigma_\theta ( \mathbf{x}_t, t) = \sigma^2_t \mathbf{I}\)</span>), et apprennent uniquement la moyenne. Dans les implémentations suivantes (par exemple <a class="reference external" href="https://openreview.net/pdf?id=-NEXDKk8gZ">celle-ci</a>), la contrainte a été prise en compte.</p>
+<p>Le réseau doit donc apprendre la moyenne et la variance, qui dependent du temps. Dans l’implémentation initiale <span id="id3">[<a class="reference internal" href="transferLearning.html#id61" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">26</a>]</span>, les auteurs relaxent la contrainte de la variance (<span class="math notranslate nohighlight">\(\Sigma_\theta ( \mathbf{x}_t, t) = \sigma^2_t \mathbf{I}\)</span>), et apprennent uniquement la moyenne. Dans les implémentations suivantes (par exemple <a class="reference external" href="https://openreview.net/pdf?id=-NEXDKk8gZ">celle-ci</a>), la contrainte a été prise en compte.</p>
 <p>Dans la suite, on suppose seulement apprendre la moyenne.</p>
 </section>
 <section id="apprentissage">
@@ -349,13 +354,13 @@ q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t
 <p>Par construction de <span class="math notranslate nohighlight">\(q\)</span>, puisque la somme de gaussiennes est égalemment gaussienne, on peut échantillonner <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> pour tout <span class="math notranslate nohighlight">\(t\)</span> conditionnellement à <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> : ainsi</p>
 <div class="math notranslate nohighlight">
 \[q(\mathbf{x}_t | \mathbf{x}_0) = \cal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t} \mathbf{x}_0, (1- \bar{\alpha}_t) \mathbf{I})\]</div>
-<p>avec  <span class="math notranslate nohighlight">\(\alpha_t := 1 - \beta_t\)</span> et  <span class="math notranslate nohighlight">\(\bar{\alpha_t} := \displaystyle\prod_{s=1}^{t} \alpha_s\)</span>.</p>
+<p>avec  <span class="math notranslate nohighlight">\(\alpha_t = 1 - \beta_t\)</span> et  <span class="math notranslate nohighlight">\(\bar{\alpha_t} = \displaystyle\prod_{s=1}^{t} \alpha_s\)</span>.</p>
 <p>Les <span class="math notranslate nohighlight">\(\bar{\alpha}_t\)</span> sont des fonctions des  <span class="math notranslate nohighlight">\(\beta_t\)</span>, permettant de mettre à jour la variance. Ces derniers étant connus, les <span class="math notranslate nohighlight">\(\bar{\alpha}_t\)</span> le sont aussi et peuvent être précalculés.
 Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notranslate nohighlight">\(t\)</span> et on optimise <span class="math notranslate nohighlight">\(\ell_t\)</span></p>
-<p>Il est également possible de reparamétriser la moyenne pour que le réseau de neurones apprenne le bruit ajouté (via un réseau <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_{\boldsymbol \theta}(\mathbf{x}_t, t)\)</span> pour un niveau de bruit <span class="math notranslate nohighlight">\(t\)</span> dans les divergences de Kullback-Leibler définissant les <span class="math notranslate nohighlight">\(\ell_t\)</span>. Le réseau <span class="math notranslate nohighlight">\(p_{\boldsymbol \theta}\)</span> prédit donc le bruit plutôt que la moyenne, qui peut ensuite être calculée par</p>
+<p>Il est également possible de reparamétriser la moyenne pour que le réseau de neurones apprenne le bruit ajouté via un réseau <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_{\boldsymbol \theta}(\mathbf{x}_t, t)\)</span> pour un niveau de bruit <span class="math notranslate nohighlight">\(t\)</span> dans les divergences de Kullback-Leibler définissant les <span class="math notranslate nohighlight">\(\ell_t\)</span>. Le réseau <span class="math notranslate nohighlight">\(p_{\boldsymbol \theta}\)</span> prédit donc le bruit plutôt que la moyenne, qui peut ensuite être calculée par</p>
 <div class="math notranslate nohighlight">
 \[ \mathbf{\mu}_\theta(\mathbf{x}_t, t) = \frac{1}{\sqrt{\alpha_t}} \left(  \mathbf{x}_t - \frac{\beta_t}{\sqrt{1- \bar{\alpha}_t}} \mathbf{\varepsilon}_\theta(\mathbf{x}_t, t) \right)\]</div>
-<p>La fonction objectif finale <span class="math notranslate nohighlight">\(\ell_t\)</span>, à <span class="math notranslate nohighlight">\(t\)</span> choisi aléatoirement et étant donné <span class="math notranslate nohighlight">\(\mathbf{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})\)</span> :</p>
+<p>La fonction objectif finale <span class="math notranslate nohighlight">\(\ell_t\)</span>, à <span class="math notranslate nohighlight">\(t\)</span> choisi aléatoirement et étant donné <span class="math notranslate nohighlight">\(\mathbf{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})\)</span> est alors :</p>
 <div class="math notranslate nohighlight">
 \[ \| \mathbf{\varepsilon} - \mathbf{\varepsilon}_\theta(\mathbf{x}_t, t) \|^2 = \| \mathbf{\varepsilon} - \mathbf{\varepsilon}_\theta( \sqrt{\bar{\alpha}_t} \mathbf{x}_0 + \sqrt{(1- \bar{\alpha}_t)  } \mathbf{\varepsilon}, t) \|^2.\]</div>
 <p>avec <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> la donnée initiale. <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}\)</span> est le bruit échantillonné au temps <span class="math notranslate nohighlight">\(t\)</span> et <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta (\mathbf{x}_t, t)\)</span> est le réseau de neurones, équipé d’une fonction de perte quadratique entre le bruit réel et le bruit gaussien prédit.</p>
@@ -376,6 +381,221 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </section>
 </div><p>Plutôt qu’un seul exemple <span class="math notranslate nohighlight">\(x_0\)</span>, le réseau est classiquement entraîné sur un batch.</p>
 </section>
+<section id="reseau-de-neurones">
+<h3>Réseau de neurones<a class="headerlink" href="#reseau-de-neurones" title="Lien vers cette rubrique">#</a></h3>
+<p>Le réseau prend en entrée une image et renvoie un bruit, ayant les mêmes dimensions que l’image.  Le réseau de neurones <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)\)</span> utilisé dans <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id4">[<a class="reference internal" href="transferLearning.html#id62" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1505.html#RonnebergerFB15.">27</a>]</span></a> est le réseau <a class="reference external" href="https://arxiv.org/abs/1505.04597">U-net</a> (<a class="reference internal" href="#unet"><span class="std std-numref">Fig. 71</span></a>)</p>
+<figure class="align-default" id="unet">
+<img alt="_images/unet.png" src="_images/unet.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Architecture du modèle U-net (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id5">[<a class="reference internal" href="transferLearning.html#id62" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1505.html#RonnebergerFB15.">27</a>]</span></a>)</span><a class="headerlink" href="#unet" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>U-Net est une architecture pour la segmentation sémantique. Il se compose d’un chemin de contraction et d’un chemin d’expansion. Le chemin de contraction suit l’architecture typique d’un réseau convolutionnel. Il consiste en l’application répétée de deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3 , chacune suivie d’une activation ReLU et d’une opération d’agrégation max 2<span class="math notranslate nohighlight">\(\times\)</span>2 avec un stride égal à 2 pour le sous-échantillonnage. À chaque étape de sous-échantillonnage, le nombre de canaux de caractéristiques est doublé. Chaque étape du chemin d’expansion consiste en un suréchantillonnage de la carte de caractéristiques suivi d’une convolution 2<span class="math notranslate nohighlight">\(\times\)</span>2  qui divise par deux le nombre de canaux de caractéristiques, une concaténation avec la carte de caractéristiques recadrée correspondante du chemin de contraction, et deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3, chacune suivie d’une ReLU. Le recadrage est nécessaire en raison de la perte de pixels de bordure dans chaque convolution. Sur la dernière couche, une convolution 1<span class="math notranslate nohighlight">\(\times\)</span>1 est utilisée pour faire correspondre chaque vecteur de caractéristiques à 64 composantes au nombre de classes souhaité. Au total, le réseau comporte 23 couches de convolution.</p>
+</section>
+</section>
+<section id="implementation">
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<p>De nombreuses implémentations du modèle DDPM utilisant U-net sont disponibles (voir par exemple <a class="reference external" href="https://paperswithcode.com/paper/denoising-diffusion-probabilistic-models">ce lien</a>). On propose ici l’implémentation d’un modèle plus simple (pour le réseau <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)\)</span>), permettant la génération d’un nuage de points de forme donnée. Le réseau sera ici un simple perceptron multicouches.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_swiss_roll</span>
+</pre></div>
+</div>
+<p>On génère une forme (ici un swiss roll)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">courbe</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">make_swiss_roll</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">courbe</span> <span class="o">=</span> <span class="n">courbe</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span><span class="o">/</span><span class="mf">10.0</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">courbe</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">s_curve</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="curve">
+<img alt="_images/curve.png" src="_images/curve.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">Forme du nuage de points <span class="math notranslate nohighlight">\(x_0\)</span></span><a class="headerlink" href="#curve" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>On précalcule ensuite les constantes du modèle. Les <span class="math notranslate nohighlight">\(\beta_t\)</span> évoluent de manière linéaire</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">150</span>
+
+<span class="n">betas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">T</span><span class="p">)</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5e-2</span> <span class="o">-</span> <span class="mf">1e-5</span><span class="p">)</span><span class="o">+</span><span class="mf">1e-5</span>
+
+<span class="n">alphas</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">betas</span>
+<span class="n">alphas_prod</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">alphas_prod_p</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span><span class="n">alphas_prod</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">alphas_bar_sqrt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alphas_prod</span><span class="p">)</span>
+<span class="n">one_minus_alphas_bar_log</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alphas_prod</span><span class="p">)</span>
+<span class="n">one_minus_alphas_bar_sqrt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alphas_prod</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On calcule <span class="math notranslate nohighlight">\(x_t\)</span> à un temps quelconque donné</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">q_x</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
+    <span class="n">alphas_t</span> <span class="o">=</span> <span class="n">alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">alphas_1_m_t</span> <span class="o">=</span> <span class="n">one_minus_alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">alphas_t</span> <span class="o">*</span> <span class="n">x_0</span> <span class="o">+</span> <span class="n">alphas_1_m_t</span> <span class="o">*</span> <span class="n">noise</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Le processus avant <span class="math notranslate nohighlight">\(q\)</span> est illustré sur la (<a class="reference internal" href="#q"><span class="std std-numref">Fig. 73</span></a>), à partir du code suivant</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nb_courbes</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_courbes</span><span class="p">):</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">//</span><span class="mi">5</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">i</span><span class="o">%</span><span class="mi">5</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">T</span><span class="o">//</span><span class="n">nb_courbes</span>
+    <span class="n">q_i</span> <span class="o">=</span> <span class="n">q_x</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">n</span><span class="p">]))</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">q_i</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">q_i</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$q(\mathbf</span><span class="si">{x}</span><span class="s1">_{&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;})$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="q">
+<img alt="_images/q.png" src="_images/q.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Application du processus avant <span class="math notranslate nohighlight">\(q\)</span> au cours du temps</span><a class="headerlink" href="#q" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>On construit ensuite le processus de diffusion. Le réseau utilisé est un perceptron multicouches à trois couches cachées de <code class="docutils literal notranslate"><span class="pre">n_hidden</span></code>neurones et à activations ReLU.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="k">class</span> <span class="nc">DDPM</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_steps</span><span class="p">,</span><span class="n">n_hidden</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DDPM</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">linears</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="c1"># Gestion des pas de temps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_embeddings</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">),</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">embedding_layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_embeddings</span><span class="p">):</span>
+            <span class="n">t_embedding</span> <span class="o">=</span> <span class="n">embedding_layer</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linears</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">+=</span> <span class="n">t_embedding</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linears</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
+            
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linears</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
+    
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>On écrit ensuite la fonction de perte du réseau</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">diffusion_loss</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">x_0</span><span class="p">,</span><span class="n">alphas_bar_sqrt</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">,</span><span class="n">n_steps</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x_0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Généreration de temps  aléatoires pour un échantillon de taille batch_size</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">batch_size</span><span class="o">//</span><span class="mi">2</span><span class="p">,))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">n_steps</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">t</span><span class="p">],</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Coefficient de x_0</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    
+    <span class="c1"># Génération, d&#39;un bruit aléatoire</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
+
+    <span class="c1"># coefficient du bruit</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">one_minus_alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    
+    <span class="c1">#réalisation à l&#39;instant t</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x_0</span><span class="o">*</span><span class="n">a</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">b</span>
+    
+    <span class="c1"># Prédiction du bruit à l&#39;instant t</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># Erreur quadratique moyenne</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">e</span> <span class="o">-</span> <span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">square</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>On écrit ensuite la fonction d’échantillonnage du processus inverse</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># On récupère x[T], x[T-1], x[T-2]|... à partir de x[T]. . x[0]</span>
+<span class="k">def</span> <span class="nf">p_sample_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">shape</span><span class="p">,</span><span class="n">n_steps</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">):</span>
+    <span class="n">cur_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">x_seq</span> <span class="o">=</span> <span class="p">[</span><span class="n">cur_x</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)):</span>
+        <span class="n">cur_x</span> <span class="o">=</span> <span class="n">p_sample</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">cur_x</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">)</span>
+        <span class="n">x_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur_x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_seq</span>
+
+<span class="c1"># On échantillonne la valeur reconstruite à l&#39;instant t à partir de x[T]</span>
+<span class="k">def</span> <span class="nf">p_sample</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">t</span><span class="p">])</span>
+    
+    <span class="n">coeff</span> <span class="o">=</span> <span class="n">betas</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">/</span> <span class="n">one_minus_alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">eps_theta</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">betas</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">.</span><span class="n">sqrt</span><span class="p">())</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">coeff</span><span class="o">*</span><span class="n">eps_theta</span><span class="p">))</span>
+    
+    <span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">sigma_t</span> <span class="o">=</span> <span class="n">betas</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">+</span> <span class="n">sigma_t</span> <span class="o">*</span> <span class="n">z</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Et on entraîne enfin le modèle</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">4000</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">DDPM</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span><span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">batch_x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">diffusion_loss</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">batch_x</span><span class="p">,</span><span class="n">alphas_bar_sqrt</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">,</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span><span class="mf">1.</span><span class="p">)</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">t</span><span class="o">%</span><span class="mi">100</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">x_seq</span> <span class="o">=</span> <span class="n">p_sample_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Les figures suivantes présentent l’action du  processus inverse au début <a class="reference internal" href="#q0"><span class="std std-numref">Fig. 74</span></a>), au milieu <a class="reference internal" href="#q1"><span class="std std-numref">Fig. 75</span></a>) et à la fin <a class="reference internal" href="#q2"><span class="std std-numref">Fig. 76</span></a>) de l’entraînement</p>
+<figure class="align-default" id="q0">
+<img alt="_images/curve_150_1.png" src="_images/curve_150_1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Processus inverse au début de l’entraînement</span><a class="headerlink" href="#q0" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="q1">
+<img alt="_images/curve_150_2.png" src="_images/curve_150_2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Processus inverse au milieu de l’entraînement</span><a class="headerlink" href="#q1" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="q2">
+<img alt="_images/curve_150_3.png" src="_images/curve_150_3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Processus inverse à la fin de l’entraînement</span><a class="headerlink" href="#q2" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>On peut alors partir d’un bruit gaussien 2D et appliquer le processus inverse pour générer une réalisation des données d’entrée.</p>
+<p><img alt="" src="_images/reversediffusion.gif" /></p>
+<p>On peut également partir d’autres nuages de points
+<img alt="" src="_images/reversediffusioncircles.gif" /><img alt="" src="_images/reversediffusionmoons.gif" /></p>
 </section>
 </section>
 
@@ -438,8 +658,10 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-de-diffusion">Modèle de diffusion</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele">Modèle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apprentissage">Apprentissage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reseau-de-neurones">Réseau de neurones</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
 </ul>
   </nav></div>
 

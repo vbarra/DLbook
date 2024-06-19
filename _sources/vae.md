@@ -22,7 +22,7 @@ Le paysage de ces modèles génératifs s'est beaucoup peuplé depuis 2014 ({num
 Paysage des modèles génératifs (Source: [Song et al., CVPR 2023](https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546))
 ```
 
-Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE) et les réseaux antagonistes générateurs (GAN).
+Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE), les réseaux antagonistes générateurs (GAN) et ferons une brève introduction aux modèles de diffusion (DDPM, pour Denoising Diffusion Probabilistic Models)
 
 
 
