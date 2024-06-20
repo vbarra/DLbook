@@ -334,3 +334,9 @@ On peut également partir d'autres nuages de points
 |---|----|
 
 
+
+```{bibliography}
+:filter: docname in docnames
+:style: unsrt
+```
+
