@@ -314,7 +314,7 @@ document.write(`
 <section id="definitions">
 <h2>Définitions<a class="headerlink" href="#definitions" title="Lien vers cette rubrique">#</a></h2>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span> (Neurone)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1 </span> (Neurone)</p>
 <section class="definition-content" id="proof-content">
 <p>Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
 Les <span class="math notranslate nohighlight">\(D\)</span> variables sur lesquelles opère le neurone sont habituellement
@@ -333,7 +333,7 @@ Le neurone formel calcule la sortie selon la formule :</p>
 </ul>
 </section>
 </div><div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span> (Réseau de neurones)</p>
+<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Réseau de neurones)</p>
 <section class="definition-content" id="proof-content">
 <p>Un réseau de neurones est un ensemble de neurones interconnectés. Les
 réseaux de neurones peuvent être visualisés par l’intermédiaire d’un
@@ -355,7 +355,7 @@ sous-jacente de ce modèle est le fonctionnement de la rétine, l’étude de
 la perception visuelle. Nous commençons par aborder le cas du perceptron
 linéaire à seuil.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 6 </span> (Perceptron linéire à seuil)</p>
+<p class="admonition-title"><span class="caption-number">Definition 3 </span> (Perceptron linéire à seuil)</p>
 <section class="definition-content" id="proof-content">
 <p>Un perceptron linéaire à seuil prend en entrée <span class="math notranslate nohighlight">\(D\)</span> valeurs
 <span class="math notranslate nohighlight">\(x_1\cdots x_D\)</span> (la rétine) et calcule une sortie <span class="math notranslate nohighlight">\(y\)</span>. Suivant la
@@ -433,9 +433,9 @@ classe binaire de <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</s
 d’un perceptron, on note <span class="math notranslate nohighlight">\(y_n\)</span> la sortie binaire calculée par le
 perceptron. Rappelons qu’il existe une <span class="math notranslate nohighlight">\((D+1)^\textrm{ème}\)</span> entrée <span class="math notranslate nohighlight">\(x_0\)</span>
 de valeur 1 pour le perceptron.
-L’apprentissage par correction d’erreur du perceptron est donné dans l”<a class="reference internal" href="#correction">Algorithm 4</a></p>
+L’apprentissage par correction d’erreur du perceptron est donné dans l”<a class="reference internal" href="#correction">Algorithm 1</a></p>
 <div class="proof algorithm admonition" id="correction">
-<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Algorithme d’apprentissage du perceptron par correction d’erreur)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Algorithme d’apprentissage du perceptron par correction d’erreur)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
@@ -481,7 +481,7 @@ pendant un certain nombre d’étapes ?</p></li>
 </ul>
 <p>Nous reviendrons sur toutes ces questions par la suite.</p>
 <div class="proof example admonition" id="example-4">
-<p class="admonition-title"><span class="caption-number">Example 2 </span> (Apprentissage du OU binaire)</p>
+<p class="admonition-title"><span class="caption-number">Example 1 </span> (Apprentissage du OU binaire)</p>
 <section class="example-content" id="proof-content">
 <p>Les descriptions appartiennent à {0,1}<span class="math notranslate nohighlight">\(^2\)</span>, les entrées du perceptron
 appartiennent à {0,1}<span class="math notranslate nohighlight">\(^3\)</span>, la première composante correspond à l’entrée
@@ -715,9 +715,9 @@ modifier le poids <span class="math notranslate nohighlight">\(w_i\)</span> apr�
 d’une quantité <span class="math notranslate nohighlight">\(\Delta w_i\)</span> définie par :
 $<span class="math notranslate nohighlight">\(\Delta w_i=-\epsilon \frac{\partial E(\mathbf w)}{\partial w_i}\)</span>$</p>
 <p>L’algorithme d’apprentissage par descente de gradient du perceptron
-linéaire peut maintenant être défini l”<a class="reference internal" href="#descente">Algorithm 5</a>.</p>
+linéaire peut maintenant être défini l”<a class="reference internal" href="#descente">Algorithm 2</a>.</p>
 <div class="proof algorithm admonition" id="descente">
-<p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
@@ -749,10 +749,10 @@ exemples de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>, l�
 chaque présentation d’exemple. La règle de modification des poids
 devient : $<span class="math notranslate nohighlight">\(\Delta w_i=\varepsilon (t_n-y_n)x_n^i\)</span>$</p>
 <p>Cette règle est appelée règle delta, ou règle Adaline, ou encore règle
-de Widrow-Hoff, et l”<a class="reference internal" href="#adaline">Algorithm 6</a>
+de Widrow-Hoff, et l”<a class="reference internal" href="#adaline">Algorithm 3</a>
 décrit cette règle :</p>
 <div class="proof algorithm admonition" id="adaline">
-<p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>

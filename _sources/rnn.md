@@ -63,15 +63,15 @@ Architectures "un vers plusieurs" , utilisées par exemple en génération de mu
 ```
 
 ```{figure} ./images/manytoone.png
-:name: onetomany
+:name: onetomany2
 Architectures "un vers plusieurs" , utilisées par exemple en classification de sentiments
 ```
 ```{figure} ./images/manytomany1.png
-:name: onetomany
+:name: onetomany3
 Architectures "plusieurs vers plusieurs", pour la reconnaissance d'entité dans des textes ou annotation de vidéos.
 ```
 ```{figure} ./images/manytomany2.png
-:name: onetomany
+:name: onetomany4
 Architectures "plusieurs vers plusieurs", pour la traduction automatique.
 ```
 
