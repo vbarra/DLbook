@@ -10,7 +10,7 @@ kernelspec:
   name: python3
 ---
 
-# Introduction aux réseaux de neurones
+# Les réseaux de neurones
 
 ## Réseaux de neurones et apprentissage automatique
 
