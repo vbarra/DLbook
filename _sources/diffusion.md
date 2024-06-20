@@ -69,7 +69,7 @@ Par construction de $q$ et $p_{\boldsymbol\theta}$, les $\ell_t,t\in[\![1,T]\!]$
 
 Par construction de $q$, puisque la somme de gaussiennes est égalemment gaussienne, on peut échantillonner $\mathbf{x}_t$ pour tout $t$ conditionnellement à $\mathbf{x}_0$ : ainsi 
 
-$$q(\mathbf{x}_t | \mathbf{x}_0) = \cal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t} \mathbf{x}_0, (1- \bar{\alpha}_t) \mathbf{I})$$
+$$q(\mathbf{x}_t | \mathbf{x}_0) = \cal{N}(\sqrt{\bar{\alpha}_t} \mathbf{x}_0, (1- \bar{\alpha}_t) \mathbf{I})$$
 
 avec  $\alpha_t = 1 - \beta_t$ et  $\bar{\alpha_t} = \displaystyle\prod_{s=1}^{t} \alpha_s$. 
 
@@ -99,7 +99,7 @@ Plutôt qu'un seul exemple $x_0$, le réseau est classiquement entraîné sur un
 
 ### Réseau de neurones
 
-Le réseau prend en entrée une image et renvoie un bruit, ayant les mêmes dimensions que l'image.  Le réseau de neurones $\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)$ utilisé dans [{cite:p}`Ronneberger15`](https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf) est le réseau [U-net](https://arxiv.org/abs/1505.04597) ({numref}`unet`)
+Le réseau de neurones $\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)$ utilisé dans [{cite:p}`Ronneberger15`](https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf) traite des images et les auteurs utilisent le réseau [U-net](https://arxiv.org/abs/1505.04597) ({numref}`unet`)
 
 
 ```{figure} ./images/unet.png
@@ -107,7 +107,7 @@ Le réseau prend en entrée une image et renvoie un bruit, ayant les mêmes dime
 Architecture du modèle U-net (source : [{cite:p}`Ronneberger15`](https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf))
 ```
 
-U-Net est une architecture pour la segmentation sémantique. Il se compose d'un chemin de contraction et d'un chemin d'expansion. Le chemin de contraction suit l'architecture typique d'un réseau convolutionnel. Il consiste en l'application répétée de deux convolutions 3$\times$3 , chacune suivie d'une activation ReLU et d'une opération d'agrégation max 2$\times$2 avec un stride égal à 2 pour le sous-échantillonnage. À chaque étape de sous-échantillonnage, le nombre de canaux de caractéristiques est doublé. Chaque étape du chemin d'expansion consiste en un suréchantillonnage de la carte de caractéristiques suivi d'une convolution 2$\times$2  qui divise par deux le nombre de canaux de caractéristiques, une concaténation avec la carte de caractéristiques recadrée correspondante du chemin de contraction, et deux convolutions 3$\times$3, chacune suivie d'une ReLU. Le recadrage est nécessaire en raison de la perte de pixels de bordure dans chaque convolution. Sur la dernière couche, une convolution 1$\times$1 est utilisée pour faire correspondre chaque vecteur de caractéristiques à 64 composantes au nombre de classes souhaité. Au total, le réseau comporte 23 couches de convolution.
+U-Net est une architecture pour la segmentation sémantique. Il se compose d'un chemin de contraction et d'un chemin d'expansion. Le chemin de contraction suit l'architecture typique d'un réseau convolutif. Il consiste en l'application répétée de deux convolutions 3$\times$3 , chacune suivie d'une activation ReLU et d'une opération d'agrégation max 2$\times$2 avec un stride égal à 2 pour le sous-échantillonnage. À chaque étape de sous-échantillonnage, le nombre de canaux de caractéristiques est doublé. Chaque étape du chemin d'expansion consiste en un suréchantillonnage de la carte de caractéristiques suivi d'une convolution 2$\times$2  qui divise par deux le nombre de canaux de caractéristiques, une concaténation avec la carte de caractéristiques recadrée correspondante du chemin de contraction, et deux convolutions 3$\times$3, chacune suivie d'une ReLU. Le recadrage est nécessaire en raison de la perte de pixels de bordure dans chaque convolution. Sur la dernière couche, une convolution 1$\times$1 est utilisée pour faire correspondre chaque vecteur de caractéristiques à 64 composantes au nombre de classes souhaité. Au total, le réseau comporte 23 couches de convolution.
 
 
 ## Implémentation
@@ -125,15 +125,15 @@ from sklearn.datasets import make_swiss_roll
 On génère une forme (ici un swiss roll)
 
 ```python
-courbe,_ = make_swiss_roll(1000,noise=0.1)
-courbe = courbe[:,[0,2]]/10.0
+X,_ = make_swiss_roll(1000,noise=0.1)
+X = X[:,[0,2]]/10.0
 
-data = courbe.T
+data = X.T
 
 plt.scatter(*data);
 plt.axis('off')
 
-dataset = torch.Tensor(s_curve).float()
+dataset = torch.Tensor(X).float()
 ```
 
 ```{figure} ./images/curve.png
@@ -141,7 +141,7 @@ dataset = torch.Tensor(s_curve).float()
 Forme du nuage de points $x_0$
 ```
 
-On précalcule ensuite les constantes du modèle. Les $\beta_t$ évoluent de manière linéaire
+On précalcule ensuite les constantes du modèle. Les $\beta_t$ évoluent de manière linéaire.
 
 ```python
 T = 150
@@ -157,7 +157,7 @@ one_minus_alphas_bar_log = torch.log(1 - alphas_prod)
 one_minus_alphas_bar_sqrt = torch.sqrt(1 - alphas_prod)
 ```
 
-On calcule $x_t$ à un temps quelconque donné
+On calcule $x_t$ à un temps quelconque donné.
 
 ```python
 def q_x(x_0,t):
@@ -169,7 +169,7 @@ def q_x(x_0,t):
 ```
 
 
-Le processus avant $q$ est illustré sur la ({numref}`q`), à partir du code suivant 
+Le processus avant $q$ est illustré sur la ({numref}`q`), à partir du code suivant :
 
 ```python
 nb_courbes = 20
@@ -307,7 +307,7 @@ for t in range(nb_epochs):
             x_seq = p_sample_loop(model,dataset.shape,T,betas,one_minus_alphas_bar_sqrt)
 ```
 
-Les figures suivantes présentent l'action du  processus inverse au début {numref}`q0`), au milieu {numref}`q1`) et à la fin {numref}`q2`) de l'entraînement
+Les figures suivantes présentent l'action du  processus inverse au début ({numref}`q0`), au milieu ({numref}`q1`) et à la fin ({numref}`q2`) de l'entraînement
 
 ```{figure} ./images/curve_150_1.png
 :name: q0

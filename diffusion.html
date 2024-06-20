@@ -342,7 +342,7 @@ q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\sqrt{1 - \beta_t} \mathbf{x}_{
 <p>Si on connaissait la distribution conditionnelle  <span class="math notranslate nohighlight">\(p(\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span>, alors on pourrait calculer le processus inverse en tirant <span class="math notranslate nohighlight">\(\mathbf{x}_T\)</span> selon une distribution gaussienne isotrope, et en « débruitant » progressivement pour aboutir en <span class="math notranslate nohighlight">\(t=0\)</span> à une réalisation <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> de la distribution des données. Cependant, <span class="math notranslate nohighlight">\(p(\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span> n’est pas accessible et on utilise un réseau de neurones <span class="math notranslate nohighlight">\(p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t)\)</span> pour approcher cette distribution conditionnelle, où <span class="math notranslate nohighlight">\(\boldsymbol \theta\)</span> est l’ensemble des paramètres du réseau.</p>
 <p>Si on suppose que le processus inverse est gaussien, alors on peut écrire</p>
 <div class="math notranslate nohighlight">
-\[ p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))\]</div>
+\[ p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))\]</div>
 <p>Le réseau doit donc apprendre la moyenne et la variance, qui dependent du temps. Dans l’implémentation initiale <span id="id3">[<a class="reference internal" href="transferLearning.html#id61" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">26</a>]</span>, les auteurs relaxent la contrainte de la variance (<span class="math notranslate nohighlight">\(\Sigma_\theta ( \mathbf{x}_t, t) = \sigma^2_t \mathbf{I}\)</span>), et apprennent uniquement la moyenne. Dans les implémentations suivantes (par exemple <a class="reference external" href="https://openreview.net/pdf?id=-NEXDKk8gZ">celle-ci</a>), la contrainte a été prise en compte.</p>
 <p>Dans la suite, on suppose seulement apprendre la moyenne.</p>
 </section>
@@ -353,7 +353,7 @@ q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\sqrt{1 - \beta_t} \mathbf{x}_{
 <p>Par construction de <span class="math notranslate nohighlight">\(q\)</span> et <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span>, les <span class="math notranslate nohighlight">\(\ell_t,t\in[\![1,T]\!]\)</span> sont les divergences de Kullback-Leibler entre deux distributions gaussiennes, ce qui peut être écrit comme une perte <span class="math notranslate nohighlight">\(\ell_2\)</span> calculée sur les moyennes de ces gaussiennes.</p>
 <p>Par construction de <span class="math notranslate nohighlight">\(q\)</span>, puisque la somme de gaussiennes est égalemment gaussienne, on peut échantillonner <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> pour tout <span class="math notranslate nohighlight">\(t\)</span> conditionnellement à <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> : ainsi</p>
 <div class="math notranslate nohighlight">
-\[q(\mathbf{x}_t | \mathbf{x}_0) = \cal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t} \mathbf{x}_0, (1- \bar{\alpha}_t) \mathbf{I})\]</div>
+\[q(\mathbf{x}_t | \mathbf{x}_0) = \cal{N}(\sqrt{\bar{\alpha}_t} \mathbf{x}_0, (1- \bar{\alpha}_t) \mathbf{I})\]</div>
 <p>avec  <span class="math notranslate nohighlight">\(\alpha_t = 1 - \beta_t\)</span> et  <span class="math notranslate nohighlight">\(\bar{\alpha_t} = \displaystyle\prod_{s=1}^{t} \alpha_s\)</span>.</p>
 <p>Les <span class="math notranslate nohighlight">\(\bar{\alpha}_t\)</span> sont des fonctions des  <span class="math notranslate nohighlight">\(\beta_t\)</span>, permettant de mettre à jour la variance. Ces derniers étant connus, les <span class="math notranslate nohighlight">\(\bar{\alpha}_t\)</span> le sont aussi et peuvent être précalculés.
 Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notranslate nohighlight">\(t\)</span> et on optimise <span class="math notranslate nohighlight">\(\ell_t\)</span></p>
@@ -383,14 +383,14 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </section>
 <section id="reseau-de-neurones">
 <h3>Réseau de neurones<a class="headerlink" href="#reseau-de-neurones" title="Lien vers cette rubrique">#</a></h3>
-<p>Le réseau prend en entrée une image et renvoie un bruit, ayant les mêmes dimensions que l’image.  Le réseau de neurones <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)\)</span> utilisé dans <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id4">[<a class="reference internal" href="transferLearning.html#id62" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1505.html#RonnebergerFB15.">27</a>]</span></a> est le réseau <a class="reference external" href="https://arxiv.org/abs/1505.04597">U-net</a> (<a class="reference internal" href="#unet"><span class="std std-numref">Fig. 71</span></a>)</p>
+<p>Le réseau de neurones <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)\)</span> utilisé dans <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id4">[<a class="reference internal" href="transferLearning.html#id62" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1505.html#RonnebergerFB15.">27</a>]</span></a> traite des images et les auteurs utilisent le réseau <a class="reference external" href="https://arxiv.org/abs/1505.04597">U-net</a> (<a class="reference internal" href="#unet"><span class="std std-numref">Fig. 71</span></a>)</p>
 <figure class="align-default" id="unet">
 <img alt="_images/unet.png" src="_images/unet.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 71 </span><span class="caption-text">Architecture du modèle U-net (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id5">[<a class="reference internal" href="transferLearning.html#id62" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015. URL: http://dblp.uni-trier.de/db/journals/corr/corr1505.html#RonnebergerFB15.">27</a>]</span></a>)</span><a class="headerlink" href="#unet" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
-<p>U-Net est une architecture pour la segmentation sémantique. Il se compose d’un chemin de contraction et d’un chemin d’expansion. Le chemin de contraction suit l’architecture typique d’un réseau convolutionnel. Il consiste en l’application répétée de deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3 , chacune suivie d’une activation ReLU et d’une opération d’agrégation max 2<span class="math notranslate nohighlight">\(\times\)</span>2 avec un stride égal à 2 pour le sous-échantillonnage. À chaque étape de sous-échantillonnage, le nombre de canaux de caractéristiques est doublé. Chaque étape du chemin d’expansion consiste en un suréchantillonnage de la carte de caractéristiques suivi d’une convolution 2<span class="math notranslate nohighlight">\(\times\)</span>2  qui divise par deux le nombre de canaux de caractéristiques, une concaténation avec la carte de caractéristiques recadrée correspondante du chemin de contraction, et deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3, chacune suivie d’une ReLU. Le recadrage est nécessaire en raison de la perte de pixels de bordure dans chaque convolution. Sur la dernière couche, une convolution 1<span class="math notranslate nohighlight">\(\times\)</span>1 est utilisée pour faire correspondre chaque vecteur de caractéristiques à 64 composantes au nombre de classes souhaité. Au total, le réseau comporte 23 couches de convolution.</p>
+<p>U-Net est une architecture pour la segmentation sémantique. Il se compose d’un chemin de contraction et d’un chemin d’expansion. Le chemin de contraction suit l’architecture typique d’un réseau convolutif. Il consiste en l’application répétée de deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3 , chacune suivie d’une activation ReLU et d’une opération d’agrégation max 2<span class="math notranslate nohighlight">\(\times\)</span>2 avec un stride égal à 2 pour le sous-échantillonnage. À chaque étape de sous-échantillonnage, le nombre de canaux de caractéristiques est doublé. Chaque étape du chemin d’expansion consiste en un suréchantillonnage de la carte de caractéristiques suivi d’une convolution 2<span class="math notranslate nohighlight">\(\times\)</span>2  qui divise par deux le nombre de canaux de caractéristiques, une concaténation avec la carte de caractéristiques recadrée correspondante du chemin de contraction, et deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3, chacune suivie d’une ReLU. Le recadrage est nécessaire en raison de la perte de pixels de bordure dans chaque convolution. Sur la dernière couche, une convolution 1<span class="math notranslate nohighlight">\(\times\)</span>1 est utilisée pour faire correspondre chaque vecteur de caractéristiques à 64 composantes au nombre de classes souhaité. Au total, le réseau comporte 23 couches de convolution.</p>
 </section>
 </section>
 <section id="implementation">
@@ -404,15 +404,15 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </pre></div>
 </div>
 <p>On génère une forme (ici un swiss roll)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">courbe</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">make_swiss_roll</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">courbe</span> <span class="o">=</span> <span class="n">courbe</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span><span class="o">/</span><span class="mf">10.0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">make_swiss_roll</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span><span class="o">/</span><span class="mf">10.0</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">courbe</span><span class="o">.</span><span class="n">T</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">s_curve</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
 </pre></div>
 </div>
 <figure class="align-default" id="curve">
@@ -421,7 +421,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 <p><span class="caption-number">Fig. 72 </span><span class="caption-text">Forme du nuage de points <span class="math notranslate nohighlight">\(x_0\)</span></span><a class="headerlink" href="#curve" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
-<p>On précalcule ensuite les constantes du modèle. Les <span class="math notranslate nohighlight">\(\beta_t\)</span> évoluent de manière linéaire</p>
+<p>On précalcule ensuite les constantes du modèle. Les <span class="math notranslate nohighlight">\(\beta_t\)</span> évoluent de manière linéaire.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">150</span>
 
 <span class="n">betas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">T</span><span class="p">)</span>
@@ -435,7 +435,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 <span class="n">one_minus_alphas_bar_sqrt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alphas_prod</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>On calcule <span class="math notranslate nohighlight">\(x_t\)</span> à un temps quelconque donné</p>
+<p>On calcule <span class="math notranslate nohighlight">\(x_t\)</span> à un temps quelconque donné.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">q_x</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
     <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
     <span class="n">alphas_t</span> <span class="o">=</span> <span class="n">alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
@@ -444,7 +444,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 
 </pre></div>
 </div>
-<p>Le processus avant <span class="math notranslate nohighlight">\(q\)</span> est illustré sur la (<a class="reference internal" href="#q"><span class="std std-numref">Fig. 73</span></a>), à partir du code suivant</p>
+<p>Le processus avant <span class="math notranslate nohighlight">\(q\)</span> est illustré sur la (<a class="reference internal" href="#q"><span class="std std-numref">Fig. 73</span></a>), à partir du code suivant :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nb_courbes</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 
@@ -573,7 +573,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
             <span class="n">x_seq</span> <span class="o">=</span> <span class="n">p_sample_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Les figures suivantes présentent l’action du  processus inverse au début <a class="reference internal" href="#q0"><span class="std std-numref">Fig. 74</span></a>), au milieu <a class="reference internal" href="#q1"><span class="std std-numref">Fig. 75</span></a>) et à la fin <a class="reference internal" href="#q2"><span class="std std-numref">Fig. 76</span></a>) de l’entraînement</p>
+<p>Les figures suivantes présentent l’action du  processus inverse au début (<a class="reference internal" href="#q0"><span class="std std-numref">Fig. 74</span></a>), au milieu (<a class="reference internal" href="#q1"><span class="std std-numref">Fig. 75</span></a>) et à la fin (<a class="reference internal" href="#q2"><span class="std std-numref">Fig. 76</span></a>) de l’entraînement</p>
 <figure class="align-default" id="q0">
 <img alt="_images/curve_150_1.png" src="_images/curve_150_1.png" />
 <figcaption>
