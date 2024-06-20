@@ -12,7 +12,7 @@ kernelspec:
 # Réseaux antagonistes générateurs
 
 ## Principe
-Dans les réseaux antagonistes génératifs (GAN: Generative Adversarial Networks), la tâche d'apprentissage d'un modèle génératif est exprimée comme un jeu à somme nulle à deux joueurs entre deux réseaux, le générateur $G$ et le discriminateur $D$ ({numref}`gan1`).
+Dans les réseaux antagonistes génératifs (GAN: Generative Adversarial Networks  {cite:p}`Goodfellow14`), la tâche d'apprentissage d'un modèle génératif est exprimée comme un jeu à somme nulle à deux joueurs entre deux réseaux, le générateur $G$ et le discriminateur $D$ ({numref}`gan1`).
 
 
 ```{figure} ./images/overview.png
@@ -258,3 +258,9 @@ for epoch in range(nbepochs):
 
 Le résultat de l'apprentissage est alors visualisé en fonction des epochs.
 ![](images/GAN1D.gif)
+
+
+```{bibliography}
+:filter: docname in docnames
+:style: unsrt
+```
