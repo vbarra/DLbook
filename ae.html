@@ -173,8 +173,11 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Auto-encodeurs</a></li>
@@ -182,6 +185,9 @@
 <li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles génératifs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
@@ -541,7 +547,7 @@ ligne.</span><a class="headerlink" href="#ae3" title="Lien vers cette image">#</
 <section id="autoencodeurs-variationnels">
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien vers cette rubrique">#</a></h2>
 <p>Le dernier modèle d’autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.</p>
-<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="transferLearning.html#id30" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">8</a>]</span> sont des modèles
+<p>Les autoencodeurs variationnels (VAE) <span id="id1">[<a class="reference internal" href="#id18" title="D. Kingma and M. Welling. Auto-encoding variational bayes. CoRR, 2013. URL: http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13.">1</a>]</span> sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
 que nous les avons abordés dans les paragraphes précédents, ils
 empruntent juste une architecture similaire (<a class="reference internal" href="#ae4"><span class="std std-numref">Fig. 24</span></a>), d’où leur nom.</p>
@@ -783,113 +789,9 @@ alors seulement pour <span class="math notranslate nohighlight">\(\epsilon\)</sp
 </div>
 <div class="docutils container" id="id2">
 <div role="list" class="citation-list">
-<div class="citation" id="id39" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<p>V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Johannes Fürnkranz and Thorsten Joachims, editors, <em>ICML</em>, 807–814. Omnipress, 2010. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10">http://dblp.uni-trier.de/db/conf/icml/icml2010.html#NairH10</a>.</p>
-</div>
-<div class="citation" id="id7" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
-<p>Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, <em>AISTATS</em>, volume 15 of JMLR Proceedings, 315–323. JMLR.org, 2011. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11">http://dblp.uni-trier.de/db/journals/jmlr/jmlrp15.html#GlorotBB11</a>.</p>
-</div>
-<div class="citation" id="id8" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
-<p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis R. Bach and David M. Blei, editors, <em>ICML</em>, volume 37 of JMLR Workshop and Conference Proceedings, 448–456. JMLR.org, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15">http://dblp.uni-trier.de/db/conf/icml/icml2015.html#IoffeS15</a>.</p>
-</div>
-<div class="citation" id="id40" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
-<p>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, volume 00, 580–587. June 2014. URL: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/6909475/">https://ieeexplore.ieee.org/abstract/document/6909475/</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.81">doi:10.1109/CVPR.2014.81</a>.</p>
-</div>
-<div class="citation" id="id5" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
-<p>Matthew D. Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13">http://dblp.uni-trier.de/db/journals/corr/corr1311.html#ZeilerF13</a>.</p>
-</div>
-<div class="citation" id="id41" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
-<p>Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, and Dhruv Batra. Grad-cam: visual explanations from deep networks via gradient-based localization. In <em>ICCV</em>, 618–626. IEEE Computer Society, 2017. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17">http://dblp.uni-trier.de/db/conf/iccv/iccv2017.html#SelvarajuCDVPB17</a>.</p>
-</div>
-<div class="citation" id="id42" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
-<p>Jason Yosinski, Jeff Clune, Anh Mai Nguyen, Thomas J. Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15">http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YosinskiCNFL15</a>.</p>
-</div>
 <div class="citation" id="id18" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">8</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>D. Kingma and M. Welling. Auto-encoding variational bayes. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13">http://dblp.uni-trier.de/db/journals/corr/corr1312.html#KingmaW13</a>.</p>
-</div>
-<div class="citation" id="id4" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
-<p>S. Hochreiter and J. Schmidhuber. Long short-term memory. <em>Neural Comput.</em>, 9(8):1735–1780, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1162/neco.1997.9.8.1735">http://dx.doi.org/10.1162/neco.1997.9.8.1735</a>, <a class="reference external" href="https://doi.org/10.1162/neco.1997.9.8.1735">doi:10.1162/neco.1997.9.8.1735</a>.</p>
-</div>
-<div class="citation" id="id34" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
-<p>J Chung, Ç Gülçehre, K Cho, and Y Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.3555">http://arxiv.org/abs/1412.3555</a>.</p>
-</div>
-<div class="citation" id="id3" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
-<p>M. Schuster and K.K. Paliwal. Bidirectional recurrent neural networks. <em>Trans. Sig. Proc.</em>, 45(11):2673–2681, November 1997. URL: <a class="reference external" href="http://dx.doi.org/10.1109/78.650093">http://dx.doi.org/10.1109/78.650093</a>, <a class="reference external" href="https://doi.org/10.1109/78.650093">doi:10.1109/78.650093</a>.</p>
-</div>
-<div class="citation" id="id11" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
-<p>A Graves, G Wayne, and I Danihelka. Neural turing machines. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1410.5401">http://arxiv.org/abs/1410.5401</a>.</p>
-</div>
-<div class="citation" id="id33" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
-<p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
-</div>
-<div class="citation" id="id31" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
-<p>Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>.</p>
-</div>
-<div class="citation" id="id30" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></span>
-<p>Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. <em>CoRR</em>, 2013. URL: <a class="reference external" href="http://arxiv.org/abs/1312.4400">http://arxiv.org/abs/1312.4400</a>.</p>
-</div>
-<div class="citation" id="id29" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. <em>CoRR</em>, 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1409.4842">http://arxiv.org/abs/1409.4842</a>.</p>
-</div>
-<div class="citation" id="id28" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.</p>
-</div>
-<div class="citation" id="id37" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
-<p>François Chollet. Xception: deep learning with depthwise separable convolutions. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
-</div>
-<div class="citation" id="id27" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></span>
-<p>Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. <em>CoRR</em>, 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1602.07261">http://arxiv.org/abs/1602.07261</a>.</p>
-</div>
-<div class="citation" id="id26" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
-<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
-</div>
-<div class="citation" id="id24" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></span>
-<p>Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. <em>IEEE Trans. on Knowl. and Data Eng.</em>, 22(10):1345–1359, October 2010. URL: <a class="reference external" href="http://dx.doi.org/10.1109/TKDE.2009.191">http://dx.doi.org/10.1109/TKDE.2009.191</a>, <a class="reference external" href="https://doi.org/10.1109/TKDE.2009.191">doi:10.1109/TKDE.2009.191</a>.</p>
-</div>
-<div class="citation" id="id47" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>22<span class="fn-bracket">]</span></span>
-<p>Y. Song, T. Wang, P. Cai, S. Mondal, and J. Sahoo. A comprehensive survey of few-shot learning: evolution, applications, challenges, and opportunities. <em>ACM Computing Surveyx</em>, 2023.</p>
-</div>
-<div class="citation" id="id46" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>23<span class="fn-bracket">]</span></span>
-<p>Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems</em>, volume 30. Curran Associates, Inc., 2017. URL: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf</a>.</p>
-</div>
-<div class="citation" id="id23" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>24<span class="fn-bracket">]</span></span>
-<p>Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Z. Ghahramani, M. Welling, C. Cortes, N. D. Lawrence, and K. Q. Weinberger, editors, <em>Advances in Neural Information Processing Systems 27</em>, pages 2672–2680. Curran Associates, Inc., 2014. URL: <a class="reference external" href="http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf">http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf</a>.</p>
-</div>
-<div class="citation" id="id48" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>25<span class="fn-bracket">]</span></span>
-<p>Luke Metz, Ben Poole, David Pfau, and Jascha Narain Sohl-Dickstein. Unrolled generative adversarial networks. <em>ArXiv</em>, 2016. URL: <a class="reference external" href="https://api.semanticscholar.org/CorpusID:6610705">https://api.semanticscholar.org/CorpusID:6610705</a>.</p>
-</div>
-<div class="citation" id="id49" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>26<span class="fn-bracket">]</span></span>
-<p>Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, <em>Advances in Neural Information Processing Systems</em>, volume 33, 6840–6851. Curran Associates, Inc., 2020.</p>
-</div>
-<div class="citation" id="id50" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>27<span class="fn-bracket">]</span></span>
-<p>Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. <em>CoRR</em>, 2015. URL: <a class="reference external" href="http://dblp.uni-trier.de/db/journals/corr/corr1505.html#RonnebergerFB15">http://dblp.uni-trier.de/db/journals/corr/corr1505.html#RonnebergerFB15</a>.</p>
 </div>
 </div>
 </div>

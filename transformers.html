@@ -173,8 +173,11 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
@@ -182,10 +185,12 @@
 <li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Transformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles génératifs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
-
-
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
 </ul>
 
     </div>
@@ -814,7 +819,7 @@ de quantités extrêmement importantes de données d’entraînement.</p>
 <section id="implementation">
 <h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
 <p>Vu les temps d’entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
-On se propose donc ici d’implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet <span id="id3">[<a class="reference internal" href="transferLearning.html#id58" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">23</a>]</span>. Dans la mesure du possible, on propose en illustration des codes les figures de l’article.</p>
+On se propose donc ici d’implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet <span id="id3">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>. Dans la mesure du possible, on propose en illustration des codes les figures de l’article.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
@@ -868,7 +873,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 </div>
-<p>On s’intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans <span id="id4">[<a class="reference internal" href="transferLearning.html#id58" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">23</a>]</span>. Pour ce faire, on créé une classe <code class="docutils literal notranslate"><span class="pre">PositionWiseFFN</span></code> qui permet de prendre en compte la position des éléments dans le calcul des prédictions.</p>
+<p>On s’intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans <span id="id4">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>. Pour ce faire, on créé une classe <code class="docutils literal notranslate"><span class="pre">PositionWiseFFN</span></code> qui permet de prendre en compte la position des éléments dans le calcul des prédictions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PositionFFN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">d_ff</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PositionWiseFeedForward</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -903,7 +908,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <figure class="align-default" id="encodeur">
 <img alt="_images/encoder.png" src="_images/encoder.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Bloc encodeur (source : <span id="id5">[<a class="reference internal" href="transferLearning.html#id58" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">23</a>]</span>).</span><a class="headerlink" href="#encodeur" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Bloc encodeur (source : <span id="id5">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#encodeur" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EncoderLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -928,7 +933,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <figure class="align-default" id="decodeur">
 <img alt="_images/decoder.png" src="_images/decoder.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Bloc décodeur (source : <span id="id6">[<a class="reference internal" href="transferLearning.html#id58" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">23</a>]</span>).</span><a class="headerlink" href="#decodeur" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Bloc décodeur (source : <span id="id6">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#decodeur" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DecoderLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -956,7 +961,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <figure class="align-default" id="transfo">
 <img alt="_images/transformer.png" src="_images/transformer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Bloc transformer (source : <span id="id7">[<a class="reference internal" href="transferLearning.html#id58" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">23</a>]</span>).</span><a class="headerlink" href="#transfo" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Bloc transformer (source : <span id="id7">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#transfo" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Transformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1050,6 +1055,15 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <span class="n">out</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">)</span>
 <span class="n">out</span>
 </pre></div>
+</div>
+<div class="docutils container" id="id8">
+<div role="list" class="citation-list">
+<div class="citation" id="id52" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>,<a role="doc-backlink" href="#id5">3</a>,<a role="doc-backlink" href="#id6">4</a>,<a role="doc-backlink" href="#id7">5</a>)</span>
+<p>Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems</em>, volume 30. Curran Associates, Inc., 2017. URL: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf</a>.</p>
+</div>
+</div>
 </div>
 </section>
 </section>

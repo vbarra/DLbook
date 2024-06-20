@@ -523,5 +523,6 @@ print("Taux de reconnaissance des chiffres manuscrits sur l'ensemble de test :  
 
 
 ```{bibliography}
+:filter: docname in docnames
 :style: unsrt
 ```

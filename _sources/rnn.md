@@ -531,5 +531,6 @@ Prédiction du modèle et valeurs réelles
 ```
 
 ```{bibliography}
+:filter: docname in docnames
 :style: unsrt
 ```

@@ -938,5 +938,6 @@ Fonction de perte.
 
 
 ```{bibliography}
+:filter: docname in docnames
 :style: unsrt
 ```

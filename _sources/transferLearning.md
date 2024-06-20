@@ -628,5 +628,6 @@ predict(model2)
 
 ```{bibliography}
 :style: unsrt
+:filter: docname in docnames
 ```
 
