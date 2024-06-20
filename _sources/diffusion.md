@@ -37,7 +37,7 @@ Illustration du modèle de diffusion (source : [{cite:p}`Ho20`](https://proceedi
 Soit $q(\mathbf{x}_0)$ la distribution des données réelles. On échantillonne $\mathbf{x}_0 \sim q(\mathbf{x}_0)$ et on définit un processus de diffusion avant $q(\mathbf{x}_t | \mathbf{x}_{t-1})$ qui ajoute un bruit gaussien à chaque pas de temps $t\in[\![1,T]\!]$, selon une mise à jour de la variance connue  $0 < \beta_1 < \beta_2 < ... < \beta_T < 1$ : 
 
 $$
-q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t} \mathbf{x}_{t-1}, \beta_t \mathbf{I})
+q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\sqrt{1 - \beta_t} \mathbf{x}_{t-1}, \beta_t \mathbf{I})
 $$
 
 Chaque donnée $\boldsymbol x_t$ est ainsi tirée selon une distribution conditionnelle gaussienne  $\mathbf{\mu}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1}$ et  $\sigma^2_t = \beta_t$,ce qui peut être réalisé en échantillonnant selon  $\mathbf{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$ et en posant  $\mathbf{x}_t = \sqrt{1 - \beta_t} \mathbf{x}_{t-1} +  \sqrt{\beta_t} \mathbf{\varepsilon}$. 
@@ -52,7 +52,7 @@ Si on connaissait la distribution conditionnelle  $p(\mathbf{x}_{t-1} | \mathbf{
 
 Si on suppose que le processus inverse est gaussien, alors on peut écrire 
 
-$$ p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))$$
+$$ p_{\boldsymbol \theta} (\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mu_\theta(\mathbf{x}_{t},t), \Sigma_\theta (\mathbf{x}_{t},t))$$
 
 Le réseau doit donc apprendre la moyenne et la variance, qui dependent du temps. Dans l'implémentation initiale {cite:p}`Ho20`, les auteurs relaxent la contrainte de la variance ($\Sigma_\theta ( \mathbf{x}_t, t) = \sigma^2_t \mathbf{I}$), et apprennent uniquement la moyenne. Dans les implémentations suivantes (par exemple [celle-ci](https://openreview.net/pdf?id=-NEXDKk8gZ)), la contrainte a été prise en compte.
 
