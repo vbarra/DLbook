@@ -307,12 +307,12 @@ document.write(`
 <h1>Modèles de diffusion<a class="headerlink" href="#modeles-de-diffusion" title="Lien vers cette rubrique">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique">#</a></h2>
-<p>Un modèle de diffusion (de débruitage) transforme du bruit à partir d’une distribution simple en un échantillon de données. Lorsque les données sont des images, le modèle se compose de deux processus (<a class="reference internal" href="#diffusion"><span class="std std-numref">Fig. 70</span></a>) :</p>
+<p>Un modèle de diffusion (de débruitage) transforme du bruit à partir d’une distribution simple en un échantillon de données. Le modèle se compose de deux processus (<a class="reference internal" href="#diffusion"><span class="std std-numref">Fig. 70</span></a>) :</p>
 <ul class="simple">
-<li><p>un processus de diffusion vers l’avant <span class="math notranslate nohighlight">\(q\)</span>, choisi, qui ajoute progressivement du bruit gaussien à une image, jusqu’à aboutir à du bruit pur</p></li>
-<li><p>un processus de diffusion inverse de débruitage <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span> , modélisé par un réseau de neurones, entraîné à débruiter progressivement une image à partir d’un bruit pur, jusqu’à obtenir une image réelle.</p></li>
+<li><p>un processus de diffusion vers l’avant <span class="math notranslate nohighlight">\(q\)</span>, choisi, qui ajoute progressivement du bruit gaussien à une donnée, jusqu’à aboutir à du bruit pur</p></li>
+<li><p>un processus de diffusion inverse de débruitage <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span> , modélisé par un réseau de neurones, entraîné à débruiter progressivement une donnée à partir d’un bruit pur, jusqu’à obtenir une réalisation d’une donnée réelle.</p></li>
 </ul>
-<p>Les processus sont temporels, indexés par le temps <span class="math notranslate nohighlight">\(t\in[\![0,T]\!]\)</span>. A <span class="math notranslate nohighlight">\(t=0\)</span>, on  échantillonne une image réelle <span class="math notranslate nohighlight">\(\boldsymbol 𝐱_0\)</span> de la distribution de données. Le processus <span class="math notranslate nohighlight">\(q\)</span> échantillonne un bruit provenant d’une distribution gaussienne à chaque pas de temps <span class="math notranslate nohighlight">\(t\)</span> ,  ajouté à l’image du pas de temps précédent. Si <span class="math notranslate nohighlight">\(T\)</span> est suffisamment et que les processus d’ajout de bruit est correct, on obtient une distribution gaussienne isotrope à <span class="math notranslate nohighlight">\(t=T\)</span>.</p>
+<p>Les processus sont temporels, indexés par le temps <span class="math notranslate nohighlight">\(t\in[\![0,T]\!]\)</span>. A <span class="math notranslate nohighlight">\(t=0\)</span>, on  échantillonne une donnée réelle <span class="math notranslate nohighlight">\(\boldsymbol 𝐱_0\)</span> de la distribution de données. Le processus <span class="math notranslate nohighlight">\(q\)</span> échantillonne un bruit provenant d’une distribution gaussienne à chaque pas de temps <span class="math notranslate nohighlight">\(t\)</span> ,  ajouté à la donnée du pas de temps précédent. Si <span class="math notranslate nohighlight">\(T\)</span> est suffisamment et que les processus d’ajout de bruit est correct, on obtient une distribution gaussienne isotrope à <span class="math notranslate nohighlight">\(t=T\)</span>.</p>
 <div class="proof remark dropdown admonition" id="remark-0">
 <p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
 <section class="remark-content" id="proof-content">
@@ -594,8 +594,14 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </figure>
 <p>On peut alors partir d’un bruit gaussien 2D et appliquer le processus inverse pour générer une réalisation des données d’entrée.</p>
 <p><img alt="" src="_images/reversediffusion.gif" /></p>
-<p>On peut également partir d’autres nuages de points
-<img alt="" src="_images/reversediffusioncircles.gif" /><img alt="" src="_images/reversediffusionmoons.gif" /></p>
+<p>On peut également partir d’autres nuages de points</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><img alt="" src="_images/reversediffusioncircles.gif" /></p></th>
+<th class="head"><p><img alt="" src="_images/reversediffusionmoons.gif" /></p></th>
+</tr>
+</thead>
+</table>
 </section>
 </section>
 

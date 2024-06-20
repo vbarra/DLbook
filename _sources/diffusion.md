@@ -13,11 +13,11 @@ kernelspec:
 
 ## Introduction
 
-Un modèle de diffusion (de débruitage) transforme du bruit à partir d'une distribution simple en un échantillon de données. Lorsque les données sont des images, le modèle se compose de deux processus ({numref}`diffusion`) : 
-- un processus de diffusion vers l'avant $q$, choisi, qui ajoute progressivement du bruit gaussien à une image, jusqu'à aboutir à du bruit pur
-- un processus de diffusion inverse de débruitage $p_{\boldsymbol\theta}$ , modélisé par un réseau de neurones, entraîné à débruiter progressivement une image à partir d'un bruit pur, jusqu'à obtenir une image réelle.
+Un modèle de diffusion (de débruitage) transforme du bruit à partir d'une distribution simple en un échantillon de données. Le modèle se compose de deux processus ({numref}`diffusion`) : 
+- un processus de diffusion vers l'avant $q$, choisi, qui ajoute progressivement du bruit gaussien à une donnée, jusqu'à aboutir à du bruit pur
+- un processus de diffusion inverse de débruitage $p_{\boldsymbol\theta}$ , modélisé par un réseau de neurones, entraîné à débruiter progressivement une donnée à partir d'un bruit pur, jusqu'à obtenir une réalisation d'une donnée réelle.
 
-Les processus sont temporels, indexés par le temps $t\in[\![0,T]\!]$. A $t=0$, on  échantillonne une image réelle $\boldsymbol 𝐱_0$ de la distribution de données. Le processus $q$ échantillonne un bruit provenant d'une distribution gaussienne à chaque pas de temps $t$ ,  ajouté à l'image du pas de temps précédent. Si $T$ est suffisamment et que les processus d'ajout de bruit est correct, on obtient une distribution gaussienne isotrope à $t=T$.
+Les processus sont temporels, indexés par le temps $t\in[\![0,T]\!]$. A $t=0$, on  échantillonne une donnée réelle $\boldsymbol 𝐱_0$ de la distribution de données. Le processus $q$ échantillonne un bruit provenant d'une distribution gaussienne à chaque pas de temps $t$ ,  ajouté à la donnée du pas de temps précédent. Si $T$ est suffisamment et que les processus d'ajout de bruit est correct, on obtient une distribution gaussienne isotrope à $t=T$.
 
 ```{prf:remark}
 :class: dropdown
@@ -329,5 +329,8 @@ On peut alors partir d'un bruit gaussien 2D et appliquer le processus inverse po
 ![](images/reversediffusion.gif)
 
 On peut également partir d'autres nuages de points
-![](images/reversediffusioncircles.gif)![](images/reversediffusionmoons.gif)
+
+| ![](images/reversediffusioncircles.gif) | ![](images/reversediffusionmoons.gif) | 
+|---|----|
+
 
