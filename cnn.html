@@ -178,6 +178,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="perceptron.html">Perceptron</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
@@ -403,7 +404,7 @@ d’information, l’idée est de laisser un neurone caché voir et traiter
 seulement une petite portion de l’image qu’il prend en entrée. L’outil
 retenu dans les réseaux convolutifs est la convolution discrète.</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span> (Convolution discrète)</p>
+<p class="admonition-title"><span class="caption-number">Definition 8 </span> (Convolution discrète)</p>
 <section class="definition-content" id="proof-content">
 <p>Soient
 <span class="math notranslate nohighlight">\(h_1,h_2\in\mathbb{N}, \mathbf{K} \in \mathbb{R}^{(2h_1+1) \times (2h_2+1)}\)</span>.
@@ -562,9 +563,9 @@ problème, chaque activation du mini batch est centrée et normée
 batch entier, indépendamment pour chaque activation. Des paramètres
 d’offset <span class="math notranslate nohighlight">\(\beta\)</span> et multiplicatif <span class="math notranslate nohighlight">\(\gamma\)</span> sont alors appliqués pour
 normaliser les données d’entrée
-(<a class="reference internal" href="#norm">Algorithm 5</a>).</p>
+(<a class="reference internal" href="#norm">Algorithm 8</a>).</p>
 <div class="proof algorithm admonition" id="norm">
-<p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Normalisation par batch sur la présentation d’un mini batch <span class="math notranslate nohighlight">\(\mathcal{B}\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 8 </span> (Normalisation par batch sur la présentation d’un mini batch <span class="math notranslate nohighlight">\(\mathcal{B}\)</span>)</p>
 <section class="algorithm-content" id="proof-content">
 <p>Entrées : valeurs de l’activation <span class="math notranslate nohighlight">\(x\)</span> sur un mini batch <span class="math notranslate nohighlight">\(\mathcal{B} = \{x_1\cdots x_m\}\)</span>,  Paramètres <span class="math notranslate nohighlight">\(\beta,\gamma\)</span> à apprendre</p>
 <p>Sortie : Données normalisées <span class="math notranslate nohighlight">\(\{y_1\cdots  y_m\}=BatchNorm_{\gamma,\beta}(x_1\cdots x_m)\)</span></p>
@@ -581,9 +582,9 @@ normaliser les données d’entrée
 </div><p>Lorsque la descente de gradient est achevée, un post apprentissage est
 appliqué dans lequel la moyenne et la variance sont calculées sur
 l’ensemble d’entraînement et remplacent <span class="math notranslate nohighlight">\(\mu_\mathcal{B}\)</span> et
-<span class="math notranslate nohighlight">\(\sigma^2_\mathcal{B}\)</span> (<a class="reference internal" href="#norm2">Algorithm 6</a>).</p>
+<span class="math notranslate nohighlight">\(\sigma^2_\mathcal{B}\)</span> (<a class="reference internal" href="#norm2">Algorithm 9</a>).</p>
 <div class="proof algorithm admonition" id="norm2">
-<p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (Normalisation par batch d’un réseau)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 9 </span> (Normalisation par batch d’un réseau)</p>
 <section class="algorithm-content" id="proof-content">
 <p>{
 Entrées : {un réseau <span class="math notranslate nohighlight">\(N\)</span>,  un ensemble d’activations <span class="math notranslate nohighlight">\(\{x^1\cdots x^K\}\)</span></p>
@@ -591,7 +592,7 @@ Entrées : {un réseau <span class="math notranslate nohighlight">\(N\)</span>, 
 <li><p><span class="math notranslate nohighlight">\(N_n=N\)</span></p></li>
 <li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(K\)</span></p>
 <ol class="arabic simple">
-<li><p>Calculer <span class="math notranslate nohighlight">\(y^i=BN_{\gamma,\beta}(x^i)\)</span> à l’aide de l”<a class="reference internal" href="#norm">Algorithm 5</a></p></li>
+<li><p>Calculer <span class="math notranslate nohighlight">\(y^i=BN_{\gamma,\beta}(x^i)\)</span> à l’aide de l”<a class="reference internal" href="#norm">Algorithm 8</a></p></li>
 <li><p>Modifier chaque couche de <span class="math notranslate nohighlight">\(N_n\)</span> : l’entrée <span class="math notranslate nohighlight">\(y^i\)</span> remplace l’entrée <span class="math notranslate nohighlight">\(x^i\)</span></p></li>
 </ol>
 </li>

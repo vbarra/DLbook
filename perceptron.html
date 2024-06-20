@@ -1,0 +1,968 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Perceptron &#8212; Apprentissage profond</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'perceptron';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Perceptrons multicouches" href="PMC.html" />
+    <link rel="prev" title="Introduction aux réseaux de neurones" href="NN.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles génératifs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Perceptron</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Définitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">Utilisation : discrimination linéaire</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">Algorithme d’apprentissage par correction d’erreur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient">Algorithme d’apprentissage par descente de gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">Pour en finir avec le perceptron</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="perceptron">
+<h1>Perceptron<a class="headerlink" href="#perceptron" title="Lien vers cette rubrique">#</a></h1>
+<section id="definitions">
+<h2>Définitions<a class="headerlink" href="#definitions" title="Lien vers cette rubrique">#</a></h2>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 4 </span> (Neurone)</p>
+<section class="definition-content" id="proof-content">
+<p>Un neurone est une fonction non linéaire, paramétrée à valeurs bornées.
+Les <span class="math notranslate nohighlight">\(D\)</span> variables sur lesquelles opère le neurone sont habituellement
+désignées sous le terme d’entrées du neurone (notées
+<span class="math notranslate nohighlight">\(x_i,i\in[\![1,D]\!])\)</span>, et la valeur de la fonction sous celui de sortie
+<span class="math notranslate nohighlight">\(y\)</span>.<br />
+Le neurone formel calcule la sortie selon la formule :</p>
+<div class="math notranslate nohighlight">
+\[y = f(w_0+\displaystyle\sum_{i=1}^Dw_ix_i) = f(w_0+\mathbf w^\top \mathbf x)\]</div>
+<p>où :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf w = (w_1\cdots w_D)^\top\)</span> est le vecteur des poids synaptiques qui pondèrent les entrées du neurone,</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_0\)</span> est un biais</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf w^\top \mathbf x\)</span> est le potentiel du neurone</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> est la fonction d’activation associée au neurone.</p></li>
+</ul>
+</section>
+</div><div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 5 </span> (Réseau de neurones)</p>
+<section class="definition-content" id="proof-content">
+<p>Un réseau de neurones est un ensemble de neurones interconnectés. Les
+réseaux de neurones peuvent être visualisés par l’intermédiaire d’un
+graphe orienté. Chaque neurone est un noeud, les neurones étant
+connectés par des arêtes.</p>
+</section>
+</div><p>On distingue habituellement neurone d’entrée et neurone de
+sortie. Un neurone d’entrée calcule <span class="math notranslate nohighlight">\(y = x\)</span> où <span class="math notranslate nohighlight">\(x\)</span> est une entrée unique
+du neurone. Les neurones de sortie prennent un nombre quelconque
+d’entrées. Interconnectés, l’ensemble de ces neurones calcule <span class="math notranslate nohighlight">\(\mathbf y(x)\)</span>
+dont la dimension est donnée par le nombre de neurones d’entrée et de
+sortie (l’entrée du réseau est acceptée par les neurones d’entrée, qui
+forment la rétine), et la sortie du réseau est formée par les neurones
+de sortie.</p>
+<p>Le cas le plus simple est celui d’un réseau comportant un seul neurone de sortie.
+C’est le <em>perceptron</em>. Le perceptron est un modèle de réseau de neurones
+avec algorithme d’apprentissage (Rosenblatt en 1958). L’idée
+sous-jacente de ce modèle est le fonctionnement de la rétine, l’étude de
+la perception visuelle. Nous commençons par aborder le cas du perceptron
+linéaire à seuil.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 6 </span> (Perceptron linéire à seuil)</p>
+<section class="definition-content" id="proof-content">
+<p>Un perceptron linéaire à seuil prend en entrée <span class="math notranslate nohighlight">\(D\)</span> valeurs
+<span class="math notranslate nohighlight">\(x_1\cdots x_D\)</span> (la rétine) et calcule une sortie <span class="math notranslate nohighlight">\(y\)</span>. Suivant la
+définition précédente, un perceptron est défini par la donnée de <span class="math notranslate nohighlight">\(D+1\)</span>
+constantes : les <strong>poids synaptiques</strong> <span class="math notranslate nohighlight">\(w_1,\cdots,w_D\)</span> et un seuil (ou
+le biais) <span class="math notranslate nohighlight">\(\theta\)</span>. La sortie <span class="math notranslate nohighlight">\(y\)</span> est calculée par</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y= 
+\left \{
+\begin{array}{lr}
+   1 &amp; \textrm{si}\quad w^Tx=\displaystyle\sum_{i=1}^Dw_ix_i&gt;\theta\\
+   0 &amp; \textrm{sinon}\\
+\end{array}
+\right.\end{split}\]</div>
+</section>
+</div><p>Les entrées <span class="math notranslate nohighlight">\(x_1,\cdots x_D\)</span> peuvent être à valeurs dans {0,1} (ou
+{-1,1}) ou réelles, les poids peuvent être entiers ou réels.</p>
+<p>Pour simplifier les notations et certaines preuves, on remplace souvent
+le seuil par un poids supplémentaire <span class="math notranslate nohighlight">\(w_0\)</span> associé à une entrée <span class="math notranslate nohighlight">\(x_0=1\)</span>. L’équivalence entre le modèle avec
+seuil et le modèle avec entrée supplémentaire à 1 est immédiate : le
+coefficient <span class="math notranslate nohighlight">\(w_0\)</span> est l’opposé du seuil <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>On note <span class="math notranslate nohighlight">\(\mathbf w\)</span> (respectivement <span class="math notranslate nohighlight">\(\mathbf x\)</span>) <span class="math notranslate nohighlight">\(\in\mathbb R^{D+1}\)</span> le vecteur des poids
+(resp. des entrées), augmenté de <span class="math notranslate nohighlight">\(w_0\)</span> (resp. <span class="math notranslate nohighlight">\(x_0\)</span>=1). Comme suggéré
+par la définition, on peut décomposer le calcul de la sortie <span class="math notranslate nohighlight">\(y\)</span> en un
+premier calcul de la quantité <span class="math notranslate nohighlight">\(\mathbf w^T\mathbf x=\displaystyle\sum_{i=0}^Dw_ix_i\)</span>
+appelée <strong>potentiel post-synaptique</strong> ou <strong>entrée totale</strong>, suivi d’une
+application d’une <strong>fonction d’activation</strong> sur cette entrée totale.
+Dans le cas du perceptron linéaire à seuil, la fonction d’activation est
+la fonction de Heaviside définie par <span class="math notranslate nohighlight">\(f(x)=1_{\{x&gt;0\}}\)</span> lorsque la
+sortie est en {0,1}, et <span class="math notranslate nohighlight">\(g(x) = 2f(x) - 1\)</span> lorsque la sortie est en
+{-1,1}.</p>
+</section>
+<section id="utilisation-discrimination-lineaire">
+<h2>Utilisation : discrimination linéaire<a class="headerlink" href="#utilisation-discrimination-lineaire" title="Lien vers cette rubrique">#</a></h2>
+<p>Soit <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un ensemble d’exemples dans <span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span>{0,1} . On
+note</p>
+<div class="math notranslate nohighlight">
+\[{\cal E}_a^0=\{\mathbf x\in \mathbb R^D/(\mathbf x,0)\in {\cal E}_a\}\textrm{ et } {\cal E}_a^1=\{\mathbf x\in \mathbb R^D/(\mathbf x,1)\in {\cal E}_a\}\]</div>
+<p>On dit que
+<span class="math notranslate nohighlight">\({\cal E}_a\)</span> est <strong>linéairement séparable</strong> s’il existe un hyperplan <span class="math notranslate nohighlight">\(H\)</span>
+de <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> tel que les ensembles <span class="math notranslate nohighlight">\({\cal E}_a^0\)</span> et <span class="math notranslate nohighlight">\({\cal E}_a^1\)</span>
+soient situés de part et d’autre de cet hyperplan.<br />
+On montre qu’un perceptron linéaire à seuil à <span class="math notranslate nohighlight">\(D\)</span> entrées divise
+l’espace des entrées <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> en deux sous-espaces délimités par un
+hyperplan <span class="math notranslate nohighlight">\(\mathbf w^T\mathbf x=-\theta\)</span>. Réciproquement, tout ensemble linéairement séparable
+peut être discriminé par un perceptron.<br />
+Un perceptron est donc un discriminant linéaire. On montre facilement
+qu’un échantillon de <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> est séparable par un hyperplan si et
+seulement si l’échantillon de <span class="math notranslate nohighlight">\(\mathbb R^{D+1}\)</span> obtenu en rajoutant une
+entrée toujours égale à 1 est séparable par un hyperplan passant par
+l’origine.<br />
+Toute fonction de <span class="math notranslate nohighlight">\(\mathbb R^D\)</span> dans {0,1} n’est bien sur pas calculable par
+un tel perceptron.</p>
+</section>
+<section id="algorithme-d-apprentissage-par-correction-d-erreur">
+<h2>Algorithme d’apprentissage par correction d’erreur<a class="headerlink" href="#algorithme-d-apprentissage-par-correction-d-erreur" title="Lien vers cette rubrique">#</a></h2>
+<p>Étant donné un échantillon d’apprentissage <span class="math notranslate nohighlight">\({\cal E}_a\)</span> de
+<span class="math notranslate nohighlight">\(\mathbb R^D\times\)</span> {0,1} (respectivement <span class="math notranslate nohighlight">\(\{0,1\}^n\times\)</span> {0,1}),
+c’est-à-dire un ensemble d’exemples dont les descriptions sont <span class="math notranslate nohighlight">\(D\)</span>
+attributs réels (respectivement binaires) et la classe est binaire, il
+s’agit de trouver un algorithme qui infère à partir de <span class="math notranslate nohighlight">\({\cal E}_a\)</span> un
+perceptron qui classifie correctement les éléments de <span class="math notranslate nohighlight">\({\cal E}_a\)</span> au vu
+de leurs descriptions si c’est possible, ou au mieux sinon.<br />
+L’algorithme d’apprentissage peut être décrit succinctement de la
+manière suivante. On initialise les poids du perceptron à des valeurs
+quelconques. A chaque fois que l’on présente un nouvel exemple, on
+ajuste les poids selon que le perceptron l’a correctement classé ou non.
+L’algorithme s’arrête lorsque tous les exemples ont été présentés sans
+modification d’aucun poids ou qu’un nombre maximum d’itération a été atteint.</p>
+<p>Dans la suite, on note <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span> une entrée. La ième composante
+de  <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span> est notée <span class="math notranslate nohighlight">\(x_n^i\)</span>. Pour simplifier l’explication de
+l’algorithme, cette composante sera supposée binaire. Un échantillon
+<span class="math notranslate nohighlight">\({\cal E}_a\)</span> est un ensemble de couples <span class="math notranslate nohighlight">\((\mathbf{x_n},t_n)\)</span> où <span class="math notranslate nohighlight">\(t_n\)</span> est la
+classe binaire de <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span>. Si une entrée <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span> est présentée en entrée
+d’un perceptron, on note <span class="math notranslate nohighlight">\(y_n\)</span> la sortie binaire calculée par le
+perceptron. Rappelons qu’il existe une <span class="math notranslate nohighlight">\((D+1)^\textrm{ème}\)</span> entrée <span class="math notranslate nohighlight">\(x_0\)</span>
+de valeur 1 pour le perceptron.
+L’apprentissage par correction d’erreur du perceptron est donné dans l”<a class="reference internal" href="#correction">Algorithm 4</a></p>
+<div class="proof algorithm admonition" id="correction">
+<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Algorithme d’apprentissage du perceptron par correction d’erreur)</p>
+<section class="algorithm-content" id="proof-content">
+<ol class="arabic simple">
+<li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
+<li><p>Tant que (test)</p>
+<ol class="arabic simple">
+<li><p>Prendre un exemple <span class="math notranslate nohighlight">\((\mathbf{x_n},t_n)\)</span> dans <span class="math notranslate nohighlight">\({\cal E}_a\)</span></p></li>
+<li><p>Calculer la sortie <span class="math notranslate nohighlight">\(y_n\)</span> du perceptron pour l’entrée <span class="math notranslate nohighlight">\(\mathbf{x_n}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\forall i)\; w_i \leftarrow w_i+(t_n-y_n)x_n^i\)</span></p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><p>La procédure d’apprentissage du perceptron est une procédure de
+correction d’erreur puisque les poids ne sont pas modifiés lorsque la
+sortie attendue <span class="math notranslate nohighlight">\(t_n\)</span> est égale à la sortie calculée <span class="math notranslate nohighlight">\(y_n\)</span> par le
+perceptron courant.</p>
+<p>Étudions les modifications sur les poids lorsque <span class="math notranslate nohighlight">\(t_n\)</span> diffère de <span class="math notranslate nohighlight">\(y_n\)</span>,
+lorsque <span class="math notranslate nohighlight">\(\mathbf{x_n} \in \{0,1\}^D\)</span> :</p>
+<ul class="simple">
+<li><p>si <span class="math notranslate nohighlight">\(y_n\)</span>=0 et <span class="math notranslate nohighlight">\(t_n\)</span>=1, cela signifie que le perceptron n’a pas assez
+pris en compte les neurones actifs de l’entrée (c’est-à-dire les
+neurones ayant une entrée à 1). Dans ce cas,
+<span class="math notranslate nohighlight">\(w_i \leftarrow w_i+x_n^i\)</span> : l’algorithme ajoute la valeur de la
+rétine aux poids synaptiques (renforcement).</p></li>
+<li><p>si <span class="math notranslate nohighlight">\(y_n\)</span>=1 et <span class="math notranslate nohighlight">\(t_n\)</span>=0, alors <span class="math notranslate nohighlight">\(w_i \leftarrow w_i-x_n^i\)</span> ;
+l’algorithme retranche la valeur de la rétine aux poids synaptiques
+(inhibition).</p></li>
+</ul>
+<p>Remarquons que, en phase de calcul, les constantes du perceptron sont
+les poids synaptiques alors que les variables sont les entrées. Tandis
+que, en phase d’apprentissage, ce sont les coefficients synaptiques qui
+sont variables alors que les entrées de l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span>
+apparaissent comme des constantes.<br />
+Certains éléments importants ont été laissés volontairement imprécis.</p>
+<ul class="simple">
+<li><p>en premier lieu, il faut préciser comment est fait le choix d’un
+élément de <span class="math notranslate nohighlight">\({\cal E}_a\)</span> : aléatoirement ? En suivant un ordre
+prédéfini ? Doivent-ils être tous présentés ?</p></li>
+<li><p>le critère d’arrêt de la boucle principale de l’algorithme n’est pas
+défini : après un certain nombre d’étapes ? Lorsque tous les
+exemples ont été présentés ? Lorsque les poids ne sont plus modifiés
+pendant un certain nombre d’étapes ?</p></li>
+</ul>
+<p>Nous reviendrons sur toutes ces questions par la suite.</p>
+<div class="proof example admonition" id="example-4">
+<p class="admonition-title"><span class="caption-number">Example 2 </span> (Apprentissage du OU binaire)</p>
+<section class="example-content" id="proof-content">
+<p>Les descriptions appartiennent à {0,1}<span class="math notranslate nohighlight">\(^2\)</span>, les entrées du perceptron
+appartiennent à {0,1}<span class="math notranslate nohighlight">\(^3\)</span>, la première composante correspond à l’entrée
+<span class="math notranslate nohighlight">\(x_0\)</span> et vaut toujours 1, les deux composantes suivantes correspondent
+aux variables <span class="math notranslate nohighlight">\(x_1\)</span> et <span class="math notranslate nohighlight">\(x_2\)</span> . On suppose qu’à l’initialisation, les
+poids suivants ont été choisis : <span class="math notranslate nohighlight">\(w_0\)</span>=0 ; <span class="math notranslate nohighlight">\(w_1\)</span> = 1 et <span class="math notranslate nohighlight">\(w_2\)</span> = -1. On
+suppose que les exemples sont présentés dans l’ordre lexicographique.</p>
+<p>Le tableau suivant présente la trace de l’algorithme à partir de cette initialisation.
+Aucune entrée ne modifie le perceptron à partir de l’itération 10.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>étape</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w_1\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w_2\)</span></p></th>
+<th class="head"><p>Entrée</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\mathbf w^\top \mathbf x\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(y\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(t\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w_1\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w_2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Init</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+<td><p>100</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>-1</p></td>
+<td><p>101</p></td>
+<td><p>-1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>110</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>111</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>100</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>101</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>110</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>111</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>100</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>101</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div><p>On peut montrer que si l’échantillon <span class="math notranslate nohighlight">\({\cal E}_a\)</span> est linéairement
+séparable et si les exemples sont présentés de manière équitable
+(c’est-à-dire que la procédure de choix des exemples n’en exclut aucun),
+la procédure d’apprentissage par correction d’erreur converge vers un
+perceptron linéaire à seuil qui sépare linéairement <span class="math notranslate nohighlight">\({\cal E}_a\)</span>.</p>
+<p>L’inconvénient majeur de cet apprentissage est que si l’échantillon
+présenté n’est pas linéairement séparable, l’algorithme ne convergera
+pas et l’on aura aucun moyen de le savoir.</p>
+<p>On pourrait penser qu’il suffit d’observer l’évolution des poids synaptiques pour en déduire si
+l’on doit arrêter ou non l’algorithme. En effet, si les poids et le
+seuil prennent deux fois les mêmes valeurs sans que le perceptron ait
+appris et alors que tous les exemples ont été présentés, cela signifie
+que l’échantillon n’est pas séparable. Et l’on peut penser que l’on peut
+borner les poids et le seuil en fonction de la taille de la rétine.</p>
+<p>C’est vrai mais les résultats de complexité suivants montrent que cette
+idée n’est pas applicable en pratique.</p>
+<ol class="arabic simple">
+<li><p>Toute fonction booléenne linéairement séparable sur <span class="math notranslate nohighlight">\(D\)</span> variables
+peut être réalisée par un perceptron dont les poids synaptiques
+entiers <span class="math notranslate nohighlight">\(w_i\)</span> sont tels que
+<span class="math notranslate nohighlight">\(\left\lceil w_i\right\rceil \leq (D+1)^{\frac{D+1}{2}}\)</span></p></li>
+<li><p>Il existe des fonction booléennes linéairement séparables sur <span class="math notranslate nohighlight">\(D\)</span>
+variables qui requièrent des poids entiers supérieurs à
+<span class="math notranslate nohighlight">\(2^{\frac{D+1}{2}}\)</span></p></li>
+</ol>
+<p>Le premier résultat montre que l’on peut
+borner les poids synaptiques en fonction de la taille de la rétine, mais
+par un nombre tellement grand que toute application pratique de ce
+résultat semble exclue. Le second résultat montre en particulier que
+l’algorithme d’apprentissage peut nécessiter un nombre exponentiel
+d’étapes (en fonction de la taille de la rétine) avant de s’arrêter. En
+effet, les poids ne varient qu’au plus d’une unité à chaque étape. Même
+lorsque l’algorithme d’apprentissage du perceptron converge, rien ne
+garantit que la solution sera robuste, c’est-à-dire qu’elle ne sera pas
+remise en cause par la présentation d’un seul nouvel exemple. Pire
+encore, cet algorithme n’a aucune tolérance au bruit : si du bruit,
+c’est-à-dire une information mal classée, vient perturber les données
+d’entrée, le perceptron ne convergera jamais. En effet, des données
+linéairement séparables peuvent ne plus l’être à cause du bruit. En
+particulier, les problèmes non-déterministes, c’est-à-dire pour lesquels
+une même description peut représenter des éléments de classes
+différentes, ne peuvent pas être traités à l’aide d’un perceptron.</p>
+</section>
+<section id="algorithme-d-apprentissage-par-descente-de-gradient">
+<h2>Algorithme d’apprentissage par descente de gradient<a class="headerlink" href="#algorithme-d-apprentissage-par-descente-de-gradient" title="Lien vers cette rubrique">#</a></h2>
+<p>Plutôt que d’obtenir un perceptron qui classifie correctement tous les
+exemples, il s’agit maintenant de calculer une erreur et d’essayer de
+minimiser cette erreur. Pour introduire cette notion d’erreur, on
+utilise des poids réels et donc des sorties réelles.</p>
+<p>Un perceptron linéaire prend en entrée un vecteur <span class="math notranslate nohighlight">\(\mathbf x_n\)</span> et calcule une
+sortie <span class="math notranslate nohighlight">\(y_n\)</span>. Un perceptron est défini par la donnée d’un vecteur <span class="math notranslate nohighlight">\(\mathbf w\)</span> de
+coefficients synaptiques. La sortie <span class="math notranslate nohighlight">\(y_n\)</span> est définie par <span class="math notranslate nohighlight">\(y_n=\mathbf w^\top\mathbf x_n\)</span>.
+L’erreur du perceptron sur un échantillon d’apprentissage <span class="math notranslate nohighlight">\({\cal E}_a\)</span>
+d’exemples <span class="math notranslate nohighlight">\((\mathbf x_n,t_n)\)</span> est définie en utilisant par l’erreur quadratique</p>
+<div class="math notranslate nohighlight">
+\[E(\mathbf w)=\frac{1}{2}\displaystyle\sum_{(\mathbf x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2\]</div>
+<p>L’erreur mesure donc l’écart entre les sorties attendue et calculée sur
+l’échantillon complet. On remarque que <span class="math notranslate nohighlight">\(E(\mathbf w) = 0\)</span> si et seulement si le
+perceptron classifie correctement l’échantillon complet. On suppose
+<span class="math notranslate nohighlight">\({\cal E}_a\)</span> fixé, le problème est donc de déterminer, par descente de
+gradient, un vecteur <span class="math notranslate nohighlight">\(\tilde{\mathbf w}\)</span> qui minimise <span class="math notranslate nohighlight">\(E(\mathbf w)\)</span>. On a alors :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\frac{\partial E(\mathbf w)}{\partial w_i}&amp;=\frac{\partial}{\partial w_i}\left (\frac{1}{2}\displaystyle\sum_{(\mathbf x_n,t_n)\in {\cal E}_a} (t_n-y_n)^2 \right )\\
+                                                                                &amp;=\frac{1}{2}\displaystyle\sum_{{\cal E}_a}\frac{\partial}{\partial w_i}(t_n-y_n)^2\\
+                                                                                &amp;=\displaystyle\sum_{{\cal E}_a}(t_n-y_n)\frac{\partial}{\partial w_i}(t_n-\mathbf w^\top \mathbf x_n)\\
+                                                                                &amp;=\displaystyle\sum_{{\cal E}_a}(t_n-y_n)(-x_n^i)\\
+\end{aligned}\end{split}\]</div>
+<p>L’application de la méthode du gradient invite donc à
+modifier le poids <span class="math notranslate nohighlight">\(w_i\)</span> après une présentation complète de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>
+d’une quantité <span class="math notranslate nohighlight">\(\Delta w_i\)</span> définie par :
+$<span class="math notranslate nohighlight">\(\Delta w_i=-\epsilon \frac{\partial E(\mathbf w)}{\partial w_i}\)</span>$</p>
+<p>L’algorithme d’apprentissage par descente de gradient du perceptron
+linéaire peut maintenant être défini l”<a class="reference internal" href="#descente">Algorithm 5</a>.</p>
+<div class="proof algorithm admonition" id="descente">
+<p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
+<section class="algorithm-content" id="proof-content">
+<ol class="arabic simple">
+<li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
+<li><p>Tant que (test)</p>
+<ol class="arabic simple">
+<li><p>Pour tout <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(\Delta w_i \leftarrow 0\)</span></p></li>
+<li><p>Pour tout <span class="math notranslate nohighlight">\((\mathbf x_n,t_n)\in {\cal E}_a\)</span></p>
+<ol class="arabic simple">
+<li><p>Calculer <span class="math notranslate nohighlight">\(y_n\)</span></p></li>
+<li><p>Pour tout <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(\Delta w_i \leftarrow \Delta w_i+\varepsilon (t_y-y_n)x_n^i\)</span></p></li>
+</ol>
+</li>
+<li><p>Pour tout <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(w_i \leftarrow w_i + \Delta w_i\)</span>$</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><p>La fonction erreur quadratique ne possède qu’un minimum (la surface est
+une paraboloïde). La convergence est assurée, même si l’échantillon
+d’entrée n’est pas linéairement séparable, vers un minimum de la
+fonction erreur pour un <span class="math notranslate nohighlight">\(\epsilon\)</span> bien choisi, suffisamment petit. <span class="math notranslate nohighlight">\(\varepsilon\)</span> est appelé le taux d’apprentissage (ou <em>learning rate</em>).</p>
+<p>Si <span class="math notranslate nohighlight">\(\varepsilon\)</span> est trop grand, on risque d’osciller autour du minimum. Pour
+cette raison, une modification classique est de diminuer graduellement
+la valeur de <span class="math notranslate nohighlight">\(\varepsilon\)</span> en fonction du nombre d’itérations. Le principal
+défaut est que la convergence peut être très lente et que chaque étape
+nécessite le calcul sur tout l’ensemble d’apprentissage.<br />
+Au lieu de calculer les variations des poids en sommant sur tous les
+exemples de <span class="math notranslate nohighlight">\({\cal E}_a\)</span>, l’idée est alors de modifier les poids à
+chaque présentation d’exemple. La règle de modification des poids
+devient : $<span class="math notranslate nohighlight">\(\Delta w_i=\varepsilon (t_n-y_n)x_n^i\)</span>$</p>
+<p>Cette règle est appelée règle delta, ou règle Adaline, ou encore règle
+de Widrow-Hoff, et l”<a class="reference internal" href="#adaline">Algorithm 6</a>
+décrit cette règle :</p>
+<div class="proof algorithm admonition" id="adaline">
+<p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (Algorithme d’apprentissage du perceptron par descente de gradient)</p>
+<section class="algorithm-content" id="proof-content">
+<ol class="arabic simple">
+<li><p>Initialisation aléatoire des <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
+<li><p>Tant que (test)</p>
+<ol class="arabic simple">
+<li><p>Prendre un exemple <span class="math notranslate nohighlight">\((\mathbf x_n,t_n)\in {\cal E}_a\)</span></p></li>
+<li><p>Calculer <span class="math notranslate nohighlight">\(y_n\)</span></p></li>
+<li><p>Pour tout <span class="math notranslate nohighlight">\(i\)</span> <span class="math notranslate nohighlight">\(w_i \leftarrow  w_i+\varepsilon (t_y-y_n)x_n^i\)</span></p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><p>En général, on parcourt l’échantillon dans un ordre prédéfini. Le
+critère d’arrêt généralement choisi fait intervenir un seuil de
+modifications des poids pour un passage complet de l’échantillon.\</p>
+<p>Au coefficient <span class="math notranslate nohighlight">\(\varepsilon\)</span> près dans la règle de modification des poids,
+on retrouve l’algorithme d’apprentissage par correction d’erreur. Pour
+l’algorithme de Widrow-Hoff, il y a correction chaque fois que la sortie
+totale (qui est un réel) est différente de la valeur attendue. Ce n’est
+donc pas une méthode d’apprentissage par correction d’erreur puisqu’il y
+a modification du perceptron dans (presque) tous les cas. Rappelons
+également que l’algorithme par correction d’erreur produit en sortie un
+perceptron linéaire à seuil alors que l’algorithme par descente de
+gradient produit un perceptron linéaire. L’avantage de l’algorithme de
+Widrow-Hoff par rapport à l’algorithme par correction d’erreur est que,
+même si l’échantillon d’entrée n’est pas linéairement séparable,
+l’algorithme va converger vers une solution optimale (sous réserve du
+bon choix du paramètre <span class="math notranslate nohighlight">\(\varepsilon\)</span>). L’algorithme est, par conséquent,
+plus robuste au bruit.</p>
+<p>L’algorithme de Widrow-Hoff s’écarte de l’algorithme du gradient sur un
+point important : on modifie les poids après présentation de chaque
+exemple en fonction de l’erreur locale et non de l’erreur globale. On
+utilise donc une méthode de type <em>gradient stochastique</em>. Rien ne
+prouve alors que la diminution de l’erreur en un point ne va pas être
+compensée par une augmentation de l’erreur pour les autres points. La
+justification empirique de cette manière de procéder est commune à
+toutes les méthodes adaptatives : le champ d’application des méthodes
+adaptatives est justement l’ensemble des problèmes pour lesquels des
+ajustements locaux vont finir par converger vers une solution globale.</p>
+<p>L’algorithme de Widrow-Hoff est souvent utilisé en pratique et
+donne de bons résultats. Iil sera utilisé dans les autres réseaux de
+neurones rencontrés dans ce cours, avec sa variante où la modification
+des poids se fait après présentation d’un sous ensemble de données
+d’apprentissage (apprentissage par batchs). La convergence est, en
+général, plus rapide que par la méthode du gradient. Il est fréquent
+pour cet algorithme de faire diminuer la valeur de <span class="math notranslate nohighlight">\(\varepsilon\)</span> en
+fonction du nombre d’itérations comme pour l’algorithme du gradient.</p>
+</section>
+<section id="implementation">
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<p>On illustre le pouvoir de séparation linéaire d’un perceptron sur trois jeux de données :</p>
+<ul class="simple">
+<li><p>un jeu de données linéairement séparable</p></li>
+<li><p>deux jeux de données non linéairement séparables classiques (« twocircles » et « moons »)</p></li>
+</ul>
+<p>On écrit une fonction permettant de visualiser le résultat de la classification par le perceptron.</p>
+<p>On construit ensuite le perceptron (extension de la classe <code class="docutils literal notranslate"> <span class="pre">nn.Module</span></code>)</p>
+<p>On écrit ensuite la fonction d’entraînement. La fonction de perte est l”<a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">entropie croisée binaire</a> et l’optimiseur est <a class="reference external" href="https://arxiv.org/abs/1412.6980">Adam </a>.</p>
+<p>On applique enfin le perceptron sur les jeux de données et on visualise les résultats.</p>
+</section>
+<section id="pour-en-finir-avec-le-perceptron">
+<h2>Pour en finir avec le perceptron<a class="headerlink" href="#pour-en-finir-avec-le-perceptron" title="Lien vers cette rubrique">#</a></h2>
+<p>L’apprentissage par correction ou par la méthode du gradient ne sont
+rien d’autre que des techniques de séparation linéaire qu’il faudrait
+comparer aux techniques utilisées habituellement en statistiques
+(discriminant linéaire, machines à vecteurs de support,…). Ces
+méthodes sont non paramétriques, c’est-à-dire qu’elles n’exigent aucune
+autre hypothèse sur les données que la séparabilité.</p>
+<p>On peut montrer que presque tous les échantillons de moins de <span class="math notranslate nohighlight">\(2D\)</span>
+exemples sont linéairement séparables lorsque <span class="math notranslate nohighlight">\(D\)</span> est le nombre de
+variables. Une classification correcte d’un petit échantillon n’a donc
+aucune valeur prédictive. Par contre, lorsque l’on travaille sur
+suffisamment de données et que le problème s’y prête, on constate
+empiriquement que le perceptron appris par un des algorithmes précédents
+a un bon pouvoir prédictif.</p>
+<p>Il est bien évident que la plupart des problèmes d’apprentissage qui se
+posent naturellement ne peuvent pas être résolus par des méthodes aussi
+simples : il n’y a que très peu d’espoir que les exemples naturels se
+répartissent sagement de part et d’autre d’un hyperplan. Deux manières
+de résoudre cette difficulté peuvent être envisagées :</p>
+<ul class="simple">
+<li><p>soit mettre au point des séparateurs non-linéaires,</p></li>
+<li><p>soit (ce qui revient à peu près aumême) complexifier l’espace de représentation de manière à linéariser le problème initial.</p></li>
+</ul>
+<p>Les réseaux multicouches abordent ce type de problème.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="NN.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Introduction aux réseaux de neurones</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="PMC.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Perceptrons multicouches</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Définitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation-discrimination-lineaire">Utilisation : discrimination linéaire</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-correction-d-erreur">Algorithme d’apprentissage par correction d’erreur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithme-d-apprentissage-par-descente-de-gradient">Algorithme d’apprentissage par descente de gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-en-finir-avec-le-perceptron">Pour en finir avec le perceptron</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Vincent BARRA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

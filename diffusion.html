@@ -177,6 +177,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="perceptron.html">Perceptron</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
@@ -371,7 +372,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 \[ \| \mathbf{\varepsilon} - \mathbf{\varepsilon}_\theta(\mathbf{x}_t, t) \|^2 = \| \mathbf{\varepsilon} - \mathbf{\varepsilon}_\theta( \sqrt{\bar{\alpha}_t} \mathbf{x}_0 + \sqrt{(1- \bar{\alpha}_t)  } \mathbf{\varepsilon}, t) \|^2.\]</div>
 <p>avec <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> la donnée initiale. <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}\)</span> est le bruit échantillonné au temps <span class="math notranslate nohighlight">\(t\)</span> et <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta (\mathbf{x}_t, t)\)</span> est le réseau de neurones, équipé d’une fonction de perte quadratique entre le bruit réel et le bruit gaussien prédit.</p>
 <div class="proof algorithm admonition" id="algorithm-1">
-<p class="admonition-title"><span class="caption-number">Algorithm 8 </span> (Algorithme d’apprentissage d’un modèle de diffusion)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 11 </span> (Algorithme d’apprentissage d’un modèle de diffusion)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Tant que (non convergence)</p>

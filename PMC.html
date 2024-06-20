@@ -65,7 +65,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
     <link rel="next" title="Réseaux convolutifs" href="cnn.html" />
-    <link rel="prev" title="Introduction aux réseaux de neurones" href="NN.html" />
+    <link rel="prev" title="Perceptron" href="perceptron.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="fr"/>
   </head>
@@ -173,8 +173,12 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="perceptron.html">Perceptron</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
@@ -182,10 +186,12 @@
 <li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles génératifs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
-
-
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
 </ul>
 
     </div>
@@ -320,7 +326,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="perceptrons-multicouches">
 <h1>Perceptrons multicouches<a class="headerlink" href="#perceptrons-multicouches" title="Lien vers cette rubrique">#</a></h1>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span> (Perceptron multicouches)</p>
+<p class="admonition-title"><span class="caption-number">Definition 7 </span> (Perceptron multicouches)</p>
 <section class="definition-content" id="proof-content">
 <p>Un perceptron à <span class="math notranslate nohighlight">\((L+1)\)</span> couches (<a class="reference internal" href="#mlp"><span class="std std-numref">Fig. 2</span></a>) est un réseau constitué d’une
 rétine à <span class="math notranslate nohighlight">\(D\)</span> neurones (auxquels on rajoute l’entrée <span class="math notranslate nohighlight">\(x_0\)</span>), <span class="math notranslate nohighlight">\(C\)</span> neurones
@@ -585,12 +591,12 @@ et</p>
 </section>
 <section id="retropropagation-de-l-erreur">
 <h2>Rétropropagation de l’erreur<a class="headerlink" href="#retropropagation-de-l-erreur" title="Lien vers cette rubrique">#</a></h2>
-<p>l”<a class="reference internal" href="#backprop">Algorithm 4</a>, dit algorithme de
+<p>l”<a class="reference internal" href="#backprop">Algorithm 7</a>, dit algorithme de
 rétropropagation du gradient, est utilisé pour évaluer le gradient
 <span class="math notranslate nohighlight">\(\nabla E_n (\mathbf w[t])\)</span> de l’erreur <span class="math notranslate nohighlight">\(E_n\)</span> à chaque itération, ceci pour tous
 les poids</p>
 <div class="proof algorithm admonition" id="backprop">
-<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Algorithme de rétropropagation du gradient)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 7 </span> (Algorithme de rétropropagation du gradient)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="arabic">
 <li><p>Propager un exemple <span class="math notranslate nohighlight">\(\mathbf x_n\)</span> dans le réseau.</p></li>
@@ -1158,12 +1164,12 @@ L’initialisation de Xavier propose un tirage uniforme dans
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="NN.html"
+       href="perceptron.html"
        title="page précédente">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">précédent</p>
-        <p class="prev-next-title">Introduction aux réseaux de neurones</p>
+        <p class="prev-next-title">Perceptron</p>
       </div>
     </a>
     <a class="right-next"
