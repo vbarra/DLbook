@@ -257,7 +257,7 @@ ligne.
 
 ## Autoencodeurs variationnels
 
-Le dernier modèle d'autoencodeurs que nous abordons fait le lien avec le chapitre consacré aux réseaux antagonistes générateurs.
+Le dernier modèle d'autoencodeurs que nous abordons sera traité plus précisément dans un chapitre dédié, dans la partie consacrée aux modèles génératifs.
 
 Les autoencodeurs variationnels (VAE) {cite:p}`Kingma13` sont des modèles
 génératifs. Ce ne sont pas à proprement parler des autoencodeurs tels
