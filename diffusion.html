@@ -172,8 +172,11 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
@@ -181,6 +184,9 @@
 <li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles génératifs</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Modèles de diffusion</a></li>
@@ -573,7 +579,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
             <span class="n">x_seq</span> <span class="o">=</span> <span class="n">p_sample_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Les figures suivantes présentent l’action du  processus inverse au début (<a class="reference internal" href="#q0"><span class="std std-numref">Fig. 74</span></a>), au milieu (<a class="reference internal" href="#q1"><span class="std std-numref">Fig. 75</span></a>) et à la fin (<a class="reference internal" href="#q2"><span class="std std-numref">Fig. 76</span></a>) de l’entraînement</p>
+<p>Les figures suivantes présentent l’action du  processus inverse au début (<a class="reference internal" href="#q0"><span class="std std-numref">Fig. 74</span></a>), au milieu (<a class="reference internal" href="#q1"><span class="std std-numref">Fig. 75</span></a>) et à la fin (<a class="reference internal" href="#q2"><span class="std std-numref">Fig. 76</span></a>) de l’entraînement.</p>
 <figure class="align-default" id="q0">
 <img alt="_images/curve_150_1.png" src="_images/curve_150_1.png" />
 <figcaption>

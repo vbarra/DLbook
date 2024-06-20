@@ -307,7 +307,7 @@ for t in range(nb_epochs):
             x_seq = p_sample_loop(model,dataset.shape,T,betas,one_minus_alphas_bar_sqrt)
 ```
 
-Les figures suivantes présentent l'action du  processus inverse au début ({numref}`q0`), au milieu ({numref}`q1`) et à la fin ({numref}`q2`) de l'entraînement
+Les figures suivantes présentent l'action du  processus inverse au début ({numref}`q0`), au milieu ({numref}`q1`) et à la fin ({numref}`q2`) de l'entraînement.
 
 ```{figure} ./images/curve_150_1.png
 :name: q0
