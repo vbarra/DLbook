@@ -255,7 +255,7 @@ testbatch_size = 16
 
 dataset = torchvision.datasets.FashionMNIST(root=data_dir,train=True,transform=transforms.ToTensor(),download=True)
 data_loader = torch.utils.data.DataLoader(dataset=dataset,batch_size=trainbatch_size, shuffle=True)
-test_loader = torch.utils.data.DataLoader(torchvision.datasets.MNIST(data_dir, train=False, download=True, transform=transforms.ToTensor()),batch_size=testbatch_size, shuffle=False)
+test_loader = torch.utils.data.DataLoader(torchvision.datasets.FashionMNIST(data_dir, train=False, download=True, transform=transforms.ToTensor()),batch_size=testbatch_size, shuffle=False)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 ```

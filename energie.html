@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Modèles basés energie &#8212; Apprentissage profond</title>
+    <title>Modèles basés énergie &#8212; Apprentissage profond</title>
   
   
   
@@ -192,7 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modèles basés energie</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modèles basés énergie</a></li>
 </ul>
 
     </div>
@@ -270,7 +270,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -281,11 +283,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Modèles basés energie</h1>
+    <h1>Modèles basés énergie</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-energie">Pourquoi « énergie » ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divergence-contrastive">Divergence contrastive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#echantillonnage">Echantillonnage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -296,12 +309,318 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="modeles-bases-energie">
-<h1>Modèles basés energie<a class="headerlink" href="#modeles-bases-energie" title="Lien vers cette rubrique">#</a></h1>
-<p>Alors que la plupart des modèles précédents ont pour objectif initial la classification ou la régression, les modèles basés énergie sont plutôt orientés sur l’estimation de densité. Etant donné un ensemble <span class="math notranslate nohighlight">\(\mathcal E_a\)</span> de données  <span class="math notranslate nohighlight">\(\boldsymbol x_i,i\in[\![1,n]\!]\in\mathcal X\)</span>, ces modèles recherchent à partir de <span class="math notranslate nohighlight">\(\mathcal E_a\)</span> une distribution de probabilité <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span> sur <span class="math notranslate nohighlight">\(\mathcal X\)</span> telle que <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span> est élevé si la donnée <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> « ressemble » à une donnée de <span class="math notranslate nohighlight">\(\mathcal E_a\)</span>.</p>
+<h1>Modèles basés énergie<a class="headerlink" href="#modeles-bases-energie" title="Lien vers cette rubrique">#</a></h1>
+<section id="pourquoi-energie">
+<h2>Pourquoi « énergie » ?<a class="headerlink" href="#pourquoi-energie" title="Lien vers cette rubrique">#</a></h2>
+<p>Alors que la plupart des modèles précédents ont pour objectif initial la classification ou la régression, les modèles basés énergie sont plutôt orientés sur l’estimation de densité. Etant donné un ensemble <span class="math notranslate nohighlight">\(\mathcal E_a\)</span> de données  <span class="math notranslate nohighlight">\(\boldsymbol x_i,i\in[\![1,n]\!]\in\mathcal X\)</span>, ces modèles recherchent à partir de <span class="math notranslate nohighlight">\(\mathcal E_a\)</span> une distribution de probabilité <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span> sur <span class="math notranslate nohighlight">\(\mathcal X\)</span> telle que la vraisemblance d’un <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> est élevée si <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> « ressemble » à une donnée de <span class="math notranslate nohighlight">\(\mathcal E_a\)</span>.</p>
 <p>L’idée des modèles basés énergie  est de transformer toute fonction qui prédit des valeurs positives en une distribution de probabilité en la divisant par son volume. En l’occurrence, les fonctions ciblées seront approchées par des réseaux de neurones.</p>
-<p>Soit <span class="math notranslate nohighlight">\(f_{\boldsymbol\theta}\)</span> un réseau de neurones, paramétré par <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>. Etant donné <span class="math notranslate nohighlight">\(\boldsymbol x\in\mathcal X\)</span>, <span class="math notranslate nohighlight">\(f_{\boldsymbol\theta}(\boldsymbol x)\in\mathbb{R}\)</span>. On pose alors :</p>
+<p>Soit <span class="math notranslate nohighlight">\(E_{\boldsymbol\theta}\)</span> un réseau de neurones, paramétré par <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>. Etant donné <span class="math notranslate nohighlight">\(\boldsymbol x\in\mathcal X\)</span>, <span class="math notranslate nohighlight">\(E_{\boldsymbol\theta}(\boldsymbol x)\in\mathbb{R}\)</span>. On pose alors :</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}q_{\boldsymbol\theta}(\boldsymbol x) = \frac{e^{-f_{\boldsymbol\theta}(\boldsymbol x)}}{Z_{\boldsymbol\theta}}\textrm{ où } Z_{\boldsymbol\theta} = \left \{\begin{array}{cc} \int_{\boldsymbol x\in\mathcal X} e^{-f_{\boldsymbol\theta}(\boldsymbol x)} dx &amp; \textrm{si } \boldsymbol x \textrm{ est discret}\\ \\displaystyle\sum_{\boldsymbol x\in\mathcal X} e^{-f_{\boldsymbol\theta}(\boldsymbol x)} dx &amp; \textrm{si } \boldsymbol x \textrm{ sinon}\end{array}\right .\end{split}\]</div>
+\[\begin{split}q_{\boldsymbol\theta}(\boldsymbol x) = \frac{e^{-E_{\boldsymbol\theta}(\boldsymbol x)}}{Z_{\boldsymbol\theta}}\textrm{ où } Z_{\boldsymbol\theta} = \left \{\begin{array}{cc} \int_{\boldsymbol x\in\mathcal X} e^{-E_{\boldsymbol\theta}(\boldsymbol x)} dx &amp; \textrm{si } \boldsymbol x \textrm{ est discret}\\ \displaystyle\sum_{\boldsymbol x\in\mathcal X} e^{-E_{\boldsymbol\theta}(\boldsymbol x)} dx &amp; \textrm{si } \boldsymbol x \textrm{ sinon}\end{array}\right .\end{split}\]</div>
+<p>Le vocabulaire « méthodes basées énergie » provient du fait que le réseau calcule une énergie <span class="math notranslate nohighlight">\(f\)</span>, et que les points <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> à forte vraisemblance seront d’énergie faible (signe - dans l’exponentielle). L’objectif est alors d’entraîner le réseau de neurones de sorte que <span class="math notranslate nohighlight">\(q_{\boldsymbol\theta}(\boldsymbol x)\)</span> soit la plus proche possible de la distribution inconnue <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span>  des données dans <span class="math notranslate nohighlight">\(\mathcal X\)</span>.</p>
+<p>Cette formulation, si facile qu’elle soit à mettre en oeuvre a priori, pose la question du calcul de <span class="math notranslate nohighlight">\(Z_{\boldsymbol\theta}\)</span> (constante de normalisation, assurant que <span class="math notranslate nohighlight">\(q_{\boldsymbol\theta}\)</span> est bien une probabilité). En effet, si <span class="math notranslate nohighlight">\(\mathcal X\)</span> est de grande dimension (ce qui est très souvent le cas, par exemple si on s’intéresse à des images <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> de taille 128<span class="math notranslate nohighlight">\(\times\)</span>128<span class="math notranslate nohighlight">\(\times\)</span>3, alors <span class="math notranslate nohighlight">\(|\mathcal X| = 3^{16384}\)</span>…), alors le calcul est infaisable. En pratique, on ne calcule pas la vraie vraisemblance, mais on utilise des méthodes d’entraînement qui permettent de s’en approcher.</p>
+</section>
+<section id="divergence-contrastive">
+<h2>Divergence contrastive<a class="headerlink" href="#divergence-contrastive" title="Lien vers cette rubrique">#</a></h2>
+<p>Dans les modèles génératifs usuels, on maximise la vraisemblance des exemples de l’ensemble d’entraînement <span class="math notranslate nohighlight">\(\mathcal E_a = \{\boldsymbol x_{train}\}\)</span>. Puisque la vraisemblance exacte d’un point ne peut pas être déterminée en raison de la constante de normalisation inconnue, il faut ici procéder différemment. On ne peut pas juste maximiser <span class="math notranslate nohighlight">\(e^{-E_{\boldsymbol\theta}(\boldsymbol x_{train})}\)</span>, n’ayant aucne garantie que <span class="math notranslate nohighlight">\(Z_{\boldsymbol\theta}\)</span> reste constante. On réécrit alors la maximisation de la vraisemblance en maximisant la probabilité de <span class="math notranslate nohighlight">\(\boldsymbol x_{train}\)</span> en le comparant avec un point de données du modèle échantillonné de manière aléatoire :</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\boldsymbol\theta}\mathcal L_{MLE}(\boldsymbol\theta,p) = -\mathbb E_{p(\boldsymbol x)}(\nabla_{\boldsymbol\theta}\;log\;q_{\boldsymbol\theta}(\boldsymbol x)) = \mathbb E_{p(\boldsymbol x)}(\nabla_{\boldsymbol\theta}E_{\boldsymbol\theta}(\boldsymbol x))-\mathbb E_{q_{\boldsymbol\theta}(\boldsymbol x)}(\nabla_{\boldsymbol\theta}E_{\boldsymbol\theta}(\boldsymbol x))\]</div>
+<p>On cherche donc à minimiser l’énergie pour les points de données de l’ensemble de données, tout en maximisant l’énergie pour les points de données échantillonnés aléatoirement à partir du modèle. Dans la figure <a class="reference internal" href="transformers.html#transformer"><span class="std std-numref">Fig. 53</span></a>, on cherche à augmenter la probabilité des points de <span class="math notranslate nohighlight">\(\mathcal E_a\)</span>, tout en baissant la probabilité de points générés aléatoirement par le modèle. Ces deux objectifs sont atteints si et seulement si <span class="math notranslate nohighlight">\(q_{\boldsymbol\theta}(\boldsymbol x)=p(\boldsymbol x)\)</span>.
+Cet objectif est intuitif et est relié à la distribution <span class="math notranslate nohighlight">\(q_{\boldsymbol\theta}(\boldsymbol x)\)</span> en approximant <span class="math notranslate nohighlight">\(Z_{\boldsymbol\theta}\)</span> par un échantillon de Monte-Carlo.</p>
+<figure class="align-default" id="energy">
+<img alt="_images/energy.png" src="_images/energy.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Optimisation de l’énergie</span><a class="headerlink" href="#energy" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="echantillonnage">
+<h2>Echantillonnage<a class="headerlink" href="#echantillonnage" title="Lien vers cette rubrique">#</a></h2>
+<p>Il faut donc pouvoir échantillonner aléatoirement un point à partir du modèle. Pour cela on utilise un algorithme (méthode de Monte Carlo par chaîne de Markov en utilisant la dynamique de Langevin), qui part d’un point aléatoire et se déplace lentement vers la direction de la probabilité la plus élevée en utilisant les gradients de <span class="math notranslate nohighlight">\(E_{\boldsymbol \theta}\)</span> et en ajoutant à chaque déplacement un bruit à l’échantillon courant.</p>
+<div class="proof algorithm admonition" id="algorithm-0">
+<p class="admonition-title"><span class="caption-number">Algorithm 9 </span> (Echantillonnage à partir du modèle)</p>
+<section class="algorithm-content" id="proof-content">
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol y_0\sim \mathcal U(.)\)</span> loi uniforme</p></li>
+<li><p>Pour <span class="math notranslate nohighlight">\(i=1\)</span> à <span class="math notranslate nohighlight">\(N\)</span></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol y_i = \boldsymbol y_{i-1}-\eta\nabla_{\boldsymbol x}E_{\boldsymbol\theta}(\boldsymbol y_{i-1}) +\varepsilon\)</span>, <span class="math notranslate nohighlight">\(\varepsilon\sim \mathcal N(0,\sigma)\)</span></p></li>
+</ol>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol x_{modele} = \boldsymbol y_N\)</span></p></li>
+</ol>
+</section>
+</div></section>
+<section id="implementation">
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<p>Les modèles basés énergie ne sont pas simples à entraîner et peuvent diverger si les hyperparamètres sont mal réglés. Des auteurs (notamment <a class="reference external" href="https://arxiv.org/abs/1903.08689">ici</a>) ont proposé des méthodes permettant de pallier ces problèmes, que nous utiliserons dans la suite.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span>  <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span> 
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+</pre></div>
+</div>
+<p>Le modèle pouvant être long à entraîner, on l’illustre ici sur un petit jeu de données (les <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html">digits</a> de scikit-learn).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Digits</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>
+        <span class="n">p_train</span> <span class="o">=</span> <span class="mf">0.7</span>   <span class="c1"># Pourcentage d&#39;images d&#39;entraînement</span>
+        <span class="n">p_val</span> <span class="o">=</span> <span class="mf">0.15</span>    <span class="c1"># Pourcentage d&#39;images de validation</span>
+        <span class="n">nb_images_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">p_train</span><span class="p">)</span><span class="o">*</span><span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">nb_images_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">p_train</span><span class="o">+</span><span class="n">p_val</span><span class="p">)</span><span class="o">*</span><span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="n">nb_images_train</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="n">nb_images_train</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">nb_images_train</span><span class="p">:</span><span class="n">nb_images_val</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">nb_images_train</span><span class="p">:</span><span class="n">nb_images_val</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">nb_images_val</span><span class="p">:]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">nb_images_val</span><span class="p">:]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">transforms</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">sample_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">sample_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+            <span class="n">sample_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">(</span><span class="n">sample_x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">sample_x</span><span class="p">,</span> <span class="n">sample_y</span><span class="p">)</span>
+    
+
+<span class="n">transforms_train</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.03</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x</span><span class="p">))])</span>
+<span class="n">transforms_val_test</span>  <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span> <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">))])</span>
+
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">Digits</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms_train</span><span class="p">)</span>
+<span class="n">val_data</span> <span class="o">=</span> <span class="n">Digits</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms_val_test</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">Digits</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms_val_test</span><span class="p">)</span>
+
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">val_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On définit les paramètres et hyperparamètres du problème</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mi">64</span>       <span class="c1"># Taille de l&#39;entrée du réseau</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">10</span>       <span class="c1"># Nombre de classes (sortie)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">512</span>      <span class="c1"># Nombre de neurones des couches cachées</span>
+
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># Variance du bruit dans la dynamique de Langevin</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1.</span>     <span class="c1"># learning rate pour la dynamique de Langevin</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">20</span>       <span class="c1"># Nombre de p  as de la dynamique de L ngevin</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">1e-3</span>    <span class="c1"># Learning rate de l&#39;optimiseur</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Nombre d&#39;epochs</span>
+</pre></div>
+</div>
+<p>On définit alors le modèle basé énergie</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EnergyBasedModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Etheta</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EnergyBasedModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Réseau E_theta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Etheta</span> <span class="o">=</span> <span class="n">Etheta</span>
+
+        <span class="c1"># Fonction de perte</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nlv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">nlvLoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>  
+
+        <span class="c1"># Nombre d&#39;entrées du réseau</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="n">D</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eta</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">([</span><span class="n">eta</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>
+
+
+    <span class="c1"># Classification par le réseau d&#39;un exemple</span>
+    <span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Etheta</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Calcule des logits</span>
+    <span class="k">def</span> <span class="nf">classification_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlv</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_pred</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># Perte associée à x_modele</span>
+    <span class="k">def</span> <span class="nf">gen_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+        <span class="c1"># Echantillon par dynamique de Langevin</span>
+        <span class="n">x_sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># Calcul de la sortie</span>
+        <span class="n">f_x_sample_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Etheta</span><span class="p">(</span><span class="n">x_sample</span><span class="p">)</span>
+
+        <span class="c1"># Réécriture de la maximisation de la vraisemblance</span>
+        <span class="k">return</span>  <span class="n">torch</span><span class="o">.</span><span class="n">logsumexp</span><span class="p">(</span><span class="n">f_x_sample_y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">logsumexp</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">):</span>
+       
+        <span class="c1"># Passse avant dans le réseau sur présentation de x</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Etheta</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Perte en classification par rapport à la vérité</span>
+        <span class="n">L_gt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classification_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># Perte en classification par rapport au modèle</span>
+        <span class="n">L_gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+
+        <span class="c1">#Fonction objectif</span>
+        <span class="k">if</span> <span class="n">reduction</span> <span class="o">==</span> <span class="s1">&#39;sum&#39;</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">L_gt</span> <span class="o">+</span> <span class="n">L_gen</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">L_gt</span> <span class="o">+</span> <span class="n">L_gen</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">loss</span>
+
+    <span class="c1"># Calcul du gradient de l&#39;énergie</span>
+    <span class="k">def</span> <span class="nf">energy_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Etheta</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+        <span class="n">y_i</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">y_i</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>  
+        <span class="n">y_i_grad</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">logsumexp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Etheta</span><span class="p">(</span><span class="n">y_i</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="p">[</span><span class="n">y_i</span><span class="p">],</span> <span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Etheta</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">y_i_grad</span>
+
+
+    <span class="c1"># Pas d&#39;une dynamique de Langevin</span>
+    <span class="k">def</span> <span class="nf">langevin_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_i1</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+        <span class="c1"># gradient à y(i-1)</span>
+        <span class="n">grad_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy_gradient</span><span class="p">(</span><span class="n">y_i1</span><span class="p">)</span>
+        <span class="c1"># bruit N(0,sigma)</span>
+        <span class="n">epsilon</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">grad_energy</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
+
+        <span class="c1"># y(i)</span>
+        <span class="n">y_i</span> <span class="o">=</span> <span class="n">y_i1</span> <span class="o">+</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad_energy</span> <span class="o">+</span> <span class="n">epsilon</span>
+        <span class="k">return</span> <span class="n">y_i</span>
+
+    <span class="c1"># Echantillonnage à partir du modèle</span>
+    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Initialisation, loi uniforme</span>
+        <span class="n">x_modele</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">([</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">])</span> <span class="o">-</span> <span class="mf">1.</span>
+
+        <span class="c1"># Dynamique de Langevin sur N pas</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">x_modele</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">langevin_step</span><span class="p">(</span><span class="n">x_modele</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x_modele</span>
+
+
+<span class="n">Etheta</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ELU</span><span class="p">(),</span>
+                               <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ELU</span><span class="p">(),</span>
+                               <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ELU</span><span class="p">(),</span>
+                               <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">EnergyBasedModel</span><span class="p">(</span><span class="n">Etheta</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="n">eta</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On se donne une fonction d’évaluation du modèle</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluation du modèle</span>
+<span class="k">def</span> <span class="nf">evaluation</span><span class="p">(</span><span class="n">test_loader</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model_best</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">model_best</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">model_best</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.model&#39;</span><span class="p">)</span>
+
+    <span class="n">model_best</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">loss_error</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">loss_gen</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">n_examples</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="p">(</span><span class="n">test_batch</span><span class="p">,</span> <span class="n">test_targets</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_loader</span><span class="p">):</span>
+
+        <span class="c1"># Log vraisemblance négative</span>
+        <span class="n">loss_test</span> <span class="o">=</span> <span class="n">model_best</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">test_batch</span><span class="p">,</span> <span class="n">test_targets</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">loss_test</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="c1"># Erreur en classification</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_best</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">test_batch</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">*</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">test_targets</span><span class="p">)</span>
+        <span class="n">loss_error</span> <span class="o">=</span> <span class="n">loss_error</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="c1"># Erreur du modèle</span>
+        <span class="n">pred_test</span> <span class="o">=</span> <span class="n">model_best</span><span class="o">.</span><span class="n">Etheta</span><span class="p">(</span><span class="n">test_batch</span><span class="p">)</span>
+        <span class="n">loss_gen</span> <span class="o">=</span> <span class="n">loss_gen</span> <span class="o">+</span> <span class="n">model_best</span><span class="o">.</span><span class="n">gen_loss</span><span class="p">(</span><span class="n">test_batch</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="n">n_examples</span> <span class="o">=</span> <span class="n">n_examples</span> <span class="o">+</span> <span class="n">test_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">/</span> <span class="n">n_examples</span>
+    <span class="n">loss_error</span> <span class="o">=</span> <span class="n">loss_error</span> <span class="o">/</span> <span class="n">n_examples</span>
+    <span class="n">loss_gen</span> <span class="o">=</span> <span class="n">loss_gen</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">/</span> <span class="n">n_examples</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">loss_error</span><span class="p">,</span> <span class="n">loss_gen</span>
+</pre></div>
+</div>
+<p>et une fonction d’entraînement</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrainement du modèle</span>
+<span class="k">def</span> <span class="nf">training</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">):</span>
+    <span class="n">nlv_val</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gen_val</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">error_val</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">best_nlv</span> <span class="o">=</span> <span class="mf">1000.</span>
+
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># Validation</span>
+        <span class="n">loss_e</span><span class="p">,</span> <span class="n">error_e</span><span class="p">,</span> <span class="n">gen_e</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">(</span><span class="n">val_loader</span><span class="p">,</span> <span class="n">model_best</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train Epoch: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">, log vraisemblance négative=</span><span class="si">{</span><span class="n">loss_e</span><span class="si">}</span><span class="s1">, erreur classif=</span><span class="si">{</span><span class="n">error_e</span><span class="si">}</span><span class="s1">, erreur modèle=</span><span class="si">{</span><span class="n">gen_e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">nlv_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_e</span><span class="p">)</span>  
+        <span class="n">error_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_e</span><span class="p">)</span> 
+        <span class="n">gen_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gen_e</span><span class="p">)</span>  
+
+
+
+        <span class="k">if</span> <span class="n">e</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.model&#39;</span><span class="p">)</span>
+            <span class="n">best_nlv</span> <span class="o">=</span> <span class="n">loss_e</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">loss_e</span> <span class="o">&lt;</span> <span class="n">best_nlv</span><span class="p">:</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.model&#39;</span><span class="p">)</span>
+                <span class="n">best_nlv</span> <span class="o">=</span> <span class="n">loss_e</span>
+
+    <span class="n">nlv_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nlv_val</span><span class="p">)</span>
+    <span class="n">error_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">error_val</span><span class="p">)</span>
+    <span class="n">gen_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gen_val</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">nlv_val</span><span class="p">,</span> <span class="n">error_val</span><span class="p">,</span> <span class="n">gen_val</span>
+</pre></div>
+</div>
+<p>et on entraîne le modèle</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adamax</span><span class="p">([</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">==</span> <span class="kc">True</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+<span class="n">nlv_val</span><span class="p">,</span> <span class="n">error_val</span><span class="p">,</span> <span class="n">gen_val</span> <span class="o">=</span> <span class="n">training</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">result_dir</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="n">num_epochs</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span><span class="n">train_loader</span><span class="o">=</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="o">=</span><span class="n">test_loader</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="energycourbes">
+<img alt="_images/energy_courbes.png" src="_images/energy_courbes.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Evolution des erreurs au cours des epochs</span><a class="headerlink" href="#energycourbes" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="energyimages">
+<img alt="_images/vraies.png" src="_images/vraies.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Exemple d’images générées (gauche) et de la base d’entraînement (droite)</span><a class="headerlink" href="#energyimages" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -350,7 +669,23 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-energie">Pourquoi « énergie » ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divergence-contrastive">Divergence contrastive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#echantillonnage">Echantillonnage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
