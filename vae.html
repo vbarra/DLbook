@@ -193,7 +193,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Autoencodeurs variationnels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energie.html">Modèles basés energie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energie.html">Modèles basés énergie</a></li>
 </ul>
 
     </div>
@@ -325,11 +325,11 @@ document.write(`
 <h1>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien vers cette rubrique">#</a></h1>
 <p>Les autoencodeurs variationnels sont, comme les GAN (abordés dans le cours suivant), des modèles génératifs, c’est-à-dire des modèles probabilistes <span class="math notranslate nohighlight">\(p\)</span> pouvant être utilisés pour
 simuler (ou générer) des données réalistes <span class="math notranslate nohighlight">\(\boldsymbol x\sim p(\boldsymbol x,\boldsymbol\theta)\)</span>, aussi proches que possible de la vraie (mais inconnue) distribution des données <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span>, pour laquelle seul un échantillon de données est disponible.</p>
-<p>Le paysage de ces modèles génératifs s’est beaucoup peuplé depuis 2014 (<a class="reference internal" href="#landscape"><span class="std std-numref">Fig. 59</span></a>).</p>
+<p>Le paysage de ces modèles génératifs s’est beaucoup peuplé depuis 2014 (<a class="reference internal" href="#landscape"><span class="std std-numref">Fig. 61</span></a>).</p>
 <figure class="align-default" id="landscape">
 <img alt="_images/landscapegen.png" src="_images/landscapegen.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Paysage des modèles génératifs (Source: <a class="reference external" href="https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546">Song et al., CVPR 2023</a>)</span><a class="headerlink" href="#landscape" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">Paysage des modèles génératifs (Source: <a class="reference external" href="https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546">Song et al., CVPR 2023</a>)</span><a class="headerlink" href="#landscape" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE), les réseaux antagonistes générateurs (GAN) et ferons une brève introduction aux modèles de diffusion (DDPM, pour Denoising Diffusion Probabilistic Models)</p>
@@ -389,7 +389,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h2>
 <section id="principe">
 <h3>Principe<a class="headerlink" href="#principe" title="Lien vers cette rubrique">#</a></h3>
-<p>Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes (<a class="reference internal" href="#vae0"><span class="std std-numref">Fig. 60</span></a>) tel que :</p>
+<p>Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes (<a class="reference internal" href="#vae0"><span class="std std-numref">Fig. 62</span></a>) tel que :</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(\boldsymbol h)\)</span> est prescrit à l’avance</p></li>
 <li><p>la vraisemblance <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h)\)</span> est un décodeur (réseau génératif) <span class="math notranslate nohighlight">\(D_{\boldsymbol\theta}\)</span> tel que <span class="math notranslate nohighlight">\(\boldsymbol\Phi = D_{\boldsymbol\theta}(\boldsymbol h)\)</span> où <span class="math notranslate nohighlight">\(\boldsymbol \Phi\)</span>  sont les paramètres de la distribution des données. Par exemple</p></li>
@@ -404,7 +404,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <figure class="align-default" id="vae0">
 <img alt="_images/vae0.png" src="_images/vae0.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Architecture générale d’un autoencodeur variationnel</span><a class="headerlink" href="#vae0" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Architecture générale d’un autoencodeur variationnel</span><a class="headerlink" href="#vae0" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Comme précédemment, on peut utiliser l’inférence variationnelle pour optimiser de manière jointe <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span> :</p>
@@ -617,7 +617,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="recon">
 <img alt="_images/recon.png" src="_images/recon.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 61 </span><span class="caption-text">Apprentissage du VAE</span><a class="headerlink" href="#recon" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Apprentissage du VAE</span><a class="headerlink" href="#recon" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>On affiche alors des exemples d’images reconstruites</p>
@@ -627,7 +627,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="recons">
 <img alt="_images/reconstruction.png" src="_images/reconstruction.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Exemples d’images reconstruites <span class="math notranslate nohighlight">\(\hat x = D(E(x))\)</span></span><a class="headerlink" href="#recons" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Exemples d’images reconstruites <span class="math notranslate nohighlight">\(\hat x = D(E(x))\)</span></span><a class="headerlink" href="#recons" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>et des exemples d’images générées</p>
@@ -637,7 +637,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="generation">
 <img alt="_images/generation.png" src="_images/generation.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h)\)</span></span><a class="headerlink" href="#generation" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h)\)</span></span><a class="headerlink" href="#generation" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Le nombre d’epoches est faible, la génération n’est pas optimale.</p>
@@ -708,7 +708,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="generation2">
 <img alt="_images/generationc.png" src="_images/generationc.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h,c)\)</span></span><a class="headerlink" href="#generation2" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h,c)\)</span></span><a class="headerlink" href="#generation2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>

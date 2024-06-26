@@ -174,10 +174,12 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="NN.html">Introduction aux réseaux de neurones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torch.html">Ressources PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NN.html">Les réseaux de neurones</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="perceptron.html">Perceptron</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
@@ -191,6 +193,7 @@
 <li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energie.html">Modèles basés énergie</a></li>
 </ul>
 
     </div>
@@ -410,7 +413,7 @@ propriétés en utilisant un mécanisme d”(auto-)attention.</p>
 <span class="math notranslate nohighlight">\(\mathbf x_1,\cdots \mathbf x_N\)</span> de <span class="math notranslate nohighlight">\(\mathbb R^d\)</span> et renvoie <span class="math notranslate nohighlight">\(N\)</span>
 vecteurs de sortie de la même taille. Dans le contexte du traitement
 automatique du langage, chaque entrée représente un mot ou un fragment
-de mot. Tout d’abord, un ensemble de vecteurs est calculé pour chaque
+de mot (<em>token</em>). Tout d’abord, un ensemble de vecteurs est calculé pour chaque
 entrée</p>
 <div class="math notranslate nohighlight">
 \[\forall i\in[\![1,N]\!]\; \mathbf v_i=\mathbf W_v^T\mathbf x_i + \mathbf b_v, \mathbf b_v\in \mathbb R^d, \mathbf W_v\in\mathcal{M}_d(\mathbb R)\]</div>
@@ -446,7 +449,7 @@ entrées de longueur quelconque.</p>
 <section id="formulation-matricielle">
 <h3>Formulation matricielle<a class="headerlink" href="#formulation-matricielle" title="Lien vers cette rubrique">#</a></h3>
 <p>En formant la matrice <span class="math notranslate nohighlight">\(\mathbf X\in\mathcal{M}_{d,N}(\mathbb R)\)</span> dont
-les colonnes sont les <span class="math notranslate nohighlight">\(\mathbf x_i\)</span>, alors le mécanisme d’attention peut
+les colonnes sont les <span class="math notranslate nohighlight">\(\mathbf x_i\)</span>, alors le mécanisme d’attention (<a class="reference internal" href="#wkq"><span class="std std-numref">Fig. 52</span></a>) peut
 s’écrire :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -457,6 +460,12 @@ s’écrire :</p>
 \end{aligned}\end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(Softmax\)</span> appliquant des fonctions softmax indépendantes
 sur chaque colonne de la matrice argument.</p>
+<figure class="align-default" id="wkq">
+<img alt="_images/WKQ.png" src="_images/WKQ.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Bloc d’attention</span><a class="headerlink" href="#wkq" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="extensions">
 <h3>Extensions<a class="headerlink" href="#extensions" title="Lien vers cette rubrique">#</a></h3>
@@ -516,7 +525,14 @@ des clés :</p>
 \mathbf A_h(\mathbf X) &amp;=&amp; \mathbf V_h(\mathbf X).Softmax\left (\frac{\mathbf K_h(\mathbf X)^T\mathbf Q_h(\mathbf X)}{\sqrt{d_q}}\right) 
 \end{aligned}\end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(\mathbf A_h(\mathbf X)\)</span> est le <span class="math notranslate nohighlight">\(h\)</span>-ième mécanisme
-d’attention ou tête (head). Typiquement, si la dimension des entrées
+d’attention ou tête (head) (<a class="reference internal" href="#wkq2"><span class="std std-numref">Fig. 53</span></a>).</p>
+<figure class="align-default" id="wkq2">
+<img alt="_images/WKQ2.png" src="_images/WKQ2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Mécanisme d’attention</span><a class="headerlink" href="#wkq2" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Typiquement, si la dimension des entrées
 <span class="math notranslate nohighlight">\(\mathbf x_i\)</span> est <span class="math notranslate nohighlight">\(d\)</span> et qu’il y a <span class="math notranslate nohighlight">\(H\)</span> têtes, les valeurs, les requêtes
 et les clés seront toutes de taille <span class="math notranslate nohighlight">\(d/H\)</span> pour une implémentation
 efficiente. Les sorties de ces mécanismes d’auto-attention sont
@@ -527,7 +543,7 @@ concaténées verticalement, et une autre transformation linéaire
 <figure class="align-default" id="multihead">
 <img alt="_images/multihead.png" src="_images/multihead.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Mécanisme d’auto attention multiple.</span><a class="headerlink" href="#multihead" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Mécanisme d’auto attention multiple.</span><a class="headerlink" href="#multihead" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Les têtes multiples semblent être nécessaires au bon fonctionnement du
@@ -538,7 +554,7 @@ résistant aux mauvaises initialisations.</p>
 <section id="id1">
 <h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
 <p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : les
-transformers (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 53</span></a>). Celui-ci se compose d’une unité d’auto-attention à
+transformers (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 55</span></a>). Celui-ci se compose d’une unité d’auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d’interagir les
 unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(MLP\)</span> qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -556,7 +572,7 @@ multicouches. La séquence d’opérations complète peut être décrite par</p>
 <figure class="align-default" id="transformer">
 <img alt="_images/transformerblock.png" src="_images/transformerblock.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>En pratique, les données passent par plusieurs de ces transformers.</p>
@@ -904,11 +920,11 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pe</span><span class="p">[:,</span> <span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>On construit ensuite l’encodeur (<a class="reference internal" href="#encodeur"><span class="std std-numref">Fig. 54</span></a>) et le décodeur (<a class="reference internal" href="#decodeur"><span class="std std-numref">Fig. 55</span></a>).</p>
+<p>On construit ensuite l’encodeur (<a class="reference internal" href="#encodeur"><span class="std std-numref">Fig. 56</span></a>) et le décodeur (<a class="reference internal" href="#decodeur"><span class="std std-numref">Fig. 57</span></a>).</p>
 <figure class="align-default" id="encodeur">
 <img alt="_images/encoder.png" src="_images/encoder.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Bloc encodeur (source : <span id="id5">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#encodeur" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Bloc encodeur (source : <span id="id5">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#encodeur" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EncoderLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -933,7 +949,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <figure class="align-default" id="decodeur">
 <img alt="_images/decoder.png" src="_images/decoder.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Bloc décodeur (source : <span id="id6">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#decodeur" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Bloc décodeur (source : <span id="id6">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#decodeur" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DecoderLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -957,11 +973,11 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>et on assemble le tout en un bloc transformer (<a class="reference internal" href="#transfo"><span class="std std-numref">Fig. 56</span></a>)</p>
+<p>et on assemble le tout en un bloc transformer (<a class="reference internal" href="#transfo"><span class="std std-numref">Fig. 58</span></a>)</p>
 <figure class="align-default" id="transfo">
 <img alt="_images/transformer.png" src="_images/transformer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Bloc transformer (source : <span id="id7">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#transfo" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Bloc transformer (source : <span id="id7">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#transfo" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Transformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1046,7 +1062,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <figure class="align-default" id="plot">
 <img alt="_images/plot.png" src="_images/plot.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Fonction de perte.</span><a class="headerlink" href="#plot" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Fonction de perte.</span><a class="headerlink" href="#plot" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>

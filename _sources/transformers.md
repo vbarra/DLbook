@@ -95,7 +95,7 @@ Un bloc d'attention $A()$ prend $N$ entrées
 $\mathbf x_1,\cdots \mathbf x_N$ de $\mathbb R^d$ et renvoie $N$
 vecteurs de sortie de la même taille. Dans le contexte du traitement
 automatique du langage, chaque entrée représente un mot ou un fragment
-de mot. Tout d'abord, un ensemble de vecteurs est calculé pour chaque
+de mot (*token*). Tout d'abord, un ensemble de vecteurs est calculé pour chaque
 entrée
 
 $$\forall i\in[\![1,N]\!]\; \mathbf v_i=\mathbf W_v^T\mathbf x_i + \mathbf b_v, \mathbf b_v\in \mathbb R^d, \mathbf W_v\in\mathcal{M}_d(\mathbb R)$$
@@ -138,7 +138,7 @@ entrées de longueur quelconque.
 ### Formulation matricielle
 
 En formant la matrice $\mathbf X\in\mathcal{M}_{d,N}(\mathbb R)$ dont
-les colonnes sont les $\mathbf x_i$, alors le mécanisme d'attention peut
+les colonnes sont les $\mathbf x_i$, alors le mécanisme d'attention ({numref}`wkq`) peut
 s'écrire : 
 
 $$\begin{aligned}
@@ -150,6 +150,11 @@ $$\begin{aligned}
 
 $Softmax$ appliquant des fonctions softmax indépendantes
 sur chaque colonne de la matrice argument.
+
+```{figure} ./images/WKQ.png
+:name: wkq
+Bloc d'attention
+```
 
 ### Extensions
 
@@ -214,7 +219,16 @@ $$\begin{aligned}
 
 
 $\mathbf A_h(\mathbf X)$ est le $h$-ième mécanisme
-d'attention ou tête (head). Typiquement, si la dimension des entrées
+d'attention ou tête (head) ({numref}`wkq2`). 
+
+```{figure} ./images/WKQ2.png
+:name: wkq2
+Mécanisme d'attention
+```
+
+
+
+Typiquement, si la dimension des entrées
 $\mathbf x_i$ est $d$ et qu'il y a $H$ têtes, les valeurs, les requêtes
 et les clés seront toutes de taille $d/H$ pour une implémentation
 efficiente. Les sorties de ces mécanismes d'auto-attention sont

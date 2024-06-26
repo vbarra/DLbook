@@ -325,12 +325,12 @@ document.write(`
 <p>Dans les modèles génératifs usuels, on maximise la vraisemblance des exemples de l’ensemble d’entraînement <span class="math notranslate nohighlight">\(\mathcal E_a = \{\boldsymbol x_{train}\}\)</span>. Puisque la vraisemblance exacte d’un point ne peut pas être déterminée en raison de la constante de normalisation inconnue, il faut ici procéder différemment. On ne peut pas juste maximiser <span class="math notranslate nohighlight">\(e^{-E_{\boldsymbol\theta}(\boldsymbol x_{train})}\)</span>, n’ayant aucne garantie que <span class="math notranslate nohighlight">\(Z_{\boldsymbol\theta}\)</span> reste constante. On réécrit alors la maximisation de la vraisemblance en maximisant la probabilité de <span class="math notranslate nohighlight">\(\boldsymbol x_{train}\)</span> en le comparant avec un point de données du modèle échantillonné de manière aléatoire :</p>
 <div class="math notranslate nohighlight">
 \[\nabla_{\boldsymbol\theta}\mathcal L_{MLE}(\boldsymbol\theta,p) = -\mathbb E_{p(\boldsymbol x)}(\nabla_{\boldsymbol\theta}\;log\;q_{\boldsymbol\theta}(\boldsymbol x)) = \mathbb E_{p(\boldsymbol x)}(\nabla_{\boldsymbol\theta}E_{\boldsymbol\theta}(\boldsymbol x))-\mathbb E_{q_{\boldsymbol\theta}(\boldsymbol x)}(\nabla_{\boldsymbol\theta}E_{\boldsymbol\theta}(\boldsymbol x))\]</div>
-<p>On cherche donc à minimiser l’énergie pour les points de données de l’ensemble de données, tout en maximisant l’énergie pour les points de données échantillonnés aléatoirement à partir du modèle. Dans la figure <a class="reference internal" href="transformers.html#transformer"><span class="std std-numref">Fig. 53</span></a>, on cherche à augmenter la probabilité des points de <span class="math notranslate nohighlight">\(\mathcal E_a\)</span>, tout en baissant la probabilité de points générés aléatoirement par le modèle. Ces deux objectifs sont atteints si et seulement si <span class="math notranslate nohighlight">\(q_{\boldsymbol\theta}(\boldsymbol x)=p(\boldsymbol x)\)</span>.
+<p>On cherche donc à minimiser l’énergie pour les points de données de l’ensemble de données, tout en maximisant l’énergie pour les points de données échantillonnés aléatoirement à partir du modèle. Dans la figure <a class="reference internal" href="transformers.html#transformer"><span class="std std-numref">Fig. 55</span></a>, on cherche à augmenter la probabilité des points de <span class="math notranslate nohighlight">\(\mathcal E_a\)</span>, tout en baissant la probabilité de points générés aléatoirement par le modèle. Ces deux objectifs sont atteints si et seulement si <span class="math notranslate nohighlight">\(q_{\boldsymbol\theta}(\boldsymbol x)=p(\boldsymbol x)\)</span>.
 Cet objectif est intuitif et est relié à la distribution <span class="math notranslate nohighlight">\(q_{\boldsymbol\theta}(\boldsymbol x)\)</span> en approximant <span class="math notranslate nohighlight">\(Z_{\boldsymbol\theta}\)</span> par un échantillon de Monte-Carlo.</p>
 <figure class="align-default" id="energy">
 <img alt="_images/energy.png" src="_images/energy.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Optimisation de l’énergie</span><a class="headerlink" href="#energy" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Optimisation de l’énergie</span><a class="headerlink" href="#energy" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -611,13 +611,13 @@ Cet objectif est intuitif et est relié à la distribution <span class="math not
 <figure class="align-default" id="energycourbes">
 <img alt="_images/energy_courbes.png" src="_images/energy_courbes.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Evolution des erreurs au cours des epochs</span><a class="headerlink" href="#energycourbes" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 80 </span><span class="caption-text">Evolution des erreurs au cours des epochs</span><a class="headerlink" href="#energycourbes" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="energyimages">
 <img alt="_images/vraies.png" src="_images/vraies.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Exemple d’images générées (gauche) et de la base d’entraînement (droite)</span><a class="headerlink" href="#energyimages" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 81 </span><span class="caption-text">Exemple d’images générées (gauche) et de la base d’entraînement (droite)</span><a class="headerlink" href="#energyimages" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
