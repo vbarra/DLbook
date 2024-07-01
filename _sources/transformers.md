@@ -335,11 +335,11 @@ $$P(k,2i) = sin\left (\frac{k}{n^\frac{2i}{d}}\right )\quad \textrm{et}\quad P(k
 avec $n$ grand (égal à $10^4$ dans {cite:p}`Vaswani17`).
 
 
-L'encodage des token et des positions est ensuite combiné, pour servir d'entrée au transformer ({numref}`encodage`).
+L'encodage des tokens et des positions est ensuite combiné, pour servir d'entrée au transformer ({numref}`encodage`).
 
 ```{figure} ./images/embedding.png
 :name: encodage
-Encodages de tokens et potisionnel
+Encodages de tokens et positionnel
 ```
 
 
