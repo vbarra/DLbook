@@ -14,19 +14,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -35,12 +35,12 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -75,27 +75,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -117,8 +113,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -195,6 +196,10 @@
 <li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energie.html">Modèles basés énergie</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LLM</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="llm.html">LLM</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -209,7 +214,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -218,7 +223,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -310,7 +315,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
@@ -553,8 +558,8 @@ résistant aux mauvaises initialisations.</p>
 </section>
 <section id="id1">
 <h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
-<p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : les
-transformers (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 55</span></a>). Celui-ci se compose d’une unité d’auto-attention à
+<p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : le
+bloc transformer (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 55</span></a>). Celui-ci se compose d’une unité d’auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d’interagir les
 unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(MLP\)</span> qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -575,7 +580,7 @@ multicouches. La séquence d’opérations complète peut être décrite par</p>
 <p><span class="caption-number">Fig. 55 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
-<p>En pratique, les données passent par plusieurs de ces transformers.</p>
+<p>En pratique, les données passent par plusieurs de ces blocs, qui composent le transformer.</p>
 </section>
 </section>
 <section id="les-transformers-en-traitement-automatique-du-langage">
@@ -624,13 +629,27 @@ correspond au <span class="math notranslate nohighlight">\(n\)</span>-ième jeto
 chaque entrée est zéro, sauf l’entrée correspondant au jeton, de valeur
 1). Les représentations des entrées sont calculées sous la forme
 <span class="math notranslate nohighlight">\(\mathbf X =\mathbf W_e\mathbf T\)</span> et <span class="math notranslate nohighlight">\(\mathbf W_e\)</span> est appris comme
-n’importe quel autre paramètre du réseau. Une taille <span class="math notranslate nohighlight">\(d\)</span> typique est de
+n’importe quel autre paramètre du réseau.</p>
+<p>Ces encodages ne sont pas dépendant de la position des tokens dans le texte. On combine alors ces encodages par un encodage positionnel.
+L’encodage positionnel décrit l’emplacement ou la position d’une entité dans une séquence, de sorte que chaque position se voit attribuer une représentation unique. Il existe de nombreuses raisons pour lesquelles un nombre unique, tel que l’indice de position, n’est pas utilisé en pratique. Par exemple, pour les longues séquences, ces indices peuvent devenir très importants. Même si on normalise ces indices entre 0 et 1, des problèmes persistent, notamment pour les séquences de longueur variable, qui seront normalisées différemment.</p>
+<p>Chaque position est en fait encodée par un vecteur. Les auteurs de <span id="id2">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span> proposent l’encodage suivant : pour une séquence (texte) de longueur <span class="math notranslate nohighlight">\(L\)</span> dans laquelle on recherche la position du <span class="math notranslate nohighlight">\(k\)</span>-ème token,<span class="math notranslate nohighlight">\(k\in[\![0,L/2]\!]\)</span>, l’encodage est donné pour tout <span class="math notranslate nohighlight">\(i\in[\![0,d/2]\!]\)</span>par</p>
+<div class="math notranslate nohighlight">
+\[P(k,2i) = sin\left (\frac{k}{n^\frac{2i}{d}}\right )\quad \textrm{et}\quad P(k,2i+1) = cos\left (\frac{k}{n^\frac{2i}{d}}\right )\]</div>
+<p>avec <span class="math notranslate nohighlight">\(n\)</span> grand (égal à <span class="math notranslate nohighlight">\(10^4\)</span> dans <span id="id3">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</p>
+<p>L’encodage des token et des positions est ensuite combiné, pour servir d’entrée au transformer (<a class="reference internal" href="#encodage"><span class="std std-numref">Fig. 56</span></a>).</p>
+<figure class="align-default" id="encodage">
+<img alt="_images/embedding.png" src="_images/embedding.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Encodages de tokens et potisionnel</span><a class="headerlink" href="#encodage" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Une taille <span class="math notranslate nohighlight">\(d\)</span> typique est de
 1024, et une taille totale de vocabulaire <span class="math notranslate nohighlight">\(|V|\)</span> typique est de 30 000,
 donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
 la mise en place des transformers.</p>
 </section>
-<section id="id2">
-<h3>Transformers<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h3>
+<section id="id4">
+<h3>Transformers<a class="headerlink" href="#id4" title="Lien vers cette rubrique">#</a></h3>
 <p>Enfin, la matrice <span class="math notranslate nohighlight">\(X\)</span> représentant le texte passe par une série de <span class="math notranslate nohighlight">\(K\)</span>
 transformers (transformer model). Il existe trois types de ces modèles,
 décrits dans les paragraphes suivants. Globalement, un encodeur
@@ -835,7 +854,7 @@ de quantités extrêmement importantes de données d’entraînement.</p>
 <section id="implementation">
 <h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
 <p>Vu les temps d’entraînement et les bases de données nécessaires, il est impossible de proposer de faire tourner un transformer sans beaucoup de ressources.
-On se propose donc ici d’implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet <span id="id3">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>. Dans la mesure du possible, on propose en illustration des codes les figures de l’article.</p>
+On se propose donc ici d’implémenter un Transformer de bout en bout, et plus particulièrement le travail séminal sur ce sujet <span id="id5">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>. Dans la mesure du possible, on propose en illustration des codes les figures de l’article.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
@@ -889,7 +908,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 </div>
-<p>On s’intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans <span id="id4">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>. Pour ce faire, on créé une classe <code class="docutils literal notranslate"><span class="pre">PositionWiseFFN</span></code> qui permet de prendre en compte la position des éléments dans le calcul des prédictions.</p>
+<p>On s’intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans <span id="id6">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>. Pour ce faire, on créé une classe <code class="docutils literal notranslate"><span class="pre">PositionWiseFFN</span></code> qui permet de prendre en compte la position des éléments dans le calcul des prédictions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PositionFFN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">d_ff</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PositionWiseFeedForward</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -920,11 +939,11 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pe</span><span class="p">[:,</span> <span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>On construit ensuite l’encodeur (<a class="reference internal" href="#encodeur"><span class="std std-numref">Fig. 56</span></a>) et le décodeur (<a class="reference internal" href="#decodeur"><span class="std std-numref">Fig. 57</span></a>).</p>
+<p>On construit ensuite l’encodeur (<a class="reference internal" href="#encodeur"><span class="std std-numref">Fig. 57</span></a>) et le décodeur (<a class="reference internal" href="#decodeur"><span class="std std-numref">Fig. 58</span></a>).</p>
 <figure class="align-default" id="encodeur">
 <img alt="_images/encoder.png" src="_images/encoder.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Bloc encodeur (source : <span id="id5">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#encodeur" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Bloc encodeur (source : <span id="id7">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#encodeur" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EncoderLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -949,7 +968,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <figure class="align-default" id="decodeur">
 <img alt="_images/decoder.png" src="_images/decoder.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Bloc décodeur (source : <span id="id6">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#decodeur" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Bloc décodeur (source : <span id="id8">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#decodeur" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DecoderLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -973,11 +992,11 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
         <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>et on assemble le tout en un bloc transformer (<a class="reference internal" href="#transfo"><span class="std std-numref">Fig. 58</span></a>)</p>
+<p>et on assemble le tout en un bloc transformer (<a class="reference internal" href="#transfo"><span class="std std-numref">Fig. 59</span></a>)</p>
 <figure class="align-default" id="transfo">
 <img alt="_images/transformer.png" src="_images/transformer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Bloc transformer (source : <span id="id7">[<a class="reference internal" href="#id52" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#transfo" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Bloc transformer (source : <span id="id9">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</span><a class="headerlink" href="#transfo" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Transformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1062,7 +1081,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <figure class="align-default" id="plot">
 <img alt="_images/plot.png" src="_images/plot.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Fonction de perte.</span><a class="headerlink" href="#plot" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Fonction de perte.</span><a class="headerlink" href="#plot" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
@@ -1072,11 +1091,11 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <span class="n">out</span>
 </pre></div>
 </div>
-<div class="docutils container" id="id8">
+<div class="docutils container" id="id10">
 <div role="list" class="citation-list">
-<div class="citation" id="id52" role="doc-biblioentry">
+<div class="citation" id="id54" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>,<a role="doc-backlink" href="#id5">3</a>,<a role="doc-backlink" href="#id6">4</a>,<a role="doc-backlink" href="#id7">5</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id3">2</a>,<a role="doc-backlink" href="#id5">3</a>,<a role="doc-backlink" href="#id6">4</a>,<a role="doc-backlink" href="#id7">5</a>,<a role="doc-backlink" href="#id8">6</a>,<a role="doc-backlink" href="#id9">7</a>)</span>
 <p>Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems</em>, volume 30. Curran Associates, Inc., 2017. URL: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf</a>.</p>
 </div>
 </div>
@@ -1111,7 +1130,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1164,7 +1183,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer">Tokenizer</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation">Représentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Transformers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Transformers</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-bert">Exemple de modèle à encodeur : BERT</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-decodeur-gpt3">Exemple de modèle à décodeur : GPT3</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-modele-a-encodeur-decodeur-traduction-automatique">Exemple de modèle à encodeur-décodeur : traduction automatique</a></li>
@@ -1226,8 +1245,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

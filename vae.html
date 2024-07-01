@@ -14,19 +14,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -35,12 +35,12 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -75,27 +75,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -117,8 +113,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -195,6 +196,10 @@
 <li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energie.html">Modèles basés énergie</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LLM</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="llm.html">LLM</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -209,7 +214,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -218,7 +223,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -325,11 +330,11 @@ document.write(`
 <h1>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien vers cette rubrique">#</a></h1>
 <p>Les autoencodeurs variationnels sont, comme les GAN (abordés dans le cours suivant), des modèles génératifs, c’est-à-dire des modèles probabilistes <span class="math notranslate nohighlight">\(p\)</span> pouvant être utilisés pour
 simuler (ou générer) des données réalistes <span class="math notranslate nohighlight">\(\boldsymbol x\sim p(\boldsymbol x,\boldsymbol\theta)\)</span>, aussi proches que possible de la vraie (mais inconnue) distribution des données <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span>, pour laquelle seul un échantillon de données est disponible.</p>
-<p>Le paysage de ces modèles génératifs s’est beaucoup peuplé depuis 2014 (<a class="reference internal" href="#landscape"><span class="std std-numref">Fig. 61</span></a>).</p>
+<p>Le paysage de ces modèles génératifs s’est beaucoup peuplé depuis 2014 (<a class="reference internal" href="#landscape"><span class="std std-numref">Fig. 62</span></a>).</p>
 <figure class="align-default" id="landscape">
 <img alt="_images/landscapegen.png" src="_images/landscapegen.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 61 </span><span class="caption-text">Paysage des modèles génératifs (Source: <a class="reference external" href="https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546">Song et al., CVPR 2023</a>)</span><a class="headerlink" href="#landscape" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Paysage des modèles génératifs (Source: <a class="reference external" href="https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546">Song et al., CVPR 2023</a>)</span><a class="headerlink" href="#landscape" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE), les réseaux antagonistes générateurs (GAN) et ferons une brève introduction aux modèles de diffusion (DDPM, pour Denoising Diffusion Probabilistic Models)</p>
@@ -389,7 +394,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <h2>Autoencodeurs variationnels<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h2>
 <section id="principe">
 <h3>Principe<a class="headerlink" href="#principe" title="Lien vers cette rubrique">#</a></h3>
-<p>Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes (<a class="reference internal" href="#vae0"><span class="std std-numref">Fig. 62</span></a>) tel que :</p>
+<p>Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes (<a class="reference internal" href="#vae0"><span class="std std-numref">Fig. 63</span></a>) tel que :</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(\boldsymbol h)\)</span> est prescrit à l’avance</p></li>
 <li><p>la vraisemblance <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}(\boldsymbol x|\boldsymbol h)\)</span> est un décodeur (réseau génératif) <span class="math notranslate nohighlight">\(D_{\boldsymbol\theta}\)</span> tel que <span class="math notranslate nohighlight">\(\boldsymbol\Phi = D_{\boldsymbol\theta}(\boldsymbol h)\)</span> où <span class="math notranslate nohighlight">\(\boldsymbol \Phi\)</span>  sont les paramètres de la distribution des données. Par exemple</p></li>
@@ -404,7 +409,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <figure class="align-default" id="vae0">
 <img alt="_images/vae0.png" src="_images/vae0.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Architecture générale d’un autoencodeur variationnel</span><a class="headerlink" href="#vae0" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Architecture générale d’un autoencodeur variationnel</span><a class="headerlink" href="#vae0" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Comme précédemment, on peut utiliser l’inférence variationnelle pour optimiser de manière jointe <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span> :</p>
@@ -617,7 +622,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="recon">
 <img alt="_images/recon.png" src="_images/recon.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Apprentissage du VAE</span><a class="headerlink" href="#recon" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Apprentissage du VAE</span><a class="headerlink" href="#recon" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>On affiche alors des exemples d’images reconstruites</p>
@@ -627,7 +632,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="recons">
 <img alt="_images/reconstruction.png" src="_images/reconstruction.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Exemples d’images reconstruites <span class="math notranslate nohighlight">\(\hat x = D(E(x))\)</span></span><a class="headerlink" href="#recons" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Exemples d’images reconstruites <span class="math notranslate nohighlight">\(\hat x = D(E(x))\)</span></span><a class="headerlink" href="#recons" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>et des exemples d’images générées</p>
@@ -637,7 +642,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="generation">
 <img alt="_images/generation.png" src="_images/generation.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h)\)</span></span><a class="headerlink" href="#generation" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h)\)</span></span><a class="headerlink" href="#generation" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Le nombre d’epoches est faible, la génération n’est pas optimale.</p>
@@ -708,7 +713,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="generation2">
 <img alt="_images/generationc.png" src="_images/generationc.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h,c)\)</span></span><a class="headerlink" href="#generation2" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h,c)\)</span></span><a class="headerlink" href="#generation2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -742,7 +747,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -843,8 +848,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

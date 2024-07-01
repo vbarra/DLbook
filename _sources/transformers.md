@@ -248,8 +248,8 @@ résistant aux mauvaises initialisations.
 
 ### Transformers
 
-L'auto-attention n'est qu'une partie d'un mécanisme plus large : les
-transformers ({numref}`transformer`). Celui-ci se compose d'une unité d'auto-attention à
+L'auto-attention n'est qu'une partie d'un mécanisme plus large : le
+bloc transformer ({numref}`transformer`). Celui-ci se compose d'une unité d'auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d'interagir les
 unes avec les autres) suivie d'un perceptron multicouches $MLP$ qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -271,7 +271,7 @@ $$\begin{aligned}
 Bloc transformer.
 ```
 
-En pratique, les données passent par plusieurs de ces transformers.
+En pratique, les données passent par plusieurs de ces blocs, qui composent le transformer.
 
 ## Les transformers en traitement automatique du langage
 
@@ -323,7 +323,27 @@ correspond au $n$-ième jeton et est un vecteur one-hot (un vecteur où
 chaque entrée est zéro, sauf l'entrée correspondant au jeton, de valeur
 1). Les représentations des entrées sont calculées sous la forme
 $\mathbf X =\mathbf W_e\mathbf T$ et $\mathbf W_e$ est appris comme
-n'importe quel autre paramètre du réseau. Une taille $d$ typique est de
+n'importe quel autre paramètre du réseau. 
+
+Ces encodages ne sont pas dépendant de la position des tokens dans le texte. On combine alors ces encodages par un encodage positionnel.
+L'encodage positionnel décrit l'emplacement ou la position d'une entité dans une séquence, de sorte que chaque position se voit attribuer une représentation unique. Il existe de nombreuses raisons pour lesquelles un nombre unique, tel que l'indice de position, n'est pas utilisé en pratique. Par exemple, pour les longues séquences, ces indices peuvent devenir très importants. Même si on normalise ces indices entre 0 et 1, des problèmes persistent, notamment pour les séquences de longueur variable, qui seront normalisées différemment.
+
+Chaque position est en fait encodée par un vecteur. Les auteurs de {cite:p}`Vaswani17` proposent l'encodage suivant : pour une séquence (texte) de longueur $L$ dans laquelle on recherche la position du $k$-ème token,$k\in[\![0,L/2]\!]$, l'encodage est donné pour tout $i\in[\![0,d/2]\!]$par 
+
+$$P(k,2i) = sin\left (\frac{k}{n^\frac{2i}{d}}\right )\quad \textrm{et}\quad P(k,2i+1) = cos\left (\frac{k}{n^\frac{2i}{d}}\right )$$
+
+avec $n$ grand (égal à $10^4$ dans {cite:p}`Vaswani17`).
+
+
+L'encodage des token et des positions est ensuite combiné, pour servir d'entrée au transformer ({numref}`encodage`).
+
+```{figure} ./images/embedding.png
+:name: encodage
+Encodages de tokens et potisionnel
+```
+
+
+Une taille $d$ typique est de
 1024, et une taille totale de vocabulaire $|V|$ typique est de 30 000,
 donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
 la mise en place des transformers.
