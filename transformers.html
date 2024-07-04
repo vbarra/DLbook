@@ -14,19 +14,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -35,12 +35,12 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -75,23 +75,27 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -113,13 +117,8 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
     </header>
   
 
@@ -196,9 +195,11 @@
 <li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energie.html">Modèles basés énergie</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">LLM</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction aux LLM</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="llm.html">LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">Introduction aux LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llmfinetune.html">Fine Tuning de LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.html">Ingénierie du prompt</a></li>
 </ul>
 
     </div>
@@ -214,7 +215,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -223,7 +224,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -309,7 +310,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-auto-attention-multiple">Mécanisme d’auto attention multiple</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Transformers</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
@@ -498,13 +499,28 @@ entrées. Si le système connaît la position absolue des deux entrées,
 la position relative peut être déterminée, mais les codages
 positionnels relatifs encodent directement cette information. Chaque
 élément de la matrice d’attention correspond à un décalage
-particulier entre la position <span class="math notranslate nohighlight">\(pq\)</span> de la requête et la position <span class="math notranslate nohighlight">\(pk\)</span>
-de la clé. Les codages positionnels relatifs apprennent un paramètre
-<span class="math notranslate nohighlight">\(\pi_{pq,pk}\)</span> pour chaque décalage et l’utilisent pour modifier la
+particulier entre la position de la requête et la position
+de la clé. Les codages positionnels relatifs apprennent un paramètre  pour chaque décalage et l’utilisent pour modifier la
 matrice d’attention en ajoutant ces valeurs, en les multipliant ou
 en les utilisant pour modifier la matrice d’attention d’une autre
 manière.</p></li>
 </ol>
+<p>Il existe de nombreuses raisons pour lesquelles un nombre unique, tel que l’indice de position, n’est pas utilisé en pratique. Par exemple, pour les longues séquences, ces indices peuvent devenir très importants. Même si on normalise ces indices entre 0 et 1, des problèmes persistent, notamment pour les séquences de longueur variable, qui seront normalisées différemment.</p>
+<p>Chaque position est en fait encodée par un vecteur. Les auteurs de <span id="id1">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span> proposent l’encodage suivant : pour une séquence (texte) de longueur <span class="math notranslate nohighlight">\(L\)</span> dans laquelle on recherche la position du <span class="math notranslate nohighlight">\(k\)</span>-ème token,<span class="math notranslate nohighlight">\(k\in[\![0,L/2]\!]\)</span>, l’encodage est donné pour tout <span class="math notranslate nohighlight">\(i\in[\![0,d/2]\!]\)</span>par</p>
+<div class="math notranslate nohighlight">
+\[P(k,2i) = sin\left (\frac{k}{n^\frac{2i}{d}}\right )\quad \textrm{et}\quad P(k,2i+1) = cos\left (\frac{k}{n^\frac{2i}{d}}\right )\]</div>
+<p>avec <span class="math notranslate nohighlight">\(n\)</span> grand (égal à <span class="math notranslate nohighlight">\(10^4\)</span> dans <span id="id2">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</p>
+<p>L’encodage des tokens et des positions est ensuite combiné, pour servir d’entrée au transformer (<a class="reference internal" href="#encodage"><span class="std std-numref">Fig. 53</span></a>).</p>
+<figure class="align-default" id="encodage">
+<img alt="_images/embedding.png" src="_images/embedding.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Encodages de tokens et positionnel</span><a class="headerlink" href="#encodage" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Une taille <span class="math notranslate nohighlight">\(d\)</span> typique est de
+1024, et une taille totale de vocabulaire <span class="math notranslate nohighlight">\(|V|\)</span> typique est de 30 000,
+donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
+la mise en place des transformers.</p>
 </section>
 <section id="auto-attention-par-produit-scalaire-mis-a-l-echelle">
 <h4>Auto attention par produit scalaire mis à l’échelle<a class="headerlink" href="#auto-attention-par-produit-scalaire-mis-a-l-echelle" title="Lien vers cette rubrique">#</a></h4>
@@ -530,11 +546,11 @@ des clés :</p>
 \mathbf A_h(\mathbf X) &amp;=&amp; \mathbf V_h(\mathbf X).Softmax\left (\frac{\mathbf K_h(\mathbf X)^T\mathbf Q_h(\mathbf X)}{\sqrt{d_q}}\right) 
 \end{aligned}\end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(\mathbf A_h(\mathbf X)\)</span> est le <span class="math notranslate nohighlight">\(h\)</span>-ième mécanisme
-d’attention ou tête (head) (<a class="reference internal" href="#wkq2"><span class="std std-numref">Fig. 53</span></a>).</p>
+d’attention ou tête (head) (<a class="reference internal" href="#wkq2"><span class="std std-numref">Fig. 54</span></a>).</p>
 <figure class="align-default" id="wkq2">
 <img alt="_images/WKQ2.png" src="_images/WKQ2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Mécanisme d’attention</span><a class="headerlink" href="#wkq2" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Mécanisme d’attention</span><a class="headerlink" href="#wkq2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Typiquement, si la dimension des entrées
@@ -548,7 +564,7 @@ concaténées verticalement, et une autre transformation linéaire
 <figure class="align-default" id="multihead">
 <img alt="_images/multihead.png" src="_images/multihead.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Mécanisme d’auto attention multiple.</span><a class="headerlink" href="#multihead" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Mécanisme d’auto attention multiple.</span><a class="headerlink" href="#multihead" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Les têtes multiples semblent être nécessaires au bon fonctionnement du
@@ -556,10 +572,10 @@ transformer, on pense qu’elles rendent le réseau d’auto-attention plus
 résistant aux mauvaises initialisations.</p>
 </section>
 </section>
-<section id="id1">
-<h3>Transformers<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
+<section id="id3">
+<h3>Transformers<a class="headerlink" href="#id3" title="Lien vers cette rubrique">#</a></h3>
 <p>L’auto-attention n’est qu’une partie d’un mécanisme plus large : le
-bloc transformer (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 55</span></a>). Celui-ci se compose d’une unité d’auto-attention à
+bloc transformer (<a class="reference internal" href="#transformer"><span class="std std-numref">Fig. 56</span></a>). Celui-ci se compose d’une unité d’auto-attention à
 plusieurs têtes (qui permet aux représentations de mots d’interagir les
 unes avec les autres) suivie d’un perceptron multicouches <span class="math notranslate nohighlight">\(MLP\)</span> qui
 opère séparément sur chaque mot. Les deux unités sont des réseaux
@@ -577,7 +593,7 @@ multicouches. La séquence d’opérations complète peut être décrite par</p>
 <figure class="align-default" id="transformer">
 <img alt="_images/transformerblock.png" src="_images/transformerblock.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Bloc transformer.</span><a class="headerlink" href="#transformer" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>En pratique, les données passent par plusieurs de ces blocs, qui composent le transformer.</p>
@@ -630,29 +646,14 @@ chaque entrée est zéro, sauf l’entrée correspondant au jeton, de valeur
 1). Les représentations des entrées sont calculées sous la forme
 <span class="math notranslate nohighlight">\(\mathbf X =\mathbf W_e\mathbf T\)</span> et <span class="math notranslate nohighlight">\(\mathbf W_e\)</span> est appris comme
 n’importe quel autre paramètre du réseau.</p>
-<p>Ces encodages ne sont pas dépendant de la position des tokens dans le texte. On combine alors ces encodages par un encodage positionnel.
-L’encodage positionnel décrit l’emplacement ou la position d’une entité dans une séquence, de sorte que chaque position se voit attribuer une représentation unique. Il existe de nombreuses raisons pour lesquelles un nombre unique, tel que l’indice de position, n’est pas utilisé en pratique. Par exemple, pour les longues séquences, ces indices peuvent devenir très importants. Même si on normalise ces indices entre 0 et 1, des problèmes persistent, notamment pour les séquences de longueur variable, qui seront normalisées différemment.</p>
-<p>Chaque position est en fait encodée par un vecteur. Les auteurs de <span id="id2">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span> proposent l’encodage suivant : pour une séquence (texte) de longueur <span class="math notranslate nohighlight">\(L\)</span> dans laquelle on recherche la position du <span class="math notranslate nohighlight">\(k\)</span>-ème token,<span class="math notranslate nohighlight">\(k\in[\![0,L/2]\!]\)</span>, l’encodage est donné pour tout <span class="math notranslate nohighlight">\(i\in[\![0,d/2]\!]\)</span>par</p>
-<div class="math notranslate nohighlight">
-\[P(k,2i) = sin\left (\frac{k}{n^\frac{2i}{d}}\right )\quad \textrm{et}\quad P(k,2i+1) = cos\left (\frac{k}{n^\frac{2i}{d}}\right )\]</div>
-<p>avec <span class="math notranslate nohighlight">\(n\)</span> grand (égal à <span class="math notranslate nohighlight">\(10^4\)</span> dans <span id="id3">[<a class="reference internal" href="#id54" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf.">1</a>]</span>).</p>
-<p>L’encodage des tokens et des positions est ensuite combiné, pour servir d’entrée au transformer (<a class="reference internal" href="#encodage"><span class="std std-numref">Fig. 56</span></a>).</p>
-<figure class="align-default" id="encodage">
-<img alt="_images/embedding.png" src="_images/embedding.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Encodages de tokens et positionnel</span><a class="headerlink" href="#encodage" title="Lien vers cette image">#</a></p>
-</figcaption>
-</figure>
-<p>Une taille <span class="math notranslate nohighlight">\(d\)</span> typique est de
-1024, et une taille totale de vocabulaire <span class="math notranslate nohighlight">\(|V|\)</span> typique est de 30 000,
-donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
-la mise en place des transformers.</p>
+<p>Ces encodages ne sont pas dépendant de la position des tokens dans le texte. On combine alors ces encodages par un encodage positionnel. L’encodage des tokens et des positions est ensuite combiné, pour servir d’entrée au transformer (<a class="reference internal" href="#encodage"><span class="std std-numref">Fig. 53</span></a>).</p>
 </section>
 <section id="id4">
 <h3>Transformers<a class="headerlink" href="#id4" title="Lien vers cette rubrique">#</a></h3>
 <p>Enfin, la matrice <span class="math notranslate nohighlight">\(X\)</span> représentant le texte passe par une série de <span class="math notranslate nohighlight">\(K\)</span>
-transformers (transformer model). Il existe trois types de ces modèles,
-décrits dans les paragraphes suivants. Globalement, un encodeur
+transformers.</p>
+<p>Il existe trois types de ces modèles,
+brièvement décrits dans les paragraphes suivants. Globalement, un encodeur
 transforme la représentation du texte en une représentation qui peut
 prendre en charge une variété de tâches. Un décodeur prédit le prochain
 jeton pour poursuivre le texte d’entrée. Les encodeurs-décodeurs sont
@@ -680,7 +681,8 @@ données d’apprentissage supervisé.</p>
 </section>
 <section id="exemple-de-modele-a-decodeur-gpt3">
 <h4>Exemple de modèle à décodeur : GPT3<a class="headerlink" href="#exemple-de-modele-a-decodeur-gpt3" title="Lien vers cette rubrique">#</a></h4>
-<p>On présente ici une description de haut niveau de <a class="reference external" href="https://arxiv.org/pdf/2005.14165">GPT3</a>. L’architecture
+<p>On présente ici une description de haut niveau de <a class="reference external" href="https://arxiv.org/pdf/2005.14165">GPT3</a>. Le modèle sera développé <a class="reference internal" href="llmfinetune.html"><span class="std std-doc">ici</span></a>
+L’architecture
 de base est très similaire à celle du modèle d’encodage et comprend une
 série de transformers qui opèrent sur les représentations de mots
 appris. Cependant, l’objectif est différent. L’encodeur vise à
@@ -1095,7 +1097,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <div role="list" class="citation-list">
 <div class="citation" id="id54" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id3">2</a>,<a role="doc-backlink" href="#id5">3</a>,<a role="doc-backlink" href="#id6">4</a>,<a role="doc-backlink" href="#id7">5</a>,<a role="doc-backlink" href="#id8">6</a>,<a role="doc-backlink" href="#id9">7</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id5">3</a>,<a role="doc-backlink" href="#id6">4</a>,<a role="doc-backlink" href="#id7">5</a>,<a role="doc-backlink" href="#id8">6</a>,<a role="doc-backlink" href="#id9">7</a>)</span>
 <p>Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems</em>, volume 30. Curran Associates, Inc., 2017. URL: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf</a>.</p>
 </div>
 </div>
@@ -1130,7 +1132,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
               
               
               
-                <footer class="prev-next-footer d-print-none">
+                <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1177,7 +1179,7 @@ On se propose donc ici d’implémenter un Transformer de bout en bout, et plus 
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanisme-d-auto-attention-multiple">Mécanisme d’auto attention multiple</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Transformers</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-en-traitement-automatique-du-langage">Les transformers en traitement automatique du langage</a><ul class="nav section-nav flex-column">
@@ -1245,8 +1247,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

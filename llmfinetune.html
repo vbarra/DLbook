@@ -1,0 +1,1112 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fine Tuning de LLM &#8212; Apprentissage profond</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'llmfinetune';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Ingénierie du prompt" href="prompt.html" />
+    <link rel="prev" title="Introduction aux LLM" href="llm.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="torch.html">Ressources PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NN.html">Les réseaux de neurones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles classiques</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="perceptron.html">Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PMC.html">Perceptrons multicouches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Réseaux convolutifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ae.html">Auto-encodeurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">Réseaux récurrents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transferLearning.html">Utilisation de réseaux existants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformers.html">Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnn.html">Graph Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modèles génératifs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vae.html">Autoencodeurs variationnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gan.html">Réseaux antagonistes générateurs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diffusion.html">Modèles de diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energie.html">Modèles basés énergie</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LLM</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="llm.html">Introduction aux LLM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fine Tuning de LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.html">Ingénierie du prompt</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fine Tuning de LLM</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemples-d-application">Exemples d’application</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-textes">Classification de textes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-paires-de-textes">Classification de paires de textes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-du-modele-gpt2">Implémentation du modèle GPT2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-a-entrainer">Modèle à entraîner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement">Entraînement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation">Utilisation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fine-tuning-de-llm">
+<h1>Fine Tuning de LLM<a class="headerlink" href="#fine-tuning-de-llm" title="Lien vers cette rubrique">#</a></h1>
+<p>Le finetuning (voir également <a class="reference internal" href="transferLearning.html"><span class="std std-doc">ce cours</span></a>), dans le contexte des LLM, est le processus d’ajustement des paramètres d’un  modèle pré-entraîné à une tâche ou à un domaine précis. Bien que les modèles linguistiques pré-entraînés tels que le GPT possèdent de vastes connaissances linguistiques, ils manquent de spécialisation dans des domaines spécifiques. Le finetuning permet de remédier à cette limitation en permettant au modèle d’apprendre à partir de données spécifiques à un domaine afin de le rendre plus précis et plus efficace pour des applications ciblées.</p>
+<p>En exposant le modèle à des exemples spécifiques à une tâche, le modèle peut acquérir une compréhension plus profonde des nuances du domaine. Cela permet de combler le fossé entre un modèle de langage polyvalent et un modèle spécialisé, et de libérer tout le potentiel des LLM dans des domaines spécifiques.</p>
+<section id="exemples-d-application">
+<h2>Exemples d’application<a class="headerlink" href="#exemples-d-application" title="Lien vers cette rubrique">#</a></h2>
+<section id="classification-de-textes">
+<h3>Classification de textes<a class="headerlink" href="#classification-de-textes" title="Lien vers cette rubrique">#</a></h3>
+<p>Les applications de classification de séquences représentent souvent une séquence d’entrée avec une seule représentation consolidée. Avec les <a class="reference internal" href="rnn.html"><span class="std std-doc">RNN</span></a>, on utilise la couche cachée associée à l’élément d’entrée final pour représenter la séquence entière. Une approche similaire est utilisée avec les transformers. Un vecteur supplémentaire est ajouté au modèle pour représenter la séquence entière. Ce vecteur est parfois appelé l’encodage de la séquence. Dans BERT, le token [CLS] joue le rôle de cette encodage, est ajouté au vocabulaire et est placé au début de toutes les séquences d’entrée, à la fois pendant le pré entraînement et l’encodage. Le vecteur de sortie dans la couche finale du modèle pour l’entrée [CLS] représente la séquence d’entrée entière et sert d’entrée à une tête de classification, une régression logistique ou un réseau de neurones en classification qui prend la décision.</p>
+<p>Par exemple, en classification de sentiments, une manière simple de finetuner un LLM est d’apprendre un ensemble de poids <span class="math notranslate nohighlight">\(\boldsymbol W_C\)</span> pour transformer le vecteur de sortie <span class="math notranslate nohighlight">\(\boldsymbol z_{CLS}\)</span> pour le token [CLS] en un ensemble de scores sur l’ensemble des sentiments possibles (par exemple positif, neutre, négatif).</p>
+<p>Le finetuning des valeurs de <span class="math notranslate nohighlight">\(\boldsymbol W_C\)</span> nécessite un ensemble d’apprentissage supervisé constitué de séquences d’entrée étiquetées avec la classe appropriée. L’entraînement se fait par minimisation de l’entropie croisée. Une fois appris, et étant donné un texte <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>, celui-ci est encodé par le LLM pour générer <span class="math notranslate nohighlight">\(\boldsymbol z_{CLS}\)</span>, multiplié à son tour par <span class="math notranslate nohighlight">\(\boldsymbol W_C\)</span> et déterminer le sentiment de <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> en recherchant le maximum des composantes de <span class="math notranslate nohighlight">\(softmax(\boldsymbol W_C\boldsymbol z_{CLS})\)</span>.</p>
+<p>C’est l’exemple qui sera codé dans la partie implémentation.</p>
+</section>
+<section id="classification-de-paires-de-textes">
+<h3>Classification de paires de textes<a class="headerlink" href="#classification-de-paires-de-textes" title="Lien vers cette rubrique">#</a></h3>
+<p>Les applications pratiques qui entrent dans cette catégorie incluent la détection de paraphrases (A et B sont elles des paraphrases l’une de l’autre ?), l’implication logique (A entraîne-t-elle logiquement B ?) et la cohérence du discours (quel est le degré de cohérence de  B en tant que suite de A ?)</p>
+<p>Le finetuning  se déroule ici de la même manière que pour le pré-entraînement dans le cadre de la prédiction de la suite d’une phrase. Au cours du finetuning, des paires de phrases étiquetées provenant des données d’apprentissage sont présentées au modèle afin de produire les sorties <span class="math notranslate nohighlight">\(\boldsymbol z\)</span> pour chaque token d’entrée. Comme pour la classification de textes, le vecteur de sortie associé au jeton [CLS] représente la vue du modèle sur la paire de phrases d’entrée. Les deux phrases d’entrées sont séparées par le token [SEP]. Pour effectuer la classification, le vecteur [CLS] est multiplié par un ensemble de poids d’apprentissage de la classification et passe par un softmax pour générer des prédictions d’étiquettes, qui sont ensuite utilisées pour mettre à jour les poids.</p>
+</section>
+</section>
+<section id="implementation">
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<p>On propose ici de finetuner un LLM pour la détection de spams. Partant d’un modèle préentraîné (GPT2) dont on construit l’architecture et on récupère les poids, on le spécialise sur une base de données de spams dédiée (sms_spam_collection).</p>
+<section id="implementation-du-modele-gpt2">
+<h3>Implémentation du modèle GPT2<a class="headerlink" href="#implementation-du-modele-gpt2" title="Lien vers cette rubrique">#</a></h3>
+<p>On charge les paramètres de GPT2 (inspiré de <a class="reference external" href="https://raw.githubusercontent.com/rasbt/LLMs-from-scratch/main/ch05/01_main-chapter-code/gpt_download.py">ce code</a>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="k">def</span> <span class="nf">loadGPT2</span><span class="p">(</span><span class="n">model_size</span><span class="p">,</span> <span class="n">models_dir</span><span class="p">):</span>
+
+    <span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">models_dir</span><span class="p">,</span> <span class="n">model_size</span><span class="p">)</span>
+    <span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://openaipublic.blob.core.windows.net/gpt-2/models&quot;</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;checkpoint&quot;</span><span class="p">,</span> <span class="s2">&quot;encoder.json&quot;</span><span class="p">,</span> <span class="s2">&quot;hparams.json&quot;</span><span class="p">,</span><span class="s2">&quot;model.ckpt.data-00000-of-00001&quot;</span><span class="p">,</span> <span class="s2">&quot;model.ckpt.index&quot;</span><span class="p">,</span><span class="s2">&quot;model.ckpt.meta&quot;</span><span class="p">,</span> <span class="s2">&quot;vocab.bpe&quot;</span><span class="p">]</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+        <span class="n">download_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">model_size</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+
+    <span class="n">ckpt_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">latest_checkpoint</span><span class="p">(</span><span class="n">model_dir</span><span class="p">)</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="s2">&quot;hparams.json&quot;</span><span class="p">)))</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;n_layer&quot;</span><span class="p">])]}</span>
+
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">list_variables</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">):</span>
+        <span class="n">variable_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">load_variable</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+
+        <span class="n">variable_name_parts</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>  
+
+        <span class="n">target_dict</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="k">if</span> <span class="n">variable_name_parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">):</span>
+            <span class="n">layer_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">variable_name_parts</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">target_dict</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">layer_number</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">variable_name_parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">target_dict</span> <span class="o">=</span> <span class="n">target_dict</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">{})</span>
+
+        <span class="n">last_key</span> <span class="o">=</span> <span class="n">variable_name_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">target_dict</span><span class="p">[</span><span class="n">last_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">variable_array</span>
+
+    <span class="k">return</span> <span class="n">settings</span><span class="p">,</span> <span class="n">params</span>
+
+
+<span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+            <span class="n">file_size_local</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">file_size</span> <span class="o">==</span> <span class="n">file_size_local</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File already exists and is up-to-date: </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+        <span class="n">block_size</span> <span class="o">=</span> <span class="mi">1024</span>  
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fichier &quot;</span><span class="p">,</span><span class="n">destination</span><span class="p">)</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">chunk</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On réécrit ensuite le modèle GPT2.</p>
+<p>On commence par l’attention multi-tête</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiHeadAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_in</span><span class="p">,</span> <span class="n">d_out</span><span class="p">,</span> <span class="n">context_length</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">qkv_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">d_out</span> <span class="o">=</span> <span class="n">d_out</span>                  
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span> <span class="o">=</span> <span class="n">num_heads</span>          
+    <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span> <span class="o">=</span> <span class="n">d_out</span> <span class="o">//</span> <span class="n">num_heads</span>  
+    <span class="bp">self</span><span class="o">.</span><span class="n">W_query</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_in</span><span class="p">,</span> <span class="n">d_out</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">qkv_bias</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">W_key</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_in</span><span class="p">,</span> <span class="n">d_out</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">qkv_bias</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">W_value</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_in</span><span class="p">,</span> <span class="n">d_out</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">qkv_bias</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">out_proj</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_out</span><span class="p">,</span> <span class="n">d_out</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span>
+        <span class="s1">&#39;mask&#39;</span><span class="p">,</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">context_length</span><span class="p">,</span><span class="n">context_length</span><span class="p">,),</span> <span class="n">diagonal</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tokens</span><span class="p">,</span> <span class="n">embedding_length</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_key</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">queries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_query</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Q,K,V</span>
+    <span class="n">queries</span> <span class="o">=</span> <span class="n">queries</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tokens</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span> 
+    <span class="n">queries</span> <span class="o">=</span> <span class="n">queries</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tokens</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span>       
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tokens</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span>   
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">attention_scores</span> <span class="o">=</span> <span class="n">queries</span> <span class="o">@</span> <span class="n">keys</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">mask_bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">bool</span><span class="p">()[:</span><span class="n">num_tokens</span><span class="p">,</span> <span class="p">:</span><span class="n">num_tokens</span><span class="p">]</span>
+
+    <span class="n">attention_scores</span><span class="o">.</span><span class="n">masked_fill_</span><span class="p">(</span><span class="n">mask_bool</span><span class="p">,</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+    <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">attention_scores</span> <span class="o">/</span> <span class="n">keys</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">attention_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">attention_weights</span><span class="p">)</span>
+
+    <span class="n">context_vectors</span> <span class="o">=</span> <span class="p">(</span><span class="n">attention_weights</span> <span class="o">@</span> <span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">context_vectors</span> <span class="o">=</span> <span class="n">context_vectors</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tokens</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_out</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_proj</span><span class="p">(</span><span class="n">context_vectors</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Puis la couche de normalisation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LayerNorm</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emb_dim</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-5</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">emb_dim</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">emb_dim</span><span class="p">))</span>
+
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">unbiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">normalized_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">*</span> <span class="n">normalized_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span>
+</pre></div>
+</div>
+<p>et le MLP utilisant la fonction d’activation <a class="reference external" href="https://arxiv.org/abs/1606.08415">GELU</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GELU</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span>
+            <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.044715</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">],</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">]),</span>
+        <span class="n">GELU</span><span class="p">(),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">]),</span>
+    <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>et enfin le bloc Transformer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lass</span> <span class="n">TransformerBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span>
+        <span class="n">d_in</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">],</span>
+        <span class="n">d_out</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">],</span>
+        <span class="n">context_length</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;context_length&quot;</span><span class="p">],</span>
+        <span class="n">dropout</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop_rate&quot;</span><span class="p">],</span>
+        <span class="n">num_heads</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;n_heads&quot;</span><span class="p">],</span>
+        <span class="n">qkv_bias</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;qkv_bias&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">ff</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">norm1</span> <span class="o">=</span> <span class="n">LayerNorm</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">norm2</span> <span class="o">=</span> <span class="n">LayerNorm</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">drop_shortcut</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop_rate&quot;</span><span class="p">])</span>
+
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">shortcut</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="c1"># Couche d&#39;attention</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_shortcut</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1">#connexion résiduelle</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">shortcut</span>         
+
+    <span class="c1"># MLP </span>
+    <span class="n">shortcut</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_shortcut</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1">#connexion résiduelle</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">shortcut</span>         
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Tout ceci permet de construire le modèle GPT2. On se donne une fonction de chargement des poids pré-entraînés, et on créé une classe <code class="docutils literal notranslate"><span class="pre">GPTModel</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">assign</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">load_weights</span><span class="p">(</span><span class="n">gpt</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">gpt</span><span class="o">.</span><span class="n">positional_embedding</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span><span class="n">gpt</span><span class="o">.</span><span class="n">positional_embedding</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;wpe&#39;</span><span class="p">])</span>
+    <span class="n">gpt</span><span class="o">.</span><span class="n">token_embedding</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span><span class="n">gpt</span><span class="o">.</span><span class="n">token_embedding</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;wte&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">])):</span>
+        <span class="n">q_w</span><span class="p">,</span> <span class="n">k_w</span><span class="p">,</span> <span class="n">v_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;attn&quot;</span><span class="p">][</span><span class="s2">&quot;c_attn&quot;</span><span class="p">])[</span><span class="s2">&quot;w&quot;</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_query</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_query</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">q_w</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_key</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_key</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">k_w</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_value</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_value</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">v_w</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+        <span class="n">q_b</span><span class="p">,</span> <span class="n">k_b</span><span class="p">,</span> <span class="n">v_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;attn&quot;</span><span class="p">][</span><span class="s2">&quot;c_attn&quot;</span><span class="p">])[</span><span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_query</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_query</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span> <span class="n">q_b</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_key</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_key</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span> <span class="n">k_b</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_value</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">W_value</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span> <span class="n">v_b</span><span class="p">)</span>
+
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">out_proj</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">out_proj</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;attn&quot;</span><span class="p">][</span><span class="s2">&quot;c_proj&quot;</span><span class="p">][</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">out_proj</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">attention</span><span class="o">.</span><span class="n">out_proj</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;attn&quot;</span><span class="p">][</span><span class="s2">&quot;c_proj&quot;</span><span class="p">][</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;mlp&quot;</span><span class="p">][</span><span class="s2">&quot;c_fc&quot;</span><span class="p">][</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;mlp&quot;</span><span class="p">][</span><span class="s2">&quot;c_fc&quot;</span><span class="p">][</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;mlp&quot;</span><span class="p">][</span><span class="s2">&quot;c_proj&quot;</span><span class="p">][</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">ff</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;mlp&quot;</span><span class="p">][</span><span class="s2">&quot;c_proj&quot;</span><span class="p">][</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm1</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm1</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;ln_1&quot;</span><span class="p">][</span><span class="s2">&quot;g&quot;</span><span class="p">])</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm1</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm1</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;ln_1&quot;</span><span class="p">][</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm2</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm2</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;ln_2&quot;</span><span class="p">][</span><span class="s2">&quot;g&quot;</span><span class="p">])</span>
+        <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm2</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span>
+            <span class="n">gpt</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">norm2</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">][</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;ln_2&quot;</span><span class="p">][</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+
+    <span class="n">gpt</span><span class="o">.</span><span class="n">final_norm</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span><span class="n">gpt</span><span class="o">.</span><span class="n">final_norm</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">])</span>
+    <span class="n">gpt</span><span class="o">.</span><span class="n">final_norm</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span><span class="n">gpt</span><span class="o">.</span><span class="n">final_norm</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+    <span class="n">gpt</span><span class="o">.</span><span class="n">out_head</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">assign</span><span class="p">(</span><span class="n">gpt</span><span class="o">.</span><span class="n">out_head</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;wte&quot;</span><span class="p">])</span>
+
+
+
+<span class="k">class</span> <span class="nc">GPTModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">token_embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;vocab_size&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">positional_embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;context_length&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">drop_embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop_rate&quot;</span><span class="p">])</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">trf_blocks</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+        <span class="o">*</span><span class="p">[</span><span class="n">TransformerBlock</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;n_layers&quot;</span><span class="p">])]</span>
+    <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">final_norm</span> <span class="o">=</span> <span class="n">LayerNorm</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">out_head</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;vocab_size&quot;</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_idx</span><span class="p">):</span>
+    <span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span> <span class="o">=</span> <span class="n">in_idx</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">token_embeddings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_embedding</span><span class="p">(</span><span class="n">in_idx</span><span class="p">)</span>
+    <span class="n">positional_embeddings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positional_embedding</span><span class="p">(</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">in_idx</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">token_embeddings</span> <span class="o">+</span> <span class="n">positional_embeddings</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_head</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logits</span>
+</pre></div>
+</div>
+<p>Pour la génération, on utilise l’échantillonnage avec paramètre de température ou top-k</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="p">,</span> <span class="n">context_size</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eos_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_new_tokens</span><span class="p">):</span>
+        <span class="n">idx_cond</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:,</span> <span class="o">-</span><span class="n">context_size</span><span class="p">:]</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">idx_cond</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">logits</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="k">if</span> <span class="n">top_k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">top_logits</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">top_k</span><span class="p">)</span>
+            <span class="n">min_val</span> <span class="o">=</span> <span class="n">top_logits</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">logits</span> <span class="o">&lt;</span> <span class="n">min_val</span><span class="p">,</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
+                <span class="n">logits</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="n">logits</span> <span class="o">/</span> <span class="n">temperature</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">idx_next</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx_next</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">idx_next</span> <span class="o">==</span> <span class="n">eos_id</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx_next</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">idx</span>
+</pre></div>
+</div>
+<p>On utilise <a class="reference external" href="https://pypi.org/project/tiktoken/0.1.1/">tiktoken</a> comme tokenizer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tiktoken</span>
+
+<span class="k">def</span> <span class="nf">text_to_token_ids</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="n">encoded</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">allowed_special</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;&lt;|endoftext|&gt;&#39;</span><span class="p">})</span>
+    <span class="n">encoded_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">encoded_tensor</span>
+
+<span class="k">def</span> <span class="nf">token_ids_to_text</span><span class="p">(</span><span class="n">token_ids</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">token_ids</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">flat</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tiktoken</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">(</span><span class="s2">&quot;gpt2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="fine-tuning">
+<h3>Fine Tuning<a class="headerlink" href="#fine-tuning" title="Lien vers cette rubrique">#</a></h3>
+<p>Maintenant que le modèle est construit, on s’occupe du finetuning. On commence par télécharger les données pour le finetuning. On utilise une collection de <a class="reference external" href="https://archive.ics.uci.edu/dataset/228/sms+spam+collection">spam SMS</a> qui est un ensemble public de messages SMS étiquetés qui ont été collectés dans le cadre de la recherche sur les spams en téléphonie mobile.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip&quot;</span>
+<span class="n">zip_path</span> <span class="o">=</span> <span class="s2">&quot;sms_spam_collection.zip&quot;</span>
+<span class="n">extracted_path</span> <span class="o">=</span> <span class="s2">&quot;sms_spam_collection&quot;</span>
+<span class="n">data_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">extracted_path</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;SMSSpamCollection.tsv&quot;</span>
+
+<span class="k">if</span> <span class="n">data_file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_file_path</span><span class="si">}</span><span class="s2"> already exists. Skipping download and extraction.&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+        <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">extracted_path</span><span class="p">)</span>
+
+<span class="n">original_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">extracted_path</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;SMSSpamCollection&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">original_file_path</span><span class="p">,</span> <span class="n">data_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ce jeu de données contient 4824 sms valides, et 747 spams. On rééquilibre ces données non balancées</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Label&quot;</span><span class="p">,</span> <span class="s2">&quot;Text&quot;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">create_balanced_dataset</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">num_spam</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;spam&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ham_subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ham&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_spam</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+    <span class="n">balanced_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ham_subset</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;spam&quot;</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">balanced_df</span>
+
+<span class="n">balanced_df</span> <span class="o">=</span> <span class="n">create_balanced_dataset</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="c1"># Conversion des labels</span>
+<span class="n">balanced_df</span><span class="p">[</span><span class="s2">&quot;Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">balanced_df</span><span class="p">[</span><span class="s2">&quot;Label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s2">&quot;ham&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;spam&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>On prétraite ces données en ensembles d’apprentissage, de test, de validation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">train_frac</span><span class="p">,</span> <span class="n">validation_frac</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">train_frac</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">train_end</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="n">validation_frac</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[:</span><span class="n">t</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">t</span><span class="p">:</span><span class="n">v</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">v</span><span class="p">:]</span>
+
+<span class="n">train_df</span><span class="p">,</span> <span class="n">validation_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">random_split</span><span class="p">(</span><span class="n">balanced_df</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">train_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;train.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">validation_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;validation.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">test_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;test.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>et on construit les structures de données adéquates</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SpamDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_file</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">pad_token_id</span><span class="o">=</span><span class="mi">50256</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span>
+
+    <span class="c1"># Encodage</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">encoded_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]]</span>
+
+    <span class="k">if</span> <span class="n">max_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_longest_encoded_length</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="n">max_length</span>
+      <span class="c1"># Troncature des textes trop longs</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">encoded_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">encoded_text</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">]</span> <span class="k">for</span> <span class="n">encoded_text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoded_texts</span><span class="p">]</span>
+
+    <span class="c1"># Padding des textes</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">encoded_texts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">encoded_text</span> <span class="o">+</span> <span class="p">[</span><span class="n">pad_token_id</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoded_text</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">encoded_text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoded_texts</span>
+    <span class="p">]</span>
+
+  <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+     <span class="n">encoded_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoded_texts</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+     <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;Label&quot;</span><span class="p">]</span>
+     <span class="k">return</span> <span class="p">(</span>
+         <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">encoded_text</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">),</span>
+         <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+     <span class="p">)</span>
+
+  <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_longest_encoded_length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">encoded_text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoded_texts</span><span class="p">:</span>
+      <span class="n">encoded_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoded_text</span><span class="p">)</span>
+      <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">encoded_length</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_length</span>
+
+
+<span class="n">num_workers</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">SpamDataset</span><span class="p">(</span><span class="n">csv_file</span><span class="o">=</span><span class="s2">&quot;train.csv&quot;</span><span class="p">,</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span><span class="n">max_length</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span><span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+
+<span class="n">validation_dataset</span> <span class="o">=</span> <span class="n">SpamDataset</span><span class="p">(</span><span class="n">csv_file</span><span class="o">=</span><span class="s2">&quot;validation.csv&quot;</span><span class="p">,</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span><span class="n">max_length</span><span class="o">=</span><span class="n">train_dataset</span><span class="o">.</span><span class="n">max_length</span><span class="p">)</span>
+<span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">validation_dataset</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span><span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">,)</span>
+
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">SpamDataset</span><span class="p">(</span><span class="n">csv_file</span><span class="o">=</span><span class="s2">&quot;test.csv&quot;</span><span class="p">,</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span><span class="n">max_length</span><span class="o">=</span><span class="n">train_dataset</span><span class="o">.</span><span class="n">max_length</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">test_dataset</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span><span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">,)</span>
+</pre></div>
+</div>
+</section>
+<section id="modele-a-entrainer">
+<h3>Modèle à entraîner<a class="headerlink" href="#modele-a-entrainer" title="Lien vers cette rubrique">#</a></h3>
+<p>On instantie le modèle : on propose ici 4 versions de GPT2, variant par leur architecture et le nombre de paramètres (hors encodage).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;vocab_size&quot;</span><span class="p">:</span> <span class="mi">50257</span><span class="p">,</span>     <span class="c1"># taille vocabulaire</span>
+    <span class="s2">&quot;context_length&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>  <span class="c1"># taille du contexte</span>
+    <span class="s2">&quot;drop_rate&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>        <span class="c1"># Dropout </span>
+    <span class="s2">&quot;qkv_bias&quot;</span><span class="p">:</span> <span class="kc">True</span>         <span class="c1"># On autorise un biais que Q,K et V</span>
+<span class="p">}</span>
+
+<span class="n">model_configs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;gpt2-small (124M)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">:</span> <span class="mi">768</span><span class="p">,</span> <span class="s2">&quot;n_layers&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span>
+    <span class="s2">&quot;gpt2-medium (355M)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span> <span class="s2">&quot;n_layers&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">},</span>
+    <span class="s2">&quot;gpt2-large (774M)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span> <span class="s2">&quot;n_layers&quot;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span>
+    <span class="s2">&quot;gpt2-xl (1558M)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;n_layers&quot;</span><span class="p">:</span> <span class="mi">48</span><span class="p">,</span> <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">MY_MODEL</span> <span class="o">=</span> <span class="s2">&quot;gpt2-medium (355M)&quot;</span>
+<span class="n">CONFIG</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">model_configs</span><span class="p">[</span><span class="n">MY_MODEL</span><span class="p">])</span>
+
+<span class="n">model_size</span> <span class="o">=</span> <span class="n">MY_MODEL</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">)</span>
+<span class="n">settings</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">loadGPT2</span><span class="p">(</span><span class="n">model_size</span><span class="o">=</span><span class="n">model_size</span><span class="p">,</span> <span class="n">models_dir</span><span class="o">=</span><span class="s2">&quot;gpt2&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GPTModel</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+<span class="n">load_weights</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On réalise le finetuning en fixant tous les paramètres, en ajoutant une tête de classification qui sera entraînée sur les données du problème</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+  <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># tête de classification à deux sorties (spam/non spam)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">out_head</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;emb_dim&quot;</span><span class="p">],</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,)</span>
+
+<span class="c1">#On autorise le dernier bloc transformer et la dernière couche de normalisation à etre entraînés</span>
+<span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">trf_blocks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+  <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">final_norm</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+  <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="entrainement">
+<h3>Entraînement<a class="headerlink" href="#entrainement" title="Lien vers cette rubrique">#</a></h3>
+<p>On définit la fonction de perte</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_loss_loader</span><span class="p">(</span><span class="n">data_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">num_batches</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_loader</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">num_batches</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">num_batches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_loader</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">num_batches</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_batches</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_loader</span><span class="p">))</span>
+
+  <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">input_batch</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_loader</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">num_batches</span><span class="p">:</span>
+        <span class="n">input_batch</span><span class="p">,</span> <span class="n">target_batch</span> <span class="o">=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">target_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_batch</span><span class="p">)[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span>
+        <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">break</span>
+  <span class="k">return</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="n">num_batches</span>
+</pre></div>
+</div>
+<p>les fonctions d’évaluation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">eval_iter</span><span class="p">):</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+  <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">calculate_loss_loader</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">num_batches</span><span class="o">=</span><span class="n">eval_iter</span><span class="p">)</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">calculate_loss_loader</span><span class="p">(</span><span class="n">val_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">num_batches</span><span class="o">=</span><span class="n">eval_iter</span><span class="p">)</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span>
+
+<span class="k">def</span> <span class="nf">calculate_accuracy_loader</span><span class="p">(</span><span class="n">data_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">num_batches</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+  <span class="n">correct_predictions</span><span class="p">,</span> <span class="n">num_examples</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+  <span class="k">if</span> <span class="n">num_batches</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">num_batches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_loader</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">num_batches</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_batches</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_loader</span><span class="p">))</span>
+
+  <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">input_batch</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_loader</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">num_batches</span><span class="p">:</span>
+      <span class="n">input_batch</span><span class="p">,</span> <span class="n">target_batch</span> <span class="o">=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">target_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+      <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_batch</span><span class="p">)[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> 
+      <span class="n">predicted_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+      <span class="n">num_examples</span> <span class="o">+=</span> <span class="n">predicted_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="n">correct_predictions</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicted_labels</span> <span class="o">==</span> <span class="n">target_batch</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+  <span class="k">return</span> <span class="n">correct_predictions</span> <span class="o">/</span> <span class="n">num_examples</span>
+</pre></div>
+</div>
+<p>et on entraîne le modèle en finetuning</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">train_loader</span><span class="p">,</span><span class="n">val_loader</span><span class="p">,</span><span class="n">optimizer</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">num_epochs</span><span class="p">,</span><span class="n">eval_freq</span><span class="p">,</span><span class="n">eval_iter</span><span class="p">,</span><span class="n">tokenizer</span><span class="p">,):</span>
+
+  <span class="n">train_losses</span><span class="p">,</span> <span class="n">val_losses</span><span class="p">,</span> <span class="n">train_accs</span><span class="p">,</span> <span class="n">val_accs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+  <span class="n">examples_seen</span><span class="p">,</span> <span class="n">global_step</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+
+  <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">input_batch</span><span class="p">,</span> <span class="n">target_batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">input_batch</span><span class="p">,</span> <span class="n">target_batch</span> <span class="o">=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">target_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_batch</span><span class="p">)[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># Grab logits of last output token only!</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">examples_seen</span> <span class="o">+=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">global_step</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">global_step</span> <span class="o">%</span> <span class="n">eval_freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">eval_iter</span><span class="p">)</span>
+            <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span>
+            <span class="n">val_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_loss</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> (Step </span><span class="si">{</span><span class="n">global_step</span><span class="si">:</span><span class="s2">06d</span><span class="si">}</span><span class="s2">): &quot;</span><span class="sa">f</span><span class="s2">&quot;Perte train </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Perte val </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+              <span class="p">)</span>
+    <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">calculate_accuracy_loader</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">num_batches</span><span class="o">=</span><span class="n">eval_iter</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Précision train: </span><span class="si">{</span><span class="n">train_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% | &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">train_accs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_accuracy</span><span class="p">)</span>
+    <span class="n">val_accuracy</span> <span class="o">=</span> <span class="n">calculate_accuracy_loader</span><span class="p">(</span><span class="n">val_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">num_batches</span><span class="o">=</span><span class="n">eval_iter</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Précision val: </span><span class="si">{</span><span class="n">val_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="n">val_accs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_accuracy</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">train_losses</span><span class="p">,</span> <span class="n">val_losses</span><span class="p">,</span> <span class="n">train_accs</span><span class="p">,</span> <span class="n">val_accs</span><span class="p">,</span> <span class="n">examples_seen</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">5e-5</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">train_losses</span><span class="p">,</span> <span class="n">val_losses</span><span class="p">,</span> <span class="n">train_accs</span><span class="p">,</span> <span class="n">val_accs</span><span class="p">,</span> <span class="n">examples_seen</span> <span class="o">=</span> <span class="n">train_classifier</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span><span class="n">train_loader</span><span class="o">=</span><span class="n">train_loader</span><span class="p">,</span><span class="n">val_loader</span><span class="o">=</span><span class="n">val_loader</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+    <span class="n">num_epochs</span><span class="o">=</span><span class="n">num_epochs</span><span class="p">,</span><span class="n">eval_freq</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">eval_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="utilisation">
+<h3>Utilisation<a class="headerlink" href="#utilisation" title="Lien vers cette rubrique">#</a></h3>
+<p>Le modèle finetuné est finalement utilisé sur des données entrées par l’utilisateur</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_token_id</span><span class="o">=</span><span class="mi">50256</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+    <span class="n">input_ids</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">supported_context_length</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">positional_embedding</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">input_ids</span> <span class="o">=</span> <span class="n">input_ids</span><span class="p">[:</span><span class="nb">min</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">supported_context_length</span><span class="p">)]</span>
+
+    <span class="n">input_ids</span> <span class="o">+=</span> <span class="p">[</span><span class="n">pad_token_id</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">))</span>
+    <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">predicted_label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="s2">&quot;spam&quot;</span> <span class="k">if</span> <span class="n">predicted_label</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;not spam&quot;</span>
+
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Hey you :) how&#39;s things? I have a VERY special surprise for you in my new video! No hints...you&#39;ll just have to see for yourself ;)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MAKE MONEY FAST Work 1 hr/day and earn $150k/week GUARANTEED!!!&quot;</span><span class="p">,</span>
+
+    <span class="s2">&quot;You can see the status of your manuscript at any time by logging into your account at the Science Journals Content Tracking System&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Register now to find out how to optimise oncology clinical trials using digital tools to accelerate decision-making. Learn how top 10 pharmaceutical companies are using a combination of DHTs, ePROs, clinical trial platforms and more, to ease oncology research and drastically reduce timelines.&quot;</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification: </span><span class="si">{</span><span class="n">classify</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">tokenizer</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">max_length</span><span class="o">=</span><span class="n">train_dataset</span><span class="o">.</span><span class="n">max_length</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Message : Hey you :) how’s things? I have a VERY special surprise for you in my new video! No hints…you’ll just have to see for yourself ;)</p>
+<p>Classification: spam</p>
+<p>Message : MAKE MONEY FAST Work 1 hr/day and earn $150k/week GUARANTEED!!!</p>
+<p>Classification: spam</p>
+<p>Message : You can see the status of your manuscript at any time by logging into your account at the Science Journals Content Tracking System</p>
+<p>Classification: not spam</p>
+<p>Message : Register now to find out how to optimise oncology clinical trials using digital tools to accelerate decision-making. Learn how top 10 pharmaceutical companies are using a combination of DHTs, ePROs, clinical trial platforms and more, to ease oncology research and drastically reduce timelines.</p>
+<p>Classification:  spam</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="llm.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Introduction aux LLM</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="prompt.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Ingénierie du prompt</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemples-d-application">Exemples d’application</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-textes">Classification de textes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-paires-de-textes">Classification de paires de textes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-du-modele-gpt2">Implémentation du modèle GPT2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-a-entrainer">Modèle à entraîner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement">Entraînement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation">Utilisation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Vincent BARRA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

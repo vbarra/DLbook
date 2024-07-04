@@ -184,12 +184,34 @@ approches principales pour intégrer les informations de position :
     la position relative peut être déterminée, mais les codages
     positionnels relatifs encodent directement cette information. Chaque
     élément de la matrice d'attention correspond à un décalage
-    particulier entre la position $pq$ de la requête et la position $pk$
-    de la clé. Les codages positionnels relatifs apprennent un paramètre
-    $\pi_{pq,pk}$ pour chaque décalage et l'utilisent pour modifier la
+    particulier entre la position de la requête et la position
+    de la clé. Les codages positionnels relatifs apprennent un paramètre  pour chaque décalage et l'utilisent pour modifier la
     matrice d'attention en ajoutant ces valeurs, en les multipliant ou
     en les utilisant pour modifier la matrice d'attention d'une autre
     manière.
+
+Il existe de nombreuses raisons pour lesquelles un nombre unique, tel que l'indice de position, n'est pas utilisé en pratique. Par exemple, pour les longues séquences, ces indices peuvent devenir très importants. Même si on normalise ces indices entre 0 et 1, des problèmes persistent, notamment pour les séquences de longueur variable, qui seront normalisées différemment.
+
+Chaque position est en fait encodée par un vecteur. Les auteurs de {cite:p}`Vaswani17` proposent l'encodage suivant : pour une séquence (texte) de longueur $L$ dans laquelle on recherche la position du $k$-ème token,$k\in[\![0,L/2]\!]$, l'encodage est donné pour tout $i\in[\![0,d/2]\!]$par 
+
+$$P(k,2i) = sin\left (\frac{k}{n^\frac{2i}{d}}\right )\quad \textrm{et}\quad P(k,2i+1) = cos\left (\frac{k}{n^\frac{2i}{d}}\right )$$
+
+avec $n$ grand (égal à $10^4$ dans {cite:p}`Vaswani17`).
+
+
+L'encodage des tokens et des positions est ensuite combiné, pour servir d'entrée au transformer ({numref}`encodage`).
+
+```{figure} ./images/embedding.png
+:name: encodage
+Encodages de tokens et positionnel
+```
+
+
+Une taille $d$ typique est de
+1024, et une taille totale de vocabulaire $|V|$ typique est de 30 000,
+donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
+la mise en place des transformers.
+
 
 #### Auto attention par produit scalaire mis à l'échelle
 
@@ -325,34 +347,16 @@ chaque entrée est zéro, sauf l'entrée correspondant au jeton, de valeur
 $\mathbf X =\mathbf W_e\mathbf T$ et $\mathbf W_e$ est appris comme
 n'importe quel autre paramètre du réseau. 
 
-Ces encodages ne sont pas dépendant de la position des tokens dans le texte. On combine alors ces encodages par un encodage positionnel.
-L'encodage positionnel décrit l'emplacement ou la position d'une entité dans une séquence, de sorte que chaque position se voit attribuer une représentation unique. Il existe de nombreuses raisons pour lesquelles un nombre unique, tel que l'indice de position, n'est pas utilisé en pratique. Par exemple, pour les longues séquences, ces indices peuvent devenir très importants. Même si on normalise ces indices entre 0 et 1, des problèmes persistent, notamment pour les séquences de longueur variable, qui seront normalisées différemment.
+Ces encodages ne sont pas dépendant de la position des tokens dans le texte. On combine alors ces encodages par un encodage positionnel. L'encodage des tokens et des positions est ensuite combiné, pour servir d'entrée au transformer ({numref}`encodage`).
 
-Chaque position est en fait encodée par un vecteur. Les auteurs de {cite:p}`Vaswani17` proposent l'encodage suivant : pour une séquence (texte) de longueur $L$ dans laquelle on recherche la position du $k$-ème token,$k\in[\![0,L/2]\!]$, l'encodage est donné pour tout $i\in[\![0,d/2]\!]$par 
-
-$$P(k,2i) = sin\left (\frac{k}{n^\frac{2i}{d}}\right )\quad \textrm{et}\quad P(k,2i+1) = cos\left (\frac{k}{n^\frac{2i}{d}}\right )$$
-
-avec $n$ grand (égal à $10^4$ dans {cite:p}`Vaswani17`).
-
-
-L'encodage des tokens et des positions est ensuite combiné, pour servir d'entrée au transformer ({numref}`encodage`).
-
-```{figure} ./images/embedding.png
-:name: encodage
-Encodages de tokens et positionnel
-```
-
-
-Une taille $d$ typique est de
-1024, et une taille totale de vocabulaire $|V|$ typique est de 30 000,
-donc ce modèle nécessite de nombreux paramètres à apprendre, avant même
-la mise en place des transformers.
 
 ### Transformers
 
 Enfin, la matrice $X$ représentant le texte passe par une série de $K$
-transformers (transformer model). Il existe trois types de ces modèles,
-décrits dans les paragraphes suivants. Globalement, un encodeur
+transformers. 
+
+Il existe trois types de ces modèles,
+brièvement décrits dans les paragraphes suivants. Globalement, un encodeur
 transforme la représentation du texte en une représentation qui peut
 prendre en charge une variété de tâches. Un décodeur prédit le prochain
 jeton pour poursuivre le texte d'entrée. Les encodeurs-décodeurs sont
@@ -381,7 +385,8 @@ données d'apprentissage supervisé.
 
 #### Exemple de modèle à décodeur : GPT3
 
-On présente ici une description de haut niveau de [GPT3](https://arxiv.org/pdf/2005.14165). L'architecture
+On présente ici une description de haut niveau de [GPT3](https://arxiv.org/pdf/2005.14165). Le modèle sera développé [ici](./llmfinetune.md)
+L'architecture
 de base est très similaire à celle du modèle d'encodage et comprend une
 série de transformers qui opèrent sur les représentations de mots
 appris. Cependant, l'objectif est différent. L'encodeur vise à
