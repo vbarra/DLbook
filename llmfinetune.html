@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fine Tuning de LLM &#8212; Apprentissage profond</title>
+    <title>Utilisation de LLM &#8212; Apprentissage profond</title>
   
   
   
@@ -198,7 +198,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLM</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="llm.html">Introduction aux LLM</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fine Tuning de LLM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Utilisation de LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prompt.html">Ingénierie du prompt</a></li>
 </ul>
 
@@ -290,7 +290,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fine Tuning de LLM</h1>
+    <h1>Utilisation de LLM</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -300,17 +300,32 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemples-d-application">Exemples d’application</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-textes">Classification de textes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-paires-de-textes">Classification de paires de textes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine Tuning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemples-d-application">Exemples d’application</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-textes">Classification de textes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-paires-de-textes">Classification de paires de textes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rlhf">RLHF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-de-recompense">Modèle de récompense</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation">Utilisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">Limites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieval-augmented-generation">Retrieval-Augmented Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rag-naifs">RAG naïfs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rag-avances">RAG avancés</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rag-modulaires">RAG modulaires</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-du-modele-gpt2">Implémentation du modèle GPT2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fine Tuning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-a-entrainer">Modèle à entraîner</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement">Entraînement</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation">Utilisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Utilisation</a></li>
 </ul>
 </li>
 </ul>
@@ -324,28 +339,134 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fine-tuning-de-llm">
-<h1>Fine Tuning de LLM<a class="headerlink" href="#fine-tuning-de-llm" title="Lien vers cette rubrique">#</a></h1>
-<p>Le finetuning (voir également <a class="reference internal" href="transferLearning.html"><span class="std std-doc">ce cours</span></a>), dans le contexte des LLM, est le processus d’ajustement des paramètres d’un  modèle pré-entraîné à une tâche ou à un domaine précis. Bien que les modèles linguistiques pré-entraînés tels que le GPT possèdent de vastes connaissances linguistiques, ils manquent de spécialisation dans des domaines spécifiques. Le finetuning permet de remédier à cette limitation en permettant au modèle d’apprendre à partir de données spécifiques à un domaine afin de le rendre plus précis et plus efficace pour des applications ciblées.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="utilisation-de-llm">
+<h1>Utilisation de LLM<a class="headerlink" href="#utilisation-de-llm" title="Lien vers cette rubrique">#</a></h1>
+<p>Bien que les grands modèles de langage pré-entraînés tels que le GPT, LLAMA ou Mistral possèdent de vastes connaissances linguistiques, ils manquent de spécialisation dans des domaines spécifiques et pechent parfois par manque de mise à jour de leur données d’apprentissage.</p>
+<section id="fine-tuning">
+<h2>Fine Tuning<a class="headerlink" href="#fine-tuning" title="Lien vers cette rubrique">#</a></h2>
+<p>Le finetuning (voir également <a class="reference internal" href="transferLearning.html"><span class="std std-doc">ce cours</span></a>), dans le contexte des LLM, est le processus d’ajustement des paramètres d’un  modèle pré-entraîné à une tâche ou à un domaine précis. Il permet au modèle d’apprendre à partir de données spécifiques à un domaine afin de le rendre plus précis et plus efficace pour des applications ciblées.</p>
 <p>En exposant le modèle à des exemples spécifiques à une tâche, le modèle peut acquérir une compréhension plus profonde des nuances du domaine. Cela permet de combler le fossé entre un modèle de langage polyvalent et un modèle spécialisé, et de libérer tout le potentiel des LLM dans des domaines spécifiques.</p>
 <section id="exemples-d-application">
-<h2>Exemples d’application<a class="headerlink" href="#exemples-d-application" title="Lien vers cette rubrique">#</a></h2>
+<h3>Exemples d’application<a class="headerlink" href="#exemples-d-application" title="Lien vers cette rubrique">#</a></h3>
 <section id="classification-de-textes">
-<h3>Classification de textes<a class="headerlink" href="#classification-de-textes" title="Lien vers cette rubrique">#</a></h3>
+<h4>Classification de textes<a class="headerlink" href="#classification-de-textes" title="Lien vers cette rubrique">#</a></h4>
 <p>Les applications de classification de séquences représentent souvent une séquence d’entrée avec une seule représentation consolidée. Avec les <a class="reference internal" href="rnn.html"><span class="std std-doc">RNN</span></a>, on utilise la couche cachée associée à l’élément d’entrée final pour représenter la séquence entière. Une approche similaire est utilisée avec les transformers. Un vecteur supplémentaire est ajouté au modèle pour représenter la séquence entière. Ce vecteur est parfois appelé l’encodage de la séquence. Dans BERT, le token [CLS] joue le rôle de cette encodage, est ajouté au vocabulaire et est placé au début de toutes les séquences d’entrée, à la fois pendant le pré entraînement et l’encodage. Le vecteur de sortie dans la couche finale du modèle pour l’entrée [CLS] représente la séquence d’entrée entière et sert d’entrée à une tête de classification, une régression logistique ou un réseau de neurones en classification qui prend la décision.</p>
 <p>Par exemple, en classification de sentiments, une manière simple de finetuner un LLM est d’apprendre un ensemble de poids <span class="math notranslate nohighlight">\(\boldsymbol W_C\)</span> pour transformer le vecteur de sortie <span class="math notranslate nohighlight">\(\boldsymbol z_{CLS}\)</span> pour le token [CLS] en un ensemble de scores sur l’ensemble des sentiments possibles (par exemple positif, neutre, négatif).</p>
 <p>Le finetuning des valeurs de <span class="math notranslate nohighlight">\(\boldsymbol W_C\)</span> nécessite un ensemble d’apprentissage supervisé constitué de séquences d’entrée étiquetées avec la classe appropriée. L’entraînement se fait par minimisation de l’entropie croisée. Une fois appris, et étant donné un texte <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>, celui-ci est encodé par le LLM pour générer <span class="math notranslate nohighlight">\(\boldsymbol z_{CLS}\)</span>, multiplié à son tour par <span class="math notranslate nohighlight">\(\boldsymbol W_C\)</span> et déterminer le sentiment de <span class="math notranslate nohighlight">\(\boldsymbol x\)</span> en recherchant le maximum des composantes de <span class="math notranslate nohighlight">\(softmax(\boldsymbol W_C\boldsymbol z_{CLS})\)</span>.</p>
 <p>C’est l’exemple qui sera codé dans la partie implémentation.</p>
 </section>
 <section id="classification-de-paires-de-textes">
-<h3>Classification de paires de textes<a class="headerlink" href="#classification-de-paires-de-textes" title="Lien vers cette rubrique">#</a></h3>
+<h4>Classification de paires de textes<a class="headerlink" href="#classification-de-paires-de-textes" title="Lien vers cette rubrique">#</a></h4>
 <p>Les applications pratiques qui entrent dans cette catégorie incluent la détection de paraphrases (A et B sont elles des paraphrases l’une de l’autre ?), l’implication logique (A entraîne-t-elle logiquement B ?) et la cohérence du discours (quel est le degré de cohérence de  B en tant que suite de A ?)</p>
 <p>Le finetuning  se déroule ici de la même manière que pour le pré-entraînement dans le cadre de la prédiction de la suite d’une phrase. Au cours du finetuning, des paires de phrases étiquetées provenant des données d’apprentissage sont présentées au modèle afin de produire les sorties <span class="math notranslate nohighlight">\(\boldsymbol z\)</span> pour chaque token d’entrée. Comme pour la classification de textes, le vecteur de sortie associé au jeton [CLS] représente la vue du modèle sur la paire de phrases d’entrée. Les deux phrases d’entrées sont séparées par le token [SEP]. Pour effectuer la classification, le vecteur [CLS] est multiplié par un ensemble de poids d’apprentissage de la classification et passe par un softmax pour générer des prédictions d’étiquettes, qui sont ensuite utilisées pour mettre à jour les poids.</p>
 </section>
 </section>
+</section>
+<section id="rlhf">
+<h2>RLHF<a class="headerlink" href="#rlhf" title="Lien vers cette rubrique">#</a></h2>
+<p>Le fine tuning peut se réveler très  efficace. Cependant, il présente certains inconvénients. La collecte de données, tout d’abord,  peut être extrêmement coûteuse, et nécessite souvent un travail important d’experts qualifiés pour produire les étiquettes (réponses ou autres) souhaitables à chaque question. De plus, dans de nombreux cas, la réponse correcte n’est pas bien définie. Par exemple, si l’invite est « Raconte-moi une histoire qui s’est passée à Clermont-Ferrand », aucun exemple de réponse ne peut englober toutes les réponses possibles. Enfin, s’il est possible d’encourager certains types de réponses, il n’existe aucun moyen de décourager les réponses possibles, telles que celles qui utilisent un langage discriminatoire ou qui ne sont pas suffisamment détaillées.</p>
+<p>Un des moyens de résoudre ces problèmes consiste à entraîner un modèle basé sur l’évaluation des réponses de modèles réels. Le travail nécessaire pour évaluer une réponse existante est considérablement moins important que de fournir cette réponse manuellement. En outre, ce système permet de prendre en compte plusieurs réponses valides possibles et peut être utilisé pour décourager activement les réponses nuisibles. L’apprentissage par renforcement à partir du retour d’information humain (RLHF: Reinforcement Learning from Human Feedback) est utilisé pour entraîner des LLM en les encourageant à produire des réponses bien notées.</p>
+<p>S’il est difficile d’attribuer une note absolue à une réponse donnée, il est cependant facile de comparer deux ou plusieurs réponses possibles et de classer celle qui est la meilleure. L’approche RLHF procède alors en deux étapes. Tout d’abord, on entraîne un modèle de récompense en utilisant le classement des réponses. Ce modèle calcule un scalaire unique tel que l’ordre de ces scalaires soit conforme aux classements humains. Le LLM est ensuite entraîné à l’aide du modèle de récompense, qui fournit une mesure absolue de la qualité de la réponse.</p>
+<section id="modele-de-recompense">
+<h3>Modèle de récompense<a class="headerlink" href="#modele-de-recompense" title="Lien vers cette rubrique">#</a></h3>
+<p>Pour entraîner le modèle de récompense, on donne une entrée <span class="math notranslate nohighlight">\(\boldsymbol m\)</span> à un LLM pré-entraîné ou finetuné pour générer deux réponses <span class="math notranslate nohighlight">\(\boldsymbol y_1\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol y_2\)</span>. Le modèle de récompense <span class="math notranslate nohighlight">\(r = r_{\boldsymbol \theta}(\boldsymbol m,\boldsymbol y)\)</span> est utilisé deux fois pour générer <span class="math notranslate nohighlight">\(r_1,r_2\)</span> sur les sorties <span class="math notranslate nohighlight">\(\boldsymbol y_1\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol y_2\)</span>.</p>
+<p>Ce modèle est fondé sur une architecture  à base de transformers. Plus précisément, il est courant de finetuner une copie du LLM pré-entraîné en ajoutant une couche linéaire à la sortie finale (ou à la moyenne des sorties) qui correspond à la valeur scalaire unique <span class="math notranslate nohighlight">\(r\)</span> de la récompense.</p>
+<p>On suppose pour fixer les idées que ces récompenses sont toujours ordonnées de telle sorte que l’expert ait indiqué qu’il préfère la réponse <span class="math notranslate nohighlight">\(\boldsymbol y_1\)</span> à <span class="math notranslate nohighlight">\(\boldsymbol y_2\)</span>. Le modèle de Bradley-Terry calcule alors la probabilité que l’expert a classé la première réponse avant la seconde :</p>
+<div class="math notranslate nohighlight">
+\[P(\boldsymbol y_1&gt;\boldsymbol y_2) = \frac{e^{r_1}}{e^{r_1}+e^{r_2}} = \frac{e^{ r_{\boldsymbol \theta}(\boldsymbol m,\boldsymbol y_1)}}{e^{ r_{\boldsymbol \theta}(\boldsymbol m,\boldsymbol y_1)}+e^{ r_{\boldsymbol \theta}(\boldsymbol m,\boldsymbol y_2)}}\]</div>
+<p>Comme pour la fonction softmax,  l’exponentielle traduit les récompenses en nombres positifs et le dénominateur normalise la valeur pour obtenir une distribution de probabilité valide. On souhaite alors maximiser cette probabilité afin que le modèle soit en accord avec les préférences de l’expert. Pour ce faire, on minimise par rétropropagation une fonction de perte basée sur le log-vraisemblance négative</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+L_{\boldsymbol\theta}&amp;=&amp;-\displaystyle\sum_{i=1}^N log\;\left [\frac{e^{ r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_1)}}{e^{ r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_1)}+e^{ r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_2)}}\right ]\\ 
+&amp;=&amp;-\displaystyle\sum_{i=1}^N log\;\left [\frac{1}{1+e^{ (r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_2)-r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_1))}}\right ]\\ 
+&amp;=&amp; -\displaystyle\sum_{i=1}^N log\;\left [\frac{1}{1+e^{ -(r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_1)-r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_2))}}\right ]\\ 
+&amp;=&amp;-\displaystyle\sum_{i=1}^N log\;\left [\sigma(r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_1)-r_{\boldsymbol \theta}(\boldsymbol m_i,\boldsymbol y^i_2))\right ]\\ 
+\end{align*}
+\end{split}\]</div>
+<p>où <span class="math notranslate nohighlight">\(\sigma\)</span> est la fonction sigmoïde, <span class="math notranslate nohighlight">\(\boldsymbol m_i\)</span> est la i-eme entrée et <span class="math notranslate nohighlight">\(\boldsymbol y^i_1,\boldsymbol y^i_2\)</span> les deux réponses associées.</p>
+<div class="proof remark dropdown admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 6 </span></p>
+<section class="remark-content" id="proof-content">
+<p>En pratique on décale les valeurs des récompenses pour avoir une moyenne nulle, pour réduire la variance des estimations des gradients.</p>
+</section>
+</div><p>Dans le cas où on demande à l’expert de classer <span class="math notranslate nohighlight">\(K\)</span> réponses, on peut générer <span class="math notranslate nohighlight">\(\begin{pmatrix}K\\2\end{pmatrix}\)</span> paires qui chacune contribue à la fonction de perte.</p>
+<div class="proof remark dropdown admonition" id="remark-1">
+<p class="admonition-title"><span class="caption-number">Remark 7 </span></p>
+<section class="remark-content" id="proof-content">
+<p>On peut également utiliser le modèle de <a class="reference external" href="https://arxiv.org/abs/1909.06722">Plackett-Luce</a> qui généralise le modèle de Bradley-Terry à <span class="math notranslate nohighlight">\(K\)</span> réponses.</p>
+</section>
+</div></section>
+<section id="utilisation">
+<h3>Utilisation<a class="headerlink" href="#utilisation" title="Lien vers cette rubrique">#</a></h3>
+<p>On souhaite utiliser ce modèle de récompense pour modifier les paramètres <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span> du LLM, de sorte à ce qu’il produise des réponses ayant des récompenses fortes lorsqu’elles sont calculées par le modèle <span class="math notranslate nohighlight">\(r_{\boldsymbol\theta}\)</span> entraîné.
+Idéalement, on doit entraîner le LLM en minimisant une fonction de perte par rapport à <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span>, perte qui doit être faible lorsque les récompenses sont élevées. Cependant, cela ne peut s’envisager ici puisque les <span class="math notranslate nohighlight">\(\boldsymbol y^i\)</span> sont échantillonnées de manière aléatoire suivant la distribution de probabilité discrète sur les tokens. La fonction de perte est donc basée sur une espérance</p>
+<div class="math notranslate nohighlight">
+\[L_{\boldsymbol\phi} = -\displaystyle\sum_{i}^N \mathbb{E}_{\boldsymbol y^i|\boldsymbol m_i,\boldsymbol \phi}\left (r_{\boldsymbol\theta}(\boldsymbol m_i,\boldsymbol y^i)\right )\]</div>
+<p>où l’espérance est prise selon la distribution</p>
+<div class="math notranslate nohighlight">
+\[P(\boldsymbol y^i|\boldsymbol m_i,\boldsymbol \phi) = P(\boldsymbol y^1|\boldsymbol m_1,\boldsymbol \phi)\displaystyle\prod_{j}P(y^j|\boldsymbol m_i,y^j_{1:j-1},\boldsymbol \phi)\]</div>
+<p>On montre que</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial\phi}\mathbb{E}_{\boldsymbol y^i|\boldsymbol m_i,\boldsymbol \phi}\left (r_{\boldsymbol\theta}(\boldsymbol m_i,\boldsymbol y^i)\right ) = \mathbb{E}_{\boldsymbol y^i|\boldsymbol m_i,\boldsymbol \phi}\left [r_{\boldsymbol\theta}(\boldsymbol m_i,\boldsymbol y^i)\frac{\partial}{\partial\phi}\;log\; P(\boldsymbol y^i|\boldsymbol m_i,\boldsymbol \phi)\right ]\]</div>
+<p>et cette espérance peut maintenant être approchée en tirant des échantillons de réponses <span class="math notranslate nohighlight">\(\boldsymbol y^i\)</span> du modèle et en calculant les termes directement. Le résultat est onnu sous le nom d”<em>estimateurde fonction de score</em>, à la base de l’algorithme <a class="reference external" href="https://fr.wikipedia.org/wiki/REINFORCE">REINFORCE</a> en apprentissage par renforcement. On peut en effet faire un parallèle avec cet algorithme en considérant le LLM comme un agent qui entreprend des actions séquentielles (choisir des tokens) et reçoit une récompense différée du modèle de récompense lorsque le dernier token est choisi.</p>
+<div class="proof remark dropdown admonition" id="remark-2">
+<p class="admonition-title"><span class="caption-number">Remark 8 </span></p>
+<section class="remark-content" id="proof-content">
+<p>En pratique on ajoute à la fonction de perte <span class="math notranslate nohighlight">\(L_{\boldsymbol\phi}\)</span> un terme de régularisation de la forme <span class="math notranslate nohighlight">\(-\beta KL(P(\boldsymbol y^i|\boldsymbol m_i,\boldsymbol \phi)||P(\boldsymbol y^i|\boldsymbol m_i,\boldsymbol \phi^0))\)</span> qui pénalise le modèle s’il diverge trop loin de ses paramètres initiaux <span class="math notranslate nohighlight">\(\boldsymbol \phi^0\)</span>.</p>
+</section>
+</div></section>
+<section id="limites">
+<h3>Limites<a class="headerlink" href="#limites" title="Lien vers cette rubrique">#</a></h3>
+<p>Si le RLHF a montré de bonnes performances, le système en deux étapes, et l’instabilité potentielle de l’étape d’apprentissage par renforcement, le rendent très (trop) complexe. D’autres alternatives sur l’optimisation directe de préférences (voir par exemple <a class="reference external" href="https://arxiv.org/abs/2306.17492">cet article</a> ou <a class="reference external" href="https://arxiv.org/abs/2305.18290">celui-là</a>) sont proposées pour simplifier la démarche et encore améliorer les performances.</p>
+</section>
+</section>
+<section id="retrieval-augmented-generation">
+<h2>Retrieval-Augmented Generation<a class="headerlink" href="#retrieval-augmented-generation" title="Lien vers cette rubrique">#</a></h2>
+<p>Les LLM  présentent des capacités impressionnantes mais se heurtent à des difficultés telles que l’hallucination, les connaissances obsolètes et les processus de raisonnement non transparents et non traçables. La génération améliorée par récupération, ou plus communément <em>Retrieval-Augmented Generation</em> (RAG), apparaît comme une solution prometteuse en incorporant des connaissances provenant de bases de données externes. Cela améliore la précision et la crédibilité de la génération et permet une mise à jour continue des connaissances et l’intégration d’informations spécifiques au domaine. Le RAG fusionne les connaissances internes des LLM avec de grands référentiels dynamiques issus des bases de données externes.</p>
+<p>On donne ici une brève introduction aux RAG.</p>
+<p>La figure (<a class="reference internal" href="#rag1"><span class="std std-numref">Fig. 86</span></a>) présente une application typique d’un RAG. Un utilisateur pose une question à un LLM sur une actualité récente et largement débattue. Le LLm étant préentrainé, il n’est pas en mesure, au départ, de fournir des informations actualisées sur l’évolution récente de la situation. Le principe d’un RAG est de combler ce manque d’information récente en recherchant et en intégrant des connaissances provenant de bases de données externes. Dans le cas présent, il rassemble des articles de presse pertinents en rapport avec la requête de l’utilisateur. Ces articles, combinés à la question initiale, forment une invite (prompt) complète qui permet au LLM de générer une réponse bien informée.</p>
+<figure class="align-default" id="rag1">
+<img alt="_images/RAG1.png" src="_images/RAG1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 86 </span><span class="caption-text">Vue schématique d’un RAG sur une application de question/réponse.  Le système se compose principalement de trois étapes :  <strong>Indexation</strong> : Les documents sont divisés en éléments (<em>chunks</em>), encodés en vecteurs et stockés dans une base de données vectorielle ; <strong>Récupération</strong>. les <span class="math notranslate nohighlight">\(k\)</span> chunks les plus pertinents par rapport à la question sont récupérés, sur la base d’une similarité sémantique ; <strong>Génération</strong> : la question originale et les <span class="math notranslate nohighlight">\(k\)</span> chunks sont entrés ensemble dans le LLM pour générer la réponse finale.</span><a class="headerlink" href="#rag1" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Les méthodes RAG évoluent rapidement et peuvent être classées en trois catégories : les RAG naïfs, les RAG avancés et les RAG modulaires. Bien que les méthodes RAG soient rentables et surpassent les performances du LLM natif, elles présentent également plusieurs limitations.</p>
+<section id="rag-naifs">
+<h3>RAG naïfs<a class="headerlink" href="#rag-naifs" title="Lien vers cette rubrique">#</a></h3>
+<p>La figure (<a class="reference internal" href="#ragnaif"><span class="std std-numref">Fig. 87</span></a>)</p>
+<figure class="align-default" id="ragnaif">
+<img alt="_images/RAGnaif.png" src="_images/RAGnaif.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 87 </span><span class="caption-text">Vue schématique d’un RAG naïf.</span><a class="headerlink" href="#ragnaif" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rag-avances">
+<h3>RAG avancés<a class="headerlink" href="#rag-avances" title="Lien vers cette rubrique">#</a></h3>
+<p>La figure (<a class="reference internal" href="#ragavance"><span class="std std-numref">Fig. 88</span></a>)</p>
+<figure class="align-default" id="ragavance">
+<img alt="_images/RAGavance.png" src="_images/RAGavance.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 88 </span><span class="caption-text">Vue schématique d’un RAG avancé.</span><a class="headerlink" href="#ragavance" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rag-modulaires">
+<h3>RAG modulaires<a class="headerlink" href="#rag-modulaires" title="Lien vers cette rubrique">#</a></h3>
+<p>La figure (<a class="reference internal" href="#ragmod"><span class="std std-numref">Fig. 89</span></a>)</p>
+<p>La figure (<a class="reference internal" href="#ragmod"><span class="std std-numref">Fig. 89</span></a>)</p>
+<figure class="align-default" id="ragmod">
+<img alt="_images/RAGmod.png" src="_images/RAGmod.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 89 </span><span class="caption-text">Vue schématique d’un RAG modulaire.</span><a class="headerlink" href="#ragmod" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 <section id="implementation">
 <h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
-<p>On propose ici de finetuner un LLM pour la détection de spams. Partant d’un modèle préentraîné (GPT2) dont on construit l’architecture et on récupère les poids, on le spécialise sur une base de données de spams dédiée (sms_spam_collection).</p>
+<p>On propose ici de finetuner un LLM pour la détection de spams. Partant d’un modèle préentraîné (GPT2) dont on construit l’architecture et on récupère les poids, on le spécialise sur une base de données de spams dédiée (<a class="reference external" href="https://archive.ics.uci.edu/dataset/228/sms+spam+collection">sms_spam_collection</a>).</p>
 <section id="implementation-du-modele-gpt2">
 <h3>Implémentation du modèle GPT2<a class="headerlink" href="#implementation-du-modele-gpt2" title="Lien vers cette rubrique">#</a></h3>
 <p>On charge les paramètres de GPT2 (inspiré de <a class="reference external" href="https://raw.githubusercontent.com/rasbt/LLMs-from-scratch/main/ch05/01_main-chapter-code/gpt_download.py">ce code</a>)</p>
@@ -683,8 +804,8 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="fine-tuning">
-<h3>Fine Tuning<a class="headerlink" href="#fine-tuning" title="Lien vers cette rubrique">#</a></h3>
+<section id="id1">
+<h3>Fine Tuning<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
 <p>Maintenant que le modèle est construit, on s’occupe du finetuning. On commence par télécharger les données pour le finetuning. On utilise une collection de <a class="reference external" href="https://archive.ics.uci.edu/dataset/228/sms+spam+collection">spam SMS</a> qui est un ensemble public de messages SMS étiquetés qui ont été collectés dans le cadre de la recherche sur les spams en téléphonie mobile.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip&quot;</span>
 <span class="n">zip_path</span> <span class="o">=</span> <span class="s2">&quot;sms_spam_collection.zip&quot;</span>
@@ -932,8 +1053,8 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="utilisation">
-<h3>Utilisation<a class="headerlink" href="#utilisation" title="Lien vers cette rubrique">#</a></h3>
+<section id="id2">
+<h3>Utilisation<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h3>
 <p>Le modèle finetuné est finalement utilisé sur des données entrées par l’utilisateur</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_token_id</span><span class="o">=</span><span class="mi">50256</span><span class="p">):</span>
     <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
@@ -1042,17 +1163,32 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemples-d-application">Exemples d’application</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-textes">Classification de textes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-paires-de-textes">Classification de paires de textes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine Tuning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemples-d-application">Exemples d’application</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-textes">Classification de textes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-de-paires-de-textes">Classification de paires de textes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rlhf">RLHF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-de-recompense">Modèle de récompense</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation">Utilisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">Limites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieval-augmented-generation">Retrieval-Augmented Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rag-naifs">RAG naïfs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rag-avances">RAG avancés</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rag-modulaires">RAG modulaires</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implémentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-du-modele-gpt2">Implémentation du modèle GPT2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fine Tuning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modele-a-entrainer">Modèle à entraîner</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrainement">Entraînement</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilisation">Utilisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Utilisation</a></li>
 </ul>
 </li>
 </ul>
