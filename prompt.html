@@ -14,19 +14,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -35,12 +35,12 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
     <script src="_static/documentation_options.js?v=72dce1d2"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -59,6 +59,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'prompt';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
@@ -72,27 +74,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -114,8 +112,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -212,7 +215,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -221,7 +224,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -274,7 +277,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -290,6 +295,19 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-de-base">Méthodes de base</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot">Zero-shot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot">Few shot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-par-instruction">Prompt par instruction</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -301,6 +319,36 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ingenierie-du-prompt">
 <h1>Ingénierie du prompt<a class="headerlink" href="#ingenierie-du-prompt" title="Lien vers cette rubrique">#</a></h1>
+<p>L’ingénierie des messages, également connue sous le nom de « In-Context Prompting », se réfère aux méthodes de communication avec le LLM afin d’orienter son comportement vers les résultats souhaités sans mettre à jour les données.
+communiquer avec LLM pour orienter son comportement vers les résultats souhaités sans mettre à jour les poids du modèle.
+sans mettre à jour les poids du modèle. Il s’agit d’une science empirique et l’effet des méthodes d’ingénierie d’invite
+peut varier considérablement d’un modèle à l’autre, ce qui nécessite de nombreuses expériences et des heuristiques.</p>
+<section id="methodes-de-base">
+<h2>Méthodes de base<a class="headerlink" href="#methodes-de-base" title="Lien vers cette rubrique">#</a></h2>
+<section id="zero-shot">
+<h3>Zero-shot<a class="headerlink" href="#zero-shot" title="Lien vers cette rubrique">#</a></h3>
+<p>La méthode zero-shot consiste simplement à transmettre le texte de la tâche au modèle et à demander des résultats. Dans l’analyse de sentiments, par exemple, on transmet juste le texte au LLM, en attendant une réponse de type positif/négatif (voire neutre pour certains modèles).</p>
+</section>
+<section id="few-shot">
+<h3>Few shot<a class="headerlink" href="#few-shot" title="Lien vers cette rubrique">#</a></h3>
+<p>La méthode few shot présente un ensemble d’exemples d’entraînement de haute qualité, chacun comprenant à la fois l’entrée et la sortie souhaitée, sur la tâche cible. Au fur et à mesure que le modèle voit de bons exemples, il peut mieux comprendre l’intention humaine et les critères relatifs aux types de réponses souhaitées.
+En contrepartie, le modèle utilise un nombre de tokens plus important et peut se heurter à la limite de longueur du contexte lorsque les textes d’entrée et de sortie sont longs.
+De nombreuses études se sont penchées sur la manière de construire des exemples pour maximiser les performances et ont observé que le choix du format de l’invite, des exemples d’entraînement et de l’ordre des exemples peut conduire à des performances très différentes, allant d’une de la devinette aléatoire à une performance égalant l’état de l’art.</p>
+<p>Pour sélectionner les exemples, on peut par exemple :</p>
+<ul class="simple">
+<li><p>choisir des exemples qui sont sémantiquement similaires à l’exemple test en utilisant le regroupement dans l’espace latent.</p></li>
+<li><p>sélectionner un ensemble d’exemples variés et représentatifs à l’aide d’une approcha basée graphe. Pour ce faire, on construit un graphe orienté <span class="math notranslate nohighlight">\(G=(V,E)\)</span> fondé sur une mesure de similarité cosinus entre la représentation des exemples dans l’espace latent du LLM, chaque noeud du graphe étant en relation avec ses <span class="math notranslate nohighlight">\(k\)</span> plus proches voisins. A partir d’un ensemble d’exemples sélectionnés <span class="math notranslate nohighlight">\(\mathcal L\)</span> initialement vide et d’un ensemble d’exemples restants <span class="math notranslate nohighlight">\(\mathcal U\)</span>, on affecte un score à chaque <span class="math notranslate nohighlight">\(u\in\mathcal U\)</span> par</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ score(u) = \displaystyle\sum_{v\in \{v, (u,v)\in E, v\in\mathcal U\}}\rho^{|l\in\mathcal L, (v,l)\in E|}, \rho&gt;1\]</div>
+<p>le terme dans la somme, dépendant de <span class="math notranslate nohighlight">\(v\)</span>, est petit si un grand nombre de voisins de <span class="math notranslate nohighlight">\(v\)</span> sont sélectionnés , le score encourageant alors la diversité des exemples.</p>
+<p>Pour ordonner les exemples, une suggestion générale est de garder la sélection d’exemples diversifiée, pertinente pour l’échantillon de test et dans un ordre aléatoire afin d’éviter le biais de l’étiquette majoritaire.</p>
+<p>L’augmentation de la taille des modèles ou l’inclusion d’un plus grand nombre d’exemples d’apprentissage ne réduit pas la variance entre les différentes permutations d’exemple. Le même ordre peut bien fonctionner pour un modèle mais mal pour un autre. Lorsque l’ensemble de validation est limité, il faut envisager de choisir l’ordre de manière à ce que le modèle ne produise pas de prédictions déséquilibrées ou qu’il ne soit pas trop confiant dans ses prédictions.</p>
+</section>
+</section>
+<section id="prompt-par-instruction">
+<h2>Prompt par instruction<a class="headerlink" href="#prompt-par-instruction" title="Lien vers cette rubrique">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -330,7 +378,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -349,7 +397,25 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes-de-base">Méthodes de base</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot">Zero-shot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot">Few shot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-par-instruction">Prompt par instruction</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
@@ -394,8 +460,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>
