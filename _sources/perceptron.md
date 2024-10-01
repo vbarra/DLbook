@@ -340,7 +340,7 @@ linéaire peut maintenant être défini l'{prf:ref}`descente`.
     2. Pour tout $(\mathbf x_n,t_n)\in {\cal E}_a$
         1. Calculer $y_n$
         2. Pour tout $i$ $\Delta w_i \leftarrow \Delta w_i+\varepsilon (t_y-y_n)x_n^i$
-    3. Pour tout $i$ $w_i \leftarrow w_i + \Delta w_i$$
+    3. Pour tout $i$ $w_i \leftarrow w_i + \Delta w_i$
 ```
 
 La fonction erreur quadratique ne possède qu'un minimum (la surface est
@@ -563,7 +563,7 @@ simples : il n'y a que très peu d'espoir que les exemples naturels se
 répartissent sagement de part et d'autre d'un hyperplan. Deux manières
 de résoudre cette difficulté peuvent être envisagées : 
 - soit mettre au point des séparateurs non-linéaires, 
-- soit (ce qui revient à peu près aumême) complexifier l'espace de représentation de manière à linéariser le problème initial.
+- soit (ce qui revient à peu près au même) complexifier l'espace de représentation de manière à linéariser le problème initial.
 
 Les réseaux multicouches abordent ce type de problème.
 

@@ -18,28 +18,16 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import torch
-import torch.nn as nn
-
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import animation
-from IPython.display import HTML
-
-import networkx as nx
-
-from torch_geometric.datasets import KarateClub
-from torch_geometric.utils import to_dense_adj,to_networkx
-from torch_geometric.nn import GCNConv
+from torchvision import models
+dir(models)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
 Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnn[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnn[39;00m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorchvision[39;00m [38;5;28;01mimport[39;00m models
+[1;32m      2[0m [38;5;28mdir[39m(models)
 
-[0;31mModuleNotFoundError[0m: No module named 'torch'
-ModuleNotFoundError: No module named 'torch'
+[0;31mModuleNotFoundError[0m: No module named 'torchvision'
+ModuleNotFoundError: No module named 'torchvision'
 

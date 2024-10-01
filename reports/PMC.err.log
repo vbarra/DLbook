@@ -18,27 +18,43 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib import colors
 import torch
 import torch.nn as nn
+import torch.optim as optim
 
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import animation
-from IPython.display import HTML
+fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','./data/moon_data_train.csv']
+fichiers_test = ['./data/linear_data_eval.csv','./data/twocircles_data_eval.csv','./data/moon_data_eval.csv']
 
-import networkx as nx
+# Fonction de lecture des jeux de données
+def extract_data(filename):
 
-from torch_geometric.datasets import KarateClub
-from torch_geometric.utils import to_dense_adj,to_networkx
-from torch_geometric.nn import GCNConv
+    labels = []
+    features = []
+
+    for line in open(filename):
+        row = line.split(",")
+        labels.append(int(row[0]))
+        features.append([float(x) for x in row[1:]])
+
+    features_np = np.matrix(features).astype(np.float32)
+
+    labels_np = np.array(labels).astype(dtype=np.uint8)
+    labels_onehot = (np.arange(num_labels) == labels_np[:, None]).astype(np.float32)
+
+    return features_np,labels_onehot    
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnn[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnn[39;00m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+Cell [0;32mIn[1], line 4[0m
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m [38;5;28;01mimport[39;00m pyplot [38;5;28;01mas[39;00m plt
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m [38;5;28;01mimport[39;00m colors
+[0;32m----> 4[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
+[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnn[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnn[39;00m
+[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01moptim[39;00m [38;5;28;01mas[39;00m [38;5;21;01moptim[39;00m
 
 [0;31mModuleNotFoundError[0m: No module named 'torch'
 ModuleNotFoundError: No module named 'torch'
