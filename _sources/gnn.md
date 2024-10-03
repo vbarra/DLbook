@@ -746,7 +746,7 @@ fig,axs = plt.subplots(1,2,figsize=(7,5))
 anim = animation.FuncAnimation(fig, animate, np.arange(0, nb_epochs, 2), interval=500, repeat=True)
 html = HTML(anim.to_html5_video())
 ```
-
 ```{code-cell} ipython3
-display(html)
+from IPython.display import Video
+Video("videos/gnn.mp4",embed =True,width=500)
 ```
