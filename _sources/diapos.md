@@ -9,4 +9,4 @@ jupytext:
 
 # Diapositives
 
-- [Perceptrons/PMC](./Diapos/PMC.pdf) du cours
+- [Perceptrons/PMC](./Diapos/PMC.pdf)
