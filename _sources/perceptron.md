@@ -242,7 +242,7 @@ perceptron linéaire à seuil qui sépare linéairement ${\cal E}_a$.
 
 ```{code-cell} ipython3
 from IPython.display import Video
-Video("videos/correction_erreur_linsep.mp4",embed =True,width=500)
+Video("videos/correction_erreur_linsep.mp4",embed =True,width=700)
 ```
 
 L'inconvénient majeur de cet apprentissage est que si l'échantillon
@@ -251,7 +251,7 @@ pas et l'on aura aucun moyen de le savoir.
 
 ```{code-cell} ipython3
 from IPython.display import Video
-Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=500)
+Video("videos/correction_erreur_nonlinsep.mp4",embed =True,width=700)
 ```
 
 
