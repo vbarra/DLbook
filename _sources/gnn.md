@@ -748,5 +748,5 @@ html = HTML(anim.to_html5_video())
 ```
 ```{code-cell} ipython3
 from IPython.display import Video
-Video("videos/gnn.mp4",embed =True,width=500)
+Video("videos/gnn.mp4",embed =True,width=700)
 ```
