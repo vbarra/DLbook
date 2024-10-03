@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="fr" >
+<html lang="fr" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Graph Neural Networks &#8212; Apprentissage profond</title>
   
@@ -15,55 +14,51 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/translations.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'gnn';</script>
@@ -80,28 +75,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -123,12 +113,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -143,9 +141,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -155,12 +155,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
@@ -199,7 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -208,7 +219,7 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -242,6 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -251,6 +263,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -329,10 +342,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="graph-neural-networks">
-<h1>Graph Neural Networks<a class="headerlink" href="#graph-neural-networks" title="Lien permanent vers cette rubrique">#</a></h1>
+<h1>Graph Neural Networks<a class="headerlink" href="#graph-neural-networks" title="Lien vers cette rubrique">#</a></h1>
 <p>Comme leur nom l’indique, les Graph Neural Networks sont des réseaux de
 neurones qui traitent les graphes. Ce traitement pose trois
 problématiques :</p>
@@ -349,9 +362,9 @@ avec de nombreux exemples de données et de test avec de nouvelles
 données n’est pas toujours possible.</p></li>
 </ul>
 <section id="representation-d-un-graphe">
-<h2>Représentation d’un graphe<a class="headerlink" href="#representation-d-un-graphe" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Représentation d’un graphe<a class="headerlink" href="#representation-d-un-graphe" title="Lien vers cette rubrique">#</a></h2>
 <section id="definition-matricielle-d-un-graphe">
-<h3>Définition matricielle d’un graphe<a class="headerlink" href="#definition-matricielle-d-un-graphe" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Définition matricielle d’un graphe<a class="headerlink" href="#definition-matricielle-d-un-graphe" title="Lien vers cette rubrique">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\(G=(V,E)\)</span> un graphe à <span class="math notranslate nohighlight">\(N=|V|\)</span> sommets et <span class="math notranslate nohighlight">\(M=|E|\)</span> arcs (ou arêtes).
 Chaque sommet et chaque arc (ou arête) peut porter une information
 vectorielle (graphe pondéré). On choisit alors de représenter <span class="math notranslate nohighlight">\(G\)</span> par
@@ -372,7 +385,7 @@ existe (seuls les sommets sont pondérés). On reviendra sur le cas de
 <span class="math notranslate nohighlight">\(\mathbf E\)</span> plus tard.</p>
 </section>
 <section id="proprietes">
-<h3>Propriétés<a class="headerlink" href="#proprietes" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Propriétés<a class="headerlink" href="#proprietes" title="Lien vers cette rubrique">#</a></h3>
 <p>La matrice d’adjacence peut être utilisée pour trouver les voisins d’un
 sommet. Supposons que le <span class="math notranslate nohighlight">\(i\)</span>-eme sommet soit encodé sous la forme d’un
 vecteur colonne <span class="math notranslate nohighlight">\(\mathbf X_{\bullet,i}\)</span> avec une seule entrée non nulle
@@ -392,7 +405,7 @@ matrice d’adjacence est donnée par <span class="math notranslate nohighlight"
 </section>
 </section>
 <section id="introduction-aux-gnn">
-<h2>Introduction aux GNN<a class="headerlink" href="#introduction-aux-gnn" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Introduction aux GNN<a class="headerlink" href="#introduction-aux-gnn" title="Lien vers cette rubrique">#</a></h2>
 <p>Un GNN est un modèle qui prend les représentations des sommets
 <span class="math notranslate nohighlight">\(\mathbf X\)</span> et la matrice d’adjacence <span class="math notranslate nohighlight">\(\mathbf A\)</span> comme entrées et les
 fait passer par une série de <span class="math notranslate nohighlight">\(K\)</span> couches. Les représentations des
@@ -404,9 +417,9 @@ des informations sur les sommets correspondants et leur contexte dans<br />
 <p>Les GNN peuvent être utilisés en exploitant la structure de <span class="math notranslate nohighlight">\(G\)</span>, les
 sommets et/ou les arcs ou arêtes.</p>
 <section id="utilisations">
-<h3>Utilisations<a class="headerlink" href="#utilisations" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Utilisations<a class="headerlink" href="#utilisations" title="Lien vers cette rubrique">#</a></h3>
 <section id="en-relation-avec-la-structure-de-graphe">
-<h4>En relation avec la structure de graphe<a class="headerlink" href="#en-relation-avec-la-structure-de-graphe" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>En relation avec la structure de graphe<a class="headerlink" href="#en-relation-avec-la-structure-de-graphe" title="Lien vers cette rubrique">#</a></h4>
 <p>Le réseau attribue une étiquette ou estime une ou plusieurs valeurs à
 partir de l’ensemble du graphe, en exploitant à la fois la structure et
 la représentation des sommets. Par exemple, on peut vouloir prédire la
@@ -428,7 +441,7 @@ toutes les représentations, et diviser par <span class="math notranslate nohigh
 technique résultante est dite <em>mean pooling</em>.</p>
 </section>
 <section id="en-relation-avec-les-sommets">
-<h4>En relation avec les sommets<a class="headerlink" href="#en-relation-avec-les-sommets" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>En relation avec les sommets<a class="headerlink" href="#en-relation-avec-les-sommets" title="Lien vers cette rubrique">#</a></h4>
 <p>Le réseau attribue une étiquette (classification) ou une ou plusieurs
 valeurs (régression) à chaque sommet du graphe, en utilisant à la fois
 la structure du graphe et les représentations des sommets. Par exemple,
@@ -443,7 +456,7 @@ effectuée indépendamment pour chaque sommet i :</p>
 \[P(y^{(i)}=1\mid \mathbf X,\mathbf A) = \sigma(\beta_K+\mathbf w_K\mathbf h^{(i)}_K)\]</div>
 </section>
 <section id="en-relation-avec-les-arcs-ou-aretes">
-<h4>En relation avec les arcs ou arêtes<a class="headerlink" href="#en-relation-avec-les-arcs-ou-aretes" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>En relation avec les arcs ou arêtes<a class="headerlink" href="#en-relation-avec-les-arcs-ou-aretes" title="Lien vers cette rubrique">#</a></h4>
 <p>Le réseau prédit s’il doit y avoir ou non un arc (ou arête) entre les
 sommets <span class="math notranslate nohighlight">\(i\)</span> et <span class="math notranslate nohighlight">\(j\)</span>. Par exemple, dans le cadre d’un réseau social, le
 réseau peut prédire si deux personnes se connaissent et s’apprécient et
@@ -456,7 +469,7 @@ résultat par une fonction sigmoïde pour calculer la probabilité.</p>
 </section>
 </section>
 <section id="gcn">
-<h3>GCN<a class="headerlink" href="#gcn" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>GCN<a class="headerlink" href="#gcn" title="Lien vers cette rubrique">#</a></h3>
 <p>Il existe de nombreux types de GNN, on se restreint ici aux réseaux
 convolutifs de graphes, ou GCN. Ces modèles sont convolutifs en ce sens
 qu’ils mettent à jour chaque sommet en agrégeant les informations
@@ -479,7 +492,7 @@ nouvelles représentations des sommets :</p>
 <p>les <span class="math notranslate nohighlight">\(\boldsymbol \phi_{k}\)</span> étant les paramètres du réseau entre
 la couche <span class="math notranslate nohighlight">\(k\)</span> et la couche <span class="math notranslate nohighlight">\(k+1\)</span>.</p>
 <section id="equivariance-et-invariance">
-<h4>Equivariance et invariance<a class="headerlink" href="#equivariance-et-invariance" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Equivariance et invariance<a class="headerlink" href="#equivariance-et-invariance" title="Lien vers cette rubrique">#</a></h4>
 <p>L’indexation des sommets dans le graphe étant arbitraire, il est
 indispensable que tout modèle respecte cette propriété. Chaque couche
 doit donc être équivariante par rapport aux permutations des indices
@@ -499,7 +512,7 @@ provenant de l’ensemble du graphe, de sorte que le résultat est
 invariant par rapport à l’ordre des sommets.</p>
 </section>
 <section id="partage-des-parametres">
-<h4>Partage des paramètres<a class="headerlink" href="#partage-des-parametres" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Partage des paramètres<a class="headerlink" href="#partage-des-parametres" title="Lien vers cette rubrique">#</a></h4>
 <p>Dans les réseaux convolutifs, des couches convolutives sont utilisées,
 qui traitent chaque position de l’image de manière identique. Cela
 permet de réduire le nombre de paramètres et d’introduire un biais
@@ -526,12 +539,12 @@ pondérer favorablement (ou pas) les informations provenant d’un sommet
 particulier.</p>
 </section>
 <section id="exemple">
-<h4>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique">#</a></h4>
 <p>La (<a class="reference internal" href="#id1"><span class="std std-numref">Fig. 61</span></a>) présente un exemple simple de GCN.</p>
 <figure class="align-default" id="id1">
 <img alt="_images/gcn.png" src="_images/gcn.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 61 </span><span class="caption-text">Exemple de GCN</span><a class="headerlink" href="#id1" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">Exemple de GCN</span><a class="headerlink" href="#id1" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <ul>
@@ -569,7 +582,7 @@ paramètres sur tout le graphe.</p>
 </section>
 </section>
 <section id="application-en-classification">
-<h3>Application en classification<a class="headerlink" href="#application-en-classification" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Application en classification<a class="headerlink" href="#application-en-classification" title="Lien vers cette rubrique">#</a></h3>
 <p>Pour l’exemple, on s’intéresse à un problème de classification binaire.
 On modélise une molécule comme un graphe, sont les sommets sont les
 atomes. La matrice <span class="math notranslate nohighlight">\(\mathbf A\)</span> donne les liaisons entre les atomes, et
@@ -604,7 +617,7 @@ représentation unique par graphe qui peut être introduite dans la
 fonction de perte.</p>
 </section>
 <section id="modeles-inductifs-et-transductifs">
-<h3>Modèles inductifs et transductifs<a class="headerlink" href="#modeles-inductifs-et-transductifs" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Modèles inductifs et transductifs<a class="headerlink" href="#modeles-inductifs-et-transductifs" title="Lien vers cette rubrique">#</a></h3>
 <p>Jusqu’à présent, tous les modèles présentés dans ce cours ont été
 inductifs : on exploite un ensemble de données étiquetées pour apprendre
 la relation entre les entrées et les sorties. On l’applique ensuite à de
@@ -634,7 +647,7 @@ en exécutant la passe avant et en récupérant les résultats lorsque la
 vérité est inconnue.</p>
 </section>
 <section id="exemple-en-classification-de-sommets">
-<h3>Exemple en classification de sommets<a class="headerlink" href="#exemple-en-classification-de-sommets" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Exemple en classification de sommets<a class="headerlink" href="#exemple-en-classification-de-sommets" title="Lien vers cette rubrique">#</a></h3>
 <p>On s’intéresse ici à un problème de classification binaire des sommet
 dans un cadre transductif. Le graphe considéré comporte des millions de
 sommets, certains ayant des étiquettes binaires <span class="math notranslate nohighlight">\(y_i\)</span>. L’objectif est
@@ -669,7 +682,7 @@ réduit pas du tout la taille du graphe : c’est le problème de
 l’expansion du graphe. Deux approches s’attaquent à ce problème :
 l’échantillonnage du voisinage et le partitionnement du graphe.</p>
 <section id="echantillonnage-du-voisinage">
-<h4>Échantillonnage du voisinage<a class="headerlink" href="#echantillonnage-du-voisinage" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Échantillonnage du voisinage<a class="headerlink" href="#echantillonnage-du-voisinage" title="Lien vers cette rubrique">#</a></h4>
 <p>Le graphe complet est échantillonné, ce qui réduit les connexions à
 chaque couche du réseau. Par exemple, on peut commencer par les sommets
 du batch et échantillonner aléatoirement un nombre fixe de leurs voisins
@@ -682,7 +695,7 @@ batch est tiré deux fois. Cette techique rappelle celle du dropout et
 ajoute une certaine régularisation.</p>
 </section>
 <section id="partitionnement-du-graphe">
-<h4>Partitionnement du graphe<a class="headerlink" href="#partitionnement-du-graphe" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Partitionnement du graphe<a class="headerlink" href="#partitionnement-du-graphe" title="Lien vers cette rubrique">#</a></h4>
 <p>On peut également partitionner le graphe original en sous-ensembles de
 sommet disjoints, et construire des graphes plus petits qui ne sont pas
 connectés les uns aux autres avant le traitement. Il existe des
@@ -702,12 +715,12 @@ beaucoup plus efficiente.</p>
 </section>
 </section>
 <section id="couches-d-un-gnn">
-<h3>Couches d’un GNN<a class="headerlink" href="#couches-d-un-gnn" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Couches d’un GNN<a class="headerlink" href="#couches-d-un-gnn" title="Lien vers cette rubrique">#</a></h3>
 <p>les sections précédentes combinaient les sommets adjacents par
 sommation, en multipliant <span class="math notranslate nohighlight">\(\mathbf H\)</span> par <span class="math notranslate nohighlight">\(\mathbf A+\mathbf I\)</span>. Dans la
 suite de ce paragraphe, on présente des alternatives à cette approche.</p>
 <section id="amelioration-de-la-diagonale">
-<h4>Amélioration de la diagonale<a class="headerlink" href="#amelioration-de-la-diagonale" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Amélioration de la diagonale<a class="headerlink" href="#amelioration-de-la-diagonale" title="Lien vers cette rubrique">#</a></h4>
 <p>La mise à jour proposée jusqu’à lors
 $<span class="math notranslate nohighlight">\(\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A+\mathbf I)\right )\)</span>$</p>
 <p>peut être modifiée en</p>
@@ -726,7 +739,7 @@ permet d’appliquer une transformation linéaire différente au sommet
 courant.</p>
 </section>
 <section id="connexions-residuelles">
-<h4>Connexions résiduelles<a class="headerlink" href="#connexions-residuelles" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Connexions résiduelles<a class="headerlink" href="#connexions-residuelles" title="Lien vers cette rubrique">#</a></h4>
 <p>Avec les connexions résiduelles, la représentation agrégée des voisins
 est transformée et passe par la fonction d’activation avant d’être
 additionnée ou concaténée avec le sommet actuel :</p>
@@ -734,7 +747,7 @@ additionnée ou concaténée avec le sommet actuel :</p>
 \[\begin{split}\mathbf H_{k+1} = \begin{pmatrix}g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k\mathbf A\right ) \\ \mathbf H_{k}   \end{pmatrix}\end{split}\]</div>
 </section>
 <section id="agregation-moyenne">
-<h4>Agrégation moyenne<a class="headerlink" href="#agregation-moyenne" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Agrégation moyenne<a class="headerlink" href="#agregation-moyenne" title="Lien vers cette rubrique">#</a></h4>
 <p>Les méthodes précédentes regroupent les voisins en additionnant les
 représentation des sommets. Cependant, il est possible de combiner
 différemment ces représentations. Parfois, il est préférable de prendre
@@ -751,7 +764,7 @@ alors</p>
 \[\forall k\in[\![0,K-1]\!]\; \mathbf H_{k+1} = g\left (\boldsymbol\beta_k \mathbf 1^T + \mathbf L_k\mathbf H_k(\mathbf A\mathbf D^{-1} + I) \right )\]</div>
 </section>
 <section id="normalisation-de-kipf">
-<h4>Normalisation de Kipf<a class="headerlink" href="#normalisation-de-kipf" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Normalisation de Kipf<a class="headerlink" href="#normalisation-de-kipf" title="Lien vers cette rubrique">#</a></h4>
 <p>Ici</p>
 <div class="math notranslate nohighlight">
 \[\mathbf f(i) = \displaystyle\sum_{j\in\mathcal{V}_i} \frac{\mathbf h(j)}{\sqrt{|\mathcal{V}_i||\mathcal{V}_j|}}\]</div>
@@ -777,14 +790,14 @@ normalisation s’écrit</p>
 </section>
 </div></section>
 <section id="agregation-par-max-pooling">
-<h4>Agrégation par max pooling<a class="headerlink" href="#agregation-par-max-pooling" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Agrégation par max pooling<a class="headerlink" href="#agregation-par-max-pooling" title="Lien vers cette rubrique">#</a></h4>
 <p>Comme dans le cas des CNN, on peut envisager d’agréger par le max, qui
 s’effectue alors composante par composante.</p>
 <div class="math notranslate nohighlight">
 \[\mathbf f(i) = \displaystyle\max_{j\in\mathcal{V}_i} \mathbf h(j)\]</div>
 </section>
 <section id="agregation-par-attention">
-<h4>Agrégation par attention<a class="headerlink" href="#agregation-par-attention" title="Lien permanent vers cette rubrique">#</a></h4>
+<h4>Agrégation par attention<a class="headerlink" href="#agregation-par-attention" title="Lien vers cette rubrique">#</a></h4>
 <p>Les méthodes d’agrégation examinées jusqu’à présent pondèrent la
 contribution des voisins de manière égale ou d’une manière qui dépend de
 la topologie du graphe. Inversement, dans les couches d’attention de
@@ -815,7 +828,7 @@ nulle.</p>
 </section>
 </section>
 <section id="prise-en-compte-de-l-information-des-arcs-ou-aretes">
-<h3>Prise en compte de l’information des arcs ou arêtes<a class="headerlink" href="#prise-en-compte-de-l-information-des-arcs-ou-aretes" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Prise en compte de l’information des arcs ou arêtes<a class="headerlink" href="#prise-en-compte-de-l-information-des-arcs-ou-aretes" title="Lien vers cette rubrique">#</a></h3>
 <p>Les paragraphes précédents ont abordé le traitement des représentrations
 des sommets. Ceux-ci évoluent au fur et à mesure qu’ils sont transmis
 dans le réseau, de sorte qu’à la fin ils représentent à la fois le
@@ -842,7 +855,7 @@ jour simultanément à partir des sommets et des arêtes.</p>
 </section>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
 <p>On étudie ici la classification semi-supervisée des sommets d’un graphe sur un jeu de données classique (<a class="reference external" href="https://en.wikipedia.org/wiki/Zachary%27s_karate_club">club de karaté de Zachary</a>) .
 Ce jeu de données est un réseau d’amitiés entre 34 membres d’un club de karaté d’une université dans les années 1970. Une arête entre deux sommets indique que les deux membres ont interagi en dehors du club. Pendant que l’auteur collectait les données, un conflit est survenu entre le président du club (Mr. Hi) et l’entraîneur (Officer), ce qui a conduit à la division du club. Certains membres ont formé un nouveau club autour de l’entraîneur, tandis que d’autres ont trouvé un nouvel entraîneur ou ont abandonné le karaté.
 Au total, 4 sous-groupes ont été créés.</p>
@@ -870,12 +883,14 @@ Au total, 4 sous-groupes ont été créés.</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">torch_geometric.datasets</span> <span class="kn">import</span> <span class="n">KarateClub</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">torch_geometric.utils</span> <span class="kn">import</span> <span class="n">to_dense_adj</span><span class="p">,</span><span class="n">to_networkx</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">torch_geometric.nn</span> <span class="kn">import</span> <span class="n">GCNConv</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch_geometric&#39;
 </pre></div>
 </div>
 </div>
@@ -1074,8 +1089,8 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="transformers.html"
@@ -1103,6 +1118,7 @@ On encode les informations des noeuds par un vecteur one hot encoder.</p>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1169,9 +1185,10 @@ Par Vincent BARRA
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1195,8 +1212,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>
