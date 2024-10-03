@@ -9,6 +9,16 @@ kernelspec:
   language: python
   name: python3
 ---
+
+
+```{code-cell} ipython3
+try:
+    import torch_geometric 
+except ModuleNotFoundError: 
+    !pip3 install --quiet torch_geometric
+    import torch_geometric
+```
+
 # Graph Neural Networks
 
 Comme leur nom l'indique, les Graph Neural Networks sont des réseaux de
