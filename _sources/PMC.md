@@ -875,7 +875,7 @@ for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
 Utiliser un perceptron multicouches à une couche cachée pour effectuer une régression d'une surface de $\mathbb R^2$ dans $\mathbb R$.
 Votre travail consiste à :
 1. Echantillonner $num\_samples$ points sur la surface
-2. Construire votre PMC (architecture, fonctiobn de perte, optimiseur)
+2. Construire votre PMC (architecture, fonction de perte, optimiseur)
 3. Entraîner votre réseau
 4. Afficher la surface reconstruite
 Vous pourrez utiliser les codes suivants pour générer la surface et afficher la surface réelle, et la surface reconstruite.
