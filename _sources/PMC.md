@@ -869,3 +869,90 @@ for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
     titre= "Précision ={0:5.3f} ".format(acc)
     plotResults(axs[0][i],axs[1][i],test_data, test_labels, model, titre, pltloss, name_test)
 ```
+
+## A Vous...
+
+Utiliser un perceptron multicouches à une couche cachée pour effectuer une régression d'une surface de $\mathbbR^2$ dans $\mathbb R$.
+Votre travail consiste à :
+1. Echantillonner $num_samples$ points sur la surface
+2. Construire votre PMC (architecture, fonctiobn de perte, optimiseur)
+3. Entraîner votre réseau
+4. Afficher la surface reconstruite
+Vous pourrez utiliser les codes suivants pour générer la surface et afficher la surface réelle, et la surface reconstruite.
+
+```python
+# Première surface
+xmin,xmax =  -10,10
+ymin,ymax =  -10,10
+num_samples = 400   
+f = lambda x, y: 0.01*np.sin(np.sqrt(x*x + y*y + 1))/np.sqrt(x*x + y*y + 1)
+
+# Deuxième surface
+xmin,xmax =  -1,1
+ymin,ymax =  -1,1
+num_samples = 100
+f =  lambda x, y: np.sin(x) + np.cos(y)*x**2
+
+# Troisième surface
+xmin,xmax =  -3,3
+ymin,ymax =  -3,3
+num_samples = 100
+f =  lambda x, y: 3*np.exp(-(y+1)**2 -x**2)*(x-1)**2 -np.exp(-(x-1)**2-y**2)/3 +np.exp(-x**2-y**2)*(10*x**3-2*x+10*y**5)
+
+# Quatrième surface
+xmin,xmax =  -4,4
+ymin,ymax =  -4,4
+num_samples = 50
+f =  lambda x, y: (1.5-x+x*y)**2 + (2.25-x+x*y**2)**2+(2.625-x+x*y**3)**2
+
+# Cinquième surface
+xmin,xmax =  -4,4
+ymin,ymax =  -4,4
+num_samples = 50
+f =  lambda x, y: (y-(5.1 / (4.*np.pi**2))*x**2+(5. / np.pi)*x-6)+10*(1-(1. / (8.*np.pi)))*np.cos(x)+10
+
+# Affichage surface et échantillonnage
+fig = plt.figure(figsize=(16, 6))
+ax = fig.add_subplot(121, projection='3d')
+x = np.linspace(xmin, xmax, num_points)
+y = np.linspace(ymin, ymax, num_points)
+X, Y = np.meshgrid(x, y)
+Z = f(X,Y)
+ax.plot_surface(X, Y, Z, cmap='plasma')
+
+ax = fig.add_subplot(122, projection='3d')
+x_train = (xmax-xmin)*np.random.rand(num_samples,1)+xmin
+y_train = (ymax-ymin)*np.random.rand(num_samples,1)+ymin
+X_train,Y_train = np.meshgrid(x_train,y_train)
+Z_train = f(X_train,Y_train)
+plt.figure(figsize=(10,10))
+ax.scatter(X_train, Y_train, Z_train, cmap='plasma')
+
+plt.tight_layout()
+
+# Affichage fonction de perte et surface reconstruite
+fig = plt.figure(figsize=(16, 6))
+fig.add_subplot(131)
+iter = list(range(1,num_epochs+1))
+l = hist.history['loss']
+plt.xlabel('epoch')
+plt.ylabel('mse')
+plt.title("Fonction de perte")
+plt.plot(iter,l)
+
+ax = fig.add_subplot(132, projection='3d')
+points = np.transpose(np.vstack([X.ravel(), Y.ravel()]))
+z_P = model.predict(points)
+
+z_P=z_P.reshape(num_points,num_points)
+ax.plot_surface(X, Y, z_P, cmap='plasma')
+
+ax = fig.add_subplot(133, projection='3d')
+x = np.linspace(xmin, xmax, num_points)
+y = np.linspace(ymin, ymax, num_points)
+X, Y = np.meshgrid(x, y)
+Z = f(X,Y)
+ax.plot_surface(X, Y, Z, cmap='plasma')
+
+plt.tight_layout()
+```
