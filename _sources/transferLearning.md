@@ -624,6 +624,10 @@ predict(model2)
 
 ```
 
+# A vous...
+
+[Notebook](./data/transferLearnng_flowers_pytorch.ipynb)
+
 
 
 ```{bibliography}
