@@ -626,7 +626,7 @@ predict(model2)
 
 # A vous...
 
-[Notebook](./data/flowers.ipynb)
+[Notebook](./data/flowers.zip)
 
 
 
