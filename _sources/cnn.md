@@ -542,7 +542,7 @@ vers un optimum local satisfaisant, mais également de proposer un modèle
 final ayant une bonne capacité de généralisation.
 
 Aujourd'hui, de nombreux réseaux, déjà entraînés, sont mis à
-disposition. En effet, ces entraînements nécessitent de grandes bases
+disposition (voir section {ref}`content:references:TL`). En effet, ces entraînements nécessitent de grandes bases
 d'apprentissage (type ImageNet) et une puissance de calcul assez élevée
 (GPUs obligatoires). Pour le traitement de problèmes précis, des
 méthodes existent, qui partent de ces réseaux préentraînés et les
@@ -763,6 +763,9 @@ cette méthode produit des images parfois très artistiques ({numref}`monteeg`).
 Visualisation des 4 premières couches de convolution d’un
 réseau convolutif par montée de gradient  (source :{cite:p}`Yosinski15`)
 ```
+
+Notons pour terminer que [ce site](https://poloclub.github.io/cnn-explainer/) propose une visualisation interactive du fonctionnement d'un réseau convolutif.
+
 
 ## Implémentation
 

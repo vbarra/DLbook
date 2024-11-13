@@ -9,6 +9,7 @@ kernelspec:
   language: python
   name: python3
 ---
+(content:references:TL)=
 # Utilisation de réseaux existants
 
 Nous présentons dans la suite quatre réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
