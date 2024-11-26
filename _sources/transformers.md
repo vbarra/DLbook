@@ -626,12 +626,12 @@ class MultiHeadAttention(nn.Module):
         return output
 ```
 
-On s'intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans {cite:p}`Vaswani17`. Pour ce faire, on créé une classe `PositionWiseFFN` qui permet de prendre en compte la position des éléments dans le calcul des prédictions.
+On s'intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans {cite:p}`Vaswani17`. Pour ce faire, on créé une classe `PositionFFN` qui permet de prendre en compte la position des éléments dans le calcul des prédictions.
 
 ```python
 class PositionFFN(nn.Module):
     def __init__(self, d, d_ff):
-        super(PositionWiseFeedForward, self).__init__()
+        super(PositionFFN, self).__init__()
         self.fc1 = nn.Linear(d, d_ff)
         self.fc2 = nn.Linear(d_ff, d)
         self.relu = nn.ReLU()
@@ -673,7 +673,7 @@ class EncoderLayer(nn.Module):
     def __init__(self, d, H, d_ff, dropout):
         super(EncoderLayer, self).__init__()
         self.self_attn = MultiHeadAttention(d, H)
-        self.feed_forward = PositionWiseFeedForward(d, d_ff)
+        self.feed_forward = PositionFFN(d, d_ff)
         self.norm1 = nn.LayerNorm(d)
         self.norm2 = nn.LayerNorm(d)
         self.dropout = nn.Dropout(dropout)
@@ -699,7 +699,7 @@ class DecoderLayer(nn.Module):
         super(DecoderLayer, self).__init__()
         self.self_attn = MultiHeadAttention(d, H)
         self.cross_attn = MultiHeadAttention(d, H)
-        self.feed_forward = PositionWiseFeedForward(d, d_ff)
+        self.feed_forward = PositionFFN(d, d_ff)
         self.norm1 = nn.LayerNorm(d)
         self.norm2 = nn.LayerNorm(d)
         self.norm3 = nn.LayerNorm(d)

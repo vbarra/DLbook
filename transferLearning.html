@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="fr" >
+<html lang="fr" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Utilisation de réseaux existants &#8212; Apprentissage profond</title>
   
@@ -19,51 +18,47 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/translations.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=bf059b8c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'transferLearning';</script>
@@ -80,14 +75,13 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
-    Back to top
+    Haut de page
   </button>
 
   
@@ -124,11 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -143,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -155,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
@@ -244,6 +254,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -253,6 +264,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -315,32 +327,32 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="utilisation-de-reseaux-existants">
-<span id="content-references-tl"></span><h1>Utilisation de réseaux existants<a class="headerlink" href="#utilisation-de-reseaux-existants" title="Lien permanent vers cette rubrique">#</a></h1>
+<span id="content-references-tl"></span><h1>Utilisation de réseaux existants<a class="headerlink" href="#utilisation-de-reseaux-existants" title="Lien vers cette rubrique">#</a></h1>
 <p>Nous présentons dans la suite quatre réseaux profonds classiques. Nous montrons ensuite comment les utiliser directement, ou comment les adapter pour répondre à une problématique précise, en lien avec leur utilisation originale ou non. Nous introduisons enfin une manière
 d’apprendre un réseau à partir de peu de données.</p>
 <section id="quelques-reseaux-profonds-classiques">
-<h2>Quelques réseaux profonds classiques<a class="headerlink" href="#quelques-reseaux-profonds-classiques" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Quelques réseaux profonds classiques<a class="headerlink" href="#quelques-reseaux-profonds-classiques" title="Lien vers cette rubrique">#</a></h2>
 <p>Les réseaux présentés ici ont prouvé leur efficacité, notamment lors des compétitions organisées depuis 2010 sur une base de données d’images nommée <a class="reference external" href="http://www.image-net.org/">ImageNet</a>. Initiée à l’Université de Stanford, cette base de données comporte aujourd’hui plus de 14 millions d’images, classées en 21841 catégories (avions, voitures, chats,…). Dans les compétitions <a class="reference external" href="https://image-net.org/challenges/LSVRC/">ILSVRC</a> ( ImageNet Large Scale Visual Recognition Challenge), les chercheurs se voient proposer
 une extraction de 1,2 millions d’images d’entraînement, 100 000 images de test et 50 000 images de validation, catégorisées en 1000 classes. Le gagnant est celui qui atteint la meilleure précision de reconnaissance sur les 5 premières classes (top-5).</p>
 <p>La <a class="reference internal" href="#perf"><span class="std std-numref">Fig. 40</span></a> donne un aperçu des performances de plusieurs réseaux profonds suivant cette métrique.</p>
 <figure class="align-default" id="perf">
 <img alt="_images/classifImagenet.png" src="_images/classifImagenet.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Performance de réseaux profonds sur une tache de classification (<a class="reference external" href="https://theaisummer.com/cnn-architectures/">source</a>)</span><a class="headerlink" href="#perf" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Performance de réseaux profonds sur une tache de classification (<a class="reference external" href="https://theaisummer.com/cnn-architectures/">source</a>)</span><a class="headerlink" href="#perf" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <section id="alexnet">
-<h3>AlexNet<a class="headerlink" href="#alexnet" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>AlexNet<a class="headerlink" href="#alexnet" title="Lien vers cette rubrique">#</a></h3>
 <p>En 2012, Krizhevsky et al  <span id="id1">[<a class="reference internal" href="#id45" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012. 2012.">1</a>]</span> remportent ILSVRC avec un taux de reconnaissance de 84.6%, en utilisant AlexNet, un réseau convolutif composé de 5 couches de convolution et de pooling, suivies de 3 couches complètement connectées (<a class="reference internal" href="#id2"><span class="std std-numref">Fig. 41</span></a>).</p>
 <figure class="align-default" id="id2">
 <img alt="_images/AlexNet.png" src="_images/AlexNet.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 41 </span><span class="caption-text">Architecture du réseau AlexNet. Les couches de convolution
 et d’activation sont en orange clair, les couches d’agrégation en orange
-foncé. Les couches complètement connectées sont en violet.</span><a class="headerlink" href="#id2" title="Lien permanent vers cette image">#</a></p>
+foncé. Les couches complètement connectées sont en violet.</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Si la profondeur du réseau reste faible, le nombre de paramètres était
@@ -358,7 +370,7 @@ nombreuses contributions, comme l’utilisation de couches ReLU, de
 dropout, ou du GPU (NVIDIA GTX 580) pendant la phase d’entraînement.</p>
 </section>
 <section id="vgg">
-<h3>VGG<a class="headerlink" href="#vgg" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>VGG<a class="headerlink" href="#vgg" title="Lien vers cette rubrique">#</a></h3>
 <p>Les réseaux VGG (Visual Geometry Group, université d’Oxford)
 <span id="id3">[<a class="reference internal" href="#id43" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, 2014. URL: http://arxiv.org/abs/1409.1556.">2</a>]</span> ont été les premiers réseaux à utiliser de petits filtres de convolution (3<span class="math notranslate nohighlight">\(\times\)</span>3) et à les combiner pour
 décrire des séquences de convolution, l’idée étant d’émuler l’effet de
@@ -366,199 +378,198 @@ larges champs réceptifs par cette séquence. Cette technique amène
 malheureusement à un nombre exponentiel de paramètres (le modèle
 entraîné qui peut être téléchargé a une taille de plus de 500 Mo). VGG a concouru à ILSVRC 2014, a obtenu un taux de bonne classification de
 92.3% mais n’a pas remporté le challenge. Aujourd’hui VGG et une famille de réseaux profonds (de A à E) qui varient par leur architecture</p>
-<div class="highlight-center notranslate"><div class="highlight"><pre><span></span>&lt;figure id=&quot;F:VGG&quot;&gt;
-&lt;style type=&quot;text/css&quot;&gt;
-.myTable {style=&quot;border:1px solid blue; border-collapse:collapse;&quot; }
+<div class="center docutils">
+<figure id="F:VGG">
+<style type="text/css">
+.myTable {style="border:1px solid blue; border-collapse:collapse;" }
 .myTable th { background-color:#000;color:white;width:50%; }
 .myTable td, .myTable th { padding:5px;border:1px solid #000; }
-&lt;/style&gt;
-
-&lt;table class=&quot;myTable&quot;&gt;
-&lt;thead&gt;
-&lt;tr class=&quot;header&quot;&gt;
-&lt;th style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;A&lt;/strong&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;&lt;span&gt;A-LRN&lt;/span&gt;&lt;/strong&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;&lt;span&gt;B&lt;/span&gt;&lt;/strong&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;&lt;span&gt;C&lt;/span&gt;&lt;/strong&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;&lt;span&gt;D&lt;/span&gt;&lt;/strong&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;&lt;span&gt;E&lt;/span&gt;&lt;/strong&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;11 couches&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;11 couches&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;13 couches&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;16 couches&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;16 couches&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;19 couches&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;Entrée : image 224&lt;span
-class=&quot;math inline&quot;&gt;×&lt;/span&gt;224 RGB&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td rowspan=&quot;2&quot; style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;LRN&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-64&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;max pooling&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td rowspan=&quot;2&quot; style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-128&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;max pooling&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td rowspan=&quot;4&quot; style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv1-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-256&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;max pooling&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td rowspan=&quot;4&quot; style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv1-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;max pooling&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td rowspan=&quot;4&quot; style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv1-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;conv3-512&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;max pooling&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;Couche complètement
-connectée 4096 neurones&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;Couche complètement
-connectée 4096 neurones&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;even&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;Couche complètement
-connectée 1000 neurones&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&quot;odd&quot;&gt;
-&lt;td colspan=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;Classifieur softmax&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/figure&gt;
-</pre></div>
+</style>
+<table class="myTable">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>A</strong></th>
+<th style="text-align: center;"><strong><span>A-LRN</span></strong></th>
+<th style="text-align: center;"><strong><span>B</span></strong></th>
+<th style="text-align: center;"><strong><span>C</span></strong></th>
+<th style="text-align: center;"><strong><span>D</span></strong></th>
+<th style="text-align: center;"><strong><span>E</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">11 couches</td>
+<td style="text-align: center;">11 couches</td>
+<td style="text-align: center;">13 couches</td>
+<td style="text-align: center;">16 couches</td>
+<td style="text-align: center;">16 couches</td>
+<td style="text-align: center;">19 couches</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">Entrée : image 224<span
+class="math inline">×</span>224 RGB</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LRN</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+<td style="text-align: center;">conv3-64</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+<td style="text-align: center;">conv3-128</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="odd">
+<td rowspan="4" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv1-256</td>
+<td style="text-align: center;">conv3-256</td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-256</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="even">
+<td rowspan="4" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv1-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="odd">
+<td rowspan="4" style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv1-512</td>
+<td style="text-align: center;">conv3-512</td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">conv3-512</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">max pooling</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">Couche complètement
+connectée 4096 neurones</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">Couche complètement
+connectée 4096 neurones</td>
+</tr>
+<tr class="even">
+<td colspan="6" style="text-align: center;">Couche complètement
+connectée 1000 neurones</td>
+</tr>
+<tr class="odd">
+<td colspan="6" style="text-align: center;">Classifieur softmax</td>
+</tr>
+</tbody>
+</table>
+</figure>
 </div>
 <p>Le nombre de paramètres (en millions) pour les réseaux de A à E est 133, 133, 134, 138 et 144. Les réseaux VGG-D et VGG-E sont les plus précis et populaires.</p>
 <figure class="align-default" id="vgg16">
 <img alt="_images/VGG16.png" src="_images/VGG16.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Réseau VGG16</span><a class="headerlink" href="#vgg16" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Réseau VGG16</span><a class="headerlink" href="#vgg16" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="inception">
-<h3>Inception<a class="headerlink" href="#inception" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Inception<a class="headerlink" href="#inception" title="Lien vers cette rubrique">#</a></h3>
 <p>Inception, proposé par Google, est le premier réseau dont les
 performances ont été augmentées non seulement en augmentant le nombre de couches, mais en pensant et optimisant le design et l’architecture.
 L’idée est ici d’utiliser plusieurs filtres, de tailles différentes, sur la même image et de concaténer les résultats pour générer une
@@ -569,7 +580,7 @@ Xception <span id="id7">[<a class="reference internal" href="#id49" title="Fran�
 <figure class="align-default" id="nin">
 <img alt="_images/NIN.png" src="_images/NIN.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Réseau Network in Network</span><a class="headerlink" href="#nin" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Réseau Network in Network</span><a class="headerlink" href="#nin" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Inception V1, implémenté dans le réseau GoogLeNet vainqueur d’ILSVRC
@@ -583,12 +594,12 @@ l’architecture uniforme et aux performances accrues.</p>
 <figure class="align-default" id="inceptionv3">
 <img alt="_images/inceptionv3.png" src="_images/inceptionv3.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 44 </span><span class="caption-text">Architecture d’inception V3</span><a class="headerlink" href="#inceptionv3" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">Architecture d’inception V3</span><a class="headerlink" href="#inceptionv3" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="resnet">
-<h3>ResNet<a class="headerlink" href="#resnet" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>ResNet<a class="headerlink" href="#resnet" title="Lien vers cette rubrique">#</a></h3>
 <p>En 2015, Microsoft remporte la compétition ILSVRC avec ResNet <span id="id9">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">8</a>]</span>, un réseau à 152 couches qui utilise un module ResNet. Le taux de bonne reconnaissance est de 96.4%. Un réseau résiduel (ou ResNet) résout le problème de vanishing gradient de la manière la plus simple possible, en permettant des raccourcis entre chaque couche du réseau. Dans un réseau classique, l’activation en sortie de couche est de la forme <span class="math notranslate nohighlight">\(y=\sigma(x)\)</span>, et lors de la rétropropagation, le gradient doit nécessairement repasser par <span class="math notranslate nohighlight">\(\sigma(x)\)</span>, ce qui peut causer des
 problèmes en raison de la (forte) non linéarité induite par <span class="math notranslate nohighlight">\(\sigma\)</span>.
 Dans un réseau résiduel, la sortie de chaque couche est calculée par
@@ -599,17 +610,17 @@ plus complexe, et prend la forme d’un module ResNet (<a class="reference inter
 <figure class="align-default" id="id11">
 <img alt="_images/resNet.png" src="_images/resNet.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">8</a>]</span>)</span><a class="headerlink" href="#id11" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Module ResNet (source : <span id="id10">[<a class="reference internal" href="#id38" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, 2015. URL: http://arxiv.org/abs/1512.03385.">8</a>]</span>)</span><a class="headerlink" href="#id11" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="comment-utiliser-ces-reseaux">
-<h2>Comment utiliser ces réseaux ?<a class="headerlink" href="#comment-utiliser-ces-reseaux" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Comment utiliser ces réseaux ?<a class="headerlink" href="#comment-utiliser-ces-reseaux" title="Lien vers cette rubrique">#</a></h2>
 <p>Il est possible de définir les réseaux classiques en décrivant une à une les couches et leur paramètres, qui sont proposés dans les articles correspondants. On imagine assez bien le travail que cela peut représenter sur ResNet par exemple…</p>
 <p>Fort heureusement, il existe d’autres manières d’utiliser ces réseaux.</p>
 <section id="utilisation-de-reseaux-pre-entraines">
-<h3>Utilisation de réseaux pré-entraînés<a class="headerlink" href="#utilisation-de-reseaux-pre-entraines" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Utilisation de réseaux pré-entraînés<a class="headerlink" href="#utilisation-de-reseaux-pre-entraines" title="Lien vers cette rubrique">#</a></h3>
 <p>Il est possible de charger / sauvegarder des
 réseaux qui ont été entraînés sur des grandes bases de données et de les utiliser directement. Il est également possible, pendant
 l’entraînement, de créer des sauvegardes (checkpoints) pour reprendre
@@ -625,13 +636,227 @@ poids.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">models</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">dir</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torchvision&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;AlexNet&#39;,
+ &#39;AlexNet_Weights&#39;,
+ &#39;ConvNeXt&#39;,
+ &#39;ConvNeXt_Base_Weights&#39;,
+ &#39;ConvNeXt_Large_Weights&#39;,
+ &#39;ConvNeXt_Small_Weights&#39;,
+ &#39;ConvNeXt_Tiny_Weights&#39;,
+ &#39;DenseNet&#39;,
+ &#39;DenseNet121_Weights&#39;,
+ &#39;DenseNet161_Weights&#39;,
+ &#39;DenseNet169_Weights&#39;,
+ &#39;DenseNet201_Weights&#39;,
+ &#39;EfficientNet&#39;,
+ &#39;EfficientNet_B0_Weights&#39;,
+ &#39;EfficientNet_B1_Weights&#39;,
+ &#39;EfficientNet_B2_Weights&#39;,
+ &#39;EfficientNet_B3_Weights&#39;,
+ &#39;EfficientNet_B4_Weights&#39;,
+ &#39;EfficientNet_B5_Weights&#39;,
+ &#39;EfficientNet_B6_Weights&#39;,
+ &#39;EfficientNet_B7_Weights&#39;,
+ &#39;EfficientNet_V2_L_Weights&#39;,
+ &#39;EfficientNet_V2_M_Weights&#39;,
+ &#39;EfficientNet_V2_S_Weights&#39;,
+ &#39;GoogLeNet&#39;,
+ &#39;GoogLeNetOutputs&#39;,
+ &#39;GoogLeNet_Weights&#39;,
+ &#39;Inception3&#39;,
+ &#39;InceptionOutputs&#39;,
+ &#39;Inception_V3_Weights&#39;,
+ &#39;MNASNet&#39;,
+ &#39;MNASNet0_5_Weights&#39;,
+ &#39;MNASNet0_75_Weights&#39;,
+ &#39;MNASNet1_0_Weights&#39;,
+ &#39;MNASNet1_3_Weights&#39;,
+ &#39;MaxVit&#39;,
+ &#39;MaxVit_T_Weights&#39;,
+ &#39;MobileNetV2&#39;,
+ &#39;MobileNetV3&#39;,
+ &#39;MobileNet_V2_Weights&#39;,
+ &#39;MobileNet_V3_Large_Weights&#39;,
+ &#39;MobileNet_V3_Small_Weights&#39;,
+ &#39;RegNet&#39;,
+ &#39;RegNet_X_16GF_Weights&#39;,
+ &#39;RegNet_X_1_6GF_Weights&#39;,
+ &#39;RegNet_X_32GF_Weights&#39;,
+ &#39;RegNet_X_3_2GF_Weights&#39;,
+ &#39;RegNet_X_400MF_Weights&#39;,
+ &#39;RegNet_X_800MF_Weights&#39;,
+ &#39;RegNet_X_8GF_Weights&#39;,
+ &#39;RegNet_Y_128GF_Weights&#39;,
+ &#39;RegNet_Y_16GF_Weights&#39;,
+ &#39;RegNet_Y_1_6GF_Weights&#39;,
+ &#39;RegNet_Y_32GF_Weights&#39;,
+ &#39;RegNet_Y_3_2GF_Weights&#39;,
+ &#39;RegNet_Y_400MF_Weights&#39;,
+ &#39;RegNet_Y_800MF_Weights&#39;,
+ &#39;RegNet_Y_8GF_Weights&#39;,
+ &#39;ResNeXt101_32X8D_Weights&#39;,
+ &#39;ResNeXt101_64X4D_Weights&#39;,
+ &#39;ResNeXt50_32X4D_Weights&#39;,
+ &#39;ResNet&#39;,
+ &#39;ResNet101_Weights&#39;,
+ &#39;ResNet152_Weights&#39;,
+ &#39;ResNet18_Weights&#39;,
+ &#39;ResNet34_Weights&#39;,
+ &#39;ResNet50_Weights&#39;,
+ &#39;ShuffleNetV2&#39;,
+ &#39;ShuffleNet_V2_X0_5_Weights&#39;,
+ &#39;ShuffleNet_V2_X1_0_Weights&#39;,
+ &#39;ShuffleNet_V2_X1_5_Weights&#39;,
+ &#39;ShuffleNet_V2_X2_0_Weights&#39;,
+ &#39;SqueezeNet&#39;,
+ &#39;SqueezeNet1_0_Weights&#39;,
+ &#39;SqueezeNet1_1_Weights&#39;,
+ &#39;SwinTransformer&#39;,
+ &#39;Swin_B_Weights&#39;,
+ &#39;Swin_S_Weights&#39;,
+ &#39;Swin_T_Weights&#39;,
+ &#39;Swin_V2_B_Weights&#39;,
+ &#39;Swin_V2_S_Weights&#39;,
+ &#39;Swin_V2_T_Weights&#39;,
+ &#39;VGG&#39;,
+ &#39;VGG11_BN_Weights&#39;,
+ &#39;VGG11_Weights&#39;,
+ &#39;VGG13_BN_Weights&#39;,
+ &#39;VGG13_Weights&#39;,
+ &#39;VGG16_BN_Weights&#39;,
+ &#39;VGG16_Weights&#39;,
+ &#39;VGG19_BN_Weights&#39;,
+ &#39;VGG19_Weights&#39;,
+ &#39;ViT_B_16_Weights&#39;,
+ &#39;ViT_B_32_Weights&#39;,
+ &#39;ViT_H_14_Weights&#39;,
+ &#39;ViT_L_16_Weights&#39;,
+ &#39;ViT_L_32_Weights&#39;,
+ &#39;VisionTransformer&#39;,
+ &#39;Weights&#39;,
+ &#39;WeightsEnum&#39;,
+ &#39;Wide_ResNet101_2_Weights&#39;,
+ &#39;Wide_ResNet50_2_Weights&#39;,
+ &#39;_GoogLeNetOutputs&#39;,
+ &#39;_InceptionOutputs&#39;,
+ &#39;__builtins__&#39;,
+ &#39;__cached__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__file__&#39;,
+ &#39;__loader__&#39;,
+ &#39;__name__&#39;,
+ &#39;__package__&#39;,
+ &#39;__path__&#39;,
+ &#39;__spec__&#39;,
+ &#39;_api&#39;,
+ &#39;_meta&#39;,
+ &#39;_utils&#39;,
+ &#39;alexnet&#39;,
+ &#39;convnext&#39;,
+ &#39;convnext_base&#39;,
+ &#39;convnext_large&#39;,
+ &#39;convnext_small&#39;,
+ &#39;convnext_tiny&#39;,
+ &#39;densenet&#39;,
+ &#39;densenet121&#39;,
+ &#39;densenet161&#39;,
+ &#39;densenet169&#39;,
+ &#39;densenet201&#39;,
+ &#39;detection&#39;,
+ &#39;efficientnet&#39;,
+ &#39;efficientnet_b0&#39;,
+ &#39;efficientnet_b1&#39;,
+ &#39;efficientnet_b2&#39;,
+ &#39;efficientnet_b3&#39;,
+ &#39;efficientnet_b4&#39;,
+ &#39;efficientnet_b5&#39;,
+ &#39;efficientnet_b6&#39;,
+ &#39;efficientnet_b7&#39;,
+ &#39;efficientnet_v2_l&#39;,
+ &#39;efficientnet_v2_m&#39;,
+ &#39;efficientnet_v2_s&#39;,
+ &#39;get_model&#39;,
+ &#39;get_model_builder&#39;,
+ &#39;get_model_weights&#39;,
+ &#39;get_weight&#39;,
+ &#39;googlenet&#39;,
+ &#39;inception&#39;,
+ &#39;inception_v3&#39;,
+ &#39;list_models&#39;,
+ &#39;maxvit&#39;,
+ &#39;maxvit_t&#39;,
+ &#39;mnasnet&#39;,
+ &#39;mnasnet0_5&#39;,
+ &#39;mnasnet0_75&#39;,
+ &#39;mnasnet1_0&#39;,
+ &#39;mnasnet1_3&#39;,
+ &#39;mobilenet&#39;,
+ &#39;mobilenet_v2&#39;,
+ &#39;mobilenet_v3_large&#39;,
+ &#39;mobilenet_v3_small&#39;,
+ &#39;mobilenetv2&#39;,
+ &#39;mobilenetv3&#39;,
+ &#39;optical_flow&#39;,
+ &#39;quantization&#39;,
+ &#39;regnet&#39;,
+ &#39;regnet_x_16gf&#39;,
+ &#39;regnet_x_1_6gf&#39;,
+ &#39;regnet_x_32gf&#39;,
+ &#39;regnet_x_3_2gf&#39;,
+ &#39;regnet_x_400mf&#39;,
+ &#39;regnet_x_800mf&#39;,
+ &#39;regnet_x_8gf&#39;,
+ &#39;regnet_y_128gf&#39;,
+ &#39;regnet_y_16gf&#39;,
+ &#39;regnet_y_1_6gf&#39;,
+ &#39;regnet_y_32gf&#39;,
+ &#39;regnet_y_3_2gf&#39;,
+ &#39;regnet_y_400mf&#39;,
+ &#39;regnet_y_800mf&#39;,
+ &#39;regnet_y_8gf&#39;,
+ &#39;resnet&#39;,
+ &#39;resnet101&#39;,
+ &#39;resnet152&#39;,
+ &#39;resnet18&#39;,
+ &#39;resnet34&#39;,
+ &#39;resnet50&#39;,
+ &#39;resnext101_32x8d&#39;,
+ &#39;resnext101_64x4d&#39;,
+ &#39;resnext50_32x4d&#39;,
+ &#39;segmentation&#39;,
+ &#39;shufflenet_v2_x0_5&#39;,
+ &#39;shufflenet_v2_x1_0&#39;,
+ &#39;shufflenet_v2_x1_5&#39;,
+ &#39;shufflenet_v2_x2_0&#39;,
+ &#39;shufflenetv2&#39;,
+ &#39;squeezenet&#39;,
+ &#39;squeezenet1_0&#39;,
+ &#39;squeezenet1_1&#39;,
+ &#39;swin_b&#39;,
+ &#39;swin_s&#39;,
+ &#39;swin_t&#39;,
+ &#39;swin_transformer&#39;,
+ &#39;swin_v2_b&#39;,
+ &#39;swin_v2_s&#39;,
+ &#39;swin_v2_t&#39;,
+ &#39;vgg&#39;,
+ &#39;vgg11&#39;,
+ &#39;vgg11_bn&#39;,
+ &#39;vgg13&#39;,
+ &#39;vgg13_bn&#39;,
+ &#39;vgg16&#39;,
+ &#39;vgg16_bn&#39;,
+ &#39;vgg19&#39;,
+ &#39;vgg19_bn&#39;,
+ &#39;video&#39;,
+ &#39;vision_transformer&#39;,
+ &#39;vit_b_16&#39;,
+ &#39;vit_b_32&#39;,
+ &#39;vit_h_14&#39;,
+ &#39;vit_l_16&#39;,
+ &#39;vit_l_32&#39;,
+ &#39;wide_resnet101_2&#39;,
+ &#39;wide_resnet50_2&#39;]
 </pre></div>
 </div>
 </div>
@@ -642,7 +867,7 @@ poids.</p>
 </div>
 </section>
 <section id="transfer-learning-et-fine-tuning">
-<h3>Transfer learning et fine tuning<a class="headerlink" href="#transfer-learning-et-fine-tuning" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Transfer learning et fine tuning<a class="headerlink" href="#transfer-learning-et-fine-tuning" title="Lien vers cette rubrique">#</a></h3>
 <p>Il est possible d’utiliser les réseaux classiques pré-entrainés pour de
 nouvelles tâches. L’idée sous-jacente et que les premières couches
 capturent des caractéristiques bas niveau, et que la sémantique vient
@@ -661,7 +886,7 @@ de classification.</p>
 <figure class="align-default" id="tl2">
 <img alt="_images/tl2.png" src="_images/tl2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Réentrainement d’un classifieur sur des caractéristiques extraites.</span><a class="headerlink" href="#tl2" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Réentrainement d’un classifieur sur des caractéristiques extraites.</span><a class="headerlink" href="#tl2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -674,7 +899,7 @@ de classification.</p>
 <figure class="align-default" id="tl">
 <img alt="_images/tl.png" src="_images/tl.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Stratégies d’apprentissage par transfert.</span><a class="headerlink" href="#tl" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Stratégies d’apprentissage par transfert.</span><a class="headerlink" href="#tl" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -684,7 +909,7 @@ entraîner le réseau initial (<a class="reference internal" href="#domaintask">
 <figure class="align-default" id="domaintask">
 <img alt="_images/domaintask.png" src="_images/domaintask.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Changement de domaine / tâche.</span><a class="headerlink" href="#domaintask" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Changement de domaine / tâche.</span><a class="headerlink" href="#domaintask" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Pour un jeu de données similaire de petite taille, on utilise du
@@ -700,7 +925,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 <figure class="align-default" id="dataaugment">
 <img alt="_images/dataaugment.png" src="_images/dataaugment.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Augmentation de données : à partir d’un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.</span><a class="headerlink" href="#dataaugment" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Augmentation de données : à partir d’un exemple (image de gauche), on construit plusieurs autres exemples par rotation, flip, ajout de bruit, déformation, changement colorimétrique.</span><a class="headerlink" href="#dataaugment" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -709,7 +934,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 </section>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
 <p>On propose ici d’implémenter deux stratégies :</p>
 <ul class="simple">
 <li><p>une première d’entraînement d’un réseau en initialisant les poids à ceux du même réseau préentraîné sur ImageNet. Une couche de classification spécifique au problème est ajoutée, et tout le réseau est entraîné.</p></li>
@@ -777,7 +1002,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 <figure class="align-default" id="sushis">
 <img alt="_images/sushis.png" src="_images/sushis.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Quelques exemples d’images.</span><a class="headerlink" href="#sushis" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Quelques exemples d’images.</span><a class="headerlink" href="#sushis" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Et une fonction d’affichage des prédictions des modèles sur l’ensemble de validation</p>
@@ -802,7 +1027,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 </pre></div>
 </div>
 <section id="premier-entrainement">
-<h3>Premier entraînement<a class="headerlink" href="#premier-entrainement" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Premier entraînement<a class="headerlink" href="#premier-entrainement" title="Lien vers cette rubrique">#</a></h3>
 <p>Dans ce premier entraînement, on utilise un réseau pré-entraîné, qui sert d’initialisation à un entraînement complet sur la base d’entraînement.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train1</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
 
@@ -890,12 +1115,12 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 <figure class="align-default" id="val">
 <img alt="_images/val.png" src="_images/val.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Quelques exemples d’images de validation étiquetées.</span><a class="headerlink" href="#val" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Quelques exemples d’images de validation étiquetées.</span><a class="headerlink" href="#val" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="second-entrainement">
-<h3>Second entraînement<a class="headerlink" href="#second-entrainement" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Second entraînement<a class="headerlink" href="#second-entrainement" title="Lien vers cette rubrique">#</a></h3>
 <p>Ici, on ne réentraîne pas les poids du réseau convolutif. On laisse donc ce réseau agir comme un extracteur de caractéristiques et on entraîne uniquement les poids de la couche de classification ajouté en bout.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">resnet34</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;IMAGENET1K_V1&#39;</span><span class="p">)</span>
 <span class="c1"># On fige les poids du réseau convolutif</span>
@@ -923,9 +1148,10 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="a-vous">
-<h1>A vous…<a class="headerlink" href="#a-vous" title="Lien permanent vers cette rubrique">#</a></h1>
+<h1>A vous…<a class="headerlink" href="#a-vous" title="Lien vers cette rubrique">#</a></h1>
 <p><a class="reference download internal" download="" href="_downloads/54d3dbe5d09460b1fed3268444db9a5d/flowers.zip"><span class="xref download myst">Notebook</span></a></p>
 <div class="docutils container" id="id14">
+<div role="list" class="citation-list">
 <div class="citation" id="id45" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In <em>Advances in Neural Information Processing Systems</em>, 2012. 2012.</p>
@@ -999,7 +1225,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="rnn.html"
@@ -1027,6 +1253,7 @@ couleurs des pixels, rotations, cropping, homothéties, translations…) (<a cla
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1077,9 +1304,10 @@ Par Vincent BARRA
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1103,8 +1331,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
