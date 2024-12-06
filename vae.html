@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="fr" data-content_root="./" >
+<html lang="fr" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Autoencodeurs variationnels &#8212; Apprentissage profond</title>
   
@@ -18,47 +19,51 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script src="_static/documentation_options.js?v=72dce1d2"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/translations.js?v=bf059b8c"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'vae';</script>
@@ -75,13 +80,14 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
-    Haut de page
+    Back to top
   </button>
 
   
@@ -118,14 +124,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +143,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="intro.html">
-  
   
   
   
@@ -154,23 +155,12 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Recherche</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
@@ -254,7 +244,6 @@
 </button>
 
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -264,7 +253,6 @@ document.write(`
   </button>
 `);
 </script>
-
 
 <script>
 document.write(`
@@ -321,24 +309,24 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="autoencodeurs-variationnels">
-<h1>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien vers cette rubrique">#</a></h1>
+<h1>Autoencodeurs variationnels<a class="headerlink" href="#autoencodeurs-variationnels" title="Lien permanent vers cette rubrique">#</a></h1>
 <p>Les autoencodeurs variationnels sont, comme les GAN (abordés dans le cours suivant), des modèles génératifs, c’est-à-dire des modèles probabilistes <span class="math notranslate nohighlight">\(p\)</span> pouvant être utilisés pour
 simuler (ou générer) des données réalistes <span class="math notranslate nohighlight">\(\boldsymbol x\sim p(\boldsymbol x,\boldsymbol\theta)\)</span>, aussi proches que possible de la vraie (mais inconnue) distribution des données <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span>, pour laquelle seul un échantillon de données est disponible.</p>
 <p>Le paysage de ces modèles génératifs s’est beaucoup peuplé depuis 2014 (<a class="reference internal" href="#landscape"><span class="std std-numref">Fig. 62</span></a>).</p>
 <figure class="align-default" id="landscape">
 <img alt="_images/landscapegen.png" src="_images/landscapegen.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Paysage des modèles génératifs (Source: <a class="reference external" href="https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546">Song et al., CVPR 2023</a>)</span><a class="headerlink" href="#landscape" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Paysage des modèles génératifs (Source: <a class="reference external" href="https://cvpr2023.thecvf.com/virtual/2023/tutorial/18546">Song et al., CVPR 2023</a>)</span><a class="headerlink" href="#landscape" title="Lien permanent vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Dans ce cours, nous aborderons uniquement les autoencodeurs variationnels (VAE), les réseaux antagonistes générateurs (GAN) et ferons une brève introduction aux modèles de diffusion (DDPM, pour Denoising Diffusion Probabilistic Models)</p>
 <section id="inference-variationnelle">
-<h2>Inférence variationnelle<a class="headerlink" href="#inference-variationnelle" title="Lien vers cette rubrique">#</a></h2>
+<h2>Inférence variationnelle<a class="headerlink" href="#inference-variationnelle" title="Lien permanent vers cette rubrique">#</a></h2>
 <section id="modeles-a-variables-latentes">
-<h3>Modèles à variables latentes<a class="headerlink" href="#modeles-a-variables-latentes" title="Lien vers cette rubrique">#</a></h3>
+<h3>Modèles à variables latentes<a class="headerlink" href="#modeles-a-variables-latentes" title="Lien permanent vers cette rubrique">#</a></h3>
 <p>Un modèle à variables latentes met en relation un ensemble de variables observables <span class="math notranslate nohighlight">\(\boldsymbol x\in \mathcal X\)</span> avec un ensemble de variables latentes  <span class="math notranslate nohighlight">\(\boldsymbol h\in \mathcal H\)</span></p>
 <div class="math notranslate nohighlight">
 \[p(\boldsymbol x,\boldsymbol h) = p(\boldsymbol x|\boldsymbol h)p(\boldsymbol h)\]</div>
@@ -349,7 +337,7 @@ simuler (ou générer) des données réalistes <span class="math notranslate noh
 <p>Malheureusement, <span class="math notranslate nohighlight">\(p(\boldsymbol x)\)</span> est inaccessible.</p>
 </section>
 <section id="id1">
-<h3>Inférence variationnelle<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
+<h3>Inférence variationnelle<a class="headerlink" href="#id1" title="Lien permanent vers cette rubrique">#</a></h3>
 <p>L’inférence variationnelle transforme l’estimation de <span class="math notranslate nohighlight">\(p(\boldsymbol h|\boldsymbol x)\)</span> en un problème d’optimisation.</p>
 <p>On considère une famille de distributions <span class="math notranslate nohighlight">\(q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)\)</span> approchant <span class="math notranslate nohighlight">\(p(\boldsymbol{h}|\boldsymbol x)\)</span>, où <span class="math notranslate nohighlight">\(\boldsymbol \phi\)</span> sont les paramètres variationnels. Ces paramètres sont optimisés pour minimiser une distance entre <span class="math notranslate nohighlight">\(q_{\boldsymbol\phi} (\boldsymbol{h}|\boldsymbol x)\)</span> et <span class="math notranslate nohighlight">\(p(\boldsymbol x,\boldsymbol h)\)</span>. Parmi toutes les distances possibles, on retient la divergence de Kullback-Leibler</p>
 <div class="math notranslate nohighlight">
@@ -388,9 +376,9 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 </section>
 </section>
 <section id="id2">
-<h2>Autoencodeurs variationnels<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h2>
+<h2>Autoencodeurs variationnels<a class="headerlink" href="#id2" title="Lien permanent vers cette rubrique">#</a></h2>
 <section id="principe">
-<h3>Principe<a class="headerlink" href="#principe" title="Lien vers cette rubrique">#</a></h3>
+<h3>Principe<a class="headerlink" href="#principe" title="Lien permanent vers cette rubrique">#</a></h3>
 <p>Un autoencodeur variationnel (VAE) est un modèle profond à variables latentes (<a class="reference internal" href="#vae0"><span class="std std-numref">Fig. 63</span></a>) tel que :</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(\boldsymbol h)\)</span> est prescrit à l’avance</p></li>
@@ -406,7 +394,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <figure class="align-default" id="vae0">
 <img alt="_images/vae0.png" src="_images/vae0.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Architecture générale d’un autoencodeur variationnel</span><a class="headerlink" href="#vae0" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Architecture générale d’un autoencodeur variationnel</span><a class="headerlink" href="#vae0" title="Lien permanent vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Comme précédemment, on peut utiliser l’inférence variationnelle pour optimiser de manière jointe <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> et <span class="math notranslate nohighlight">\(\boldsymbol\phi\)</span> :</p>
@@ -432,7 +420,7 @@ ELBO(\boldsymbol x,\boldsymbol\phi)&amp;=&amp;\mathbb{E}_{ q_{\boldsymbol\phi} (
 <p>On montre alors que <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol\phi}ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi)\)</span> peut être estimé par méthode de Monte Carlo.</p>
 </section>
 <section id="exemple">
-<h3>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique">#</a></h3>
+<h3>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers cette rubrique">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\(\boldsymbol h\in\mathbb{R}^d\)</span>. On suppose que la distribution de la variable latente suit une loi normale centrée réduite <span class="math notranslate nohighlight">\(p(\boldsymbol h) = \mathcal N(\boldsymbol 0,\boldsymbol I)\)</span>.</p>
 <p>Alors</p>
 <div class="math notranslate nohighlight">
@@ -469,7 +457,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <p>dont les dérivées peuvent être évaluées analytiquement.</p>
 </section>
 <section id="en-resume">
-<h3>En résumé<a class="headerlink" href="#en-resume" title="Lien vers cette rubrique">#</a></h3>
+<h3>En résumé<a class="headerlink" href="#en-resume" title="Lien permanent vers cette rubrique">#</a></h3>
 <p>Pour utiliser un VAE il suffit donc</p>
 <ul class="simple">
 <li><p>de définir l’encodeur et le décodeur</p></li>
@@ -480,7 +468,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 </section>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien permanent vers cette rubrique">#</a></h2>
 <p>On propose ici d’implémenter un auto-encodeur variationnel, et une variation de ce modèle intégrant une génération conditionnelle. Le jeu de données utilisé est <a class="reference external" href="https://github.com/zalandoresearch/fashion-mnist">Fashion MNIST</a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -549,7 +537,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 </pre></div>
 </div>
 <section id="vae-classique">
-<h3>VAE classique<a class="headerlink" href="#vae-classique" title="Lien vers cette rubrique">#</a></h3>
+<h3>VAE classique<a class="headerlink" href="#vae-classique" title="Lien permanent vers cette rubrique">#</a></h3>
 <p>On construit tout d’abord un VAE classique</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">image_size</span> <span class="o">=</span> <span class="mi">784</span>
 <span class="n">h_dim</span> <span class="o">=</span> <span class="mi">400</span>
@@ -619,7 +607,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="recon">
 <img alt="_images/recon.png" src="_images/recon.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Apprentissage du VAE</span><a class="headerlink" href="#recon" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Apprentissage du VAE</span><a class="headerlink" href="#recon" title="Lien permanent vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>On affiche alors des exemples d’images reconstruites</p>
@@ -629,7 +617,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="recons">
 <img alt="_images/reconstruction.png" src="_images/reconstruction.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Exemples d’images reconstruites <span class="math notranslate nohighlight">\(\hat x = D(E(x))\)</span></span><a class="headerlink" href="#recons" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Exemples d’images reconstruites <span class="math notranslate nohighlight">\(\hat x = D(E(x))\)</span></span><a class="headerlink" href="#recons" title="Lien permanent vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>et des exemples d’images générées</p>
@@ -639,13 +627,13 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="generation">
 <img alt="_images/generation.png" src="_images/generation.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h)\)</span></span><a class="headerlink" href="#generation" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h)\)</span></span><a class="headerlink" href="#generation" title="Lien permanent vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>Le nombre d’epoches est faible, la génération n’est pas optimale.</p>
 </section>
 <section id="vae-conditionnel">
-<h3>VAE conditionnel<a class="headerlink" href="#vae-conditionnel" title="Lien vers cette rubrique">#</a></h3>
+<h3>VAE conditionnel<a class="headerlink" href="#vae-conditionnel" title="Lien permanent vers cette rubrique">#</a></h3>
 <p>On modifie légèrement l’architecture précédente en ajoutant l’information du label de l’exemple au décodeur. Pour cela il faut d’abord encoder le label (en one-hot)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_classes</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">def</span> <span class="nf">l_2_onehot</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="n">nb_classes</span><span class="o">=</span><span class="n">n_classes</span><span class="p">):</span>
@@ -710,7 +698,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
 <figure class="align-default" id="generation2">
 <img alt="_images/generationc.png" src="_images/generationc.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h,c)\)</span></span><a class="headerlink" href="#generation2" title="Lien vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Exemples d’images générées <span class="math notranslate nohighlight">\(x=D(h,c)\)</span></span><a class="headerlink" href="#generation2" title="Lien permanent vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -745,7 +733,7 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
               
               
                 <footer class="prev-next-footer">
-                  
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="gnn.html"
@@ -773,7 +761,6 @@ ELBO(\boldsymbol x,\boldsymbol\theta,\boldsymbol\phi) &amp;=&amp; \mathbb{E}_{q_
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -818,10 +805,9 @@ Par Vincent BARRA
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -845,8 +831,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
 
   <footer class="bd-footer">
   </footer>
