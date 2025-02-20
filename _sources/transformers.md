@@ -575,6 +575,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 ```
 
 
@@ -584,7 +585,7 @@ On implémente le mécanisme d’auto-attention multiple (multihead attention)
 class MultiHeadAttention(nn.Module):
     def __init__(self, d, H):
         super(MultiHeadAttention, self).__init__()
-        assert d % H == 0, 
+        assert d % H == 0
         
         self.d = d
         self.H = H
@@ -626,28 +627,27 @@ class MultiHeadAttention(nn.Module):
         return output
 ```
 
-On s'intéresse ensuite au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans {cite:p}`Vaswani17`. Pour ce faire, on créé une classe `PositionFFN` qui permet de prendre en compte la position des éléments dans le calcul des prédictions.
+
 
 ```python
-class PositionFFN(nn.Module):
-    def __init__(self, d, d_ff):
-        super(PositionFFN, self).__init__()
-        self.fc1 = nn.Linear(d, d_ff)
-        self.fc2 = nn.Linear(d_ff, d)
+class MLP(nn.Module):
+    def __init__(self, d, dh):
+        super(MLP, self).__init__()
+        self.fc1 = nn.Linear(d, dh)
+        self.fc2 = nn.Linear(dh, d)
         self.relu = nn.ReLU()
 
     def forward(self, x):
         return self.fc2(self.relu(self.fc1(x)))
 ```
 
-Cette classe est ensuite utilisée dans l'encodage positionnel à proprement parler. On initialise un tenseur de taille $d\times max\_N$ permettant de stocker les valeurs d'encodage.
+On s'intéresse au codage positionnel des mots. On encode la position d’un mot à l’aide des formules proposées dans {cite:p}`Vaswani17`. 
 
 ```python
 class PositionalEncoding(nn.Module):
     def __init__(self, d, max_N):
         super(PositionalEncoding, self).__init__()
         
-        # Codage de l'encodage proposé dans l'article
         pe = torch.zeros(max_N, d)
         p = torch.arange(0, max_N, dtype=torch.float).unsqueeze(1)
         div_term = torch.exp(torch.arange(0, d, 2).float() * -(math.log(10000.0) / d))
@@ -670,10 +670,10 @@ Bloc encodeur (source : {cite:p}`Vaswani17`).
 
 ```python
 class EncoderLayer(nn.Module):
-    def __init__(self, d, H, d_ff, dropout):
+    def __init__(self, d, H, dh, dropout):
         super(EncoderLayer, self).__init__()
         self.self_attn = MultiHeadAttention(d, H)
-        self.feed_forward = PositionFFN(d, d_ff)
+        self.feed_forward = MLP(d, dh)
         self.norm1 = nn.LayerNorm(d)
         self.norm2 = nn.LayerNorm(d)
         self.dropout = nn.Dropout(dropout)
@@ -695,11 +695,11 @@ Bloc décodeur (source : {cite:p}`Vaswani17`).
 
 ```python
 class DecoderLayer(nn.Module):
-    def __init__(self, d, H, d_ff, dropout):
+    def __init__(self, d, H, dh, dropout):
         super(DecoderLayer, self).__init__()
         self.self_attn = MultiHeadAttention(d, H)
         self.cross_attn = MultiHeadAttention(d, H)
-        self.feed_forward = PositionFFN(d, d_ff)
+        self.feed_forward = MLP(d, dh)
         self.norm1 = nn.LayerNorm(d)
         self.norm2 = nn.LayerNorm(d)
         self.norm3 = nn.LayerNorm(d)
@@ -724,14 +724,14 @@ Bloc transformer (source : {cite:p}`Vaswani17`).
 
 ```python
 class Transformer(nn.Module):
-    def __init__(self, taille_voc_source, taille_voc_cible, d, H, nb_layers, d_ff, max_N, dropout):
+    def __init__(self, taille_voc_source, taille_voc_cible, d, H, nb_layers, dh, max_N, dropout):
         super(Transformer, self).__init__()
         self.encoder_embedding = nn.Embedding(taille_voc_source, d)
         self.decoder_embedding = nn.Embedding(taille_voc_cible, d)
         self.positional_encoding = PositionalEncoding(d, max_N)
 
-        self.encoder_layers = nn.ModuleList([EncoderLayer(d, H, d_ff, dropout) for _ in range(nb_layers)])
-        self.decoder_layers = nn.ModuleList([DecoderLayer(d, H, d_ff, dropout) for _ in range(nb_layers)])
+        self.encoder_layers = nn.ModuleList([EncoderLayer(d, H, dh, dropout) for _ in range(nb_layers)])
+        self.decoder_layers = nn.ModuleList([DecoderLayer(d, H, dh, dropout) for _ in range(nb_layers)])
 
         self.fc = nn.Linear(d, taille_voc_cible)
         self.dropout = nn.Dropout(dropout)
@@ -769,29 +769,24 @@ taille_voc_cible = 5000
 d = 512
 H = 8
 nb_layers = 6
-d_ff = 2048
+dh = 2048
 max_N = 100
 dropout = 0.1
-bath_size = 64
+batch_size = 64
+nb_epochs = 100
 
-transformer = Transformer(taille_voc_source, taille_voc_cible, d, H, nb_layers, d_ff, max_N, dropout)
-
-# Calcul du nombre de paramètres entraînables
-model_parameters = filter(lambda p: p.requires_grad, transformer.parameters())
-params = sum([np.prod(p.size()) for p in model_parameters])
-print(params)
+transformer = Transformer(taille_voc_source, taille_voc_cible, d, H, nb_layers, dh, max_N, dropout)
 
 # Génération de deux séquences
 src_data = torch.randint(1, taille_voc_source, (batch_size, max_N))  
 cible_data = torch.randint(1, taille_voc_cible, (batch_size, max_N))  
 
 criterion = nn.CrossEntropyLoss(ignore_index=0)
-optimizer = optim.Adam(transformer.parameters(), lr=0.0001, betas=(0.9, 0.98), eps=1e-9)
+optimizer = torch.optim.Adam(transformer.parameters(), lr=0.0001, betas=(0.9, 0.98), eps=1e-9)
 
 l = []
 transformer.train()
 
-nb_epochs = 100
 for epoch in range(nb_epochs):
     optimizer.zero_grad()
     output = transformer(src_data, cible_data[:, :-1])
@@ -799,7 +794,8 @@ for epoch in range(nb_epochs):
     loss.backward()
     optimizer.step()
     l.append(loss.item())
-    print(f"Epoch: {epoch+1}, Loss: {loss.item()}")
+    if epoch%10==0:
+        print(f"Epoch: {epoch+1}, Loss: {loss.item()}")
 
 plt.plot(np.arange(nb_epochs),l)
 ```
