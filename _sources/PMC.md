@@ -9,7 +9,7 @@ kernelspec:
   language: python
   name: python3
 ---
-# Perceptrons multicouches 
+# Perceptrons multicouches
 
 ````{prf:definition} Perceptron multicouches
 Un perceptron à $(L+1)$ couches ({numref}`mlp`) est un réseau constitué d'une
@@ -69,7 +69,7 @@ est la matrice de tous les poids du réseau.
 On parlera de **réseau profond (Deep network)** lorsque le nombre de
 couches cachées est "suffisamment important" (supérieur à 3 par exemple).
 
-## Fonctions d'activation 
+## Fonctions d'activation
 
 Trois grandes classes de fonction d'activation $f$ sont généralement
 utilisées : les fonctions de seuils (comme dans le perceptron linéaire à
@@ -148,7 +148,7 @@ Quelques fonctions d'activation
 
 Les fonctions d'activation sous Pytorch sont résumées [ici](https://pytorch.org/docs/stable/nn.functional.html).
 
-## Entraînement des réseaux multicouches 
+## Entraînement des réseaux multicouches
 
 Pour pouvoir utiliser les réseaux multicouches en apprentissage, deux
 ingrédients sont indispensables :
@@ -217,7 +217,7 @@ sont classiquement utilisées
     jour en fonction de l'erreur cumulée
     $E_M(\mathbf w) = \displaystyle\sum_{n \in M} E_n(\mathbf w)$.
 
-## Optimisation des paramètres 
+## Optimisation des paramètres
 
 Considérons le cas de l'entraînement stochastique. La condition
 nécessaire d'optimalité d'ordre 1 donne 
@@ -255,7 +255,7 @@ calcul ou l'estimation du Hessien $H_n$ de $E_n$ à chaque itération).
 
 (content:references:initW)=
 
-## Initialisation des poids 
+## Initialisation des poids
 
 Une méthode itérative d'optimisation étant utilisée, l'initialisation
 des poids requiert une attention toute particulière. 
@@ -322,7 +322,7 @@ $$\mathbf  w_{ij}^l \rightsquigarrow\ \frac{1}{\sqrt{m^{l-1}}}\mathcal{N}(0,1)$$
 Si la fonction d'activation du neurone est la fonction ReLU, on peut multiplier par $\frac{\sqrt{2}}{\sqrt{m^{l-1}}}$ pour prendre en compte la partie négative qui ne participe pas au calcul de la variance.
 
 
-## Rétropropagation de l'erreur 
+## Rétropropagation de l'erreur
 
 l'{prf:ref}`backprop`, dit algorithme de
 rétropropagation du gradient, est utilisé pour évaluer le gradient
@@ -717,7 +717,7 @@ on obtient les relations suivantes :
             \end{array}
         \right.$$
 
-#### Initialisation des poids 
+#### Initialisation des poids
 
 -   les biais sont initialisés à zéro : 
     $( b_1, b_2, b_3, b_4 ) = \mathbf{0}_4$ ;
@@ -837,7 +837,6 @@ loss = nn.BCELoss()
 
 def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
     loss_values = []    
-    losses = np.zeros(n_epochs)
     correct = 0
     for iter in range(n_epochs):
         optimizer.zero_grad() 
