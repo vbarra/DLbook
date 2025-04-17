@@ -1,0 +1,97 @@
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/vibarra/Library/Python/3.13/lib/python/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+datasets = ['blobs', 'moons', 'circles']
+    
+for dataset in datasets:
+
+    train_loader, test_loader, X_train, y_train, X_test, y_test = generate_dataset(dataset)
+    
+    input_dim = X_train.shape[1]
+    model = MLP1(input_dim,num_hidden,1).to(DEVICE)
+
+    # Training
+    train_losses, test_accuracies = train_model(model, train_loader, test_loader, epochs=epochs)
+       
+    # Results
+    plt.figure(figsize=(12, 5))
+    plt.suptitle(f'{dataset}')
+    plt.subplot(1, 3, 1)
+    plt.plot(range(epochs), train_losses)
+    plt.title(f'Training Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    
+    plt.subplot(1, 3, 2)
+    plt.plot(range(epochs), test_accuracies)
+    plt.title(f'Test Accuracy ')
+    plt.xlabel('Epochs')
+    plt.ylabel('Accuracy (%)')
+
+    plt.subplot(1, 3, 3)
+    X = np.vstack([X_train, X_test])
+    y = np.concatenate([y_train, y_test])
+    h = 0.01
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+    
+    # Prediction of the class of each point of the grid
+    model.eval()
+    Z = model(torch.FloatTensor(np.c_[xx.ravel(), yy.ravel()]).to(DEVICE)).to(DEVICE)
+    Z = (Z > 0.5).float().cpu().detach().numpy()
+    Z = Z.reshape(xx.shape)
+    
+    plt.contourf(xx, yy, Z, alpha=0.3)
+    plt.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')
+    plt.title(f'Accuracy = {test_accuracies[-1]:.2f}%')
+    plt.tight_layout()
+    plt.show()
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 5[39m
+[32m      1[39m datasets = [[33m'[39m[33mblobs[39m[33m'[39m, [33m'[39m[33mmoons[39m[33m'[39m, [33m'[39m[33mcircles[39m[33m'[39m]
+[32m      3[39m [38;5;28;01mfor[39;00m dataset [38;5;129;01min[39;00m datasets:
+[32m----> [39m[32m5[39m     train_loader, test_loader, X_train, y_train, X_test, y_test = [43mgenerate_dataset[49m[43m([49m[43mdataset[49m[43m)[49m
+[32m      7[39m     input_dim = X_train.shape[[32m1[39m]
+[32m      8[39m     model = MLP1(input_dim,num_hidden,[32m1[39m).to(DEVICE)
+
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 13[39m, in [36mgenerate_dataset[39m[34m(dataset_type, n_samples)[39m
+[32m      9[39m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([33m"[39m[33mUnknown dataset[39m[33m"[39m)
+[32m     11[39m X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=[32m0.2[39m, random_state=[32m42[39m)
+[32m---> [39m[32m13[39m X_train_tensor = torch.FloatTensor(X_train).to([43mDEVICE[49m)
+[32m     14[39m y_train_tensor = torch.FloatTensor(y_train).unsqueeze([32m1[39m).to(DEVICE)
+[32m     15[39m X_test_tensor = torch.FloatTensor(X_test).to(DEVICE)
+
+[31mNameError[39m: name 'DEVICE' is not defined
+

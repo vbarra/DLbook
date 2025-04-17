@@ -750,124 +750,161 @@ from matplotlib import colors
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
-fichiers_train = ['./data/linear_data_train.csv','./data/twocircles_data_train.csv','./data/moon_data_train.csv']
-fichiers_test = ['./data/linear_data_eval.csv','./data/twocircles_data_eval.csv','./data/moon_data_eval.csv']
-
-# Fonction de lecture des jeux de données
-def extract_data(filename):
-
-    labels = []
-    features = []
-
-    for line in open(filename):
-        row = line.split(",")
-        labels.append(int(row[0]))
-        features.append([float(x) for x in row[1:]])
-
-    features_np = np.matrix(features).astype(np.float32)
-
-    labels_np = np.array(labels).astype(dtype=np.uint8)
-    labels_onehot = (np.arange(num_labels) == labels_np[:, None]).astype(np.float32)
-
-    return features_np,labels_onehot    
+from torch.utils.data import TensorDataset, DataLoader
+from sklearn.datasets import make_moons,make_circles,make_blobs
+from sklearn.model_selection import train_test_split   
 ```
 
-On écrit une fonction permettant de visualiser le résultat de la classification par le perceptron.
+On génère les données directement (contrairement au perceptron), pour montrer comment faire en utilisant la librairie [scikit-learn](https://scikit-learn.org/stable/)
 
 ```{code-cell} ipython3
-def plotResults(ax,ay,X,Y,model,title,pltloss,name):
-    mins = np.amin(X,0); 
-    mins = mins - 0.1*np.abs(mins);
-    maxs = np.amax(X,0); 
-    maxs = maxs + 0.1*maxs;
-
-    xs,ys = np.meshgrid(np.linspace(mins[0,0],maxs[0,0],300),np.linspace(mins[0,1], maxs[0,1], 300));
-
-    toto = torch.FloatTensor(np.c_[xs.flatten(), ys.flatten()])
-    Z = np.argmax(model(toto).detach().numpy(), axis=-1)
-    Z=Z.reshape(xs.shape[0],xs.shape[1])
+def generate_dataset(dataset_type, n_samples=1000):
+    if dataset_type == 'blobs':
+        X, y = make_blobs(n_samples=n_samples, centers=2, random_state=42)
+    elif dataset_type == 'moons':
+        X, y = make_moons(n_samples=n_samples, noise=0.1, random_state=42)
+    elif dataset_type == 'circles':
+        X, y = make_circles(n_samples=n_samples, noise=0.1, factor=0.5, random_state=42)
+    else:
+        raise ValueError("Unknown dataset")
     
-    labelY = np.matrix(Y[:, 0]+2*Y[:, 1])
-    labelY = labelY.reshape(np.array(X[:, 0]).shape)
-
-    ax.contourf(xs, ys, Z, cmap=colors.ListedColormap([[0,0.5,0.66,0], [0.93,0.76,0.27,0]]),alpha=.5)
-    ax.scatter(np.array(X[:, 0]),np.array(X[:, 1]),c= np.array(labelY),s=20,cmap=colors.ListedColormap(['red', 'green']))
-    ax.set_title(title)
-
-    ay.plot(pltloss)
-    ay.set_title("perte sur " + name)
-    ay.set_xlabel("epoch")
-
-    plt.tight_layout()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    X_train_tensor = torch.FloatTensor(X_train).to(DEVICE)
+    y_train_tensor = torch.FloatTensor(y_train).unsqueeze(1).to(DEVICE)
+    X_test_tensor = torch.FloatTensor(X_test).to(DEVICE)
+    y_test_tensor = torch.FloatTensor(y_test).unsqueeze(1).to(DEVICE)
+        
+    train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
+    test_dataset = TensorDataset(X_test_tensor, y_test_tensor)
+    
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+    
+    return train_loader, test_loader, X_train, y_train, X_test, y_test
 ```
 
-On implémente une classe PMC, dérivée de la clase `nn.Module`.
+On construit le modèle
 
 
 ```{code-cell} ipython3
-# Nombre de neurones de la couche cachée
 num_hidden = 5
 
-class PMC(nn.Module):
-    def __init__(self,p):
-        super().__init__()
+class MLP1(nn.Module):
+    def __init__(self, input_size, hidden_neurons, output_size):
+        super(MLP1, self).__init__()
         self.layers = nn.Sequential(
           nn.Linear(num_features, num_hidden),
           nn.Tanh(),
-          nn.Linear(num_hidden, num_labels),
-          nn.Softmax(1),
+          nn.Linear(num_hidden, 1)
         )
-        
-    def forward(self, x): 
-        return self.layers(x)
+    # prediction function
+    def forward(self, x):
+        return  torch.sigmoid(self.layers(x))
 ```
+ on écrit la fonction d'entraînement
 
-et on définit la fonction d'entraînement. La fonction de perte est l'[entropie croisée binaire](https://en.wikipedia.org/wiki/Cross_entropy) et l'optimiseur est [Adam ](https://arxiv.org/abs/1412.6980).
 
 ```{code-cell} ipython3
-
-# Paramètres de l'apprentissage
-batch_size = 100  
-num_epochs = 10000
-num_labels = 2 
-num_features = 2
-
 loss = nn.BCELoss()
 
-def train_session(X,y,classifier,criterion,optimizer,n_epochs=num_epochs):
-    loss_values = []    
-    correct = 0
-    for iter in range(n_epochs):
-        optimizer.zero_grad() 
-        yPred = classifier(X)
-        loss = criterion(yPred,y)
-        loss_values.append(loss.detach().numpy())
-        #Gradient et rétropropagation
-        loss.backward()
-        #Mise à jour des poids
-        optimizer.step()
-        y2 = yPred>0.5
-        correct = (y2 == y).sum().item()/2
-    acc = 100 * correct / (X.shape[0])
-    return loss_values,acc
-```
+def train_model(model, train_loader, test_loader, epochs=100, lr=0.01):
+    criterion = nn.BCELoss()
+    optimizer = optim.SGD(model.parameters(), lr=lr)
+    
+    train_losses = []
+    test_accuracies = []
+    
+    for epoch in range(epochs):
+        model.train()
+        train_loss = 0
+        
+        for X_batch, y_batch in train_loader:
+            # Forward pass
+            y_pred = model(X_batch)
+            loss = criterion(y_pred, y_batch)
+            
+            # Backward pass
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            
+            train_loss += loss.item()
+        
+        train_loss /= len(train_loader)
+        train_losses.append(train_loss)
+        
+        # Evaluation
+        model.eval()
+        correct = 0
+        total = 0
+        with torch.no_grad():
+            for X_batch, y_batch in test_loader:
+                y_pred = model(X_batch)
+                predicted = (y_pred > 0.5).float()
+                total += y_batch.size(0)
+                correct += (predicted == y_batch).sum().item()
+        
+        accuracy = 100 * correct / total
+        test_accuracies.append(accuracy)
+            
+    return train_losses, test_accuracies
+``` 
 
-On applique enfin le perceptron sur les jeux de données et on visualise les résultats.
+On entraîne et on visualise les résultats
+
 
 ```{code-cell} ipython3
-fig,axs = plt.subplots(2, 3,figsize=(15,8))
-for i,name_train,name_test in zip ([0,1,2],fichiers_train,fichiers_test):
-    train_data,train_labels = extract_data(name_train)
-    test_data, test_labels = extract_data(name_test)
-
-    model = PMC(train_data.shape[1])
-    optimizer = optim.Adam(model.parameters())
-    pltloss,acc = train_session(torch.FloatTensor(train_data),torch.FloatTensor(train_labels),model,loss,optimizer)
+datasets = ['blobs', 'moons', 'circles']
     
-    titre= "Précision ={0:5.3f} ".format(acc)
-    plotResults(axs[0][i],axs[1][i],test_data, test_labels, model, titre, pltloss, name_test)
-```
+for dataset in datasets:
+
+    train_loader, test_loader, X_train, y_train, X_test, y_test = generate_dataset(dataset)
+    
+    input_dim = X_train.shape[1]
+    model = MLP1(input_dim,num_hidden,1).to(DEVICE)
+
+    # Training
+    train_losses, test_accuracies = train_model(model, train_loader, test_loader, epochs=epochs)
+       
+    # Results
+    plt.figure(figsize=(12, 5))
+    plt.suptitle(f'{dataset}')
+    plt.subplot(1, 3, 1)
+    plt.plot(range(epochs), train_losses)
+    plt.title(f'Training Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    
+    plt.subplot(1, 3, 2)
+    plt.plot(range(epochs), test_accuracies)
+    plt.title(f'Test Accuracy ')
+    plt.xlabel('Epochs')
+    plt.ylabel('Accuracy (%)')
+
+    plt.subplot(1, 3, 3)
+    X = np.vstack([X_train, X_test])
+    y = np.concatenate([y_train, y_test])
+    h = 0.01
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+    
+    # Prediction of the class of each point of the grid
+    model.eval()
+    Z = model(torch.FloatTensor(np.c_[xx.ravel(), yy.ravel()]).to(DEVICE)).to(DEVICE)
+    Z = (Z > 0.5).float().cpu().detach().numpy()
+    Z = Z.reshape(xx.shape)
+    
+    plt.contourf(xx, yy, Z, alpha=0.3)
+    plt.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')
+    plt.title(f'Accuracy = {test_accuracies[-1]:.2f}%')
+    plt.tight_layout()
+    plt.show()
+```     
+
+
+
 
 ## A Vous...
 

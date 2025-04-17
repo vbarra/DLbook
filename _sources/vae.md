@@ -369,7 +369,7 @@ On modifie légèrement l'architecture précédente en ajoutant l'information du
 ```python
 n_classes = 10
 def l_2_onehot(labels,nb_classes=n_classes):
-    l_onehot = torch.FloatTensor(labels.shape[0], nb_digits)
+    l_onehot = torch.FloatTensor(labels.shape[0], n_classes)
     l_onehot.zero_()
     l_onehot.scatter_(1, labels.unsqueeze(1), 1)
     return l_onehot

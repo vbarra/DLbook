@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="fr" >
+<html lang="fr" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Modèles de diffusion &#8212; Apprentissage profond</title>
   
@@ -15,55 +14,51 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/translations.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=041d0952"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'diffusion';</script>
@@ -80,28 +75,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -123,12 +113,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -143,9 +141,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -155,12 +157,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Apprentissage profond - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Apprentissage profond - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
@@ -201,7 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -210,14 +223,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -244,26 +257,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -301,12 +316,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="modeles-de-diffusion">
-<h1>Modèles de diffusion<a class="headerlink" href="#modeles-de-diffusion" title="Lien permanent vers cette rubrique">#</a></h1>
+<h1>Modèles de diffusion<a class="headerlink" href="#modeles-de-diffusion" title="Lien vers cette rubrique">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique">#</a></h2>
 <p>Un modèle de diffusion (de débruitage) transforme du bruit à partir d’une distribution simple en un échantillon de données. Le modèle se compose de deux processus (<a class="reference internal" href="#diffusion"><span class="std std-numref">Fig. 73</span></a>) :</p>
 <ul class="simple">
 <li><p>un processus de diffusion vers l’avant <span class="math notranslate nohighlight">\(q\)</span>, choisi, qui ajoute progressivement du bruit gaussien à une donnée, jusqu’à aboutir à du bruit pur</p></li>
@@ -321,14 +336,14 @@ document.write(`
 </div><figure class="align-default" id="diffusion">
 <img alt="_images/diffusion.png" src="_images/diffusion.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Illustration du modèle de diffusion (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id1">[<a class="reference internal" href="#id53" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">1</a>]</span></a>)</span><a class="headerlink" href="#diffusion" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Illustration du modèle de diffusion (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id1">[<a class="reference internal" href="#id53" title="Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems, volume 33, 6840–6851. Curran Associates, Inc., 2020.">1</a>]</span></a>)</span><a class="headerlink" href="#diffusion" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="modele-de-diffusion">
-<h2>Modèle de diffusion<a class="headerlink" href="#modele-de-diffusion" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Modèle de diffusion<a class="headerlink" href="#modele-de-diffusion" title="Lien vers cette rubrique">#</a></h2>
 <section id="modele">
-<h3>Modèle<a class="headerlink" href="#modele" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Modèle<a class="headerlink" href="#modele" title="Lien vers cette rubrique">#</a></h3>
 <p>Soit <span class="math notranslate nohighlight">\(q(\mathbf{x}_0)\)</span> la distribution des données réelles. On échantillonne <span class="math notranslate nohighlight">\(\mathbf{x}_0 \sim q(\mathbf{x}_0)\)</span> et on définit un processus de diffusion avant <span class="math notranslate nohighlight">\(q(\mathbf{x}_t | \mathbf{x}_{t-1})\)</span> qui ajoute un bruit gaussien à chaque pas de temps <span class="math notranslate nohighlight">\(t\in[\![1,T]\!]\)</span>, selon une mise à jour de la variance connue  <span class="math notranslate nohighlight">\(0 &lt; \beta_1 &lt; \beta_2 &lt; ... &lt; \beta_T &lt; 1\)</span> :</p>
 <div class="math notranslate nohighlight">
 \[
@@ -347,7 +362,7 @@ q(\mathbf{x}_t | \mathbf{x}_{t-1}) = \mathcal{N}(\sqrt{1 - \beta_t} \mathbf{x}_{
 <p>Dans la suite, on suppose seulement apprendre la moyenne.</p>
 </section>
 <section id="apprentissage">
-<h3>Apprentissage<a class="headerlink" href="#apprentissage" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Apprentissage<a class="headerlink" href="#apprentissage" title="Lien vers cette rubrique">#</a></h3>
 <p>La combinaison de <span class="math notranslate nohighlight">\(q\)</span> et <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span> peut-être vue comme un autoencodeur variationnel. Ainsi, ELBO peut être utilisée pour minimiser la log-vraisemblance négative par rapport à <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> . ELBO est la somme de fonctions de pertes calculées à chaque pas de temps</p>
 <p><span class="math notranslate nohighlight">\(\ell  = \displaystyle\sum_{t=0}^T \ell_t\)</span>.</p>
 <p>Par construction de <span class="math notranslate nohighlight">\(q\)</span> et <span class="math notranslate nohighlight">\(p_{\boldsymbol\theta}\)</span>, les <span class="math notranslate nohighlight">\(\ell_t,t\in[\![1,T]\!]\)</span> sont les divergences de Kullback-Leibler entre deux distributions gaussiennes, ce qui peut être écrit comme une perte <span class="math notranslate nohighlight">\(\ell_2\)</span> calculée sur les moyennes de ces gaussiennes.</p>
@@ -365,7 +380,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 \[ \| \mathbf{\varepsilon} - \mathbf{\varepsilon}_\theta(\mathbf{x}_t, t) \|^2 = \| \mathbf{\varepsilon} - \mathbf{\varepsilon}_\theta( \sqrt{\bar{\alpha}_t} \mathbf{x}_0 + \sqrt{(1- \bar{\alpha}_t)  } \mathbf{\varepsilon}, t) \|^2.\]</div>
 <p>avec <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> la donnée initiale. <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}\)</span> est le bruit échantillonné au temps <span class="math notranslate nohighlight">\(t\)</span> et <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta (\mathbf{x}_t, t)\)</span> est le réseau de neurones, équipé d’une fonction de perte quadratique entre le bruit réel et le bruit gaussien prédit.</p>
 <div class="proof algorithm admonition" id="algorithm-1">
-<p class="admonition-title"><span class="caption-number">Algorithm 8 </span> (Algorithme d’apprentissage d’un modèle de diffusion )</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 8 </span> (Algorithme d’apprentissage d’un modèle de diffusion)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Tant que (non convergence)</p>
@@ -382,25 +397,25 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </div><p>Plutôt qu’un seul exemple <span class="math notranslate nohighlight">\(x_0\)</span>, le réseau est classiquement entraîné sur un batch.</p>
 </section>
 <section id="reseau-de-neurones">
-<h3>Réseau de neurones<a class="headerlink" href="#reseau-de-neurones" title="Lien permanent vers cette rubrique">#</a></h3>
+<h3>Réseau de neurones<a class="headerlink" href="#reseau-de-neurones" title="Lien vers cette rubrique">#</a></h3>
 <p>Le réseau de neurones <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)\)</span> utilisé dans <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id4">[<a class="reference internal" href="#id54" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015.">2</a>]</span></a> traite des images et les auteurs utilisent le réseau <a class="reference external" href="https://arxiv.org/abs/1505.04597">U-net</a> (<a class="reference internal" href="#unet"><span class="std std-numref">Fig. 74</span></a>)</p>
 <figure class="align-default" id="unet">
 <img alt="_images/unet.png" src="_images/unet.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Architecture du modèle U-net (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id5">[<a class="reference internal" href="#id54" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015.">2</a>]</span></a>)</span><a class="headerlink" href="#unet" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Architecture du modèle U-net (source : <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf"><span id="id5">[<a class="reference internal" href="#id54" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. CoRR, 2015.">2</a>]</span></a>)</span><a class="headerlink" href="#unet" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>U-Net est une architecture pour la segmentation sémantique. Il se compose d’un chemin de contraction et d’un chemin d’expansion. Le chemin de contraction suit l’architecture typique d’un réseau convolutif. Il consiste en l’application répétée de deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3 , chacune suivie d’une activation ReLU et d’une opération d’agrégation max 2<span class="math notranslate nohighlight">\(\times\)</span>2 avec un stride égal à 2 pour le sous-échantillonnage. À chaque étape de sous-échantillonnage, le nombre de canaux de caractéristiques est doublé. Chaque étape du chemin d’expansion consiste en un suréchantillonnage de la carte de caractéristiques suivi d’une convolution 2<span class="math notranslate nohighlight">\(\times\)</span>2  qui divise par deux le nombre de canaux de caractéristiques, une concaténation avec la carte de caractéristiques recadrée correspondante du chemin de contraction, et deux convolutions 3<span class="math notranslate nohighlight">\(\times\)</span>3, chacune suivie d’une ReLU. Le recadrage est nécessaire en raison de la perte de pixels de bordure dans chaque convolution. Sur la dernière couche, une convolution 1<span class="math notranslate nohighlight">\(\times\)</span>1 est utilisée pour faire correspondre chaque vecteur de caractéristiques à 64 composantes au nombre de classes souhaité. Au total, le réseau comporte 23 couches de convolution.</p>
 </section>
 </section>
 <section id="implementation">
-<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien permanent vers cette rubrique">#</a></h2>
+<h2>Implémentation<a class="headerlink" href="#implementation" title="Lien vers cette rubrique">#</a></h2>
 <p>De nombreuses implémentations du modèle DDPM utilisant U-net sont disponibles (voir par exemple <a class="reference external" href="https://paperswithcode.com/paper/denoising-diffusion-probabilistic-models">ce lien</a>). On propose ici l’implémentation d’un modèle plus simple (pour le réseau <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_\theta(\mathbf{x}_t, t)\)</span>), permettant la génération d’un nuage de points de forme donnée. Le réseau sera ici un simple perceptron multicouches.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_swiss_roll</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_swiss_roll</span>
 </pre></div>
 </div>
 <p>On génère une forme (ici un swiss roll)</p>
@@ -418,7 +433,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 <figure class="align-default" id="curve">
 <img alt="_images/curve.png" src="_images/curve.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Forme du nuage de points <span class="math notranslate nohighlight">\(x_0\)</span></span><a class="headerlink" href="#curve" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Forme du nuage de points <span class="math notranslate nohighlight">\(x_0\)</span></span><a class="headerlink" href="#curve" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>On précalcule ensuite les constantes du modèle. Les <span class="math notranslate nohighlight">\(\beta_t\)</span> évoluent de manière linéaire.</p>
@@ -436,7 +451,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </pre></div>
 </div>
 <p>On calcule <span class="math notranslate nohighlight">\(x_t\)</span> à un temps quelconque donné.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">q_x</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">q_x</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
     <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
     <span class="n">alphas_t</span> <span class="o">=</span> <span class="n">alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
     <span class="n">alphas_1_m_t</span> <span class="o">=</span> <span class="n">one_minus_alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
@@ -462,14 +477,14 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 <figure class="align-default" id="q">
 <img alt="_images/q.png" src="_images/q.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Application du processus avant <span class="math notranslate nohighlight">\(q\)</span> au cours du temps</span><a class="headerlink" href="#q" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Application du processus avant <span class="math notranslate nohighlight">\(q\)</span> au cours du temps</span><a class="headerlink" href="#q" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>On construit ensuite le processus de diffusion. Le réseau utilisé est un perceptron multicouches à trois couches cachées de <code class="docutils literal notranslate"><span class="pre">n_hidden</span></code>neurones et à activations ReLU.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">64</span>
 
-<span class="k">class</span> <span class="nc">DDPM</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_steps</span><span class="p">,</span><span class="n">n_hidden</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDPM</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_steps</span><span class="p">,</span><span class="n">n_hidden</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">DDPM</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">linears</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span>
@@ -489,7 +504,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
             <span class="p">]</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">embedding_layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_embeddings</span><span class="p">):</span>
             <span class="n">t_embedding</span> <span class="o">=</span> <span class="n">embedding_layer</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
             <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linears</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">idx</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
@@ -502,7 +517,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </pre></div>
 </div>
 <p>On écrit ensuite la fonction de perte du réseau</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">diffusion_loss</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">x_0</span><span class="p">,</span><span class="n">alphas_bar_sqrt</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">,</span><span class="n">n_steps</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">diffusion_loss</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">x_0</span><span class="p">,</span><span class="n">alphas_bar_sqrt</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">,</span><span class="n">n_steps</span><span class="p">):</span>
     <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x_0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     
     <span class="c1"># Généreration de temps  aléatoires pour un échantillon de taille batch_size</span>
@@ -531,7 +546,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 </div>
 <p>On écrit ensuite la fonction d’échantillonnage du processus inverse</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># On récupère x[T], x[T-1], x[T-2]|... à partir de x[T]. . x[0]</span>
-<span class="k">def</span> <span class="nf">p_sample_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">shape</span><span class="p">,</span><span class="n">n_steps</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">p_sample_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">shape</span><span class="p">,</span><span class="n">n_steps</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">):</span>
     <span class="n">cur_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
     <span class="n">x_seq</span> <span class="o">=</span> <span class="p">[</span><span class="n">cur_x</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)):</span>
@@ -540,7 +555,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
     <span class="k">return</span> <span class="n">x_seq</span>
 
 <span class="c1"># On échantillonne la valeur reconstruite à l&#39;instant t à partir de x[T]</span>
-<span class="k">def</span> <span class="nf">p_sample</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">p_sample</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">betas</span><span class="p">,</span><span class="n">one_minus_alphas_bar_sqrt</span><span class="p">):</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">t</span><span class="p">])</span>
     
     <span class="n">coeff</span> <span class="o">=</span> <span class="n">betas</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">/</span> <span class="n">one_minus_alphas_bar_sqrt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
@@ -577,32 +592,34 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
 <figure class="align-default" id="q0">
 <img alt="_images/curve_150_1.png" src="_images/curve_150_1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Processus inverse au début de l’entraînement</span><a class="headerlink" href="#q0" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Processus inverse au début de l’entraînement</span><a class="headerlink" href="#q0" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="q1">
 <img alt="_images/curve_150_2.png" src="_images/curve_150_2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Processus inverse au milieu de l’entraînement</span><a class="headerlink" href="#q1" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Processus inverse au milieu de l’entraînement</span><a class="headerlink" href="#q1" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="q2">
 <img alt="_images/curve_150_3.png" src="_images/curve_150_3.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Processus inverse à la fin de l’entraînement</span><a class="headerlink" href="#q2" title="Lien permanent vers cette image">#</a></p>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Processus inverse à la fin de l’entraînement</span><a class="headerlink" href="#q2" title="Lien vers cette image">#</a></p>
 </figcaption>
 </figure>
 <p>On peut alors partir d’un bruit gaussien 2D et appliquer le processus inverse pour générer une réalisation des données d’entrée.</p>
 <p><img alt="" src="_images/reversediffusion.gif" /></p>
 <p>On peut également partir d’autres nuages de points</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p><img alt="" src="_images/reversediffusioncircles.gif" /></p></th>
 <th class="head"><p><img alt="" src="_images/reversediffusionmoons.gif" /></p></th>
 </tr>
 </thead>
 </table>
+</div>
 <div class="docutils container" id="id6">
+<div role="list" class="citation-list">
 <div class="citation" id="id53" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>)</span>
@@ -645,8 +662,8 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="gan.html"
@@ -674,6 +691,7 @@ Ainsi, pendant l’entraînement, on tire aléatoirement <span class="math notra
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -710,9 +728,10 @@ Par Vincent BARRA
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -736,8 +755,8 @@ Par Vincent BARRA
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
