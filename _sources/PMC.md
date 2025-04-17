@@ -873,7 +873,7 @@ def train_model(model, train_loader, test_loader, epochs=100, lr=0.01):
 On entraîne et on visualise les résultats
 
 
-```{code-cell} ipython3
+```python
 datasets = ['blobs', 'moons', 'circles']
     
 for dataset in datasets:
@@ -922,6 +922,9 @@ for dataset in datasets:
     plt.show()
 ```     
 
+![](./images/res1.png)
+![](./images/res2.png)
+![](./images/res3.png)
 
 
 
