@@ -79,19 +79,21 @@ for dataset in datasets:
 
 [31m---------------------------------------------------------------------------[39m
 [31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 5[39m
-[32m      1[39m datasets = [[33m'[39m[33mblobs[39m[33m'[39m, [33m'[39m[33mmoons[39m[33m'[39m, [33m'[39m[33mcircles[39m[33m'[39m]
-[32m      3[39m [38;5;28;01mfor[39;00m dataset [38;5;129;01min[39;00m datasets:
-[32m----> [39m[32m5[39m     train_loader, test_loader, X_train, y_train, X_test, y_test = [43mgenerate_dataset[49m[43m([49m[43mdataset[49m[43m)[49m
-[32m      7[39m     input_dim = X_train.shape[[32m1[39m]
-[32m      8[39m     model = MLP1(input_dim,num_hidden,[32m1[39m).to(DEVICE)
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 8[39m
+[32m      5[39m train_loader, test_loader, X_train, y_train, X_test, y_test = generate_dataset(dataset)
+[32m      7[39m input_dim = X_train.shape[[32m1[39m]
+[32m----> [39m[32m8[39m model = [43mMLP1[49m[43m([49m[43minput_dim[49m[43m,[49m[43mnum_hidden[49m[43m,[49m[32;43m1[39;49m[43m)[49m.to(DEVICE)
+[32m     10[39m [38;5;66;03m# Training[39;00m
+[32m     11[39m train_losses, test_accuracies = train_model(model, train_loader, test_loader, epochs=epochs)
 
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 13[39m, in [36mgenerate_dataset[39m[34m(dataset_type, n_samples)[39m
-[32m      9[39m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([33m"[39m[33mUnknown dataset[39m[33m"[39m)
-[32m     11[39m X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=[32m0.2[39m, random_state=[32m42[39m)
-[32m---> [39m[32m13[39m X_train_tensor = torch.FloatTensor(X_train).to([43mDEVICE[49m)
-[32m     14[39m y_train_tensor = torch.FloatTensor(y_train).unsqueeze([32m1[39m).to(DEVICE)
-[32m     15[39m X_test_tensor = torch.FloatTensor(X_test).to(DEVICE)
+[36mCell[39m[36m [39m[32mIn[3][39m[32m, line 7[39m, in [36mMLP1.__init__[39m[34m(self, input_size, hidden_neurons, output_size)[39m
+[32m      4[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34m__init__[39m([38;5;28mself[39m, input_size, hidden_neurons, output_size):
+[32m      5[39m     [38;5;28msuper[39m(MLP1, [38;5;28mself[39m).[34m__init__[39m()
+[32m      6[39m     [38;5;28mself[39m.layers = nn.Sequential(
+[32m----> [39m[32m7[39m       nn.Linear([43mnum_features[49m, num_hidden),
+[32m      8[39m       nn.Tanh(),
+[32m      9[39m       nn.Linear(num_hidden, [32m1[39m)
+[32m     10[39m     )
 
-[31mNameError[39m: name 'DEVICE' is not defined
+[31mNameError[39m: name 'num_features' is not defined
 

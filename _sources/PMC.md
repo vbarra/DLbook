@@ -753,6 +753,9 @@ import torch.optim as optim
 from torch.utils.data import TensorDataset, DataLoader
 from sklearn.datasets import make_moons,make_circles,make_blobs
 from sklearn.model_selection import train_test_split   
+
+DEVICE = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
+
 ```
 
 On génère les données directement (contrairement au perceptron), pour montrer comment faire en utilisant la librairie [scikit-learn](https://scikit-learn.org/stable/)
