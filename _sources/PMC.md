@@ -761,7 +761,7 @@ On Définit les variables globales.
 ```{code-cell} ipython3
 batch_size = 100  
 
-epochs = 8000
+epochs = 1000
 
 num_features = 2
 

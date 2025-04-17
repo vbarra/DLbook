@@ -1025,7 +1025,7 @@ L’initialisation de Xavier propose un tirage uniforme dans
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">100</span>  
 
-<span class="n">epochs</span> <span class="o">=</span> <span class="mi">8000</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">num_features</span> <span class="o">=</span> <span class="mi">2</span>
 
@@ -1191,6 +1191,8 @@ L’initialisation de Xavier propose un tirage uniforme dans
 </div>
 </div>
 <div class="cell_output docutils container">
+<img alt="_images/370cd942efac21a82466745f355ad52ddfbc6f1398000b40f825dd390b8b962e.png" src="_images/370cd942efac21a82466745f355ad52ddfbc6f1398000b40f825dd390b8b962e.png" />
+<img alt="_images/78620cb9325bc255b16118a2c2607f0d8f929167deef54594eb51df1120aa85b.png" src="_images/78620cb9325bc255b16118a2c2607f0d8f929167deef54594eb51df1120aa85b.png" />
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
@@ -1200,68 +1202,12 @@ L’initialisation de Xavier propose un tirage uniforme dans
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># Results</span>
 <span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-<span class="nn">Cell In[5], line 14,</span> in <span class="ni">train_model</span><span class="nt">(model, train_loader, test_loader, epochs, lr)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">train_loss</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="ne">---&gt; </span><span class="mi">14</span> <span class="k">for</span> <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="c1"># Forward pass</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
-
-<span class="nn">File /opt/homebrew/lib/python3.13/site-packages/torch/utils/data/dataloader.py:708,</span> in <span class="ni">_BaseDataLoaderIter.__next__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">705</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampler_iter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">706</span>     <span class="c1"># TODO(https://github.com/pytorch/pytorch/issues/76750)</span>
-<span class="g g-Whitespace">    </span><span class="mi">707</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_reset</span><span class="p">()</span>  <span class="c1"># type: ignore[call-arg]</span>
-<span class="ne">--&gt; </span><span class="mi">708</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next_data</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">709</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_yielded</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">    </span><span class="mi">710</span> <span class="k">if</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">711</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_kind</span> <span class="o">==</span> <span class="n">_DatasetKind</span><span class="o">.</span><span class="n">Iterable</span>
-<span class="g g-Whitespace">    </span><span class="mi">712</span>     <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_IterableDataset_len_called</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">713</span>     <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_yielded</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_IterableDataset_len_called</span>
-<span class="g g-Whitespace">    </span><span class="mi">714</span> <span class="p">):</span>
-
-<span class="nn">File /opt/homebrew/lib/python3.13/site-packages/torch/utils/data/dataloader.py:764,</span> in <span class="ni">_SingleProcessDataLoaderIter._next_data</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">762</span> <span class="k">def</span><span class="w"> </span><span class="nf">_next_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">763</span>     <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next_index</span><span class="p">()</span>  <span class="c1"># may raise StopIteration</span>
-<span class="ne">--&gt; </span><span class="mi">764</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_fetcher</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># may raise StopIteration</span>
-<span class="g g-Whitespace">    </span><span class="mi">765</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pin_memory</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">766</span>         <span class="n">data</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">pin_memory</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pin_memory_device</span><span class="p">)</span>
-
-<span class="nn">File /opt/homebrew/lib/python3.13/site-packages/torch/utils/data/_utils/fetch.py:55,</span> in <span class="ni">_MapDatasetFetcher.fetch</span><span class="nt">(self, possibly_batched_index)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="n">possibly_batched_index</span><span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">55</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collate_fn</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="nn">File /opt/homebrew/lib/python3.13/site-packages/torch/utils/data/_utils/collate.py:398,</span> in <span class="ni">default_collate</span><span class="nt">(batch)</span>
-<span class="g g-Whitespace">    </span><span class="mi">337</span> <span class="k">def</span><span class="w"> </span><span class="nf">default_collate</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">338</span><span class="w">     </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">339</span><span class="sd">     Take in a batch of data and put the elements within the batch into a tensor with an additional outer dimension - batch size.</span>
-<span class="g g-Whitespace">    </span><span class="mi">340</span><span class="sd"> </span>
-<span class="sd">   (...)    396         &gt;&gt;&gt; default_collate(batch)  # Handle `CustomType` automatically</span>
-<span class="g g-Whitespace">    </span><span class="mi">397</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">398</span>     <span class="k">return</span> <span class="n">collate</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">collate_fn_map</span><span class="o">=</span><span class="n">default_collate_fn_map</span><span class="p">)</span>
-
-<span class="nn">File /opt/homebrew/lib/python3.13/site-packages/torch/utils/data/_utils/collate.py:212,</span> in <span class="ni">collate</span><span class="nt">(batch, collate_fn_map)</span>
-<span class="g g-Whitespace">    </span><span class="mi">208</span> <span class="n">transposed</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">batch</span><span class="p">))</span>  <span class="c1"># It may be accessed twice, so we use a list.</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span>     <span class="k">return</span> <span class="p">[</span>
-<span class="ne">--&gt; </span><span class="mi">212</span>         <span class="n">collate</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">collate_fn_map</span><span class="o">=</span><span class="n">collate_fn_map</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span>         <span class="k">for</span> <span class="n">samples</span> <span class="ow">in</span> <span class="n">transposed</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="p">]</span>  <span class="c1"># Backwards compatibility.</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="k">try</span><span class="p">:</span>
-
-<span class="nn">File /opt/homebrew/lib/python3.13/site-packages/torch/utils/data/_utils/collate.py:155,</span> in <span class="ni">collate</span><span class="nt">(batch, collate_fn_map)</span>
-<span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">if</span> <span class="n">collate_fn_map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">if</span> <span class="n">elem_type</span> <span class="ow">in</span> <span class="n">collate_fn_map</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">155</span>         <span class="k">return</span> <span class="n">collate_fn_map</span><span class="p">[</span><span class="n">elem_type</span><span class="p">](</span><span class="n">batch</span><span class="p">,</span> <span class="n">collate_fn_map</span><span class="o">=</span><span class="n">collate_fn_map</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">157</span>     <span class="k">for</span> <span class="n">collate_type</span> <span class="ow">in</span> <span class="n">collate_fn_map</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">158</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">collate_type</span><span class="p">):</span>
-
-<span class="nn">File /opt/homebrew/lib/python3.13/site-packages/torch/utils/data/_utils/collate.py:272,</span> in <span class="ni">collate_tensor_fn</span><span class="nt">(batch, collate_fn_map)</span>
-<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">storage</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">_typed_storage</span><span class="p">()</span><span class="o">.</span><span class="n">_new_shared</span><span class="p">(</span><span class="n">numel</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">elem</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">271</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span><span class="o">.</span><span class="n">resize_</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">),</span> <span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
-<span class="ne">--&gt; </span><span class="mi">272</span> <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="nn">Cell In[5], line 24,</span> in <span class="ni">train_model</span><span class="nt">(model, train_loader, test_loader, epochs, lr)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">24</span>     <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">train_loss</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
