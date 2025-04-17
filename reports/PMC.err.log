@@ -1,4 +1,17 @@
 Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 782, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vibarra/Library/Python/3.13/lib/python/site-packages/jupyter_core/utils/__init__.py", line 198, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "/Users/vibarra/Library/Python/3.13/lib/python/site-packages/jupyter_client/channels.py", line 313, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/opt/homebrew/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
     ~~~~~~~~~^
@@ -22,78 +35,22 @@ Traceback (most recent call last):
     await self.async_execute_cell(
         cell, index, execution_count=self.code_cells_executed + 1
     )
-  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-datasets = ['blobs', 'moons', 'circles']
-    
-for dataset in datasets:
-
-    train_loader, test_loader, X_train, y_train, X_test, y_test = generate_dataset(dataset)
-    
-    input_dim = X_train.shape[1]
-    model = MLP1(input_dim,num_hidden,1).to(DEVICE)
-
-    # Training
-    train_losses, test_accuracies = train_model(model, train_loader, test_loader, epochs=epochs)
-       
-    # Results
-    plt.figure(figsize=(12, 5))
-    plt.suptitle(f'{dataset}')
-    plt.subplot(1, 3, 1)
-    plt.plot(range(epochs), train_losses)
-    plt.title(f'Training Loss')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
-    
-    plt.subplot(1, 3, 2)
-    plt.plot(range(epochs), test_accuracies)
-    plt.title(f'Test Accuracy ')
-    plt.xlabel('Epochs')
-    plt.ylabel('Accuracy (%)')
-
-    plt.subplot(1, 3, 3)
-    X = np.vstack([X_train, X_test])
-    y = np.concatenate([y_train, y_test])
-    h = 0.01
-    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-    
-    # Prediction of the class of each point of the grid
-    model.eval()
-    Z = model(torch.FloatTensor(np.c_[xx.ravel(), yy.ravel()]).to(DEVICE)).to(DEVICE)
-    Z = (Z > 0.5).float().cpu().detach().numpy()
-    Z = Z.reshape(xx.shape)
-    
-    plt.contourf(xx, yy, Z, alpha=0.3)
-    plt.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')
-    plt.title(f'Accuracy = {test_accuracies[-1]:.2f}%')
-    plt.tight_layout()
-    plt.show()
-------------------
-
-
-[31m---------------------------------------------------------------------------[39m
-[31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 8[39m
-[32m      5[39m train_loader, test_loader, X_train, y_train, X_test, y_test = generate_dataset(dataset)
-[32m      7[39m input_dim = X_train.shape[[32m1[39m]
-[32m----> [39m[32m8[39m model = [43mMLP1[49m[43m([49m[43minput_dim[49m[43m,[49m[43mnum_hidden[49m[43m,[49m[32;43m1[39;49m[43m)[49m.to(DEVICE)
-[32m     10[39m [38;5;66;03m# Training[39;00m
-[32m     11[39m train_losses, test_accuracies = train_model(model, train_loader, test_loader, epochs=epochs)
-
-[36mCell[39m[36m [39m[32mIn[3][39m[32m, line 7[39m, in [36mMLP1.__init__[39m[34m(self, input_size, hidden_neurons, output_size)[39m
-[32m      4[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34m__init__[39m([38;5;28mself[39m, input_size, hidden_neurons, output_size):
-[32m      5[39m     [38;5;28msuper[39m(MLP1, [38;5;28mself[39m).[34m__init__[39m()
-[32m      6[39m     [38;5;28mself[39m.layers = nn.Sequential(
-[32m----> [39m[32m7[39m       nn.Linear([43mnum_features[49m, num_hidden),
-[32m      8[39m       nn.Tanh(),
-[32m      9[39m       nn.Linear(num_hidden, [32m1[39m)
-[32m     10[39m     )
-
-[31mNameError[39m: name 'num_features' is not defined
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/nbclient/client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+        "Cell execution timed out", timeout, cell
+    )
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 100 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+["datasets = ['blobs', 'moons', 'circles']", '    ', 'for dataset in datasets:', '', '    train_loader, test_loader, X_train, y_train, X_test, y_test = generate_dataset(dataset)']
+...
+['    plt.contourf(xx, yy, Z, alpha=0.3)', "    plt.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')", "    plt.title(f'Accuracy = {test_accuracies[-1]:.2f}%')", '    plt.tight_layout()', '    plt.show()']
+-------------------
 

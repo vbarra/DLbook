@@ -755,8 +755,24 @@ from sklearn.datasets import make_moons,make_circles,make_blobs
 from sklearn.model_selection import train_test_split   
 
 DEVICE = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
-
 ```
+On Définit les variables globales.
+
+```{code-cell} ipython3
+batch_size = 100  
+
+epochs = 8000
+
+num_features = 2
+
+nb_samples = 300
+test_size = 0.2
+nb_train = (int)(nb_samples*(1-test_size))
+nb_test = (int)(nb_samples*test_size)
+```
+
+
+
 
 On génère les données directement (contrairement au perceptron), pour montrer comment faire en utilisant la librairie [scikit-learn](https://scikit-learn.org/stable/)
 
@@ -791,7 +807,7 @@ On construit le modèle
 
 
 ```{code-cell} ipython3
-num_hidden = 5
+num_hidden = 5     
 
 class MLP1(nn.Module):
     def __init__(self, input_size, hidden_neurons, output_size):
