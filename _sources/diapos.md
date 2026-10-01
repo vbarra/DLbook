@@ -19,4 +19,8 @@ jupytext:
 - [Autoencodeurs variationnels](./Diapos/VAE.pdf)
 - [GAN](./Diapos/GAN.pdf)
 
+# Projet
+
+- [Sujet](./Diapos/Projet.pdf)
+
 
